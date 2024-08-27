@@ -18,6 +18,8 @@ body {
   --white-transparent-10: rgba(255, 255, 255, .1);
   --white-transparent-08: rgba(255, 255, 255, .08);
   --white-transparent-05: rgba(255, 255, 255, .05);
+  --light-grey: rgb(225, 225, 225);
+  --dark-grey: rgb(50, 50, 50);
   --black: #000000;
   --black-transparent-90: rgba(0, 0, 0, .9);
   --black-transparent-15: rgba(0, 0, 0, .15);
@@ -66,7 +68,8 @@ body {
   --md-palette-icon-color: var(--black);
   --md-palette-icon-color--hover: var(--black);
 
-  --md-dropdown-color: var(--pink-transparent-5);
+  --md-dropdown-color: var(--white);
+  --md-dropdown-border-color: var(--light-grey);
 
   /* Admonition SVGs (base64 encoded) - use Material icons */
   --md-admonition-icon-color--note: #4a93d1;
@@ -122,7 +125,8 @@ body {
   --md-palette-icon-color: var(--white);
   --md-palette-icon-color--hover: var(--white);
 
-  --md-dropdown-color: var(--pink-transparent-5);
+  --md-dropdown-color: var(--black);
+  --md-dropdown-border-color: var(--dark-grey);
 
   --md-admonition-icon-color--note: #3b76a7;
   --md-admonition-border--interface: var(--white-transparent-20);
@@ -967,6 +971,8 @@ html .md-typeset details.function div.tabbed-set,
 .md-tab__list {
   position: absolute;
   background: var(--md-dropdown-color);
+  border: .5px solid var(--md-dropdown-border-color);
+  border-radius: var(--md-border-radius);
   z-index: 3;
   list-style: none;
   display: none;
