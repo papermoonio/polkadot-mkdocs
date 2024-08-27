@@ -1,0 +1,1285 @@
+h1, h2, h3, h4, h5 {
+  font-family: "Unbounded";
+}
+
+body {
+  --md-text-font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --md-border-radius: .2rem;
+  --md-border-width: .1rem;
+  --md-hover-opacity: .7;
+
+  --white: #ffffff;
+  --white-transparent-90: rgba(255, 255, 255, .9);
+  --white-transparent-20: rgba(255, 255, 255, .2);
+  --white-transparent-15: rgba(255, 255, 255, .15);
+  --white-transparent-10: rgba(255, 255, 255, .1);
+  --white-transparent-08: rgba(255, 255, 255, .08);
+  --white-transparent-05: rgba(255, 255, 255, .05);
+  --black: #000000;
+  --black-transparent-90: rgba(0, 0, 0, .9);
+  --black-transparent-15: rgba(0, 0, 0, .15);
+  --black-transparent-08: rgba(0, 0, 0, .08);
+  --black-transparent-05: rgba(0, 0, 0, .05);
+  --pink: #E6007A;
+  --pink-transparent-5: rgba(230, 0, 122, .05);
+  --pink-15: #F9E0EB;
+  --pink-dark-25: #350C1E;
+  --pink-transparent-15: rgba(230, 0, 122, .15);
+  --pink-transparent-30: rgba(230, 0, 122, .3);
+  --pink-transparent-50: rgba(230, 0, 122, .5);
+  --lime: #D3FF33;
+  --purple: #552BBF;
+  --purple-transparent-25: rgba(85, 43, 191, .2);
+  --blue: #00B2FF;
+  --green: #56F39A;
+
+  --md-admonition-icon--note: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuNC4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIzIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNNDEwLjMgMjMxbDExLjMtMTEuMy0zMy45LTMzLjktNjIuMS02Mi4xTDI5MS43IDg5LjhsLTExLjMgMTEuMy0yMi42IDIyLjZMNTguNiAzMjIuOWMtMTAuNCAxMC40LTE4IDIzLjMtMjIuMiAzNy40TDEgNDgwLjdjLTIuNSA4LjQtLjIgMTcuNSA2LjEgMjMuN3MxNS4zIDguNSAyMy43IDYuMWwxMjAuMy0zNS40YzE0LjEtNC4yIDI3LTExLjggMzcuNC0yMi4yTDM4Ny43IDI1My43IDQxMC4zIDIzMXpNMTYwIDM5OS40bC05LjEgMjIuN2MtNCAzLjEtOC41IDUuNC0xMy4zIDYuOUw1OS40IDQ1MmwyMy03OC4xYzEuNC00LjkgMy44LTkuNCA2LjktMTMuM2wyMi43LTkuMXYzMmMwIDguOCA3LjIgMTYgMTYgMTZoMzJ6TTM2Mi43IDE4LjdMMzQ4LjMgMzMuMiAzMjUuNyA1NS44IDMxNC4zIDY3LjFsMzMuOSAzMy45IDYyLjEgNjIuMSAzMy45IDMzLjkgMTEuMy0xMS4zIDIyLjYtMjIuNiAxNC41LTE0LjVjMjUtMjUgMjUtNjUuNSAwLTkwLjVMNDUzLjMgMTguN2MtMjUtMjUtNjUuNS0yNS05MC41IDB6bS00Ny40IDE2OGwtMTQ0IDE0NGMtNi4yIDYuMi0xNi40IDYuMi0yMi42IDBzLTYuMi0xNi40IDAtMjIuNmwxNDQtMTQ0YzYuMi02LjIgMTYuNC02LjIgMjIuNiAwczYuMiAxNi40IDAgMjIuNnoiLz48L3N2Zz4=');
+  --md-admonition-icon--code: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTE0LjYsMTYuNkwxOS4yLDEyTDE0LjYsNy40TDE2LDZMMjIsMTJMMTYsMThMMTQuNiwxNi42TTkuNCwxNi42TDQuOCwxMkw5LjQsNy40TDgsNkwyLDEyTDgsMThMOS40LDE2LjZaIiAvPjwvc3ZnPg==');
+}
+
+:root,
+[data-md-color-scheme='default'] {
+  
+  --md-primary-fg-color: var(--white);
+  --md-primary-fg-color--light: #dbe9f6;
+  --md-primary-fg-color--dark: var(--black-transparent-90);
+  --md-primary-bg-color: var(--black);
+
+  --md-accent-fg-color: var(--pink);
+  --md-accent-fg-color-light: var(--white-transparent-90);
+  --md-accent-bg-color: var(--pink);
+
+  --md-footer-fg-color: var(--black);
+  --md-footer-fg-color--light: #4b4848;
+  --md-footer-bg-color: var(--white);
+  --md-footer-bg-color--dark: var(--white);
+
+  --md-typeset-a-color: var(--pink);
+  --md-typeset-a-color--hover: var(--pink);
+  --md-typeset-table-color--light: var(--black-transparent-08);
+
+  --md-nav-bg-color: var(--pink-15);
+
+  --md-palette-icon-color: var(--black);
+  --md-palette-icon-color--hover: var(--black);
+
+  --md-dropdown-color: var(--pink-transparent-5);
+
+  /* Admonition SVGs (base64 encoded) - use Material icons */
+  --md-admonition-icon-color--note: #4a93d1;
+  --md-admonition-border--interface: var(--black-transparent-15);
+  --md-admonition-bg--interface: var(--black-transparent-05);
+
+  --md-home-hero-bg-color: #dcdcdc;
+
+  /** Optional: For branded code snippets**/
+  --md-code-fg-color: var(--purple);
+  /** Code highlighting color shades **/
+  /* Numbers */
+  --md-code-hl-number-color: var(--pink);
+  /* Python function names */
+  --md-code-hl-function-color: var(--green);
+  /* JavaScript booleans, Python variable names */
+  --md-code-hl-name-color: var(--purple);
+  /* Strings */
+  --md-code-hl-string-color: var(--purple);
+  /* Python print */
+  --md-code-hl-constant-color: var(--blue);
+  /* Imports, const, let, var, async, await, function, etc. */
+  --md-code-hl-keyword-color: var(--blue);
+  /* Comments */
+  --md-code-hl-comment-color: #545454;
+  /* Table content */
+  --md-typeset-table-color: var(--black-transparent-15);
+}
+
+[data-md-color-scheme='slate'] {
+  --md-default-fg-color: var(--white);
+  --md-default-bg-color: var(--black);
+  
+  --md-primary-fg-color: var(--pink-transparent-5);
+  --md-primary-fg-color--light: #132e47;
+  --md-primary-fg-color--dark: var(--white-transparent-90);
+
+  --md-accent-fg-color: var(--pink);
+  --md-accent-fg-color-light: var(--white-transparent-90);
+  --md-accent-bg-color: var(--pink);
+
+  --md-footer-fg-color: #e0d9d1;
+  --md-footer-fg-color--light: #b3aea7;
+  --md-footer-bg-color: var(--black);
+  --md-footer-bg-color--dark: var(--black);
+  
+  --md-typeset-a-color: var(--pink) !important; /* Important is needed to override mkdocs specificity */ 
+  --md-typeset-a-color--hover: #a5c9e8;
+  --md-typeset-table-color--light: var(--white-transparent-10);
+
+  --md-nav-bg-color: var(--pink-dark-25);
+
+  --md-palette-icon-color: var(--white);
+  --md-palette-icon-color--hover: var(--white);
+
+  --md-dropdown-color: var(--pink-transparent-5);
+
+  --md-admonition-icon-color--note: #3b76a7;
+  --md-admonition-border--interface: var(--white-transparent-20);
+  --md-admonition-bg--interface: var(--white-transparent-05);
+
+  --md-home-hero-bg-color: #000a15;
+
+  /** Optional: For branded code snippets**/
+  --md-code-fg-color: var(--lime);
+  --md-code-bg-color: var(--white-transparent-08);
+  /** Code highlighting color shades **/
+  /* Numbers */
+  --md-code-hl-number-color: var(--pink);
+  /* Python function names */
+  --md-code-hl-function-color: var(--green);
+  /* JavaScript booleans, Python variable names */
+  --md-code-hl-name-color: var(--green);
+  /* Strings */
+  --md-code-hl-string-color: var(--lime);
+  /* Python print */
+  --md-code-hl-constant-color: var(--blue);
+  /* Imports, const, let, var, async, await, function, etc. */
+  --md-code-hl-keyword-color: var(--blue);
+  /* Comments */
+  --md-code-hl-comment-color: #545454;
+  /* Comments */
+  --md-code-hl-comment-color: #D9D9D9;
+  /* Table content */
+  --md-typeset-table-color: var(--white-transparent-15);
+}
+
+/* General styling */
+.md-header, .md-tabs {
+  background-color: var(--md-default-bg-color);
+}
+
+.md-typeset a:focus, .md-typeset a:hover {
+  color: var(--md-typeset-a-color);
+  opacity: var(--md-hover-opacity);
+}
+
+.md-typeset h1 {
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset pre>code {
+  border-radius: var(--md-border-radius);
+}
+
+.md-typeset .tabbed-block p {
+  margin-left: 1em
+}
+
+[data-md-color-scheme='default'] img[src$='#only-dark'],
+[data-md-color-scheme='slate'] img[src$='#only-light'] {
+  /* Hide dark images in light mode and vice versa */
+  display: none !important;
+}
+
+/* Dark/light mode icon styling */
+form[data-md-component=palette] .md-icon svg {
+  fill: var(--md-palette-icon-color);
+}
+
+form[data-md-component=palette] .md-header__button:hover svg {
+  fill: var(--md-palette-icon-color--hover);
+}
+
+/* All other icons */
+.md-icon svg {
+  fill: var(--md-typeset-a-color);
+  vertical-align: middle;
+  display: flex;
+}
+
+/* Header styles */
+[dir=ltr] .md-header__title {
+  margin-left: 0;
+  height: unset;
+}
+
+.md-header__button.md-logo img {
+  height: 2rem;
+}
+
+.md-tabs__item {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+
+/* Set all non-primary sections font and margin size to be smaller */
+.md-nav__link.md-nav__link--index,
+.md-nav__link {
+  margin-top: 0;
+  font-size: 0.9em;
+  padding: 0.4em 0;
+}
+
+/* Make the primary section font larger on left nav (i.e., Build, Node Operators, etc.) */
+.md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link {
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  font-size: 1.3em;
+  font-family: var(--header-font);
+}
+
+.md-nav--lifted
+  > .md-nav__list
+  > .md-nav__item--active
+  > .md-nav__link--active {
+  color: var(--md-default-fg-color);
+}
+
+/* Make the secondary section font larger on left nav (i.e., Get Started, Build, etc.) */
+.md-nav__item--section > .md-nav__link {
+  font-size: 1em;
+}
+
+/* Highlight current active nav item and nav items on hover */
+.md-nav__link:hover,
+.md-nav__link-wrapper.md-nav__item.md-nav__item--active,
+.md-nav__item div.md-nav__link--active {
+  background: var(--md-nav-bg-color);
+  margin-left: -1em;
+  border-radius: var(--border-radius);
+}
+
+/* Use standard color for active pages */
+.md-nav__item .md-nav__link--active {
+  color: var(--md-default-fg-color);
+}
+
+/* For active sections, when on that section index page */
+.md-nav__item .md-nav__link-wrapper.md-nav__link--active a,
+.md-nav__item .md-nav__link--active a {
+  color: var(--md-default-fg-color);
+  margin-left: 1em;
+}
+
+/* For links on hover */
+a.md-nav__link:hover,
+.md-nav__link:hover a {
+  color: var(--md-default-fg-color);
+  text-decoration: none;
+  margin-left: 1em;
+}
+
+a.md-nav__link:hover {
+  padding-left: 1.1em;
+  margin-left: -1.1em;
+}
+
+.md-nav__link.md-nav__link--index:hover a {
+  color: var(--md-typeset-a-color);
+}
+
+/* For active pages that are nested within sections */
+a.md-nav__link.md-nav__link--active {
+  margin-left: 0.7rem;
+}
+
+a.md-nav__link:hover.md-nav__link--active:hover {
+  margin-left: 0;
+}
+
+/* Styling of arrows on active sections */
+.md-nav__link:hover .md-nav__icon:after,
+.md-nav__item .md-nav__link--active label span.md-nav__icon.md-icon::after {
+  color: var(--md-accent-fg-color);
+}
+
+.md-nav__link {
+  justify-content: start;
+}
+
+.md-nav__item .md-nav__link--index [href] {
+  width: auto;
+  padding-right: 0.5em;
+}
+
+/* Only show the active items on the sidebar */
+@media screen and (min-width: 76.25em) {
+  [dir='ltr'] .md-nav--primary .md-nav__item > .md-nav__link {
+    margin-right: 0;
+  }
+
+  .main-page-sidebar .md-nav > .md-nav__list .md-nav__item--section,
+  .md-nav > .md-nav__list .md-nav__item--section.md-nav__item--active {
+    display: block;
+  }
+
+  /* Allow section headers to be clickable */
+  .md-nav--lifted
+    > .md-nav__list
+    > .md-nav__item--active
+    > .md-nav__link:not(.md-nav__container),
+  .md-nav__item--section > .md-nav__link:not(.md-nav__container) {
+    pointer-events: auto;
+  }
+
+  /* Remove arrow (dropdown) icon next to the section header (i.e., Builders, Node Operators, etc.) */
+  .md-nav--lifted
+    > .md-nav__list
+    > .md-nav__item--active
+    > .md-nav__link
+    label
+    span.md-nav__icon:after {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 76.1875em) {
+  [data-md-toggle='drawer']:checked ~ .md-container .md-sidebar--primary {
+    top: 0 !important; /* Use important to override in-line styling from mkdocs */
+  }
+}
+
+/* Section lines */
+li > nav.md-nav[data-md-level='3'] ul.md-nav__list,
+li > nav.md-nav[data-md-level='4'] ul.md-nav__list {
+  border-left: var(--border-width-thin) solid var(--md-accent-fg-color);
+}
+
+/* Add spacing below the section lines */
+.md-nav--primary .md-nav__list {
+  padding-bottom: 0;
+  margin-bottom: 0.5em;
+}
+
+/* Render arrow next to expandable sections */
+.md-nav__link > * {
+  cursor: pointer;
+  display: flex;
+}
+
+/* TOC styling */
+.md-nav--secondary .md-nav__item .md-nav__link--active {
+  color: var(--purple);
+  text-decoration: underline;
+}
+
+.md-nav--secondary .md-nav__title {
+  box-shadow: none;
+  padding-bottom: 0.5em;
+}
+
+.md-nav--secondary .md-nav__link:hover {
+  background: transparent;
+  color: var(--purple);
+}
+
+/* Hides paragraph mark at end of anchored text for H1s */
+.md-typeset h1 .headerlink {
+  display: none;
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-nav--secondary a.md-nav__link.md-nav__link--active {
+    margin-left: 0;
+  }
+
+  .md-nav--secondary a.md-nav__link.md-nav__link--active:hover {
+    margin-left: -.7rem;
+  }
+
+  .md-nav--secondary a.md-nav__link:hover.md-nav__link--active:hover {
+    padding-left: .7rem;
+  }
+}
+
+/* Adjust Nav Bar styling for smaller screens*/
+@media screen and (max-width: 76.1875em) {
+  /* Hide Nav Bar header label text - only show back arrow */
+  .md-nav--primary .md-nav__title {
+    height: 0;
+    background: unset;
+    display: flex;
+    align-items: center;
+  }
+
+  .toc-sections-title {
+    display: none;
+  }
+
+  /* Remove lines between sidebar nav items*/
+  .md-nav--primary .md-nav__title ~ .md-nav__list {
+    box-shadow: none;
+    padding-top: 1em;
+  }
+
+  .md-nav--primary .md-nav__item {
+    border-top: none;
+  }
+
+  .md-nav__link-wrapper.md-nav__item.md-nav__item--active
+    .md-nav__link.md-nav__link--active {
+    display: none;
+  }
+
+  /* Adjust font of nav items */
+  .md-nav__link,
+  .md-nav__item--section > .md-nav__link {
+    font-size: 0.9em;
+  }
+
+  .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link {
+    text-transform: capitalize;
+    font-family: var(--md-text-font);
+    font-size: 0.9em;
+  }
+
+  .md-nav__link.md-nav__link--index,
+  .md-nav__link {
+    margin-top: unset;
+    padding: 0.6rem 0.8rem;
+  }
+
+  /* TOC icon */
+  .md-nav__link--active > .md-nav__icon {
+    margin-left: 0.5em;
+  }
+
+  /* Nav hover styling active pages */
+  .md-nav__link:hover {
+    margin-left: unset;
+  }
+
+  /* Nav hover styling for sections */
+  div.md-nav__link:hover {
+    margin-left: 0;
+    padding-left: 0.1em;
+  }
+
+  /* Nav hover styling for pages */
+  a.md-nav__link:hover {
+    margin-left: 0;
+    padding-left: 1.1em;
+  }
+
+  /* Section lines */
+  li > nav.md-nav[data-md-level='3'] ul.md-nav__list,
+  li > nav.md-nav[data-md-level='4'] ul.md-nav__list {
+    border-left: none;
+  }
+
+  /* Apply background to active nav items */
+  .md-nav__item.md-nav__item--active {
+    background: var(--md-nav-bg-color);
+  }
+
+  a.md-nav__link.md-nav__link--active {
+    margin-left: 0;
+  }
+}
+
+/* Custom admonition styling */
+.md-typeset .admonition {
+  border-width: var(--md-border-width);
+}
+
+.md-typeset .admonition.note {
+  border-color: var(--md-admonition-icon-color--note);
+}
+
+/* Admonition icon background color */
+/* Should be the same as the border color above */
+.md-typeset .note > .admonition-title:before,
+.md-typeset .note > summary:before {
+  background-color: var(--md-admonition-icon-color--note);
+}
+
+/* Admonition top background color */
+.md-typeset .note > .admonition-title,
+.md-typeset .note > summary {
+  background-color: var(--md-primary-fg-color--light);
+}
+
+/* Styling for custom Admonition notes used for code */
+.md-typeset .admonition.code,
+.md-typeset details.code {
+  border-color: var(--purple);
+}
+
+/* Admonition icon background color */
+/* Should be the same as the border color above */
+.md-typeset .code > .admonition-title,
+.md-typeset .code > summary {
+  background-color: var(--purple-transparent-25);
+}
+
+/* Admonition top background color */
+.md-typeset .code > .admonition-title::before,
+.md-typeset .code > summary::before {
+  background-color: var(--purple);
+  -webkit-mask-image: var(--md-admonition-icon--code);
+  mask-image: var(--md-admonition-icon--code);
+}
+
+/* Styling for function description admonition */
+.md-typeset details.function {
+  border: none;
+  margin: 0.1rem;
+}
+
+.md-typeset .function > summary {
+  background-color: unset;
+}
+
+.md-typeset .function > summary::before {
+  display: none;
+}
+
+.md-typeset .function > summary::after {
+  left: 0.6rem;
+}
+
+.md-typeset .function summary {
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+html .md-typeset details.function div.tabbed-set,
+.md-typeset .function p,
+.md-typeset .function .admonition {
+  margin: 1em 2em;
+}
+
+.md-typeset .function .admonition * {
+  margin: 0 -0.6rem;
+  padding-top: 0.4rem;
+}
+
+.md-typeset .function .admonition > p:not(:first-child) {
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+}
+
+.md-typeset .function summary code {
+  box-shadow: none;
+}
+
+/* Styling for the Copy to Clipboard */
+/* Clipboard icon */
+.md-clipboard {
+  color: var(--md-primary-fg-color--dark);
+}
+
+.md-clipboard:focus,
+.md-clipboard:hover {
+  color: var(--md-accent-bg-color);
+}
+
+.md-dialog {
+  text-align: center;
+}
+
+/* Styling for Tables */
+.md-typeset table:not([class]) {
+  border-radius: var(--md-border-radius);
+  display: inline-table;
+}
+
+.md-typeset .md-typeset__table table th {
+  background-color: var(--pink-transparent-50);
+}
+
+.md-typeset table:not([class]) td,
+.md-typeset table:not([class]) th {
+  vertical-align: middle;
+}
+
+/* Tables centered */
+.md-typeset__scrollwrap {
+  text-align: center;
+}
+
+/* Tables in tabs */
+.tabbed-content {
+  padding: 0.5em 0.7em;
+}
+
+.tabbed-content .md-typeset__scrollwrap {
+  margin: 0;
+}
+
+.tabbed-content .md-typeset__table {
+  display: inline-table;
+  margin-bottom: 0;
+  padding: 0.5em;
+  width: 100%;
+}
+
+/* Tabbed Styling */
+.md-typeset .tabbed-labels {
+  box-shadow: none;
+  padding: 0.2em;
+}
+
+.md-typeset .tabbed-set {
+  background: var(--pink-transparent-15);
+  border: 1px solid var(--pink);
+  border-radius: var(--md-border-radius);
+}
+
+.md-typeset .tabbed-content {
+  background: var(--md-default-bg-color);
+  border: var(--md-border-width) solid var(--md-primary-fg-color);
+  border-bottom-left-radius: var(--md-border-radius);
+  border-bottom-right-radius: var(--md-border-radius);
+}
+
+.md-typeset
+  .tabbed-set
+  > input:first-child:checked
+  ~ .tabbed-labels
+  > :first-child,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(10):checked
+  ~ .tabbed-labels
+  > :nth-child(10),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(11):checked
+  ~ .tabbed-labels
+  > :nth-child(11),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(12):checked
+  ~ .tabbed-labels
+  > :nth-child(12),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(13):checked
+  ~ .tabbed-labels
+  > :nth-child(13),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(14):checked
+  ~ .tabbed-labels
+  > :nth-child(14),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(15):checked
+  ~ .tabbed-labels
+  > :nth-child(15),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(16):checked
+  ~ .tabbed-labels
+  > :nth-child(16),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(17):checked
+  ~ .tabbed-labels
+  > :nth-child(17),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(18):checked
+  ~ .tabbed-labels
+  > :nth-child(18),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(19):checked
+  ~ .tabbed-labels
+  > :nth-child(19),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(2):checked
+  ~ .tabbed-labels
+  > :nth-child(2),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(20):checked
+  ~ .tabbed-labels
+  > :nth-child(20),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(3):checked
+  ~ .tabbed-labels
+  > :nth-child(3),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(4):checked
+  ~ .tabbed-labels
+  > :nth-child(4),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(5):checked
+  ~ .tabbed-labels
+  > :nth-child(5),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(6):checked
+  ~ .tabbed-labels
+  > :nth-child(6),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(7):checked
+  ~ .tabbed-labels
+  > :nth-child(7),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(8):checked
+  ~ .tabbed-labels
+  > :nth-child(8),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(9):checked
+  ~ .tabbed-labels
+  > :nth-child(9) {
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset .tabbed-labels > label {
+  color: var(--md-accent-fg-color--light);
+}
+
+.js .md-typeset .tabbed-labels:before {
+  background: var(--md-accent-bg-color);
+  height: 3px;
+}
+
+.md-typeset .tabbed-labels>label:hover {
+  color: var(--md-default-fg-color);
+}
+
+/* Document date styling */
+.md-source-file {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+
+.md-source-file small {
+  display: flex;
+  align-items: end;
+}
+
+.source-file-label {
+  margin-right: 0.5em;
+}
+
+.source-file-seperator {
+  margin: 0 0.5em;
+}
+
+/* Disclaimer styling */
+.disclaimer,
+.page-disclaimer {
+  margin-top: auto;
+  margin-bottom: 1em;
+  font-size: x-small;
+  font-style: italic;
+}
+
+.page-disclaimer {
+  margin-top: 3em;
+}
+
+@media screen and (max-width: 30em) {
+  .source-file-seperator {
+    display: none;
+  }
+
+  .md-source-file {
+    margin: auto;
+  }
+
+  .md-source-file small {
+    display: block;
+    text-align: center;
+  }
+
+  .disclaimer {
+    margin: 2em auto;
+  }
+}
+
+/* Feedback widget styling */
+.md-feedback {
+  margin: 2em auto;
+  text-align: center;
+  border: var(--md-border-width) solid var(--md-primary-fg-color);
+  border-radius: var(--md-border-radius);
+  width: 30%;
+  padding: 0.7em;
+}
+
+.md-feedback__title {
+  font-weight: 300;
+}
+
+.md-feedback__icon:hover svg {
+  fill: var(--md-typeset-a-color--hover);
+}
+
+/* Footer Styling */
+.md-footer {
+  box-shadow: 0 0 .2rem #0000001a, 0 .2rem .4rem #0003;
+  transition: transform .25s cubic-bezier(.1,.7,.1,1), box-shadow .25s;
+}
+
+.md-footer-meta__inner,
+.md-footer-meta__inner.md-grid {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.md-footer-meta__inner {
+  flex-direction: column;
+}
+
+.md-footer-meta__inner.md-grid:first-child {
+  padding: 0.5em;
+}
+
+.md-copyright {
+  font-size: 0.6rem;
+  text-align: center;
+}
+
+.network-links {
+  text-align: center;
+}
+
+.network-links > a {
+  margin-right: 1em;
+}
+
+.md-social__link svg {
+  max-height: 1rem;
+}
+
+/* 404 page */
+.not-found {
+  display: flex;
+  justify-content: center;
+}
+
+/* Reference page styling */
+.api-referece {
+  width: 90%;
+}
+
+/* Grid styling */
+.grid > div:last-child {
+  max-height: 1000px;
+  overflow: auto;
+}
+
+.md-typeset .grid {
+  grid-gap: 3rem;
+}
+
+.md-typeset .grid > div:first-child > p:first-child {
+  margin-top: 0;
+}
+
+.grid .highlight span.filename {
+  margin-top: 0;
+}
+
+/* Type styling */
+.md-typeset kbd {
+  border-radius: 1em;
+  vertical-align: baseline;
+  box-shadow: none;
+}
+/* For links to definitions on reference pages */
+.md-typeset .twemoji {
+  vertical-align: middle;
+}
+
+/* Button styling */
+.md-header__option .md-header__button:not([hidden]),
+.md-typeset.md-button,
+.md-typeset .md-button {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  font-weight: 400;
+  padding: 0.5em 1.5em;
+  border-radius: var(--md-border-radius);
+  background: var(--pink-transparent-5);
+  border: 1px solid var(--pink);
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset .md-button.secondary {
+  background: var(--pink-transparent-5);
+  border: 1px solid var(--pink);
+}
+
+.md-typeset .md-button svg {
+  fill: var(--white);
+  height: 1.4em;
+  padding-left: .3em;
+}
+
+/* Header buttons styling */
+.md-header__buttons {
+  display: flex;
+}
+
+.md-header__buttons > * {
+  align-self: center;
+  font-size: 0.6rem;
+  border-radius: var(--md-border-radius);
+  display: flex;
+  align-items: center;
+}
+
+.md-header__inner.md-grid .md-tabs__link {
+  margin-top: 0;
+}
+
+.md-header__option {
+  padding: 0.467em 1em;
+  margin: .2em;
+}
+
+/* Dropdown menu styling */
+.md-tabs__list {
+  display: flex;
+  padding: 0 1em;
+  contain: none;
+  font-family: var(--label-font);
+}
+
+.md-tabs__item--custom {
+  padding: 1em 1.5em;
+  display: inline-block;
+  min-height: 5.5em;
+  align-content: space-around;
+  border-bottom: 3px solid transparent; /* Set initial border to transparent */
+  transition: border 0.3s ease;
+}
+
+.md-tab__list {
+  position: absolute;
+  background: var(--md-dropdown-color);
+  z-index: 3;
+  list-style: none;
+  display: none;
+  margin-top: 1em;
+  padding: 0;
+  top: 4.5em;
+  transform: translateZ(0); /* For Safari */
+  margin-left: -1.5em;
+}
+
+.md-tabs__item--custom:hover .md-tab__list,
+.md-tab__list:hover {
+  display: block;
+}
+
+.md-tabs__item--custom:hover {
+  cursor: pointer;
+  border-bottom: 3px solid var(--blue);
+}
+
+.md-tabs__item--custom:hover .md-tabs__link {
+  color: var(--blue);
+}
+
+.md-tab__item {
+  font-size: 1.1em;
+  padding: 0.75em 1.5em;
+}
+
+.md-tab__item:hover,
+.md-tab__item:active {
+  opacity: var(--md-hover-opacity);
+  border-bottom: 1px solid var(--blue)
+}
+
+.md-tab__item:hover:first-child,
+.md-tab__item:active:first-child {
+  border-top-left-radius: 0.2em;
+  border-top-right-radius: 0.2em;
+}
+
+.md-tab__item:hover:last-child,
+.md-tab__item:active:last-child {
+  border-bottom-left-radius: 0.2em;
+  border-bottom-right-radius: 0.2em;
+}
+
+.md-tab__item:hover a,
+.md-tab__item:active a {
+  text-decoration: none;
+}
+
+.md-tabs__link {
+  opacity: unset;
+}
+
+.md-tab__item a {
+  display: flex;
+  margin: 0.3em 0;
+}
+
+.dropdown-icon {
+  width: 2em;
+  height: 2em;
+}
+
+.text-col {
+  margin-left: 1.5em;
+}
+
+.icon-col {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-title {
+  text-transform: uppercase;
+}
+
+.dropdown-desc {
+  margin: 0.2em 0;
+  color: var(--light-transparent-60);
+  font-family: var(--md-text-font);
+}
+
+.md-header .md-icon svg {
+  fill: var(--md-default-fg-color);
+}
+
+/* Search styling */
+.md-header__button.md-icon[for='__search'] {
+  display: inline-block;
+  border: 1px solid var(--pink);
+  background: var(--pink-transparent-5);
+  color: var(--md-default-fg-color);
+  border-radius: var(--md-border-radius);
+  padding: 0.467em 1em;
+  margin: 0;
+}
+
+.md-header__button.md-icon[for='__search'] svg {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.md-search {
+  visibility: hidden;
+  width: 0;
+}
+
+.md-search__input {
+  font-size: 0.7rem;
+}
+
+.md-search-result__meta {
+  background-color: var(--md-default-bg-color);
+}
+
+.md-search-result__item {
+  box-shadow: 0 -0.05rem var(--light-transparent-40);
+}
+
+.md-typeset .button-wrapper a:hover {
+  text-decoration: none;
+}
+
+.md-typeset .md-button:hover,
+.md-header__option:hover .md-header__button,
+.md-header__option .md-header__button:hover,
+.md-header__button.md-icon[for='__search']:hover,
+.md-header__button.md-icon[for='__search']:active {
+  opacity: var(--md-hover-opacity);
+  color: var(--md-default-fg-color);
+  background-color: var(--pink-transparent-5);
+  border: 1px solid var(--pink);
+}
+
+.md-typeset .md-button.secondary:hover {
+  background-color: var(--pink-transparent-15);
+  border: 1px solid var(--blue);
+}
+
+[data-md-toggle='search']:checked ~ .md-header .md-search {
+  visibility: visible;
+  width: unset;
+  height: auto;
+  padding-right: 0.3em;
+  position: absolute;
+  right: 1.4em;
+  z-index: 100;
+  background: var(--md-default-bg-color);
+}
+
+[data-md-toggle='search']:checked ~ .md-header .md-search__overlay {
+  opacity: 0;
+}
+
+@media screen and (min-width: 60em) {
+  [data-md-toggle='search']:checked ~ .md-header .md-search__form {
+    border: 1px solid var(--pink);
+    border-radius: var(--md-border-radius);
+    background-color: transparent;
+  }
+
+  [data-md-toggle='search']:checked ~ .md-header .md-search__output {
+    margin-top: 0.5em;
+    border-radius: var(--md-border-radius);
+    border: 1px solid var(--pink)
+  }
+
+  [data-md-toggle='search']:checked
+    ~ .md-header
+    .md-search__input:valid
+    ~ .md-search__options
+    > .md-icon,
+  [data-md-toggle='search']:checked ~ .md-header .md-search__input,
+  [data-md-toggle='search']:checked
+    ~ .md-header
+    .md-search__input
+    + .md-search__icon {
+    color: var(--md-default-fg-color);
+  }
+}
+
+@media screen and (min-width: 60em) and (max-width: 76.1875em) {
+  [data-md-toggle='search']:checked ~ .md-header .md-search__inner,
+  .md-search__scrollwrap {
+    width: 34.4rem;
+  }
+}
+
+@media screen and (max-width: 76.234375em) {
+  .md-tabs {
+    display: none;
+  }
+
+  .md-nav--primary .md-nav__item--active>.md-nav__link {
+    color: var(--md-default-fg-color);
+  }
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-nav__item--section>.md-nav__link:not(.md-nav__container) {
+    pointer-events: auto;
+  }
+
+  .md-nav--primary .md-nav__title {
+    box-shadow: none;
+  }
+}
+
+/* API styling: child admonition */
+.api-reference-link {
+  position: absolute;
+  margin-top: -1em;
+  left: 69%;
+}
+
+details.child summary::before {
+  display: none;
+}
+
+details.child {
+  width: fit-content;
+}
+
+[dir=ltr] .md-typeset details.child summary {
+  width: fit-content;
+  padding-left: 1em;
+}
+
+[dir=ltr] .md-typeset details.child[open] {
+  width: 100%;
+}
+
+.md-typeset details.child summary {
+  background-color: unset;
+}
+
+.md-typeset details.child {
+  width: fit-content;
+  border: 1px solid var(--md-admonition-border--interface);
+  box-shadow: none;
+}
+
+@media screen and (min-width: 60em) {
+  .md-sidebar--secondary:not([hidden]) {
+      display: block;
+      margin-left: 1em;
+  }
+}
+
+/* Remove inline code background */
+.md-typeset p code {
+  background-color: unset;
+}
+
+/* Remove type background and adjust font size */
+.md-typeset kbd {
+  background-color: unset;
+  font-size: .7em;
+  padding-left: 0;
+}
+
+/* Add background for required paramaters */
+.md-typeset .required kbd {
+  background-color: rgba(249, 105, 14, .7);
+  text-transform: capitalize;
+  padding-left: .6666666667em;
+}
+
+/* API Styling: interface admonition */
+details.interface>summary::before {
+  display: none;
+}
+
+.md-typeset details.interface {
+  border: 1px solid var(--md-admonition-border--interface);
+  box-shadow: none;
+}
+
+[dir=ltr] .md-typeset details.interface>summary {
+  padding: 1em 0 1em 1em;
+  background-color: var(--md-admonition-bg--interface);
+}
+
+.md-typeset details.interface>summary:after {
+  top: auto;
+}
+
+.md-typeset details.interface {
+  width: 100%;
+}
+
+.md-typeset details.interface .tabbed-set {
+  background: var(--md-admonition-bg--interface);
+  border: 1px solid var(--md-admonition-border--interface);
+  border-radius: var(--md-border-radius);
+}
+
+.md-typeset details.interface .tabbed-set .tabbed-labels {
+  color: var(--md-admonition-bg--interface);
+}
+
+.md-typeset details.interface .tabbed-set > input:first-child:checked ~ .tabbed-labels > :first-child,
+.md-typeset details.interface .tabbed-set > input:nth-child(2):checked ~ .tabbed-labels > :nth-child(2) {
+  color: var(--white);
+}
+
+.md-typeset .grid {
+  grid-gap: 1rem;
+}
+
+.md-typeset .grid.cards>ul>li:hover {
+  border-color: var(--md-default-fg-color--lightest);
+}

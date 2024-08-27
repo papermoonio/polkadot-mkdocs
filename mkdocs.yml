@@ -1,0 +1,113 @@
+site_name: Polkadot Developer Docs
+site_url: # XXX
+docs_dir: polkadot-docs
+copyright: © 2024 Web3 Foundation
+# Extra CSS files
+extra_css:
+  - assets/stylesheets/extra.css
+  - assets/stylesheets/terminal.css
+# Diagnostic messages when validating links to documents
+validation:
+  absolute_links: ignore
+  unrecognized_links: ignore
+# Theme related settings
+theme:
+  name: material
+  custom_dir: material-overrides
+  favicon: assets/images/favicon.png
+  logo: assets/images/logo.png
+  logo_dark_mode: assets/images/logo-dark.png
+  font:
+    text: Inter
+  features:
+    - content.code.annotate # Adds annotations to code blocks
+    - content.code.copy # Adds copy to clipboard button to code snippets
+    - content.tooltips # Adds tooltips
+    - navigation.footer # Shows previous and next on the footer
+    - navigation.tabs # Top-level sections are rendered below the header (can be modified to in-line with CSS)
+    - navigation.tabs.sticky # When scrolling, the tabs remain at the top of the page
+    - navigation.sections # Render top-level sections as groups in the sidebar
+    - navigation.indexes # Index pages
+  # Used for light and dark mode feature
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - codehilite
+  - md_in_html
+  - meta
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: True
+      line_spans: __span
+      pygments_lang_class: True
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.snippets:
+      base_path: docs/.snippets
+      url_download: True
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: True
+  - toc:
+      title: Sections
+      permalink: True
+
+plugins:
+  - search
+  - awesome-pages
+  - redirects:
+      redirect_maps:
+        # Redirects will go here as pages get moved around in the following format:
+        # old-page.md: new-page.md
+  - macros:
+      include_yaml:
+        - docs/variables.yml
+extra:
+  generator: False
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/Polkadot
+      name: Twitter
+    - icon: fontawesome/brands/discord
+      link: https://dot.li/discord
+      name: Discord
+    - icon: fontawesome/brands/github
+      link: https://github.com/paritytech/polkadot-sdk
+      name: GitHub
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/channel/UCB7PbjuZLEba_znc7mEGNgw
+      name: YouTube
+#   analytics:
+#     provider: google
+#     property: G-XXX
+#     feedback:
+#       title: Was this page helpful?
+#       ratings:
+#         - icon: material/emoticon-happy-outline
+#           name: This page was helpful
+#           data: 1
+#           note: >-
+#             Thanks for your feedback!
+#         - icon: material/emoticon-sad-outline
+#           name: This page could be improved
+#           data: 0
+#           note: >-
+#             Thanks for your feedback! Help us improve this page by submitting
+#             <a href="https://github.com/polkadot-developers/polkadot-docs/issues/new/?title=[Feedback]+{title}+-+{url}" target="_blank" rel="noopener">additional feedback</a>.
