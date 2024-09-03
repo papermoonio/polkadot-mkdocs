@@ -60,7 +60,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.keys
   - pymdownx.snippets:
-      base_path: docs/.snippets
+      base_path: polkadot-docs/.snippets
       url_download: True
   - pymdownx.superfences
   - pymdownx.tabbed:
@@ -78,7 +78,7 @@ plugins:
         # old-page.md: new-page.md
   - macros:
       include_yaml:
-        - docs/variables.yml
+        - polkadot-docs/variables.yml
 extra:
   generator: False
   social:
