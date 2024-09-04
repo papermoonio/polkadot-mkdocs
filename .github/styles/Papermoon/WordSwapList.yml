@@ -1,0 +1,33 @@
+extends: substitution
+message: "Use '%s' instead of '%s'."
+link: "https://developers.google.com/style/word-list"
+level: warning
+ignorecase: false
+action:
+  name: replace
+swap:
+  "(?:e-mail|Email|E-mail)": email
+  "(?:file ?path|path ?name)": path
+  "(?:kill|terminate|abort)": stop|exit|cancel|end
+  "(?:ok|Okay)": OK|okay
+  "(?:WiFi|wifi)": Wi-Fi
+  '3\-D': 3D
+  "un(?:check|select)": clear
+  above: preceding
+  admin: administrator
+  Ajax: AJAX
+  a\.k\.a|aka: or|also known as
+  approx\.: approximately
+  check box: checkbox
+  disabled?: turn off|off|deactivate
+  file name: filename
+  HTTPs: HTTPS
+  in order to: to
+  open-source: open source
+  stylesheet: style sheet
+  tablename: table name
+  url: URL
+  vs\.: versus
+  wasm: Wasm
+  
+  
