@@ -1,0 +1,6 @@
+MainNet
+TestNet
+time frame
+
+
+
