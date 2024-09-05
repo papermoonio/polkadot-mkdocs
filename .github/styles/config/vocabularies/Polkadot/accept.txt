@@ -9,7 +9,7 @@ dev_newBlock
 dev_setHead
 dev_setStorage
 dev_timeTravel
-extrinsics
+[Ee]xtrinsics
 ink!
 invulnerables
 IPs
@@ -18,10 +18,15 @@ parachain's
 parachains
 parathread
 Polkadot
+Westend
+Rococo
+Kusama
+Paseo
 Polkadot's
 Polkadot SDK
 relay chain
 relay chains
 Smoldot
 Zombienet
-
+[Dd]ispatchable
+[Ii]nherents
