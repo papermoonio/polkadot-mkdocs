@@ -28,5 +28,11 @@ relay chain
 relay chains
 Smoldot
 Zombienet
+Ferdie
 [Dd]ispatchable
 [Ii]nherents
+[Ss]udo
+runtimes
+[Ll]iveness
+composable
+
