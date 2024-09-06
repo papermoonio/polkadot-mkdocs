@@ -33,9 +33,12 @@ subcommand
 subkeys
 tooltip
 TypeScript
-validator
+[Vv]alidator
 validators
 Wasm
+[Tt]rie
+picosecond
+Merkle
 webRTC
 
 
