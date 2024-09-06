@@ -12,6 +12,7 @@ dev_timeTravel
 [Dd]ispatchable
 [Ee]xtrinsics
 Ferdie
+FRAME
 [Ii]nherents
 ink!
 invulnerables
@@ -20,8 +21,8 @@ Kusama
 [Mm]ultilocation
 OpenGov
 [Pp]arachain
-parachain's
-parachains
+[Pp]arachain's
+[Pp]arachains
 parathread
 Paseo
 Polkadot
