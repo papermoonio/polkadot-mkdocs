@@ -18,6 +18,7 @@ JavaScript
 JSON-RPC
 keystore
 keystores
+Merkle
 mintable
 multisig
 namespace
@@ -26,19 +27,18 @@ npm
 npx
 onboarded
 onboarding
+picosecond
 Podman
 SDK
 snake_case
 subcommand
 subkeys
 tooltip
+[Tt]rie
 TypeScript
 [Vv]alidator
 validators
 Wasm
-[Tt]rie
-picosecond
-Merkle
 webRTC
 
 
