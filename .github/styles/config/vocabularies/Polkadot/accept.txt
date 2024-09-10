@@ -30,7 +30,6 @@ Smoldot
 Zombienet
 [Ff]orkless
 [Rr]untimes
-
 Ferdie
 [Dd]ispatchable
 [Ii]nherents
