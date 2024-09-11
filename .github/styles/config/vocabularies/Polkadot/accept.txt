@@ -15,7 +15,7 @@ invulnerables
 IPs
 [Pp]arachain
 parachain's
-parachains
+[Pp]arachains
 parathread
 Polkadot
 Westend
@@ -28,6 +28,8 @@ relay chain
 relay chains
 Smoldot
 Zombienet
+[Ff]orkless
+[Rr]untimes
 Ferdie
 [Dd]ispatchable
 [Ii]nherents
@@ -35,4 +37,14 @@ Ferdie
 runtimes
 [Ll]iveness
 composable
-
+Subscan
+[Ss]ubxt
+[Mm]ultilocation
+TxWrapper
+Darwinia
+Phala
+Khala
+Acala
+Karura
+Shiden
+srtool
