@@ -24,6 +24,7 @@ swap:
   HTTPs: HTTPS
   in order to: to
   open-source: open source
+  "(?:Polkadot JS|Polkadot.Js|Polkadot.JS)": Polkadot.js
   stylesheet: style sheet
   tablename: table name
   url: URL
