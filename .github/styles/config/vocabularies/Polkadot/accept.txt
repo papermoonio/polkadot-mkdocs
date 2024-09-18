@@ -27,6 +27,7 @@ Polkadot SDK
 relay chain
 relay chains
 Smoldot
+Solochain
 Zombienet
 [Ff]orkless
 [Rr]untimes

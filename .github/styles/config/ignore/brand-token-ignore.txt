@@ -18,4 +18,5 @@ Polkadot
 Sei
 Solana
 Uniswap
+UNIT
 Wormhole
