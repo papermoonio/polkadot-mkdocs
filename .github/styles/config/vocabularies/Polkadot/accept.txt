@@ -16,6 +16,7 @@ dev_timeTravel
 [Ee]xtrinsics
 Ferdie
 [Ff]orkless
+Grafana
 [Ii]nherents
 ink!
 invulnerables
@@ -35,6 +36,8 @@ Phala
 Polkadot
 Polkadot's
 Polkadot SDK
+[Rr]ebond
+referenda
 relay chain
 relay chains
 Rococo
@@ -46,6 +49,8 @@ Subscan
 [Ss]ubxt
 [Ss]udo
 TxWrapper
+[Uu]nbond
+[Uu]nbonding
 Westend
 Zombienet
 
