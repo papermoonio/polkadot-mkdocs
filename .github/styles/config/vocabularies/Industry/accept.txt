@@ -1,7 +1,7 @@
 API
 application
-blockchain
-blockchains
+[Bb]lockchain
+[Bb]lockchains
 burnable
 certhash
 CronJobs
@@ -10,8 +10,10 @@ daemonless
 [Dd]App
 enum
 ERC-\d+
+Etherscan
 EVM 
 EVMs
+Ethereum
 href
 Injective
 JavaScript
@@ -31,10 +33,12 @@ npx
 [Oo]nboarding
 picosecond
 Podman
+Protobuf
 SDK
 snake_case
 subcommand
 subkeys
+toolchain
 tooltip
 [Tt]rie
 TypeScript
@@ -42,11 +46,6 @@ TypeScript
 [Vv]alidators
 Wasm
 webRTC
-
-
-
-
-
 
 
 

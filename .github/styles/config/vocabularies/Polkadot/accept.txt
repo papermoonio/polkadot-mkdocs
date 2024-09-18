@@ -1,10 +1,13 @@
+Acala
 args
 backchannel
 blockHash
-bootnode
-bootnodes
+[Bb]ootnode
+[Bb]ootnodes
+composable
 config
 [Cc]oretime
+Darwinia
 dev_newBlock
 dev_setHead
 dev_setStorage
@@ -12,7 +15,7 @@ dev_timeTravel
 [Dd]ispatchable
 [Ee]xtrinsics
 Ferdie
-FRAME
+[Ff]orkless
 [Ii]nherents
 ink!
 invulnerables
@@ -20,11 +23,18 @@ IPs
 Kusama
 [Mm]ultilocation
 OpenGov
+Karura
+Khala
+Kusama
+[Ll]iveness
+[Mm]ultilocation
+[Oo]mninode
 [Pp]arachain
 [Pp]arachain's
 [Pp]arachains
 parathread
 Paseo
+Phala
 Polkadot
 Polkadot's
 Polkadot SDK
@@ -34,20 +44,15 @@ Polkadot SDK
 relay chain
 relay chains
 Rococo
+[Rr]untimes
+Shiden
 Smoldot
+Solochain
+Subscan
+[Ss]ubxt
+[Ss]udo
+TxWrapper
 Westend
-
-
-
-
-
-
 Zombienet
 
-
-
-[Ss]udo
-runtimes
-[Ll]iveness
-composable
 
