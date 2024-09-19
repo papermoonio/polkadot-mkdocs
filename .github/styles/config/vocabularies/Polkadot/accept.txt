@@ -1,51 +1,26 @@
 Acala
-args
-backchannel
-blockHash
-[Bb]ootnode
-[Bb]ootnodes
-composable
-config
-[Cc]oretime
 Darwinia
 dev_newBlock
 dev_setHead
 dev_setStorage
 dev_timeTravel
-[Dd]ispatchable
-[Ee]xtrinsics
 Ferdie
-[Ff]orkless
-[Ii]nherents
 ink!
 invulnerables
 IPs
 Karura
 Khala
 Kusama
-[Ll]iveness
-[Mm]ultilocation
-[Oo]mninode
-[Pp]arachain
-[Pp]arachain's
-[Pp]arachains
-parathread
 Paseo
 Phala
 Polkadot
 Polkadot's
 Polkadot SDK
-relay chain
-relay chains
+Polkassembly
 Rococo
-[Rr]untimes
 Shiden
 Smoldot
-Solochain
 Subscan
-[Ss]ubxt
-[Ss]udo
-TxWrapper
 Westend
 Zombienet
 
