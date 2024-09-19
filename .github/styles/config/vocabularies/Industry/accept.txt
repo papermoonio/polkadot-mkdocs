@@ -27,8 +27,10 @@ namespace
 namespaces
 npm
 npx
-onboarded
-onboarding
+[Oo]ffboarded
+[Oo]ffboarding
+[Oo]nboarded
+[Oo]nboarding
 picosecond
 Podman
 Protobuf
@@ -41,7 +43,7 @@ tooltip
 [Tt]rie
 TypeScript
 [Vv]alidator
-validators
+[Vv]alidators
 Wasm
 webRTC
 
