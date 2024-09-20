@@ -1,14 +1,6 @@
 API
-application
-[Bb]lockchain
-[Bb]lockchains
-burnable
-certhash
 CronJobs
-daemon
-daemonless
 [Dd]App
-enum
 ERC-\d+
 Etherscan
 EVM 
