@@ -15,6 +15,7 @@ exceptions:
   - CSS
   - CSV
   - DEBUG
+  - DNS
   - DOM
   - DPI
   - EVM
@@ -47,6 +48,7 @@ exceptions:
   - RPC
   - RPM
   - RSA
+  - SCALE
   - SCM
   - SCSS
   - SDK
@@ -63,6 +65,7 @@ exceptions:
   - URL
   - USB
   - UTF
+  - WSS
   - XCM
   - XML
   - XSS

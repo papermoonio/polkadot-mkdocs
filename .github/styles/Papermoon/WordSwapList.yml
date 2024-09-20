@@ -19,16 +19,21 @@ swap:
   a\.k\.a|aka: or|also known as
   approx\.: approximately
   check box: checkbox
+  config: configuration
   disabled?: turn off|off|deactivate
   file name: filename
   HTTPs: HTTPS
   in order to: to
+  Nginx: nginx|NGINX
   open-source: open source
   "(?:Polkadot JS|Polkadot.Js|Polkadot.JS)": Polkadot.js
+  "(?:repo|repos)": repository|repositories
+  rpc: RPC
   stylesheet: style sheet
   tablename: table name
   url: URL
   vs\.: versus
+  whitelist: allowlist 
   wasm: Wasm
   
   

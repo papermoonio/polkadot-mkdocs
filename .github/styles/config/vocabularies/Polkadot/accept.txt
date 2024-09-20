@@ -17,8 +17,6 @@ dev_newBlock
 dev_setHead
 dev_setStorage
 dev_timeTravel
-[Dd]ispatchable
-[Ee]xtrinsics
 Ferdie
 [Ff]orkless
 FRAME
@@ -52,6 +50,7 @@ Polkadot
 Polkadot OpenGov
 Polkadot's
 Polkadot SDK
+Polkassembly
 [Rr]ebond
 referenda
 [Pr]eimage
@@ -60,7 +59,6 @@ referenda
 relay chain
 relay chains
 Rococo
-[Rr]untimes
 Shiden
 Smoldot
 Snowbridge

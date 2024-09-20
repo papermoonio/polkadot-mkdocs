@@ -14,12 +14,13 @@ Etherscan
 EVM 
 EVMs
 Ethereum
+hardcoded
 href
 Injective
 JavaScript
 JSON-RPC
-keystore
-keystores
+[Kk]eystore
+[Kk]eystores
 Merkle
 mintable
 multisig
@@ -27,6 +28,7 @@ namespace
 namespaces
 Nano
 [Nn]ominable
+nginx
 npm
 npx
 onboarded
@@ -34,9 +36,12 @@ onboarding
 permissionless
 picosecond
 Podman
+Prometheus
 [Pp]rometheus
 promtool
 Protobuf
+proxied
+proxying
 runbooks
 SDK
 snake_case
@@ -51,8 +56,11 @@ UI
 UIs
 [Vv]alidator
 [Vv]alidators
+virtualhost
 Wasm
 webRTC
+[Ww]ebsocket
+[Ww]ebsockets
 
 
 
