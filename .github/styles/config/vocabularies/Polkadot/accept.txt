@@ -24,10 +24,14 @@ Ferdie
 FRAME
 GRANDPA
 HRMP
+Grafana
 [Ii]nherents
 ink!
 invulnerables
 IPs
+Kusama
+[Mm]ultilocation
+OpenGov
 Karura
 Khala
 Kusama
@@ -48,6 +52,11 @@ Polkadot
 Polkadot OpenGov
 Polkadot's
 Polkadot SDK
+[Rr]ebond
+referenda
+[Pr]eimage
+[Pr]eimages
+[Rr]eferenda
 relay chain
 relay chains
 Rococo
@@ -61,7 +70,8 @@ Subscan
 [Ss]ubxt
 [Ss]udo
 TxWrapper
+[Uu]nbond
+[Uu]nbonding
 Wasm
-WebAssembly
 Westend
 Zombienet
