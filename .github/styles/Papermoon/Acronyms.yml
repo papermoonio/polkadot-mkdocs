@@ -45,10 +45,12 @@ exceptions:
   - RAM
   - REPL
   - RPC
+  - RPM
   - RSA
   - SCM
   - SCSS
   - SDK
+  - SMS
   - SQL
   - SSH
   - SSL
