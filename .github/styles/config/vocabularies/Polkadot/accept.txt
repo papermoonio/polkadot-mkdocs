@@ -21,6 +21,9 @@ Grafana
 ink!
 invulnerables
 IPs
+Kusama
+[Mm]ultilocation
+OpenGov
 Karura
 Khala
 Kusama
@@ -38,6 +41,9 @@ Polkadot's
 Polkadot SDK
 [Rr]ebond
 referenda
+[Pr]eimage
+[Pr]eimages
+[Rr]eferenda
 relay chain
 relay chains
 Rococo
@@ -53,4 +59,5 @@ TxWrapper
 [Uu]nbonding
 Westend
 Zombienet
+
 

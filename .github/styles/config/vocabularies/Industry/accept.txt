@@ -51,7 +51,6 @@ UI
 UIs
 [Vv]alidator
 [Vv]alidators
-.wasm
 Wasm
 webRTC
 
