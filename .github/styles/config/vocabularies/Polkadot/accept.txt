@@ -8,6 +8,9 @@ Ferdie
 ink!
 invulnerables
 IPs
+Kusama
+[Mm]ultilocation
+OpenGov
 Karura
 Khala
 Kusama
@@ -17,10 +20,16 @@ Polkadot
 Polkadot's
 Polkadot SDK
 Polkassembly
+[Pr]eimage
+[Pr]eimages
+[Rr]eferenda
+relay chain
+relay chains
 Rococo
 Shiden
 Smoldot
 Subscan
 Westend
 Zombienet
+
 

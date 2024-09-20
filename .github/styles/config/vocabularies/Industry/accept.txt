@@ -29,8 +29,10 @@ namespaces
 nginx
 npm
 npx
-onboarded
-onboarding
+[Oo]ffboarded
+[Oo]ffboarding
+[Oo]nboarded
+[Oo]nboarding
 picosecond
 Podman
 Prometheus
