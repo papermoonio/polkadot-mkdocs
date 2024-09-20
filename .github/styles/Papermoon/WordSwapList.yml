@@ -14,12 +14,13 @@ swap:
   '3\-D': 3D
   "un(?:check|select)": clear
   above: preceding
-  admin: administrator
+  admin: administrator|`admin`
   Ajax: AJAX
   a\.k\.a|aka: or|also known as
   approx\.: approximately
+  args: arguments|`args`
   check box: checkbox
-  config: configuration
+  config: configuration|`config`
   disabled?: turn off|off|deactivate
   file name: filename
   HTTPs: HTTPS

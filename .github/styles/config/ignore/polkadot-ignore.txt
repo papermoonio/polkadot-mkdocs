@@ -1,4 +1,3 @@
-args
 backchannel
 blockHash
 bootnode
@@ -6,6 +5,7 @@ bootnodes
 composable
 coretime
 dispatchable
+dispatchables
 extrinsics
 forkless
 inherents
@@ -17,10 +17,15 @@ parachain
 parachain's
 parachains
 parathread
+preimage
+preimages
+rebond
+referenda
 relay chain
 relay chains
 runtimes
-Smoldot
 solochain
 subxt
 sudo
+unbond
+unbonding
