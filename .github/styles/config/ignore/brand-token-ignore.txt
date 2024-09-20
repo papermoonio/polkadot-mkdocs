@@ -7,6 +7,7 @@ Astar
 Celo
 CELO
 Ethereum
+ETH
 Grafana
 Klaytn
 Kujira
@@ -15,6 +16,8 @@ Moonbeam
 Moonriver
 Moonbase Alpha
 Polkadot
+Rococo
+ROC
 Sei
 Solana
 Uniswap

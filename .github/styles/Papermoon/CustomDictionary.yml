@@ -8,7 +8,4 @@ ignore:
   # Reference file location relative to styles/config/ignore directory
     # custom dictionary of cyrpto brands and token names/symbols
   - brand-token-ignore.txt
-    # custom dictionary of blockchain & software engineering terms
-  - industry-ignore.txt
-  
     
