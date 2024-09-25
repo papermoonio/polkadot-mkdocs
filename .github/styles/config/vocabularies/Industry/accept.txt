@@ -1,4 +1,5 @@
 API
+Certus
 CronJobs
 [Dd]App
 ERC-\d+
@@ -18,6 +19,8 @@ SDK
 TypeScript
 UI
 UIs
+VM
+VMs
 Wasm
 webRTC
 
