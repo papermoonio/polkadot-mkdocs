@@ -64,6 +64,7 @@ exceptions:
   - TCP
   - TODO
   - TOML
+  - UNIX
   - URI
   - URL
   - USB
