@@ -11,10 +11,14 @@ ETH
 Grafana
 Klaytn
 Kujira
+Kusama
+KSM
 Metamask
 Moonbeam
 Moonriver
 Moonbase Alpha
+Paseo
+PAS
 Polkadot
 Rococo
 ROC
@@ -22,4 +26,6 @@ Sei
 Solana
 Uniswap
 UNIT
+Westend
+WND
 Wormhole

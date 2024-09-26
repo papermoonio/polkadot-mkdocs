@@ -2,6 +2,7 @@ API
 Certus
 CronJobs
 [Dd]App
+Dwellir
 ERC-\d+
 Etherscan
 EVM 
@@ -12,6 +13,7 @@ JavaScript
 JSON-RPC
 Merkle
 Nano
+NOWNodes
 Podman
 Prometheus
 Protobuf
