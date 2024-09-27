@@ -1,4 +1,5 @@
 MainNet
+(?i)mkdocs
 PaperMoon
 TestNet
 time frame
