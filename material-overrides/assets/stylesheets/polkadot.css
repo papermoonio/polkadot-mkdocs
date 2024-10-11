@@ -98,13 +98,36 @@ body {
   /* Table content */
   --md-typeset-table-color: var(--black-transparent-15);
 
-  /** Branded Mermaid Diagrams **/
-  --md-default-fg-color--lightest: var(--black-transparent-15);
-  --md-mermaid-edge-color: var(--black);
-  --md-mermaid-node-bg-color: var(--pink);
-  --md-mermaid-node-fg-color: var(--black);
+  /** Branded Mermaid Flowchart Diagrams **/
+  --md-mermaid-font-family: var(--md-text-font-family), sans-serif;
+  --md-default-fg-color--lightest: var(--white-transparent-10);
+  --md-mermaid-edge-color: var(--md-code-fg-color);
+  --md-mermaid-node-bg-color: var(--md-accent-fg-color--transparent);
+  --md-mermaid-node-fg-color: var(--md-accent-fg-color);
   --md-mermaid-label-bg-color: var(--md-default-bg-color);
-  --md-mermaid-label-fg-color: var(--black);
+  --md-mermaid-label-fg-color: var(--md-code-fg-color);
+
+  /** Branded Mermaid Sequence Diagrams **/
+  --md-mermaid-sequence-actor-bg-color:      var(--md-mermaid-label-bg-color);
+  --md-mermaid-sequence-actor-fg-color:      var(--md-mermaid-label-fg-color);
+  --md-mermaid-sequence-actor-border-color:  var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-actor-line-color:    var(--md-default-fg-color--lighter);
+  --md-mermaid-sequence-actorman-bg-color:   var(--md-mermaid-label-bg-color);
+  --md-mermaid-sequence-actorman-line-color: var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-box-bg-color:        var(--md-mermaid-node-bg-color);
+  --md-mermaid-sequence-box-fg-color:        var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-label-bg-color:      var(--md-mermaid-node-bg-color);
+  --md-mermaid-sequence-label-fg-color:      var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-loop-bg-color:       var(--md-mermaid-node-bg-color);
+  --md-mermaid-sequence-loop-fg-color:       var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-loop-border-color:   var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-message-fg-color:    var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-message-line-color:  var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-note-bg-color:       var(--md-mermaid-label-bg-color);
+  --md-mermaid-sequence-note-fg-color:       var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-note-border-color:   var(--md-mermaid-label-fg-color);
+  --md-mermaid-sequence-number-bg-color:     var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-number-fg-color:     var(--md-accent-bg-color);
 }
 
 [data-md-color-scheme='slate'] {
@@ -165,13 +188,36 @@ body {
   /* Table content */
   --md-typeset-table-color: var(--white-transparent-15);
 
-    /** Branded Mermaid Diagrams **/
+    /** Branded Mermaid Flowchart Diagrams **/
+  --md-mermaid-font-family: var(--md-text-font-family), sans-serif;
   --md-default-fg-color--lightest: var(--white-transparent-10);
-  --md-mermaid-edge-color: var(--white);
-  --md-mermaid-node-bg-color: var(--pink);
-  --md-mermaid-node-fg-color: var(--black);
+  --md-mermaid-edge-color: var(--md-code-fg-color);
+  --md-mermaid-node-bg-color: var(--md-accent-fg-color--transparent);
+  --md-mermaid-node-fg-color: var(--md-accent-fg-color);
   --md-mermaid-label-bg-color: var(--md-default-bg-color);
-  --md-mermaid-label-fg-color: var(--white);
+  --md-mermaid-label-fg-color: var(--md-code-fg-color);
+
+  /** Branded Mermaid Sequence Diagrams **/
+  --md-mermaid-sequence-actor-bg-color:      var(--md-mermaid-label-bg-color);
+  --md-mermaid-sequence-actor-fg-color:      var(--md-mermaid-label-fg-color);
+  --md-mermaid-sequence-actor-border-color:  var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-actor-line-color:    var(--md-default-fg-color--lighter);
+  --md-mermaid-sequence-actorman-bg-color:   var(--md-mermaid-label-bg-color);
+  --md-mermaid-sequence-actorman-line-color: var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-box-bg-color:        var(--white-transparent-10);
+  --md-mermaid-sequence-box-fg-color:        var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-label-bg-color:      var(--md-mermaid-node-bg-color);
+  --md-mermaid-sequence-label-fg-color:      var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-loop-bg-color:       var(--md-mermaid-node-bg-color);
+  --md-mermaid-sequence-loop-fg-color:       var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-loop-border-color:   var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-message-fg-color:    var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-message-line-color:  var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-note-bg-color:       var(--md-mermaid-label-bg-color);
+  --md-mermaid-sequence-note-fg-color:       var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-note-border-color:   var(--md-mermaid-label-fg-color);
+  --md-mermaid-sequence-number-bg-color:     var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-number-fg-color:     var(--md-accent-bg-color);
 }
 
 /* General styling */
@@ -232,7 +278,6 @@ form[data-md-component=palette] .md-header__button:hover svg {
   padding-left: 1rem;
   padding-right: 1rem;
 }
-
 
 /* Set all non-primary sections font and margin size to be smaller */
 .md-nav__link.md-nav__link--index,
