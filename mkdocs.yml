@@ -1,5 +1,7 @@
 site_name: Polkadot Developer Docs
 site_url: # XXX
+home_url: https://polkadot.com/
+home_name: Polkadot
 docs_dir: polkadot-docs
 copyright: © 2024
 # Extra CSS files
