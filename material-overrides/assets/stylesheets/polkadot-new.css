@@ -32,20 +32,20 @@
   --md-typeset-a-color: var(--pink);
 
   /** Branded code snippets**/
-  --md-code-fg-color: #00000095;
+  --md-code-fg-color: #363732;
   /** Code highlighting color shades **/
   /* Numbers */
-  --md-code-hl-number-color: var(--aqua);
+  --md-code-hl-number-color: #4ca09f;
   /* Python function names */
-  --md-code-hl-function-color: var(--electric-violet);
+  --md-code-hl-function-color: #363732;
   /* JavaScript booleans, Python variable names */
   --md-code-hl-name-color: var(--electric-violet);
   /* Strings */
-  --md-code-hl-string-color: var(--pink);
+  --md-code-hl-string-color: #d33262;
   /* Python print */
-  --md-code-hl-constant-color: var(--blue-ribbon);
+  --md-code-hl-constant-color: #070e8b;
   /* Imports, const, let, var, async, await, function, etc. */
-  --md-code-hl-keyword-color: var(--blue-ribbon);
+  --md-code-hl-keyword-color: #070e8b;
   /* Comments */
   --md-code-hl-comment-color: #00000060;
 }
@@ -110,7 +110,7 @@ body {
 
 .md-header__button.md-logo img {
   height: auto;
-  width: 144px;
+  width: 160px;
 }
 
 @media screen and (max-width: 76.2344em) {
@@ -153,42 +153,66 @@ body {
   color: var(--md-default-fg-color);
 }
 
+.md-tabs .md-grid {
+  display: flex;
+}
+
+/* Needed to display the dropdown menus as the full width of the header_buttons element*/
+.md-header__buttons {
+  position: relative;
+}
+
 .md-tabs__list {
-  /* display: flex; */
   contain: none;
   padding: 0 1em;
-  font-family: var(--label-font);
 }
 
 .md-tabs__item--custom {
-  padding: 1em 1.5em;
+  padding: 1em 12px;
   transition: border 0.3s ease;
   color: var(--black);
 }
 
+/* TODO: This isn't working because it always loads the last list elements submenu (Tutorials).
+This is because each of these are layered one on top of the other. How do I separate these?
+Is this possible with just HTML and CSS? 
+*/
+/* Pseudo-element to create hoverable area */
+.md-tabs__item--custom::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  height: 10px;
+  width: 100%;
+  background-color: transparent;
+  z-index: -1;
+}
+
 .md-tab__list {
   position: absolute;
+  width: 100%;
+  left: 0;
+  top: calc(100% + 10px);
+  /* top: 100%; */
   background: var(--md-default-bg-color);
   border: 0.5px solid var(--mystic);
   z-index: 3;
   list-style: none;
   display: none;
   padding: 0;
-  margin-top: 1.07em;
-  transform: translateZ(0);
   /* For Safari */
-  margin-left: -1.5em;
   box-shadow: var(--md-shadow-z3);
-}
-
-.md-tabs__item {
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .md-tabs__item--custom:hover .md-tab__list,
 .md-tab__list:hover {
   display: block;
+}
+
+.md-tabs__item {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .md-tabs__item--custom:hover {
@@ -236,7 +260,7 @@ body {
 /* Search styling */
 .md-header__button.md-icon[for='__search'] {
   display: inline-block;
-  padding: 0.467em 1em;
+  padding: 0 12px;
 }
 
 .md-header__button.md-icon[for='__search'] svg {
@@ -705,39 +729,104 @@ html .md-footer-meta.md-typeset a:hover {
   max-height: unset;
 }
 
-/* Index page styling */
-.grid.cards {
-  gap: 40px;
+/** API styling **/
+
+/* Remove inline code background */
+.md-typeset li > code,
+.md-typeset strong > code,
+.md-typeset a code,
+.md-typeset a:hover code,
+.md-typeset p code {
+  background-color: unset;
 }
 
-.md-typeset .grid.cards ul li {
-  border-radius: 16px;
-  border: 1px solid var(--mystic);
-  padding: 3em;
+/* Types styling */
+/* Remove type background and adjust font size */
+.md-typeset kbd {
+  background-color: unset;
+  font-size: .7em;
+  padding-left: 0;
+  border-radius: 1em;
+  vertical-align: baseline;
+  box-shadow: none;
 }
 
-.md-typeset .grid.cards ul li p:first-child {
-  background-color: var(--mystic);
+/* Add background for required parameters */
+.md-typeset .required kbd {
+  background-color: rgba(255, 0, 0, .3);
+  color: var(--black);
+  text-transform: capitalize;
+  padding-left: .6666666667em;
+}
+
+/* Child Admonition*/
+.api-reference-link {
+  position: absolute;
+  margin-top: -1em;
+  left: 69%;
+}
+
+details.child summary::before {
+  display: none;
+}
+
+details.child {
   width: fit-content;
-  border-radius: 16px;
-  width: 72px;
-  height: 72px;
-  margin-bottom: 2em;
 }
 
-.md-typeset .lg {
-  --md-icon-size: 2.5em;
-  margin: 1em;
+[dir=ltr] .md-typeset details.child summary {
+  width: fit-content;
+  padding-left: 1em;
 }
 
-.md-typeset .grid.cards p {
-  font-size: 16px;
-  color: var(--storm-gray);
+[dir=ltr] .md-typeset details.child[open] {
+  width: 100%;
 }
 
-.md-typeset .grid.cards p > strong {
-  font-family: 'Unbounded';
-  font-size: 20px;
-  font-weight: 400;
-  color: black;
+.md-typeset details.child summary {
+  background-color: unset;
+}
+
+.md-typeset details.child {
+  width: fit-content;
+  border: 1px solid var(--mystic);
+  box-shadow: none;
+}
+
+/* API Styling: interface admonition */
+details.interface>summary::before {
+  display: none;
+}
+
+.md-typeset details.interface {
+  border: 1px solid var(--mystic);
+  box-shadow: none;
+}
+
+[dir=ltr] .md-typeset details.interface>summary {
+  padding: 1em 0 1em 1em;
+  background-color: var(--athens-gray);
+}
+
+.md-typeset details.interface>summary:after {
+  top: auto;
+}
+
+.md-typeset details.interface {
+  width: 100%;
+}
+
+.md-typeset details.interface .tabbed-set {
+  background: var(--athens-gray);
+  border: 1px solid var(--mystic);
+  border-radius: var(--md-border-radius);
+}
+
+.md-typeset details.interface .tabbed-set .tabbed-labels {
+  color: var(--athens-gray);
+}
+
+.md-typeset details.interface .tabbed-set > input:first-child:checked ~ .tabbed-labels > :first-child,
+.md-typeset details.interface .tabbed-set > input:nth-child(2):checked ~ .tabbed-labels > :nth-child(2) {
+  color: var(--white);
 }
