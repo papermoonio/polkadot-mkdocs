@@ -1,0 +1,4677 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+  
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Launch a blockchain with a private set of authorized validators. Generate keys, create a custom chain spec, and start a two-node network with Aura consensus.">
+      
+      
+      
+      
+        <link rel="prev" href="../upgrade-a-running-network/">
+      
+      
+        <link rel="next" href="../../build-a-parachain/">
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24">
+    
+  
+
+    <title>Add Trusted Nodes | Polkadot Developer Docs</title>
+    
+	
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+  <link rel="stylesheet" href="../../../../assets/stylesheets/polkadot.css">
+
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
+      
+    
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/terminal.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#add-trusted-nodes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+  
+    
+  
+  <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="Header">
+      <label class="md-header__button md-icon" for="__drawer">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      </label>
+      <div class="md-header__title" data-md-component="header-title">
+        <div class="md-header__ellipsis">
+          <a href="../../../.." title="Polkadot Developer Docs" class="md-header__button md-logo" aria-label="Polkadot Developer Docs" data-md-component="logo">
+            
+  <img src="../../../../assets/images/logo.png#only-light" alt="logo">
+  <img src="../../../../assets/images/logo-dark.png#only-dark" alt="logo">
+
+          </a>
+        </div>
+      </div>
+      <div class="md-header__buttons">
+         
+        
+            <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+    <div class="md-grid">
+      <ul class="md-tabs__list">
+        
+          
+        
+          
+            <li class="md-tabs__item--custom" tabindex="0">    
+              <span class="md-tabs__link">Develop</span>
+              <ul class="md-tab__list">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../../develop/blockchains/">
+                        <!-- Uncomment the following to add support for icons in the dropdown menus -->
+                        <!-- <div class="icon-col">
+                          
+                          
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/blockchains.webp#only-dark" alt="Blockchains" loading="lazy">
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/blockchains-light.webp#only-light" alt="Blockchains" loading="lazy">
+                        </div> -->
+                        <!-- <div class="text-col"> -->
+                          <span class="dropdown-title">Blockchains</span>
+                          <p class="dropdown-desc"></p>
+                        <!-- </div> -->
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../../develop/integrations/">
+                        <!-- Uncomment the following to add support for icons in the dropdown menus -->
+                        <!-- <div class="icon-col">
+                          
+                          
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/integrations.webp#only-dark" alt="Integrations" loading="lazy">
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/integrations-light.webp#only-light" alt="Integrations" loading="lazy">
+                        </div> -->
+                        <!-- <div class="text-col"> -->
+                          <span class="dropdown-title">Integrations</span>
+                          <p class="dropdown-desc"></p>
+                        <!-- </div> -->
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../../develop/smart-contracts/">
+                        <!-- Uncomment the following to add support for icons in the dropdown menus -->
+                        <!-- <div class="icon-col">
+                          
+                          
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/smart-contracts.webp#only-dark" alt="Smart Contracts" loading="lazy">
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/smart-contracts-light.webp#only-light" alt="Smart Contracts" loading="lazy">
+                        </div> -->
+                        <!-- <div class="text-col"> -->
+                          <span class="dropdown-title">Smart Contracts</span>
+                          <p class="dropdown-desc"></p>
+                        <!-- </div> -->
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../../develop/interoperability/">
+                        <!-- Uncomment the following to add support for icons in the dropdown menus -->
+                        <!-- <div class="icon-col">
+                          
+                          
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/interoperability.webp#only-dark" alt="Interoperability" loading="lazy">
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/interoperability-light.webp#only-light" alt="Interoperability" loading="lazy">
+                        </div> -->
+                        <!-- <div class="text-col"> -->
+                          <span class="dropdown-title">Interoperability</span>
+                          <p class="dropdown-desc"></p>
+                        <!-- </div> -->
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../../develop/toolkit/">
+                        <!-- Uncomment the following to add support for icons in the dropdown menus -->
+                        <!-- <div class="icon-col">
+                          
+                          
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/toolkit.webp#only-dark" alt="Toolkit" loading="lazy">
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/toolkit-light.webp#only-light" alt="Toolkit" loading="lazy">
+                        </div> -->
+                        <!-- <div class="text-col"> -->
+                          <span class="dropdown-title">Toolkit</span>
+                          <p class="dropdown-desc"></p>
+                        <!-- </div> -->
+                      </a>
+                    </li>
+                  
+                
+              </ul>
+            </li>
+          
+        
+          
+            <li class="md-tabs__item--custom" tabindex="0">    
+              <span class="md-tabs__link">Infrastructure</span>
+              <ul class="md-tab__list">
+                
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../../infrastructure/running-a-node/">
+                        <!-- Uncomment the following to add support for icons in the dropdown menus -->
+                        <!-- <div class="icon-col">
+                          
+                          
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/running-a-node.webp#only-dark" alt="Running a Node" loading="lazy">
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/running-a-node-light.webp#only-light" alt="Running a Node" loading="lazy">
+                        </div> -->
+                        <!-- <div class="text-col"> -->
+                          <span class="dropdown-title">Running a Node</span>
+                          <p class="dropdown-desc"></p>
+                        <!-- </div> -->
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../../infrastructure/running-a-validator/">
+                        <!-- Uncomment the following to add support for icons in the dropdown menus -->
+                        <!-- <div class="icon-col">
+                          
+                          
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/running-a-validator.webp#only-dark" alt="Running a Validator" loading="lazy">
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/running-a-validator-light.webp#only-light" alt="Running a Validator" loading="lazy">
+                        </div> -->
+                        <!-- <div class="text-col"> -->
+                          <span class="dropdown-title">Running a Validator</span>
+                          <p class="dropdown-desc"></p>
+                        <!-- </div> -->
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../../infrastructure/staking-mechanics/">
+                        <!-- Uncomment the following to add support for icons in the dropdown menus -->
+                        <!-- <div class="icon-col">
+                          
+                          
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/staking-mechanics.webp#only-dark" alt="Staking Mechanics" loading="lazy">
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/staking-mechanics-light.webp#only-light" alt="Staking Mechanics" loading="lazy">
+                        </div> -->
+                        <!-- <div class="text-col"> -->
+                          <span class="dropdown-title">Staking Mechanics</span>
+                          <p class="dropdown-desc"></p>
+                        <!-- </div> -->
+                      </a>
+                    </li>
+                  
+                
+              </ul>
+            </li>
+          
+        
+          
+            <li class="md-tabs__item--custom" tabindex="0">    
+              <span class="md-tabs__link">Polkadot Protocol</span>
+              <ul class="md-tab__list">
+                
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../../polkadot-protocol/architecture/">
+                        <!-- Uncomment the following to add support for icons in the dropdown menus -->
+                        <!-- <div class="icon-col">
+                          
+                          
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/architecture.webp#only-dark" alt="Architecture" loading="lazy">
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/architecture-light.webp#only-light" alt="Architecture" loading="lazy">
+                        </div> -->
+                        <!-- <div class="text-col"> -->
+                          <span class="dropdown-title">Architecture</span>
+                          <p class="dropdown-desc"></p>
+                        <!-- </div> -->
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../../polkadot-protocol/basics/">
+                        <!-- Uncomment the following to add support for icons in the dropdown menus -->
+                        <!-- <div class="icon-col">
+                          
+                          
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/basics.webp#only-dark" alt="Basics" loading="lazy">
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/basics-light.webp#only-light" alt="Basics" loading="lazy">
+                        </div> -->
+                        <!-- <div class="text-col"> -->
+                          <span class="dropdown-title">Basics</span>
+                          <p class="dropdown-desc"></p>
+                        <!-- </div> -->
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../../polkadot-protocol/onchain-governance/">
+                        <!-- Uncomment the following to add support for icons in the dropdown menus -->
+                        <!-- <div class="icon-col">
+                          
+                          
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/onchain-governance.webp#only-dark" alt="On-Chain Governance" loading="lazy">
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/onchain-governance-light.webp#only-light" alt="On-Chain Governance" loading="lazy">
+                        </div> -->
+                        <!-- <div class="text-col"> -->
+                          <span class="dropdown-title">On-Chain Governance</span>
+                          <p class="dropdown-desc"></p>
+                        <!-- </div> -->
+                      </a>
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            </li>
+          
+        
+          
+            <li class="md-tabs__item--custom" tabindex="0">    
+              <span class="md-tabs__link">Tutorials</span>
+              <ul class="md-tab__list">
+                
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../">
+                        <!-- Uncomment the following to add support for icons in the dropdown menus -->
+                        <!-- <div class="icon-col">
+                          
+                          
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/polkadot-sdk.webp#only-dark" alt="Polkadot SDK" loading="lazy">
+                          <img class="dropdown-icon" src="../../../../assets/images/dropdown-icons/polkadot-sdk-light.webp#only-light" alt="Polkadot SDK" loading="lazy">
+                        </div> -->
+                        <!-- <div class="text-col"> -->
+                          <span class="dropdown-title">Polkadot SDK</span>
+                          <p class="dropdown-desc"></p>
+                        <!-- </div> -->
+                      </a>
+                    </li>
+                  
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </nav>
+          
+         
+        
+        
+          
+            <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+          
+        
+        
+        
+          <label class="md-header__button md-icon" for="__search">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+          </label>
+          <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input
+        type="text"
+        class="md-search__input"
+        name="query"
+        aria-label="Search"
+        autocapitalize="off"
+        autocorrect="off"
+        autocomplete="off"
+        spellcheck="false"
+        data-md-component="search-query"
+        required
+      />
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button
+          type="reset"
+          class="md-search__icon md-icon"
+          title="Clear"
+          aria-label="Clear"
+          tabindex="-1"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+        
+      </div>
+    </nav>
+  </header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Polkadot Developer Docs" class="md-nav__button md-logo" aria-label="Polkadot Developer Docs" data-md-component="logo">
+      
+  <img src="../../../../assets/images/logo.png#only-light" alt="logo">
+  <img src="../../../../assets/images/logo-dark.png#only-dark" alt="logo">
+
+    </a>
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+  
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../.." class="md-nav__link">
+          Polkadot Developer Docs
+        </a>
+      </li>
+    
+  
+    
+      
+      
+      
+  
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/">Develop</a>
+            
+              <label for="__nav_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/development-pathways/" class="md-nav__link">
+          Development Pathways
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/networks/" class="md-nav__link">
+          Networks
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+        
+      
+      <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/blockchains/">Blockchains</a>
+            
+              <label for="__nav_2_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-blockchains-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_2" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/blockchains/get-started/">Get Started</a>
+            
+              <label for="__nav_2_4_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-blockchains-get-started-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/get-started/intro-blockchain-dev/" class="md-nav__link">
+          Introduction to Blockchain Development
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/get-started/install-polkadot-sdk/" class="md-nav__link">
+          Install Polkadot SDK
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/get-started/deploy-blockchain-to-polkadot/" class="md-nav__link">
+          Deploy a Blockchain to Polkadot
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/get-started/build-app-chains/" class="md-nav__link">
+          Build App-Specific Blockchains
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/get-started/build-from-templates/" class="md-nav__link">
+          Build from Templates
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_3" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/blockchains/custom-blockchains/">Custom Blockchains</a>
+            
+              <label for="__nav_2_4_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-blockchains-custom-blockchains-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/custom-blockchains/overview/" class="md-nav__link">
+          Overview
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/custom-blockchains/add-existing-pallets/" class="md-nav__link">
+          Add Existing Pallets
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/custom-blockchains/make-custom-pallet/" class="md-nav__link">
+          Make a Custom Pallet
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/custom-blockchains/pallet-testing/" class="md-nav__link">
+          Pallet Testing
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/custom-blockchains/benchmarking/" class="md-nav__link">
+          Benchmarking
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_4" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/blockchains/testing/">Testing</a>
+            
+              <label for="__nav_2_4_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_4">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-blockchains-testing-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/testing/setup/" class="md-nav__link">
+          Setup
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/testing/runtime/" class="md-nav__link">
+          Runtime
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_5" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/blockchains/deployment/">Deployment</a>
+            
+              <label for="__nav_2_4_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_5">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-blockchains-deployment-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/deployment/overview/" class="md-nav__link">
+          Overview
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/deployment/generate-chain-specs/" class="md-nav__link">
+          Generate Chain Specs and Wasm
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/deployment/obtain-coretime/" class="md-nav__link">
+          Obtain Coretime
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/deployment/pop-cli/" class="md-nav__link">
+          POP CLI
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/deployment/tanssi/" class="md-nav__link">
+          Tanssi
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_6" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/blockchains/maintenance/">Maintenance</a>
+            
+              <label for="__nav_2_4_6">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_6">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-blockchains-maintenance-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/maintenance/runtime-upgrades/" class="md-nav__link">
+          Runtime Upgrades
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/maintenance/storage-migrations/" class="md-nav__link">
+          Storage Migrations
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/maintenance/debug-prod-issues/" class="md-nav__link">
+          Debug Production Issues
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/blockchains/maintenance/runtime-metrics-monitoring/" class="md-nav__link">
+          Runtime Metrics and Monitoring
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+        
+      
+      <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/integrations/">Integrations</a>
+            
+              <label for="__nav_2_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-integrations-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/integrations/wallets/" class="md-nav__link">
+          Wallets
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/integrations/indexers/" class="md-nav__link">
+          Indexers
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/integrations/others/" class="md-nav__link">
+          Others
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+        
+      
+      <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/smart-contracts/">Smart Contracts</a>
+            
+              <label for="__nav_2_6">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-smart-contracts-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/smart-contracts/overview/" class="md-nav__link">
+          Overview
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/smart-contracts/native-wasm-ink/" class="md-nav__link">
+          Native/Wasm (!ink)
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/smart-contracts/evm/" class="md-nav__link">
+          EVM
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+        
+      
+      <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/interoperability/">Interoperability</a>
+            
+              <label for="__nav_2_7">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-interoperability-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/interoperability/intro-to-xcm/" class="md-nav__link">
+          Introduction to XCM
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/interoperability/xcm-channels/" class="md-nav__link">
+          XCM Channels
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../xcm-configuration.md" class="md-nav__link">
+          XCM Configuration
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/interoperability/send-messages/" class="md-nav__link">
+          Send Messages
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/interoperability/test-and-debug/" class="md-nav__link">
+          Test and Debug
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+        
+      
+      <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/toolkit/">Toolkit</a>
+            
+              <label for="__nav_2_8">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-toolkit-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8_2" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/toolkit/blockchain/">Blockchain</a>
+            
+              <label for="__nav_2_8_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8_2">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-toolkit-blockchain-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/toolkit/blockchain/spawn-testing-chain/" class="md-nav__link">
+          Spawn Chains for Testing with Zombienet
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/toolkit/blockchain/fork-live-chains/" class="md-nav__link">
+          Fork Live Chains with Chopsticks
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/toolkit/blockchain/others/" class="md-nav__link">
+          Others
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8_3" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/toolkit/api-libraries/">API Libraries</a>
+            
+              <label for="__nav_2_8_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8_3">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-toolkit-api-libraries-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/toolkit/api-libraries/polkadot-js-sdk/" class="md-nav__link">
+          Polkadot.js SDK
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/toolkit/api-libraries/papi/" class="md-nav__link">
+          Polkadot-API
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/toolkit/api-libraries/sidecar/" class="md-nav__link">
+          Sidecar Rest API
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/toolkit/api-libraries/py-substrate-interface/" class="md-nav__link">
+          Python Substrate Interface
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8_4" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../develop/toolkit/interoperability/">Interoperability</a>
+            
+              <label for="__nav_2_8_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_8_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8_4">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list develop-toolkit-interoperability-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/toolkit/interoperability/xcm-tools/" class="md-nav__link">
+          XCM Tools
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../develop/toolkit/interoperability/others/" class="md-nav__link">
+          Others
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+    
+      
+      
+      
+  
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../infrastructure/">Infrastructure</a>
+            
+              <label for="__nav_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list infrastructure-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      
+        
+      
+      <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../infrastructure/running-a-node/">Running a Node</a>
+            
+              <label for="__nav_3_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list infrastructure-running-a-node-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../infrastructure/running-a-node/setup-full-node/" class="md-nav__link">
+          Set Up a Full Node
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../infrastructure/running-a-node/setup-bootnode/" class="md-nav__link">
+          Set Up a Bootnode
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../infrastructure/running-a-node/common-node-flags/" class="md-nav__link">
+          Common Node Flags
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+        
+      
+      <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../infrastructure/running-a-validator/">Running a Validator</a>
+            
+              <label for="__nav_3_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list infrastructure-running-a-validator-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../infrastructure/running-a-validator/requirements/" class="md-nav__link">
+          Requirements
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../infrastructure/running-a-validator/onboarding-and-offboarding/">Onboarding and Offboarding</a>
+            
+              <label for="__nav_3_3_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list infrastructure-running-a-validator-onboarding-and-offboarding-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../infrastructure/running-a-validator/onboarding-and-offboarding/community-validator-program/" class="md-nav__link">
+          Community Validator Program
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../infrastructure/running-a-validator/onboarding-and-offboarding/set-up-validator/" class="md-nav__link">
+          Set Up a Validator
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../infrastructure/running-a-validator/onboarding-and-offboarding/stop-validating/" class="md-nav__link">
+          Stop Validating
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_4" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../infrastructure/running-a-validator/operational-tasks/">Operational Tasks</a>
+            
+              <label for="__nav_3_3_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_4">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list infrastructure-running-a-validator-operational-tasks-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../infrastructure/running-a-validator/operational-tasks/general-management/" class="md-nav__link">
+          General Management
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../infrastructure/running-a-validator/operational-tasks/upgrade-your-node/" class="md-nav__link">
+          Upgrade Your Node
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../infrastructure/running-a-validator/operational-tasks/pause-validating/" class="md-nav__link">
+          Pause Validating
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+        
+      
+      <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../infrastructure/staking-mechanics/">Staking Mechanics</a>
+            
+              <label for="__nav_3_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list infrastructure-staking-mechanics-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../infrastructure/staking-mechanics/rewards-payout/" class="md-nav__link">
+          Rewards Payout
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../infrastructure/staking-mechanics/offenses-and-slashes/" class="md-nav__link">
+          Offenses and Slashes
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+    
+      
+      
+      
+  
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../polkadot-protocol/">Polkadot Protocol</a>
+            
+              <label for="__nav_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list polkadot-protocol-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      
+        
+      
+      <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../polkadot-protocol/architecture/">Architecture</a>
+            
+              <label for="__nav_4_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list polkadot-protocol-architecture-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../polkadot-protocol/architecture/polkadot-chain/">Polkadot Chain</a>
+            
+              <label for="__nav_4_2_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list polkadot-protocol-architecture-polkadot-chain-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/architecture/polkadot-chain/overview/" class="md-nav__link">
+          Overview
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/architecture/polkadot-chain/pos-consensus/" class="md-nav__link">
+          Proof of Stake Consensus
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/architecture/polkadot-chain/agile-coretime/" class="md-nav__link">
+          Agile Coretime
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../polkadot-protocol/architecture/system-chains/">System Chains</a>
+            
+              <label for="__nav_4_2_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list polkadot-protocol-architecture-system-chains-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/architecture/system-chains/overview/" class="md-nav__link">
+          Overview
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/architecture/system-chains/asset-hub/" class="md-nav__link">
+          Asset Hub
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/architecture/system-chains/bridge-hub/" class="md-nav__link">
+          Bridge Hub
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/architecture/system-chains/coretime/" class="md-nav__link">
+          Coretime
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/architecture/system-chains/people/" class="md-nav__link">
+          People
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/architecture/system-chains/collectives/" class="md-nav__link">
+          Collectives
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_4" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../polkadot-protocol/architecture/parachains/">Parachains</a>
+            
+              <label for="__nav_4_2_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_4">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list polkadot-protocol-architecture-parachains-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/architecture/parachains/overview/" class="md-nav__link">
+          Overview
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/architecture/parachains/consensus/" class="md-nav__link">
+          Consensus
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+        
+      
+      <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../polkadot-protocol/basics/">Basics</a>
+            
+              <label for="__nav_4_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list polkadot-protocol-basics-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/basics/networks/" class="md-nav__link">
+          Networks
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/basics/accounts/" class="md-nav__link">
+          Accounts
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_4" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../polkadot-protocol/basics/blocks-transactions-fees/">Blocks, Transactions, and Fees</a>
+            
+              <label for="__nav_4_3_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_4">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list polkadot-protocol-basics-blocks-transactions-fees-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/basics/blocks-transactions-fees/blocks/" class="md-nav__link">
+          Blocks
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/basics/blocks-transactions-fees/transactions/" class="md-nav__link">
+          Transactions
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/basics/blocks-transactions-fees/fees/" class="md-nav__link">
+          Fees
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/basics/interoperability/" class="md-nav__link">
+          Interoperability
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/basics/randomness/" class="md-nav__link">
+          Randomness
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/basics/cryptography/" class="md-nav__link">
+          Cryptography
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/basics/data-encoding/" class="md-nav__link">
+          Data Encoding
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+        
+      
+      <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../../polkadot-protocol/onchain-governance/">On-Chain Governance</a>
+            
+              <label for="__nav_4_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list polkadot-protocol-onchain-governance-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/onchain-governance/overview/" class="md-nav__link">
+          Overview
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../tracks-origins.md" class="md-nav__link">
+          Tracks and Origins
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/polkadot-sdk/" class="md-nav__link">
+          Polkadot SDK
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../../../polkadot-protocol/glossary/" class="md-nav__link">
+          Glossary
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+    
+      
+      
+      
+  
+    
+    
+      
+    
+    
+      
+      <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../../">Tutorials</a>
+            
+              <label for="__nav_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list tutorials-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+      
+    
+    
+      
+        
+      
+      <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../">Polkadot SDK</a>
+            
+              <label for="__nav_5_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list tutorials-polkadot-sdk-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+      
+    
+    
+      
+      <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2" checked>
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../">Build a Blockchain</a>
+            
+              <label for="__nav_5_2_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2_2">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list tutorials-polkadot-sdk-build-a-blockchain-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../build-a-local-blockchain/" class="md-nav__link">
+          Build a Local Solochain
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../simulate-a-network/" class="md-nav__link">
+          Simulate a Network
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../upgrade-a-running-network/" class="md-nav__link">
+          Upgrade a Running Network
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+      
+    
+    
+      <li class="md-nav__item md-nav__item--active">
+        
+        <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+        
+        
+          
+        
+        
+          <label class="md-nav__link md-nav__link--active" for="__toc">
+            Add Trusted Nodes
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <div class="md-nav__link-wrapper md-nav__item md-nav__item--active">
+          <a href="./" class="md-nav__link md-nav__link--active">
+            Add Trusted Nodes
+          </a>
+        </div>
+        
+          
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Sections">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sections
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-an-account-and-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generate an Account and Keys
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generate an Account and Keys">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-generation-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Generation Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-local-keys-with-the-node-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generate Local Keys with the Node Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-a-second-set-of-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generate a Second Set of Keys
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-custom-chain-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a Custom Chain Specification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a Custom Chain Specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#steps-to-create-a-custom-chain-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to Create a Custom Chain Specification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convert-chain-specification-to-raw-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Convert Chain Specification to Raw Format
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-keys-to-the-keystore" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Keys to the Keystore
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-the-first-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start the First Node
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-more-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add More Nodes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      
+      <li class="md-nav__item md-nav__item--nested">
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_3" >
+        
+        
+          
+            
+            
+              
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+        
+          
+          
+          <div class="md-nav__link md-nav__link--index ">
+            <a href="../../build-a-parachain/">Build a Parachain Tutorials</a>
+            
+              <label for="__nav_5_2_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_3">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+          
+            
+              <ul class="md-nav__list tutorials-polkadot-sdk-build-a-parachain-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../build-a-parachain/prepare-relay-chain/" class="md-nav__link">
+          Prepare a Relay Chain
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../build-a-parachain/connect-a-parachain/" class="md-nav__link">
+          Connect a Parachain
+        </a>
+      </li>
+    
+  
+            
+          
+            
+              
+    
+    
+    
+      <li class="md-nav__item">
+        <a href="../../build-a-parachain/acquire-a-testnet-slot/" class="md-nav__link">
+          Acquire a TestNet Slot
+        </a>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+            
+          
+          </ul>
+        </nav>
+      </li>
+    
+  
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Sections">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sections
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-an-account-and-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generate an Account and Keys
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generate an Account and Keys">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-generation-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Generation Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-local-keys-with-the-node-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generate Local Keys with the Node Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-a-second-set-of-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generate a Second Set of Keys
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-custom-chain-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a Custom Chain Specification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a Custom Chain Specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#steps-to-create-a-custom-chain-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to Create a Custom Chain Specification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convert-chain-specification-to-raw-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Convert Chain Specification to Raw Format
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-keys-to-the-keystore" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Keys to the Keystore
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-the-first-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start the First Node
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-more-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add More Nodes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+    
+    <article class="md-content__inner md-typeset ">
+      
+        
+
+
+<h1 id="add-trusted-nodes">Add Trusted Nodes<a class="headerlink" href="#add-trusted-nodes" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>This tutorial guides you through launching a private blockchain network with a small, trusted set of validators. In decentralized networks, consensus ensures that nodes agree on the state of the data at any given time. The <a href="https://github.com/paritytech/polkadot-sdk-solochain-template" target="_blank">Polkadot SDK Solochain Template</a> uses Aura (Authority Round), a proof of authority consensus mechanism where a fixed set of trusted validators produces blocks in a round-robin fashion. This approach offers an easy way to launch a standalone blockchain with a predefined list of validators.</p>
+<p>You'll learn how to generate keys, create a custom chain specification, and start a two-node blockchain network using the Aura consensus mechanism.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>Before starting this tutorial, ensure you have:</p>
+<ul>
+<li>Installed and configured Rust on your system. For detailed instructions on installing Rust and setting up your development environment, refer to the <a href="TODO - add path">Installation</a> guide</li>
+<li>Completed the <a href="TODO - add path">Build a Local Blockchain</a> tutorial and have the <a href="https://github.com/paritytech/polkadot-sdk-solochain-template" target="_blank">Polkadot SDK Solochain Template</a> installed on your local machine</li>
+<li>Experience using predefined accounts to start nodes on a single computer, as described in the <a href="/tutorials/polkadot-sdk/build-a-blockchain/simulate-a-network" target="_blank">Simulate a Network</a> guide</li>
+</ul>
+<h2 id="generate-an-account-and-keys">Generate an Account and Keys<a class="headerlink" href="#generate-an-account-and-keys" title="Permanent link">&para;</a></h2>
+<p>Unlike in the <a href="TODO - add path">Simulate a Network</a> tutorial, where you used predefined accounts and keys to start peer nodes, this tutorial requires you to generate unique secret keys for your validator nodes. It's crucial to understand that each participant is responsible for generating and managing their own unique set of keys in a real blockchain network.</p>
+<p>This process of generating your own keys serves several important purposes:</p>
+<ul>
+<li>It enhances the security of your network by ensuring that each node has its own unique cryptographic identity</li>
+<li>It simulates a more realistic blockchain environment where participants don't share key information</li>
+<li>It helps you understand the process of key generation, which is a fundamental skill in blockchain operations</li>
+</ul>
+<p>There are a couple of Polkadot Wiki articles that may help you better understand the different signing algorithms used in this tutorial. See the <a href="https://wiki.polkadot.network/docs/learn-cryptography#keypairs-and-signing" target="_blank">Keypairs and Signing</a> section to learn about the sr25519 and ed25519 signing algorithms. Refer to the <a href="https://wiki.polkadot.network/docs/learn-cryptography#keys" target="_blank">Keys</a> section to learn more about the different types of keys used in the ecosystem.</p>
+<h3 id="key-generation-options">Key Generation Options<a class="headerlink" href="#key-generation-options" title="Permanent link">&para;</a></h3>
+<p>There are several ways you can generate keys. The available methods are:</p>
+<ul>
+<li><strong><a href="https://docs.rs/sc-cli/0.46.0/sc_cli/commands/enum.KeySubcommand.html" target="_blank"><code>solochain-template-node key</code> subcommand</a></strong> - the most straightforward method for developers working directly with the node is to use the integrated key generation feature. Using the <code>key</code> subcommand, you can generate keys directly from your node's command line interface. This method ensures compatibility with your chain and is convenient for quick setup and testing</li>
+<li><strong><a href="https://github.com/paritytech/polkadot-sdk/tree/master/substrate/bin/utils/subkey" target="_blank">subkey</a></strong> - it is a powerful standalone utility specifically designed for Polkadot SDK-based chains. It offers advanced options for key generation, including support for different key types such as <code>ed25519</code> and <code>sr25519</code>. This tool allows fine-grained control over the key generation process</li>
+<li><strong>Third-party key generation utilities</strong> - various tools developed by the community</li>
+</ul>
+<h3 id="generate-local-keys-with-the-node-template">Generate Local Keys with the Node Template<a class="headerlink" href="#generate-local-keys-with-the-node-template" title="Permanent link">&para;</a></h3>
+<p>Best practices for key generation:</p>
+<ul>
+<li>Whenever possible, use an air-gapped computer, meaning never connected to the internet, when generating keys for a production blockchain</li>
+<li>If an air-gapped computer is not an option, disconnect from the internet before generating keys for any public or private blockchain not under your control</li>
+</ul>
+<p>For this tutorial, however, you'll use the <code>solochain-template-node</code> command-line options to generate random keys locally while remaining connected to the internet. This method is suitable for learning and testing purposes.</p>
+<p>Follow these steps to generate your keys:</p>
+<ol>
+<li>
+<p>Navigate to the root directory where you compiled the node template</p>
+</li>
+<li>
+<p>Generate a random secret phrase and Sr25519 keys. Enter a password when prompted:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>./target/release/solochain-template-node<span class="w"> </span>key<span class="w"> </span>generate<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>--scheme<span class="w"> </span>Sr25519<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>--password-interactive
+</span></code></pre></div>
+<p>The command will output information about the generated keys similar to the following:</p>
+<p><div id="termynal" data-termynal>
+  <span data-ty="input"><span class="file-path"></span>./target/release/solochain-template-node key generate \</span>
+  <span data-ty>--scheme Sr25519 \</span>
+  <span data-ty>--password-interactive</span>
+  <span data-ty>Key password:</span>
+  <span data-ty>Secret phrase: digital width rely long insect blind usual name oyster easy steak spend</span>
+  <span data-ty>Network ID: substrate</span>
+  <span data-ty>Secret seed: 0xc52405d0b45dd856cbf1371f3b33fbde20cb76bf6ee440d12ea15f7ed17cca0a</span>
+  <span data-ty>Public key (hex): 0xea23fa399c6bd91af3d7ea2d0ad46c48aff818b285342d9aaf15b3172270e914</span>
+  <span data-ty>Account ID: 0xea23fa399c6bd91af3d7ea2d0ad46c48aff818b285342d9aaf15b3172270e914</span>
+  <span data-ty>Public key (SS58): 5HMhkSHpD4XcibjbU9ZiGemLpnsTUzLsG5JhQJQEcxp3KJaW</span>
+  <span data-ty>SS58 Address: 5HMhkSHpD4XcibjbU9ZiGemLpnsTUzLsG5JhQJQEcxp3KJaW</span>
+  <span data-ty="input"><span class="file-path"></span></span>
+</div></p>
+<p>Note the Sr25519 public key for the account (SS58 format). This key will be used for producing blocks with Aura. In this example, the Sr25519 public key for the account is <code>5HMhkSHpD4XcibjbU9ZiGemLpnsTUzLsG5JhQJQEcxp3KJaW</code>.</p>
+</li>
+<li>
+<p>Use the generated secret phrase to derive keys using the Ed25519 signature scheme. </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>./target/release/solochain-template-node<span class="w"> </span>key<span class="w"> </span>inspect<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>--scheme<span class="w"> </span>Ed25519<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>--password-interactive<span class="w"> </span><span class="se">\</span>
+</span></code></pre></div>
+<p>When prompted for a <strong>Key password</strong>, enter the same password you used in the previous step</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Replace <code>INSERT_SECRET_PHRASE</code> with the secret phrase generated in step 2.</p>
+</div>
+<p>The command will output information about the generated keys similar to the following:</p>
+<p><div id="termynal" data-termynal>
+  <span data-ty="input"><span class="file-path"></span>./target/release/solochain-template-node key inspect \</span>
+  <span data-ty>--scheme Ed25519 \</span>
+  <span data-ty>--password-interactive \</span>
+  <span data-ty>Key password:</span>
+  <span data-ty>Secret phrase: digital width rely long insect blind usual name oyster easy steak spend</span>
+  <span data-ty>Network ID: substrate</span>
+  <span data-ty>Secret seed: 0xc52405d0b45dd856cbf1371f3b33fbde20cb76bf6ee440d12ea15f7ed17cca0a</span>
+  <span data-ty>Public key (hex): 0xc9c2cd111f98f2bf78bab6787449fc007dd7f2a5d02f099919f7fb50ade97dd6</span>
+  <span data-ty>Account ID: 0xc9c2cd111f98f2bf78bab6787449fc007dd7f2a5d02f099919f7fb50ade97dd6</span>
+  <span data-ty>Public key (SS58): 5GdFMFbXy24uz8mFZroFUgdBkY2pq6igBNGAq9tsBfEZRSzP</span>
+  <span data-ty>SS58 Address: 5GdFMFbXy24uz8mFZroFUgdBkY2pq6igBNGAq9tsBfEZRSzP</span>
+  <span data-ty="input"><span class="file-path"></span></span>
+</div></p>
+<p>The Ed25519 key you've generated is crucial for block finalization using the <code>grandpa</code> consensus algorithm. The Ed25519 public key for the account is <code>5GdFMFbXy24uz8mFZroFUgdBkY2pq6igBNGAq9tsBfEZRSzP</code>.</p>
+</li>
+</ol>
+<h3 id="generate-a-second-set-of-keys">Generate a Second Set of Keys<a class="headerlink" href="#generate-a-second-set-of-keys" title="Permanent link">&para;</a></h3>
+<p>In this tutorial, the private network will consist of two nodes, meaning you'll need two distinct sets of keys. You have several options for generating this second set of keys:</p>
+<ul>
+<li>Use the keys from one of the predefined accounts</li>
+<li>Follow the steps from the previous section, but use a different identity on your local machine to create a new key pair</li>
+<li>Derive a child key pair to simulate a second identity on your local machine</li>
+</ul>
+<p>For this tutorial, the second set of keys will be:</p>
+<ul>
+<li>Sr25519 (for Aura) - <code>5Df9bvnbqKNR8S1W2Uj5XSpJCKUomyymwCGf6WHKyoo3GDev</code></li>
+<li>Ed25519 (for Grandpa)  <code>5DJRQQWEaJart5yQnA6gnKLYKHLdpX6V4vHgzAYfNPT2NNuW</code></li>
+</ul>
+<h2 id="create-a-custom-chain-specification">Create a Custom Chain Specification<a class="headerlink" href="#create-a-custom-chain-specification" title="Permanent link">&para;</a></h2>
+<p>After generating key pairs for your blockchain, the next step is creating a custom chain specification. You will share this specification with trusted validators participating in your network.</p>
+<p>To enable others to participate in your blockchain, ensure that each participant generates their own key pair. Once you collect the keys from all network participants, you can create a custom chain specification to replace the default local one.</p>
+<p>In this tutorial, you'll modify the local chain specification to create a custom version for a two-node network. The same process can be used to add more nodes if you have the necessary keys.</p>
+<h3 id="steps-to-create-a-custom-chain-specification">Steps to Create a Custom Chain Specification<a class="headerlink" href="#steps-to-create-a-custom-chain-specification" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Open a terminal and navigate to the root directory of your compiled node template</p>
+</li>
+<li>
+<p>Export the local chain specification:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./target/release/solochain-template-node<span class="w"> </span>build-spec<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>--disable-default-bootnode<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>--chain<span class="w"> </span><span class="nb">local</span><span class="w"> </span>&gt;<span class="w"> </span>customSpec.json
+</span></code></pre></div>
+</li>
+<li>
+<p>Preview the <code>customSpec.json</code> file:</p>
+<ul>
+<li>
+<p>Preview first fields:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>head<span class="w"> </span>customSpec.json
+</span></code></pre></div>
+<p><div id="termynal" data-termynal>
+  <span data-ty="input"><span class="file-path"></span>head customSpec.json</span>
+  <pre>
+  {
+      "name": "Local Testnet",
+      "id": "local_testnet",
+      "chainType": "Local",
+      "bootNodes": [],
+      "telemetryEndpoints": null,
+      "protocolId": null,
+      "properties": null,
+      "codeSubstitutes": {},
+      "genesis": {
+          ...
+      }
+      ...
+  }
+  </pre>
+</div></p>
+</li>
+<li>
+<p>Preview last fields:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">78</span><span class="w"> </span>customSpec.json
+</span></code></pre></div></p>
+<p><div id="termynal" data-termynal>
+  <span data-ty="input"><span class="file-path">tail -n 78 customSpec.json</span></span>
+  <pre>
+  {
+    "patch": {
+      "aura": {
+        "authorities": [
+          "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY",
+          "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty"
+        ]
+      },
+      "balances": {
+        "balances": [
+          [
+            "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY",
+            1152921504606846976
+          ],
+          [
+            "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty",
+            1152921504606846976
+          ],
+          [
+            "5FLSigC9HGRKVhB9FiEo4Y3koPsNmBmLJbpXg2mp1hXcS59Y",
+            1152921504606846976
+          ],
+          [
+            "5DAAnrj7VHTznn2AWBemMuyBwZWs6FNFjdyVXUeYum3PTXFy",
+            1152921504606846976
+          ],
+          [
+            "5HGjWAeFDfFCWPsjFQdVV2Msvz2XtMktvgocEZcCj68kUMaw",
+            1152921504606846976
+          ],
+          [
+            "5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL",
+            1152921504606846976
+          ],
+          [
+            "5GNJqTPyNqANBkUVMN1LPPrxXnFouWXoe2wNSmmEoLctxiZY",
+            1152921504606846976
+          ],
+          [
+            "5HpG9w8EBLe5XCrbczpwq5TSXvedjrBGCwqxK1iQ7qUsSWFc",
+            1152921504606846976
+          ],
+          [
+            "5Ck5SLSHYac6WFt5UZRSsdJjwmpSZq85fd5TRNAdZQVzEAPT",
+            1152921504606846976
+          ],
+          [
+            "5HKPmK9GYtE1PSLsS1qiYU9xQ9Si1NcEhdeCq9sw5bqu4ns8",
+            1152921504606846976
+          ],
+          [
+            "5FCfAonRZgTFrTd9HREEyeJjDpT397KMzizE6T3DvebLFE7n",
+            1152921504606846976
+          ],
+          [
+            "5CRmqmsiNFExV6VbdmPJViVxrWmkaXXvBrSX8oqBT8R9vmWk",
+            1152921504606846976
+          ]
+        ]
+      },
+      "grandpa": {
+        "authorities": [
+          [
+            "5FA9nQDVg267DEd8m1ZypXLBnvN7SFxYwV7ndqSYGiN9TTpu",
+            1
+          ],
+          [
+            "5GoNkf6WdbxCFnPdAnYYQyCjAKPJgLNxXwPjwTh6DGg6gN3E",
+            1
+          ]
+        ]
+      },
+      "sudo": {
+        "key": "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"
+      }
+    }
+  }
+  </pre>
+</div></p>
+<p>This command will display fields that include configuration details for pallets, such as sudo and balances, as well as the validator settings for the Aura and Grandpa keys.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Edit <code>customSpec.json</code>:</p>
+<ol>
+<li>
+<p>Update the <code>name</code> field:
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My Custom Testnet&quot;</span><span class="p">,</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Add Sr25519 addresses for each validator in the authorities array to the <code>aura</code> field to specify the nodes with authority to create blocks:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">&quot;aura&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">&quot;authorities&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="s2">&quot;5HMhkSHpD4XcibjbU9ZiGemLpnsTUzLsG5JhQJQEcxp3KJaW&quot;</span><span class="p">,</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="s2">&quot;5Df9bvnbqKNR8S1W2Uj5XSpJCKUomyymwCGf6WHKyoo3GDev&quot;</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">},</span>
+</span></code></pre></div>
+</li>
+<li>
+<p>Add Ed25519 addresses for each validator in the authorities array to the <code>grandpa</code> field to specify the nodes with the authority to finalize blocks. Include a voting weight (typically <code>1</code>) for each validator to define their voting power:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">&quot;grandpa&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&quot;authorities&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="p">[</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">      </span><span class="s2">&quot;5GdFMFbXy24uz8mFZroFUgdBkY2pq6igBNGAq9tsBfEZRSzP&quot;</span><span class="p">,</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">      </span><span class="mi">1</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="p">],</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="p">[</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">      </span><span class="s2">&quot;5DJRQQWEaJart5yQnA6gnKLYKHLdpX6V4vHgzAYfNPT2NNuW&quot;</span><span class="p">,</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">      </span><span class="mi">1</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="p">]</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="p">},</span>
+</span></code></pre></div>
+</li>
+</ol>
+</li>
+<li>
+<p>Save and close <code>customSpec.json</code></p>
+</li>
+</ol>
+<h3 id="convert-chain-specification-to-raw-format">Convert Chain Specification to Raw Format<a class="headerlink" href="#convert-chain-specification-to-raw-format" title="Permanent link">&para;</a></h3>
+<p>After creating your custom chain specification, the next crucial step is converting it to a raw format. This process is essential because the raw format includes encoded storage keys that nodes use to reference data in their local storage. By distributing a raw chain specification, you ensure that each node in the network stores data using the same storage keys, which is vital for maintaining data integrity and facilitating network synchronization.</p>
+<p>To convert your chain specification to the raw format, follow these steps:</p>
+<ol>
+<li>
+<p>Navigate to the root directory where you compiled the node template</p>
+</li>
+<li>
+<p>Run the following command to convert the <code>customSpec.json</code> chain specification to the raw format and save it as <code>customSpecRaw.json</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>./target/release/solochain-template-node<span class="w"> </span>build-spec<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>--chain<span class="o">=</span>customSpec.json<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>--raw<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>--disable-default-bootnode<span class="w"> </span>&gt;<span class="w"> </span>customSpecRaw.json
+</span></code></pre></div>
+</li>
+</ol>
+<h2 id="add-keys-to-the-keystore">Add Keys to the Keystore<a class="headerlink" href="#add-keys-to-the-keystore" title="Permanent link">&para;</a></h2>
+<p>To enable block production and finalization, you need to add two types of keys to the keystore for each node in the network:</p>
+<ul>
+<li><code>aura</code> authority keys for block production</li>
+<li><code>grandpa</code> authority keys for block finalization</li>
+</ul>
+<p>Follow these steps for each node in your network:</p>
+<ol>
+<li>
+<p>Open a terminal and navigate to the root directory where you compiled the node template</p>
+</li>
+<li>
+<p>Insert the <code>aura</code> secret key:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>./target/release/solochain-template-node<span class="w"> </span>key<span class="w"> </span>insert<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>--base-path<span class="w"> </span>/tmp/node01<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>--chain<span class="w"> </span>customSpecRaw.json<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>--scheme<span class="w"> </span>Sr25519<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>--suri<span class="w"> </span><span class="s2">&quot;INSERT_SECRET_PHRASE&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>--password-interactive<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>--key-type<span class="w"> </span>aura
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Replace <code>INSERT_SECRET_PHRASE</code> with the secret phrase or seed you generated earlier. When prompted, enter the password you used to generate the keys.</p>
+</div>
+</li>
+<li>
+<p>Insert the <code>grandpa</code> secret key:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>./target/release/solochain-template-node<span class="w"> </span>key<span class="w"> </span>insert<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>--base-path<span class="w"> </span>/tmp/node01<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>--chain<span class="w"> </span>customSpecRaw.json<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>--scheme<span class="w"> </span>Ed25519<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>--suri<span class="w"> </span><span class="s2">&quot;INSERT_SECRET_PHRASE&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>--password-interactive<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>--key-type<span class="w"> </span>gran
+</span></code></pre></div></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use the same secret phrase or seed and password as in step 2.</p>
+</div>
+</li>
+<li>
+<p>Verify that your keys are in the keystore by running the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ls<span class="w"> </span>/tmp/node01/chains/local_testnet/keystore
+</span></code></pre></div>
+<p>You should see output similar to:</p>
+<p><div id='termynal' data-termynal>
+    <span data-ty="input"><span class="file-path"></span>ls /tmp/node01/chains/local_testnet/keystore</span>
+    <br>
+    <span data-ty>61757261ea23fa399c6bd91af3d7ea2d0ad46c48aff818b285342d9aaf15b3172270e914</span>
+    <span data-ty>6772616ec9c2cd111f98f2bf78bab6787449fc007dd7f2a5d02f099919f7fb50ade97dd6</span>
+</div></p>
+</li>
+</ol>
+<h2 id="start-the-first-node">Start the First Node<a class="headerlink" href="#start-the-first-node" title="Permanent link">&para;</a></h2>
+<p>Before starting the first node, it's crucial to generate a network key. This key ensures that the node's identity remains consistent, allowing other nodes to connect to it reliably as a bootnode for synchronization.</p>
+<p>To generate a network key, run the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>./target/release/solochain-template-node<span class="w"> </span>key<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>generate-node-key<span class="w"> </span>--base-path<span class="w"> </span>/tmp/node01
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This command generates a network key and stores it in the same base path used for storing the <code>aura</code> and <code>grandpa</code> keys.</p>
+</div>
+<p>After generating the network key, start the first node using your custom chain specification with the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>./target/release/solochain-template-node<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>--base-path<span class="w"> </span>/tmp/node01<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>--chain<span class="w"> </span>./customSpecRaw.json<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>--port<span class="w"> </span><span class="m">30333</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>--rpc-port<span class="w"> </span><span class="m">9945</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>--validator<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>--name<span class="w"> </span>MyNode01<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>--password-interactive
+</span></code></pre></div>
+<p>Upon execution, you should see output similar to the following:</p>
+<div id="termynal" data-termynal>
+  <span data-ty="input"><span class="file-path"></span>./target/release/solochain-template-node \</span>
+  <span data-ty>--base-path /tmp/node01 \</span>
+  <span data-ty>--chain ./customSpecRaw.json \</span>
+  <span data-ty>--port 30333 \</span>
+  <span data-ty>--rpc-port 9945 \</span>
+  <span data-ty>--validator \</span>
+  <span data-ty>--name MyNode01 \</span>
+  <span data-ty>--password-interactive</span>
+  <span data-ty>2024-09-12 11:18:46 Substrate Node</span>
+  <span data-ty>2024-09-12 11:18:46 ✌️ version 0.1.0-8599efc46ae</span>
+  <span data-ty>2024-09-12 11:18:46 ❤️ by Parity Technologies &lt;admin@parity.io&gt;, 2017-2024</span>
+  <span data-ty>2024-09-12 11:18:46 📋 Chain specification: My Custom Testnet</span>
+  <span data-ty>2024-09-12 11:18:46 🏷 Node name: MyNode01</span>
+  <span data-ty>2024-09-12 11:18:46 👤 Role: AUTHORITY</span>
+  <span data-ty>2024-09-12 11:18:46 💾 Database: RocksDb at /tmp/node01/chains/local_testnet/db/full</span>
+  <span data-ty>2024-09-12 11:18:46 Using default protocol ID "sup" because none is configured in the chain specs</span>
+  <span data-ty>2024-09-12 11:18:46 🏷 Local node identity is: 12D3KooWSbaPxmb2tWLgkQVoJdxzpBPTd9dQPmKiJfsvtP753Rg1</span>
+  <span data-ty>2024-09-12 11:18:46 Running libp2p network backend</span>
+  <span data-ty>2024-09-12 11:18:46 💻 Operating system: macos</span>
+  <span data-ty>2024-09-12 11:18:46 💻 CPU architecture: aarch64</span>
+  <span data-ty>2024-09-12 11:18:46 📦 Highest known block at #0</span>
+  <span data-ty>2024-09-12 11:18:46 〽️ Prometheus exporter started at 127.0.0.1:9615</span>
+  <span data-ty>2024-09-12 11:18:46 Running JSON-RPC server: addr=127.0.0.1:9945, allowed origins=["http://localhost:*", "http://127.0.0.1:*", "https://localhost:*", "https://127.0.0.1:*", "https://polkadot.js.org"]</span>
+  <span data-ty>2024-09-12 11:18:51 💤 Idle (0 peers), best: #0 (0x850f…951f), finalized #0 (0x850f…951f), ⬇ 0 ⬆ 0</span>
+</div>
+
+<p>After starting the first node, you'll notice:</p>
+<ul>
+<li>The node is running with the custom chain specification ("My Custom Testnet")</li>
+<li>The local node identity is displayed (<code>12D3KooWSbaPxmb2tWLgkQVoJdxzpBPTd9dQPmKiJfsvtP753Rg1</code> in this example). This identity is crucial for other nodes to connect to this one</li>
+<li>The node is currently idle with 0 peers, as it's the only node in the network at this point</li>
+<li>No blocks are being produced. Block production will commence once another node joins the network</li>
+</ul>
+<h2 id="add-more-nodes">Add More Nodes<a class="headerlink" href="#add-more-nodes" title="Permanent link">&para;</a></h2>
+<p>Block finalization requires at least two-thirds of the validators. In this example network configured with two validators, block finalization can only start after the second node has been added.</p>
+<p>Before starting additional nodes, ensure you've properly configured their keys as described in the <a href="#add-keys-to-the-keystore">Add Keys to the Keystore</a> section. For this node, the keys should be stored under the <code>/tmp/node02</code> base path.</p>
+<p>To add a second validator to the private network, run the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>./target/release/solochain-template-node<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>--base-path<span class="w"> </span>/tmp/node02<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>--chain<span class="w"> </span>./customSpecRaw.json<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>--port<span class="w"> </span><span class="m">30334</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>--rpc-port<span class="w"> </span><span class="m">9946</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>--validator<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>--name<span class="w"> </span>MyNode02<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>--bootnodes<span class="w"> </span>/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWSbaPxmb2tWLgkQVoJdxzpBPTd9dQPmKiJfsvtP753Rg1<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>--unsafe-force-node-key-generation<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>--password-interactive
+</span></code></pre></div>
+<p>Key points about this command:</p>
+<ul>
+<li>It uses a different <code>base-path</code> and name to identify this as the second validator</li>
+<li>The <code>--chain</code> option specifies the same chain specification file used for the first node</li>
+<li>The <code>--bootnodes</code> option is crucial. It should contain the local node identifier from the first node in the network</li>
+<li>The <code>--unsafe-force-node-key-generation</code> parameter forces the generation of a new node key if one doesn't exist. For non-bootnode validators (like this second node and any subsequent nodes), it's less critical if the key changes because they won't be used as bootnodes. However, for consistency and best practices, it's recommended to generate and maintain a stable node key for all validators once the network is set up</li>
+</ul>
+<p>After both nodes have added their keys to their respective keystores (under <code>/tmp/node01</code> and <code>/tmp/node02</code>) and been run, you should see:</p>
+<ul>
+<li>The same genesis block and state root hashes on both nodes</li>
+<li>Each node showing one peer</li>
+<li>Block proposals being produced </li>
+<li>After a few seconds, new blocks being finalized on both nodes</li>
+</ul>
+<p>If successful, you should see logs similar to the following on both nodes:</p>
+<div id="termynal" data-termynal>
+  <span data-ty>2024-09-12 15:37:05 💤 Idle (0 peers), best: #0 (0x8af7…53fd), finalized #0 (0x8af7…53fd), ⬇ 0 ⬆ 0</span>
+  <span data-ty>2024-09-12 15:37:08 discovered: 12D3KooWMaL5zqYiMnVikaYCGF65fKekSPqXGgyz92eRcqcnfpey /ip4/192.168.1.2/tcp/30334</span>
+  <span data-ty>2024-09-12 15:37:10 💤 Idle (1 peers), best: #0 (0x8af7…53fd), finalized #0 (0x8af7…53fd), ⬇ 0.6kiB/s ⬆ 0.6kiB/s</span>
+  <span data-ty>2024-09-12 15:37:12 🙌 Starting consensus session on top of parent 0x8af7c72457d437486fe697b4a11ef42b26c8b4448836bdb2220495aea39f53fd (#0)</span>
+  <span data-ty>2024-09-12 15:37:12 🎁 Prepared block for proposing at 1 (6 ms) [hash: 0xb97cb3a4a62f0cb320236469d8e1e13227a15138941f3c9819b6b78f91986262; parent_hash: 0x8af7…53fd; extrinsics (1): [0x1ef4…eecb]</span>
+  <span data-ty>2024-09-12 15:37:12 🔖 Pre-sealed block for proposal at 1. Hash now 0x05115677207265f22c6d428fb00b65a0e139c866c975913431ddefe291124f04, previously 0xb97cb3a4a62f0cb320236469d8e1e13227a15138941f3c9819b6b78f91986262.</span>
+  <span data-ty>2024-09-12 15:37:12 🏆 Imported #1 (0x8af7…53fd → 0x0511…4f04)</span>
+  <span data-ty>2024-09-12 15:37:15 💤 Idle (1 peers), best: #1 (0x0511…4f04), finalized #0 (0x8af7…53fd), ⬇ 0.5kiB/s ⬆ 0.6kiB/s</span>
+  <span data-ty>2024-09-12 15:37:18 🏆 Imported #2 (0x0511…4f04 → 0x17a7…a1fd)</span>
+  <span data-ty>2024-09-12 15:37:20 💤 Idle (1 peers), best: #2 (0x17a7…a1fd), finalized #0 (0x8af7…53fd), ⬇ 0.6kiB/s ⬆ 0.5kiB/s</span>
+  <span data-ty>2024-09-12 15:37:24 🙌 Starting consensus session on top of parent 0x17a77a8799bd58c7b82ca6a1e3322b38e7db574ee6c92fbcbc26bbe5214da1fd (#2)</span>
+  <span data-ty>2024-09-12 15:37:24 🎁 Prepared block for proposing at 3 (1 ms) [hash: 0x74d78266b1ac2514050ced3f34fbf98a28c6a2856f49dbe8b44686440a45f879; parent_hash: 0x17a7…a1fd; extrinsics (1): [0xe35f…8d48]</span>
+  <span data-ty>2024-09-12 15:37:24 🔖 Pre-sealed block for proposal at 3. Hash now 0x12cc1e9492988cfd3ffe4a6eb3186b1abb351a12a97809f7bae4a7319e177dee, previously 0x74d78266b1ac2514050ced3f34fbf98a28c6a2856f49dbe8b44686440a45f879.</span>
+  <span data-ty>2024-09-12 15:37:24 🏆 Imported #3 (0x17a7…a1fd → 0x12cc…7dee)</span>
+  <span data-ty>2024-09-12 15:37:25 💤 Idle (1 peers), best: #3 (0x12cc…7dee), finalized #1 (0x0511…4f04), ⬇ 0.5kiB/s ⬆ 0.6kiB/s</span>
+</div>
+<div class="md-source-file">
+  <small>
+    
+  </small>
+</div>
+
+
+
+
+      
+    </article>
+  </div>
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+    
+      
+        
+        <nav class="md-footer__inner md-grid" aria-label="Footer" >
+          
+            
+            <a href="../upgrade-a-running-network/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Upgrade a Running Network">
+              <div class="md-footer__button md-icon">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+              </div>
+              <div class="md-footer__title">
+                <span class="md-footer__direction">
+                  Previous
+                </span>
+                <div class="md-ellipsis">
+                  Upgrade a Running Network
+                </div>
+              </div>
+            </a>
+          
+          
+            
+            <a href="../../build-a-parachain/" class="md-footer__link md-footer__link--next" aria-label="Next: Build a Parachain Tutorials">
+              <div class="md-footer__title">
+                <span class="md-footer__direction">
+                  Next
+                </span>
+                <div class="md-ellipsis">
+                  Build a Parachain Tutorials
+                </div>
+              </div>
+              <div class="md-footer__button md-icon">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+              </div>
+            </a>
+          
+        </nav>
+      
+    
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        
+          <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://twitter.com/Polkadot" target="_blank" rel="noopener" title="Twitter" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://dot.li/discord" target="_blank" rel="noopener" title="Discord" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/paritytech/polkadot-sdk" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://www.youtube.com/channel/UCB7PbjuZLEba_znc7mEGNgw" target="_blank" rel="noopener" title="YouTube" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+  
+</div>
+        
+        <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2024 Web3 Foundation
+    </div>
+  
+  
+</div>
+      </div>
+    </div>
+  </footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.annotate", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes"], "search": "../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
