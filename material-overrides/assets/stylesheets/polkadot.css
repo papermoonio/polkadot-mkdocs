@@ -178,6 +178,10 @@ body {
   padding-left: 12px;
 }
 
+.home-button-wrapper:hover .md-tabs__link {
+  color: var(--pink);
+}
+
 .md-header__button.md-tabs__link {
   color: var(--black);
   font-weight: 600;
@@ -776,6 +780,7 @@ body {
 .md-footer-meta__inner.md-grid img {
   width: 126px;
   height: max-content;
+  height: intrinsic; /* For Safari */
 }
 
 .md-footer-meta__inner.md-grid > div {
