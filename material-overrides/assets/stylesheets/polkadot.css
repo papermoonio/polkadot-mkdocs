@@ -725,10 +725,6 @@ body {
 }
 
 @media screen and (max-width: 106.249em) {
-  .md-header {
-    background-color: red !important;
-  }
-
   [dir='ltr'] .md-sidebar--primary:not([hidden]) ~ .md-content > .md-content__inner {
       margin-left: 2rem;
   }
@@ -739,10 +735,6 @@ body {
 }
 
 @media screen and (max-width: 76.249em) {
-  .md-header {
-    background-color: green !important;
-  }
-
   [dir='ltr'] .md-sidebar--primary:not([hidden]) ~ .md-content > .md-content__inner {
     margin-left: 0;
   }
