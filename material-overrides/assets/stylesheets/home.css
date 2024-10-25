@@ -50,13 +50,13 @@
   max-width: 48%;
 }
 
-.hero h1 {
-  font-size: 61.04px;
+.md-typeset .hero-content h1 {
+  font-size: 4rem;
   margin-bottom: 0.5em;
-  line-height: 67.14px;
+  line-height: 1;
 }
 
-.hero p {
+.hero-content p {
   font-size: 18px;
 }
 
@@ -90,6 +90,11 @@
   max-width: 880px;
 }
 
+.md-typeset .feature-intro h2 {
+  font-size: 2rem;
+  line-height: 1;
+}
+
 .featured-content {
   display: flex;
   flex-wrap: wrap;
@@ -111,6 +116,12 @@
   gap: 24px;
 }
 
+.md-typeset a.feature h3  {
+  font-size: 1rem;
+  color: var(--black);
+  margin: 0;
+}
+
 .md-typeset a.feature:hover h3 {
   color: var(--pink);
 }
@@ -122,12 +133,6 @@
 
 .md-typeset a.feature .column:first-child {
   width: 83.3%;
-}
-
-.feature h3 {
-  color: var(--black);
-  font-size: 20px;
-  margin: 0;
 }
 
 .feature p {
@@ -199,15 +204,15 @@
 }
 
 .md-typeset .final-cta h2 {
-  font-size: 20px;
+  font-size: 1.5rem;
   color: var(--white);
-  line-height: 25px;
+  line-height: 1;
   margin-bottom: 0;
 }
 
 .md-typeset .final-cta p {
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 18px;
+  line-height: 1;
   color: var(--white);
 }
 
