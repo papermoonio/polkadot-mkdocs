@@ -370,7 +370,9 @@ body {
   }
 
   [data-md-toggle='search']:checked ~ .md-header .md-search__output {
-    margin-top: 0.7em;
+    margin-top: 17px;
+    padding: 9px;
+    border-radius: 24px;
   }
 
   [data-md-toggle='search']:checked
