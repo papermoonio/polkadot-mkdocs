@@ -21,8 +21,22 @@
         </div>
       </div>
       <div class="md-header__buttons">
-         {% if "navigation.tabs.sticky" in features %}
-        {% if "navigation.tabs" in features %}
+        <!-- Link to home -->
+        {% if not page.is_homepage %}
+          <div class="home-button-wrapper">
+            <a
+            href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}"
+            title="{{ config.site_name | e }}"
+            class="md-header__button md-tabs__link"
+            aria-label="{{ config.site_name }}"
+            data-md-component="logo"
+            >
+              Home
+            </a>
+          </div>
+        {% endif %}
+        {% if "navigation.tabs.sticky" in features %}
+          {% if "navigation.tabs" in features %}
             {% include "partials/tabs.html" %}
           {% endif %}
         {% endif %} 

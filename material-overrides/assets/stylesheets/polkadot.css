@@ -173,6 +173,22 @@ body {
   }
 }
 
+/* Home button styling */
+.home-button-wrapper {
+  padding-left: 12px;
+}
+
+.md-header__button.md-tabs__link {
+  color: var(--black);
+  font-weight: 600;
+  margin: 0;
+  padding: 1em 12px;
+}
+
+[dir=ltr] .md-tabs__list {
+  margin-left: 0
+}
+
 /* Header buttons styling */
 .md-header__buttons {
   display: flex;
@@ -212,7 +228,7 @@ body {
 
 .md-tabs__list {
   contain: none;
-  padding: 0 1em;
+  padding: 0 12px 0 0;
 }
 
 .md-tabs__item--custom {
