@@ -24,7 +24,6 @@
 }
 
 .subsection-wrapper .title {
-  color: var(--md-default-fg-color);
   margin: 0;
   font-size: 1.2em;
   padding: 1.5em 1.5em 0 1.2em;
@@ -38,7 +37,7 @@
 }
 
 .subsection-wrapper .card {
-  border: 1px solid var(--pink);
+  border: 1px solid var(--mystic);
   border-radius: var(--md-border-radius);
   margin: 1em 0;
   text-decoration: none;

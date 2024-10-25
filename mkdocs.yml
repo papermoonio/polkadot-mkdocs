@@ -1,7 +1,9 @@
 site_name: Polkadot Developer Docs
 site_url: # XXX
+home_url: https://polkadot.com/
+home_name: Polkadot
 docs_dir: polkadot-docs
-copyright: © 2024 Web3 Foundation
+copyright: © 2024
 # Extra CSS files
 extra_css:
   - assets/stylesheets/extra.css
@@ -16,9 +18,8 @@ theme:
   custom_dir: material-overrides
   favicon: assets/images/favicon.png
   logo: assets/images/logo.png
-  logo_dark_mode: assets/images/logo-dark.png
   font:
-    text: Inter
+    text: Manrope
   features:
     - content.code.annotate # Adds annotations to code blocks
     - content.code.copy # Adds copy to clipboard button to code snippets
@@ -28,20 +29,7 @@ theme:
     - navigation.tabs.sticky # When scrolling, the tabs remain at the top of the page
     - navigation.sections # Render top-level sections as groups in the sidebar
     - navigation.indexes # Index pages
-  # Used for light and dark mode feature
-  palette:
-    # Palette toggle for light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      toggle:
-        icon: material/weather-night
-        name: Switch to dark mode
-    # Palette toggle for dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
+    - navigation.top # Show the back to top button since we don't keep top nav sticky
 markdown_extensions:
   - abbr
   - admonition
@@ -62,11 +50,10 @@ markdown_extensions:
   - pymdownx.snippets:
       base_path: polkadot-docs/.snippets
       url_download: True
-  - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: True
   - toc:
-      title: Sections
+      title: ' '
       permalink: True
   - pymdownx.superfences:
       custom_fences:
@@ -90,9 +77,6 @@ plugins:
 extra:
   generator: False
   social:
-    - icon: fontawesome/brands/twitter
-      link: https://twitter.com/Polkadot
-      name: Twitter
     - icon: fontawesome/brands/discord
       link: https://dot.li/discord
       name: Discord
@@ -102,6 +86,9 @@ extra:
     - icon: fontawesome/brands/youtube
       link: https://www.youtube.com/channel/UCB7PbjuZLEba_znc7mEGNgw
       name: YouTube
+    - icon: fontawesome/brands/x-twitter
+      link: https://twitter.com/Polkadot
+      name: Twitter
 #   analytics:
 #     provider: google
 #     property: G-XXX

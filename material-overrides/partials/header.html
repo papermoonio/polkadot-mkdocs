@@ -15,14 +15,28 @@
       </label>
       <div class="md-header__title" data-md-component="header-title">
         <div class="md-header__ellipsis">
-          <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" title="{{ config.site_name | e }}" class="md-header__button md-logo" aria-label="{{ config.site_name }}" data-md-component="logo">
+          <a href="{{ config.home_url }}" title="{{ config.home_name | e }}" class="md-header__button md-logo" aria-label="{{ config.home_name }}" data-md-component="logo">
             {% include "partials/logo.html" %}
           </a>
         </div>
       </div>
       <div class="md-header__buttons">
-         {% if "navigation.tabs.sticky" in features %}
-        {% if "navigation.tabs" in features %}
+        <!-- Link to home -->
+        {% if not page.is_homepage %}
+          <div class="home-button-wrapper">
+            <a
+            href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}"
+            title="{{ config.site_name | e }}"
+            class="md-header__button md-tabs__link"
+            aria-label="{{ config.site_name }}"
+            data-md-component="logo"
+            >
+              Home
+            </a>
+          </div>
+        {% endif %}
+        {% if "navigation.tabs.sticky" in features %}
+          {% if "navigation.tabs" in features %}
             {% include "partials/tabs.html" %}
           {% endif %}
         {% endif %} 
@@ -35,18 +49,18 @@
         {% if config.extra.alternate %}
           {% include "partials/alternate.html" %}
         {% endif %}
-        {% if "material/search" in config.plugins %}
-          <label class="md-header__button md-icon" for="__search">
-            {% set icon = config.theme.icon.search or "material/magnify" %}
-            {% include ".icons/" ~ icon ~ ".svg" %}
-          </label>
-          {% include "partials/search.html" %}
-        {% endif %}
-        {% if config.repo_url %}
-          <div class="md-header__source">
-            {% include "partials/source.html" %}
-          </div>
-        {% endif %}
       </div>
+      {% if "material/search" in config.plugins %}
+        <label class="md-header__button md-icon" for="__search">
+          {% set icon = config.theme.icon.search or "material/magnify" %}
+          {% include ".icons/" ~ icon ~ ".svg" %}
+        </label>
+        {% include "partials/search.html" %}
+      {% endif %}
+      {% if config.repo_url %}
+        <div class="md-header__source">
+          {% include "partials/source.html" %}
+        </div>
+      {% endif %}
     </nav>
   </header>
