@@ -196,6 +196,7 @@ body {
 
 .md-header {
   background-color: transparent;
+  position: unset;
 }
 
 /* Dropdown styling */
@@ -955,4 +956,10 @@ details.interface > summary::before {
   background-color: var(--pink);
   color: var(--white);
   border: 1px solid var(--pink);
+}
+
+/** Back to top button styling **/
+.md-top {
+  top: unset !important; /* To override inline styling */
+  bottom: 75px;
 }
