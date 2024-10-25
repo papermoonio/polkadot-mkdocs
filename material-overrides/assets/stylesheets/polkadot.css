@@ -271,22 +271,23 @@ body {
   padding: 1rem;
 }
 
-/* Add border to top two items */
-.md-tab__item:nth-child(-n + 2) {
+/* Apply bottom border to all items */
+.md-tab__item {
   border-bottom: 1px solid var(--mystic);
 }
 
-/* Add border to all middle items */
-.md-tab__item:nth-child(n + 3):nth-last-child(-n + 2) {
-  border-bottom: 1px solid var(--mystic);
+/* Remove bottom border from the last item */
+.md-tab__item:last-child {
+  border-bottom: none;
 }
 
-/* Add border to last item if the total number of items is odd */
-.md-tab__item:nth-last-child(odd) {
-  border-bottom: 1px solid var(--mystic);
+/* Remove bottom border from the second-to-last item if it's odd */
+/* Adjust for common cases with specific nth-last-child selectors */
+.md-tab__item:nth-last-child(2):nth-child(odd) {
+  border-bottom: none;
 }
 
-/* Add right border to first column items */
+/* Optionally, add right border to odd items for a two-column layout */
 .md-tab__item:nth-child(odd) {
   border-right: 1px solid var(--mystic);
 }
