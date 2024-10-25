@@ -2,7 +2,7 @@
 
 {% block styles %}
 	{{ super() }}
-  <link rel="stylesheet" href="{{ 'assets/stylesheets/polkadot-new.css' | url }}">
+  <link rel="stylesheet" href="{{ 'assets/stylesheets/polkadot.css' | url }}">
 {% endblock %}
 
 {% block fonts %}
@@ -36,7 +36,7 @@
 
 {%- block container -%} 
   <div class="md-content" data-md-component="content">
-    {% set class = "index-page" if not page.content and not page.is_homepage %}
+    {% set class = "index-page" if not page.content %}
     <article class="md-content__inner md-typeset {{ class }}">
       {% block content %}
         {% include "partials/content.html" %}

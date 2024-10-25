@@ -1,3 +1,94 @@
 {% extends "main.html" %}
 
-<!-- Add custom home page styling here -->
+{% block htmltitle %}
+  <title>Polkadot Developer Docs</title>
+{% endblock %}
+
+{% block styles %}
+	{{ super() }}
+  <link rel="stylesheet" href="{{ 'assets/stylesheets/home.css' | url }}">
+{% endblock %}
+
+{%- block container -%} 
+  {% block content %}
+    <div class="home-container md-typeset">
+      <div class="hero-gradient">
+        <div class="hero-section">
+          <div class="hero-content">
+            <div>
+              <h1>Defy what's possible</h1>
+              <p>Polkadot unites the world's innovators and changemakers, building and using the most transformative apps and blockchains.</p>
+            </div>
+            <div class="button-wrapper">
+              <a href="builders/get-started/">
+                <button class="md-button">Join the community</button>
+              </a>
+              <a href="builders/get-started/endpoints/">
+                <button class="md-button secondary">Start building</button>
+              </a>     
+            </div>
+          </div>
+          <div class="hero-visual">
+            <img
+            class="hero-img"
+            src="/assets/images/hero-image.png"
+            alt="representation of the Moonbeam docs site"
+          />
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-gradient">
+        <div class="feature-section">
+          <div class="feature-intro">
+            <h2>A network governed by a rebelliously innovative community</h2>
+            <p>Polkadot is a blockchain network of networks designed to challenge our assumptions, directed and governed by those who hold the DOT token. By holding DOT, you are part of the largest and most decentralized decision-making group in the world.</p>
+          </div>
+          <div class="featured-content">
+            <a class="feature" href="#">
+              <div class="column">
+                <h3>DOT Token Basics</h3>
+                <p> What’s in a DOT? Dive into the utility token that powers the Polkadot ecosystem.</p>
+              </div>
+              <div class="column">
+                <span class="md-icon">{% include ".icons/octicons/arrow-up-right-16.svg" %}</span>
+              </div>
+            </a>
+            <a class="feature" href="#">
+              <div class="column">
+                <h3>DOT Token Basics</h3>
+                <p> What’s in a DOT? Dive into the utility token that powers the Polkadot ecosystem.</p>
+              </div>
+              <div class="column">
+                <span class="md-icon">{% include ".icons/octicons/arrow-up-right-16.svg" %}</span>
+              </div>
+            </a>
+            <a class="feature" href="#">
+              <div class="column">
+                <h3>DOT Token Basics</h3>
+                <p> What’s in a DOT? Dive into the utility token that powers the Polkadot ecosystem.</p>
+              </div>
+              <div class="column">
+                <span class="md-icon">{% include ".icons/octicons/arrow-up-right-16.svg" %}</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="cta-gradient">
+        <div class="cta-section">
+          <div class="final-cta">
+            <div class="final-cta-content">
+            <h2>Final CTA</h2>
+            <p>Lorem ipsum</p>
+            <a href="builders/get-started/endpoints/">
+              <button class="md-button secondary">CTA Button</button>
+            </a>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  {% endblock %}
+{%- endblock -%} 

@@ -49,7 +49,6 @@ markdown_extensions:
   - pymdownx.snippets:
       base_path: polkadot-docs/.snippets
       url_download: True
-  - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: True
   - toc:
