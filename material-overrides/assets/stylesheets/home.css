@@ -33,7 +33,9 @@
     linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%),
     linear-gradient(107.15deg, #07ffff 0%, #af04ff 100%);
   background-size: cover; /* Ensures the gradient covers the entire screen */
-  margin-top: calc(-1 * var(--adjust-header-height)); /* Use a negative value to push the gradient to cover behind the header */
+  margin-top: calc(
+    -1 * var(--adjust-header-height)
+  ); /* Use a negative value to push the gradient to cover behind the header */
 }
 
 .hero-section {
@@ -116,7 +118,7 @@
   gap: 24px;
 }
 
-.md-typeset a.feature h3  {
+.md-typeset a.feature h3 {
   font-size: 1rem;
   color: var(--black);
   margin: 0;
@@ -230,7 +232,7 @@
     padding: var(--min-padding);
     padding-top: var(--adjust-header-height);
   }
- 
+
   .hero-content,
   .hero-visual {
     max-width: 70%;
@@ -269,7 +271,7 @@
 
   .md-typeset a.feature h3 {
     font-size: 1.5rem;
-  };
+  }
 
   .final-cta {
     width: 90%;
@@ -282,11 +284,10 @@
 }
 
 @media screen and (max-width: 45em) {
-
   .hero-content h1 {
     font-size: 3rem;
   }
-  
+
   .button-wrapper {
     width: fit-content;
     flex-wrap: wrap;
