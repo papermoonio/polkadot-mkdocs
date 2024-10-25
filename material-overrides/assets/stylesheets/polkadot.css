@@ -374,6 +374,7 @@ body {
     margin-top: 17px;
     padding: 9px;
     border-radius: 24px;
+    background: var(--md-default-bg-color);
   }
 
   [data-md-toggle='search']:checked
