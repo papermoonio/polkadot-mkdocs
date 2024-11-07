@@ -1021,10 +1021,10 @@ details.interface > summary::before {
  * - level 3 is filled square
  * - ul default is filled disc (bullet)
  */
- ul ul {
-    list-style-type:  circle !important;
+ ul:not(nav ul) ul {
+    list-style-type: circle !important;
 }
 
-ul ul ul {
-    list-style-type:  square !important;
+ul:not(nav ul) ul ul {
+    list-style-type: square !important;
 }
