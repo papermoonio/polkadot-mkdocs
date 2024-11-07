@@ -1014,3 +1014,17 @@ details.interface > summary::before {
   top: unset !important; /* To override inline styling */
   bottom: 75px;
 }
+
+/* Custom styles to override MkDocs defaults and enhance theme */
+/* Unordered list <ul> symbols:
+ * - level 2 is hollow circle
+ * - level 3 is filled square
+ * - ul default is filled disc (bullet)
+ */
+ ul:not(nav ul) ul {
+    list-style-type: circle !important;
+}
+
+ul:not(nav ul) ul ul {
+    list-style-type: square !important;
+}
