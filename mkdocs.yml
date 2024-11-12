@@ -4,6 +4,9 @@ home_url: https://polkadot.com/
 home_name: Polkadot
 docs_dir: polkadot-docs
 copyright: © 2024
+extra_javascript:
+  - js/header-scroll.js
+  - js/search-bar-results.js
 # Extra CSS files
 extra_css:
   - assets/stylesheets/extra.css
@@ -17,7 +20,7 @@ theme:
   name: material
   custom_dir: material-overrides
   favicon: assets/images/favicon.png
-  logo: assets/images/logo.png
+  logo: https://polkadot.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpolkadot-logo.0e1e2c79.png&w=384&q=75
   font:
     text: Manrope
   features:
