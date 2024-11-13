@@ -1250,7 +1250,7 @@ details.interface > summary::before {
 }
 
 .md-typeset .tabbed-labels>label:hover {
-  color: var(--md-default-fg-color);
+  color: var(--white);
 }
 
 .md-typeset .tabbed-block p,
