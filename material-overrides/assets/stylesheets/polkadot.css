@@ -1230,7 +1230,8 @@ details.interface > summary::before {
   color: var(--white);
 }
 
-.md-typeset .tabbed-labels > label {
+.md-typeset .tabbed-labels > label,
+.md-typeset .tabbed-labels > label > a > code {
   color: var(--white);
 }
 
