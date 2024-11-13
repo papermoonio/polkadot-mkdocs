@@ -225,8 +225,8 @@
   padding: 1em 12px;
 }
 
-[dir=ltr] .md-tabs__list {
-  margin-left: 0
+[dir='ltr'] .md-tabs__list {
+  margin-left: 0;
 }
 
 /* Header buttons styling */
@@ -435,11 +435,11 @@ input.md-search__input::placeholder {
   .md-search__output {
     display: none;
   }
-  
+
   .md-search__output.visible {
     display: block;
   }
-  
+
   [data-md-toggle='search']:checked ~ .md-header .md-search__form {
     background-color: transparent;
     box-shadow: none;
@@ -622,7 +622,7 @@ input.md-search__input::placeholder {
   }
 
   /* Ensure left navigation remains in place */
-  .md-header--lifted~.md-container .md-sidebar {
+  .md-header--lifted ~ .md-container .md-sidebar {
     top: 4.8rem !important;
   }
 }
@@ -806,8 +806,11 @@ input.md-search__input::placeholder {
 }
 
 @media screen and (max-width: 106.249em) {
-  [dir='ltr'] .md-sidebar--primary:not([hidden]) ~ .md-content > .md-content__inner {
-      margin-left: 2rem;
+  [dir='ltr']
+    .md-sidebar--primary:not([hidden])
+    ~ .md-content
+    > .md-content__inner {
+    margin-left: 2rem;
   }
 
   .md-content__inner.md-typeset {
@@ -816,7 +819,10 @@ input.md-search__input::placeholder {
 }
 
 @media screen and (max-width: 76.249em) {
-  [dir='ltr'] .md-sidebar--primary:not([hidden]) ~ .md-content > .md-content__inner {
+  [dir='ltr']
+    .md-sidebar--primary:not([hidden])
+    ~ .md-content
+    > .md-content__inner {
     margin-left: 0;
   }
 
@@ -1133,21 +1139,21 @@ details.interface > summary::before {
 }
 
 .md-typeset .tabbed-labels > label,
-.md-typeset .tabbed-labels>label>[href]:first-child,
+.md-typeset .tabbed-labels > label > [href]:first-child,
 .md-typeset .tabbed-labels > label > a > code {
   color: var(--white);
 }
 
-.md-typeset .tabbed-labels--linked>label>a {
+.md-typeset .tabbed-labels--linked > label > a {
   text-decoration: none;
 }
 
 .js .md-typeset .tabbed-labels:before {
-  background: #40465C;
+  background: #40465c;
   height: 4px;
 }
 
-.md-typeset .tabbed-labels>label:hover {
+.md-typeset .tabbed-labels > label:hover {
   color: var(--white);
 }
 
@@ -1177,7 +1183,7 @@ details.interface > summary::before {
 }
 
 .md-feedback__icon:not(:disabled).md-icon:hover {
-  color: var(--pink)
+  color: var(--pink);
 }
 
 /* Styles to override unordered list defaults */
@@ -1186,10 +1192,10 @@ details.interface > summary::before {
  * - level 3 is filled square
  * - ul default is filled disc (bullet)
  */
- ul:not(nav ul) ul {
-    list-style-type: circle !important;
+ul:not(nav ul) ul {
+  list-style-type: circle !important;
 }
 
 ul:not(nav ul) ul ul {
-    list-style-type: square !important;
+  list-style-type: square !important;
 }

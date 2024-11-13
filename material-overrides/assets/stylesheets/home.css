@@ -315,7 +315,9 @@
 }
 
 @media screen and (max-width: 45em) {
-  .hero-section, .feature-section, .cta-section {
+  .hero-section,
+  .feature-section,
+  .cta-section {
     padding: 0 1.5rem;
   }
 
@@ -373,5 +375,3 @@
     padding: 1.5em;
   }
 }
-
-
