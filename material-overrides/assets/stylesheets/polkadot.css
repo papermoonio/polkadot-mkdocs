@@ -620,6 +620,11 @@ input.md-search__input::placeholder {
   .md-nav__link.md-nav__link--index:hover a {
     color: var(--pink);
   }
+
+  /* Ensure left navigation remains in place */
+  .md-header--lifted~.md-container .md-sidebar {
+    top: 4.8rem !important;
+  }
 }
 
 /* Styling for nav items that are active or hovered over on smaller screens */
@@ -1246,6 +1251,12 @@ details.interface > summary::before {
 
 .md-typeset .tabbed-labels>label:hover {
   color: var(--md-default-fg-color);
+}
+
+.md-typeset .tabbed-block p,
+.md-typeset .tabbed-block ul,
+.md-typeset .tabbed-block ol {
+  margin: 1em;
 }
 
 /** Feedback widget styling **/
