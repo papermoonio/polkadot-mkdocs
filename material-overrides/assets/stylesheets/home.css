@@ -172,6 +172,7 @@
 
 .md-typeset a.feature .column:first-child {
   width: 83.3%;
+  height: 100%;
 }
 
 .feature p {
