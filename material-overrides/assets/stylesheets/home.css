@@ -1,14 +1,25 @@
 :root {
-  --adjust-margin-left: -2em;
   --adjust-header-height: 8em;
   --min-padding: 0 3em;
+}
+
+.md-container {
+  padding: 0;
 }
 
 .hero-gradient,
 .feature-gradient,
 .cta-gradient {
   width: 100vw;
-  margin-left: var(--adjust-margin-left);
+}
+
+.hero-section,
+.feature-section,
+.cta-section {
+  max-width: var(--max-page-width);
+  width: 100%;
+  margin: auto;
+  padding: 0 var(--page-padding);
 }
 
 .md-main {
@@ -25,6 +36,10 @@
 
 .md-main__inner {
   display: block;
+}
+
+.md-tabs__list {
+  padding-left: 12px;
 }
 
 /** Styling for the hero section **/
@@ -44,16 +59,25 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 4%;
-  padding: 0 7em 1em;
+  padding: var(--adjust-header-height) var(--page-padding);
+  overflow: hidden;
 }
 
-.hero-content,
-.hero-visual {
-  max-width: 48%;
+.hero-content {
+  max-width: 43%;
+}
+
+.md-typeset iframe.hero-visual {
+  max-width: 53%;
+}
+
+.md-typeset iframe.hero-visual {
+  transform: scale(1.5);
+  transform-origin: center center;
 }
 
 .md-typeset .hero-content h1 {
-  font-size: 4rem;
+  font-size: 2.773rem;
   margin-bottom: 0.5em;
   line-height: 1;
 }
@@ -64,9 +88,21 @@
 
 .button-wrapper {
   display: flex;
-  width: max-content;
   gap: 16px;
   margin-top: 2em;
+  width: 100%;
+}
+
+.md-typeset .button-wrapper a {
+  flex: 1 1 0%;
+}
+
+.md-typeset .button-wrapper a .md-button {
+  width: 100%;
+}
+
+.md-typeset iframe.hero-visual {
+  min-height: 35em;
 }
 
 /** Styling for the feature section **/
@@ -84,7 +120,6 @@
 
 .feature-section {
   transform: rotate(180deg);
-  padding: var(--min-padding);
 }
 
 .feature-intro {
@@ -93,8 +128,9 @@
 }
 
 .md-typeset .feature-intro h2 {
-  font-size: 2rem;
-  line-height: 1;
+  font-size: 1.659rem;
+  line-height: 1.1;
+  margin-top: 0;
 }
 
 .featured-content {
@@ -119,9 +155,10 @@
 }
 
 .md-typeset a.feature h3 {
-  font-size: 1rem;
+  font-size: 1.382rem;
   color: var(--black);
-  margin: 0;
+  margin-top: 0;
+  line-height: 1.2;
 }
 
 .md-typeset a.feature:hover h3 {
@@ -135,6 +172,7 @@
 
 .md-typeset a.feature .column:first-child {
   width: 83.3%;
+  height: 100%;
 }
 
 .feature p {
@@ -198,8 +236,7 @@
     rgba(0, 0, 0, 0) 0.38%,
     rgba(0, 0, 0, 0.5) 97.35%
   );
-  padding-left: 3em;
-  padding-bottom: 3em;
+  padding: 0 3em 3em;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -226,25 +263,29 @@
   .hero-section {
     gap: 1em;
     justify-content: center;
+    flex-direction: column-reverse;
   }
 
   .hero-section {
     padding: var(--min-padding);
     padding-top: var(--adjust-header-height);
+    padding-bottom: 5em;
   }
 
   .hero-content,
-  .hero-visual {
-    max-width: 70%;
+  .md-typeset iframe.hero-visual {
+    max-width: 100%;
+  }
+
+  .md-typeset iframe.hero-visual {
+    min-height: 33em;
   }
 
   .hero-content {
-    text-align: center;
     justify-items: center;
   }
 
-  .hero-content h1 {
-    font-size: 4rem;
+  .md-typeset .hero-content h1 {
     line-height: 1;
     margin-top: 1rem;
     margin-bottom: 2rem;
@@ -252,11 +293,6 @@
 
   .feature-intro {
     max-width: unset;
-  }
-
-  .md-typeset .feature-intro h2 {
-    font-size: 2rem;
-    line-height: 1;
   }
 
   .featured-content {
@@ -267,10 +303,6 @@
   .md-typeset a.feature {
     min-width: 60%;
     max-width: 75%;
-  }
-
-  .md-typeset a.feature h3 {
-    font-size: 1.5rem;
   }
 
   .final-cta {
@@ -284,13 +316,37 @@
 }
 
 @media screen and (max-width: 45em) {
-  .hero-content h1 {
-    font-size: 3rem;
+  .hero-section,
+  .feature-section,
+  .cta-section {
+    padding: 0 1.5rem;
+  }
+
+  .hero-section {
+    padding-top: var(--adjust-header-height);
+    padding-bottom: 5em;
+  }
+
+  .md-typeset iframe.hero-visual {
+    min-height: 18em;
+    max-width: 80%;
+  }
+
+  .md-typeset .hero-content h1 {
+    font-size: 1.659rem;
   }
 
   .button-wrapper {
-    width: fit-content;
-    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .feature-section {
+    padding-bottom: 5em;
+  }
+
+  .md-typeset .feature-intro h2 {
+    font-size: 1.382rem;
   }
 
   .featured-content {
@@ -298,8 +354,25 @@
     gap: 36px;
   }
 
+  .md-typeset a.feature h3 {
+    font-size: 1rem;
+  }
+
   .md-typeset a.feature {
     min-width: 100%;
     max-width: 100%;
+  }
+
+  .feature p,
+  .md-typeset .final-cta p {
+    font-size: 16px;
+  }
+
+  .md-typeset .final-cta h2 {
+    font-size: 1.382rem;
+  }
+
+  .final-cta-content {
+    padding: 1.5em;
   }
 }
