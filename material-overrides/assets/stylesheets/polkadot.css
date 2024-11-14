@@ -1159,7 +1159,8 @@ details.interface > summary::before {
 
 .md-typeset .tabbed-block p,
 .md-typeset .tabbed-block ul,
-.md-typeset .tabbed-block ol {
+.md-typeset .tabbed-block ol,
+.md-typeset .tabbed-block details {
   margin: 1em;
 }
 
