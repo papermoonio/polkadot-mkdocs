@@ -1200,3 +1200,8 @@ ul:not(nav ul) ul {
 ul:not(nav ul) ul ul {
   list-style-type: square !important;
 }
+
+div.mermaid { 
+    display: flex !important; 
+    justify-content: center !important;
+ }
