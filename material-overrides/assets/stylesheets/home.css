@@ -3,6 +3,16 @@
   --min-padding: 0 3em;
 }
 
+.home-container {
+  background-image: url('../images/gradient.png');
+  background-size: 100% 100%; /* Scales the image to cover the entire element */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Ensures the image doesn't repeat */
+  margin-top: calc(
+    -1 * var(--adjust-header-height)
+  ); /* Use a negative value to push the gradient to cover behind the header */
+}
+
 .md-container {
   padding: 0;
 }
@@ -40,17 +50,6 @@
 
 .md-tabs__list {
   padding-left: 12px;
-}
-
-/** Styling for the hero section **/
-.hero-gradient {
-  background: linear-gradient(107.4deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%),
-    linear-gradient(107.15deg, #07ffff 0%, #af04ff 100%);
-  background-size: cover; /* Ensures the gradient covers the entire screen */
-  margin-top: calc(
-    -1 * var(--adjust-header-height)
-  ); /* Use a negative value to push the gradient to cover behind the header */
 }
 
 .hero-section {
@@ -105,22 +104,6 @@
   min-height: 35em;
 }
 
-/** Styling for the feature section **/
-.feature-gradient {
-  background: linear-gradient(
-      107.15deg,
-      rgba(255, 255, 255, 0) 0%,
-      #ffffff 100%
-    ),
-    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%),
-    linear-gradient(107.15deg, #e4ff07 0%, #07ffff 100%);
-  transform: rotate(180deg);
-  background-size: cover; /* Ensures the gradient covers the entire screen */
-}
-
-.feature-section {
-  transform: rotate(180deg);
-}
 
 .feature-intro {
   margin: auto;
@@ -197,17 +180,6 @@
   margin-left: 0.3em;
 }
 
-/** Styling for the call to action (cta) section **/
-.cta-gradient {
-  background: linear-gradient(
-      252.85deg,
-      rgba(255, 255, 255, 0) 0%,
-      #ffffff 100%
-    ),
-    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%),
-    linear-gradient(252.85deg, #e4ff07 0%, #07ffff 100%);
-  background-size: cover; /* Ensures the gradient covers the entire screen */
-}
 
 .cta-section {
   padding: var(--min-padding);
@@ -229,7 +201,7 @@
 
 .final-cta-content {
   width: 633px;
-  height: 360px;
+  min-height: 360px;
   border-radius: 16px;
   background: linear-gradient(
     270deg,
@@ -251,7 +223,7 @@
 
 .md-typeset .final-cta p {
   font-size: 18px;
-  line-height: 1;
+  line-height: 1.5;
   color: var(--white);
 }
 
@@ -374,5 +346,9 @@
 
   .final-cta-content {
     padding: 1.5em;
+  }
+
+  .md-typeset .final-cta .md-button {
+    margin-top: unset;
   }
 }
