@@ -2,7 +2,7 @@
   width: 750px;
   max-width: 100%;
   background: #101010;
-  color: #eee;
+  color: var(--white);
   font-size: 13px;
   font-family: 'Fira Mono', Consolas, Menlo, Monaco, 'Courier New', Courier,
     monospace;
@@ -37,6 +37,11 @@
   text-align: center;
 }
 
+[data-termynal] a,
+.md-typeset [data-termynal] pre {
+  color: var(--white);
+}
+
 [data-ty] {
   display: block;
   line-height: 1.25;
@@ -67,15 +72,21 @@
   content: attr(data-ty-prompt);
 }
 
+/* For tables in terminal elements (see Zombienet page for example) */
+.md-typeset .table-termynal [data-ty] {
+  white-space-collapse: unset ;
+}
+
 .md-typeset .table-termynal table:not([class]) {
   border: none;
 }
 
 .md-typeset .table-termynal .md-typeset__table table th.left-header {
-  border-bottom: 0.05rem solid rgba(255, 255, 255, 0.1);
-  border-right: 0.05rem solid rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.1);
+  border-bottom: 0.05rem solid rgba(255, 255, 255, 0.4);
+  border-right: 0.05rem solid rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
   background-color: var(--black);
+  color: var(--white);
 }
 
 .md-typeset .table-termynal .md-typeset__table table th.center-header {
@@ -83,10 +94,16 @@
   width: 100%;
   color: var(--white);
   background-color: var(--pink);
-  padding: 0 22% 0 0;
 }
 
 .md-typeset .table-termynal table:not([class]) td {
   background-color: var(--black);
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  border-top: none;
+  border-bottom: 0.05rem solid rgba(255, 255, 255, 0.4);
+}
+
+.md-typeset .table-termynal table:not([class]) tr:last-child th,
+.md-typeset .table-termynal table:not([class]) tr:last-child td {
+  border-bottom: none;
 }
