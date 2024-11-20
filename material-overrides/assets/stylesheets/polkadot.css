@@ -58,7 +58,6 @@
 
   /** Branded Mermaid Flowchart Diagrams **/
   --md-mermaid-font-family: var(--md-text-font-family), sans-serif;
-  --md-default-fg-color--lightest: var(--white-transparent-10);
   --md-mermaid-edge-color: var(--md-code-fg-color);
   --md-mermaid-node-bg-color: var(--md-accent-fg-color--transparent);
   --md-mermaid-node-fg-color: var(--md-accent-fg-color);
@@ -101,6 +100,7 @@
   padding-top: calc(var(--header-height) + var(--dropdown-gap));
 }
 
+/* Font styling */
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
@@ -116,6 +116,7 @@
   color: var(--storm-gray);
 }
 
+/* Link styling */
 .md-typeset a {
   text-decoration: underline;
 }
@@ -128,6 +129,11 @@
 .md-typeset a:focus,
 .md-typeset a:hover {
   color: var(--pink);
+}
+
+/* Code element styling */
+.md-typeset pre>code {
+  padding: 12px 18px;
 }
 
 /* Header styling */
@@ -665,6 +671,26 @@ input.md-search__input::placeholder {
   .md-nav--primary .md-nav__item--active > .md-nav__link {
     background-color: var(--athens-gray);
   }
+
+  /* Adjust size of the TOC icon in left nav */
+  .md-nav--primary .md-nav__link--active.md-nav__link[for=__toc] .md-icon:after,
+  .md-nav--primary .md-nav__link .md-nav__icon {
+    /* Override mkdocs styling */
+    font-size: unset;
+    width: 36px;
+    max-width: 36px;
+  }
+
+  /* Adjust size of arrows for sections in left nav */
+  .md-nav--primary .md-nav__link.md-nav__link--index .md-icon:after,
+  .md-nav--primary .md-nav__link.md-nav__link--index .md-nav__icon {
+    height: 24px;
+    width: 24px;
+  }
+
+  .md-nav__item div.md-nav__link--active {
+    margin-left: 0;
+  }
 }
 
 @media screen and (max-width: 76.1875em) {
@@ -1009,16 +1035,6 @@ details.interface > summary::before {
   width: 100%;
 }
 
-.md-typeset details.interface .tabbed-set {
-  background: var(--athens-gray);
-  border: 1px solid var(--mystic);
-  border-radius: var(--md-border-radius);
-}
-
-.md-typeset details.interface .tabbed-set .tabbed-labels {
-  color: var(--athens-gray);
-}
-
 .md-typeset
   details.interface
   .tabbed-set
@@ -1157,11 +1173,23 @@ details.interface > summary::before {
   color: var(--white);
 }
 
-.md-typeset .tabbed-block p,
-.md-typeset .tabbed-block ul,
-.md-typeset .tabbed-block ol,
-.md-typeset .tabbed-block details {
+/* Add margin to all items nested inside a tabbed element */
+.md-typeset .tabbed-block > *,
+/* Need this line to override mkdocs styling */
+.md-typeset .tabbed-block > .tabbed-set {
   margin: 1em;
+}
+
+/* Specifically remove the margin on code inside a tabbed element */
+.md-typeset .tabbed-block .highlight:first-child {
+  margin: 0;
+}
+
+/* Adjust border of code elements nested inside tabbed elements */
+.md-typeset .tabbed-block>.highlight:first-child>pre>code,
+.md-typeset .tabbed-block>pre:first-child>code {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
 }
 
 /** Feedback widget styling **/
@@ -1201,7 +1229,24 @@ ul:not(nav ul) ul ul {
   list-style-type: square !important;
 }
 
-div.mermaid { 
-    display: flex !important; 
-    justify-content: center !important;
- }
+/* Mermaid diagram styling */
+div.mermaid {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* Card styling (as seen in Develop > Integrations section) */
+.md-typeset .grid.cards>ul>li {
+  display: flex;
+  flex-direction: column;
+}
+
+.md-typeset .grid.cards>ul>li>:last-child {
+  margin-top: auto;
+  padding-top: 1em;
+}
+
+.md-typeset .grid.cards .twemoji {
+  vertical-align: sub;
+  padding-right: .5em;
+}
