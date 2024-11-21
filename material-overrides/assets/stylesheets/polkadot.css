@@ -689,12 +689,6 @@ input.md-search__input::placeholder {
     display: block;
   }
 
-  /** Show only active items **/
-  /* To hide the inactive dropdown sections on the left nav */
-  .md-nav > .md-nav__list .md-nav__item--section {
-    display: none;
-  }
-
   /* To show only the active dropdown section on the left nav */
   .md-nav > .md-nav__list .md-nav__item--section.md-nav__item--active,
   .root-level-sidebar
@@ -710,8 +704,16 @@ input.md-search__input::placeholder {
     display: block;
   }
 
+  /** Show only active items **/
+  /* To hide the inactive dropdown sections on the left nav */
   .md-nav > .md-nav__list .md-nav__item--section {
     display: none;
+  }
+
+  /* Show the entire left navigation */
+  .root-subdirectory-page > .md-sidebar--primary .md-nav > .md-nav__list .md-nav__item--section,
+  .root-subdirectory-page > .md-sidebar--primary .md-nav__list .md-nav__item > a.md-nav__link {
+    display: block;
   }
 }
 
