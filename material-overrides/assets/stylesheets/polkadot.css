@@ -564,16 +564,7 @@ input.md-search__input::placeholder {
     pointer-events: auto;
   }
 
-  /** Show only active items **/
-  /* To hide the inactive dropdown sections on the left nav */
-  .md-nav > .md-nav__list .md-nav__item--section {
-    display: none;
-  }
 
-  /* To show only the active dropdown section on the left nav */
-  .md-nav > .md-nav__list .md-nav__item--section.md-nav__item--active {
-    display: block;
-  }
 
   /* Spacing styling */
   .md-nav--primary .md-nav__list {
@@ -630,6 +621,43 @@ input.md-search__input::placeholder {
   /* Ensure left navigation remains in place */
   .md-header--lifted ~ .md-container .md-sidebar {
     top: 4.8rem !important;
+  }
+  /* A root-level section (i.e., Develop) can have both sections (i.e., Toolkit) and 
+   individual pages (i.e. Development Pathways). We need to make sure that when the user 
+   is on an individual page, that the other sections do not show up in the left navigation.
+   Similarly, when the user is on a section, we need to make sure we're not showing the
+   individual pages in the left navigation. So, let's start with a clean slate and not display
+   any nav item. Then, we'll conditionally display the active section. Similarly, when on 
+   an individual page, we'll conditionally show the active page. */
+  .md-sidebar--primary .md-nav__list .md-nav__item > a.md-nav__link {
+    display: none;
+  }
+
+  /* Only show active section */
+  .md-sidebar--primary .md-nav__list .md-nav__item.md-nav__item--section.md-nav__item--active a.md-nav__link {
+    display: block;
+  }
+
+  /* Only show active individual page */
+  .md-sidebar--primary .md-nav__list .md-nav__item--active > a.md-nav__link {
+    display: block;
+  }
+
+  /** Show only active items **/
+  /* To hide the inactive dropdown sections on the left nav */
+  .md-nav > .md-nav__list .md-nav__item--section {
+    display: none;
+  }
+
+  /* To show only the active dropdown section on the left nav */
+  .md-nav > .md-nav__list .md-nav__item--section.md-nav__item--active,
+  .root-level-sidebar .md-nav > .md-nav__list .md-nav__item--active .md-nav__item,
+  .md-sidebar--primary .root-level-sidebar .md-nav__list .md-nav__item > a.md-nav__link {
+    display: block;
+  }
+
+  .md-nav > .md-nav__list .md-nav__item--section {
+    display: none;
   }
 }
 
