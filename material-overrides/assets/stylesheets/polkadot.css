@@ -532,7 +532,7 @@ input.md-search__input::placeholder {
   }
 
   [dir='ltr']
-    .md-nav--primary[data-md-level='0']
+    .md-nav[data-md-level='0']:not() 
     .md-nav__list:first-of-type
     > .md-nav__item
     > a.md-nav__link,
