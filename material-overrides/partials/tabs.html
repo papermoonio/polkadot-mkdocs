@@ -17,6 +17,12 @@
                         <span class="dropdown-title">{{ section_item.title }}</span>
                       </a>
                     </li>
+                  {% elif section_item.is_page and not section_item == nav_item.children[0] %}
+                    <li class="md-tab__item">
+                      <a href="{{ section_item.url | url }}">
+                        <span class="dropdown-title">{{ section_item.title }}</span>
+                      </a>
+                    </li>
                   {% endif %}
                 {% endfor %}
               </ul>

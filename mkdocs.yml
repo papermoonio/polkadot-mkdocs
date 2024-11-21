@@ -8,6 +8,7 @@ copyright: © 2024
 extra_javascript:
   - js/header-scroll.js
   - js/search-bar-results.js
+  - js/root-level-sections.js
 # Extra CSS files
 extra_css:
   - assets/stylesheets/extra.css

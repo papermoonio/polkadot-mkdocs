@@ -58,7 +58,6 @@
 
   /** Branded Mermaid Flowchart Diagrams **/
   --md-mermaid-font-family: var(--md-text-font-family), sans-serif;
-  --md-default-fg-color--lightest: var(--white-transparent-10);
   --md-mermaid-edge-color: var(--md-code-fg-color);
   --md-mermaid-node-bg-color: var(--md-accent-fg-color--transparent);
   --md-mermaid-node-fg-color: var(--md-accent-fg-color);
@@ -94,6 +93,7 @@
 
 .md-main {
   padding: 0 2em;
+  height: 100%;
 }
 
 .md-container {
@@ -101,6 +101,7 @@
   padding-top: calc(var(--header-height) + var(--dropdown-gap));
 }
 
+/* Font styling */
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
@@ -116,6 +117,7 @@
   color: var(--storm-gray);
 }
 
+/* Link styling */
 .md-typeset a {
   text-decoration: underline;
 }
@@ -128,6 +130,11 @@
 .md-typeset a:focus,
 .md-typeset a:hover {
   color: var(--pink);
+}
+
+/* Code element styling */
+.md-typeset pre > code {
+  padding: 12px 18px;
 }
 
 /* Header styling */
@@ -170,43 +177,6 @@
 .md-header__button.md-logo img {
   height: auto;
   width: 140px;
-}
-
-@media screen and (max-width: 76.2344em) {
-  .md-header {
-    padding: 0 32px !important;
-  }
-
-  .md-header__button.md-logo {
-    margin: 0;
-    padding: 0 1em;
-  }
-
-  .md-header__buttons {
-    height: unset !important;
-  }
-
-  .md-header__title {
-    border-left: 1px solid var(--heather);
-    border-right: 1px solid var(--heather);
-    height: var(--header-height);
-  }
-
-  .md-header__buttons {
-    border-left: none !important;
-  }
-}
-
-@media screen and (max-width: 48em) {
-  .md-header {
-    padding: 0;
-    display: flex;
-    justify-content: center;
-  }
-
-  .md-header__buttons {
-    display: none !important;
-  }
 }
 
 /* Home button styling */
@@ -258,6 +228,44 @@
   width: 100%;
   padding: 0 var(--page-padding);
   margin: auto;
+}
+
+/* Header, home button, header buttons styling on smaller screens */
+@media screen and (max-width: 76.2344em) {
+  .md-header {
+    padding: 0 32px;
+  }
+
+  .md-header__button.md-logo {
+    margin: 0;
+    padding: 0 1em;
+  }
+
+  .md-header__button {
+    color: var(--black);
+  }
+
+  .md-header__buttons {
+    height: unset;
+  }
+
+  .md-header__title {
+    border-left: 1px solid var(--heather);
+    border-right: 1px solid var(--heather);
+    height: var(--header-height);
+  }
+
+  .md-header__buttons {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 48em) {
+  .md-header {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 /* Dropdown styling */
@@ -523,15 +531,43 @@ input.md-search__input::placeholder {
     color: var(--black);
   }
 
-  .md-nav__item--section {
+  [dir='ltr']
+    .md-nav[data-md-level='0']:not() 
+    .md-nav__list:first-of-type
+    > .md-nav__item
+    > a.md-nav__link,
+  .md-nav__list .md-nav__item--section {
     margin-top: 0;
+    margin-bottom: 1.25em;
   }
 
-  /* Don't show the root-level sections */
+  /* Styling for root-level sections */
   .md-nav--lifted
     > .md-nav__list
     > .md-nav__item--active
     > .md-nav__link:not(.md-nav__container) {
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--mystic);
+    margin-left: -1em;
+    padding-left: 1em;
+    font-weight: 600;
+  }
+
+  /* Ensure the root-level section doesn't get indented when on it's index page */
+  .md-nav--lifted
+    > .md-nav__list
+    > .md-nav__item--active
+    > .md-nav__link:not(.md-nav__container)
+    a {
+    margin-left: 0;
+  }
+
+  /* Don't show arrow next to root-level sections */
+  .md-nav--lifted
+    > .md-nav__list
+    > .md-nav__item--active
+    > .md-nav__link:not(.md-nav__container)
+    > label {
     display: none;
   }
 
@@ -558,15 +594,8 @@ input.md-search__input::placeholder {
     pointer-events: auto;
   }
 
-  /** Show only active items **/
-  /* To hide the inactive dropdown sections on the left nav */
-  .md-nav > .md-nav__list .md-nav__item--section {
-    display: none;
-  }
-
-  /* To show only the active dropdown section on the left nav */
-  .md-nav > .md-nav__list .md-nav__item--section.md-nav__item--active {
-    display: block;
+  [dir='ltr'] .md-nav--primary .md-nav__item > .md-nav__link {
+    margin-right: 0;
   }
 
   /* Spacing styling */
@@ -575,11 +604,16 @@ input.md-search__input::placeholder {
   }
 
   [dir='ltr'] .md-nav--primary .md-nav__item > .md-nav__link {
-    padding-top: 0.212em;
-    padding-bottom: 0.212em;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
     margin-top: 0.1em;
     margin-right: 0;
     margin-bottom: 0.1em;
+  }
+
+  [dir='ltr'] .md-nav--primary .md-nav__item > div.md-nav__link {
+    padding-top: 0.212em;
+    padding-bottom: 0.212em;
   }
 
   .md-nav__link {
@@ -600,7 +634,6 @@ input.md-search__input::placeholder {
   .md-nav__link-wrapper.md-nav__item.md-nav__item--active {
     margin-left: -0.9em;
     padding-left: 0.9em;
-    font-weight: 700;
   }
 
   .md-nav__item div.md-nav__link--active {
@@ -624,6 +657,63 @@ input.md-search__input::placeholder {
   /* Ensure left navigation remains in place */
   .md-header--lifted ~ .md-container .md-sidebar {
     top: 4.8rem !important;
+  }
+
+  .md-sidebar,
+  .md-sidebar__scrollwrap {
+    /* Using important to override inline styling */
+    height: 100% !important;
+  }
+
+  /* A root-level section (i.e., Develop) can have both sections (i.e., Toolkit) and 
+   individual pages (i.e. Development Pathways). We need to make sure that when the user 
+   is on an individual page, that the other sections do not show up in the left navigation.
+   Similarly, when the user is on a section, we need to make sure we're not showing the
+   individual pages in the left navigation. So, let's start with a clean slate and not display
+   any nav item. Then, we'll conditionally display the active section. Similarly, when on 
+   an individual page, we'll conditionally show the active page. */
+  .md-sidebar--primary .md-nav__list .md-nav__item > a.md-nav__link {
+    display: none;
+  }
+
+  /* Only show active section */
+  .md-sidebar--primary
+    .md-nav__list
+    .md-nav__item.md-nav__item--section.md-nav__item--active
+    a.md-nav__link {
+    display: block;
+  }
+
+  /* Only show active individual page */
+  .md-sidebar--primary .md-nav__list .md-nav__item--active > a.md-nav__link {
+    display: block;
+  }
+
+  /* To show only the active dropdown section on the left nav */
+  .md-nav > .md-nav__list .md-nav__item--section.md-nav__item--active,
+  .root-level-sidebar
+    .md-nav
+    > .md-nav__list
+    .md-nav__item--active
+    .md-nav__item,
+  .md-sidebar--primary
+    .root-level-sidebar
+    .md-nav__list
+    .md-nav__item
+    > a.md-nav__link {
+    display: block;
+  }
+
+  /** Show only active items **/
+  /* To hide the inactive dropdown sections on the left nav */
+  .md-nav > .md-nav__list .md-nav__item--section {
+    display: none;
+  }
+
+  /* Show the entire left navigation */
+  .root-subdirectory-page > .md-sidebar--primary .md-nav > .md-nav__list .md-nav__item--section,
+  .root-subdirectory-page > .md-sidebar--primary .md-nav__list .md-nav__item > a.md-nav__link {
+    display: block;
   }
 }
 
@@ -665,6 +755,17 @@ input.md-search__input::placeholder {
   .md-nav--primary .md-nav__item--active > .md-nav__link {
     background-color: var(--athens-gray);
   }
+
+  .md-nav__item div.md-nav__link--active {
+    margin-left: 0;
+  }
+
+  /* Adjust size of arrows for sections in left nav */
+  .md-nav--primary .md-nav__link.md-nav__link--index .md-icon:after,
+  .md-nav--primary .md-nav__link.md-nav__link--index .md-nav__icon {
+    height: 24px;
+    width: 24px;
+  }
 }
 
 @media screen and (max-width: 76.1875em) {
@@ -678,10 +779,6 @@ input.md-search__input::placeholder {
     display: flex;
     align-items: center;
     font-weight: 400;
-  }
-
-  .toc-sections-title {
-    display: none;
   }
 
   /* Remove lines between sidebar nav items*/
@@ -776,6 +873,25 @@ input.md-search__input::placeholder {
   }
 }
 
+/** TOC styling on smaller screens **/
+@media screen and (max-width: 59.9844em) {
+  .md-nav--primary .md-nav__link[for='__toc'] ~ .md-nav {
+    overflow: scroll;
+  }
+
+  /** Styling of icons in the navigation on smaller screens **/
+  /* Adjust size of the TOC icon in left nav */
+  .md-nav--primary
+    .md-nav__link--active.md-nav__link[for='__toc']
+    .md-icon:after,
+  .md-nav--primary .md-nav__link .md-nav__icon {
+    /* Override inline styling */
+    font-size: unset;
+    width: 36px;
+    max-width: 36px;
+  }
+}
+
 /** Main content styling **/
 @media screen and (min-width: 76.25em) {
   [dir='ltr']
@@ -802,6 +918,7 @@ input.md-search__input::placeholder {
 
   .md-main__inner {
     margin-top: 2rem;
+    height: 100%;
   }
 }
 
@@ -1009,16 +1126,6 @@ details.interface > summary::before {
   width: 100%;
 }
 
-.md-typeset details.interface .tabbed-set {
-  background: var(--athens-gray);
-  border: 1px solid var(--mystic);
-  border-radius: var(--md-border-radius);
-}
-
-.md-typeset details.interface .tabbed-set .tabbed-labels {
-  color: var(--athens-gray);
-}
-
 .md-typeset
   details.interface
   .tabbed-set
@@ -1157,11 +1264,23 @@ details.interface > summary::before {
   color: var(--white);
 }
 
-.md-typeset .tabbed-block p,
-.md-typeset .tabbed-block ul,
-.md-typeset .tabbed-block ol,
-.md-typeset .tabbed-block details {
+/* Add margin to all items nested inside a tabbed element */
+.md-typeset .tabbed-block > *,
+/* Need this line to override inline styling */
+.md-typeset .tabbed-block > .tabbed-set {
   margin: 1em;
+}
+
+/* Specifically remove the margin on code inside a tabbed element */
+.md-typeset .tabbed-block .highlight:first-child {
+  margin: 0;
+}
+
+/* Adjust border of code elements nested inside tabbed elements */
+.md-typeset .tabbed-block > .highlight:first-child > pre > code,
+.md-typeset .tabbed-block > pre:first-child > code {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
 }
 
 /** Feedback widget styling **/
@@ -1201,7 +1320,24 @@ ul:not(nav ul) ul ul {
   list-style-type: square !important;
 }
 
-div.mermaid { 
-    display: flex !important; 
-    justify-content: center !important;
- }
+/* Mermaid diagram styling */
+div.mermaid {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* Card styling (as seen in Develop > Integrations section) */
+.md-typeset .grid.cards > ul > li {
+  display: flex;
+  flex-direction: column;
+}
+
+.md-typeset .grid.cards > ul > li > :last-child {
+  margin-top: auto;
+  padding-top: 1em;
+}
+
+.md-typeset .grid.cards .twemoji {
+  vertical-align: sub;
+  padding-right: 0.5em;
+}
