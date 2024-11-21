@@ -1,20 +1,3 @@
-.md-main {
-  display: flex;
-  height: 100%;
-}
-
-.md-main__inner {
-  height: unset;
-  width: 100%;
-}
-
-.index-page,
-.main-page {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .main-page .subsection-wrapper {
   margin-top: -1em;
 }
