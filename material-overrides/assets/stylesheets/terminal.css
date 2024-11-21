@@ -74,7 +74,7 @@
 
 /* For tables in terminal elements (see Zombienet page for example) */
 .md-typeset .table-termynal [data-ty] {
-  white-space-collapse: unset ;
+  white-space-collapse: unset;
 }
 
 .md-typeset .table-termynal table:not([class]) {

@@ -133,7 +133,7 @@
 }
 
 /* Code element styling */
-.md-typeset pre>code {
+.md-typeset pre > code {
   padding: 12px 18px;
 }
 
@@ -531,7 +531,11 @@ input.md-search__input::placeholder {
     color: var(--black);
   }
 
-  [dir='ltr'] .md-nav--primary[data-md-level=0] .md-nav__list:first-of-type > .md-nav__item > a.md-nav__link,
+  [dir='ltr']
+    .md-nav--primary[data-md-level='0']
+    .md-nav__list:first-of-type
+    > .md-nav__item
+    > a.md-nav__link,
   .md-nav__list .md-nav__item--section {
     margin-top: 0;
     margin-bottom: 1.25em;
@@ -542,27 +546,28 @@ input.md-search__input::placeholder {
     > .md-nav__list
     > .md-nav__item--active
     > .md-nav__link:not(.md-nav__container) {
-      margin-bottom: 1em;
-      border-bottom: 1px solid var(--mystic);
-      margin-left: -1em;
-      padding-left: 1em;
-      font-weight: 600;
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--mystic);
+    margin-left: -1em;
+    padding-left: 1em;
+    font-weight: 600;
   }
 
   /* Ensure the root-level section doesn't get indented when on it's index page */
   .md-nav--lifted
-  > .md-nav__list
-  > .md-nav__item--active
-  > .md-nav__link:not(.md-nav__container) a {
+    > .md-nav__list
+    > .md-nav__item--active
+    > .md-nav__link:not(.md-nav__container)
+    a {
     margin-left: 0;
   }
 
   /* Don't show arrow next to root-level sections */
   .md-nav--lifted
-  > .md-nav__list
-  > .md-nav__item--active
-  > .md-nav__link:not(.md-nav__container) >
-  label {
+    > .md-nav__list
+    > .md-nav__item--active
+    > .md-nav__link:not(.md-nav__container)
+    > label {
     display: none;
   }
 
@@ -607,8 +612,8 @@ input.md-search__input::placeholder {
   }
 
   [dir='ltr'] .md-nav--primary .md-nav__item > div.md-nav__link {
-    padding-top: .212em;
-    padding-bottom: .212em;
+    padding-top: 0.212em;
+    padding-bottom: 0.212em;
   }
 
   .md-nav__link {
@@ -672,7 +677,10 @@ input.md-search__input::placeholder {
   }
 
   /* Only show active section */
-  .md-sidebar--primary .md-nav__list .md-nav__item.md-nav__item--section.md-nav__item--active a.md-nav__link {
+  .md-sidebar--primary
+    .md-nav__list
+    .md-nav__item.md-nav__item--section.md-nav__item--active
+    a.md-nav__link {
     display: block;
   }
 
@@ -689,8 +697,16 @@ input.md-search__input::placeholder {
 
   /* To show only the active dropdown section on the left nav */
   .md-nav > .md-nav__list .md-nav__item--section.md-nav__item--active,
-  .root-level-sidebar .md-nav > .md-nav__list .md-nav__item--active .md-nav__item,
-  .md-sidebar--primary .root-level-sidebar .md-nav__list .md-nav__item > a.md-nav__link {
+  .root-level-sidebar
+    .md-nav
+    > .md-nav__list
+    .md-nav__item--active
+    .md-nav__item,
+  .md-sidebar--primary
+    .root-level-sidebar
+    .md-nav__list
+    .md-nav__item
+    > a.md-nav__link {
     display: block;
   }
 
@@ -857,13 +873,15 @@ input.md-search__input::placeholder {
 
 /** TOC styling on smaller screens **/
 @media screen and (max-width: 59.9844em) {
-  .md-nav--primary .md-nav__link[for=__toc]~.md-nav {
+  .md-nav--primary .md-nav__link[for='__toc'] ~ .md-nav {
     overflow: scroll;
   }
 
   /** Styling of icons in the navigation on smaller screens **/
   /* Adjust size of the TOC icon in left nav */
-  .md-nav--primary .md-nav__link--active.md-nav__link[for=__toc] .md-icon:after,
+  .md-nav--primary
+    .md-nav__link--active.md-nav__link[for='__toc']
+    .md-icon:after,
   .md-nav--primary .md-nav__link .md-nav__icon {
     /* Override inline styling */
     font-size: unset;
@@ -1257,8 +1275,8 @@ details.interface > summary::before {
 }
 
 /* Adjust border of code elements nested inside tabbed elements */
-.md-typeset .tabbed-block>.highlight:first-child>pre>code,
-.md-typeset .tabbed-block>pre:first-child>code {
+.md-typeset .tabbed-block > .highlight:first-child > pre > code,
+.md-typeset .tabbed-block > pre:first-child > code {
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
 }
@@ -1307,17 +1325,17 @@ div.mermaid {
 }
 
 /* Card styling (as seen in Develop > Integrations section) */
-.md-typeset .grid.cards>ul>li {
+.md-typeset .grid.cards > ul > li {
   display: flex;
   flex-direction: column;
 }
 
-.md-typeset .grid.cards>ul>li>:last-child {
+.md-typeset .grid.cards > ul > li > :last-child {
   margin-top: auto;
   padding-top: 1em;
 }
 
 .md-typeset .grid.cards .twemoji {
   vertical-align: sub;
-  padding-right: .5em;
+  padding-right: 0.5em;
 }

@@ -104,7 +104,6 @@
   min-height: 35em;
 }
 
-
 .feature-intro {
   margin: auto;
   max-width: 880px;
@@ -179,7 +178,6 @@
 .feature a svg {
   margin-left: 0.3em;
 }
-
 
 .cta-section {
   padding: var(--min-padding);
