@@ -1,8 +1,8 @@
 site_name: Polkadot Developer Docs
-site_url: #https://docs.polkadot.com/
+site_url: https://docs.polkadot.com/
 home_url: https://polkadot.com/
 home_name: Polkadot
-site_dir: #
+site_dir: /var/www/polkadot-docs-static
 docs_dir: polkadot-docs
 copyright: © 2024
 extra_javascript:
