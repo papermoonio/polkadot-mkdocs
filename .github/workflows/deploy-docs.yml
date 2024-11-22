@@ -42,5 +42,9 @@ jobs:
           python -m pip install --upgrade pip setuptools 'cython<3.0.0' wheel
           # install dependencies quietly
           python -m pip install -r requirements.txt
+      - name: Update site_url in mkdocs.yml
+        run: |
+          sed -i 's|site_url: .*|site_url: #|' ./mkdocs.yml
+          sed -i 's|site_dir: .*|site_dir: #|' ./mkdocs.yml
       - name: Deploy Docs
         run: mkdocs gh-deploy --force --site-dir site
