@@ -42,5 +42,9 @@ jobs:
           python -m pip install --upgrade pip setuptools 'cython<3.0.0' wheel
           # install dependencies quietly
           python -m pip install -r requirements.txt
+      - name: Update image paths in Markdown files
+        run: |
+          # Replace old image paths with new paths in Markdown files
+          find polkadot-docs -type f -name "*.md" -exec sed -i 's|/images/|/polkadot-mkdocs/images/|g' {} \;
       - name: Deploy Docs
         run: mkdocs gh-deploy --force --clean --site-dir ./site
