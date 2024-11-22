@@ -41,3 +41,8 @@
     max-width: 100%;
   }
 }
+
+/* Hide TOC on index pages */
+.md-nav.md-nav--secondary {
+  display: none;
+}
