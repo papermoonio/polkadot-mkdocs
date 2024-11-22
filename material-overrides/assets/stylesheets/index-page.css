@@ -7,25 +7,25 @@
 .subsection-wrapper .card {
   border: 1px solid var(--mystic);
   border-radius: 16px;
-  margin: 1em 0;
   text-decoration: none;
   align-content: start;
   flex: 1 0 48%;
+  max-width: 48%;
 }
 
-.md-typeset .subsection-wrapper a.card:hover {
+.md-typeset .subsection-wrapper .card a {
   text-decoration: none;
   cursor: pointer;
 }
 
-.md-typeset .subsection-wrapper a.card:hover .title {
+.md-typeset .subsection-wrapper .card a:hover .title {
   color: var(--pink);
 }
 
 .subsection-wrapper .title {
   margin: 0;
   font-size: 1.15em;
-  padding: 1.5em 1.5em .5em 1.2em;
+  padding: 1.5em 1.5em 0.5em 1.2em;
 }
 
 .subsection-wrapper .description {
@@ -33,4 +33,11 @@
   margin: 0;
   font-size: 0.9em;
   padding: 0 1.5em 1.8em 1.5em;
+}
+
+@media screen and (max-width: 36em) {
+  .subsection-wrapper .card {
+    flex: 1 0 100%;
+    max-width: 100%;
+  }
 }
