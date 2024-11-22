@@ -45,6 +45,6 @@ jobs:
       - name: Update image paths in Markdown files
         run: |
           # Replace old image paths with new paths in Markdown files
-          find polkadot-docs -type f -name "*.md" -exec sed -i 's|/images/|/polkadot-mkdocs/images/|g' {} \;
+          find polkadot-docs -type f -name "*.md" -exec sed -i 's|(/images/|(/polkadot-mkdocs/images/|g' {} \;
       - name: Deploy Docs
         run: mkdocs gh-deploy --force --clean --site-dir ./site
