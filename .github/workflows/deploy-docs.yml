@@ -43,4 +43,4 @@ jobs:
           # install dependencies quietly
           python -m pip install -r requirements.txt
       - name: Deploy Docs
-        run: mkdocs gh-deploy --force --clean --site-dir ./
+        run: mkdocs gh-deploy --force --clean --site-dir ./polkadot-mkdocs
