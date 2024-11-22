@@ -1,15 +1,31 @@
-.main-page .subsection-wrapper {
-  margin-top: -1em;
+.subsection-wrapper {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
 }
 
-.subsection-wrapper a {
+.subsection-wrapper .card {
+  border: 1px solid var(--mystic);
+  border-radius: 16px;
   text-decoration: none;
+  align-content: start;
+  flex: 1 0 48%;
+  max-width: 48%;
+}
+
+.md-typeset .subsection-wrapper .card a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.md-typeset .subsection-wrapper .card a:hover .title {
+  color: var(--pink);
 }
 
 .subsection-wrapper .title {
   margin: 0;
-  font-size: 1.2em;
-  padding: 1.5em 1.5em 0 1.2em;
+  font-size: 1.15em;
+  padding: 1.5em 1.5em 0.5em 1.2em;
 }
 
 .subsection-wrapper .description {
@@ -19,17 +35,14 @@
   padding: 0 1.5em 1.8em 1.5em;
 }
 
-.subsection-wrapper .card {
-  border: 1px solid var(--mystic);
-  border-radius: var(--md-border-radius);
-  margin: 1em 0;
-  text-decoration: none;
+@media screen and (max-width: 36em) {
+  .subsection-wrapper .card {
+    flex: 1 0 100%;
+    max-width: 100%;
+  }
 }
 
-.md-typeset .subsection-wrapper a:hover {
-  text-decoration: none;
-}
-
-.subsection-wrapper .card:last-child {
-  margin-bottom: 4em;
+/* Hide TOC on index pages */
+.md-nav.md-nav--secondary {
+  display: none;
 }

@@ -16,7 +16,6 @@
       {% else %}
         <!-- render subsection content -->
         {% if nav_item.is_page %}
-          <h1 class="subsection-title">{{ nav_item.parent.title }}</h1>
           <div class="subsection-wrapper">
           {% set description = "" %}
           {% for nav_item in element[1:] %}
@@ -98,13 +97,25 @@
     {% endif %}
 {% endmacro %}
 
-<div class="subsection-page">
-  {% if nav|length>1 %}
-    {% for nav_item in nav %}
-      {% if nav_item.is_section and nav_item.active %}
-        {{ find_active_page(nav_item.children, nav_item) }}
+{% set insert_marker = ':::INSERT_IN_THIS_SECTION:::' %}
+{% if insert_marker in page.content %}
+  {% set parts = page.content.split(insert_marker) %}
+  {% set dynamic_html %}
+    <div class="subsection-page">
+      {% if nav|length > 1 %}
+        {% for nav_item in nav %}
+          {% if nav_item.is_section and nav_item.active %}
+            {{ find_active_page(nav_item.children, nav_item) }}
+          {% endif %}
+        {% endfor %}
       {% endif %}
-    {% endfor %}
-  {% endif %}
-</div>
+    </div>
+  {% endset %}
+  {% set modified_content = parts[0] | safe + (dynamic_html | safe) + parts[1] | safe %}
+  {{ modified_content | safe }}
+{% else %}
+  {{ page.content | safe }}
+{% endif %}
+
+
 {% endblock %}
