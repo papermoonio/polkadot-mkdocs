@@ -43,4 +43,4 @@ jobs:
           # install dependencies quietly
           python -m pip install -r requirements.txt
       - name: Deploy Docs
-        run: mkdocs gh-deploy --force --site-dir ./polkadot-mkdocs --no-directory-urls
+        run: mkdocs gh-deploy --force --site-dir ./polkadot-mkdocs --site-url https://albertov19.github.io/polkadot-mkdocs/
