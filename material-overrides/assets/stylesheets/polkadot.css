@@ -261,14 +261,6 @@
   }
 }
 
-@media screen and (max-width: 48em) {
-  .md-header {
-    padding: 0;
-    display: flex;
-    justify-content: center;
-  }
-}
-
 /* Dropdown styling */
 .md-header__inner,
 .md-tabs {
@@ -958,17 +950,28 @@ input.md-search__input::placeholder {
   }
 }
 
+@media screen and (max-width: 76.2344em) {
+  .md-container {
+    position: unset;
+  }
+}
+
 @media screen and (max-width: 48em) {
   .md-main {
     padding: 0;
   }
-
+  
   .md-header {
     padding: 0;
     display: flex;
     justify-content: center;
   }
+
+  .md-header__inner {
+    margin-left: auto;
+  }
 }
+
 
 /** Footer styling **/
 .md-grid.md-footer-meta__inner {
