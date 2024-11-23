@@ -1355,3 +1355,17 @@ div.mermaid {
   vertical-align: sub;
   padding-right: 0.5em;
 }
+
+/** Kapa styling **/
+.mantine-r39cu6 {
+  height: 3rem;
+}
+
+.mantine-120ms1q {
+  font-size: 16px;
+}
+
+.mantine-1p3no9p {
+  height: .9rem !important;
+  width: .9rem !important;
+}
