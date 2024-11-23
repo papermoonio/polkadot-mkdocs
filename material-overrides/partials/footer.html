@@ -1,6 +1,6 @@
 {#-
-  This file was automatically generated - do not edit
--#}
+    This file was automatically generated - do not edit
+  -#}
   <footer class="md-footer">
     {% if "navigation.footer" in features %}
       {% if page.previous_page or page.next_page %}
@@ -37,8 +37,8 @@
                 </div>
               </div>
               <div class="md-footer__button md-icon">
-                {% set icon = config.theme.icon.next or "material/arrow-right" %} {%
-                include ".icons/" ~ icon ~ ".svg" %}
+                {% set icon = config.theme.icon.next or "material/arrow-right" %}
+                {% include ".icons/" ~ icon ~ ".svg" %}
               </div>
             </a>
           {% endif %}
@@ -57,7 +57,7 @@
           <a href="https://polkadot.com/cookie-policy">Cookie Policy</a>
           <a href="https://github.com/polkadot-developers/polkadot-docs?tab=readme-ov-file#disclaimer">Disclaimers</a>
         </div>
-        {% if config.extra.social %} 
+        {% if config.extra.social %}
           {% include "partials/social.html" %}
         {% endif %}
       </div>
