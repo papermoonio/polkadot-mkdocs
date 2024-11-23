@@ -98,7 +98,8 @@
 
 .md-container {
   padding: 0 var(--page-padding);
-  padding-top: calc(var(--header-height) + var(--dropdown-gap));
+  top: 4.8rem;
+  position: sticky;
 }
 
 /* Font styling */
@@ -155,7 +156,7 @@
   width: fit-content;
   margin-left: 0;
   border-radius: 48px;
-  position: fixed;
+  position: relative;
   top: 16px;
   transition: transform 0.3s ease;
 }
@@ -257,14 +258,6 @@
 
   .md-header__buttons {
     display: none;
-  }
-}
-
-@media screen and (max-width: 48em) {
-  .md-header {
-    padding: 0;
-    display: flex;
-    justify-content: center;
   }
 }
 
@@ -532,7 +525,7 @@ input.md-search__input::placeholder {
   }
 
   [dir='ltr']
-    .md-nav[data-md-level='0']:not() 
+    .md-nav[data-md-level='0']:not()
     .md-nav__list:first-of-type
     > .md-nav__item
     > a.md-nav__link,
@@ -656,13 +649,11 @@ input.md-search__input::placeholder {
 
   /* Ensure left navigation remains in place */
   .md-header--lifted ~ .md-container .md-sidebar {
-    top: 4.8rem !important;
+    top: 3.8rem !important;
   }
 
-  .md-sidebar,
   .md-sidebar__scrollwrap {
-    /* Using important to override inline styling */
-    height: 100% !important;
+    padding-bottom: 1.5em;
   }
 
   /* A root-level section (i.e., Develop) can have both sections (i.e., Toolkit) and 
@@ -711,8 +702,16 @@ input.md-search__input::placeholder {
   }
 
   /* Show the entire left navigation */
-  .root-subdirectory-page > .md-sidebar--primary .md-nav > .md-nav__list .md-nav__item--section,
-  .root-subdirectory-page > .md-sidebar--primary .md-nav__list .md-nav__item > a.md-nav__link {
+  .root-subdirectory-page +
+    .md-sidebar--primary
+    .md-nav
+    > .md-nav__list
+    .md-nav__item--section,
+  .root-subdirectory-page +
+    .md-sidebar--primary
+    .md-nav__list
+    .md-nav__item
+    > a.md-nav__link {
     display: block;
   }
 }
@@ -833,6 +832,10 @@ input.md-search__input::placeholder {
     border-left: 1px solid var(--mystic);
   }
 
+  .md-sidebar--secondary {
+    width: 10rem;
+  }
+
   .md-sidebar--secondary .md-sidebar__scrollwrap {
     margin: 0;
   }
@@ -902,18 +905,14 @@ input.md-search__input::placeholder {
     .md-sidebar--primary:not([hidden])
     ~ .md-content
     > .md-content__inner {
-    margin-right: 3rem;
+    margin-right: 1rem;
   }
 
   [dir='ltr']
     .md-sidebar--primary:not([hidden])
     ~ .md-content
     > .md-content__inner {
-    margin-left: 3rem;
-  }
-
-  .md-content__inner.md-typeset {
-    padding-right: 5em;
+    margin-left: 1rem;
   }
 
   .md-main__inner {
@@ -922,16 +921,19 @@ input.md-search__input::placeholder {
   }
 }
 
-@media screen and (max-width: 106.249em) {
+@media screen and (min-width: 96.25em) {
+  [dir='rtl']
+    .md-sidebar--primary:not([hidden])
+    ~ .md-content
+    > .md-content__inner {
+    margin-right: 2rem;
+  }
+
   [dir='ltr']
     .md-sidebar--primary:not([hidden])
     ~ .md-content
     > .md-content__inner {
     margin-left: 2rem;
-  }
-
-  .md-content__inner.md-typeset {
-    padding-right: 1em;
   }
 }
 
@@ -948,17 +950,28 @@ input.md-search__input::placeholder {
   }
 }
 
+@media screen and (max-width: 76.2344em) {
+  .md-container {
+    position: unset;
+  }
+}
+
 @media screen and (max-width: 48em) {
   .md-main {
     padding: 0;
   }
-
+  
   .md-header {
     padding: 0;
     display: flex;
     justify-content: center;
   }
+
+  .md-header__inner {
+    margin-left: auto;
+  }
 }
+
 
 /** Footer styling **/
 .md-grid.md-footer-meta__inner {
@@ -1198,6 +1211,12 @@ details.interface > summary::before {
   text-align: center;
 }
 
+/* Make sure the clipboard icon isn't on top of the code */
+.md-typeset pre > code {
+  white-space: break-spaces;
+  padding-right: 3em;
+}
+
 /** Button styling **/
 .md-typeset .md-button {
   background-color: var(--black);
@@ -1381,4 +1400,18 @@ div.mermaid {
 .md-typeset .grid.cards .twemoji {
   vertical-align: sub;
   padding-right: 0.5em;
+}
+
+/** Kapa styling **/
+.mantine-r39cu6 {
+  height: 3rem;
+}
+
+.mantine-120ms1q {
+  font-size: 16px;
+}
+
+.mantine-1p3no9p {
+  height: 0.9rem !important;
+  width: 0.9rem !important;
 }
