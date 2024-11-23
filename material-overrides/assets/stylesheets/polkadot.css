@@ -978,6 +978,41 @@ input.md-search__input::placeholder {
   gap: 1em;
 }
 
+/* Policy and disclaimer links */
+.policy-links {
+  text-align: center;
+  font-size: 12px;
+}
+
+html .md-footer-meta.md-typeset .policy-links a {
+  text-decoration: none;
+  min-width: 100px;
+  height: auto;
+}
+
+html .md-footer-meta.md-typeset .policy-links a:hover {
+  background-color: unset;
+  color: var(--pink);
+  transition: none;
+}
+
+@media screen and (max-width: 48em) {
+  .md-grid.md-footer-meta__inner {
+    padding: 0.75rem 0;
+  }
+
+  .md-grid.md-footer-meta__inner {
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .md-footer-meta__inner.md-grid > .policy-links {
+    flex-wrap: wrap;
+    padding: 1em 0;
+    justify-content: center;
+  }
+}
+
 /* Copyright styling */
 .md-copyright {
   margin: 0;
@@ -1038,6 +1073,12 @@ html .md-footer-meta.md-typeset a:hover {
 
 .md-footer__link {
   align-items: center;
+}
+
+/* Back to top button */
+[dir=ltr] .md-top {
+  left: 50%;
+  margin-left: 0
 }
 
 /** API styling **/
