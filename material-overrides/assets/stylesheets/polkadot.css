@@ -98,7 +98,8 @@
 
 .md-container {
   padding: 0 var(--page-padding);
-  padding-top: calc(var(--header-height) + var(--dropdown-gap));
+  top: 4.8rem;
+  position: sticky;
 }
 
 /* Font styling */
@@ -155,7 +156,7 @@
   width: fit-content;
   margin-left: 0;
   border-radius: 48px;
-  position: fixed;
+  position: relative;
   top: 16px;
   transition: transform 0.3s ease;
 }
@@ -656,13 +657,11 @@ input.md-search__input::placeholder {
 
   /* Ensure left navigation remains in place */
   .md-header--lifted ~ .md-container .md-sidebar {
-    top: 4.8rem !important;
+    top: 3.8rem !important;
   }
 
-  .md-sidebar,
   .md-sidebar__scrollwrap {
-    /* Using important to override inline styling */
-    height: 100% !important;
+    padding-bottom: 1.5em;
   }
 
   /* A root-level section (i.e., Develop) can have both sections (i.e., Toolkit) and 
@@ -711,9 +710,18 @@ input.md-search__input::placeholder {
   }
 
   /* Show the entire left navigation */
-  .root-subdirectory-page > .md-sidebar--primary .md-nav > .md-nav__list .md-nav__item--section,
-  .root-subdirectory-page > .md-sidebar--primary .md-nav__list .md-nav__item > a.md-nav__link {
+  .root-subdirectory-page .md-sidebar--primary .md-nav > .md-nav__list .md-nav__item--section,
+  .root-subdirectory-page .md-sidebar--primary .md-nav__list .md-nav__item > a.md-nav__link {
     display: block;
+  }
+
+  .root-subdirectory-page {
+    display: contents;
+  }
+  
+  .root-subdirectory-page + .md-content .md-content__inner.md-typeset {
+    margin-left: 3rem;
+    margin-right: 3rem;
   }
 }
 
@@ -1155,6 +1163,12 @@ details.interface > summary::before {
 /* "Copied to clipboard" pop-up */
 .md-dialog {
   text-align: center;
+}
+
+/* Make sure the clipboard icon isn't on top of the code */
+.md-typeset pre > code {
+  white-space: break-spaces;
+  padding-right: 3em;
 }
 
 /** Button styling **/
