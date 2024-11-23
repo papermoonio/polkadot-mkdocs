@@ -533,7 +533,7 @@ input.md-search__input::placeholder {
   }
 
   [dir='ltr']
-    .md-nav[data-md-level='0']:not() 
+    .md-nav[data-md-level='0']:not()
     .md-nav__list:first-of-type
     > .md-nav__item
     > a.md-nav__link,
@@ -710,18 +710,17 @@ input.md-search__input::placeholder {
   }
 
   /* Show the entire left navigation */
-  .root-subdirectory-page .md-sidebar--primary .md-nav > .md-nav__list .md-nav__item--section,
-  .root-subdirectory-page .md-sidebar--primary .md-nav__list .md-nav__item > a.md-nav__link {
+  .root-subdirectory-page +
+    .md-sidebar--primary
+    .md-nav
+    > .md-nav__list
+    .md-nav__item--section,
+  .root-subdirectory-page +
+    .md-sidebar--primary
+    .md-nav__list
+    .md-nav__item
+    > a.md-nav__link {
     display: block;
-  }
-
-  .root-subdirectory-page {
-    display: contents;
-  }
-  
-  .root-subdirectory-page + .md-content .md-content__inner.md-typeset {
-    margin-left: 3rem;
-    margin-right: 3rem;
   }
 }
 
@@ -841,6 +840,10 @@ input.md-search__input::placeholder {
     border-left: 1px solid var(--mystic);
   }
 
+  .md-sidebar--secondary {
+    width: 10rem;
+  }
+
   .md-sidebar--secondary .md-sidebar__scrollwrap {
     margin: 0;
   }
@@ -910,18 +913,14 @@ input.md-search__input::placeholder {
     .md-sidebar--primary:not([hidden])
     ~ .md-content
     > .md-content__inner {
-    margin-right: 3rem;
+    margin-right: 1rem;
   }
 
   [dir='ltr']
     .md-sidebar--primary:not([hidden])
     ~ .md-content
     > .md-content__inner {
-    margin-left: 3rem;
-  }
-
-  .md-content__inner.md-typeset {
-    padding-right: 5em;
+    margin-left: 1rem;
   }
 
   .md-main__inner {
@@ -930,16 +929,19 @@ input.md-search__input::placeholder {
   }
 }
 
-@media screen and (max-width: 106.249em) {
+@media screen and (min-width: 96.25em) {
+  [dir='rtl']
+    .md-sidebar--primary:not([hidden])
+    ~ .md-content
+    > .md-content__inner {
+    margin-right: 2rem;
+  }
+
   [dir='ltr']
     .md-sidebar--primary:not([hidden])
     ~ .md-content
     > .md-content__inner {
     margin-left: 2rem;
-  }
-
-  .md-content__inner.md-typeset {
-    padding-right: 1em;
   }
 }
 
@@ -1366,6 +1368,6 @@ div.mermaid {
 }
 
 .mantine-1p3no9p {
-  height: .9rem !important;
-  width: .9rem !important;
+  height: 0.9rem !important;
+  width: 0.9rem !important;
 }
