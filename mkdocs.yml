@@ -10,6 +10,7 @@ extra_javascript:
   - js/header-scroll.js
   - js/search-bar-results.js
   - js/root-level-sections.js
+  - js/fixCreatedDate.js
 # Extra CSS files
 extra_css:
   - assets/stylesheets/extra.css
