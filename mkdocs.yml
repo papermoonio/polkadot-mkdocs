@@ -2,6 +2,8 @@ site_name: Polkadot Developer Docs
 site_url: https://docs.polkadot.com/
 home_url: https://polkadot.com/
 home_name: Polkadot
+repo_url: https://github.com/polkadot-developers/polkadot-docs
+edit_uri: edit/master
 site_dir: /var/www/polkadot-docs-static
 docs_dir: polkadot-docs
 copyright: © 2024
@@ -35,6 +37,8 @@ theme:
     - navigation.sections # Render top-level sections as groups in the sidebar
     - navigation.indexes # Index pages
     - navigation.top # Show the back to top button since we don't keep top nav sticky
+    - content.action.edit
+    - content.action.view
 markdown_extensions:
   - abbr
   - admonition
@@ -77,6 +81,8 @@ plugins:
   - macros:
       include_yaml:
         - polkadot-docs/variables.yml
+  - git-revision-date-localized:
+      type: date
 extra:
   generator: False
   social:
