@@ -1,0 +1,48 @@
+.subsection-wrapper {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.subsection-wrapper .card {
+  border: 1px solid var(--mystic);
+  border-radius: 16px;
+  text-decoration: none;
+  align-content: start;
+  flex: 1 0 48%;
+  max-width: 48%;
+}
+
+.md-typeset .subsection-wrapper .card a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.md-typeset .subsection-wrapper .card a:hover .title {
+  color: var(--pink);
+}
+
+.subsection-wrapper .title {
+  margin: 0;
+  font-size: 1.15em;
+  padding: 1.5em 1.5em 0.5em 1.2em;
+}
+
+.subsection-wrapper .description {
+  color: var(--md-default-fg-color);
+  margin: 0;
+  font-size: 0.9em;
+  padding: 0 1.5em 1.8em 1.5em;
+}
+
+@media screen and (max-width: 36em) {
+  .subsection-wrapper .card {
+    flex: 1 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* Hide TOC on index pages */
+.md-nav.md-nav--secondary {
+  display: none;
+}
