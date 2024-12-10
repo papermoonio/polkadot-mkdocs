@@ -1369,6 +1369,10 @@ details.interface > summary::before {
   color: var(--pink);
 }
 
+.md-feedback__note {
+  font-size: 14px;
+}
+
 /* Styles to override unordered list defaults */
 /* Unordered list <ul> symbols:
  * - level 2 is hollow circle
