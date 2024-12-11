@@ -5,8 +5,7 @@
 
 .home-container {
   background-image: url('../images/gradient.png');
-  background-size: 100% 100%; /* Scales the image to cover the entire element */
-  background-position: center; /* Centers the image */
+  background-size: 100%;
   background-repeat: no-repeat; /* Ensures the image doesn't repeat */
   margin-top: calc(
     -1 * var(--adjust-header-height)
@@ -58,12 +57,12 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 4%;
-  padding: var(--adjust-header-height) var(--page-padding);
+  padding: 5em var(--page-padding);
   overflow: hidden;
 }
 
 .hero-content {
-  max-width: 43%;
+  max-width: 44%;
 }
 
 .md-typeset iframe.hero-visual {
@@ -350,4 +349,62 @@
   .md-typeset .final-cta .md-button {
     margin-top: unset;
   }
+}
+
+
+/** New CSS */
+.tutorial-cards {
+  display: flex;
+  gap: 3em;
+  width: 44%;
+  align-items: center;
+}
+
+.tutorial-cards > .column {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.md-typeset a.tutorial-card {
+  background-color: var(--white);
+  border-radius: 16px;
+  border: 1px solid var(--mystic);
+  padding: 1em;
+  display: flex;
+  gap: 24px;
+  text-decoration: none;
+}
+
+.md-typeset a.tutorial-card .md-icon svg {
+  width: 32px;
+  height: 32px;
+  max-width: unset;
+  fill: var(--black);
+}
+
+.tutorial-card .column:nth-child(2) {
+  display: flex;
+  align-items: center;
+}
+
+.tutorial-card h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.tutorial-card p {
+  font-size: 16px;
+}
+
+.cta-section {
+  display: flex;
+}
+
+.final-cta {
+  width: 45%;
+}
+
+.final-cta-content {
+  width: unset;
 }
