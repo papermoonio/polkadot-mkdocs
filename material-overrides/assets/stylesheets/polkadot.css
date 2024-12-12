@@ -1418,3 +1418,26 @@ div.mermaid {
   height: 0.9rem !important;
   width: 0.9rem !important;
 }
+
+/** Where to Go Next Badge styling */
+.md-typeset span.badge {
+  border-radius: 0.5em;
+  font-size: .8em;
+  padding: 0.2em .5em;
+  margin-right: .5em;
+}
+
+.md-typeset span.badge.tutorial {
+  background-color: var(--electric-violet);
+  color: var(--white);
+}
+
+.md-typeset span.badge.guide {
+  background-color: var(--chartreuse);
+  color: var(--black);
+}
+
+.md-typeset span.badge.learn {
+  background-color: var(--aqua);
+  color: var(--black);
+}
