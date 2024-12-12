@@ -85,8 +85,8 @@ extra:
       We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation.
       By consenting to the use of cookies, you help us improve the site.
     cookies:
-      analytics: Custom name for analytics cookies
-      essential: Essential cookies for site functionality
+      analytics: Google Analythics
+      custom: Essential cookies
     actions:
       - accept
       - manage
