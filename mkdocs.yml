@@ -6,6 +6,7 @@ site_dir: /var/www/polkadot-docs-static
 docs_dir: polkadot-docs
 copyright: © 2024
 extra_javascript:
+  - scripts/cookies-consent.js
   - js/header-scroll.js
   - js/search-bar-results.js
   - js/root-level-sections.js
@@ -78,6 +79,17 @@ plugins:
       include_yaml:
         - polkadot-docs/variables.yml
 extra:
+  consent:
+    title: Cookie Consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation.
+      By consenting to the use of cookies, you help us improve the site.
+    cookies:
+      analytics: Custom name for analytics cookies
+      essential: Essential cookies for site functionality
+    actions:
+      - accept
+      - manage
   generator: False
   social:
     - icon: fontawesome/brands/discord
