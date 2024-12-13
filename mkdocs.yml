@@ -6,7 +6,6 @@ site_dir: /var/www/polkadot-docs-static
 docs_dir: polkadot-docs
 copyright: © 2024
 extra_javascript:
-  - scripts/cookies-consent.js
   - js/header-scroll.js
   - js/search-bar-results.js
   - js/root-level-sections.js
