@@ -2,9 +2,13 @@ site_name: Polkadot Developer Docs
 site_url: https://docs.polkadot.com/
 home_url: https://polkadot.com/
 home_name: Polkadot
-site_dir: /var/www/polkadot-docs-static
+site_dir: build
 docs_dir: polkadot-docs
 copyright: © 2024
+extra_templates:
+ - ../material-overrides/policies/cookie-policy.html
+ - ../material-overrides/policies/privacy-policy.html
+ - ../material-overrides/policies/terms-of-use.html
 extra_javascript:
   - js/header-scroll.js
   - js/search-bar-results.js
