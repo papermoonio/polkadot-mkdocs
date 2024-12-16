@@ -10,17 +10,17 @@ Cookies are small text files that are stored on your computer or other device, w
 
 ## Types of Cookies
 
-**Session Cookies -** Session cookies are stored temporarily on the memory of your computer or other devices while visiting the Website and are erased once you close your browser.
+**Session Cookies** - Session cookies are stored temporarily on the memory of your computer or other devices while visiting the Website and are erased once you close your browser.
 
-**Persistent Cookies -** Persistent cookies are stored for a predetermined amount of time, which varies from cookie to cookie. Persistent cookies are stored longer than the session cookies but ultimately expire after some predetermined time. They help us understand whether or not you have previously visited the Website.
+**Persistent Cookies** - Persistent cookies are stored for a predetermined amount of time, which varies from cookie to cookie. Persistent cookies are stored longer than the session cookies but ultimately expire after some predetermined time. They help us understand whether or not you have previously visited the Website.
 
-**First-Party Cookies -** set directly by the Website or its subdomains. 
+**First-Party Cookies** - set directly by the Website or its subdomains.
 
-**Third-Party Cookies -** set by external websites and other third parties not managed by us, such as other processors (as described in the Privacy Policy) or other technology partners.
+**Third-Party Cookies** - set by external websites and other third parties not managed by us, such as other processors (as described in the Privacy Policy) or other technology partners.
 
-## How do we use Cookies?
+## How Do We Use Cookies?
 
-!!!note 
+!!!note
     The following list is merely for illustrative purposes and is not intended to be exhaustive.
 
 - Authenticating you as a user on the Website, keeping your login session active, and remembering how you prefer to store your login information on the Website or otherwise in connection with your use of the Services.
@@ -31,14 +31,13 @@ Cookies are small text files that are stored on your computer or other device, w
 - Improve security by recognizing suspicious activity or repeated failed login attempts.
 - Analyze aggregated data to optimize user experience and site performance.
 
-## What Cookies do we use?
+## What Cookies Do We Use?
 
-**Essential cookies -** We may store cookies on your device if necessary to enable us to offer and provide Services, including intended user functionality and use of the Website. They are also required for you to navigate through the Website and benefit from all the available features. These cookies cannot be switched off and are set for fundamental options on the Website, such as logging in and forms, as well as set preferences, such as timezone or languages (as noted above).
+**Essential cookies** - We may store cookies on your device if necessary to enable us to offer and provide Services, including intended user functionality and use of the Website. They are also required for you to navigate through the Website and benefit from all the available features. These cookies cannot be switched off and are set for fundamental options on the Website, such as logging in and forms, as well as set preferences, such as timezone or languages (as noted above).
 
-**Analytical cookies -** These cookies help us learn how you interact with the Website and its features, which parts you use the most, and how you otherwise engage with the Services. This helps us track various usage statistics and better understand how much time you spend on the Website and otherwise interacting with the Services. These statistics are intended to help us to improve the Website and the Services related thereto.
+**Analytical cookies** - These cookies help us learn how you interact with the Website and its features, which parts you use the most, and how you otherwise engage with the Services. This helps us track various usage statistics and better understand how much time you spend on the Website and otherwise interacting with the Services. These statistics are intended to help us to improve the Website and the Services related thereto.
 
-**Functional Cookies -** These cookies help us provide you with better functionality of the Website and otherwise in connection with the Services, including a more personalized experience. Third-party providers can also place these cookies you expressly consent to when you accept this Cookie Policy and the Privacy Policy by accessing the Website and/or otherwise using the Services provided in connection therewith. You may block these cookies, but if you do, parts of the Website do not function the way we intended.
-
+**Functional Cookies** - These cookies help us provide you with better functionality of the Website and otherwise in connection with the Services, including a more personalized experience. Third-party providers can also place these cookies you expressly consent to when you accept this Cookie Policy and the Privacy Policy by accessing the Website and/or otherwise using the Services provided in connection therewith. You may block these cookies, but if you do, parts of the Website do not function the way we intended.
 
 ## How to Block Cookies
 
@@ -54,21 +53,17 @@ Please see the links below for guidance on how to modify your web browser’s se
 
 Please note that once you correctly block cookies on your browser, parts of the Website may become unavailable or otherwise not function properly. Refer to your specific device's user guide for detailed instructions on managing cookies for mobile devices.
 
-
 ## Cookie List
 
 Essential Cookies:
 
 
-
 Analytical Cookies:
 
 
-
-## Changes to this Policy
+## Changes to This Policy
 
 We may update this Cookie Policy occasionally to reflect changes in legal requirements or how we use cookies. You are encouraged to review this policy periodically to stay informed of any updates. For more information on cookies and how they work, visit [www.cookiesandyou.com](www.cookiesandyou.com){target=\_blank}.
-
 
 ## Contact Us
 
@@ -77,4 +72,3 @@ If you have any queries regarding this cookie policy, please contact us at conta
 We are happy to assist with any concerns or further clarifications.
 
 _Last updated: December 18, 2024_
-
