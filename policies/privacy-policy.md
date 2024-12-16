@@ -65,7 +65,8 @@ To exercise such rights, the User may contact the Company at contact@papermoon.i
 Information can be automatically stored on the User's computer or other device when the User visits the Website. This is done in the form of so-called "cookies" or a similar file, which help the Company in various ways, for example, to get to know the preferences of visitors and Users of the Website and to improve the Website and Services. Both permanent and functional/temporary session cookies may be used: permanent cookies remain on your computer after you close your session until you delete them. In contrast, session cookies expire when you close your browser. And for more information about “cookies” generally, please visit [https://allaboutcookies.org/](https://allaboutcookies.org/){target=\_blank}.
 
 
-10. Other data privacy concerns
+## Other Data Privacy Concerns
+
 Although the transmission of information over wireless and wired networks is not 100% secure, and therefore, the security of your information cannot be guaranteed, we employ generally accepted industry standards to protect such information through appropriate technical and organizational security measures to protect the personal data provided by Users.
 
 
@@ -77,8 +78,7 @@ The User may interact with the Company through social media. The information col
 
 The Company may modify this Privacy Policy from time to time, and we therefore recommend that the User consults it each time he/she accesses the Website. In particular, concerning the Services and to the extent that new versions of the same are offered, this Policy may change, in which case the Company will predispose a new Privacy Policy that complies with the GDPR for acceptance by the User.
 
-
-Last updated: December 18, 2024
+_Last updated: December 18, 2024_
 
 
 
