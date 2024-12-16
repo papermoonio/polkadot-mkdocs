@@ -6,7 +6,7 @@
 .home-container {
   background-image: url('../images/gradient.png');
   background-size: 100%;
-  background-repeat: no-repeat; /* Ensures the image doesn't repeat */
+  background-repeat: no-repeat;
   margin-top: calc(
     -1 * var(--adjust-header-height)
   ); /* Use a negative value to push the gradient to cover behind the header */
@@ -15,6 +15,7 @@
   gap: var(--adjust-header-height);
 }
 
+.md-main,
 .md-container {
   padding: 0;
 }
@@ -26,10 +27,6 @@
   width: 100%;
   margin: auto;
   padding: 0 var(--page-padding);
-}
-
-.md-main {
-  padding: 0;
 }
 
 .md-header {
@@ -52,22 +49,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   padding-top: var(--adjust-header-height);
   overflow: hidden;
 }
 
 .hero-content {
   max-width: 44%;
-}
-
-.md-typeset iframe.hero-visual {
-  max-width: 53%;
-}
-
-.md-typeset iframe.hero-visual {
-  transform: scale(1.5);
-  transform-origin: center center;
 }
 
 .md-typeset .hero-content h1 {
@@ -96,8 +83,72 @@
   height: 100%;
 }
 
-.md-typeset iframe.hero-visual {
-  min-height: 35em;
+.tutorial-cards {  
+  width: 44%;
+  display: grid;
+  gap: 1.5em;
+  max-width: 800px;
+  grid-template-rows: auto;
+  grid-auto-rows: minmax(200px, auto);
+  grid-template-columns: 1fr 1fr;
+}
+
+.md-typeset a.tutorial-card {
+  background-color: var(--white);
+  border-radius: 16px;
+  border: 1px solid var(--mystic);
+  padding: 1em;
+  text-decoration: none;
+  position: relative;
+  min-height: 200px;
+}
+
+.md-typeset a.tutorial-card:first-child {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.md-typeset a.tutorial-card:nth-child(2) {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  align-self: center;
+  margin-bottom: 1.5em;
+}
+
+.md-typeset a.tutorial-card:nth-child(3) {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.md-typeset a.tutorial-card:hover h3,
+.md-typeset a.feature:hover h3 {
+  color: var(--pink);
+}
+
+.md-typeset a.tutorial-card .md-icon svg {
+  width: 32px;
+  height: 32px;
+  max-width: unset;
+  fill: var(--black);
+}
+
+.tutorial-card .column:nth-child(2) {
+  display: flex;
+  align-items: center;
+}
+
+.tutorial-card h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.tutorial-card .tutorial-number {
+  font-size: 22px;
+  vertical-align: bottom;
+}
+
+.tutorial-card p {
+  font-size: 16px;
 }
 
 .feature-intro {
@@ -139,10 +190,6 @@
   line-height: 1.2;
 }
 
-.md-typeset a.feature:hover h3 {
-  color: var(--pink);
-}
-
 .md-typeset .featured-content a {
   text-decoration: none;
   background-color: var(--white);
@@ -176,18 +223,18 @@
 }
 
 .cta-section {
-  padding: 0 var(--min-padding);
+  display: flex;
+  justify-content: space-between;
+  gap: 3em;
 }
 
 .final-cta {
-  width: 880px;
   min-height: 360px;
-  margin: auto;
   border-radius: 16px;
   border: 1px solid var(--mystic);
-  background-size: cover; /* Scales the image to cover the entire element */
-  background-position: center; /* Centers the image */
-  background-repeat: no-repeat; /* Ensures the image doesn't repeat */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .final-cta:first-child {
@@ -199,7 +246,7 @@
 }
 
 .final-cta-content {
-  width: 633px;
+  width: unset;
   min-height: 360px;
   border-radius: 16px;
   background: linear-gradient(
@@ -230,36 +277,26 @@
   margin-top: 1rem;
 }
 
-@media screen and (max-width: 76.2344em) {
+@media screen and (max-width: 76.2344em) {  
   .hero-section {
-    gap: 1em;
-    justify-content: center;
-    flex-direction: column-reverse;
-  }
-
-  .hero-section {
-    padding: var(--min-padding);
-    padding-top: var(--adjust-header-height);
-    padding-bottom: 5em;
-  }
-
-  .hero-content,
-  .md-typeset iframe.hero-visual {
-    max-width: 100%;
-  }
-
-  .md-typeset iframe.hero-visual {
-    min-height: 33em;
+    gap: 3em;
   }
 
   .hero-content {
     justify-items: center;
+    width: unset;
+    max-width: unset;
   }
 
   .md-typeset .hero-content h1 {
     line-height: 1;
     margin-top: 1rem;
     margin-bottom: 2rem;
+  }
+
+  .tutorial-cards {
+    max-width: unset;
+    width: unset;
   }
 
   .feature-intro {
@@ -276,31 +313,38 @@
     max-width: 75%;
   }
 
-  .final-cta {
-    width: 90%;
-  }
-
   .cta-section .final-cta,
   .final-cta-content {
     width: auto;
   }
 }
 
+@media screen and (max-width: 66.2344em) {  
+  .hero-section {
+    flex-wrap: wrap;
+    gap: 5em;
+  }
+
+  .tutorial-cards {
+    grid-auto-rows: auto;
+  }
+
+  .md-typeset a.tutorial-card {
+    min-height: unset;
+  }
+}
+
 @media screen and (max-width: 45em) {
+  .home-container {
+    gap: 4em;
+  }
+
   .hero-section,
   .feature-section,
   .cta-section {
-    padding: 0 1.5rem;
-  }
-
-  .hero-section {
-    padding-top: var(--adjust-header-height);
-    padding-bottom: 5em;
-  }
-
-  .md-typeset iframe.hero-visual {
-    min-height: 18em;
-    max-width: 80%;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    word-break: break-word;
   }
 
   .md-typeset .hero-content h1 {
@@ -312,8 +356,25 @@
     width: 100%;
   }
 
-  .feature-section {
-    padding-bottom: 5em;
+  .tutorial-cards {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+  }
+
+  .tutorial-cards,
+  .featured-content,
+  .cta-section {
+    gap: 36px;
+  }
+
+  .md-typeset a.tutorial-card {
+    width: 100%;
+  }
+
+  .md-typeset a.tutorial-card:nth-child(2) {
+    margin-bottom: 0;
   }
 
   .md-typeset .feature-intro h2 {
@@ -321,8 +382,7 @@
   }
 
   .featured-content {
-    padding: 2em 0;
-    gap: 36px;
+    padding: 0;
   }
 
   .md-typeset a.feature h3 {
@@ -339,6 +399,19 @@
     font-size: 16px;
   }
 
+  .cta-section {
+    flex-direction: column;
+    padding-bottom: 3em;
+  }
+
+  .final-cta {
+    min-height: unset;
+  }
+
+  .final-cta-content {
+    min-height: unset;
+  }  
+
   .md-typeset .final-cta h2 {
     font-size: 1.382rem;
   }
@@ -350,62 +423,4 @@
   .md-typeset .final-cta .md-button {
     margin-top: unset;
   }
-}
-
-
-/** New CSS */
-.tutorial-cards {
-  display: flex;
-  gap: 3em;
-  width: 44%;
-  align-items: center;
-}
-
-.tutorial-cards > .column {
-  display: flex;
-  flex-direction: column;
-  gap: 3em;
-}
-
-.md-typeset a.tutorial-card {
-  background-color: var(--white);
-  border-radius: 16px;
-  border: 1px solid var(--mystic);
-  padding: 1em;
-  display: flex;
-  gap: 24px;
-  text-decoration: none;
-}
-
-.md-typeset a.tutorial-card .md-icon svg {
-  width: 32px;
-  height: 32px;
-  max-width: unset;
-  fill: var(--black);
-}
-
-.tutorial-card .column:nth-child(2) {
-  display: flex;
-  align-items: center;
-}
-
-.tutorial-card h3 {
-  margin-top: 0;
-  font-size: 20px;
-}
-
-.tutorial-card p {
-  font-size: 16px;
-}
-
-.cta-section {
-  display: flex;
-}
-
-.final-cta {
-  width: 45%;
-}
-
-.final-cta-content {
-  width: unset;
 }
