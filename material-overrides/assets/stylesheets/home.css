@@ -10,16 +10,13 @@
   margin-top: calc(
     -1 * var(--adjust-header-height)
   ); /* Use a negative value to push the gradient to cover behind the header */
+  display: flex;
+  flex-direction: column;
+  gap: var(--adjust-header-height);
 }
 
 .md-container {
   padding: 0;
-}
-
-.hero-gradient,
-.feature-gradient,
-.cta-gradient {
-  width: 100vw;
 }
 
 .hero-section,
@@ -56,8 +53,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 4%;
-  padding: 5em var(--page-padding);
+  padding-top: var(--adjust-header-height);
   overflow: hidden;
 }
 
@@ -121,7 +117,7 @@
   justify-content: space-between;
   gap: 48px;
   margin: auto;
-  padding: 2em;
+  padding: 2em 2em 0;
 }
 
 .md-typeset a.feature {
@@ -180,21 +176,26 @@
 }
 
 .cta-section {
-  padding: var(--min-padding);
-  padding-top: 5em;
+  padding: 0 var(--min-padding);
 }
 
 .final-cta {
   width: 880px;
   min-height: 360px;
   margin: auto;
-  margin-bottom: 5em;
   border-radius: 16px;
   border: 1px solid var(--mystic);
-  background-image: url('../images/final-cta-background.png');
   background-size: cover; /* Scales the image to cover the entire element */
   background-position: center; /* Centers the image */
   background-repeat: no-repeat; /* Ensures the image doesn't repeat */
+}
+
+.final-cta:first-child {
+  background-image: url('../images/home-card-1.svg');
+}
+
+.final-cta:last-child {
+  background-image: url('../images/home-card-2.svg');
 }
 
 .final-cta-content {
@@ -363,7 +364,7 @@
 .tutorial-cards > .column {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 3em;
 }
 
 .md-typeset a.tutorial-card {
