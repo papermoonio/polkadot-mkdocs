@@ -94,7 +94,7 @@ extra:
       name: Twitter
   analytics:
     provider: google
-    property: G-93CNT1SZV0
+    property: G-ZSKWB953ZL
     feedback:
       title: Was this page helpful?
       ratings:
