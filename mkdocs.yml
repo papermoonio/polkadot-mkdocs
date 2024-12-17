@@ -2,6 +2,7 @@ site_name: Polkadot Developer Docs
 site_url: https://docs.polkadot.com/
 home_url: https://polkadot.com/
 home_name: Polkadot
+edit_uri: https://github.com/polkadot-developers/polkadot-docs/edit/master
 site_dir: /var/www/polkadot-docs-static
 docs_dir: polkadot-docs
 copyright: © 2024
@@ -9,6 +10,7 @@ extra_javascript:
   - js/header-scroll.js
   - js/search-bar-results.js
   - js/root-level-sections.js
+  - js/fix-created-date.js
 # Extra CSS files
 extra_css:
   - assets/stylesheets/extra.css
@@ -35,6 +37,7 @@ theme:
     - navigation.sections # Render top-level sections as groups in the sidebar
     - navigation.indexes # Index pages
     - navigation.top # Show the back to top button since we don't keep top nav sticky
+    - content.action.edit
 markdown_extensions:
   - abbr
   - admonition
@@ -77,6 +80,12 @@ plugins:
   - macros:
       include_yaml:
         - polkadot-docs/variables.yml
+  - git-revision-date-localized:
+      type: date
+      enable_creation_date: true
+      exclude:
+        - node_modules/*
+      enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
 extra:
   generator: False
   social:
@@ -94,7 +103,7 @@ extra:
       name: Twitter
   analytics:
     provider: google
-    property: G-93CNT1SZV0
+    property: G-ZSKWB953ZL
     feedback:
       title: Was this page helpful?
       ratings:
