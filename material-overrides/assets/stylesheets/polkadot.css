@@ -1352,7 +1352,7 @@ details.interface > summary::before {
   padding: 1em;
   border: 1px solid var(--mystic);
   border-radius: 16px;
-  margin: 3rem auto;
+  margin: 1rem auto;
 }
 
 .md-feedback__title {
@@ -1397,6 +1397,12 @@ div.mermaid {
 .md-typeset .grid.cards > ul > li {
   display: flex;
   flex-direction: column;
+  border-radius: 16px;
+}
+
+.md-typeset .grid.cards > ul > li:hover {
+  border: .05rem solid var(--md-default-fg-color--lightest);
+  box-shadow: unset;
 }
 
 .md-typeset .grid.cards > ul > li > :last-child {
@@ -1444,4 +1450,60 @@ div.mermaid {
 .md-typeset span.badge.learn {
   background-color: var(--aqua);
   color: var(--black);
+}
+
+/* Document date styling */
+.md-source-file {
+  display: flex;
+  flex-direction: column;
+}
+
+.md-source-file small {
+  display: flex;
+  justify-content: center;
+}
+
+.source-file-label {
+  margin-right: 0.5em;
+}
+
+.source-file-seperator {
+  margin: 0 0.5em;
+}
+
+/* Edit this page styling */
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 4em;
+}
+
+.md-typeset .actions a {
+  margin: 0;
+  font-size: 80%;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: .5em;
+  color: var(--md-default-fg-color);
+  opacity: .75
+}
+
+.md-typeset .actions svg {
+  fill: var(--heather);
+}
+
+@media screen and (max-width: 30em) {
+  .source-file-seperator {
+    display: none;
+  }
+
+  .actions {
+    margin: 2em auto 0;
+  }
+
+  .md-source-file small {
+    display: block;
+    text-align: center;
+  }
 }
