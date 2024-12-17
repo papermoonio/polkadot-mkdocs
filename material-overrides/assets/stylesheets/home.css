@@ -226,6 +226,7 @@
   display: flex;
   justify-content: space-between;
   gap: 3em;
+  margin-bottom: 3em;
 }
 
 .final-cta {
