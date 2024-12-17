@@ -55,11 +55,10 @@ Please note that once you correctly block cookies on your browser, parts of the 
 
 ## Cookie List
 
-Essential Cookies:
-
-
-Analytical Cookies:
-
+| Source           | Cookie  | Domain             | Description                                                                                                                                                                                                                                                                       | Duration                | Type      |
+|------------------|---------|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|-----------|
+| Google Analytics | \_ga\_* | .docs.polkadot.com | Google Analytics sets this cookie to store and count page views.                                                                                                                                                                                                                  | 1 year, 1 month, 4 days | Analytics |
+| Google Analytics | \_ga    | .docs.polkadot.com | The \_ga cookie, installed by Google Analytics, calculates visitor, session and campaign data and also keeps track of site usage for the site's analytics report. The cookie stores information anonymously and assigns a randomly generated number to recognize unique visitors. | 1 year, 1 month, 4 days | Analytics |
 
 ## Changes to This Policy
 
