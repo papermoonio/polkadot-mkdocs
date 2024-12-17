@@ -62,7 +62,7 @@ Please note that once you correctly block cookies on your browser, parts of the 
 
 ## Changes to This Policy
 
-We may update this Cookie Policy occasionally to reflect changes in legal requirements or how we use cookies. You are encouraged to review this policy periodically to stay informed of any updates. For more information on cookies and how they work, visit [www.cookiesandyou.com](www.cookiesandyou.com){target=\_blank}.
+We may update this Cookie Policy occasionally to reflect changes in legal requirements or how we use cookies. You are encouraged to review this policy periodically to stay informed of any updates. For more information on cookies and how they work, visit [www.cookiesandyou.com](https://www.cookiesandyou.com/){target=\_blank}.
 
 ## Contact Us
 
