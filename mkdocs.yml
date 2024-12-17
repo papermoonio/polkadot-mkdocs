@@ -87,6 +87,17 @@ plugins:
         - node_modules/*
       enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
 extra:
+  consent:
+    title: Cookie Consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation.
+      By consenting to the use of cookies, you help us improve the site.
+    cookies:
+      analytics: Google Analythics
+      custom: Essential cookies
+    actions:
+      - accept
+      - manage
   generator: False
   social:
     - icon: fontawesome/brands/discord
