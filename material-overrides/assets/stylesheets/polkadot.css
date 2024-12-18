@@ -319,7 +319,7 @@
   padding: 0;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   box-shadow: 0 0.2rem 0.5rem #0003, 0 0 0.05rem #00000059;
-   /* For Safari */
+  /* For Safari */
   transform: translateZ(0);
 }
 
@@ -704,13 +704,13 @@ input.md-search__input::placeholder {
   }
 
   /* Show the entire left navigation */
-  .root-subdirectory-page +
-    .md-sidebar--primary
+  .root-subdirectory-page
+    + .md-sidebar--primary
     .md-nav
     > .md-nav__list
     .md-nav__item--section,
-  .root-subdirectory-page +
-    .md-sidebar--primary
+  .root-subdirectory-page
+    + .md-sidebar--primary
     .md-nav__list
     .md-nav__item
     > a.md-nav__link {
@@ -962,7 +962,7 @@ input.md-search__input::placeholder {
   .md-main {
     padding: 0;
   }
-  
+
   .md-header {
     padding: 0;
     display: flex;
@@ -974,7 +974,6 @@ input.md-search__input::placeholder {
     height: fit-content;
   }
 }
-
 
 /** Footer styling **/
 .md-grid.md-footer-meta__inner {
@@ -1092,9 +1091,9 @@ html .md-footer-meta.md-typeset a:hover {
 }
 
 /* Back to top button */
-[dir=ltr] .md-top {
+[dir='ltr'] .md-top {
   left: 50%;
-  margin-left: 0
+  margin-left: 0;
 }
 
 /** API styling **/
@@ -1401,18 +1400,37 @@ div.mermaid {
 }
 
 .md-typeset .grid.cards > ul > li:hover {
-  border: .05rem solid var(--md-default-fg-color--lightest);
+  border: 0.05rem solid var(--md-default-fg-color--lightest);
   box-shadow: unset;
 }
 
-.md-typeset .grid.cards > ul > li > :last-child {
+.md-typeset .grid.cards .twemoji {
+  padding-right: 0.5em;
+}
+
+/* Additional card styling (as seen on the Develop index page) */
+.md-typeset .grid.cards:not(.links) > ul > li > :last-child:has(> a) {
   margin-top: auto;
   padding-top: 1em;
 }
 
-.md-typeset .grid.cards .twemoji {
-  vertical-align: sub;
-  padding-right: 0.5em;
+.md-typeset .grid.cards h3 {
+  margin: 0;
+  font-size: 1.15em;
+  display: flex;
+}
+
+.md-typeset .grid.cards.links > ul > li > a {
+  padding: .25em 0;
+}
+
+.md-typeset .grid.cards.links ul > li > p {
+  margin: 0;
+}
+
+.md-typeset .grid.cards.links .twemoji {
+  height: auto;
+  width: 1.75em;
 }
 
 /** Kapa styling **/
@@ -1432,9 +1450,9 @@ div.mermaid {
 /** Where to Go Next Badge styling */
 .md-typeset span.badge {
   border-radius: 0.5em;
-  font-size: .8em;
-  padding: 0.2em .5em;
-  margin-right: .5em;
+  font-size: 0.8em;
+  padding: 0.2em 0.5em;
+  margin-right: 0.5em;
 }
 
 .md-typeset span.badge.tutorial {
@@ -1484,9 +1502,9 @@ div.mermaid {
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: .5em;
+  gap: 0.5em;
   color: var(--md-default-fg-color);
-  opacity: .75
+  opacity: 0.75;
 }
 
 .md-typeset .actions svg {
