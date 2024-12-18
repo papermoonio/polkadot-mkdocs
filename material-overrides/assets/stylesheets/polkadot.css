@@ -1424,6 +1424,10 @@ div.mermaid {
   padding: .25em 0;
 }
 
+.md-typeset .grid.cards.links ul > li > p {
+  margin: 0;
+}
+
 .md-typeset .grid.cards.links .twemoji {
   height: auto;
   width: 1.75em;
