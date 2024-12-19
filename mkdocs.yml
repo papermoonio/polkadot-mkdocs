@@ -23,8 +23,8 @@ validation:
 theme:
   name: material
   custom_dir: material-overrides
-  favicon: assets/images/favicon.png
-  logo: https://polkadot.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpolkadot-logo.0e1e2c79.png&w=384&q=75
+  favicon: assets/images/favicon.webp
+  logo: assets/images/logo.webp
   font:
     text: Manrope
   features:

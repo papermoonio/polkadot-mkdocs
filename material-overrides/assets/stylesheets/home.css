@@ -4,7 +4,7 @@
 }
 
 .home-container {
-  background-image: url('../images/gradient.png');
+  background-image: url('../images/gradient.webp');
   background-size: 100%;
   background-repeat: no-repeat;
   margin-top: calc(
@@ -239,11 +239,11 @@
 }
 
 .final-cta:first-child {
-  background-image: url('../images/home-card-1.svg');
+  background-image: url('../images/home-card-1.webp');
 }
 
 .final-cta:last-child {
-  background-image: url('../images/home-card-2.svg');
+  background-image: url('../images/home-card-2.webp');
 }
 
 .final-cta-content {
