@@ -1447,6 +1447,10 @@ div.mermaid {
   width: 0.9rem !important;
 }
 
+.mantine-1wkdfe1 {
+  font-size: 12px;
+}
+
 /** Where to Go Next Badge styling */
 .md-typeset span.badge {
   border-radius: 0.5em;
