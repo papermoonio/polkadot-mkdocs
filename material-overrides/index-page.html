@@ -5,9 +5,7 @@
   <link rel="stylesheet" href="{{ 'assets/stylesheets/index-page.css' | url }}">
 {% endblock %}
 
-{# --- Definimos los macros fuera o dentro del bloque content, como prefieras --- #}
 {% macro find_active_page(element, nav) %}
-  {# Lógica original de find_active_page #}
   {% for nav_item in element %}
     {% if nav_item.active %}
       {% if nav_item.is_section %}
