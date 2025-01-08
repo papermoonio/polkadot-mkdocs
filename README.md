@@ -53,4 +53,6 @@ Now in the `polkadot-mkdocs` folder, you can build the site by running:
 mkdocs serve
 ```
 
+> **_NOTE:_** To improve build times, you can disable the git revision plugin by running the following command before you serve the docs: `export ENABLED_GIT_REVISION_DATE=false`.
+
 After a successful build, the site should be available locally at `http://127.0.0.1:8000`.

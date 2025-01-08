@@ -12,35 +12,45 @@
 {%- block container -%} 
   {% block content %}
     <div class="home-container md-typeset">
-      <div class="hero-gradient">
         <div class="hero-section">
-          <div class="hero-content">
+          <div class="column hero-content">
             <div>
-              <h1>Build beyond boundaries</h1>
+              <h1>Polkadot Documentation</h1>
               <p>Your launchpad for all things Polkadot—access tools, guides, and resources to quickly start building custom chains, deploying smart contracts, and creating dApps.
               </p>
             </div>
             <div class="button-wrapper">
-              <a href="https://polkadot.com/community" target="_blank" rel="noopener noreferrer">
-                <button class="md-button">Join the community</button>
-              </a>
-              <a href="develop/development-pathways/">
-                <button class="md-button secondary">Start building</button>
+              <a href="develop/">
+                <button class="md-button">Start building</button>
               </a>     
+              <a href="https://polkadot.com/community" target="_blank" rel="noopener">
+                <button class="md-button secondary">Join the community</button>
+              </a>
             </div>
           </div>
-          <iframe class="hero-visual" src='https://my.spline.design/polkadotanimationv3copy-0cc020eebace663feadb0323fa301579/' frameborder='0' width='100%' height='100%'></iframe>
+          <div class="column tutorial-cards">
+            <a class="tutorial-card" href="tutorials/polkadot-sdk/parachains/zero-to-hero/set-up-a-template/">
+              <h3><span class="tutorial-number">❶</span> Create a chain in minutes</h3>
+              <p>Fast-track your development with a preconfigured blockchain template.</p>
+            </a>
+            <a class="tutorial-card" href="tutorials/polkadot-sdk/parachains/zero-to-hero/build-custom-pallet/">
+              <h3><span class="tutorial-number">❷</span> Customize your business logic</h3>
+              <p>Design and tailor your blockchain's functionality to fit your needs.</p>
+            </a>
+            <a class="tutorial-card" href="tutorials/polkadot-sdk/parachains/zero-to-hero/deploy-to-testnet/">
+              <h3><span class="tutorial-number">❸</span> Deploy your chain to Polkadot</h3>
+              <p>Launch your blockchain on Polkadot's secure and scalable platform.</p>
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div class="feature-gradient">
         <div class="feature-section">
           <div class="feature-intro">
             <h2>Your complete guide to building on Polkadot</h2>
             <p>Polkadot's enhanced developer docs provide all the guidance and resources you need to launch and scale your projects within the Polkadot ecosystem.</p>
           </div>
           <div class="featured-content">
-            <a class="feature" href="develop/parachains/get-started/">
+            <a class="feature" href="develop/parachains/">
               <div class="column">
                 <h3>Start building blockchains</h3>
                 <p>Kickstart your journey by learning how to get started with the Polkadot SDK to build and deploy custom blockchains.</p>
@@ -69,21 +79,27 @@
             </a>
           </div>
         </div>
-      </div>
       
-      <div class="cta-gradient">
         <div class="cta-section">
           <div class="final-cta">
             <div class="final-cta-content">
-            <h2>What are you waiting for?</h2>
-            <p>Get hands-on experience with Polkadot's in-depth tutorials. Covering everything from blockchain basics to advanced skills, our tutorials help you build expertise and start creating with confidence.</p>
-            <a href="tutorials/">
-              <button class="md-button secondary">See tutorials</button>
+            <h2>Turn ideas into reality</h2>
+            <p>Get the funding you need to take your blockchain project to the next level with Polkadot's grants program.</p>
+            <a href="https://polkadot.com/developers/grants" target="_blank" rel="noopener">
+              <button class="md-button secondary">Discover grants</button>
             </a>
           </div>
         </div>
-      </div>
-      </div>
+        <div class="final-cta">
+          <div class="final-cta-content">
+            <h2>Elevate your blockchain skills</h2>
+            <p>Join the Polkadot Blockchain Academy to grow your Web3 expertise, with programs designed for all skill levels.</p>
+            <a href="https://polkadot.com/blockchain-academy" target="_blank" rel="noopener">
+              <button class="md-button secondary">Explore programs</button>
+            </a>
+          </div>
+        </div>
     </div>
+  </div>
   {% endblock %}
 {%- endblock -%} 

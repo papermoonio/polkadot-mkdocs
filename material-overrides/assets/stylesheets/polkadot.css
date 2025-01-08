@@ -319,7 +319,7 @@
   padding: 0;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   box-shadow: 0 0.2rem 0.5rem #0003, 0 0 0.05rem #00000059;
-   /* For Safari */
+  /* For Safari */
   transform: translateZ(0);
 }
 
@@ -704,13 +704,13 @@ input.md-search__input::placeholder {
   }
 
   /* Show the entire left navigation */
-  .root-subdirectory-page +
-    .md-sidebar--primary
+  .root-subdirectory-page
+    + .md-sidebar--primary
     .md-nav
     > .md-nav__list
     .md-nav__item--section,
-  .root-subdirectory-page +
-    .md-sidebar--primary
+  .root-subdirectory-page
+    + .md-sidebar--primary
     .md-nav__list
     .md-nav__item
     > a.md-nav__link {
@@ -962,7 +962,7 @@ input.md-search__input::placeholder {
   .md-main {
     padding: 0;
   }
-  
+
   .md-header {
     padding: 0;
     display: flex;
@@ -974,7 +974,6 @@ input.md-search__input::placeholder {
     height: fit-content;
   }
 }
-
 
 /** Footer styling **/
 .md-grid.md-footer-meta__inner {
@@ -1092,9 +1091,9 @@ html .md-footer-meta.md-typeset a:hover {
 }
 
 /* Back to top button */
-[dir=ltr] .md-top {
+[dir='ltr'] .md-top {
   left: 50%;
-  margin-left: 0
+  margin-left: 0;
 }
 
 /** API styling **/
@@ -1352,7 +1351,7 @@ details.interface > summary::before {
   padding: 1em;
   border: 1px solid var(--mystic);
   border-radius: 16px;
-  margin: 3rem auto;
+  margin: 1rem auto;
 }
 
 .md-feedback__title {
@@ -1367,6 +1366,10 @@ details.interface > summary::before {
 
 .md-feedback__icon:not(:disabled).md-icon:hover {
   color: var(--pink);
+}
+
+.md-feedback__note {
+  font-size: 14px;
 }
 
 /* Styles to override unordered list defaults */
@@ -1393,16 +1396,41 @@ div.mermaid {
 .md-typeset .grid.cards > ul > li {
   display: flex;
   flex-direction: column;
+  border-radius: 16px;
 }
 
-.md-typeset .grid.cards > ul > li > :last-child {
+.md-typeset .grid.cards > ul > li:hover {
+  border: 0.05rem solid var(--md-default-fg-color--lightest);
+  box-shadow: unset;
+}
+
+.md-typeset .grid.cards .twemoji {
+  padding-right: 0.5em;
+}
+
+/* Additional card styling (as seen on the Develop index page) */
+.md-typeset .grid.cards:not(.links) > ul > li > :last-child:has(> a) {
   margin-top: auto;
   padding-top: 1em;
 }
 
-.md-typeset .grid.cards .twemoji {
-  vertical-align: sub;
-  padding-right: 0.5em;
+.md-typeset .grid.cards h3 {
+  margin: 0;
+  font-size: 1.15em;
+  display: flex;
+}
+
+.md-typeset .grid.cards.links > ul > li > a {
+  padding: .25em 0;
+}
+
+.md-typeset .grid.cards.links ul > li > p {
+  margin: 0;
+}
+
+.md-typeset .grid.cards.links .twemoji {
+  height: auto;
+  width: 1.75em;
 }
 
 /** Kapa styling **/
@@ -1417,4 +1445,87 @@ div.mermaid {
 .mantine-1p3no9p {
   height: 0.9rem !important;
   width: 0.9rem !important;
+}
+
+.mantine-1wkdfe1 {
+  font-size: 12px;
+}
+
+/** Where to Go Next Badge styling */
+.md-typeset span.badge {
+  border-radius: 0.5em;
+  font-size: 0.8em;
+  padding: 0.2em 0.5em;
+  margin-right: 0.5em;
+}
+
+.md-typeset span.badge.tutorial {
+  background-color: var(--electric-violet);
+  color: var(--white);
+}
+
+.md-typeset span.badge.guide {
+  background-color: var(--chartreuse);
+  color: var(--black);
+}
+
+.md-typeset span.badge.learn {
+  background-color: var(--aqua);
+  color: var(--black);
+}
+
+/* Document date styling */
+.md-source-file {
+  display: flex;
+  flex-direction: column;
+}
+
+.md-source-file small {
+  display: flex;
+  justify-content: center;
+}
+
+.source-file-label {
+  margin-right: 0.5em;
+}
+
+.source-file-seperator {
+  margin: 0 0.5em;
+}
+
+/* Edit this page styling */
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 4em;
+}
+
+.md-typeset .actions a {
+  margin: 0;
+  font-size: 80%;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--md-default-fg-color);
+  opacity: 0.75;
+}
+
+.md-typeset .actions svg {
+  fill: var(--heather);
+}
+
+@media screen and (max-width: 30em) {
+  .source-file-seperator {
+    display: none;
+  }
+
+  .actions {
+    margin: 2em auto 0;
+  }
+
+  .md-source-file small {
+    display: block;
+    text-align: center;
+  }
 }

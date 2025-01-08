@@ -1,5 +1,4 @@
 [data-termynal] {
-  width: 750px;
   max-width: 100%;
   background: #101010;
   color: var(--white);
@@ -40,6 +39,10 @@
 [data-termynal] a,
 .md-typeset [data-termynal] pre {
   color: var(--white);
+}
+
+.md-typeset [data-termynal] pre {
+    white-space: break-spaces;
 }
 
 [data-ty] {
