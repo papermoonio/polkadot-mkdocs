@@ -19,6 +19,9 @@ extra_css:
 validation:
   absolute_links: ignore
   unrecognized_links: ignore
+exclude_docs: |
+   README.md
+   LICENSE.md
 # Theme related settings
 theme:
   name: material
