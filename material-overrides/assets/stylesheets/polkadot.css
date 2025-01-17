@@ -1529,3 +1529,8 @@ div.mermaid {
     text-align: center;
   }
 }
+/** screnshot styling **/
+.browser-extension {
+  display: block;
+  margin: auto;
+}
