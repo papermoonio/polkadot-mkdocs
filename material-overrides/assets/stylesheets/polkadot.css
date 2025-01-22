@@ -1530,7 +1530,7 @@ div.mermaid {
   }
 }
 /** screnshot styling **/
-.browser-extension {
+img.browser-extension {
   display: block;
   margin: auto;
 }
