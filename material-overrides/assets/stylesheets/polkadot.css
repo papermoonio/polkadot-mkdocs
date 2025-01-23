@@ -85,6 +85,10 @@
   --md-mermaid-sequence-note-border-color: var(--md-mermaid-label-fg-color);
   --md-mermaid-sequence-number-bg-color: var(--md-mermaid-node-fg-color);
   --md-mermaid-sequence-number-fg-color: var(--md-accent-bg-color);
+
+/*admonition SVGs*/
+/* SVG run through base64 encoder creates url that goes here*/
+--md-admonition-icon--code: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTE0LjYsMTYuNkwxOS4yLDEyTDE0LjYsNy40TDE2LDZMMjIsMTJMMTYsMThMMTQuNiwxNi42TTkuNCwxNi42TDQuOCwxMkw5LjQsNy40TDgsNkwyLDEyTDgsMThMOS40LDE2LjZaIiAvPjwvc3ZnPg==');
 }
 
 .md-grid {
@@ -1123,6 +1127,26 @@ html .md-footer-meta.md-typeset a:hover {
   color: var(--black);
   text-transform: capitalize;
   padding-left: 0.6666666667em;
+}
+
+/* Code Admonition */
+
+.md-typeset .admonition.code,
+.md-typeset details.code {
+  border-color: var(--md-default-fg-color);
+}
+
+.md-typeset .code > .admonition-title,
+.md-typeset .code > summary {
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-footer-fg-color)
+}
+
+.md-typeset .code > .admonition-title::before,
+.md-typeset .code > summary::before {
+  background-color: var(--md-accent-fg-color);
+  -webkit-mask-image: var(--md-admonition-icon--code);
+  mask-image: var(--md-admonition-icon--code);
 }
 
 /* Child Admonition */
