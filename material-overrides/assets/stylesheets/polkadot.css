@@ -1474,6 +1474,11 @@ div.mermaid {
   color: var(--black);
 }
 
+.md-typeset span.badge.external {
+  background-color: var(--blue-ribbon);
+  color: var(--white);
+}
+
 /* Document date styling */
 .md-source-file {
   display: flex;
