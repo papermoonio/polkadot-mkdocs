@@ -75,7 +75,7 @@
 {% endblock %}
 
 {% block site_nav %}
-  <!-- Navigation (menu de la izquierda) -->
+{#- Navigation (menu de la izquierda) -#}
   {% if nav %}
     {% if page.meta and page.meta.hide %}
       {% set hidden = "hidden" if "navigation" in page.meta.hide %}
@@ -93,7 +93,7 @@
       </div>
     </div>
   {% endif %}
-  <!-- Table of contents -->
+  {#- Table of contents -#}
   {% if "toc.integrate" not in features %}
     {% if page.meta and page.meta.hide %}
       {% set hidden = "hidden" if "toc" in page.meta.hide %}
@@ -106,12 +106,12 @@
     >
       <div class="md-sidebar__scrollwrap">
         <div class="md-sidebar__inner">
-          <!-- TOC -->
+          {#- TOC -#}
           {% include "partials/toc.html" %}
         </div>
-        <!--Add Feedback-->
+        {#- Add Feedback -#}
         {% include "partials/feedback.html" %}
-        <!--Add Edit this page button--> 
+        {#- Add Edit this page button -#}
         <div class="actions">
           {% include "partials/actions.html" %}
         </div> 
