@@ -5,8 +5,6 @@
   --athens-gray: #eceff3;
   --storm-gray: #6e7391;
   --black: #000000;
-  --code-green: #5ee20c;
-  --code-green-light: #64dd171a;
 
   /* Primary color */
   --pink: #ff2670;
@@ -89,9 +87,10 @@
   --md-mermaid-sequence-number-fg-color: var(--md-accent-bg-color);
 
   /*custom code admonition colors*/
-
-  --md-code-admo-border-color: var(--code-green);
-  --md-code-admo-title-background: var(--code-green-light);
+  
+  --md-code-admo-border-color: #5ee20c;
+  --md-code-admo-title-bg: #64dd171a;
+}
 
 .md-grid {
   max-width: var(--max-page-width);
@@ -1140,7 +1139,7 @@ html .md-footer-meta.md-typeset a:hover {
 
 .md-typeset .code > .admonition-title,
 .md-typeset .code > summary {
-  background-color: var(--md-code-admo-title-background);
+  background-color: var(--md-code-admo-title-bg);
 }
 
 .md-typeset .code > .admonition-title::before,
