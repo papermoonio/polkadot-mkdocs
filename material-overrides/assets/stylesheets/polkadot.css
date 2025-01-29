@@ -85,6 +85,11 @@
   --md-mermaid-sequence-note-border-color: var(--md-mermaid-label-fg-color);
   --md-mermaid-sequence-number-bg-color: var(--md-mermaid-node-fg-color);
   --md-mermaid-sequence-number-fg-color: var(--md-accent-bg-color);
+
+  /*custom code admonition colors*/
+  
+  --md-code-admo-border-color: #5ee20c;
+  --md-code-admo-title-bg: #64dd171a;
 }
 
 .md-grid {
@@ -1128,6 +1133,25 @@ html .md-footer-meta.md-typeset a:hover {
   padding-left: 0.6666666667em;
 }
 
+/* Code Admonition */
+
+.md-typeset .admonition.code,
+.md-typeset details.code {
+  border-color: var(--md-code-admo-border-color);
+}
+
+.md-typeset .code > .admonition-title,
+.md-typeset .code > summary {
+  background-color: var(--md-code-admo-title-bg);
+}
+
+.md-typeset .code > .admonition-title::before,
+.md-typeset .code > summary::before {
+  background-color: var(--md-code-admo-border-color);
+  -webkit-mask-image: var(--md-admonition-icon--code);
+  mask-image: var(--md-admonition-icon--code);
+}
+
 /* Child Admonition */
 .api-reference-link {
   position: absolute;
@@ -1513,6 +1537,11 @@ div.mermaid {
   color: var(--black);
 }
 
+.md-typeset span.badge.external {
+  background-color: var(--blue-ribbon);
+  color: var(--white);
+}
+
 /* Document date styling */
 .md-source-file {
   display: flex;
@@ -1592,4 +1621,10 @@ div.mermaid {
     display: block;
     text-align: center;
   }
+}
+
+/** screnshot styling **/
+img.browser-extension {
+  display: block;
+  margin: auto;
 }
