@@ -1561,7 +1561,7 @@ div.mermaid {
 }
 
 .md-content__button.md-icon:hover svg {
-  fill: var(--pink); /
+  fill: var(--pink);
 }
 
 .md-typeset .actions svg {
