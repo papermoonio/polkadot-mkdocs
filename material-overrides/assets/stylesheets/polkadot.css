@@ -1354,19 +1354,27 @@ details.interface > summary::before {
   justify-content: center;
   align-items: center;
   width: fit-content;
-  padding: 1em;
+  padding: 0.75em 0.75em 0;
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
 .md-feedback__title {
   font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
   font-size: 12px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75em;
 }
 
 .md-feedback__list{
-  gap: 8px;
+  margin-top: 0.75em;
+  gap: 1em;
+  margin-bottom: 0.75em;
+  display: flex;
+  flex-wrap: wrap;
+  place-content: baseline center;
+  position: relative;
 }
 
 .md-feedback__icon,
@@ -1390,16 +1398,17 @@ details.interface > summary::before {
   border: 1px solid var(--mystic);
   border-radius: 16px;
   padding: 1.5em;
-  width: fit-content;
+  width: calc(100% - 2em);
   background-color: var(--white);
   margin-top: 2rem;
+  box-sizing: border-box;
 }
 
 .feedback-actions-container .divider {
   width: 100%;
   height: 1px;
   background-color: var(--mystic);
-  margin: 10px 10px 10px 10px;
+  margin: 0.75em;
 }
 
 /* Styles to override unordered list defaults */
@@ -1546,11 +1555,13 @@ div.mermaid {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   text-decoration: none;
   color: var(--storm-gray);
   transition: color 0.3s;
   margin: 0 auto;
+  margin-top: 0.75em;
+  font-size: 12px;
 }
 
 .md-content__button.md-icon svg {
@@ -1581,12 +1592,4 @@ div.mermaid {
     display: block;
     text-align: center;
   }
-}
-
-.md-content__button.md-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-size: 12px;
 }
