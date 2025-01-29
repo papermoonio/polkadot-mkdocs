@@ -28,6 +28,8 @@ theme:
   custom_dir: material-overrides
   favicon: assets/images/favicon.webp
   logo: assets/images/logo.webp
+  icon:
+    edit: fontawesome/brands/github
   font:
     text: Manrope
   features:
