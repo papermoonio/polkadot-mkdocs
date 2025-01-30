@@ -30,6 +30,8 @@ theme:
   logo: assets/images/logo.webp
   icon:
     edit: fontawesome/brands/github
+    admonition:
+      code: material/code-tags
   font:
     text: Manrope
   features:
