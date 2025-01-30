@@ -1402,6 +1402,7 @@ details.interface > summary::before {
   background-color: var(--white);
   margin-top: 2rem;
   box-sizing: border-box;
+  max-width: 170px;
 }
 
 .feedback-actions-container .divider {
