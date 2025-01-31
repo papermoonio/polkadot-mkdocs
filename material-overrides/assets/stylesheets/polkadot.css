@@ -1378,7 +1378,7 @@ details.interface > summary::before {
   justify-content: center;
   align-items: center;
   width: fit-content;
-  padding: 0.75em 0.75em 0;
+  padding: 0;
   margin-top: 0px;
   margin-bottom: 0px;
 }
@@ -1388,7 +1388,7 @@ details.interface > summary::before {
   text-align: center;
   white-space: nowrap;
   font-size: 12px;
-  margin-bottom: 0.75em;
+  margin: 0;
 }
 
 .md-feedback__list{
