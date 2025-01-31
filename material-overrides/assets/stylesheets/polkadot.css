@@ -662,7 +662,7 @@ input.md-search__input::placeholder {
   .md-sidebar__scrollwrap {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     padding-bottom: 1.5em;
   }
 
