@@ -1379,8 +1379,8 @@ details.interface > summary::before {
   align-items: center;
   width: fit-content;
   padding: 0;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .md-feedback__title {
@@ -1426,7 +1426,6 @@ details.interface > summary::before {
   background-color: var(--white);
   margin-top: 2rem;
   box-sizing: border-box;
-  max-width: 170px;
 }
 
 .feedback-actions-container .divider {
