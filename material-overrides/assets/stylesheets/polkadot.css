@@ -1374,19 +1374,12 @@ details.interface > summary::before {
 
 /** Feedback widget styling **/
 .md-feedback {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: fit-content;
-  padding: 0;
   margin-top: 0;
   margin-bottom: 0;
 }
 
 .md-feedback__title {
   font-weight: 400;
-  text-align: center;
-  white-space: nowrap;
   font-size: 12px;
   margin: 0;
 }
@@ -1562,28 +1555,9 @@ div.mermaid {
 }
 
 /* Edit this page styling */
-.actions {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 4em;
-  align-items: center;
-}
-
-.md-typeset .actions a {
-  margin: 0;
-  font-size: 80%;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  color: var(--md-default-fg-color);
-  opacity: 0.75;  
-}
-
 .md-content__button.md-icon {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
   text-decoration: none;
   color: var(--storm-gray);
