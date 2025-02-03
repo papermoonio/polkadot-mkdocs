@@ -87,7 +87,7 @@
   --md-mermaid-sequence-number-fg-color: var(--md-accent-bg-color);
 
   /*custom code admonition colors*/
-  
+
   --md-code-admo-border-color: #5ee20c;
   --md-code-admo-title-bg: #64dd171a;
 }
@@ -1383,7 +1383,7 @@ details.interface > summary::before {
   margin: 0;
 }
 
-.md-feedback__list{
+.md-feedback__list {
   margin-top: 0.75em;
   gap: 1em;
   margin-bottom: 0.75em;
@@ -1469,7 +1469,7 @@ div.mermaid {
 }
 
 .md-typeset .grid.cards.links > ul > li > a {
-  padding: .25em 0;
+  padding: 0.25em 0;
 }
 
 .md-typeset .grid.cards.links ul > li > p {
