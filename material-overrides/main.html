@@ -72,13 +72,15 @@
     data-button-position-top="120px"
     data-button-position-right="0px"
   ></script>
-  <script>
-    document.body.addEventListener('click', (event) => {
-      if (event.target.id === 'kapa-widget-container') {
-        event.target.addEventListener('keydown', (event) => {
-          event.stopPropagation()
-        })
-      }
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.addEventListener('click', (event) => {
+        if (event.target.id === 'kapa-widget-container') {
+          event.target.addEventListener('keydown', (event) => {
+            event.stopPropagation();
+          });
+        }
+      });
     });
   </script>
 {% endblock %}
