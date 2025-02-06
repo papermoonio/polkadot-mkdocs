@@ -1417,7 +1417,8 @@ details.interface > summary::before {
   width: 100%;
   height: 1px;
   background-color: var(--mystic);
-  margin: 0.75em;
+  margin-top: 0.75em;
+  margin-bottom: 1.5em;
 }
 
 /* Styles to override unordered list defaults */
@@ -1551,7 +1552,7 @@ div.mermaid {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 0.75em auto 0;
+  margin: auto;
   font-size: 12px;
 }
 
