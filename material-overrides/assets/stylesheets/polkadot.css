@@ -1414,11 +1414,9 @@ details.interface > summary::before {
 }
 
 .feedback-actions-container .divider {
-  width: 100%;
   height: 1px;
   background-color: var(--mystic);
-  margin-top: 0.75em;
-  margin-bottom: 1.5em;
+  margin: 0.75em auto 0;
 }
 
 /* Styles to override unordered list defaults */
@@ -1552,7 +1550,6 @@ div.mermaid {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: auto;
   font-size: 12px;
 }
 
@@ -1569,6 +1566,20 @@ div.mermaid {
 
 .md-typeset .actions svg {
   fill: var(--heather);
+}
+
+.feedback-actions-container
+  .feedback-section
+  ~ .edit-section
+  a.md-content__button.md-icon {
+  margin: 0.75em auto 0;
+}
+
+.feedback-actions-container
+  .feedback-section:has(.md-feedback[hidden])
+  ~ .edit-section
+  a.md-content__button.md-icon {
+  margin: auto;
 }
 
 @media screen and (max-width: 30em) {
