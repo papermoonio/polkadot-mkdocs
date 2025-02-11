@@ -1374,7 +1374,7 @@ details.interface > summary::before {
 /** Feedback widget styling **/
 .md-feedback {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 0.75em;;
 }
 
 .md-feedback__title {
