@@ -29,7 +29,7 @@ theme:
   favicon: assets/images/favicon.webp
   logo: assets/images/logo.webp
   icon:
-    edit: fontawesome/brands/github
+    edit: material/github
     admonition:
       code: material/code-tags
   font:

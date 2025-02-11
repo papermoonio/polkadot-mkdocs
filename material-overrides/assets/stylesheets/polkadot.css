@@ -1555,8 +1555,6 @@ div.mermaid {
 
 .md-content__button.md-icon svg {
   fill: var(--heather);
-  width: 20px;
-  height: 20px;
   transition: fill 0.3s ease;
 }
 
