@@ -8,8 +8,5 @@
   <h1>{{ page.title | d(config.site_name, true)}}</h1>
   {% endif %}
   {{ page.content }}
-  <div class="actions">
-    {% include "partials/actions.html" %}
-  </div>
   {% include "partials/source-file.html" %}
   {% include "partials/comments.html" %}
