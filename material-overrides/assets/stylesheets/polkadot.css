@@ -1558,8 +1558,19 @@ div.mermaid {
     text-align: center;
   }
 }
-/** screnshot styling **/
+
+/** Screnshot styling **/
 img.browser-extension {
   display: block;
   margin: auto;
+}
+
+/** Announcement banner styling */
+.announce {
+  z-index: 1;
+}
+
+.md-banner {
+  background-color: var(--mystic);
+  text-align: center;
 }
