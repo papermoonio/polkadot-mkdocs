@@ -1566,7 +1566,7 @@ img.browser-extension {
 }
 
 /** Announcement banner styling */
-.announce {
+.announce.hideable {
   z-index: 1;
 }
 
