@@ -11,6 +11,7 @@ extra_javascript:
   - js/search-bar-results.js
   - js/root-level-sections.js
   - js/fix-created-date.js
+  - js/connect-to-metamask.js
 # Extra CSS files
 extra_css:
   - assets/stylesheets/extra.css
