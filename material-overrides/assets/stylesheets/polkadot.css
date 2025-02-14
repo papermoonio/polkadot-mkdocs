@@ -1600,3 +1600,13 @@ img.browser-extension {
   display: block;
   margin: auto;
 }
+
+/** MetaMask connection button styling **/
+div.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+div.button-wrapper > a.connectMetaMask {
+  text-decoration: none;
+}
