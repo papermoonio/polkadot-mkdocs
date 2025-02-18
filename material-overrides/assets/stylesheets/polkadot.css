@@ -1610,3 +1610,13 @@ img.browser-extension {
   background-color: var(--mystic);
   text-align: center;
 }
+
+/** MetaMask connection button styling **/
+div.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+div.button-wrapper > a.connectMetaMask {
+  text-decoration: none;
+}
