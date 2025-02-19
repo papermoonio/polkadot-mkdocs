@@ -1595,10 +1595,20 @@ div.mermaid {
   }
 }
 
-/** screnshot styling **/
+/** Screnshot styling **/
 img.browser-extension {
   display: block;
   margin: auto;
+}
+
+/** Announcement banner styling */
+.announce.hideable {
+  z-index: 1;
+}
+
+.md-banner {
+  background-color: var(--mystic);
+  text-align: center;
 }
 
 /** MetaMask connection button styling **/
