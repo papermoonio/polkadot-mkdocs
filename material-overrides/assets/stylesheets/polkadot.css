@@ -1480,6 +1480,11 @@ div.mermaid {
   width: 1.75em;
 }
 
+/* Cards with lists */
+.md-typeset .grid.cards ul li ul.card-list {
+  margin: 0;
+}
+
 /** Kapa styling **/
 .mantine-r39cu6 {
   height: 3rem;
