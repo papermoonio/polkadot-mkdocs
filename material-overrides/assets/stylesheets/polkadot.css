@@ -1485,6 +1485,17 @@ div.mermaid {
   margin: 0;
 }
 
+.md-typeset ul.card-list > li {
+  list-style: none;
+  margin: 0.25em 0;
+}
+
+.md-typeset ul.card-list > li a {
+  display: flex;
+  align-items: center;
+}
+
+
 /** Kapa styling **/
 .mantine-r39cu6 {
   height: 3rem;
