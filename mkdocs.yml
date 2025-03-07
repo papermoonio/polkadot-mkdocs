@@ -106,7 +106,7 @@ extra:
   generator: False
   social:
     - icon: fontawesome/brands/discord
-      link: https://dot.li/discord
+      link: https://polkadot-discord.w3f.tools
       name: Discord
     - icon: fontawesome/brands/github
       link: https://github.com/paritytech/polkadot-sdk
