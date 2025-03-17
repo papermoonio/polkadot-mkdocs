@@ -118,8 +118,8 @@ Neoteroi Mkdocs timeline extension: https://github.com/Neoteroi/mkdocs-plugins/b
         /* px here control left margin/width of timeline */
         .nt-timeline-before {
           background: linear-gradient(
-            rgba(255, 38, 112, 0.5) 0%,
-            rgba(255, 38, 112, 1) 100%
+            rgba(121, 22, 243, .3) 0%,
+            rgba(121, 22, 243, .7) 100%
             )
             no-repeat 30px/2px 100%;
         }
@@ -135,8 +135,9 @@ Neoteroi Mkdocs timeline extension: https://github.com/Neoteroi/mkdocs-plugins/b
   
         .nt-timeline-items {
           background: linear-gradient(
-            rgba(255, 38, 112, 1) 0%,
-            rgba(110, 115, 145, 0.5) 100%
+            rgba(121, 22, 243, 0.7) 0%,
+            rgba(121, 22, 243, 0.3) 50%, 
+            rgba(255, 255, 255, 1) 100% 
             )
             no-repeat 30px/2px 100%;
         }
