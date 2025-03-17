@@ -45,6 +45,11 @@
   padding-left: 12px;
 }
 
+.md-typeset img {
+  border-radius: unset;
+  box-shadow: unset;
+}
+
 .hero-section {
   display: flex;
   justify-content: space-between;

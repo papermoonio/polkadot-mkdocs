@@ -1635,3 +1635,8 @@ div.button-wrapper {
 div.button-wrapper > a.connectMetaMask {
   text-decoration: none;
 }
+
+.md-typeset img {
+  border-radius: .5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
