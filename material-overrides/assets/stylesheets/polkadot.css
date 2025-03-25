@@ -1640,3 +1640,27 @@ div.button-wrapper > a.connectMetaMask {
   border-radius: .5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+
+/*Card style and new badges for tutorial*/
+
+.card-divider {
+  width: 90%;
+  margin: 0 1em 1em;
+  border: .5px solid #ccc;
+}
+
+span.badge.advanced {
+  display: inline-block;
+  margin-top: .9em;
+  margin-left: 1.5em;
+  border-radius: 0.5em;
+  font-size: 0.8em;
+  padding: 0.2em 0.5em;
+  background-color: red;
+  color: var(--white);
+}
+
+.subsection-wrapper .card .title{
+  padding: 0.5em 1.5em 0.5em 1.2em
+}
