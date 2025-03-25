@@ -32,28 +32,37 @@
 
               <div class="card">
                 <a href="{{ subsection_path }}">
-                  <h2 class="title">{{ nav_item.title }}</h2>
-                  {% if description != "" %}
-                    <p class="description">{{ description }}</p>
-                  {% else %}
-                    {% if nav_item.is_link %}
-                      {% if '#' in nav_item.url %}
-                        {% set nav_item_url = nav_item.url.split('#')[0] %}
-                      {% else %}
-                        {% set nav_item_url = nav_item.url %}
-                      {% endif %}
-
-                      {% if nav_item_url.startswith('/') %}
-                        {% set nav_item_url = nav_item_url[1:] %}
-                      {% endif %}
-
-                      {% for nav_child in nav.children %}
-                        {{ find_desc_for_linked_pages(nav_child, nav_item_url, description) }}
-                      {% endfor %}
+                  {% if nav_item.meta and nav_item.meta.tutorial_badge %}
+                  <span class="badge {{ nav_item.meta.tutorial_badge | lower }}">
+                    {{ nav_item.meta.tutorial_badge | capitalize }}
+                  </span>
+                {% endif %}
+            
+                <h2 class="title">{{ nav_item.title }}</h2>
+            
+                <div class="card-divider"></div>
+            
+                {% if description != "" %}
+                  <p class="description">{{ description }}</p>
+                {% else %}
+                  {% if nav_item.is_link %}
+                    {% if '#' in nav_item.url %}
+                      {% set nav_item_url = nav_item.url.split('#')[0] %}
+                    {% else %}
+                      {% set nav_item_url = nav_item.url %}
                     {% endif %}
+                    {% if nav_item_url.startswith('/') %}
+                      {% set nav_item_url = nav_item_url[1:] %}
+                    {% endif %}
+            
+                    {% for nav_child in nav.children %}
+                      {{ find_desc_for_linked_pages(nav_child, nav_item_url, description) }}
+                    {% endfor %}
                   {% endif %}
-                </a>
-              </div>
+                {% endif %}
+            
+              </a>
+            </div>
             {% endfor %}
           </div>
         {% endif %}
