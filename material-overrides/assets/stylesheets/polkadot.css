@@ -1668,8 +1668,8 @@ span.badge.intermediate {
   border-radius: 0.5em;
   font-size: 0.8em;
   padding: 0.2em 0.5em;
-  background-color: yellow;
-  color: var(--white);
+  background-color: var(--chartreuse);
+  color: var(--black);
 }
 
 span.badge.advanced {
