@@ -1650,6 +1650,28 @@ div.button-wrapper > a.connectMetaMask {
   border: .5px solid #ccc;
 }
 
+span.badge.beginner {
+  display: inline-block;
+  margin-top: .9em;
+  margin-left: 1.5em;
+  border-radius: 0.5em;
+  font-size: 0.8em;
+  padding: 0.2em 0.5em;
+  background-color: rgb(32, 172, 32);
+  color: var(--white);
+}
+
+span.badge.intermediate {
+  display: inline-block;
+  margin-top: .9em;
+  margin-left: 1.5em;
+  border-radius: 0.5em;
+  font-size: 0.8em;
+  padding: 0.2em 0.5em;
+  background-color: yellow;
+  color: var(--white);
+}
+
 span.badge.advanced {
   display: inline-block;
   margin-top: .9em;
