@@ -13,65 +13,102 @@
   {% block content %}
     <div class="home-container md-typeset">
         <div class="hero-section">
-          <div class="column hero-content">
-            <div>
-              <h1>Polkadot Documentation</h1>
-              <p>Your launchpad for all things Polkadot—access tools, guides, and resources to quickly start building custom chains, deploying smart contracts, and creating dApps.
-              </p>
-            </div>
+          <div class="hero-content">
+            <h1>Polkadot Documentation</h1>
+            <p>Your launchpad for all things Polkadot—access tools, guides, and resources to quickly start building custom chains, deploying smart contracts, and creating dApps.</p>
             <div class="button-wrapper">
               <a href="develop/">
                 <button class="md-button">Start building</button>
               </a>     
-              <a href="https://polkadot.com/community" target="_blank" rel="noopener">
-                <button class="md-button secondary">Join the community</button>
+              <a href="develop/smart-contracts/connect-to-asset-hub/">
+                <button class="md-button secondary">Connect to Polkadot</button>
               </a>
             </div>
           </div>
-          <div class="column tutorial-cards">
-            <a class="tutorial-card" href="tutorials/polkadot-sdk/parachains/zero-to-hero/set-up-a-template/">
-              <h3><span class="tutorial-number">❶</span> Create a chain in minutes</h3>
-              <p>Fast-track your development with a preconfigured blockchain template.</p>
-            </a>
-            <a class="tutorial-card" href="tutorials/polkadot-sdk/parachains/zero-to-hero/build-custom-pallet/">
-              <h3><span class="tutorial-number">❷</span> Customize your business logic</h3>
-              <p>Design and tailor your blockchain's functionality to fit your needs.</p>
-            </a>
-            <a class="tutorial-card" href="tutorials/polkadot-sdk/parachains/zero-to-hero/deploy-to-testnet/">
-              <h3><span class="tutorial-number">❸</span> Deploy your chain to Polkadot</h3>
-              <p>Launch your blockchain on Polkadot's secure and scalable platform.</p>
-            </a>
+          <div>
+            <img src="assets/images/Polkadot_Asset_26.svg" alt="Polkadot hero image">
           </div>
         </div>
 
         <div class="feature-section">
           <div class="feature-intro">
-            <h2>Your complete guide to building on Polkadot</h2>
-            <p>Polkadot's enhanced developer docs provide all the guidance and resources you need to launch and scale your projects within the Polkadot ecosystem.</p>
+            <div>
+              <h2>Deploy smart contracts</h2>
+              <p>Explore smart contract development on Polkadot — write, test, and deploy with industry-standard tools you already know and trust.</p>
+            </div>
+            <div>
+              <a href="develop/smart-contracts/">
+                <button class="md-button">Start now</button>
+              </a>     
+            </div>
           </div>
           <div class="featured-content">
-            <a class="feature" href="develop/parachains/">
+            <div class="feature">
+              <h3>Learn through building</h3>
+              <p>Step into the world of Polkadot by learning to deploy smart contracts with Hardhat, guiding you through every step from setup to deployment.</p>
+              <a href="tutorials/smart-contracts/launch-your-first-project/test-and-deploy-with-hardhat/">
+                <button class="md-button secondary">Level up with tutorials</button>
+              </a>
+            </div>
+            <div class="feature">
+              <h3>Use trusted tools</h3>
+              <div class="brand-list">
+                <a class="feature brand" href="develop/smart-contracts/dev-environments/remix/">
+                  <img src="assets/images/remix-logo.webp" alt="Remix logo"><span>Remix</span>
+                </a>
+                <a class="feature brand" href="develop/smart-contracts/dev-environments/hardhat/">
+                  <img src="assets/images/hardhat-logo.webp" alt="Hardhat logo"><span>Hardhat</span>
+                </a>
+                <a class="feature brand" href="develop/smart-contracts/libraries/ethers-js/">
+                  <img src="assets/images/ethers-logo.webp" alt="Ethers.js logo"><span>Ethers.js</span>
+                </a>
+              </div>
+            </div>
+            <div class="feature">
+              <h3>Understand the landscape</h3>
+              <p>Discover the smart contract ecosystem on Polkadot, supporting both Solidity and ink! development.</p>
+              <a href="tutorials/smart-contracts/launch-your-first-project/test-and-deploy-with-hardhat/">
+                <button class="md-button secondary">Explore the ecosystem</button>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="feature-intro">
+            <div>
+              <h2>Build blockchains</h2>
+              <p>Kickstart your journey by learning how to get started with the Polkadot SDK to build and deploy custom blockchains.</p>
+            </div>
+            <div>
+              <a href="develop/parachains">
+                <button class="md-button">Start now</button>
+              </a>     
+            </div>
+          </div>
+          <div class="featured-content">   
+            <a class="feature" href="tutorials/polkadot-sdk/parachains/zero-to-hero/set-up-a-template/">
               <div class="column">
-                <h3>Start building blockchains</h3>
-                <p>Kickstart your journey by learning how to get started with the Polkadot SDK to build and deploy custom blockchains.</p>
+                <h3>1. Create your chain in minutes</h3>
+                <p>Fast-track your development with a preconfigured blockchain template.</p>
               </div>
               <div class="column">
                 <span class="md-icon">{% include ".icons/octicons/arrow-up-right-16.svg" %}</span>
               </div>
             </a>
-            <a class="feature" href="develop/smart-contracts/">
+            <a class="feature" href="tutorials/polkadot-sdk/parachains/zero-to-hero/build-custom-pallet/">
               <div class="column">
-                <h3>Develop smart contracts</h3>
-                <p>Unlock the power of smart contracts on Polkadot, whether you're leveraging Wasm or working in an EVM environment.</p>
+                <h3>2. Customize the business logic</h3>
+                <p>Design and tailor your blockchain's functionality to fit your needs.</p>
               </div>
               <div class="column">
                 <span class="md-icon">{% include ".icons/octicons/arrow-up-right-16.svg" %}</span>
               </div>
             </a>
-            <a class="feature" href="polkadot-protocol/architecture/">
+            <a class="feature" href="tutorials/polkadot-sdk/parachains/zero-to-hero/deploy-to-testnet/">
               <div class="column">
-                <h3>Explore architecture</h3>
-                <p>Discover Polkadot's network structure and how it ensures security, scalability, and interoperability across chains.</p>
+                <h3>3. Deploy your chain to Polkadot</h3>
+                <p>Launch your blockchain on Polkadot's secure and scalable platform.</p>
               </div>
               <div class="column">
                 <span class="md-icon">{% include ".icons/octicons/arrow-up-right-16.svg" %}</span>
@@ -79,7 +116,7 @@
             </a>
           </div>
         </div>
-      
+
         <div class="cta-section">
           <div class="final-cta">
             <div class="final-cta-content">
