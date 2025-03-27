@@ -1374,7 +1374,7 @@ details.interface > summary::before {
 /** Feedback widget styling **/
 .md-feedback {
   margin-top: 0;
-  margin-bottom: 0.75em;;
+  margin-bottom: 0.75em;
 }
 
 .md-feedback__title {
@@ -1513,32 +1513,72 @@ div.mermaid {
   font-size: 12px;
 }
 
-/** Where to Go Next Badge styling */
-.md-typeset span.badge {
+/** Badge Styling */
+/* Basic style */
+span.badge {
   border-radius: 0.5em;
   font-size: 0.8em;
   padding: 0.2em 0.5em;
-  margin-right: 0.5em;
 }
 
-.md-typeset span.badge.tutorial {
+/* Color Variants */
+span.badge.tutorial {
   background-color: var(--electric-violet);
   color: var(--white);
 }
-
-.md-typeset span.badge.guide {
+span.badge.guide {
   background-color: var(--chartreuse);
   color: var(--black);
 }
-
-.md-typeset span.badge.learn {
+span.badge.learn {
   background-color: var(--aqua);
   color: var(--black);
 }
-
-.md-typeset span.badge.external {
+span.badge.external {
   background-color: var(--blue-ribbon);
   color: var(--white);
+}
+
+span.badge.beginner {
+  background-color: rgb(32, 172, 32);
+  color: var(--white);
+}
+span.badge.intermediate {
+  background-color: var(--chartreuse);
+  color: var(--black);
+}
+span.badge.advanced {
+  background-color: red;
+  color: var(--white);
+}
+
+/* Cards "In this Section" */
+.subsection-wrapper .card span.badge {
+  display: inline-block;
+  margin-top: 0.9em;
+  margin-left: 1.5em;
+}
+
+/* Cards "Where to Go Next" */
+.grid.cards span.badge {
+  margin-right: 0.5em;
+}
+
+/* Badge in Content Page */
+.md-typeset > span.badge {
+  margin-top: 2em;
+  margin-bottom: 1.5em;
+  display: inline-block;
+}
+
+.card-divider {
+  width: 90%;
+  margin: 0 1em 1em;
+  border: 0.5px solid #ccc;
+}
+
+.subsection-wrapper .card .title {
+  padding: 0.5em 1.5em 0.5em 1.2em;
 }
 
 /* Document date styling */
@@ -1637,52 +1677,6 @@ div.button-wrapper > a.connectMetaMask {
 }
 
 .md-typeset img {
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-
-/*Card style and new badges for tutorial*/
-
-.card-divider {
-  width: 90%;
-  margin: 0 1em 1em;
-  border: .5px solid #ccc;
-}
-
-span.badge.beginner {
-  display: inline-block;
-  margin-top: .9em;
-  margin-left: 1.5em;
-  border-radius: 0.5em;
-  font-size: 0.8em;
-  padding: 0.2em 0.5em;
-  background-color: rgb(32, 172, 32);
-  color: var(--white);
-}
-
-span.badge.intermediate {
-  display: inline-block;
-  margin-top: .9em;
-  margin-left: 1.5em;
-  border-radius: 0.5em;
-  font-size: 0.8em;
-  padding: 0.2em 0.5em;
-  background-color: var(--chartreuse);
-  color: var(--black);
-}
-
-span.badge.advanced {
-  display: inline-block;
-  margin-top: .9em;
-  margin-left: 1.5em;
-  border-radius: 0.5em;
-  font-size: 0.8em;
-  padding: 0.2em 0.5em;
-  background-color: red;
-  color: var(--white);
-}
-
-.subsection-wrapper .card .title{
-  padding: 0.5em 1.5em 0.5em 1.2em
 }
