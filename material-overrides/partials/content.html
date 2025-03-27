@@ -1,22 +1,22 @@
 {#-
   This file was automatically generated - do not edit
 -#}
+
 {% if "material/tags" in config.plugins and tags %}
   {% include "partials/tags.html" %}
 {% endif %}
 
 {% set badge_html = '' %}
 {% if page.meta and page.meta.tutorial_badge %}
-  {% set badge_html = '<span class="badge ' ~ (page.meta.tutorial_badge | lower | replace('.', '-')) ~ '">' ~ (page.meta.tutorial_badge | capitalize) ~ '</span>' %}
+  {% set badge_html = '<span class="badge ' ~ (page.meta.tutorial_badge | lower | replace(".", "-")) ~ '">' ~ (page.meta.tutorial_badge | capitalize) ~ '</span>' %}
+  {{ badge_html | safe }}
 {% endif %}
 
-{% if "\x3ch1" in page.content %}
-  {{ page.content | replace('<h1>', badge_html ~ '\n<h1>', 1) | safe }}
-{% else %}
-  {{ badge_html | safe }}
+{% if "\x3ch1" not in page.content %}
   <h1>{{ page.title | d(config.site_name, true) }}</h1>
-  {{ page.content }}
 {% endif %}
+
+{{ page.content }}
 
 {% include "partials/source-file.html" %}
 {% include "partials/comments.html" %}
