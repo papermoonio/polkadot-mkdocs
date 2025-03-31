@@ -1526,6 +1526,7 @@ span.badge.tutorial {
   background-color: var(--electric-violet);
   color: var(--white);
 }
+
 span.badge.guide {
   background-color: var(--chartreuse);
   color: var(--black);
