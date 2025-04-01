@@ -32,15 +32,16 @@
 
               <div class="card">
                 <a href="{{ subsection_path }}">
-                  {% if nav_item.meta and nav_item.meta.tutorial_badge %}
-                    <span class="badge {{ nav_item.meta.tutorial_badge | lower }}">
-                      {{ nav_item.meta.tutorial_badge | capitalize }}
-                    </span>
-                  {% endif %}
+                  <div class="card-header">
+                    {% if nav_item.meta and nav_item.meta.tutorial_badge %}
+                      <span class="badge {{ nav_item.meta.tutorial_badge | lower }}">
+                        {{ nav_item.meta.tutorial_badge | capitalize }}
+                      </span>
+                    {% endif %}
+                    <h2 class="title">{{ nav_item.title }}</h2>
+                  </div>
 
-                  <h2 class="title">{{ nav_item.title }}</h2>
-
-                  <div class="card-divider"></div>
+                  <hr>
 
                   {% if description != "" %}
                     <p class="description">{{ description }}</p>
