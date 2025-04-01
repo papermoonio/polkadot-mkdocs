@@ -982,6 +982,10 @@ input.md-search__input::placeholder {
   }
 }
 
+article.md-content__inner.md-typeset > h1 {
+  margin: 0 0 0.5em;
+}
+
 /** Footer styling **/
 .md-grid.md-footer-meta__inner {
   padding: 0.75rem 1.5rem;
@@ -1519,6 +1523,7 @@ span.badge {
   border-radius: 0.5em;
   font-size: 0.8em;
   padding: 0.2em 0.5em;
+  white-space: nowrap;
 }
 
 /* Color Variants */
@@ -1540,46 +1545,28 @@ span.badge.external {
   color: var(--white);
 }
 
-span.badge.beginner {
-  background-color: rgb(32, 172, 32);
-  color: var(--white);
-}
-span.badge.intermediate {
-  background-color: var(--chartreuse);
-  color: var(--black);
-}
+span.badge.beginner,
+span.badge.intermediate,
 span.badge.advanced {
-  background-color: red;
+  background-color: var(--storm-gray);
   color: var(--white);
 }
 
-/* Cards "In this Section" */
-.subsection-wrapper .card span.badge {
-  display: inline-block;
-  margin-top: 0.9em;
-  margin-left: 1.5em;
-}
-
-/* Cards "Where to Go Next" */
+/* Badge in card "Where to Go Next" */
 .grid.cards span.badge {
   margin-right: 0.5em;
 }
 
 /* Badge in Content Page */
 .md-typeset > span.badge {
-  margin-top: 2em;
-  margin-bottom: 1.5em;
   display: inline-block;
 }
 
-.card-divider {
-  width: 90%;
-  margin: 0 1em 1em;
-  border: 0.5px solid #ccc;
-}
-
-.subsection-wrapper .card .title {
-  padding: 0.5em 1.5em 0.5em 1.2em;
+.card-header {
+  align-items: center;
+  padding: 1.2em;
+  gap: 0.75em;
+  display: flex;
 }
 
 /* Document date styling */
