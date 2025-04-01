@@ -29,10 +29,14 @@
   display: flex;
 }
 
+.subsection-wrapper .card .card-header h2.title {
+  padding: 0;
+}
+
 .subsection-wrapper .title {
   margin: 0;
   font-size: 1.15em;
-  padding: 0;
+  padding: 1.5em 1.5em 0.5em 1.2em;
 }
 
 .md-typeset hr {

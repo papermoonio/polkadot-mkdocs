@@ -1562,13 +1562,6 @@ span.badge.advanced {
   display: inline-block;
 }
 
-.card-header {
-  align-items: center;
-  padding: 1.2em;
-  gap: 0.75em;
-  display: flex;
-}
-
 /* Document date styling */
 .md-source-file {
   display: flex;
