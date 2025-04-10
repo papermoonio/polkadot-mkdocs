@@ -982,7 +982,7 @@ input.md-search__input::placeholder {
   }
 }
 
-article.md-content__inner.md-typeset > h1 {
+article.md-content__inner.md-typeset > h1:has(+ .badge) {
   margin: 0 0 0.5em;
 }
 
