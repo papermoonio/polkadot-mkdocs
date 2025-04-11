@@ -1499,6 +1499,11 @@ div.mermaid {
   align-items: center;
 }
 
+.md-typeset .grid.cards > ul > li > hr, .md-typeset .grid.cards > ol > li > hr, .md-typeset .grid > .card > h {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
 /** Kapa styling **/
 .mantine-r39cu6 {
   height: 3rem;
