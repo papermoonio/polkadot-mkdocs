@@ -1,8 +1,9 @@
 {#-
   This file was automatically generated - do not edit
 -#}
-
-{% include "partials/tags.html" %}
+{% if "material/tags" in config.plugins and tags %}
+  {% include "partials/tags.html" %}
+{% endif %}  
 
 {% set badge_html = '' %}
 {% if page.meta and page.meta.tutorial_badge %}
