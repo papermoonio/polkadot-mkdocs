@@ -24,7 +24,7 @@
 
 .subsection-wrapper .card-header {
   align-items: center;
-  padding: 1.2em;
+  padding: 1.2em 1.2em 0em;
   gap: 0.75em;
   display: flex;
 }
@@ -41,6 +41,11 @@
 
 .md-typeset hr {
   margin: 0 1.5em 1em;
+}
+
+.subsection-wrapper .card hr {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
 }
 
 .subsection-wrapper .description {
