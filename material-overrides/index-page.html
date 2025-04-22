@@ -32,7 +32,17 @@
 
               <div class="card">
                 <a href="{{ subsection_path }}">
-                  <h2 class="title">{{ nav_item.title }}</h2>
+                  <div class="card-header">
+                    {% if nav_item.meta and nav_item.meta.tutorial_badge %}
+                      <span class="badge {{ nav_item.meta.tutorial_badge | lower }}">
+                        {{ nav_item.meta.tutorial_badge | capitalize }}
+                      </span>
+                    {% endif %}
+                    <h2 class="title">{{ nav_item.title }}</h2>
+                  </div>
+
+                  <hr>
+
                   {% if description != "" %}
                     <p class="description">{{ description }}</p>
                   {% else %}
@@ -42,7 +52,6 @@
                       {% else %}
                         {% set nav_item_url = nav_item.url %}
                       {% endif %}
-
                       {% if nav_item_url.startswith('/') %}
                         {% set nav_item_url = nav_item_url[1:] %}
                       {% endif %}
@@ -79,7 +88,6 @@
 {% endmacro %}
 
 {% block content %}
- 
   {% set insert_marker = ':::INSERT_IN_THIS_SECTION:::' %}
   {% if insert_marker in page.content %}
     {% set parts = page.content.split(insert_marker) %}
@@ -100,4 +108,3 @@
     {{ page.content | safe }}
   {% endif %}
 {% endblock %}
-

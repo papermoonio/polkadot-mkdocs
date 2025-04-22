@@ -22,10 +22,35 @@
   color: var(--pink);
 }
 
+.subsection-wrapper .card-header {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.2em 1.2em 0em;
+  gap: 0.25em;
+  display: flex;
+}
+.subsection-wrapper .card-header .badge {
+  order: 2;
+}
+
+.subsection-wrapper .card .card-header h2.title {
+  order: 1; 
+  padding: 0;
+}
+
 .subsection-wrapper .title {
   margin: 0;
   font-size: 1.15em;
   padding: 1.5em 1.5em 0.5em 1.2em;
+}
+
+.md-typeset hr {
+  margin: 0 1.5em 1em;
+}
+
+.subsection-wrapper .card hr {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
 }
 
 .subsection-wrapper .description {
