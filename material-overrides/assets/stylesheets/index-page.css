@@ -40,8 +40,9 @@
 
 .subsection-wrapper .title {
   margin: 0;
+  line-height: 1.5em;
   font-size: 1.15em;
-  padding: 1.5em 1.5em 0.5em 1.2em;
+  padding: 1.05em 1.05em 0em;
 }
 
 .md-typeset hr {
