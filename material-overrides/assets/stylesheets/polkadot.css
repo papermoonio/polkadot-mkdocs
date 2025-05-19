@@ -1610,15 +1610,21 @@ span.badge.advanced {
 .feedback-actions-container
   .feedback-section
   ~ .edit-section
-  a.md-content__button.md-icon {
-  margin: 0.75em auto 0;
+  > a.md-content__button.md-icon {
+  margin: 0.75em 0 0 0
 }
 
 .feedback-actions-container
   .feedback-section:has(.md-feedback[hidden])
   ~ .edit-section
   a.md-content__button.md-icon {
-  margin: auto;
+  align-items: center;
+}
+
+.feedback-actions-container .edit-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
 @media screen and (max-width: 30em) {
