@@ -107,6 +107,13 @@ div.button-wrapper {
 /**
   Feature section styles
 **/
+.md-typeset .feature-section .featured-content a.feature {
+  gap: unset;
+}
+
+.md-typeset .feature-section .featured-content a.feature .column {
+  width: unset;
+}
 
 .feature-intro {
   display: flex;
@@ -179,10 +186,6 @@ div.feature {
   height: 100%;
 }
 
-div.feature h3 {
-  max-width: 80%;
-}
-
 div.feature h3,
 .md-typeset a.feature h3 {
   font-size: 1.382rem;
@@ -212,28 +215,23 @@ div.feature h3,
   margin-top: auto;
 }
 
-.brand-list {
+.md-typeset a.brand {
   display: flex;
-  flex-direction: column;
-  gap: .75em;
-}
-
-.md-typeset a.feature.brand {
-  justify-content: center;
-  padding: .5em;
+  gap: .5em;
+  padding: .3em;
   color: var(--black);
   font-family: 'Unbounded';
 }
 
-.md-typeset a.feature.brand:hover {
+.md-typeset a.brand:hover {
   color: var(--pink);
 }
 
-.md-typeset a.feature.brand img {
-  height: 3em;
+.md-typeset a.brand img {
+  height: 1.5em;
 }
 
-.md-typeset a.feature.brand span {
+.md-typeset a.brand span {
   min-width: 6em;
 }
 
@@ -327,16 +325,6 @@ div.feature h3,
     max-width: 75%;
   }
 
-  .brand-list {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .md-typeset a.feature.brand {
-    min-width: unset;
-    max-width: 30em;
-  }
-
   .cta-section .final-cta,
   .final-cta-content {
     width: auto;
@@ -366,12 +354,6 @@ div.feature h3,
 
   .feature-intro {
     gap: 5em;
-  }
-
-  .md-typeset a.feature.brand {
-    padding: .5em 1.5em;
-    gap: 1em;
-    flex: unset;
   }
 }
 
@@ -413,6 +395,7 @@ div.feature h3,
     padding: 0;
   }
 
+  div.feature h3,
   .md-typeset a.feature h3 {
     font-size: 1rem;
   }
@@ -446,13 +429,5 @@ div.feature h3,
     flex-direction: column;
     gap: 1em;
     align-items: start;
-  }
-
-  div.feature h3 {
-    max-width: 100%;
-  }
-
-  .md-typeset a.feature.brand {
-    flex: 1 1 50%;
   }
 }
