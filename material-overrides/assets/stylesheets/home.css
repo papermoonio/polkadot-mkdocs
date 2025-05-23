@@ -1,3 +1,7 @@
+/**
+  General styles
+**/
+
 :root {
   --adjust-header-height: 8em;
   --min-padding: 0 3em;
@@ -10,9 +14,10 @@
   margin-top: calc(
     -1 * var(--adjust-header-height)
   ); /* Use a negative value to push the gradient to cover behind the header */
+  padding-top: 5.5em;
   display: flex;
   flex-direction: column;
-  gap: var(--adjust-header-height);
+  gap: 4em;
 }
 
 .md-main,
@@ -50,12 +55,20 @@
   box-shadow: unset;
 }
 
+.md-typeset a {
+  text-decoration: none;
+}
+
+/**
+  Hero section styles
+**/
+
 .hero-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: var(--adjust-header-height);
   overflow: hidden;
+  gap: 5em;
 }
 
 .hero-content {
@@ -72,15 +85,18 @@
   font-size: 18px;
 }
 
-.button-wrapper {
-  display: flex;
+div.button-wrapper {
   gap: 16px;
   margin-top: 2em;
   width: 100%;
+  flex-wrap: wrap;
+  justify-content: normal;
 }
 
 .md-typeset .button-wrapper a {
-  flex: 1 1 0%;
+  flex: 1 1 265px;
+  white-space: nowrap;
+  max-width: 365px;
 }
 
 .md-typeset .button-wrapper a .md-button {
@@ -88,77 +104,22 @@
   height: 100%;
 }
 
-.tutorial-cards {  
-  width: 44%;
-  display: grid;
-  gap: 1.5em;
-  max-width: 800px;
-  grid-template-rows: auto;
-  grid-auto-rows: minmax(200px, auto);
-  grid-template-columns: 1fr 1fr;
+/**
+  Feature section styles
+**/
+.md-typeset .feature-section .featured-content a.feature {
+  gap: unset;
 }
 
-.md-typeset a.tutorial-card {
-  background-color: var(--white);
-  border-radius: 16px;
-  border: 1px solid var(--mystic);
-  padding: 1em;
-  text-decoration: none;
-  position: relative;
-  min-height: 200px;
-}
-
-.md-typeset a.tutorial-card:first-child {
-  grid-row: 1;
-  grid-column: 1;
-}
-
-.md-typeset a.tutorial-card:nth-child(2) {
-  grid-row: 1 / span 2;
-  grid-column: 2;
-  align-self: center;
-  margin-bottom: 1.5em;
-}
-
-.md-typeset a.tutorial-card:nth-child(3) {
-  grid-row: 2;
-  grid-column: 1;
-}
-
-.md-typeset a.tutorial-card:hover h3,
-.md-typeset a.feature:hover h3 {
-  color: var(--pink);
-}
-
-.md-typeset a.tutorial-card .md-icon svg {
-  width: 32px;
-  height: 32px;
-  max-width: unset;
-  fill: var(--black);
-}
-
-.tutorial-card .column:nth-child(2) {
-  display: flex;
-  align-items: center;
-}
-
-.tutorial-card h3 {
-  margin-top: 0;
-  font-size: 20px;
-}
-
-.tutorial-card .tutorial-number {
-  font-size: 22px;
-  vertical-align: bottom;
-}
-
-.tutorial-card p {
-  font-size: 16px;
+.md-typeset .feature-section .featured-content a.feature .column {
+  width: unset;
 }
 
 .feature-intro {
-  margin: auto;
-  max-width: 880px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 10em;
 }
 
 .md-typeset .feature-intro h2 {
@@ -167,15 +128,24 @@
   margin-top: 0;
 }
 
+.md-typeset .feature-intro p {
+  margin-bottom: 0;
+}
+
+.feature-intro .md-button {
+  white-space: nowrap;
+}
+
 .featured-content {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 48px;
   margin: auto;
-  padding: 2em 2em 0;
+  padding: 2em 0 0;
 }
 
+div.feature,
 .md-typeset a.feature {
   color: var(--md-default-fg-color);
   flex: 1 1;
@@ -183,26 +153,50 @@
   border-radius: 16px;
   padding: 32px;
   display: flex;
+  gap: 36px;
+  background-color: var(--white);
+}
+
+.md-typeset a.feature { 
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
 }
 
-.md-typeset a.feature h3 {
-  font-size: 1.382rem;
-  color: var(--black);
-  margin-top: 0;
-  line-height: 1.2;
+div.feature,
+.md-typeset a.feature.column {
+  flex-direction: column;
 }
 
-.md-typeset .featured-content a {
-  text-decoration: none;
-  background-color: var(--white);
+div.feature {
+  gap: 1em;
+}
+
+.md-typeset a.feature.column {
+  gap: unset;
+}
+
+.md-typeset a.feature .column {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .md-typeset a.feature .column:first-child {
   width: 83.3%;
   height: 100%;
+}
+
+div.feature h3,
+.md-typeset a.feature h3 {
+  font-size: 1.382rem;
+  color: var(--black);
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+.md-typeset a.feature:hover h3 {
+  color: var(--pink);
 }
 
 .feature p {
@@ -218,14 +212,32 @@
 }
 
 .feature a {
-  display: flex;
-  justify-content: center;
   margin-top: auto;
 }
 
-.feature a svg {
-  margin-left: 0.3em;
+.md-typeset a.brand {
+  display: flex;
+  gap: .5em;
+  padding: .3em;
+  color: var(--black);
+  font-family: 'Unbounded';
 }
+
+.md-typeset a.brand:hover {
+  color: var(--pink);
+}
+
+.md-typeset a.brand img {
+  height: 1.5em;
+}
+
+.md-typeset a.brand span {
+  min-width: 6em;
+}
+
+/**
+  Final CTA section styles
+**/
 
 .cta-section {
   display: flex;
@@ -283,29 +295,22 @@
   margin-top: 1rem;
 }
 
+/**
+  Smaller screen styles
+**/
+@media screen and (max-width: 1332px) {  
+  .hero-section {
+    margin-top: 2em;
+  }
+}
+
 @media screen and (max-width: 76.2344em) {  
   .hero-section {
     gap: 3em;
   }
 
   .hero-content {
-    justify-items: center;
     width: unset;
-    max-width: unset;
-  }
-
-  .md-typeset .hero-content h1 {
-    line-height: 1;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .tutorial-cards {
-    max-width: unset;
-    width: unset;
-  }
-
-  .feature-intro {
     max-width: unset;
   }
 
@@ -314,6 +319,7 @@
     gap: 24px;
   }
 
+  div.feature,
   .md-typeset a.feature {
     min-width: 60%;
     max-width: 75%;
@@ -322,27 +328,38 @@
   .cta-section .final-cta,
   .final-cta-content {
     width: auto;
+    min-height: 100%;
   }
 }
 
 @media screen and (max-width: 66.2344em) {  
+  .home-container {
+    gap: 3em;
+  }
+
   .hero-section {
     flex-wrap: wrap;
+    gap: 1em;
+  }
+
+  .hero-section img {
+    display: none;
+  }
+
+  div.feature,
+  .md-typeset a.feature {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .feature-intro {
     gap: 5em;
-  }
-
-  .tutorial-cards {
-    grid-auto-rows: auto;
-  }
-
-  .md-typeset a.tutorial-card {
-    min-height: unset;
   }
 }
 
 @media screen and (max-width: 45em) {
-  .home-container {
-    gap: 4em;
+  .hero-section {
+    gap: 0em;
   }
 
   .hero-section,
@@ -357,30 +374,17 @@
     font-size: 1.659rem;
   }
 
-  .button-wrapper {
+  div.button-wrapper {
     flex-direction: column;
     width: 100%;
   }
 
-  .tutorial-cards {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    width: 100%;
+  .md-typeset .button-wrapper a {
+    flex: 1 1 0%;
   }
 
-  .tutorial-cards,
-  .featured-content,
-  .cta-section {
-    gap: 36px;
-  }
-
-  .md-typeset a.tutorial-card {
-    width: 100%;
-  }
-
-  .md-typeset a.tutorial-card:nth-child(2) {
-    margin-bottom: 0;
+  .feature-intro {
+    margin-bottom: 2em;
   }
 
   .md-typeset .feature-intro h2 {
@@ -391,13 +395,9 @@
     padding: 0;
   }
 
+  div.feature h3,
   .md-typeset a.feature h3 {
     font-size: 1rem;
-  }
-
-  .md-typeset a.feature {
-    min-width: 100%;
-    max-width: 100%;
   }
 
   .feature p,
@@ -407,26 +407,27 @@
 
   .cta-section {
     flex-direction: column;
-    padding-bottom: 3em;
+    padding-bottom: 0;
+    gap: 1em;
   }
-
-  .final-cta {
-    min-height: unset;
-  }
-
-  .final-cta-content {
-    min-height: unset;
-  }  
 
   .md-typeset .final-cta h2 {
     font-size: 1.382rem;
   }
 
   .final-cta-content {
-    padding: 1.5em;
+    padding: 32px;
   }
 
   .md-typeset .final-cta .md-button {
-    margin-top: unset;
+    margin-top: .5em;
+  }
+}
+
+@media screen and (max-width: 40em) {
+  .feature-intro {
+    flex-direction: column;
+    gap: 1em;
+    align-items: start;
   }
 }

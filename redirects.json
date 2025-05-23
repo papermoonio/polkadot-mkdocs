@@ -1,0 +1,72 @@
+{
+  "data": [
+    {
+      "key": "/develop/parachains/testing/setup/",
+      "value": "/develop/parachains/testing/"
+    },
+    {
+      "key": "/develop/smart-contracts/evm/",
+      "value": "/develop/smart-contracts/overview/"
+    },
+    {
+      "key": "/develop/smart-contracts/evm/native-evm-contracts/",
+      "value": "/develop/smart-contracts/overview/"
+    },
+    {
+      "key": "/develop/smart-contracts/evm/parachain-contracts/",
+      "value": "/develop/smart-contracts/overview/"
+    },
+    {
+      "key": "/develop/smart-contracts/wasm-ink/",
+      "value": "/develop/smart-contracts/overview/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/accounts/",
+      "value": "/polkadot-protocol/parachain-basics/accounts/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/blocks-transactions-fees/blocks/",
+      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/blocks/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/blocks-transactions-fees/fees/",
+      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/fees/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/blocks-transactions-fees/",
+      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/blocks-transactions-fees/transactions/",
+      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/transactions/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/chain-data/",
+      "value": "/polkadot-protocol/parachain-basics/chain-data/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/cryptography/",
+      "value": "/polkadot-protocol/parachain-basics/cryptography/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/data-encoding/",
+      "value": "/polkadot-protocol/parachain-basics/data-encoding/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/",
+      "value": "/polkadot-protocol/parachain-basics/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/interoperability/",
+      "value": "/polkadot-protocol/parachain-basics/interoperability/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/networks/",
+      "value": "/polkadot-protocol/parachain-basics/networks/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/randomness/",
+      "value": "/polkadot-protocol/parachain-basics/randomness/"
+    }
+  ]
+}
