@@ -34,6 +34,20 @@
   {%- endif -%} 
 {%- endblock -%} 
 
+{% block announce %}
+<aside class="md-banner md-banner--info" id="custom-announcement">
+  <div class="md-banner__inner">
+    <button class="md-banner__button md-icon" aria-label="Dismiss" onclick="document.getElementById('custom-announcement').style.display='none'">
+      {% set icon = config.theme.icon.close or "material/close" %}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+    </button>
+    💬 Help us improve the Smart Contracts docs! 
+    Take our quick feedback survey 👉 
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdfw3ZcSI1UR1kszTuTt_A-oIBy9jLv6sRIEoukSb3xVL1v4Q/viewform" target="_blank">Share your thoughts</a>
+  </div>
+</aside>
+{% endblock %}
+
 {% block libs %}
   {{ super() }}
   <link rel="preconnect" href="https://widget.kapa.ai/">
