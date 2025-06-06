@@ -1,0 +1,6871 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+  
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learn about account structures, balances, and address formats in the Polkadot SDK, including how to manage lifecycle, references, and balances.">
+      
+      
+      
+        <link rel="canonical" href="https://docs.polkadot.com/polkadot-protocol/parachain-basics/accounts/">
+      
+      
+        <link rel="prev" href="../networks/">
+      
+      
+        <link rel="next" href="../blocks-transactions-fees/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.webp">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+  
+
+    <title>Polkadot SDK Accounts | Polkadot Developer Docs</title>
+    
+	
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
+      
+      
+  
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--code:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.6 16.6 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4m-5.2 0L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4Z"/></svg>');}</style>
+
+
+
+    
+  <link rel="stylesheet" href="../../../assets/stylesheets/polkadot.css">
+
+    
+  
+      
+    
+  <link rel="preconnect" href="https://widget.kapa.ai/">
+  <style data-emotion="mantine" data-s=""></style>
+  <script defer
+    src="https://widget.kapa.ai/kapa-widget.bundle.js"
+    data-website-id="3fbec0cf-5f4b-4f78-9cff-4ebf071c3bd3"
+    data-project-name="Polkadot"
+    data-modal-title="Polkadot AI Chatbot"
+    data-project-color="#1E1E1E"
+    data-button-bg-color="#1C0533"
+    data-button-text-color="white"
+    data-button-height="80px"
+    data-button-width="72px"
+    data-font-size-xs="12px"
+    data-font-size-sm="14px"
+    data-font-size-md="16px"
+    data-font-size-lg="18px"
+    data-font-size-xl="22px"
+    data-modal-title-font-size="22px"
+    data-button-text-font-size="18px"
+    data-query-input-font-size="16px"
+    data-button-image-height="24px"
+    data-button-image-width="24px"
+    data-modal-image-height="24px"
+    data-modal-image-width="24px"
+    data-project-logo="https://1000logos.net/wp-content/uploads/2022/08/Polkadot-Symbol.png"
+    data-modal-header-bg-color="#1C0533"
+    data-modal-title-color="white"
+    data-modal-disclaimer="This is an AI chatbot trained to answer questions about Polkadot. As such, the answers it provides might not always be accurate or up-to-date. Please use your best judgement when evaluating its responses. Also, **please refrain from sharing any personal or private information with the bot**. By submitting a query, you agree that you have read and understood [these conditions](https://polkadot.com/legal-disclosures/).
+      **If you need further assistance, you can reach out to [Polkadot Support](https://support.polkadot.network/support/tickets/new?ticket_form=i_have_a_support_request).**"
+    data-modal-disclaimer-font-size="12px"
+    data-search-mode-enabled="false"
+    data-search-mode-default="false"
+    data-search-result-primary-title-font-size="16px"
+    data-button-position-top="120px"
+    data-button-position-right="0px"
+  ></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.addEventListener('click', (event) => {
+        if (event.target.id === 'kapa-widget-container') {
+          event.target.addEventListener('keydown', (event) => {
+            event.stopPropagation();
+          });
+        }
+      });
+    });
+  </script>
+
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Manrope:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Manrope";--md-code-font:"Roboto Mono"}</style>
+      
+    
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/terminal.css">
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/timeline-neoteroi.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-ZSKWB953ZL"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-ZSKWB953ZL",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-ZSKWB953ZL",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>var consent;"undefined"==typeof __md_analytics||(consent=__md_get("__consent"))&&consent.analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#accounts" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    <div data-md-component="announce" class="announce hideable" style="display: none;">
+    <aside class="md-banner">
+      <div class="md-banner__inner md-grid md-typeset">
+          <button
+            class="md-banner__button md-icon"
+            aria-label="Don't show this again"
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          </button>
+        <div class="announce-content">Welcome to the Polkadot developer documentation! If you were looking for docs.substrate.io, you've been redirected here. Check out the <a class="announce-link" href="https://x.com/PolkadotDevs/status/1885377834480230498" target="_blank">official announcement</a> on X (Twitter).</div>
+      </div>
+    </aside>
+  </div>
+
+  
+      
+  
+    
+  
+  <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="Header">
+      <label class="md-header__button md-icon" for="__drawer">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      </label>
+      <div class="md-header__title" data-md-component="header-title">
+        <div class="md-header__ellipsis">
+          <a href="https://polkadot.com/" title="Polkadot" class="md-header__button md-logo" aria-label="Polkadot" data-md-component="logo">
+            
+  <img src="../../../assets/images/logo.webp" alt="logo">
+
+          </a>
+        </div>
+      </div>
+      <div class="md-header__buttons">
+        <!-- Link to home -->
+        
+          <div class="home-button-wrapper">
+            <a
+            href="../../.."
+            title="Polkadot Developer Docs"
+            class="md-header__button md-tabs__link"
+            aria-label="Polkadot Developer Docs"
+            data-md-component="logo"
+            >
+              Home
+            </a>
+          </div>
+        
+        
+          
+            <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+    <div class="md-grid">
+      <ul class="md-tabs__list">
+        
+          
+        
+          
+            <li class="md-tabs__item--custom" tabindex="0">    
+              <span class="md-tabs__link">
+                <a href="../../../develop/">Develop</a>   
+              </span>
+              <ul class="md-tab__list">
+                
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../develop/networks/">
+                        <span class="dropdown-title">Networks</span>
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../develop/parachains/">
+                        <span class="dropdown-title">Parachains</span>
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../develop/smart-contracts/">
+                        <span class="dropdown-title">Smart Contracts</span>
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../develop/interoperability/">
+                        <span class="dropdown-title">Interoperability</span>
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../develop/toolkit/">
+                        <span class="dropdown-title">Toolkit</span>
+                      </a>
+                    </li>
+                  
+                
+              </ul>
+            </li>
+          
+        
+          
+            <li class="md-tabs__item--custom" tabindex="0">    
+              <span class="md-tabs__link">
+                <a href="../../../infrastructure/">Infrastructure</a>   
+              </span>
+              <ul class="md-tab__list">
+                
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../infrastructure/running-a-node/">
+                        <span class="dropdown-title">Running a Node</span>
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../infrastructure/running-a-validator/">
+                        <span class="dropdown-title">Running a Validator</span>
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../infrastructure/staking-mechanics/">
+                        <span class="dropdown-title">Staking Mechanics</span>
+                      </a>
+                    </li>
+                  
+                
+              </ul>
+            </li>
+          
+        
+          
+            <li class="md-tabs__item--custom" tabindex="0">    
+              <span class="md-tabs__link">
+                <a href="../../">Polkadot Protocol</a>   
+              </span>
+              <ul class="md-tab__list">
+                
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../architecture/">
+                        <span class="dropdown-title">Architecture</span>
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../">
+                        <span class="dropdown-title">Parachain Basics</span>
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../smart-contract-basics/">
+                        <span class="dropdown-title">Smart Contract Basics</span>
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../onchain-governance/">
+                        <span class="dropdown-title">On-Chain Governance</span>
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../glossary/">
+                        <span class="dropdown-title">Glossary</span>
+                      </a>
+                    </li>
+                  
+                
+              </ul>
+            </li>
+          
+        
+          
+            <li class="md-tabs__item--custom" tabindex="0">    
+              <span class="md-tabs__link">
+                <a href="../../../tutorials/">Tutorials</a>   
+              </span>
+              <ul class="md-tab__list">
+                
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../tutorials/polkadot-sdk/">
+                        <span class="dropdown-title">Polkadot SDK Chains</span>
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../tutorials/interoperability/">
+                        <span class="dropdown-title">Interoperability</span>
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../tutorials/onchain-governance/">
+                        <span class="dropdown-title">On-Chain Governance</span>
+                      </a>
+                    </li>
+                  
+                
+                  
+                    <li class="md-tab__item">
+                      <a href="../../../tutorials/smart-contracts/">
+                        <span class="dropdown-title">Smart Contracts</span>
+                      </a>
+                    </li>
+                  
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </nav>
+          
+         
+        
+        
+        
+      </div>
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input
+        type="text"
+        class="md-search__input"
+        name="query"
+        aria-label="Search"
+        placeholder="Type to start searching"
+        autocapitalize="off"
+        autocorrect="off"
+        autocomplete="off"
+        spellcheck="false"
+        data-md-component="search-query"
+        required
+      />
+      <label class="md-search__icon md-icon" for="__search">
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button
+          type="reset"
+          class="md-search__icon md-icon"
+          title="Clear"
+          aria-label="Clear"
+          tabindex="-1"
+        >
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+      
+    </nav>
+  </header>
+    
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+    
+    <div
+      class="md-sidebar md-sidebar--primary"
+      data-md-component="sidebar"
+      data-md-type="navigation"
+      
+    >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://polkadot.com/" title="Polkadot" class="md-nav__button md-logo" aria-label="Polkadot" data-md-component="logo">
+      
+  <img src="../../../assets/images/logo.webp" alt="logo">
+
+    </a>
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/">Develop</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Develop
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/networks/" class="md-nav__link">
+        Networks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/parachains/">Parachains</a>
+          
+            <label for="__nav_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Parachains
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-parachains-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/intro-polkadot-sdk/" class="md-nav__link">
+        Introduction to Polkadot SDK
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/install-polkadot-sdk/" class="md-nav__link">
+        Install Polkadot SDK Dependencies
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_4" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/parachains/customize-parachain/">Customize Your Parachain</a>
+          
+            <label for="__nav_2_3_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Customize Your Parachain
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-parachains-customize-parachain-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/customize-parachain/overview/" class="md-nav__link">
+        Overview (FRAME)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/customize-parachain/add-existing-pallets/" class="md-nav__link">
+        Add Existing Pallets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/customize-parachain/add-smart-contract-functionality/" class="md-nav__link">
+        Add Smart Contract Functionality
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/customize-parachain/make-custom-pallet/" class="md-nav__link">
+        Make a Custom Pallet
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_5" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/parachains/testing/">Testing</a>
+          
+            <label for="__nav_2_3_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Testing
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-parachains-testing-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/testing/mock-runtime/" class="md-nav__link">
+        Mock Runtime
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/testing/pallet-testing/" class="md-nav__link">
+        Pallet Testing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/testing/benchmarking/" class="md-nav__link">
+        Benchmarking
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_6" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/parachains/deployment/">Deployment</a>
+          
+            <label for="__nav_2_3_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Deployment
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-parachains-deployment-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/deployment/build-deterministic-runtime/" class="md-nav__link">
+        Build a Deterministic Runtime
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/deployment/generate-chain-specs/" class="md-nav__link">
+        Generate Chain Specs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/deployment/obtain-coretime/" class="md-nav__link">
+        Obtain Coretime
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_7" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/parachains/maintenance/">Maintenance</a>
+          
+            <label for="__nav_2_3_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Maintenance
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-parachains-maintenance-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/maintenance/runtime-upgrades/" class="md-nav__link">
+        Runtime Upgrades
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/maintenance/storage-migrations/" class="md-nav__link">
+        Storage Migrations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/parachains/maintenance/runtime-metrics-monitoring/" class="md-nav__link">
+        Runtime Metrics and Monitoring
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/smart-contracts/">Smart Contracts</a>
+          
+            <label for="__nav_2_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Smart Contracts
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-smart-contracts-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/connect-to-polkadot/" class="md-nav__link">
+        Connect to Polkadot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/wallets/" class="md-nav__link">
+        Wallets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/local-development-node/" class="md-nav__link">
+        Local Development Node
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_6" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/smart-contracts/dev-environments/">Development Environments</a>
+          
+            <label for="__nav_2_4_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          Development Environments
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-smart-contracts-dev-environments-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/dev-environments/remix/" class="md-nav__link">
+        Remix IDE
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/dev-environments/hardhat/" class="md-nav__link">
+        Hardhat
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_7" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/smart-contracts/libraries/">Libraries</a>
+          
+            <label for="__nav_2_4_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4_7">
+          <span class="md-nav__icon md-icon"></span>
+          Libraries
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-smart-contracts-libraries-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/libraries/ethers-js/" class="md-nav__link">
+        Ethers.js
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/libraries/web3-js/" class="md-nav__link">
+        Web3.js
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/libraries/web3-py/" class="md-nav__link">
+        Web3.py
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/libraries/viem/" class="md-nav__link">
+        viem
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/libraries/wagmi/" class="md-nav__link">
+        Wagmi
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_8" >
+      
+      
+        
+          
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/smart-contracts/block-explorers/">Block Explorers</a>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Block Explorers
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-smart-contracts-block-explorers-" data-md-scrollfix>
+            
+          
+          
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/json-rpc-apis/" class="md-nav__link">
+        JSON-RPC APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_10" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/smart-contracts/precompiles/">Precompiles</a>
+          
+            <label for="__nav_2_4_10">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_10_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4_10">
+          <span class="md-nav__icon md-icon"></span>
+          Precompiles
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-smart-contracts-precompiles-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/precompiles/interact-with-precompiles/" class="md-nav__link">
+        Interact With Precompiles
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/smart-contracts/faqs/" class="md-nav__link">
+        FAQs
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/interoperability/">Interoperability</a>
+          
+            <label for="__nav_2_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Interoperability
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-interoperability-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/interoperability/intro-to-xcm/" class="md-nav__link">
+        Introduction to XCM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/interoperability/xcm-channels/" class="md-nav__link">
+        XCM Channels
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/interoperability/xcm-config/" class="md-nav__link">
+        XCM Configuration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/interoperability/send-messages/" class="md-nav__link">
+        Send Messages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/interoperability/xcm-runtime-apis/" class="md-nav__link">
+        XCM Runtime APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/interoperability/test-and-debug/" class="md-nav__link">
+        Test and Debug
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/toolkit/">Toolkit</a>
+          
+            <label for="__nav_2_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Toolkit
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-toolkit-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/toolkit/parachains/">Parachains</a>
+          
+            <label for="__nav_2_6_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6_2">
+          <span class="md-nav__icon md-icon"></span>
+          Parachains
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-toolkit-parachains-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2_2" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/toolkit/parachains/spawn-chains/">Spawn Chains for Testing</a>
+          
+            <label for="__nav_2_6_2_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_6_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Spawn Chains for Testing
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-toolkit-parachains-spawn-chains-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2_2_2" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/toolkit/parachains/spawn-chains/zombienet/">Zombienet</a>
+          
+            <label for="__nav_2_6_2_2_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_6_2_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Zombienet
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-toolkit-parachains-spawn-chains-zombienet-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/parachains/spawn-chains/zombienet/get-started/" class="md-nav__link">
+        Get Started
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/parachains/spawn-chains/zombienet/write-tests/" class="md-nav__link">
+        Write Tests
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2_3" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/toolkit/parachains/fork-chains/">Fork Chains for Testing</a>
+          
+            <label for="__nav_2_6_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_6_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Fork Chains for Testing
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-toolkit-parachains-fork-chains-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2_3_2" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/toolkit/parachains/fork-chains/chopsticks/">Chopsticks</a>
+          
+            <label for="__nav_2_6_2_3_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_6_2_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6_2_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Chopsticks
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-toolkit-parachains-fork-chains-chopsticks-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/parachains/fork-chains/chopsticks/get-started/" class="md-nav__link">
+        Get Started
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2_4" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/toolkit/parachains/e2e-testing/">E2E Testing</a>
+          
+            <label for="__nav_2_6_2_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_6_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          E2E Testing
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-toolkit-parachains-e2e-testing-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/parachains/e2e-testing/moonwall/" class="md-nav__link">
+        Moonwall
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_3" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/toolkit/api-libraries/">API Libraries</a>
+          
+            <label for="__nav_2_6_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6_3">
+          <span class="md-nav__icon md-icon"></span>
+          API Libraries
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-toolkit-api-libraries-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/api-libraries/polkadot-js-api/" class="md-nav__link">
+        Polkadot.js API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/api-libraries/papi/" class="md-nav__link">
+        Polkadot-API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/api-libraries/sidecar/" class="md-nav__link">
+        Sidecar Rest API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/api-libraries/py-substrate-interface/" class="md-nav__link">
+        Python Substrate Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/api-libraries/subxt/" class="md-nav__link">
+        Subxt
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_4" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/toolkit/integrations/">Integrations</a>
+          
+            <label for="__nav_2_6_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6_4">
+          <span class="md-nav__icon md-icon"></span>
+          Integrations
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-toolkit-integrations-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/integrations/wallets/" class="md-nav__link">
+        Wallets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/integrations/indexers/" class="md-nav__link">
+        Indexers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/integrations/oracles/" class="md-nav__link">
+        Oracles
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_5" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/toolkit/interoperability/">Interoperability</a>
+          
+            <label for="__nav_2_6_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6_5">
+          <span class="md-nav__icon md-icon"></span>
+          Interoperability
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-toolkit-interoperability-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/interoperability/xcm-tools/" class="md-nav__link">
+        XCM Tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_5_3" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../develop/toolkit/interoperability/asset-transfer-api/">Asset Transfer API</a>
+          
+            <label for="__nav_2_6_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_6_5_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Asset Transfer API
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list develop-toolkit-interoperability-asset-transfer-api-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/interoperability/asset-transfer-api/overview/" class="md-nav__link">
+        Get Started
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../develop/toolkit/interoperability/asset-transfer-api/reference/" class="md-nav__link">
+        API Reference
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../infrastructure/">Infrastructure</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Infrastructure
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list infrastructure-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../infrastructure/running-a-node/">Running a Node</a>
+          
+            <label for="__nav_3_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Running a Node
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list infrastructure-running-a-node-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../infrastructure/running-a-node/setup-full-node/" class="md-nav__link">
+        Set Up a Full Node
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../infrastructure/running-a-node/setup-bootnode/" class="md-nav__link">
+        Set Up a Bootnode
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../infrastructure/running-a-node/setup-secure-wss/" class="md-nav__link">
+        Set Up Secure Websocket
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../infrastructure/running-a-validator/">Running a Validator</a>
+          
+            <label for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Running a Validator
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list infrastructure-running-a-validator-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../infrastructure/running-a-validator/requirements/" class="md-nav__link">
+        Requirements
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../infrastructure/running-a-validator/onboarding-and-offboarding/">Onboarding and Offboarding</a>
+          
+            <label for="__nav_3_3_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Onboarding and Offboarding
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list infrastructure-running-a-validator-onboarding-and-offboarding-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../infrastructure/running-a-validator/onboarding-and-offboarding/set-up-validator/" class="md-nav__link">
+        Set Up a Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../infrastructure/running-a-validator/onboarding-and-offboarding/key-management/" class="md-nav__link">
+        Key Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../infrastructure/running-a-validator/onboarding-and-offboarding/start-validating/" class="md-nav__link">
+        Start Validating
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../infrastructure/running-a-validator/onboarding-and-offboarding/stop-validating/" class="md-nav__link">
+        Stop Validating
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_4" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../infrastructure/running-a-validator/operational-tasks/">Operational Tasks</a>
+          
+            <label for="__nav_3_3_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Operational Tasks
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list infrastructure-running-a-validator-operational-tasks-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../infrastructure/running-a-validator/operational-tasks/general-management/" class="md-nav__link">
+        General Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../infrastructure/running-a-validator/operational-tasks/upgrade-your-node/" class="md-nav__link">
+        Upgrade Your Node
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../infrastructure/running-a-validator/operational-tasks/pause-validating/" class="md-nav__link">
+        Pause Validating
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../infrastructure/staking-mechanics/">Staking Mechanics</a>
+          
+            <label for="__nav_3_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Staking Mechanics
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list infrastructure-staking-mechanics-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../infrastructure/staking-mechanics/rewards-payout/" class="md-nav__link">
+        Rewards Payout
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../infrastructure/staking-mechanics/offenses-and-slashes/" class="md-nav__link">
+        Offenses and Slashes
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../">Polkadot Protocol</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Polkadot Protocol
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list polkadot-protocol-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../architecture/">Architecture</a>
+          
+            <label for="__nav_4_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Architecture
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list polkadot-protocol-architecture-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../architecture/polkadot-chain/">Polkadot Chain</a>
+          
+            <label for="__nav_4_2_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Polkadot Chain
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list polkadot-protocol-architecture-polkadot-chain-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/polkadot-chain/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/polkadot-chain/pos-consensus/" class="md-nav__link">
+        Proof of Stake Consensus
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/polkadot-chain/agile-coretime/" class="md-nav__link">
+        Agile Coretime
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../architecture/system-chains/">System Chains</a>
+          
+            <label for="__nav_4_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          System Chains
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list polkadot-protocol-architecture-system-chains-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/system-chains/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/system-chains/asset-hub/" class="md-nav__link">
+        Asset Hub
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/system-chains/bridge-hub/" class="md-nav__link">
+        Bridge Hub
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/system-chains/coretime/" class="md-nav__link">
+        Coretime Chain
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/system-chains/people/" class="md-nav__link">
+        People Chain
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/system-chains/collectives/" class="md-nav__link">
+        Collectives Chain
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_4" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../architecture/parachains/">Parachains</a>
+          
+            <label for="__nav_4_2_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Parachains
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list polkadot-protocol-architecture-parachains-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/parachains/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/parachains/consensus/" class="md-nav__link">
+        Consensus
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Parachain Basics</a>
+          
+            <label for="__nav_4_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Parachain Basics
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list polkadot-protocol-parachain-basics-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../networks/" class="md-nav__link">
+        Networks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Accounts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <div class="md-nav__link-wrapper md-nav__item md-nav__item--active">
+        <a href="./" class="md-nav__link md-nav__link--active">
+          Accounts
+        </a>
+      </div>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label=" ">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+       
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#account-data-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Data Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Account Data Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#account" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#account-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#account-reference-counters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Reference Counters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Account Reference Counters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#providers-reference-counters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Providers Reference Counters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consumers-reference-counters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consumers Reference Counters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sufficients-reference-counter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sufficients Reference Counter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#account-deactivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Deactivation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-counters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating Counters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#account-balance-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Balance Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Account Balance Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#balance-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Balance Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#locks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Locks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Locks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#locks-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Locks Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edge-cases-for-locks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edge Cases for Locks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#balance-types-on-polkadotjs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Balance Types on Polkadot.js
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#address-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Address Formats
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Address Formats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#address-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Address Type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#address-length" class="md-nav__link">
+    <span class="md-ellipsis">
+      Address Length
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checksum-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checksum Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-addresses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validating Addresses
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validating Addresses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-subkey" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Subkey
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-polkadotjs-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Polkadot.js API
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-ss58-implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other SS58 Implementations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_4" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../blocks-transactions-fees/">Blocks, Transactions, and Fees</a>
+          
+            <label for="__nav_4_3_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Blocks, Transactions, and Fees
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list polkadot-protocol-parachain-basics-blocks-transactions-fees-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../blocks-transactions-fees/blocks/" class="md-nav__link">
+        Blocks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../blocks-transactions-fees/transactions/" class="md-nav__link">
+        Transactions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../blocks-transactions-fees/fees/" class="md-nav__link">
+        Fees
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../node-and-runtime/" class="md-nav__link">
+        Node and Runtime
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interoperability/" class="md-nav__link">
+        Interoperability
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../randomness/" class="md-nav__link">
+        Randomness
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cryptography/" class="md-nav__link">
+        Cryptography
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-encoding/" class="md-nav__link">
+        Data Encoding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chain-data/" class="md-nav__link">
+        Chain Data
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../smart-contract-basics/">Smart Contract Basics</a>
+          
+            <label for="__nav_4_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Smart Contract Basics
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list polkadot-protocol-smart-contract-basics-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../smart-contract-basics/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../smart-contract-basics/polkavm-design/" class="md-nav__link">
+        PolkaVM Design
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../smart-contract-basics/evm-vs-polkavm/" class="md-nav__link">
+        EVM vs PolkaVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../smart-contract-basics/accounts/" class="md-nav__link">
+        Accounts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../smart-contract-basics/networks/" class="md-nav__link">
+        Networks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../smart-contract-basics/blocks-transactions-fees/" class="md-nav__link">
+        Blocks, Transactions and Fees
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../onchain-governance/">On-Chain Governance</a>
+          
+            <label for="__nav_4_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          On-Chain Governance
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list polkadot-protocol-onchain-governance-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../onchain-governance/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../onchain-governance/origins-tracks/" class="md-nav__link">
+        Origins and Tracks
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        Glossary
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/">Tutorials</a>
+          
+            <label for="__nav_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/polkadot-sdk/">Polkadot SDK Chains</a>
+          
+            <label for="__nav_5_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          Polkadot SDK Chains
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-polkadot-sdk-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/polkadot-sdk/parachains/">Parachains</a>
+          
+            <label for="__nav_5_2_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Parachains
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-polkadot-sdk-parachains-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2_2" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/polkadot-sdk/parachains/zero-to-hero/">Zero to Hero</a>
+          
+            <label for="__nav_5_2_2_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_2_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Zero to Hero
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-polkadot-sdk-parachains-zero-to-hero-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/polkadot-sdk/parachains/zero-to-hero/set-up-a-template/" class="md-nav__link">
+        Set Up a Template
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/polkadot-sdk/parachains/zero-to-hero/build-custom-pallet/" class="md-nav__link">
+        Build a Custom Pallet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/polkadot-sdk/parachains/zero-to-hero/pallet-unit-testing/" class="md-nav__link">
+        Pallet Unit Testing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/polkadot-sdk/parachains/zero-to-hero/pallet-benchmarking/" class="md-nav__link">
+        Pallet Benchmarking
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/polkadot-sdk/parachains/zero-to-hero/add-pallets-to-runtime/" class="md-nav__link">
+        Add Pallets to the Runtime
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/polkadot-sdk/parachains/zero-to-hero/pallet-benchmarking/" class="md-nav__link">
+        Pallet Benchmarking
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/polkadot-sdk/parachains/zero-to-hero/deploy-to-testnet/" class="md-nav__link">
+        Deploy to Paseo TestNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/polkadot-sdk/parachains/zero-to-hero/obtain-coretime/" class="md-nav__link">
+        Obtain Coretime
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_3" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/polkadot-sdk/system-chains/">System Chains</a>
+          
+            <label for="__nav_5_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          System Chains
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-polkadot-sdk-system-chains-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_3_2" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/polkadot-sdk/system-chains/asset-hub/">Asset Hub</a>
+          
+            <label for="__nav_5_2_3_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_2_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_2_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Asset Hub
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-polkadot-sdk-system-chains-asset-hub-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/polkadot-sdk/system-chains/asset-hub/register-local-asset/" class="md-nav__link">
+        Register a Local Asset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/polkadot-sdk/system-chains/asset-hub/register-foreign-asset/" class="md-nav__link">
+        Register a Foreign Asset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/polkadot-sdk/system-chains/asset-hub/asset-conversion/" class="md-nav__link">
+        Convert Assets
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_4" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/polkadot-sdk/testing/">Testing</a>
+          
+            <label for="__nav_5_2_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Testing
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-polkadot-sdk-testing-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/polkadot-sdk/testing/spawn-basic-chain/" class="md-nav__link">
+        Spawn a Basic Chain with Zombienet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/polkadot-sdk/testing/fork-live-chains/" class="md-nav__link">
+        Fork a Chain with Chopsticks
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/interoperability/">Interoperability</a>
+          
+            <label for="__nav_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Interoperability
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-interoperability-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3_2" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/interoperability/xcm-channels/">XCM Channels</a>
+          
+            <label for="__nav_5_3_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          XCM Channels
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-interoperability-xcm-channels-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/interoperability/xcm-channels/para-to-para/" class="md-nav__link">
+        Opening HRMP Channels Between Parachains
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/interoperability/xcm-channels/para-to-system/" class="md-nav__link">
+        Opening HRMP Channels with System Parachains
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3_3" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/interoperability/xcm-transfers/">XCM Transfers</a>
+          
+            <label for="__nav_5_3_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          XCM Transfers
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-interoperability-xcm-transfers-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/interoperability/xcm-transfers/from-relaychain-to-parachain/" class="md-nav__link">
+        From Relay Chain to Parachain
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/onchain-governance/">On-Chain Governance</a>
+          
+            <label for="__nav_5_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          On-Chain Governance
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-onchain-governance-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/onchain-governance/fast-track-gov-proposal/" class="md-nav__link">
+        Fast Track a Governance Proposal
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/smart-contracts/">Smart Contracts</a>
+          
+            <label for="__nav_5_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_5">
+          <span class="md-nav__icon md-icon"></span>
+          Smart Contracts
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-smart-contracts-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/smart-contracts/deploy-nft/" class="md-nav__link">
+        Deploy an NFT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/smart-contracts/deploy-erc20/" class="md-nav__link">
+        Deploy an ERC-20
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5_4" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/smart-contracts/launch-your-first-project/">Launch Your First Project</a>
+          
+            <label for="__nav_5_5_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_5_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Launch Your First Project
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-smart-contracts-launch-your-first-project-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/smart-contracts/launch-your-first-project/create-contracts/" class="md-nav__link">
+        Create a Smart Contract
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/smart-contracts/launch-your-first-project/test-and-deploy-with-hardhat/" class="md-nav__link">
+        Test and Deploy with Hardhat
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/smart-contracts/launch-your-first-project/create-dapp-viem/" class="md-nav__link">
+        Create a DApp with Viem
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/smart-contracts/launch-your-first-project/create-dapp-ethers-js/" class="md-nav__link">
+        Create a DApp with Ethers.js
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5_5" >
+      
+      
+        
+          
+          
+            
+          
+        
+          
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../tutorials/smart-contracts/demo-aplications/">Demo Applications</a>
+          
+            <label for="__nav_5_5_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_5_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_5_5">
+          <span class="md-nav__icon md-icon"></span>
+          Demo Applications
+        </label>
+        <div class="nav-wrapper">
+          
+            
+              <ul class="md-nav__list tutorials-smart-contracts-demo-aplications-" data-md-scrollfix>
+            
+          
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/smart-contracts/demo-aplications/deploying-uniswap-v2/" class="md-nav__link">
+        Deploy Uniswap V2
+      </a>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+            
+          
+          </ul>
+        </div>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+        </div>
+      </div>
+    </div>
+  
+    
+    <div
+      class="md-sidebar md-sidebar--secondary"
+      data-md-component="sidebar"
+      data-md-type="toc"
+      
+    >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label=" ">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+       
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#account-data-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Data Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Account Data Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#account" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#account-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#account-reference-counters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Reference Counters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Account Reference Counters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#providers-reference-counters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Providers Reference Counters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consumers-reference-counters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consumers Reference Counters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sufficients-reference-counter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sufficients Reference Counter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#account-deactivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Deactivation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-counters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating Counters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#account-balance-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Balance Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Account Balance Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#balance-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Balance Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#locks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Locks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Locks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#locks-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Locks Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edge-cases-for-locks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edge Cases for Locks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#balance-types-on-polkadotjs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Balance Types on Polkadot.js
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#address-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Address Formats
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Address Formats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#address-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Address Type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#address-length" class="md-nav__link">
+    <span class="md-ellipsis">
+      Address Length
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checksum-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checksum Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-addresses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validating Addresses
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validating Addresses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-subkey" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Subkey
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-polkadotjs-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Polkadot.js API
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-ss58-implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other SS58 Implementations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div><div class="feedback-actions-container"><div class="feedback-section">
+            
+    
+  
+  
+  
+    <form class="md-feedback" name="feedback" hidden>
+      <fieldset>
+        <legend class="md-feedback__title">
+          Was this page helpful?
+        </legend>
+        <div class="md-feedback__inner">
+          <div class="md-feedback__list">
+            
+              <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81Z"/></svg>
+              </button>
+            
+              <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14Z"/></svg>
+              </button>
+            
+          </div>
+          <div class="md-feedback__note">
+            
+              <div data-md-value="1" hidden>
+                
+                
+                  
+                
+                Thanks for your feedback!
+              </div>
+            
+              <div data-md-value="0" hidden>
+                
+                
+                  
+                
+                Thanks for your feedback! Help us improve this page by submitting <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZR0p70uR78JVemft66VuL39-k6Mge9rufGZyYBeEhezF3iw/viewform?usp=pp_url&entry.1469237372=[Feedback]+Polkadot%20SDK%20Accounts+-+/polkadot-protocol/parachain-basics/accounts/" target="_blank" rel="noopener">additional feedback</a>.
+              </div>
+            
+          </div>
+        </div>
+      </fieldset>
+      <div class="divider"></div></form>
+  
+          </div><div class="edit-section">
+            
+    
+      <a href="https://github.com/polkadot-developers/polkadot-docs/edit/master/polkadot-protocol/parachain-basics/accounts.md" title="Edit this page" class="md-content__button md-icon">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg> Edit this page
+      </a>
+    
+    
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+          <div class="md-content" data-md-component="content">
+    
+    <article class="md-content__inner md-typeset ">
+      
+        
+  
+  <h1 id="accounts">Accounts<a class="headerlink" href="#accounts" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Accounts are essential for managing identity, transactions, and governance on the network in the Polkadot SDK. Understanding these components is critical for seamless development and operation on the network, whether you're building or interacting with Polkadot-based chains.</p>
+<p>This page will guide you through the essential aspects of accounts, including their data structure, balance types, reference counters, and address formats. You’ll learn how accounts are managed within the runtime, how balances are categorized, and how addresses are encoded and validated. </p>
+<h2 id="account-data-structure">Account Data Structure<a class="headerlink" href="#account-data-structure" title="Permanent link">&para;</a></h2>
+<p>Accounts are foundational to any blockchain, and the Polkadot SDK provides a flexible management system. This section explains how the Polkadot SDK defines accounts and manages their lifecycle through data structures within the runtime.</p>
+<h3 id="account">Account<a class="headerlink" href="#account" title="Permanent link">&para;</a></h3>
+<p>The <a href="https://paritytech.github.io/polkadot-sdk/master/frame_system/pallet/type.Account.html" target="_blank"><code>Account</code> data type</a> is a storage map within the <a href="https://paritytech.github.io/polkadot-sdk/master/src/frame_system/lib.rs.html" target="_blank">System pallet</a> that links an account ID to its corresponding data. This structure is fundamental for mapping account-related information within the chain.</p>
+<p>The code snippet below shows how accounts are defined:</p>
+<div class="language-rs highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w"> </span><span class="sd">/// The full account information for a particular account ID.</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w"> </span><span class="cp">#[pallet::storage]</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w"> </span><span class="cp">#[pallet::getter(fn account)]</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w"> </span><span class="k">pub</span><span class="w"> </span><span class="k">type</span> <span class="nc">Account</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">Config</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StorageMap</span><span class="o">&lt;</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">_</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">Blake2_128Concat</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="n">T</span>::<span class="n">AccountId</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">AccountInfo</span><span class="o">&lt;</span><span class="n">T</span>::<span class="n">Nonce</span><span class="p">,</span><span class="w"> </span><span class="n">T</span>::<span class="n">AccountData</span><span class="o">&gt;</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="n">ValueQuery</span><span class="p">,</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w"> </span><span class="o">&gt;</span><span class="p">;</span>
+</span></code></pre></div>
+<p>The preceding code block defines a storage map named <code>Account</code>. The <code>StorageMap</code> is a type of on-chain storage that maps keys to values. In the <code>Account</code> map, the key is an account ID, and the value is the account's information. Here, <code>T</code> represents the generic parameter for the runtime configuration, which is defined by the pallet's configuration trait (<code>Config</code>).</p>
+<p>The <code>StorageMap</code> consists of the following parameters:</p>
+<ul>
+<li><strong><code>_</code></strong> - used in macro expansion and acts as a placeholder for the storage prefix type. Tells the macro to insert the default prefix during expansion</li>
+<li><strong><code>Blake2_128Concat</code></strong> - the hashing function applied to keys in the storage map</li>
+<li><strong><code>T::AccountId</code></strong> - represents the key type, which corresponds to the account’s unique ID</li>
+<li><strong><code>AccountInfo&lt;T::Nonce, T::AccountData&gt;</code></strong> - the value type stored in the map. For each account ID, the map stores an <code>AccountInfo</code> struct containing:<ul>
+<li><strong><code>T::Nonce</code></strong> - a nonce for the account, which is incremented with each transaction to ensure transaction uniqueness</li>
+<li><strong><code>T::AccountData</code></strong> - custom account data defined by the runtime configuration, which could include balances, locked funds, or other relevant information</li>
+</ul>
+</li>
+<li><strong><code>ValueQuery</code></strong> - defines how queries to the storage map behave when no value is found; returns a default value instead of <code>None</code></li>
+</ul>
+<p>For a detailed explanation of storage maps, see the <a href="https://paritytech.github.io/polkadot-sdk/master/frame_support/storage/types/struct.StorageMap.html" target="_blank"><code>StorageMap</code></a> entry in the Rust docs.</p>
+<h3 id="account-info">Account Info<a class="headerlink" href="#account-info" title="Permanent link">&para;</a></h3>
+<p>The <code>AccountInfo</code> structure is another key element within the <a href="https://paritytech.github.io/polkadot-sdk/master/src/frame_system/lib.rs.html" target="_blank">System pallet</a>, providing more granular details about each account's state. This structure tracks vital data, such as the number of transactions and the account’s relationships with other modules.</p>
+<div class="language-rs highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="sd">/// Information of an account.</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="cp">#[derive(Clone, Eq, PartialEq, Default, RuntimeDebug, Encode, Decode, TypeInfo, MaxEncodedLen)]</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">AccountInfo</span><span class="o">&lt;</span><span class="n">Nonce</span><span class="p">,</span><span class="w"> </span><span class="n">AccountData</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="sd">/// The number of transactions this account has sent.</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">nonce</span>: <span class="nc">Nonce</span><span class="p">,</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="sd">/// The number of other modules that currently depend on this account&#39;s existence. The account</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="sd">/// cannot be reaped until this is zero.</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">consumers</span>: <span class="nc">RefCount</span><span class="p">,</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="sd">/// The number of other modules that allow this account to exist. The account may not be reaped</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="sd">/// until this and `sufficients` are both zero.</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">providers</span>: <span class="nc">RefCount</span><span class="p">,</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="sd">/// The number of modules that allow this account to exist for their own purposes only. The</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="sd">/// account may not be reaped until this and `providers` are both zero.</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">sufficients</span>: <span class="nc">RefCount</span><span class="p">,</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="sd">/// The additional data that belongs to this account. Used to store the balance(s) in a lot of</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="sd">/// chains.</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">data</span>: <span class="nc">AccountData</span><span class="p">,</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>The <code>AccountInfo</code> structure includes the following components:</p>
+<ul>
+<li><strong><code>nonce</code></strong> - tracks the number of transactions initiated by the account, which ensures transaction uniqueness and prevents replay attacks</li>
+<li><strong><code>consumers</code></strong> - counts how many other modules or pallets rely on this account’s existence. The account cannot be removed from the chain (reaped) until this count reaches zero</li>
+<li><strong><code>providers</code></strong> - tracks how many modules permit this account’s existence. An account can only be reaped once both <code>providers</code> and <code>sufficients</code> are zero</li>
+<li><strong><code>sufficients</code></strong> - represents the number of modules that allow the account to exist for internal purposes, independent of any other modules</li>
+<li><strong><code>AccountData</code></strong> - a flexible data structure that can be customized in the runtime configuration, usually containing balances or other user-specific data</li>
+</ul>
+<p>This structure helps manage an account's state and prevents its premature removal while it is still referenced by other on-chain data or modules. The <a href="https://paritytech.github.io/polkadot-sdk/master/frame_system/struct.AccountInfo.html" target="_blank"><code>AccountInfo</code></a> structure can vary as long as it satisfies the trait bounds defined by the <code>AccountData</code> associated type in the <a href="https://paritytech.github.io/polkadot-sdk/master/frame_system/pallet/trait.Config.html" target="_blank"><code>frame-system::pallet::Config</code></a> trait.</p>
+<h3 id="account-reference-counters">Account Reference Counters<a class="headerlink" href="#account-reference-counters" title="Permanent link">&para;</a></h3>
+<p>Polkadot SDK uses reference counters to track an account’s dependencies across different runtime modules. These counters ensure that accounts remain active while data is associated with them.</p>
+<p>The reference counters include:</p>
+<ul>
+<li><strong><code>consumers</code></strong> - prevents account removal while other pallets still rely on the account</li>
+<li><strong><code>providers</code></strong> - ensures an account is active before other pallets store data related to it</li>
+<li><strong><code>sufficients</code></strong> - indicates the account’s independence, ensuring it can exist even without a native token balance, such as when holding sufficient alternative assets</li>
+</ul>
+<h4 id="providers-reference-counters">Providers Reference Counters<a class="headerlink" href="#providers-reference-counters" title="Permanent link">&para;</a></h4>
+<p>The <code>providers</code> counter ensures that an account is ready to be depended upon by other runtime modules. For example, it is incremented when an account has a balance above the existential deposit, which marks the account as active.</p>
+<p>The system requires this reference counter to be greater than zero for the <code>consumers</code> counter to be incremented, ensuring the account is stable before any dependencies are added.</p>
+<h4 id="consumers-reference-counters">Consumers Reference Counters<a class="headerlink" href="#consumers-reference-counters" title="Permanent link">&para;</a></h4>
+<p>The <code>consumers</code> counter ensures that the account cannot be reaped until all references to it across the runtime have been removed. This check prevents the accidental deletion of accounts that still have active on-chain data.</p>
+<p>It is the user’s responsibility to clear out any data from other runtime modules if they wish to remove their account and reclaim their existential deposit.</p>
+<h4 id="sufficients-reference-counter">Sufficients Reference Counter<a class="headerlink" href="#sufficients-reference-counter" title="Permanent link">&para;</a></h4>
+<p>The <code>sufficients</code> counter tracks accounts that can exist independently without relying on a native account balance. This is useful for accounts holding other types of assets, like tokens, without needing a minimum balance in the native token.</p>
+<p>For instance, the <a href="https://paritytech.github.io/polkadot-sdk/master/pallet_assets/index.html" target="_blank">Assets pallet</a>, may increment this counter for an account holding sufficient tokens.</p>
+<h4 id="account-deactivation">Account Deactivation<a class="headerlink" href="#account-deactivation" title="Permanent link">&para;</a></h4>
+<p>In Polkadot SDK-based chains, an account is deactivated when its reference counters (such as <code>providers</code>, <code>consumers</code>, and <code>sufficient</code>) reach zero. These counters ensure the account remains active as long as other runtime modules or pallets reference it.</p>
+<p>When all dependencies are cleared and the counters drop to zero, the account becomes deactivated and may be removed from the chain (reaped). This is particularly important in Polkadot SDK-based blockchains, where accounts with balances below the existential deposit threshold are pruned from storage to conserve state resources.</p>
+<p>Each pallet that references an account has cleanup functions that decrement these counters when the pallet no longer depends on the account. Once these counters reach zero, the account is marked for deactivation.</p>
+<h4 id="updating-counters">Updating Counters<a class="headerlink" href="#updating-counters" title="Permanent link">&para;</a></h4>
+<p>The Polkadot SDK provides runtime developers with various methods to manage account lifecycle events, such as deactivation or incrementing reference counters. These methods ensure that accounts cannot be reaped while still in use.</p>
+<p>The following helper functions manage these counters:</p>
+<ul>
+<li><strong><code>inc_consumers()</code></strong> - increments the <code>consumer</code> reference counter for an account, signaling that another pallet depends on it</li>
+<li><strong><code>dec_consumers()</code></strong> - decrements the <code>consumer</code> reference counter, signaling that a pallet no longer relies on the account</li>
+<li><strong><code>inc_providers()</code></strong> - increments the <code>provider</code> reference counter, ensuring the account remains active</li>
+<li><strong><code>dec_providers()</code></strong> - decrements the <code>provider</code> reference counter, allowing for account deactivation when no longer in use</li>
+<li><strong><code>inc_sufficients()</code></strong> - increments the <code>sufficient</code> reference counter for accounts that hold sufficient assets</li>
+<li><strong><code>dec_sufficients()</code></strong> - decrements the <code>sufficient</code> reference counter</li>
+</ul>
+<p>To ensure proper account cleanup and lifecycle management, a corresponding decrement should be made for each increment action.</p>
+<p>The <code>System</code> pallet offers three query functions to assist developers in tracking account states:</p>
+<ul>
+<li><a href="https://paritytech.github.io/polkadot-sdk/master/frame_system/pallet/struct.Pallet.html#method.can_inc_consumer" target="_blank"><strong><code>can_inc_consumer()</code></strong></a> - checks if the account can safely increment the consumer reference</li>
+<li><a href="https://paritytech.github.io/polkadot-sdk/master/frame_system/pallet/struct.Pallet.html#method.can_dec_provider" target="_blank"><strong><code>can_dec_provider()</code></strong></a> - ensures that no consumers exist before allowing the decrement of the provider counter</li>
+<li><a href="https://paritytech.github.io/polkadot-sdk/master/frame_system/pallet/struct.Pallet.html#method.is_provider_required" target="_blank"><strong><code>is_provider_required()</code></strong></a> - verifies whether the account still has any active consumer references</li>
+</ul>
+<p>This modular and flexible system of reference counters tightly controls the lifecycle of accounts in Polkadot SDK-based blockchains, preventing the accidental removal or retention of unneeded accounts. You can refer to the <a href="https://paritytech.github.io/polkadot-sdk/master/frame_system/pallet/struct.Pallet.html" target="_blank">System pallet Rust docs</a> for more details.</p>
+<h2 id="account-balance-types">Account Balance Types<a class="headerlink" href="#account-balance-types" title="Permanent link">&para;</a></h2>
+<p>In the Polkadot ecosystem, account balances are categorized into different types based on how the funds are utilized and their availability. These balance types determine the actions that can be performed, such as transferring tokens, paying transaction fees, or participating in governance activities. Understanding these balance types helps developers manage user accounts and implement balance-dependent logic.</p>
+<div class="admonition note">
+<p class="admonition-title">A more efficient distribution of account balance types is in development</p>
+<p>Soon, pallets in the Polkadot SDK will implement the <a href="https://paritytech.github.io/polkadot-sdk/master/frame_support/traits/tokens/fungible/index.html" target="_blank"><code>Fungible</code> trait</a> (see the <a href="https://github.com/paritytech/polkadot-sdk/issues/226" target="_blank">tracking issue</a> for more details). For example, the <a href="https://paritytech.github.io/polkadot-sdk/master/pallet_transaction_storage/index.html" target="_blank"><code>transaction-storage</code></a> pallet changed the implementation of the <a href="https://paritytech.github.io/polkadot-sdk/master/frame_support/traits/tokens/currency/index.html" target="_blank"><code>Currency</code></a> trait (see the <a href="https://github.com/paritytech/polkadot-sdk/pull/1800" target="_blank">Refactor transaction storage pallet to use fungible traits</a> PR for further details):</p>
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">type</span> <span class="nc">BalanceOf</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">T</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Config</span><span class="o">&gt;</span>::<span class="n">Currency</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Currency</span><span class="o">&lt;&lt;</span><span class="n">T</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">frame_system</span>::<span class="n">Config</span><span class="o">&gt;</span>::<span class="n">AccountId</span><span class="o">&gt;&gt;</span>::<span class="n">Balance</span><span class="p">;</span>
+</span></code></pre></div>
+<p>To the <a href="https://paritytech.github.io/polkadot-sdk/master/frame_support/traits/tokens/fungible/index.html" target="_blank"><code>Fungible</code></a> trait:</p>
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">type</span> <span class="nc">BalanceOf</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">T</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Config</span><span class="o">&gt;</span>::<span class="n">Currency</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">FnInspect</span><span class="o">&lt;&lt;</span><span class="n">T</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">frame_system</span>::<span class="n">Config</span><span class="o">&gt;</span>::<span class="n">AccountId</span><span class="o">&gt;&gt;</span>::<span class="n">Balance</span><span class="p">;</span>
+</span></code></pre></div>
+<p>This update will enable more efficient use of account balances, allowing the free balance to be utilized for on-chain activities such as setting proxies and managing identities.</p>
+</div>
+<h3 id="balance-types">Balance Types<a class="headerlink" href="#balance-types" title="Permanent link">&para;</a></h3>
+<p>The five main balance types are:</p>
+<ul>
+<li><strong>Free balance</strong> - represents the total tokens available to the account for any on-chain activity, including staking, governance, and voting. However, it may not be fully spendable or transferrable if portions of it are locked or reserved</li>
+<li><strong>Locked balance</strong> - portions of the free balance that cannot be spent or transferred because they are tied up in specific activities like <a href="https://wiki.polkadot.network/docs/learn-staking#nominating-validators" target="_blank">staking</a>, <a href="https://wiki.polkadot.network/docs/learn-guides-transfers#vested-transfers-with-the-polkadot-js-ui" target="_blank">vesting</a>, or participating in <a href="https://wiki.polkadot.network/docs/learn-polkadot-opengov#voting-on-a-referendum" target="_blank">governance</a>. While the tokens remain part of the free balance, they are non-transferable for the duration of the lock</li>
+<li><strong>Reserved balance</strong> - funds locked by specific system actions, such as setting up an <a href="https://wiki.polkadot.network/docs/learn-identity" target="_blank">identity</a>, creating <a href="https://wiki.polkadot.network/docs/learn-proxies" target="_blank">proxies</a>, or submitting <a href="https://wiki.polkadot.network/docs/learn-guides-polkadot-opengov#claiming-opengov-deposits" target="_blank">deposits for governance proposals</a>. These tokens are not part of the free balance and cannot be spent unless they are unreserved</li>
+<li><strong>Spendable balance</strong> - the portion of the free balance that is available for immediate spending or transfers. It is calculated by subtracting the maximum of locked or reserved amounts from the free balance, ensuring that existential deposit limits are met</li>
+<li><strong>Untouchable balance</strong> - funds that cannot be directly spent or transferred but may still be utilized for on-chain activities, such as governance participation or staking. These tokens are typically tied to certain actions or locked for a specific period</li>
+</ul>
+<p>The spendable balance is calculated as follows:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>spendable = free - max(locked - reserved, ED)
+</span></code></pre></div>
+<p>Here, <code>free</code>, <code>locked</code>, and <code>reserved</code> are defined above. The <code>ED</code> represents the <a href="https://wiki.polkadot.network/docs/learn-accounts#existential-deposit-and-reaping" target="_blank">existential deposit</a>, the minimum balance required to keep an account active and prevent it from being reaped. You may find you can't see all balance types when looking at your account via a wallet. Wallet providers often display only spendable, locked, and reserved balances.</p>
+<h3 id="locks">Locks<a class="headerlink" href="#locks" title="Permanent link">&para;</a></h3>
+<p>Locks are applied to an account's free balance, preventing that portion from being spent or transferred. Locks are automatically placed when an account participates in specific on-chain activities, such as staking or governance. Although multiple locks may be applied simultaneously, they do not stack. Instead, the largest lock determines the total amount of locked tokens.</p>
+<p>Locks follow these basic rules:</p>
+<ul>
+<li>If different locks apply to varying amounts, the largest lock amount takes precedence</li>
+<li>If multiple locks apply to the same amount, the lock with the longest duration governs when the balance can be unlocked</li>
+</ul>
+<h4 id="locks-example">Locks Example<a class="headerlink" href="#locks-example" title="Permanent link">&para;</a></h4>
+<p>Consider an example where an account has 80 DOT locked for both staking and governance purposes like so:</p>
+<ul>
+<li>80 DOT is staked with a 28-day lock period</li>
+<li>24 DOT is locked for governance with a 1x conviction and a 7-day lock period</li>
+<li>4 DOT is locked for governance with a 6x conviction and a 224-day lock period</li>
+</ul>
+<p>In this case, the total locked amount is 80 DOT because only the largest lock (80 DOT from staking) governs the locked balance. These 80 DOT will be released at different times based on the lock durations. In this example, the 24 DOT locked for governance will be released first since the shortest lock period is seven days. The 80 DOT stake with a 28-day lock period is released next. Now, all that remains locked is the 4 DOT for governance. After 224 days, all 80 DOT (minus the existential deposit) will be free and transferrable.</p>
+<p><img alt="Illustration of Lock Example" src="/polkadot-mkdocs/images/polkadot-protocol/parachain-basics/accounts/locks-example-2.webp" /></p>
+<h4 id="edge-cases-for-locks">Edge Cases for Locks<a class="headerlink" href="#edge-cases-for-locks" title="Permanent link">&para;</a></h4>
+<p>In scenarios where multiple convictions and lock periods are active, the lock duration and amount are determined by the longest period and largest amount. For example, if you delegate with different convictions and attempt to undelegate during an active lock period, the lock may be extended for the full amount of tokens. For a detailed discussion on edge case lock behavior, see this <a href="https://substrate.stackexchange.com/questions/5067/delegating-and-undelegating-during-the-lock-period-extends-it-for-the-initial-am" target="_blank">Stack Exchange post</a>.</p>
+<h3 id="balance-types-on-polkadotjs">Balance Types on Polkadot.js<a class="headerlink" href="#balance-types-on-polkadotjs" title="Permanent link">&para;</a></h3>
+<p>Polkadot.js provides a user-friendly interface for managing and visualizing various account balances on Polkadot and Kusama networks. When interacting with Polkadot.js, you will encounter multiple balance types that are critical for understanding how your funds are distributed and restricted. This section explains how different balances are displayed in the Polkadot.js UI and what each type represents.</p>
+<p><img alt="" src="/polkadot-mkdocs/images/polkadot-protocol/parachain-basics/accounts/account-balance-types-1.webp" /></p>
+<p>The most common balance types displayed on Polkadot.js are:</p>
+<ul>
+<li>
+<p><strong>Total balance</strong> - the total number of tokens available in the account. This includes all tokens, whether they are transferable, locked, reserved, or vested. However, the total balance does not always reflect what can be spent immediately. In this example, the total balance is 0.6274 KSM</p>
+</li>
+<li>
+<p><strong>Transferrable balance</strong> - shows how many tokens are immediately available for transfer. It is calculated by subtracting the locked and reserved balances from the total balance. For example, if an account has a total balance of 0.6274 KSM and a transferrable balance of 0.0106 KSM, only the latter amount can be sent or spent freely</p>
+</li>
+<li>
+<p><strong>Vested balance</strong> - tokens that allocated to the account but released according to a specific schedule. Vested tokens remain locked and cannot be transferred until fully vested. For example, an account with a vested balance of 0.2500 KSM means that this amount is owned but not yet transferable</p>
+</li>
+<li>
+<p><strong>Locked balance</strong> - tokens that are temporarily restricted from being transferred or spent. These locks typically result from participating in staking, governance, or vested transfers. In Polkadot.js, locked balances do not stack—only the largest lock is applied. For instance, if an account has 0.5500 KSM locked for governance and staking, the locked balance would display 0.5500 KSM, not the sum of all locked amounts</p>
+</li>
+<li>
+<p><strong>Reserved balance</strong> - refers to tokens locked for specific on-chain actions, such as setting an identity, creating a proxy, or making governance deposits. Reserved tokens are not part of the free balance, but can be freed by performing certain actions. For example, removing an identity would unreserve those funds</p>
+</li>
+<li>
+<p><strong>Bonded balance</strong> - the tokens locked for staking purposes. Bonded tokens are not transferrable until they are unbonded after the unbonding period</p>
+</li>
+<li>
+<p><strong>Redeemable balance</strong> - the number of tokens that have completed the unbonding period and are ready to be unlocked and transferred again. For example, if an account has a redeemable balance of 0.1000 KSM, those tokens are now available for spending</p>
+</li>
+<li>
+<p><strong>Democracy balance</strong> - reflects the number of tokens locked for governance activities, such as voting on referenda. These tokens are locked for the duration of the governance action and are only released after the lock period ends</p>
+</li>
+</ul>
+<p>By understanding these balance types and their implications, developers and users can better manage their funds and engage with on-chain activities more effectively.</p>
+<h2 id="address-formats">Address Formats<a class="headerlink" href="#address-formats" title="Permanent link">&para;</a></h2>
+<p>The SS58 address format is a core component of the Polkadot SDK that enables accounts to be uniquely identified across Polkadot-based networks. This format is a modified version of Bitcoin's Base58Check encoding, specifically designed to accommodate the multi-chain nature of the Polkadot ecosystem. SS58 encoding allows each chain to define its own set of addresses while maintaining compatibility and checksum validation for security. </p>
+<h3 id="basic-format">Basic Format<a class="headerlink" href="#basic-format" title="Permanent link">&para;</a></h3>
+<p>SS58 addresses consist of three main components:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>base58encode(concat(&lt;address-type&gt;, &lt;address&gt;, &lt;checksum&gt;))
+</span></code></pre></div>
+<ul>
+<li><strong>Address type</strong> - a byte or set of bytes that define the network (or chain) for which the address is intended. This ensures that addresses are unique across different Polkadot SDK-based chains</li>
+<li><strong>Address</strong> - the public key of the account encoded as bytes</li>
+<li><strong>Checksum</strong> - a hash-based checksum which ensures that addresses are valid and unaltered. The checksum is derived from the concatenated address type and address components, ensuring integrity</li>
+</ul>
+<p>The encoding process transforms the concatenated components into a Base58 string, providing a compact and human-readable format that avoids easily confused characters (e.g., zero '0', capital 'O', lowercase 'l'). This encoding function (<a href="https://docs.rs/bs58/latest/bs58/fn.encode.html" target="_blank"><code>encode</code></a>) is implemented exactly as defined in Bitcoin and IPFS specifications, using the same alphabet as both implementations.</p>
+<p>For more details about the SS58 address format implementation, see the <a href="https://paritytech.github.io/polkadot-sdk/master/sp_core/crypto/trait.Ss58Codec.html" target="_blank"><code>Ss58Codec</code></a> trait in the Rust Docs.</p>
+<h3 id="address-type">Address Type<a class="headerlink" href="#address-type" title="Permanent link">&para;</a></h3>
+<p>The address type defines how an address is interpreted and to which network it belongs. Polkadot SDK uses different prefixes to distinguish between various chains and address formats:</p>
+<ul>
+<li><strong>Address types <code>0-63</code></strong> - simple addresses, commonly used for network identifiers</li>
+<li><strong>Address types <code>64-127</code></strong> - full addresses that support a wider range of network identifiers</li>
+<li><strong>Address types <code>128-255</code></strong> - reserved for future address format extensions</li>
+</ul>
+<p>For example, Polkadot’s main network uses an address type of 0, while Kusama uses 2. This ensures that addresses can be used without confusion between networks.</p>
+<p>The address type is always encoded as part of the SS58 address, making it easy to quickly identify the network. Refer to the <a href="https://github.com/paritytech/ss58-registry" target="_blank">SS58 registry</a> for the canonical listing of all address type identifiers and how they map to Polkadot SDK-based networks.</p>
+<h3 id="address-length">Address Length<a class="headerlink" href="#address-length" title="Permanent link">&para;</a></h3>
+<p>SS58 addresses can have different lengths depending on the specific format. Address lengths range from as short as 3 to 35 bytes, depending on the complexity of the address and network requirements. This flexibility allows SS58 addresses to adapt to different chains while providing a secure encoding mechanism.</p>
+<table>
+<thead>
+<tr>
+<th>Total</th>
+<th>Type</th>
+<th>Raw account</th>
+<th>Checksum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>7</td>
+<td>1</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr>
+<td>8</td>
+<td>1</td>
+<td>4</td>
+<td>3</td>
+</tr>
+<tr>
+<td>9</td>
+<td>1</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>10</td>
+<td>1</td>
+<td>8</td>
+<td>1</td>
+</tr>
+<tr>
+<td>11</td>
+<td>1</td>
+<td>8</td>
+<td>2</td>
+</tr>
+<tr>
+<td>12</td>
+<td>1</td>
+<td>8</td>
+<td>3</td>
+</tr>
+<tr>
+<td>13</td>
+<td>1</td>
+<td>8</td>
+<td>4</td>
+</tr>
+<tr>
+<td>14</td>
+<td>1</td>
+<td>8</td>
+<td>5</td>
+</tr>
+<tr>
+<td>15</td>
+<td>1</td>
+<td>8</td>
+<td>6</td>
+</tr>
+<tr>
+<td>16</td>
+<td>1</td>
+<td>8</td>
+<td>7</td>
+</tr>
+<tr>
+<td>17</td>
+<td>1</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>35</td>
+<td>1</td>
+<td>32</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>SS58 addresses also support different payload sizes, allowing a flexible range of account identifiers.</p>
+<h3 id="checksum-types">Checksum Types<a class="headerlink" href="#checksum-types" title="Permanent link">&para;</a></h3>
+<p>A checksum is applied to validate SS58 addresses. Polkadot SDK uses a Blake2b-512 hash function to calculate the checksum, which is appended to the address before encoding. The checksum length can vary depending on the address format (e.g., 1-byte, 2-byte, or longer), providing varying levels of validation strength.</p>
+<p>The checksum ensures that an address is not modified or corrupted, adding an extra layer of security for account management.</p>
+<h3 id="validating-addresses">Validating Addresses<a class="headerlink" href="#validating-addresses" title="Permanent link">&para;</a></h3>
+<p>SS58 addresses can be validated using the subkey command-line interface or the Polkadot.js API. These tools help ensure an address is correctly formatted and valid for the intended network. The following sections will provide an overview of how validation works with these tools.</p>
+<h4 id="using-subkey">Using Subkey<a class="headerlink" href="#using-subkey" title="Permanent link">&para;</a></h4>
+<p><a href="https://paritytech.github.io/polkadot-sdk/master/subkey/index.html" target="_blank">Subkey</a> is a CLI tool provided by Polkadot SDK for generating and managing keys. It can inspect and validate SS58 addresses.</p>
+<p>The <code>inspect</code> command gets a public key and an SS58 address from the provided secret URI. The basic syntax for the <code>subkey inspect</code> command is:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>subkey<span class="w"> </span>inspect<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span><span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span>uri
+</span></code></pre></div>
+<p>For the <code>uri</code> command-line argument, you can specify the secret seed phrase, a hex-encoded private key, or an SS58 address. If the input is a valid address, the <code>subkey</code> program displays the corresponding hex-encoded public key, account identifier, and SS58 addresses.</p>
+<p>For example, to inspect the public keys derived from a secret seed phrase, you can run a command similar to the following:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>subkey<span class="w"> </span>inspect<span class="w"> </span><span class="s2">&quot;caution juice atom organ advance problem want pledge someone senior holiday very&quot;</span>
+</span></code></pre></div>
+<p>The command displays output similar to the following:</p>
+<div data-termynal="data-termynal" id="termynal">
+<p><span data-ty="input"><span class="file-path"></span>subkey inspect "caution juice atom organ advance problem want pledge someone senior holiday very"</span>
+  <span data-ty>Secret phrase <code>caution juice atom organ advance problem want pledge someone senior holiday very</code> is account:</span>
+  <span data-ty> Secret seed: 0xc8fa03532fb22ee1f7f6908b9c02b4e72483f0dbd66e4cd456b8f34c6230b849</span>
+  <span data-ty> Public key (hex): 0xd6a3105d6768e956e9e5d41050ac29843f98561410d3a47f9dd5b3b227ab8746</span>
+  <span data-ty> Public key (SS58): 5Gv8YYFu8H1btvmrJy9FjjAWfb99wrhV3uhPFoNEr918utyR</span>
+  <span data-ty> Account ID: 0xd6a3105d6768e956e9e5d41050ac29843f98561410d3a47f9dd5b3b227ab8746</span>
+  <span data-ty> SS58 Address: 5Gv8YYFu8H1btvmrJy9FjjAWfb99wrhV3uhPFoNEr918utyR</span></p>
+</div>
+<p>The <code>subkey</code> program assumes an address is based on a public/private key pair. If you inspect an address, the command returns the 32-byte account identifier.</p>
+<p>However, not all addresses in Polkadot SDK-based networks are based on keys.</p>
+<p>Depending on the command-line options you specify and the input you provided, the command output might also display the network for which the address has been encoded. For example:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>subkey<span class="w"> </span>inspect<span class="w"> </span><span class="s2">&quot;12bzRJfh7arnnfPPUZHeJUaE62QLEwhK48QnH9LXeK2m1iZU&quot;</span>
+</span></code></pre></div>
+<p>The command displays output similar to the following:</p>
+<div data-termynal="data-termynal" id="termynal">
+<p><span data-ty="input"><span class="file-path"></span>subkey inspect "12bzRJfh7arnnfPPUZHeJUaE62QLEwhK48QnH9LXeK2m1iZU"</span>
+  <span data-ty>Public Key URI <code>12bzRJfh7arnnfPPUZHeJUaE62QLEwhK48QnH9LXeK2m1iZU</code> is account:</span>
+  <span data-ty> Network ID/Version: polkadot</span>
+  <span data-ty> Public key (hex): 0x46ebddef8cd9bb167dc30878d7113b7e168e6f0646beffd77d69d39bad76b47a</span>
+  <span data-ty> Account ID: 0x46ebddef8cd9bb167dc30878d7113b7e168e6f0646beffd77d69d39bad76b47a</span>
+  <span data-ty> Public key (SS58): 12bzRJfh7arnnfPPUZHeJUaE62QLEwhK48QnH9LXeK2m1iZU</span>
+  <span data-ty> SS58 Address: 12bzRJfh7arnnfPPUZHeJUaE62QLEwhK48QnH9LXeK2m1iZU</span></p>
+</div>
+<h4 id="using-polkadotjs-api">Using Polkadot.js API<a class="headerlink" href="#using-polkadotjs-api" title="Permanent link">&para;</a></h4>
+<p>To verify an address in JavaScript or TypeScript projects, you can use the functions built into the <a href="https://polkadot.js.org/docs/" target="_blank">Polkadot.js API</a>. For example:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">// Import Polkadot.js API dependencies</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">decodeAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">encodeAddress</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;@polkadot/keyring&#39;</span><span class="p">);</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">hexToU8a</span><span class="p">,</span><span class="w"> </span><span class="nx">isHex</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;@polkadot/util&#39;</span><span class="p">);</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1">// Specify an address to test.</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="kd">const</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;INSERT_ADDRESS_TO_TEST&#39;</span><span class="p">;</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1">// Check address</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="kd">const</span><span class="w"> </span><span class="nx">isValidSubstrateAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="nx">encodeAddress</span><span class="p">(</span><span class="nx">isHex</span><span class="p">(</span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">hexToU8a</span><span class="p">(</span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">decodeAddress</span><span class="p">(</span><span class="nx">address</span><span class="p">));</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="p">};</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="c1">// Query result</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="kd">const</span><span class="w"> </span><span class="nx">isValid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">isValidSubstrateAddress</span><span class="p">();</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isValid</span><span class="p">);</span>
+</span></code></pre></div>
+<p>If the function returns <code>true</code>, the specified address is a valid address.</p>
+<h4 id="other-ss58-implementations">Other SS58 Implementations<a class="headerlink" href="#other-ss58-implementations" title="Permanent link">&para;</a></h4>
+<p>Support for encoding and decoding Polkadot SDK SS58 addresses has been implemented in several other languages and libraries.</p>
+<ul>
+<li><strong>Crystal</strong> - <a href="https://github.com/wyhaines/base58.cr" target="_blank"><code>wyhaines/base58.cr</code></a></li>
+<li><strong>Go</strong> - <a href="https://github.com/itering/subscan-plugin" target="_blank"><code>itering/subscan-plugin</code></a></li>
+<li><strong>Python</strong> - <a href="https://github.com/polkascan/py-scale-codec" target="_blank"><code>polkascan/py-scale-codec</code></a></li>
+<li><strong>TypeScript</strong> - <a href="https://github.com/subsquid/squid-sdk" target="_blank"><code>subsquid/squid-sdk</code></a></li>
+</ul>
+  <div class="md-source-file">
+    <small>
+      
+        <span class="source-file-label">Last update:</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 6, 2025</span>
+        
+          <br>
+          <span class="source-file-seperator">|</span>
+          <span class="source-file-label">Created:</span>
+          <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 6, 2025</span>
+        
+      
+    </small>
+  </div>
+  
+      
+    </article>
+  </div>
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+    
+      
+        
+        <nav class="md-footer__inner md-grid" aria-label="Footer" >
+          
+            
+            <a href="../networks/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Networks">
+              <div class="md-footer__button md-icon">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+              </div>
+              <div class="md-footer__title">
+                <span class="md-footer__direction">
+                  Previous
+                </span>
+                <div class="md-ellipsis">
+                  Networks
+                </div>
+              </div>
+            </a>
+          
+          
+            
+            <a href="../blocks-transactions-fees/" class="md-footer__link md-footer__link--next" aria-label="Next: Blocks, Transactions, and Fees">
+              <div class="md-footer__title">
+                <span class="md-footer__direction">
+                  Next
+                </span>
+                <div class="md-ellipsis">
+                  Blocks, Transactions, and Fees
+                </div>
+              </div>
+              <div class="md-footer__button md-icon">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+              </div>
+            </a>
+          
+        </nav>
+      
+    
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div>
+          
+  <img src="../../../assets/images/logo.webp" alt="logo">
+
+          <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025
+    </div>
+  
+  
+</div>
+        </div>
+        <!-- Add custom links section -->
+        <div class="policy-links">
+          <a href="/terms-of-use/">Terms of Use</a>
+          <a href="/privacy-policy/">Privacy Policy</a>
+          <a href="/cookie-policy/">Cookie Policy</a>
+        </div>
+        
+          <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://polkadot-discord.w3f.tools" target="_blank" rel="noopener" title="Discord" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/paritytech/polkadot-sdk" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://www.youtube.com/channel/UCB7PbjuZLEba_znc7mEGNgw" target="_blank" rel="noopener" title="YouTube" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://twitter.com/Polkadot" target="_blank" rel="noopener" title="Twitter" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9L389.2 48zm-24.8 373.8h39.1L151.1 88h-42l255.3 333.8z"/></svg>
+    </a>
+  
+</div>
+        
+      </div>
+    </div>
+  </footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+  
+    
+  
+
+
+
+
+
+<h4>Cookie Consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation. By consenting to the use of cookies, you help us improve the site. Review the <a href="https://docs.polkadot.com/cookie-policy/" target="_blank" rel="noopener">cookie policy</a> for more information. </p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+      
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="analytics" checked>
+          <span class="task-list-indicator"></span>
+          Google Analytics
+        </label>
+      </li>
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout(function(){document.querySelector("[data-md-component=consent]").hidden=!1},250);var action,form=document.forms.consent;for(action of["submit","reset"])form.addEventListener(action,function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map(function(e){return[e,!0]}))),location.hash="",location.reload()})</script>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+  
+      <script src="../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+        <script src="../../../js/header-scroll.js"></script>
+      
+        <script src="../../../js/search-bar-results.js"></script>
+      
+        <script src="../../../js/root-level-sections.js"></script>
+      
+        <script src="../../../js/fix-created-date.js"></script>
+      
+        <script src="../../../js/connect-to-metamask.js"></script>
+      
+    
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.referrer.includes('docs.substrate.io')) {        
+        const announceElement = document.querySelector('.announce.hideable');
+        if (announceElement) {          
+          const content = announceElement.querySelector('.md-typeset');
+          if (content) {            
+            const storedHash = __md_get('__announce');  
+            const currentHash = __md_hash(content.innerHTML);
+
+            const close = document.querySelector('.md-banner__button');
+            if (close) {
+              close.addEventListener('click', () => {                
+                // If the current hash matches the stored value, hide the element
+                if (currentHash === storedHash) {
+                  announceElement.style.display = 'none';
+                  announceElement.hidden = true;
+                } else {
+                  __md_set('__announce', currentHash);
+                  announceElement.style.display = 'none';
+                  announceElement.hidden = true;
+                }
+              });
+            }
+            
+            // Only show the banner if the stored hash doesn't match
+            if (currentHash !== storedHash) {
+              announceElement.style.display = 'block';
+            }
+          }
+        }
+      }
+    });
+  </script>  
+
+  </body>
+</html>
