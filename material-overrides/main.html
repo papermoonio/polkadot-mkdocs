@@ -36,7 +36,7 @@
 
 {% block announce %}
   💬 Help us improve the smart contracts docs! Take our quick feedback survey 👉 
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdfw3ZcSI1UR1kszTuTt_A-oIBy9jLv6sRIEoukSb3xVL1v4Q/viewform" target="_blank" rel="noopener noreferrer">
+  <a href="https://forms.gle/FdmbA7bFSZ4A6Fkz7" target="_blank" rel="noopener noreferrer">
     Share your thoughts
   </a>
 {% endblock %}
@@ -90,26 +90,6 @@
       });
     });
   </script>
-{% endblock %}
-
-{% block header %}
-  {#- With the way the announce partial is set up, we can't override the entire announce div. So this adds one in the header and should be the only one used -#}
-  <div data-md-component="announce" class="announce hideable" style="display: none;">
-    <aside class="md-banner">
-      <div class="md-banner__inner md-grid md-typeset">
-          <button
-            class="md-banner__button md-icon"
-            aria-label="{{ lang.t('announce.dismiss') }}"
-          >
-            {% set icon = config.theme.icon.close or "material/close" %}
-            {% include ".icons/" ~ icon ~ ".svg" %}
-          </button>
-        <div class="announce-content">Welcome to the Polkadot developer documentation! If you were looking for docs.substrate.io, you've been redirected here. Check out the <a class="announce-link" href="https://x.com/PolkadotDevs/status/1885377834480230498" target="_blank">official announcement</a> on X (Twitter).</div>
-      </div>
-    </aside>
-  </div>
-
-  {{ super() }}
 {% endblock %}
 
 {% block site_nav %}

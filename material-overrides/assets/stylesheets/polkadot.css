@@ -905,6 +905,11 @@ input.md-search__input::placeholder {
 }
 
 /** Main content styling **/
+.md-main__inner {
+  margin-top: 2.4rem;
+  height: 100%;
+}
+
 @media screen and (min-width: 76.25em) {
   [dir='ltr']
     .md-sidebar--secondary:not([hidden])
@@ -922,11 +927,6 @@ input.md-search__input::placeholder {
     ~ .md-content
     > .md-content__inner {
     margin-left: 1rem;
-  }
-
-  .md-main__inner {
-    margin-top: 2rem;
-    height: 100%;
   }
 }
 
