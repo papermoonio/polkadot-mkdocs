@@ -1658,6 +1658,10 @@ img.browser-extension {
   text-align: center;
 }
 
+.md-banner__inner.md-grid.md-typeset {
+  cursor: default;
+}
+
 /** MetaMask connection button styling **/
 div.button-wrapper {
   display: flex;
