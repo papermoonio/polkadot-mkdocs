@@ -47,6 +47,8 @@ theme:
     - navigation.indexes # Index pages
     - navigation.top # Show the back to top button since we don't keep top nav sticky
     - content.action.edit
+    - content.action.report # Show report an issue button
+    - announce.dismiss
 markdown_extensions:
   - abbr
   - admonition
@@ -125,6 +127,12 @@ extra:
     - icon: fontawesome/brands/discord
       link: https://polkadot-discord.w3f.tools
       name: Discord
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/substratedevs
+      name: Telegram  
+    - icon: simple/element
+      link: https://matrix.to/#/#substratedevs:matrix.org
+      name: Matrix  
     - icon: fontawesome/brands/github
       link: https://github.com/paritytech/polkadot-sdk
       name: GitHub
