@@ -982,6 +982,10 @@ input.md-search__input::placeholder {
   }
 }
 
+article.md-content__inner.md-typeset > h1:has(+ .badge) {
+  margin: 0 0 0.5em;
+}
+
 /** Footer styling **/
 .md-grid.md-footer-meta__inner {
   padding: 0.75rem 1.5rem;
@@ -1374,7 +1378,7 @@ details.interface > summary::before {
 /** Feedback widget styling **/
 .md-feedback {
   margin-top: 0;
-  margin-bottom: 0.75em;;
+  margin-bottom: 0.75em;
 }
 
 .md-feedback__title {
@@ -1495,6 +1499,11 @@ div.mermaid {
   align-items: center;
 }
 
+.md-typeset .grid.cards > ul > li > hr, .md-typeset .grid.cards > ol > li > hr, .md-typeset .grid > .card > h {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
 /** Kapa styling **/
 .mantine-r39cu6 {
   height: 3rem;
@@ -1513,32 +1522,49 @@ div.mermaid {
   font-size: 12px;
 }
 
-/** Where to Go Next Badge styling */
-.md-typeset span.badge {
+/** Badge Styling */
+/* Basic style */
+span.badge {
   border-radius: 0.5em;
   font-size: 0.8em;
   padding: 0.2em 0.5em;
-  margin-right: 0.5em;
+  white-space: nowrap;
 }
 
-.md-typeset span.badge.tutorial {
+/* Color Variants */
+span.badge.tutorial {
   background-color: var(--electric-violet);
   color: var(--white);
 }
 
-.md-typeset span.badge.guide {
+span.badge.guide {
   background-color: var(--chartreuse);
   color: var(--black);
 }
-
-.md-typeset span.badge.learn {
+span.badge.learn {
   background-color: var(--aqua);
   color: var(--black);
 }
-
-.md-typeset span.badge.external {
+span.badge.external {
   background-color: var(--blue-ribbon);
   color: var(--white);
+}
+
+span.badge.beginner,
+span.badge.intermediate,
+span.badge.advanced {
+  background-color: var(--storm-gray);
+  color: var(--white);
+}
+
+/* Badge in card "Where to Go Next" */
+.grid.cards span.badge {
+  margin-right: 0.5em;
+}
+
+/* Badge in Content Page */
+.md-typeset > span.badge {
+  display: inline-block;
 }
 
 /* Document date styling */
@@ -1584,15 +1610,21 @@ div.mermaid {
 .feedback-actions-container
   .feedback-section
   ~ .edit-section
-  a.md-content__button.md-icon {
-  margin: 0.75em auto 0;
+  > a.md-content__button.md-icon {
+  margin: 0.75em 0 0 0
 }
 
 .feedback-actions-container
   .feedback-section:has(.md-feedback[hidden])
   ~ .edit-section
   a.md-content__button.md-icon {
-  margin: auto;
+  align-items: center;
+}
+
+.feedback-actions-container .edit-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
 @media screen and (max-width: 30em) {
@@ -1637,6 +1669,6 @@ div.button-wrapper > a.connectMetaMask {
 }
 
 .md-typeset img {
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
