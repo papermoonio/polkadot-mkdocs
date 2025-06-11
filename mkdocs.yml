@@ -37,6 +37,9 @@ theme:
   font:
     text: Manrope
   features:
+    - announce.dismiss # Dismiss the announcement bar
+    - content.action.edit # Edit this page button
+    - content.action.report # Show report an issue button
     - content.code.annotate # Adds annotations to code blocks
     - content.code.copy # Adds copy to clipboard button to code snippets
     - content.tooltips # Adds tooltips
@@ -46,8 +49,6 @@ theme:
     - navigation.sections # Render top-level sections as groups in the sidebar
     - navigation.indexes # Index pages
     - navigation.top # Show the back to top button since we don't keep top nav sticky
-    - content.action.edit
-    - content.action.report # Show report an issue button
 markdown_extensions:
   - abbr
   - admonition
