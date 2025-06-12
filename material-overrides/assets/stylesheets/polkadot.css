@@ -527,6 +527,7 @@ input.md-search__input::placeholder {
 /* Nav items with icons in the title */
 .md-nav__link > .nav-title.twemoji {
   display: flex;
+  align-items: center;
   gap: .5em;
 }
 
