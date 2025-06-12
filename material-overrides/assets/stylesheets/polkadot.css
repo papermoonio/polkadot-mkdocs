@@ -524,6 +524,12 @@ input.md-search__input::placeholder {
   margin-left: -1em;
 }
 
+/* Nav items with icons in the title */
+.md-nav__link > .nav-title.twemoji {
+  display: flex;
+  gap: .5em;
+}
+
 @media screen and (min-width: 76.25em) {
   .md-nav {
     font-size: 14px;
@@ -1541,10 +1547,12 @@ span.badge.guide {
   background-color: var(--chartreuse);
   color: var(--black);
 }
+
 span.badge.learn {
   background-color: var(--aqua);
   color: var(--black);
 }
+
 span.badge.external {
   background-color: var(--blue-ribbon);
   color: var(--white);
