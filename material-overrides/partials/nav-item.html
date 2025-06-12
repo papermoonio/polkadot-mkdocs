@@ -105,9 +105,6 @@
       {% if toc %}
         <label class="md-nav__link md-nav__link--active" for="__toc">
           {{ nav_item.title }}
-          {% if toc | length > 1 %}
-            <span class="md-nav__icon md-icon"></span>
-          {% endif %}
           <span class="md-nav__icon md-icon"></span>
         </label>
       {% endif %}
@@ -128,5 +125,4 @@
     </li>
   {% endif %}
 {% endmacro %}
-
 {{ render(nav_item, path, level) }}
