@@ -10,7 +10,9 @@
       {% set icon_name = parts[1] %}
       {% set text = parts[2] %}
       <span class="twemoji nav-title">
-        {% include ".icons/" ~ icon_name.replace('-', '/') ~ ".svg" %}
+        <span aria-hidden="true">
+          {% include ".icons/" ~ icon_name.replace('-', '/') ~ ".svg" %}
+        </span>
         {{ text }}
       </span>
     {% else %}
