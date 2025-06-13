@@ -526,9 +526,17 @@ input.md-search__input::placeholder {
 
 /* Nav items with icons in the title */
 .md-nav__link > .nav-title.twemoji {
-  display: flex;
-  align-items: center;
-  gap: .5em;
+  display: inline;
+  white-space: normal;
+}
+
+.md-nav__link .nav-title.twemoji svg {
+  vertical-align: sub;
+  margin: 0 0.5em;
+}
+
+.md-nav__link > .nav-title.twemoji > span svg {
+  margin-left: 0;
 }
 
 @media screen and (min-width: 76.25em) {
