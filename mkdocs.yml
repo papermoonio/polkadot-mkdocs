@@ -12,6 +12,7 @@ extra_javascript:
   - js/root-level-sections.js
   - js/fix-created-date.js
   - js/connect-to-metamask.js
+  - js/error-modal.js
 # Extra CSS files
 extra_css:
   - assets/stylesheets/extra.css

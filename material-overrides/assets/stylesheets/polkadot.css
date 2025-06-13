@@ -87,7 +87,6 @@
   --md-mermaid-sequence-number-fg-color: var(--md-accent-bg-color);
 
   /*custom code admonition colors*/
-
   --md-code-admo-border-color: #5ee20c;
   --md-code-admo-title-bg: #64dd171a;
 }
@@ -1676,3 +1675,54 @@ div.button-wrapper > a.connectMetaMask {
   border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* Modal Styling */
+.error-modal-container {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+}
+
+.error-modal {
+  background-color: var(--mystic);
+  border: 1px solid var(--heather);
+  border-radius: 16px;
+  margin: 15% auto;
+  font-size: 2em;
+  overflow: auto;
+  width: 40%;
+  padding: 0 1em;
+}
+
+.close-modal {
+  font-size: 2em;
+  float: right;
+  cursor: pointer;
+  margin-left: 0.5em;
+}
+
+.error-modal-header {
+  font-size: 0.9em;
+}
+
+.error-message {
+  font-size: 0.8em;
+}
+
+@media screen and (max-width: 76.1875em) {
+  .error-modal {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 46.1875em) {
+  .error-modal {
+    width: 80%;
+    margin: 25% auto;
+  }
+}
+
