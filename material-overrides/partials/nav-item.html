@@ -21,7 +21,9 @@
       {% set icon_name = parts[1] %}
       <span class="twemoji nav-title">
         {{ text }}
-        {% include ".icons/" ~ icon_name.replace('-', '/') ~ ".svg" %}
+        <span aria-hidden="true">
+          {% include ".icons/" ~ icon_name.replace('-', '/') ~ ".svg" %}
+        </span>
       </span>
     {% endif %}
   {% else %}
