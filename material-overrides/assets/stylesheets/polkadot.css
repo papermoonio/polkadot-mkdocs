@@ -89,6 +89,7 @@
   /*custom code admonition colors*/
   --md-code-admo-border-color: #5ee20c;
   --md-code-admo-title-bg: #64dd171a;
+  --warning-admo-color: #f88bb0; 
 }
 
 .md-grid {
@@ -1151,7 +1152,6 @@ html .md-footer-meta.md-typeset a:hover {
 }
 
 /* Code Admonition */
-
 .md-typeset .admonition.code,
 .md-typeset details.code {
   border-color: var(--md-code-admo-border-color);
@@ -1167,6 +1167,23 @@ html .md-footer-meta.md-typeset a:hover {
   background-color: var(--md-code-admo-border-color);
   -webkit-mask-image: var(--md-admonition-icon--code);
   mask-image: var(--md-admonition-icon--code);
+}
+
+/* Warning Admonition */
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-color: var(--warning-admo-color);
+}
+
+.md-typeset .warning > .admonition-title,
+.md-typeset .warning > summary {
+  background-color: var(--pink);
+  color: var(--white);
+}
+
+.md-typeset .warning > .admonition-title::before,
+.md-typeset .warning > summary::before {
+  background-color: var(--warning-admo-color);
 }
 
 /* Child Admonition */
