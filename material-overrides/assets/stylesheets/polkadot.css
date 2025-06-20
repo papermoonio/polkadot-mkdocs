@@ -1183,7 +1183,7 @@ html .md-footer-meta.md-typeset a:hover {
 
 .md-typeset .warning > .admonition-title::before,
 .md-typeset .warning > summary::before {
-  background-color: var(--warning-admo-color);
+  background-color: var(--white);
 }
 
 /* Child Admonition */
