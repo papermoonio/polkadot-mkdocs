@@ -89,6 +89,9 @@
   /*custom code admonition colors*/
   --md-code-admo-border-color: #5ee20c;
   --md-code-admo-title-bg: #64dd171a;
+  
+  /*custom icons for admonition*/
+  --md-admonition-icon--smartcontract: var(--md-admonition-icon--warning);
 }
 
 .md-grid {
@@ -1151,7 +1154,6 @@ html .md-footer-meta.md-typeset a:hover {
 }
 
 /* Code Admonition */
-
 .md-typeset .admonition.code,
 .md-typeset details.code {
   border-color: var(--md-code-admo-border-color);
@@ -1167,6 +1169,25 @@ html .md-footer-meta.md-typeset a:hover {
   background-color: var(--md-code-admo-border-color);
   -webkit-mask-image: var(--md-admonition-icon--code);
   mask-image: var(--md-admonition-icon--code);
+}
+
+/* Smartcontract Admonition */
+.md-typeset .admonition.smartcontract,
+.md-typeset details.smartcontract {
+  border-color: var(--pink);
+}
+
+.md-typeset .smartcontract > .admonition-title,
+.md-typeset .smartcontract > summary {
+  background-color: var(--pink);
+  color: var(--white);
+}
+
+.md-typeset .smartcontract > .admonition-title::before,
+.md-typeset .smartcontract > summary::before {
+  background-color: var(--white);
+  -webkit-mask-image: var(--md-admonition-icon--smartcontract);
+  mask-image: var(--md-admonition-icon--smartcontract);
 }
 
 /* Child Admonition */
