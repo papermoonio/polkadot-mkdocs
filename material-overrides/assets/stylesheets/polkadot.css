@@ -89,7 +89,6 @@
   /*custom code admonition colors*/
   --md-code-admo-border-color: #5ee20c;
   --md-code-admo-title-bg: #64dd171a;
-  --warning-admo-color: #f88bb0; 
 }
 
 .md-grid {
@@ -1172,7 +1171,7 @@ html .md-footer-meta.md-typeset a:hover {
 /* Warning Admonition */
 .md-typeset .admonition.warning,
 .md-typeset details.warning {
-  border-color: var(--warning-admo-color);
+  border-color: var(--pink);
 }
 
 .md-typeset .warning > .admonition-title,
