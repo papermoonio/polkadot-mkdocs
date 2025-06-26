@@ -6,10 +6,12 @@ localhost
 https://fonts.gstatic.com/
 https://fonts.googleapis.com/
 
-# Ignore sites that prevent scrapers
-https://allaboutcookies.org/**
+# Ignore sites that prevent scrapers (403s)
+https://allaboutcookies.org/
 https://www.vultr.com/
 https://www.linode.com/
-https://*stackexchange.com/**
-https://*stackoverflow.com/**
-https://dune.com/**
+https://dune.com/
+
+# Ignore StackExchange and StackOverflow (403s) subdomains using regex
+regex:^https://.*\.stackexchange\.com/.*
+regex:^https://.*\.stackoverflow\.com/.*
