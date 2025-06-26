@@ -10,15 +10,5 @@ https://fonts.gstatic.com/
 https://fonts.googleapis.com/
 
 # Ignore sites that block scrapers (403s or 400s)
-https://allaboutcookies.org/
-https://www.vultr.com/
-https://www.linode.com/
-https://dune.com/
 https://x.com/
-https://stackexchange.com/
-https://stackoverflow.com/
-
-# Ignore StackExchange and StackOverflow subdomains using regex
-https?:\/\/.*\.stackexchange\.com\/
-https?:\/\/.*\.stackexchange\.com\/
-https?:\/\/.*\.stackoverflow\.com\/
+https://twitter.com/
