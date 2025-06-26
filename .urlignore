@@ -2,16 +2,20 @@
 localhost
 127.0.0.1
 
+# Polkadot main site (404s - non-browser clients)
+https://polkadot.com/
+
 # Ignore Google Fonts service
 https://fonts.gstatic.com/
 https://fonts.googleapis.com/
 
-# Ignore sites that prevent scrapers (403s)
+# Ignore sites that block scrapers (403s or 400s)
 https://allaboutcookies.org/
 https://www.vultr.com/
 https://www.linode.com/
 https://dune.com/
+https://x.com/
 
-# Ignore StackExchange and StackOverflow (403s) subdomains using regex
-regex:^https://.*\.stackexchange\.com/.*
-regex:^https://.*\.stackoverflow\.com/.*
+# Ignore StackExchange and StackOverflow subdomains using regex
+https?:\/\/.*\.stackexchange\.com\/
+https?:\/\/.*\.stackoverflow\.com\/
