@@ -1,0 +1,14 @@
+# Ignore localhost
+localhost
+127.0.0.1
+
+# Ignore Google Fonts service
+https://fonts.gstatic.com/
+https://fonts.googleapis.com/
+
+# Ignore sites that prevent scrapers
+https://allaboutcookies.org/**
+https://www.vultr.com/
+https://www.linode.com/
+https://*.stackexchange.com/**
+https://dune.com/**
