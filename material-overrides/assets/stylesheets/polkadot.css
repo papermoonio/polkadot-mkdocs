@@ -1021,6 +1021,40 @@ article.md-content__inner.md-typeset > h1:has(+ .badge) {
   gap: 1em;
 }
 
+/* Footer copy llms button */
+.md-footer.button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em 0;
+}
+
+.md-button.llms-copy-button,
+.md-button.llms-copy-button:focus
+ {
+  display: inline-flex; 
+  align-items: center;
+  gap: 0.4em; 
+  background-color: var(--md-footer-bg-color);
+  border: 1px solid var(--md-default-fg-color);
+  color: var(--md-default-fg-color);
+  margin-top: 1rem;
+}
+
+.llms-copy-button svg,
+.llms-copy-button:focus svg {
+  width: 1.25em;   
+  height: 1.25em;
+  fill: var(--md-default-fg-color);
+  display: inline-block;
+  vertical-align: middle;
+  transition: fill 0.3s ease;
+}
+
+.llms-copy-button:hover svg {
+  fill: var(--md-footer-bg-color);
+}
+
 /* Policy and disclaimer links */
 .policy-links {
   text-align: center;
