@@ -194,7 +194,6 @@
       }
     });
   </script>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const copyTxtFile = async (url) => {
@@ -246,7 +245,7 @@
           const filePath = (fileName === "llms.txt" || fileName === "llms-full.txt") 
             ? fileName 
             : `llms-files/${fileName}`;
-          // TODO update URL for production
+          // TODO Update URL for production
           const url = `http://127.0.0.1:8000/${filePath}`;
 
           if (action === 'copy') {
