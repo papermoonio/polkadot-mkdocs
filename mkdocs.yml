@@ -85,7 +85,7 @@ markdown_extensions:
 
 plugins:
   - search
-  - awesome-pages
+  - awesome-nav
   - redirects:
       redirect_maps:
         develop/parachains/testing/setup.md: develop/parachains/testing/index.md
