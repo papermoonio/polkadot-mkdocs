@@ -637,6 +637,10 @@ input.md-search__input::placeholder {
     margin-top: 0;
   }
 
+  .md-nav__toggle~.md-nav {
+    grid-template-rows: 0fr;
+  }
+
   /* Remove spacing for items in expandable sections */
   .md-nav__toggle ~ .md-nav > .nav-wrapper {
     overflow: hidden;
