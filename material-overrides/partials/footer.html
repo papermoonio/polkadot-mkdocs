@@ -46,12 +46,15 @@
       {% endif %}
     {% endif %}
     <div class="md-footer-meta md-typeset">
-      <div class="md-footer button-wrapper">
+      <div class="md-footer-meta__inner md-grid ai-resources">
+        <div class="md-footer button-wrapper">
           <button class="md-button llms-copy-button", title="{{ lang.t('clipboard.copy') }}">
             {% include ".icons/material/content-copy.svg" %} 
             llms-full.txt
           </button>
         </div>
+      </div>
+      
       <div class="md-footer-meta__inner md-grid">
         <div>
           {% include "partials/logo.html" %}
