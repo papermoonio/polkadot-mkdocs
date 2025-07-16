@@ -1,6 +1,36 @@
 {#-
   This file was automatically generated - do not edit
 -#}
+
+{% macro render_title_with_icon(title) %}
+  {% set parts = title.split(':') %}
+  {% if parts|length > 2 %}
+    {% if parts[0] == '' %}
+      {# Icon is at the start #}
+      {% set icon_name = parts[1] %}
+      {% set text = parts[2] %}
+      <span class="twemoji nav-title">
+        <span aria-hidden="true">
+          {% include ".icons/" ~ icon_name.replace('-', '/') ~ ".svg" %}
+        </span>
+        {{ text }}
+      </span>
+    {% else %}
+      {# Icon is at the end #}
+      {% set text = parts[0] %}
+      {% set icon_name = parts[1] %}
+      <span class="twemoji nav-title">
+        {{ text }}
+        <span aria-hidden="true">
+          {% include ".icons/" ~ icon_name.replace('-', '/') ~ ".svg" %}
+        </span>
+      </span>
+    {% endif %}
+  {% else %}
+    {{ title }}
+  {% endif %}
+{% endmacro %}
+
 {% macro render(nav_item, path, level) %}
   {% set class = "md-nav__item" %}
   {% if nav_item.active %}
@@ -84,7 +114,7 @@
       {% endif %}
       <div class="md-nav__link-wrapper {{ class }}">
         <a href="{{ nav_item.url | url }}" class="md-nav__link md-nav__link--active">
-          {{ nav_item.title }}
+          {{ render_title_with_icon(nav_item.title) }}
         </a>
       </div>
       {% if toc %}
@@ -94,7 +124,7 @@
   {% else %}
     <li class="{{ class }}">
       <a href="{{ nav_item.url | url }}" class="md-nav__link">
-        {{ nav_item.title }}
+        {{ render_title_with_icon(nav_item.title) }}
       </a>
     </li>
   {% endif %}

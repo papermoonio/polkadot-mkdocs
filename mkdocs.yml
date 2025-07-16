@@ -12,6 +12,7 @@ extra_javascript:
   - js/root-level-sections.js
   - js/fix-created-date.js
   - js/connect-to-metamask.js
+  - js/error-modal.js
 # Extra CSS files
 extra_css:
   - assets/stylesheets/extra.css
@@ -37,6 +38,9 @@ theme:
   font:
     text: Manrope
   features:
+    - announce.dismiss # Dismiss the announcement bar
+    - content.action.edit # Edit this page button
+    - content.action.report # Show report an issue button
     - content.code.annotate # Adds annotations to code blocks
     - content.code.copy # Adds copy to clipboard button to code snippets
     - content.tooltips # Adds tooltips
@@ -46,8 +50,6 @@ theme:
     - navigation.sections # Render top-level sections as groups in the sidebar
     - navigation.indexes # Index pages
     - navigation.top # Show the back to top button since we don't keep top nav sticky
-    - content.action.edit
-    - content.action.report # Show report an issue button
 markdown_extensions:
   - abbr
   - admonition
@@ -86,8 +88,23 @@ plugins:
   - awesome-pages
   - redirects:
       redirect_maps:
-        # Redirects will go here as pages get moved around in the following format:
-        # old-page.md: new-page.md
+        develop/parachains/testing/setup.md: develop/parachains/testing/index.md
+        develop/smart-contracts/evm/index.md: develop/smart-contracts/overview.md
+        develop/smart-contracts/evm/native-evm-contracts.md: develop/smart-contracts/overview.md
+        develop/smart-contracts/evm/parachain-contracts.md: develop/smart-contracts/overview.md
+        develop/smart-contracts/wasm-ink.md: develop/smart-contracts/overview.md
+        polkadot-protocol/basics/accounts.md: polkadot-protocol/parachain-basics/accounts.md
+        polkadot-protocol/basics/blocks-transactions-fees/blocks.md: polkadot-protocol/parachain-basics/blocks-transactions-fees/blocks.md
+        polkadot-protocol/basics/blocks-transactions-fees/fees.md: polkadot-protocol/parachain-basics/blocks-transactions-fees/fees.md
+        polkadot-protocol/basics/blocks-transactions-fees/index.md: polkadot-protocol/parachain-basics/blocks-transactions-fees/index.md
+        polkadot-protocol/basics/blocks-transactions-fees/transactions.md: polkadot-protocol/parachain-basics/blocks-transactions-fees/transactions.md
+        polkadot-protocol/basics/chain-data.md: polkadot-protocol/parachain-basics/chain-data.md
+        polkadot-protocol/basics/cryptography.md: polkadot-protocol/parachain-basics/cryptography.md
+        polkadot-protocol/basics/data-encoding.md: polkadot-protocol/parachain-basics/data-encoding.md
+        polkadot-protocol/basics/index.md: polkadot-protocol/parachain-basics/index.md
+        polkadot-protocol/basics/interoperability.md: polkadot-protocol/parachain-basics/interoperability.md
+        polkadot-protocol/basics/networks.md: polkadot-protocol/parachain-basics/networks.md
+        polkadot-protocol/basics/randomness.md: polkadot-protocol/parachain-basics/randomness.md
   - macros:
       include_yaml:
         - polkadot-docs/variables.yml
