@@ -46,29 +46,35 @@
       {% endif %}
     {% endif %}
     <div class="md-footer-meta md-typeset">
-      <div class="md-footer-meta__inner md-grid ai-resources">
-        <div class="md-footer button-wrapper">
-          <button class="md-button llms-copy-button" title="{{ lang.t('clipboard.copy') }}" data-action="copy" data-value="llms-full.txt">
-            {% include ".icons/material/content-copy.svg" %} 
-            llms-full.txt
-          </button>
-        </div>
-      </div>
-      
       <div class="md-footer-meta__inner md-grid">
-        <div>
-          {% include "partials/logo.html" %}
-          {% include "partials/copyright.html" %}
+        <div class="row links">
+          <div class="llms-links">
+            <p>AI-Ready Docs</p>
+            <a href="/llms.txt">llms.txt</a>
+            <a href="/llms-full.txt">llms-full.txt</a>
+            <a href="/ai-resources/ai-resources/">LLMs by Topic</a>
+          </div>
+          <div class="llms-links">
+            <p>Support</p>
+            <a href="/get-support/get-in-touch/">Get in Touch</a>
+            <a href="/get-support/explore-resources/">Community Resources</a>
+          </div>
+          <div class="policy-links">
+            <p>Legal</p>
+            <a href="/terms-of-use/">Terms of Use</a>
+            <a href="/privacy-policy/">Privacy Policy</a>
+            <a href="/cookie-policy/">Cookie Policy</a>
+          </div>
         </div>
-        <!-- Add custom links section -->
-        <div class="policy-links">
-          <a href="/terms-of-use/">Terms of Use</a>
-          <a href="/privacy-policy/">Privacy Policy</a>
-          <a href="/cookie-policy/">Cookie Policy</a>
+        <div class="row">
+          <div class="logo">
+            {% include "partials/logo.html" %}
+            {% include "partials/copyright.html" %}
+          </div>
+          {% if config.extra.social %}
+            {% include "partials/social.html" %}
+          {% endif %}
         </div>
-        {% if config.extra.social %}
-          {% include "partials/social.html" %}
-        {% endif %}
       </div>
     </div>
   </footer>

@@ -1004,119 +1004,98 @@ article.md-content__inner.md-typeset > h1:has(+ .badge) {
 }
 
 /** Footer styling **/
-
 .md-footer-meta {
-  border: 1px solid var(--md-accent-fg-color--transparent);
-  border-radius: 1rem;
-  margin: 0.5em;
+  border: 1px solid var(--mystic);
+  border-radius: 1em;
+  max-width: 1600px;
+  width: calc(100% - var(--page-padding) - var(--page-padding));
+  margin: 0 var(--page-padding) 2em;
 }
 
 .md-grid.md-footer-meta__inner {
-  padding: 0.75rem 1.5rem;
+  padding: 0;
   align-items: center;
   max-width: 1600px;
-  border-top: 1px solid var(--md-accent-fg-color--transparent);
+  flex-direction: column;
 }
 
 .md-footer-meta__inner.md-grid img {
   width: 126px;
   height: max-content;
   height: intrinsic; /* For Safari */
+  box-shadow: none;
 }
 
-.md-footer-meta__inner.md-grid > div {
+.md-footer-meta__inner.md-grid > div.row {
   display: flex;
   gap: 1em;
+  padding: 0.75rem 1.5rem;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
-.md-grid.md-footer-meta__inner.ai-resources {
-  background-color: var(--md-footer-bg-color);
-  color: var(--md-footer-fg-color);
-  border-top: 1px solid var(--md-accent-fg-color--transparent);
-  border-radius: 1rem;
+.md-footer-meta__inner.md-grid > div.row.links {
+  gap: 3em;
+  font-size: 16px;
+  padding: 0.75rem 1.5rem;
+  justify-content: space-evenly;
 }
 
-
-/* Footer copy llms button */
-.md-footer.button-wrapper {
+.md-footer-meta__inner.md-grid > div.row.links > div {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+}
+
+.md-footer-meta__inner.md-grid > div.row.links > div p {
+  font-weight: 500;
+  color: var(--black);
+  text-transform: uppercase;
+  text-decoration: underline;
+  margin: 0 0 0.5em;
+}
+
+.md-footer-meta__inner div.logo {
+  display: flex;
+  gap: 1em;
   align-items: center;
-  padding: 0.5em 0;
 }
 
-.md-button.llms-copy-button,
-.md-button.llms-copy-button:focus
- {
-  display: inline-flex; 
-  align-items: center;
-  gap: 0.4em; 
-  /* black */
-  background-color: var(--md-footer-fg-color);
-  /* storm gray */
-  border: 1px solid var(--md-default-fg-color);
-  color: var(--md-footer-bg-color);
-  margin-top: 1rem;
-}
-
-.llms-copy-button svg,
-.llms-copy-button:focus svg {
-  width: 1.25em;   
-  height: 1.25em;
-  fill: var(--md-footer-bg-color);
-  display: inline-block;
-  vertical-align: middle;
-  transition: fill 0.3s ease;
-}
-
-.llms-copy-button:hover svg {
-  fill: var(--md-footer-bg-color);
-}
-
-.md-button.llms-copy-button,
-.md-button.llms-copy-button:hover {
-  border: none;
+.md-footer-meta__inner.md-grid > div.row:last-child {
+  justify-content: space-between;
+  border-top: 1px solid var(--mystic);
 }
 
 /* Policy and disclaimer links */
-.policy-links {
-  text-align: center;
-  font-size: 12px;
-}
-
-html .md-footer-meta.md-typeset .policy-links a {
+html .md-footer-meta.md-typeset .links a {
   text-decoration: none;
   min-width: 100px;
   height: auto;
 }
 
-html .md-footer-meta.md-typeset .policy-links a:hover {
+html .md-footer-meta.md-typeset .links a:hover {
   background-color: unset;
   color: var(--pink);
   transition: none;
 }
 
-@media screen and (max-width: 48em) {
-  .md-grid.md-footer-meta__inner {
-    padding: 0.75rem 0;
+@media screen and (max-width: 60em) {
+  .md-footer-meta {
+    width: 100%;
+    margin: 0 0 2em;
   }
+}
 
-  .md-grid.md-footer-meta__inner {
-    max-width: 100%;
-    justify-content: center;
-  }
-
-  .md-footer-meta__inner.md-grid > .policy-links {
-    flex-wrap: wrap;
-    padding: 1em 0;
-    justify-content: center;
+@media screen and (max-width: 40em) {
+  .md-footer-meta__inner.md-grid > div.row.links {
+    font-size: 14px;
+    justify-content: left;
   }
 }
 
 /* Copyright styling */
 .md-copyright {
-  margin: 0;
-  margin-bottom: 0.1em;
+  margin: 0.5em 0 0;
+  padding: 0;
 }
 
 .md-copyright__highlight {
@@ -1126,7 +1105,12 @@ html .md-footer-meta.md-typeset .policy-links a:hover {
 }
 
 /* Socials styling */
-html .md-footer-meta.md-typeset a {
+.md-social {
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+html .md-footer-meta.md-typeset .md-social a {
   width: 48px;
   height: 48px;
   display: flex;
@@ -1134,8 +1118,8 @@ html .md-footer-meta.md-typeset a {
   justify-content: center;
 }
 
-html .md-footer-meta.md-typeset a:focus,
-html .md-footer-meta.md-typeset a:hover {
+html .md-footer-meta.md-typeset .md-social a:focus,
+html .md-footer-meta.md-typeset .md-social a:hover {
   background-color: #d5d4d8;
   border-radius: 9999px;
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
