@@ -86,6 +86,10 @@ markdown_extensions:
 plugins:
   - search
   - awesome-pages
+  - copy-to-llm:
+      enabled: true
+      code_blocks: true
+      page_button: true
   - redirects:
       redirect_maps:
         develop/parachains/testing/setup.md: develop/parachains/testing/index.md
