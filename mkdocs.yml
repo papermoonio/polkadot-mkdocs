@@ -88,7 +88,6 @@ plugins:
   - awesome-pages
   - copy-to-llm:
       enabled: true
-      code_blocks: true
       page_button: true
   - awesome-nav
   - glightbox
