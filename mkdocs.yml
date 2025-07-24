@@ -105,6 +105,9 @@ plugins:
         polkadot-protocol/basics/interoperability.md: polkadot-protocol/parachain-basics/interoperability.md
         polkadot-protocol/basics/networks.md: polkadot-protocol/parachain-basics/networks.md
         polkadot-protocol/basics/randomness.md: polkadot-protocol/parachain-basics/randomness.md
+        get-support/explore-resources.md: support/explore-resources.md
+        get-support/get-in-touch.md: support/get-in-touch.md
+        get-support/index.md: support/index.md
   - macros:
       include_yaml:
         - polkadot-docs/variables.yml
