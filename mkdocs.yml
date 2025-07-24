@@ -90,6 +90,8 @@ plugins:
       enabled: true
       code_blocks: true
       page_button: true
+  - awesome-nav
+  - glightbox
   - redirects:
       redirect_maps:
         develop/parachains/testing/setup.md: develop/parachains/testing/index.md
