@@ -85,6 +85,10 @@ markdown_extensions:
 
 plugins:
   - search
+  - awesome-pages
+  - copy-to-llm:
+      button_hover_color: "var(--pink)"
+      toast_bg_color: "var(--pink)"
   - awesome-nav
   - glightbox
   - redirects:
