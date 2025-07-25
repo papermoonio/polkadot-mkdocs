@@ -87,8 +87,8 @@ plugins:
   - search
   - awesome-pages
   - copy-to-llm:
-      enabled: true
-      page_button: true
+      button_hover_color: "var(--pink)"
+      toast_bg_color: "var(--pink)"
   - awesome-nav
   - glightbox
   - redirects:
