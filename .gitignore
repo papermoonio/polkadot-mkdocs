@@ -3,3 +3,4 @@ venv
 .vscode
 polkadot-docs
 .gitmodules
+scripts/__pycache__/*
