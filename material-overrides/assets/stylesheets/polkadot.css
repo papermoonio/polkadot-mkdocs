@@ -1011,15 +1011,14 @@ article.md-content__inner.md-typeset > h1:has(+ .badge) {
 .md-footer-meta {
   border: 1px solid var(--mystic);
   border-radius: 1em;
-  max-width: 1600px;
-  width: calc(100% - var(--page-padding) - var(--page-padding));
-  margin: 0 var(--page-padding) 2em;
+  max-width: var(--max-page-width);
+  width: calc(100% - var(--page-padding) * 4);
+  margin: 0 auto 2em;
 }
 
 .md-grid.md-footer-meta__inner {
   padding: 0;
   align-items: center;
-  max-width: 1600px;
   flex-direction: column;
 }
 
