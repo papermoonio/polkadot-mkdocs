@@ -246,7 +246,7 @@
             ? fileName 
             : `llms-files/${fileName}`;
           // TODO Update URL for production
-          const url = `http://127.0.0.1:8000/${filePath}`;
+          const url = `https://docs.polkadot.com/${filePath}`;
 
           if (action === 'copy') {
             copyTxtFile(url, fileName);
