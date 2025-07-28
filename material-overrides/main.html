@@ -233,7 +233,7 @@
           }
       }
 
-      document.querySelectorAll('.llms-copy-button').forEach(button => {
+      document.querySelectorAll('.llms').forEach(button => {
         button.addEventListener('click', (event) => {
           event.preventDefault(); // Prevent default link behavior
 
@@ -245,7 +245,6 @@
           const filePath = (fileName === "llms.txt" || fileName === "llms-full.txt") 
             ? fileName 
             : `llms-files/${fileName}`;
-          // TODO Update URL for production
           const url = `https://docs.polkadot.com/${filePath}`;
 
           if (action === 'copy') {
