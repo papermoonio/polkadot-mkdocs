@@ -9,6 +9,9 @@ https://polkadot.com/
 https://fonts.gstatic.com/
 https://fonts.googleapis.com/
 
+# Ignore known working URLs
+https://metamask.io/
+
 # Ignore sites that block scrapers (403s or 400s)
 https://x.com/
 https://twitter.com/
