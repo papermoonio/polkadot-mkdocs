@@ -196,7 +196,7 @@
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const copyTxtFile = async (url) => {
+      const copyTxtFile = async (url, fileName) => {
         try {
             const response = await fetch(url);
             if (!response.ok) {
@@ -219,7 +219,7 @@
                 copiedToClipboardMessage.textContent =
                   "{{ lang.t('clipboard.copied') }}";
               }
-              // Set a timer to remove the after 2 seconds (2000ms)
+              // Set a timer to remove the dialog after 2 seconds (2000ms)
               setTimeout(() => {
                 copiedToClipboard.classList.remove('md-dialog--active');
               }, 2000);
