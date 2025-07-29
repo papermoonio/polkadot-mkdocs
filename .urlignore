@@ -11,6 +11,7 @@ https://fonts.googleapis.com/
 
 # Ignore known working URLs
 https://metamask.io/
+https://ethereum.org/
 
 # Ignore sites that block scrapers (403s or 400s)
 https://x.com/
