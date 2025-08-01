@@ -90,7 +90,116 @@
     /* Error text styles */
     .error-code { font-size: clamp(4rem, 10vw, 6rem); font-weight: 800; color: #E6007A; margin-bottom: 1.5rem; letter-spacing: -0.02em; animation: slideInUp 0.8s ease-out; }
     .error-title { font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; animation: slideInUp 0.8s ease-out 0.2s both; }
-    .error-description { font-size: 1.125rem; color: #666666; margin-bottom: 2rem; line-height: 1.7; font-weight: 400; animation: slideInUp 0.8s ease-out 0.4s both; }
+    .error-description { 
+      font-size: 1.125rem; 
+      color: #666666; 
+      margin-bottom: 2rem; 
+      line-height: 1.7; 
+      font-weight: 400; 
+      animation: slideInUp 0.8s ease-out 0.4s both; 
+      position: relative;
+    }
+
+    /* Dissolving text effect - permanent degradation */
+    .dissolving-text {
+      position: relative;
+      display: inline-block;
+      animation: textDissolve 12s ease-out forwards;
+    }
+
+    .dissolving-text::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.1) 2px,
+        rgba(255, 255, 255, 0.1) 4px
+      );
+      animation: dissolveMask 12s ease-out forwards;
+      pointer-events: none;
+    }
+
+    .dissolving-text .char {
+      display: inline-block;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    @keyframes textDissolve {
+      0% { 
+        opacity: 1; 
+        filter: blur(0px) brightness(1);
+        text-shadow: 0 0 0 rgba(230, 0, 122, 0);
+      }
+      15% { 
+        opacity: 0.95; 
+        filter: blur(0.1px) brightness(0.98);
+        text-shadow: 0 0 1px rgba(230, 0, 122, 0.05);
+      }
+      30% { 
+        opacity: 0.8; 
+        filter: blur(0.3px) brightness(0.92);
+        text-shadow: 0 0 3px rgba(230, 0, 122, 0.15);
+      }
+      45% { 
+        opacity: 0.6; 
+        filter: blur(0.7px) brightness(0.85);
+        text-shadow: 0 0 5px rgba(230, 0, 122, 0.25);
+      }
+      60% { 
+        opacity: 0.4; 
+        filter: blur(1.2px) brightness(0.75);
+        text-shadow: 0 0 8px rgba(230, 0, 122, 0.35);
+      }
+      75% { 
+        opacity: 0.25; 
+        filter: blur(2px) brightness(0.6);
+        text-shadow: 0 0 12px rgba(230, 0, 122, 0.45);
+      }
+      90% { 
+        opacity: 0.1; 
+        filter: blur(3px) brightness(0.4);
+        text-shadow: 0 0 16px rgba(230, 0, 122, 0.5);
+      }
+      100% { 
+        opacity: 0.05; 
+        filter: blur(4px) brightness(0.2);
+        text-shadow: 0 0 20px rgba(230, 0, 122, 0.6);
+      }
+    }
+
+    @keyframes dissolveMask {
+      0% { 
+        transform: translateX(-100%) rotate(0deg);
+        opacity: 0;
+      }
+      20% { 
+        transform: translateX(-20%) rotate(20deg);
+        opacity: 0.2;
+      }
+      40% { 
+        transform: translateX(20%) rotate(40deg);
+        opacity: 0.4;
+      }
+      60% { 
+        transform: translateX(60%) rotate(60deg);
+        opacity: 0.6;
+      }
+      80% { 
+        transform: translateX(120%) rotate(80deg);
+        opacity: 0.4;
+      }
+      100% { 
+        transform: translateX(200%) rotate(100deg);
+        opacity: 0;
+      }
+    }
 
     @keyframes slideInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -127,7 +236,8 @@
       .dot { width: 26px; height: 13px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .polkadot-logo, .dot, .bg-circle, .error-code, .error-title, .error-description {
+      .polkadot-logo, .dot, .bg-circle, .error-code, .error-title, .error-description, 
+      .dissolving-text, .dissolving-text::before {
         animation: none; opacity: 1; transform: none;
       }
     }
@@ -166,7 +276,7 @@
         <div class="error-code">404</div>
         <h1 class="error-title">Page Not Found</h1>
         <p class="error-description">
-            The page you're looking for doesn't exist or has been moved.
+            <span class="dissolving-text">The page you're looking for doesn't exist or has been moved.</span>
             <a href="{{ config.site_url }}">Return to the Polkadot Docs</a>.
         </p>
     </div>
@@ -198,6 +308,73 @@
         });
     }
 
+    // Enhanced dissolving text effect
+    function initializeDissolvingText() {
+        const dissolvingText = document.querySelector('.dissolving-text');
+        if (!dissolvingText || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        
+        const text = dissolvingText.textContent;
+        dissolvingText.innerHTML = '';
+        
+        // Wrap each character in a span for individual animation
+        text.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.className = 'char';
+            span.textContent = char === ' ' ? '\u00A0' : char; // Non-breaking space
+            span.style.animationDelay = `${index * 0.15}s`;
+            span.style.animation = `charDissolve 12s ease-out forwards`;
+            dissolvingText.appendChild(span);
+        });
+    }
+
+    // Individual character dissolve animation - permanent degradation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes charDissolve {
+            0% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1) rotate(0deg);
+                filter: blur(0px);
+            }
+            10% { 
+                opacity: 0.95; 
+                transform: translateY(-1px) scale(0.99) rotate(0.5deg);
+                filter: blur(0.1px);
+            }
+            25% { 
+                opacity: 0.85; 
+                transform: translateY(-2px) scale(0.97) rotate(1deg);
+                filter: blur(0.3px);
+            }
+            40% { 
+                opacity: 0.7; 
+                transform: translateY(1px) scale(0.94) rotate(-1deg);
+                filter: blur(0.6px);
+            }
+            55% { 
+                opacity: 0.5; 
+                transform: translateY(3px) scale(0.9) rotate(2deg);
+                filter: blur(1px);
+            }
+            70% { 
+                opacity: 0.3; 
+                transform: translateY(5px) scale(0.85) rotate(-2deg);
+                filter: blur(1.5px);
+            }
+            85% { 
+                opacity: 0.15; 
+                transform: translateY(8px) scale(0.75) rotate(3deg);
+                filter: blur(2.5px);
+            }
+            100% { 
+                opacity: 0.05; 
+                transform: translateY(12px) scale(0.6) rotate(-4deg);
+                filter: blur(4px);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
     // Evolving mouse interaction
     let mouseEvolution = 0;
     document.addEventListener('mousemove', (e) => {
@@ -221,14 +398,34 @@
             const scale = 1 + Math.cos(phase) * 0.1;
             dot.style.filter += ` scale(${scale}) brightness(${intensity})`;
         });
+
+        // Interactive dissolving effect on hover
+        const dissolvingText = document.querySelector('.dissolving-text');
+        if (dissolvingText) {
+            const textRect = dissolvingText.getBoundingClientRect();
+            const distance = Math.sqrt(
+                Math.pow(e.clientX - (textRect.left + textRect.width / 2), 2) +
+                Math.pow(e.clientY - (textRect.top + textRect.height / 2), 2)
+            );
+            const maxDistance = 200;
+            const intensity = Math.max(0, 1 - distance / maxDistance);
+            
+            dissolvingText.style.filter = `blur(${intensity * 2}px) brightness(${1 - intensity * 0.3})`;
+            dissolvingText.style.transform = `scale(${1 - intensity * 0.1})`;
+        }
     });
 
     // Reset on mouse leave with evolution
     document.addEventListener('mouseleave', () => {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         const logo = document.querySelector('.polkadot-logo');
-        if (!logo) return;
-        logo.style.transform = `rotate(${Math.sin(mouseEvolution) * 2}deg)`;
+        const dissolvingText = document.querySelector('.dissolving-text');
+        
+        if (logo) logo.style.transform = `rotate(${Math.sin(mouseEvolution) * 2}deg)`;
+        if (dissolvingText) {
+            dissolvingText.style.filter = '';
+            dissolvingText.style.transform = '';
+        }
     });
 
     // Continuous evolution effects
@@ -262,6 +459,7 @@
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setInterval(evolveDotColors, 100);
       continuousEvolution();
+      setTimeout(initializeDissolvingText, 1000); // Start dissolving after initial load
     }
 
     // Keyboard navigation enhancement
