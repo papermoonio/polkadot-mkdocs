@@ -1376,7 +1376,6 @@ details.interface > summary::before {
   border-bottom-right-radius: 16px;
 }
 
-.md-typeset .tabbed-labels > label,
 .md-typeset .tabbed-labels > label > [href]:first-child,
 .md-typeset .tabbed-labels > label > a > code {
   color: var(--white);
@@ -1389,10 +1388,6 @@ details.interface > summary::before {
 .js .md-typeset .tabbed-labels:before {
   background: #40465c;
   height: 4px;
-}
-
-.md-typeset .tabbed-labels > label:hover {
-  color: var(--white);
 }
 
 /* Add margin to all items nested inside a tabbed element */
