@@ -1,0 +1,74 @@
+{% extends "main.html" %}
+
+{% block styles %}
+	{{ super() }}
+  <link rel="stylesheet" href="{{ 'assets/stylesheets/toggle-page.css' | url }}">
+{% endblock %}
+
+{% block content %}
+  <div class="page-toggle" markdown>
+    {{ super() }}
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Function to update the TOC based on active page-level tab
+      const updateToc = (tabbedSet) => {
+        if (!tabbedSet) return;
+
+        const tabbedBlocks = tabbedSet.querySelectorAll(':scope > .tabbed-content > .tabbed-block');
+        const tocItems = document.querySelectorAll('.md-nav--secondary .md-nav__item');
+
+        tabbedBlocks.forEach((block) => {
+          const isHidden = window.getComputedStyle(block).display === 'none';
+          const h2s = block.querySelectorAll('h2');
+
+          h2s.forEach((h2) => {
+            const { id } = h2;
+            if (!id) return;
+
+            tocItems.forEach((item) => {
+              const link = item.querySelector('.md-nav__link');
+              if (!link?.href.includes(id)) return;
+
+              if (isHidden) {
+                item.classList.add('hidden-toc');
+              } else {
+                item.classList.remove('hidden-toc');
+              }
+            });
+          });
+        });
+      };
+
+      // Function to update the checked label for each input
+      // This is used to visually indicate which tab is active
+      const updateCheckedLabel = (inputs, tabbedSet) => {
+        inputs.forEach(input => {
+          const label = tabbedSet.querySelector(`label[for="${input.id}"]`);
+          if (label) {
+            label.classList.toggle('checked', input.checked);
+          }
+        });
+      };
+
+      // Grab the page-level tabs
+      const tabbedSet = document.querySelector('.tabbed-set');
+      tabbedSet.classList.add('page-level-options')
+      updateToc(tabbedSet);
+      
+      const inputs = tabbedSet.querySelectorAll('input[name="__tabbed_1"]')
+      updateCheckedLabel(inputs, tabbedSet);
+
+      inputs.forEach(input => {
+        input.addEventListener('change', (e) => {
+          updateCheckedLabel(inputs, tabbedSet);
+          updateToc(tabbedSet)
+        })
+      })
+    });
+  </script>
+{% endblock %}

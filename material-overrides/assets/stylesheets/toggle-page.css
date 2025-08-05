@@ -1,0 +1,52 @@
+/** Page-level toggle **/
+.js .md-typeset .page-level-options > .tabbed-labels:before {
+  display: none;
+}
+
+.js .md-typeset .page-level-options > .tabbed-labels {
+  margin-bottom: 1rem;
+  background-color: var(--athens-gray);
+  border-radius: 20px;
+  padding: 2px;
+  border: 1px solid var(--mystic);
+  position: absolute;
+  top: -5em;
+  right: 0;
+}
+
+.js .md-typeset .page-level-options > .tabbed-labels > label {
+  padding: 0.5em 1.2em;
+  color: var(--storm-gray);
+  background-color: var(--athens-gray);
+  border-radius: 18px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.md-typeset .page-level-options > .tabbed-labels > label > [href]:first-child {
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset .page-level-options > .tabbed-labels--linked > label > a {
+  padding: 0;
+}
+
+.md-typeset .page-level-options > .tabbed-labels > label.checked {
+  border-color: var(--pink);
+  background-color: var(--white);
+}
+
+.md-typeset .page-level-options > .tabbed-content {
+  border: none;
+  border-radius: unset;
+}
+
+.md-typeset .page-level-options .tabbed-block > *,
+.md-typeset .page-level-options .tabbed-block > .tabbed-set {
+  margin-left: unset;
+  margin-right: unset;
+}
+
+.hidden-toc {
+  display: none;
+}
