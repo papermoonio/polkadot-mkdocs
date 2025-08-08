@@ -1,12 +1,135 @@
-{#-
-    This file was automatically generated - do not edit
-  -#}
+{% extends "main.html" %} {# This block sets the page title. #} {% block title
+%} 404 - Page Not Found | {{ config.site_name }} {% endblock %} {# This block
+injects your custom CSS. #} {% block styles %} {{ super() }}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Unbounded:wght@800&display=swap"
+  rel="stylesheet"
+/>
 
-{% extends "main.html" %}
+<link rel="stylesheet" href="{{ 'assets/stylesheets/404.css' | url }}" />
+{% endblock %} {# This block replaces the theme's main content area with your
+HTML. #} {% block content %}
+<div class="page-404-container">
+  <div class="background-decoration">
+    <div class="bg-circle"></div>
+    <div class="bg-circle"></div>
+    <div class="bg-circle"></div>
+  </div>
 
-{% block content %}
-  <h1 class="not-found">404 - Not found</h1>
-{% endblock %}
-  
-{% block site_nav %}
+  <div class="page-404-content">
+    <div class="polkadot-logo">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <div class="error-text-wrapper">
+      <div class="error-code">
+        <span class="digit digit-4">4</span>
+        <span class="digit digit-0">0</span>
+        <span class="digit digit-4">4</span>
+      </div>
+      <h1 class="error-title">Page Not Found</h1>
+      <span class="error-description">
+        <span class="dissolving-text">The page you are looking for does not exist.</span>
+        <a href="{{ config.site_url }}" class="btn-primary">
+          <span>Return Home</span>
+        </a>
+      </span>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block site_nav %} {% endblock %} {# This block injects your
+custom JavaScript. #} {% block scripts %} {{ super() }}
+<script>
+  // Dynamic color evolution for dots
+  const dots = document.querySelectorAll(".dot");
+
+  const colorVarNames = ["--pink"];
+  const rootStyles = getComputedStyle(document.documentElement);
+  const colors = colorVarNames.map((varName) =>
+    rootStyles.getPropertyValue(varName).trim()
+  );
+
+  function evolveDotColors() {
+    if (!colors.length || !colors[0]) return;
+    dots.forEach((dot, index) => {
+      const colorIndex = (Date.now() / (1000 + index * 200)) % colors.length;
+      const color1 = colors[Math.floor(colorIndex)];
+      const progress = colorIndex - Math.floor(colorIndex);
+
+      dot.style.background = color1;
+      dot.style.filter = `brightness(${0.8 + progress * 0.5})`;
+    });
+  }
+
+  // Enhanced dissolving text effect
+  function initializeDissolvingText() {
+    const dissolvingText = document.querySelector(".dissolving-text");
+    if (
+      !dissolvingText ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+
+    const text = dissolvingText.textContent;
+    dissolvingText.innerHTML = "";
+
+    text.split("").forEach((char, index) => {
+      const span = document.createElement("span");
+      span.className = "char";
+      span.textContent = char === " " ? "\u00A0" : char;
+      span.style.animationDelay = `${index * 0.15}s`;
+      span.style.animation = `charDissolve 12s ease-out forwards`;
+      dissolvingText.appendChild(span);
+    });
+  }
+
+  // Individual character dissolve animation
+  const style = document.createElement("style");
+  style.textContent = `
+        @keyframes charDissolve {
+            0% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); filter: blur(0px); }
+            25% { opacity: 0.85; transform: translateY(-2px) scale(0.97) rotate(1deg); filter: blur(0.3px); }
+            55% { opacity: 0.5; transform: translateY(3px) scale(0.9) rotate(2deg); filter: blur(1px); }
+            100% { opacity: 0.05; transform: translateY(12px) scale(0.6) rotate(-4deg); filter: blur(4px); }
+        }
+    `;
+  document.head.appendChild(style);
+
+  // Evolving mouse interaction
+  let mouseEvolution = 0;
+  document.addEventListener("mousemove", (e) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    mouseEvolution += 0.01;
+    const logo = document.querySelector(".polkadot-logo");
+    if (!logo) return;
+    const rect = logo.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const deltaX = (e.clientX - centerX) * 0.02;
+    const deltaY = (e.clientY - centerY) * 0.02;
+    const rotation = Math.sin(mouseEvolution * 0.5) * 5;
+
+    logo.style.transform = `translate(${deltaX}px, ${deltaY}px) rotate(${rotation}deg)`;
+  });
+
+  document.addEventListener("mouseleave", () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const logo = document.querySelector(".polkadot-logo");
+    if (logo) logo.style.transform = `rotate(0deg)`;
+  });
+
+  // Start animation cycles
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    setInterval(evolveDotColors, 100);
+    setTimeout(initializeDissolvingText, 1000);
+  }
+</script>
 {% endblock %}
