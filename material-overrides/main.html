@@ -196,7 +196,7 @@
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const copyTxtFile = async (url, fileName) => {
+      const copyTxtFile = async (url) => {
         try {
             const response = await fetch(url);
             if (!response.ok) {
@@ -248,7 +248,7 @@
           const url = `https://docs.polkadot.com/${filePath}`;
 
           if (action === 'copy') {
-            copyTxtFile(url, fileName);
+            copyTxtFile(url);
           }
         })
       })
