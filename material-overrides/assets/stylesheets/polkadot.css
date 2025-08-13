@@ -1122,6 +1122,12 @@ html .md-footer-meta.md-typeset a:hover {
   align-items: center;
 }
 
+.md-footer__title .md-ellipsis span svg {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: sub;
+}
+
 /* Back to top button */
 [dir="ltr"] .md-top {
   left: 50%;
