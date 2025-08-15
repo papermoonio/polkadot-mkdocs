@@ -1008,62 +1008,72 @@ article.md-content__inner.md-typeset > h1:has(+ .badge) {
 }
 
 /** Footer styling **/
+.md-footer {
+  width: 100%;
+  max-width: var(--max-page-width);
+  margin: auto;
+}
+
+.md-footer-meta {
+  border: 1px solid var(--mystic);
+  border-radius: 1em;
+  margin: 0 var(--page-padding) 2em;
+}
+
 .md-grid.md-footer-meta__inner {
-  padding: 0.75rem 1.5rem;
+  padding: 0;
   align-items: center;
-  max-width: 1600px;
+  flex-direction: column;
 }
 
 .md-footer-meta__inner.md-grid img {
-  width: 126px;
-  height: max-content;
-  height: intrinsic; /* For Safari */
+  height: 32px;
+  min-width: 150.24px;
+  box-shadow: none;
 }
 
-.md-footer-meta__inner.md-grid > div {
+.md-footer-meta__inner.md-grid > div.row {
   display: flex;
   gap: 1em;
+  padding: 0.75rem 1.5rem;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
-/* Policy and disclaimer links */
-.policy-links {
-  text-align: center;
-  font-size: 12px;
+.md-footer-meta__inner.md-grid > div.row.links {
+  gap: 3em;
+  font-size: 16px;
+  padding: 0.75rem 1.5rem;
+  justify-content: space-between;
+  min-height: calc(48px + 1.5rem);
+  align-content: center;
 }
 
-html .md-footer-meta.md-typeset .policy-links a {
-  text-decoration: none;
-  min-width: 100px;
-  height: auto;
-}
-
-html .md-footer-meta.md-typeset .policy-links a:hover {
-  background-color: unset;
+.md-footer-meta__inner.md-grid > div.row.links a:hover {
   color: var(--pink);
-  transition: none;
 }
 
-@media screen and (max-width: 48em) {
-  .md-grid.md-footer-meta__inner {
-    padding: 0.75rem 0;
-  }
+.md-footer-meta__inner.md-grid > div.row.links > div {
+  display: flex;
+  gap: 3em;
+  text-align: center;
+}
 
-  .md-grid.md-footer-meta__inner {
-    max-width: 100%;
-    justify-content: center;
-  }
+.md-footer-meta__inner div.logo {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
 
-  .md-footer-meta__inner.md-grid > .policy-links {
-    flex-wrap: wrap;
-    padding: 1em 0;
-    justify-content: center;
-  }
+.md-footer-meta__inner.md-grid > div.row:last-child {
+  justify-content: space-between;
+  border-top: 1px solid var(--mystic);
 }
 
 /* Copyright styling */
 .md-copyright {
-  margin: 0;
-  margin-bottom: 0.1em;
+  margin: 0.5em 0 0;
+  padding: 0;
 }
 
 .md-copyright__highlight {
@@ -1073,7 +1083,12 @@ html .md-footer-meta.md-typeset .policy-links a:hover {
 }
 
 /* Socials styling */
-html .md-footer-meta.md-typeset a {
+.md-social {
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+html .md-footer-meta.md-typeset .md-social a {
   width: 48px;
   height: 48px;
   display: flex;
@@ -1081,8 +1096,8 @@ html .md-footer-meta.md-typeset a {
   justify-content: center;
 }
 
-html .md-footer-meta.md-typeset a:focus,
-html .md-footer-meta.md-typeset a:hover {
+html .md-footer-meta.md-typeset .md-social a:focus,
+html .md-footer-meta.md-typeset .md-social a:hover {
   background-color: #d5d4d8;
   border-radius: 9999px;
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
@@ -1101,6 +1116,61 @@ html .md-footer-meta.md-typeset a:hover {
   height: auto;
   width: 32px;
   max-height: unset;
+}
+
+@media screen and (max-width: 60em) {
+  .md-footer-meta__inner.md-grid > div.row.links {
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+}
+
+@media screen and (max-width: 46em) {
+  .md-footer-meta__inner.md-grid > div.row {
+    border: none
+  }
+
+  .md-footer-meta__inner.md-grid > div.row:last-child {
+    flex-direction: column;
+    align-items: center;
+    gap: .75rem;
+  }
+}
+
+@media screen and (max-width: 35em) {
+  .md-footer-meta {
+    margin: 0;
+    border: none;
+  }
+
+  .md-footer-meta__inner.md-grid img {
+    height: auto;
+    min-width: 117px;
+    width: 117px;
+  }
+
+  .md-social {
+    gap: .5rem;
+  }
+
+  html .md-footer-meta.md-typeset .md-social a {
+    height: 32px;
+    width: 32px;
+  }
+
+  .md-footer-meta__inner.md-grid > div.row:last-child {
+    border-top: none;
+    padding-top: 0.5em;
+  }
+
+  .md-footer-meta__inner.md-grid > div.row.links a {
+    font-size: 14px;
+  }
+
+  .md-footer-meta__inner.md-grid > div.row.links > div {
+    gap: 1em;
+  }
 }
 
 /* Next and prev styling */
