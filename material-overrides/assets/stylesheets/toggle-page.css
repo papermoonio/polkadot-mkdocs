@@ -10,7 +10,7 @@
   padding: 2px;
   border: 1px solid var(--mystic);
   position: absolute;
-  top: -5em;
+  top: -4.6em;
   right: 0;
 }
 
@@ -39,6 +39,7 @@
 .md-typeset .page-level-options > .tabbed-content {
   border: none;
   border-radius: unset;
+  margin-top: -1em;
 }
 
 .md-typeset .page-level-options .tabbed-block > *,
@@ -47,6 +48,30 @@
   margin-right: unset;
 }
 
+.md-typeset .page-toggle .tabbed-set,
+.md-typeset .page-level-options .tabbed-block h1 {
+  margin-top: 0;
+}
+
 .hidden-toc {
   display: none;
+}
+
+/* Adjust h1 width based on page-level toggle width */
+.page-toggle h1 {
+  width: calc(100% - var(--tabbed-labels-width, 0px));
+}
+
+@media screen and (max-width: 768px) {
+  .page-toggle h1 {
+    width: 100%;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+  }
+
+  .js .md-typeset .page-level-options > .tabbed-labels {
+    left: 0;
+    right: unset;
+    top: -7em;
+  }
 }

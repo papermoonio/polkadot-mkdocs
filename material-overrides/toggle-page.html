@@ -69,6 +69,13 @@
           updateToc(tabbedSet)
         })
       })
+
+      // Get the width of the page-level toggle and set CSS custom property
+      const labels = tabbedSet.querySelector('.tabbed-labels');
+      const width = labels ? labels.offsetWidth + 32 : 0;
+      // Set the width as a CSS custom property on the root or a parent element
+      document.documentElement.style.setProperty('--tabbed-labels-width', `${width}px`);
+
     });
   </script>
 {% endblock %}
