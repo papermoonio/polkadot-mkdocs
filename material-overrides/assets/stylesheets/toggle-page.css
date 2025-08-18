@@ -10,7 +10,7 @@
   padding: 2px;
   border: 1px solid var(--mystic);
   position: absolute;
-  top: -4.6em;
+  top: calc(-1 * (var(--page-toggle-h1-height) + 2.6em));
   right: 0;
 }
 
@@ -57,7 +57,7 @@
   display: none;
 }
 
-/* Adjust h1 width based on page-level toggle width */
+/* Adjust h1 width based on tabbed labels width */
 .page-toggle h1 {
   width: calc(100% - var(--tabbed-labels-width, 0px));
 }
@@ -72,6 +72,6 @@
   .js .md-typeset .page-level-options > .tabbed-labels {
     left: 0;
     right: unset;
-    top: -7em;
+    top: calc(-1 * (var(--page-toggle-h1-height) + 4.6em));
   }
 }

@@ -70,11 +70,32 @@
         })
       })
 
-      // Get the width of the page-level toggle and set CSS custom property
-      const labels = tabbedSet.querySelector('.tabbed-labels');
-      const width = labels ? labels.offsetWidth + 32 : 0;
-      // Set the width as a CSS custom property on the root or a parent element
-      document.documentElement.style.setProperty('--tabbed-labels-width', `${width}px`);
+      // Function to update CSS custom properties based on current layout
+      const updateLayoutProperties = () => {
+        // Get the width of the page-level toggle and set CSS custom property
+        const labels = tabbedSet.querySelector('.tabbed-labels');
+        const width = labels ? labels.offsetWidth + 32 : 0;
+        document.documentElement.style.setProperty('--tabbed-labels-width', `${width}px`);
+
+        // Get the height of the h1 and set CSS custom property for mobile positioning
+        const h1 = document.querySelector('.page-toggle h1');
+        if (h1) {
+          const h1Height = h1.offsetHeight;
+          document.documentElement.style.setProperty('--page-toggle-h1-height', `${h1Height}px`);
+        }
+      };
+
+      // Initial calculation
+      updateLayoutProperties();
+
+      // Recalculate on window resize with debouncing to improve performance
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          updateLayoutProperties();
+        }, 100); // Debounce resize events by 100ms
+      });
 
     });
   </script>
