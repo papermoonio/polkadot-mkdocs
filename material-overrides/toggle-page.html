@@ -65,7 +65,8 @@
           const isHidden = window.getComputedStyle(block).display === 'none';
           const h2s = block.querySelectorAll('h2');
 
-          h2s.forEach(({ id }) => {
+          h2s.forEach((h2) => {
+            const id = h2.id;
             if (!id) return;
             tocItems.forEach((item) => {
               const link = item.querySelector('.md-nav__link');
