@@ -6,8 +6,41 @@
 {% endblock %}
 
 {% block content %}
-  <div class="page-toggle" markdown>
-    {{ super() }}
+  <div class="page-toggle">
+    {% set content = page.content %}
+    {# Create wrapper for the h1 #}
+    {% if '<h1' in content %}
+      {% set content = content.replace('<h1', '<div class="h1-wrapper"><h1', 1) %}
+      {% set content = content.replace('</h1>', '</h1></div>', 1) %}
+    {% endif %}
+    
+    {# Find and move the first tabbed-labels div into the h1-wrapper #}
+    {% if 'class="tabbed-labels"' in content %}
+      {% set labels_start = content.find('<div class="tabbed-labels"') %}
+      {% if labels_start != -1 %}
+        {% set after_start = content[labels_start:] %}
+        {% set first_close = after_start.find('</div>') %}
+        {% if first_close != -1 %}
+          {% set labels_end = labels_start + first_close + 6 %}
+          {% set before_labels = content[:labels_start] %}
+          {% set labels_div = content[labels_start:labels_end] %}
+          {% set after_labels = content[labels_end:] %}
+          
+          {# Remove the labels div from its original position #}
+          {% set content_without_labels = before_labels + after_labels %}
+          
+          {# Find the h1-wrapper closing div and insert labels before it #}
+          {% if '</div>' in content_without_labels %}
+            {% set wrapper_close_pos = content_without_labels.find('</div>') %}
+            {% set before_wrapper_close = content_without_labels[:wrapper_close_pos] %}
+            {% set after_wrapper_close = content_without_labels[wrapper_close_pos:] %}
+            {% set content = before_wrapper_close + labels_div + after_wrapper_close %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    
+    {{ content | safe }}
   </div>
 {% endblock %}
 
@@ -15,88 +48,53 @@
   {{ super() }}
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Function to update the TOC based on active page-level tab
-      const updateToc = (tabbedSet) => {
-        if (!tabbedSet) return;
+      const tabbedSet = document.querySelector('.tabbed-set');
+      if (!tabbedSet) return;
 
+      tabbedSet.classList.add('page-level-options');
+
+      const inputs = tabbedSet.querySelectorAll('input[name="__tabbed_1"]');
+      const labels = document.querySelector('.tabbed-labels');
+      const tocItems = document.querySelectorAll('.md-nav--secondary .md-nav__item');
+
+      // Update TOC visibility based on active tab
+      const updateToc = () => {
         const tabbedBlocks = tabbedSet.querySelectorAll(':scope > .tabbed-content > .tabbed-block');
-        const tocItems = document.querySelectorAll('.md-nav--secondary .md-nav__item');
 
         tabbedBlocks.forEach((block) => {
           const isHidden = window.getComputedStyle(block).display === 'none';
           const h2s = block.querySelectorAll('h2');
 
-          h2s.forEach((h2) => {
-            const { id } = h2;
+          h2s.forEach(({ id }) => {
             if (!id) return;
-
             tocItems.forEach((item) => {
               const link = item.querySelector('.md-nav__link');
               if (!link?.href.includes(id)) return;
-
-              if (isHidden) {
-                item.classList.add('hidden-toc');
-              } else {
-                item.classList.remove('hidden-toc');
-              }
+              item.classList.toggle('hidden-toc', isHidden);
             });
           });
         });
       };
 
-      // Function to update the checked label for each input
-      // This is used to visually indicate which tab is active
-      const updateCheckedLabel = (inputs, tabbedSet) => {
-        inputs.forEach(input => {
-          const label = tabbedSet.querySelector(`label[for="${input.id}"]`);
-          if (label) {
-            label.classList.toggle('checked', input.checked);
-          }
-        });
-      };
-
-      // Grab the page-level tabs
-      const tabbedSet = document.querySelector('.tabbed-set');
-      tabbedSet.classList.add('page-level-options')
-      updateToc(tabbedSet);
-      
-      const inputs = tabbedSet.querySelectorAll('input[name="__tabbed_1"]')
-      updateCheckedLabel(inputs, tabbedSet);
-
-      inputs.forEach(input => {
-        input.addEventListener('change', (e) => {
-          updateCheckedLabel(inputs, tabbedSet);
-          updateToc(tabbedSet)
-        })
-      })
-
-      // Function to update CSS custom properties based on current layout
-      const updateLayoutProperties = () => {
-        // Get the width of the page-level toggle and set CSS custom property
-        const labels = tabbedSet.querySelector('.tabbed-labels');
-        const width = labels ? labels.offsetWidth + 32 : 0;
-        document.documentElement.style.setProperty('--tabbed-labels-width', `${width}px`);
-
-        // Get the height of the h1 and set CSS custom property for mobile positioning
-        const h1 = document.querySelector('.page-toggle h1');
-        if (h1) {
-          const h1Height = h1.offsetHeight;
-          document.documentElement.style.setProperty('--page-toggle-h1-height', `${h1Height}px`);
+      // Update tab label states
+      const updateLabels = () => {
+        if (labels) {
+          labels.classList.toggle('option-1-active', inputs[0]?.checked);
+          labels.classList.toggle('option-2-active', inputs[1]?.checked);
         }
       };
 
-      // Initial calculation
-      updateLayoutProperties();
+      // Initialize
+      updateToc();
+      updateLabels();
 
-      // Recalculate on window resize with debouncing to improve performance
-      let resizeTimeout;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          updateLayoutProperties();
-        }, 100); // Debounce resize events by 100ms
-      });
-
+      // Watch for changes
+      inputs.forEach((input) =>
+        input.addEventListener('change', () => {
+          updateLabels();
+          updateToc();
+        })
+      );
     });
   </script>
 {% endblock %}
