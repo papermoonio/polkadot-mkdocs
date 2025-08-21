@@ -1,1 +1,0 @@
-You can add custom fonts by adding their corresponding `.otf` font file to this directory. You'll also need to add your font to the `extra.css` file.
