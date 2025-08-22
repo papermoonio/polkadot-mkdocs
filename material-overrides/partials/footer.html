@@ -1,6 +1,9 @@
 {#-
     This file was automatically generated - do not edit
   -#}
+
+{% from "partials/macros.html" import render_title_with_icon %}
+
   <footer class="md-footer">
     {% if "navigation.footer" in features %}
       {% if page.previous_page or page.next_page %}
@@ -20,7 +23,7 @@
                   {{ direction }}
                 </span>
                 <div class="md-ellipsis">
-                  {{ page.previous_page.title }}
+                  {{ render_title_with_icon(page.previous_page.title) }}
                 </div>
               </div>
             </a>
@@ -33,7 +36,7 @@
                   {{ direction }}
                 </span>
                 <div class="md-ellipsis">
-                  {{ page.next_page.title }}
+                  {{ render_title_with_icon(page.next_page.title) }}
                 </div>
               </div>
               <div class="md-footer__button md-icon">
