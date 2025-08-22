@@ -1161,7 +1161,8 @@ html .md-footer-meta.md-typeset .md-social a:hover {
   }
 
   .md-social {
-    gap: .5rem;
+    gap: .7rem;
+    justify-content: center;
   }
 
   html .md-footer-meta.md-typeset .md-social a {
@@ -1176,6 +1177,7 @@ html .md-footer-meta.md-typeset .md-social a:hover {
 
   .md-footer-meta__inner.md-grid > div.row.links > div {
     gap: 1em;
+    text-wrap-mode: nowrap;
   }
 }
 
