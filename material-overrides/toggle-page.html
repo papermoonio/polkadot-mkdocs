@@ -1,0 +1,101 @@
+{% extends "main.html" %}
+
+{% block styles %}
+	{{ super() }}
+  <link rel="stylesheet" href="{{ 'assets/stylesheets/toggle-page.css' | url }}">
+{% endblock %}
+
+{% block content %}
+  <div class="page-toggle">
+    {% set content = page.content %}
+    {# Create wrapper for the h1 #}
+    {% if '<h1' in content %}
+      {% set content = content.replace('<h1', '<div class="h1-wrapper"><h1', 1) %}
+      {% set content = content.replace('</h1>', '</h1></div>', 1) %}
+    {% endif %}
+    
+    {# Find and move the first tabbed-labels div into the h1-wrapper #}
+    {% if 'class="tabbed-labels"' in content %}
+      {% set labels_start = content.find('<div class="tabbed-labels"') %}
+      {% if labels_start != -1 %}
+        {% set after_start = content[labels_start:] %}
+        {% set first_close = after_start.find('</div>') %}
+        {% if first_close != -1 %}
+          {% set labels_end = labels_start + first_close + 6 %}
+          {% set before_labels = content[:labels_start] %}
+          {% set labels_div = content[labels_start:labels_end] %}
+          {% set after_labels = content[labels_end:] %}
+          
+          {# Remove the labels div from its original position #}
+          {% set content_without_labels = before_labels + after_labels %}
+          
+          {# Find the h1-wrapper closing div and insert labels before it #}
+          {% if '</div>' in content_without_labels %}
+            {% set wrapper_close_pos = content_without_labels.find('</div>') %}
+            {% set before_wrapper_close = content_without_labels[:wrapper_close_pos] %}
+            {% set after_wrapper_close = content_without_labels[wrapper_close_pos:] %}
+            {% set content = before_wrapper_close + labels_div + after_wrapper_close %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    
+    {{ content | safe }}
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabbedSet = document.querySelector('.tabbed-set');
+      if (!tabbedSet) return;
+
+      tabbedSet.classList.add('page-level-options');
+
+      const inputs = tabbedSet.querySelectorAll('input[name="__tabbed_1"]');
+      const labels = document.querySelector('.tabbed-labels');
+      const tocItems = document.querySelectorAll('.md-nav--secondary .md-nav__item');
+
+      // Update TOC visibility based on active tab
+      const updateToc = () => {
+        const tabbedBlocks = tabbedSet.querySelectorAll(':scope > .tabbed-content > .tabbed-block');
+
+        tabbedBlocks.forEach((block) => {
+          const isHidden = window.getComputedStyle(block).display === 'none';
+          const h2s = block.querySelectorAll('h2');
+
+          h2s.forEach((h2) => {
+            const id = h2.id;
+            if (!id) return;
+            tocItems.forEach((item) => {
+              const link = item.querySelector('.md-nav__link');
+              if (!link?.href.includes(id)) return;
+              item.classList.toggle('hidden-toc', isHidden);
+            });
+          });
+        });
+      };
+
+      // Update tab label states
+      const updateLabels = () => {
+        if (labels) {
+          labels.classList.toggle('option-1-active', inputs[0]?.checked);
+          labels.classList.toggle('option-2-active', inputs[1]?.checked);
+        }
+      };
+
+      // Initialize
+      updateToc();
+      updateLabels();
+
+      // Watch for changes
+      inputs.forEach((input) =>
+        input.addEventListener('change', () => {
+          updateLabels();
+          updateToc();
+        })
+      );
+    });
+  </script>
+{% endblock %}

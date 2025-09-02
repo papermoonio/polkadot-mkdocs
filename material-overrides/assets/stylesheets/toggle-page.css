@@ -1,0 +1,98 @@
+/** Page-level toggle **/
+.h1-wrapper {
+  display: flex;
+  gap: 3em;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1.25em;
+}
+
+.md-typeset .h1-wrapper h1 {
+  margin: 0;
+}
+
+/* Make the labels container look like a pill toggle */
+.js .md-typeset .h1-wrapper .tabbed-labels {
+  position: relative;
+  background: var(--athens-gray);
+  border-radius: 2em;
+  width: fit-content;
+  min-width: 132px;
+  height: min-content;
+}
+
+.md-typeset .h1-wrapper .tabbed-labels > label {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  z-index: 1;
+  padding: 0.5em 1em;
+}
+
+.md-typeset .h1-wrapper .tabbed-labels > label > [href]:first-child,
+.md-typeset .h1-wrapper .tabbed-labels > label a {
+  color: var(--black);
+  text-decoration: none;
+  display: block;
+}
+
+/* Slider background */
+.js .md-typeset .h1-wrapper .tabbed-labels:before {
+  content: "";
+  position: absolute;
+  top: 0.2em;
+  left: 0.2em;
+  width: calc(50% - 0.2em);
+  height: calc(100% - 0.4em);
+  background: var(--pink);
+  border-radius: 2em;
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+
+.js .md-typeset .h1-wrapper .tabbed-labels.option-2-active::before {
+  transform: translateX(100%);
+}
+
+.js .md-typeset .h1-wrapper .tabbed-labels.option-1-active::before {
+  transform: translateX(0);
+}
+
+.js .md-typeset .h1-wrapper .tabbed-labels.option-1-active label:nth-child(1) a,
+.js
+  .md-typeset
+  .h1-wrapper
+  .tabbed-labels.option-2-active
+  label:nth-child(2)
+  a {
+  color: var(--md-default-bg-color);
+}
+
+.md-typeset .page-level-options > .tabbed-content {
+  border: none;
+  border-radius: unset;
+  margin-top: -1em;
+}
+
+.md-typeset .page-level-options .tabbed-block > *,
+.md-typeset .page-level-options .tabbed-block > .tabbed-set {
+  margin-left: unset;
+  margin-right: unset;
+}
+
+.md-typeset .page-toggle .tabbed-set,
+.md-typeset .page-level-options .tabbed-block h1 {
+  margin-top: 0;
+}
+
+.hidden-toc {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .h1-wrapper {
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+}
