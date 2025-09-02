@@ -98,6 +98,8 @@
 /* Link styling */
 .md-typeset a {
   text-decoration: underline;
+  -webkit-text-decoration-skip-ink: none;
+  text-decoration-skip-ink: none;
 }
 
 .md-typeset a > code {
