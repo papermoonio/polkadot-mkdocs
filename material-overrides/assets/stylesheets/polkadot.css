@@ -1161,7 +1161,7 @@ html .md-footer-meta.md-typeset .md-social a:hover {
   }
 
   .md-social {
-    gap: .7rem;
+    gap: 0.5rem;
     justify-content: center;
   }
 
