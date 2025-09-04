@@ -97,6 +97,8 @@ plugins:
         - node_modules/*
       enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
 extra:
+  # TODO update url for prod
+  ai_raw_base: https://raw.githubusercontent.com/polkadot-developers/polkadot-docs/dawn/improved-llms/.ai
   consent:
     title: Cookie Consent
     description: >-
