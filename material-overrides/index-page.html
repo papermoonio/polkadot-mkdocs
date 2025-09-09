@@ -1,34 +1,11 @@
 {% extends "main.html" %}
 
+{% from "partials/macros.html" import render_title_with_icon %}
+
 {% block styles %}
   {{ super() }}
   <link rel="stylesheet" href="{{ 'assets/stylesheets/index-page.css' | url }}">
 {% endblock %}
-
-{% macro render_title_with_icon(title) %}
-  {% set parts = title.split(':') %}
-  {% if parts|length > 2 %}
-    {% if parts[0] == '' %}
-      {# Icon is at the start #}
-      {% set icon_name = parts[1] %}
-      {% set text = parts[2] %}
-      <span aria-hidden="true">
-        {% include ".icons/" ~ icon_name.replace('-', '/') ~ ".svg" %}
-      </span>
-      {{ text }}
-    {% else %}
-      {# Icon is at the end #}
-      {% set text = parts[0] %}
-      {% set icon_name = parts[1] %}
-      {{ text }}
-      <span aria-hidden="true">
-        {% include ".icons/" ~ icon_name.replace('-', '/') ~ ".svg" %}
-      </span>
-    {% endif %}
-  {% else %}
-    {{ title }}
-  {% endif %}
-{% endmacro %}
 
 {% macro find_active_page(element, nav) %}
   {% for nav_item in element %}
