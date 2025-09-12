@@ -287,12 +287,6 @@
           downloadViaFetch(url, filename);
         });
       });
-
-      // Special case: llms.txt at site root (same-origin)
-      document.querySelectorAll('.llms-root').forEach((a) => {
-        a.setAttribute('href', `${SITE_BASE}/llms.txt`);
-        a.setAttribute('download', 'llms.txt'); // same-origin, browser will honor
-      });
     });
   </script>
 {% endblock %}
