@@ -73,24 +73,24 @@
     data-modal-title-color="white"
     data-modal-disclaimer="This is an AI chatbot trained to answer questions about Polkadot. As such, the answers it provides might not always be accurate or up-to-date. Please use your best judgement when evaluating its responses. Also, **please refrain from sharing any personal or private information with the bot**. By submitting a query, you agree that you have read and understood [these conditions](https://polkadot.com/legal-disclosures/).
       **If you need further assistance, you can reach out to [Polkadot Support](https://support.polkadot.network/support/tickets/new?ticket_form=i_have_a_support_request).**"
-  data-modal-disclaimer-font-size="12px"
-  data-search-mode-enabled="false"
-  data-search-mode-default="false"
-  data-search-result-primary-title-font-size="16px"
-  data-button-position-top="120px"
-  data-button-position-right="0px"
-></script>
-<script defer>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.body.addEventListener('click', (event) => {
-      if (event.target.id === 'kapa-widget-container') {
-        event.target.addEventListener('keydown', (event) => {
-          event.stopPropagation();
-        });
-      }
+    data-modal-disclaimer-font-size="12px"
+    data-search-mode-enabled="false"
+    data-search-mode-default="false"
+    data-search-result-primary-title-font-size="16px"
+    data-button-position-top="120px"
+    data-button-position-right="0px"
+  ></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.addEventListener('click', (event) => {
+        if (event.target.id === 'kapa-widget-container') {
+          event.target.addEventListener('keydown', (event) => {
+            event.stopPropagation();
+          });
+        }
+      });
     });
-  });
-</script>
+  </script>
 {% endblock %} 
 
 {% block site_nav %} 
@@ -170,129 +170,129 @@
             const storedHash = __md_get('__announce');
             const currentHash = __md_hash(content.innerHTML);
 
-          const close = document.querySelector('.md-banner__button');
-          if (close) {
-            close.addEventListener('click', () => {
-              // If the current hash matches the stored value, hide the element
-              if (currentHash === storedHash) {
-                announceElement.style.display = 'none';
-                announceElement.hidden = true;
-              } else {
-                __md_set('__announce', currentHash);
-                announceElement.style.display = 'none';
-                announceElement.hidden = true;
-              }
-            });
-          }
+            const close = document.querySelector('.md-banner__button');
+            if (close) {
+              close.addEventListener('click', () => {
+                // If the current hash matches the stored value, hide the element
+                if (currentHash === storedHash) {
+                  announceElement.style.display = 'none';
+                  announceElement.hidden = true;
+                } else {
+                  __md_set('__announce', currentHash);
+                  announceElement.style.display = 'none';
+                  announceElement.hidden = true;
+                }
+              });
+            }
 
-          // Only show the banner if the stored hash doesn't match
-          if (currentHash !== storedHash) {
-            announceElement.style.display = 'block';
+            // Only show the banner if the stored hash doesn't match
+            if (currentHash !== storedHash) {
+              announceElement.style.display = 'block';
+            }
           }
         }
       }
-    }
-  });
-</script>
-<script>
-  // AI_RAW_BASE = base URL where AI artifacts are stored (injected via variables.yml or mkdocs.yml:extra)
-  window.AI_RAW_BASE =
-    "{{ config.extra.ai_raw_base | default('https://raw.githubusercontent.com/polkadot-developers/polkadot-docs/master/.ai') }}";
+    });
+  </script>
+  <script>
+    // AI_RAW_BASE = base URL where AI artifacts are stored (injected via variables.yml or mkdocs.yml:extra)
+    const AI_RAW_BASE =
+      "{{ config.extra.ai_raw_base | default('https://raw.githubusercontent.com/polkadot-developers/polkadot-docs/master/.ai') }}";
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const RAW_BASE = (window.AI_RAW_BASE || '').replace(/\/+$/, '');
-    const SITE_BASE = location.origin.replace(/\/+$/, '');
+    document.addEventListener('DOMContentLoaded', () => {
+      const RAW_BASE = (window.AI_RAW_BASE || '').replace(/\/+$/, '');
+      const SITE_BASE = location.origin.replace(/\/+$/, '');
 
-    const toAbsolute = (dataPath) => {
-      if (!dataPath) return null;
-      if (/^https?:\/\//i.test(dataPath)) return dataPath; // already absolute
+      const toAbsolute = (dataPath) => {
+        if (!dataPath) return null;
+        if (/^https?:\/\//i.test(dataPath)) return dataPath; // already absolute
 
-      // 🔧 special-case: root-level llms.txt is served by MkDocs at same origin
-      if (dataPath === '/llms.txt' || dataPath === 'llms.txt') {
-        return `${SITE_BASE}/llms.txt`;
-      }
-
-      // AI artifacts live under RAW_BASE
-      if (dataPath.startsWith('/.ai/')) return `${RAW_BASE}${dataPath}`;
-      if (dataPath.startsWith('/')) return `${RAW_BASE}${dataPath}`;
-      return `${RAW_BASE}/` + dataPath.replace(/^\/+/, '');
-    };
-
-    const downloadViaFetch = async (url, filename) => {
-      try {
-        const res = await fetch(url, { credentials: 'omit' });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const blob = await res.blob(); // keep original content-type from server
-        const link = document.createElement('a');
-        const objectUrl = URL.createObjectURL(blob);
-        link.href = objectUrl;
-        link.download = filename || 'download.txt';
-        document.body.appendChild(link);
-        link.click();
-        URL.revokeObjectURL(objectUrl);
-        link.remove();
-      } catch (err) {
-        console.error('Download failed, falling back to navigation:', err);
-        // Fallback: just navigate to the URL (will open in browser)
-        window.location.href = url;
-      }
-    };
-
-    const copyTextFromUrl = async (url) => {
-      try {
-        const res = await fetch(url, { credentials: 'omit' });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const text = await res.text();
-        await navigator.clipboard.writeText(text);
-
-        const dlg = document.querySelector('.md-dialog');
-        if (dlg) {
-          dlg.classList.add('md-dialog--active');
-          const msg = dlg.querySelector('.md-dialog__inner');
-          if (msg) msg.textContent = "{{ lang.t('clipboard.copied') }}";
-          setTimeout(() => dlg.classList.remove('md-dialog--active'), 2000);
+        // 🔧 special-case: root-level llms.txt is served by MkDocs at same origin
+        if (dataPath === '/llms.txt' || dataPath === 'llms.txt') {
+          return `${SITE_BASE}/llms.txt`;
         }
-      } catch (err) {
-        console.error('Failed to copy:', err);
-        const dlg = document.querySelector('.md-dialog');
-        if (dlg) dlg.classList.remove('md-dialog--active');
-      }
-    };
 
-    // COPY buttons
-    document.querySelectorAll('.llms-copy').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const url = toAbsolute(btn.getAttribute('data-path'));
-        if (url) copyTextFromUrl(url);
+        // AI artifacts live under RAW_BASE
+        if (dataPath.startsWith('/.ai/')) return `${RAW_BASE}${dataPath}`;
+        if (dataPath.startsWith('/')) return `${RAW_BASE}${dataPath}`;
+        return `${RAW_BASE}/` + dataPath.replace(/^\/+/, '');
+      };
+
+      const downloadViaFetch = async (url, filename) => {
+        try {
+          const res = await fetch(url, { credentials: 'omit' });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const blob = await res.blob(); // keep original content-type from server
+          const link = document.createElement('a');
+          const objectUrl = URL.createObjectURL(blob);
+          link.href = objectUrl;
+          link.download = filename || 'download.txt';
+          document.body.appendChild(link);
+          link.click();
+          URL.revokeObjectURL(objectUrl);
+          link.remove();
+        } catch (err) {
+          console.error('Download failed, falling back to navigation:', err);
+          // Fallback: just navigate to the URL (will open in browser)
+          window.location.href = url;
+        }
+      };
+
+      const copyTextFromUrl = async (url) => {
+        try {
+          const res = await fetch(url, { credentials: 'omit' });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const text = await res.text();
+          await navigator.clipboard.writeText(text);
+
+          const dlg = document.querySelector('.md-dialog');
+          if (dlg) {
+            dlg.classList.add('md-dialog--active');
+            const msg = dlg.querySelector('.md-dialog__inner');
+            if (msg) msg.textContent = "{{ lang.t('clipboard.copied') }}";
+            setTimeout(() => dlg.classList.remove('md-dialog--active'), 2000);
+          }
+        } catch (err) {
+          console.error('Failed to copy:', err);
+          const dlg = document.querySelector('.md-dialog');
+          if (dlg) dlg.classList.remove('md-dialog--active');
+        }
+      };
+
+      // COPY buttons
+      document.querySelectorAll('.llms-copy').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const url = toAbsolute(btn.getAttribute('data-path'));
+          if (url) copyTextFromUrl(url);
+        });
+      });
+
+      // DOWNLOAD buttons: force a real download via Blob
+      document.querySelectorAll('.llms-dl').forEach((a) => {
+        // Set href for right-click "Copy link address" convenience
+        const abs = toAbsolute(a.getAttribute('data-path'));
+        if (abs) a.setAttribute('href', abs);
+
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          const path = a.getAttribute('data-path') || '';
+          const url = toAbsolute(path);
+          if (!url) return;
+          // Prefer explicit filename; else derive from last path segment
+          const filename =
+            a.getAttribute('data-filename') ||
+            path.split('/').pop() ||
+            'download.txt';
+          downloadViaFetch(url, filename);
+        });
+      });
+
+      // Special case: llms.txt at site root (same-origin)
+      document.querySelectorAll('.llms-root').forEach((a) => {
+        a.setAttribute('href', `${SITE_BASE}/llms.txt`);
+        a.setAttribute('download', 'llms.txt'); // same-origin, browser will honor
       });
     });
-
-    // DOWNLOAD buttons: force a real download via Blob
-    document.querySelectorAll('.llms-dl').forEach((a) => {
-      // Set href for right-click "Copy link address" convenience
-      const abs = toAbsolute(a.getAttribute('data-path'));
-      if (abs) a.setAttribute('href', abs);
-
-      a.addEventListener('click', (e) => {
-        e.preventDefault();
-        const path = a.getAttribute('data-path') || '';
-        const url = toAbsolute(path);
-        if (!url) return;
-        // Prefer explicit filename; else derive from last path segment
-        const filename =
-          a.getAttribute('data-filename') ||
-          path.split('/').pop() ||
-          'download.txt';
-        downloadViaFetch(url, filename);
-      });
-    });
-
-    // Special case: llms.txt at site root (same-origin)
-    document.querySelectorAll('.llms-root').forEach((a) => {
-      a.setAttribute('href', `${SITE_BASE}/llms.txt`);
-      a.setAttribute('download', 'llms.txt'); // same-origin, browser will honor
-    });
-  });
-</script>
+  </script>
 {% endblock %}
