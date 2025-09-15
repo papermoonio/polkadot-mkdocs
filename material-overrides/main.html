@@ -195,7 +195,7 @@
     });
   </script>
   <script>
-    // AI_RAW_BASE = base URL where AI artifacts are stored (injected via variables.yml or mkdocs.yml:extra)
+    // AI_RAW_BASE = base URL where AI artifacts are stored (injected via mkdocs.yml:extra)
     const AI_RAW_BASE =
       "{{ config.extra.ai_raw_base | default('https://raw.githubusercontent.com/polkadot-developers/polkadot-docs/master/.ai') }}";
 
@@ -210,6 +210,11 @@
         // 🔧 special-case: root-level llms.txt is served by MkDocs at same origin
         if (dataPath === '/llms.txt' || dataPath === 'llms.txt') {
           return `${SITE_BASE}/llms.txt`;
+        }
+
+        // 🔧 special-case: root-level llms-full.jsonl is served by MkDocs at same origin
+        if (dataPath === '/llms-full.jsonl' || dataPath === 'llms-full.jsonl') {
+          return `${SITE_BASE}/llms-full.jsonl`;
         }
 
         // AI artifacts live under RAW_BASE
