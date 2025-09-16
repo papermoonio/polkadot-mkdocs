@@ -12,6 +12,12 @@
                 <a href="{{ nav_item.children[0].url | url }}">{{ nav_item.title }}</a>   
               </span>
               <ul class="md-tab__list">
+                {#- Include index page as item in dropdown -#}
+                <li class="md-tab__item">
+                  <a href="{{ nav_item.children[0].url | url }}">
+                    <span class="dropdown-title">{{ nav_item.children[0].title }}</span>
+                  </a>
+                </li>
                 {% for section_item in nav_item.children %}
                   {% if section_item.is_section %}
                     <li class="md-tab__item">
