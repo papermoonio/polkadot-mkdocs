@@ -19,6 +19,7 @@
   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
   IN THE SOFTWARE.
 -->
+
 <!-- TODO: ADD SUPPORT FOR ICONS IN NAV TITLES BACK -->
 <!-- {% from "partials/macros.html" import render_title_with_icon %} -->
 
@@ -41,16 +42,23 @@
 {% endmacro %}
 
 <!-- Render navigation link content -->
-{% macro render_content(nav_item, ref = nav_item) %}
+{% macro render_content(nav_item, ref) %}
+  {% set ref = ref or nav_item %}
 
   <!-- Navigation link icon -->
-  {% if nav_item.is_page and nav_item.meta.icon %}
+  {% if nav_item.meta and nav_item.meta.icon %}
     {% include ".icons/" ~ nav_item.meta.icon ~ ".svg" %}
   {% endif %}
 
   <!-- Navigation link title -->
   <span class="md-ellipsis">
     {{ ref.title }}
+
+    <!-- Navigation link subtitle -->
+    {% if nav_item.meta and nav_item.meta.subtitle %}
+      <br />
+      <small>{{ nav_item.meta.subtitle }}</small>
+    {% endif %}
   </span>
 
   <!-- Navigation link status -->
@@ -60,7 +68,8 @@
 {% endmacro %}
 
 <!-- Render navigation item (pruned) -->
-{% macro render_pruned(nav_item, ref = nav_item) %}
+{% macro render_pruned(nav_item, ref) %}
+  {% set ref = ref or nav_item %}
   {% set first = nav_item.children | first %}
 
   <!-- Recurse, if the first item has further nested items -->
@@ -81,7 +90,7 @@
 {% endmacro %}
 
 <!-- Render navigation item -->
-{% macro render(nav_item, path, level, loop_index) %}
+{% macro render(nav_item, path, level, parent) %}
 
   <!-- Determine classes -->
   {% set class = "md-nav__item" %}
@@ -100,14 +109,15 @@
   {% if nav_item.children %}
 
     <!-- Determine all nested items that are index pages -->
-    {% set indexes = [] %}
+    {% set _ = namespace(index = none) %}
     {% if "navigation.indexes" in features %}
-      {% for nav_item in nav_item.children %}
-        {% if nav_item.is_index and not index is defined %}
-          {% set _ = indexes.append(nav_item) %}
+      {% for item in nav_item.children %}
+        {% if item.is_index and _.index is none %}
+          {% set _.index = item %}
         {% endif %}
       {% endfor %}
     {% endif %}
+    {% set index = _.index %}
 
     <!-- Navigation tabs -->
     {% if "navigation.tabs" in features %}
@@ -122,7 +132,7 @@
       {% if "navigation.sections" in features %}
 
         <!-- Render 2nd level items with nested items as sections -->
-        {% if level == 2 and nav_item.parent.active %}
+        {% if level == 2 and parent.active %}
           {% set class = class ~ " md-nav__item--section" %}
           {% set is_section = true %}
         {% endif %}
@@ -148,12 +158,8 @@
       {% endif %}
     {% endif %}
 
-    {% if level == 2 %}
-      {% set class = class ~ " nav__item--section" %}
-    {% endif %}
-
     <!-- Nested navigation item -->
-    <li class="{{ class }} md-nav__item--nested" id="{{ loop_index }}">
+    <li class="{{ class }} md-nav__item--nested">
       {% if not is_pruned %}
         {% set checked = "checked" if nav_item.active %}
 
@@ -179,14 +185,12 @@
             id="{{ path }}_label"
             tabindex="{{ tabindex }}"
           >
-
             {{ render_content(nav_item) }}
             <span class="md-nav__icon md-icon"></span>
           </label>
 
         <!-- Toggle to expand nested items with link to index page -->
         {% else %}
-          {% set index = indexes | first %}
           {% set class = "md-nav__link--active" if index == page %}
           <div class="md-nav__link md-nav__container">
             <a
@@ -223,13 +227,11 @@
             {{ nav_item.title }}
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-            {% set id_title = nav_item.title | lower | replace(" ", "_") ~ "_" %}
 
             <!-- Nested navigation item -->
-            {% for nav_item in nav_item.children %}
-              {% if not index or nav_item != indexes | first %}
-                {{ render(nav_item, path ~ "_" ~ loop.index, level + 1, id_title ~ loop.index) }}
+            {% for item in nav_item.children %}
+              {% if not index or item != index %}
+                {{ render(item, path ~ "_" ~ loop.index, level + 1, nav_item) }}
               {% endif %}
             {% endfor %}
           </ul>
@@ -284,9 +286,6 @@
     <li class="{{ class }}">
       <a href="{{ nav_item.url | url }}" class="md-nav__link">
         {{ render_content(nav_item) }}
-        {% if nav_item.url.startswith('https') %}
-          <span class="external-link">{% include ".icons/octicons/link-external-16.svg" %}</span>
-        {% endif %}
       </a>
     </li>
   {% endif %}
