@@ -97,7 +97,6 @@ plugins:
         - node_modules/*
       enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
 extra:
-  ai_raw_base: https://raw.githubusercontent.com/polkadot-developers/polkadot-docs/master/.ai
   consent:
     title: Cookie Consent
     description: >-
