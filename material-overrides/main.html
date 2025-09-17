@@ -195,12 +195,11 @@
     });
   </script>
   <script>
-    // AI_RAW_BASE = base URL where AI artifacts are stored (injected via mkdocs.yml:extra)
-    const AI_RAW_BASE =
-      "{{ config.extra.ai_raw_base | default('https://raw.githubusercontent.com/polkadot-developers/polkadot-docs/master/.ai') }}";
+    // AI_RAW_BASE = base URL where AI artifacts are stored 
+    const AI_RAW_BASE = "https://raw.githubusercontent.com/polkadot-developers/polkadot-docs/master/.ai'";
 
     document.addEventListener('DOMContentLoaded', () => {
-      const RAW_BASE = (window.AI_RAW_BASE || '').replace(/\/+$/, '');
+      const RAW_BASE = (AI_RAW_BASE).replace(/\/+$/, '');
       const SITE_BASE = location.origin.replace(/\/+$/, '');
 
       const toAbsolute = (dataPath) => {
