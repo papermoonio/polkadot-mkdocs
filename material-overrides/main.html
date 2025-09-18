@@ -195,11 +195,11 @@
     });
   </script>
   <script>
-    // AI_RAW_BASE = base URL where AI artifacts are stored
-    const AI_RAW_BASE = 'https://api.github.com/repos/polkadot-developers/polkadot-docs/contents/.ai';
+    // AI_RAW_BASE = base URL where AI artifacts are stored 
+    const AI_RAW_BASE = 'https://raw.githubusercontent.com/polkadot-developers/polkadot-docs/master/.ai';
 
     document.addEventListener('DOMContentLoaded', () => {
-      const RAW_BASE = AI_RAW_BASE.replace(/\/+$/, '');
+      const RAW_BASE = (AI_RAW_BASE).replace(/\/+$/, '');
       const SITE_BASE = location.origin.replace(/\/+$/, '');
 
       const toAbsolute = (dataPath) => {
@@ -216,53 +216,38 @@
           return `${SITE_BASE}/llms-full.jsonl`;
         }
 
-        // AI artifacts: convert path to GitHub API URL
-        const cleanedPath = dataPath.replace(/^\/+/, '');
-        return `${RAW_BASE}/${cleanedPath}`;
-      };
-
-      // Fetch a file from GitHub API and decode base64 if necessary
-      const fetchContent = async (url) => {
-        try {
-          const res = await fetch(url, { credentials: 'omit' });
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const data = await res.json();
-          if (data.content && data.encoding === 'base64') {
-            // Decode base64 content
-            return atob(data.content.replace(/\n/g, ''));
-          }
-          // fallback: return raw text
-          return data;
-        } catch (err) {
-          console.error('Failed to fetch content:', err);
-          return null;
-        }
+        // AI artifacts live under RAW_BASE
+        if (dataPath.startsWith('/.ai/')) return `${RAW_BASE}${dataPath}`;
+        if (dataPath.startsWith('/')) return `${RAW_BASE}${dataPath}`;
+        return `${RAW_BASE}/` + dataPath.replace(/^\/+/, '');
       };
 
       const downloadViaFetch = async (url, filename) => {
         try {
-          const content = await fetchContent(url);
-          if (!content) throw new Error('No content fetched');
-          const blob = new Blob([content], { type: 'text/markdown' });
+          const res = await fetch(url, { credentials: 'omit' });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const blob = await res.blob(); // keep original content-type from server
           const link = document.createElement('a');
           const objectUrl = URL.createObjectURL(blob);
           link.href = objectUrl;
-          link.download = filename || 'download.md';
+          link.download = filename || 'download.txt';
           document.body.appendChild(link);
           link.click();
           URL.revokeObjectURL(objectUrl);
           link.remove();
         } catch (err) {
           console.error('Download failed, falling back to navigation:', err);
+          // Fallback: just navigate to the URL (will open in browser)
           window.location.href = url;
         }
       };
 
       const copyTextFromUrl = async (url) => {
         try {
-          const content = await fetchContent(url);
-          if (!content) throw new Error('No content fetched');
-          await navigator.clipboard.writeText(content);
+          const res = await fetch(url, { credentials: 'omit' });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const text = await res.text();
+          await navigator.clipboard.writeText(text);
 
           const dlg = document.querySelector('.md-dialog');
           if (dlg) {
@@ -287,8 +272,9 @@
         });
       });
 
-      // DOWNLOAD buttons
+      // DOWNLOAD buttons: force a real download via Blob
       document.querySelectorAll('.llms-dl').forEach((a) => {
+        // Set href for right-click "Copy link address" convenience
         const abs = toAbsolute(a.getAttribute('data-path'));
         if (abs) a.setAttribute('href', abs);
 
@@ -297,10 +283,11 @@
           const path = a.getAttribute('data-path') || '';
           const url = toAbsolute(path);
           if (!url) return;
+          // Prefer explicit filename; else derive from last path segment
           const filename =
             a.getAttribute('data-filename') ||
             path.split('/').pop() ||
-            'download.md';
+            'download.txt';
           downloadViaFetch(url, filename);
         });
       });
