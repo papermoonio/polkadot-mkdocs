@@ -91,13 +91,13 @@
       });
     });
   </script>
-{% endblock %} 
+{% endblock %}
 
-{% block site_nav %} 
-{#- Navigation (left menu) -#} 
+{% block site_nav %}
+{#- Navigation (left menu) -#}
   {% if nav %}
-    {% if page.meta and page.meta.hide %} 
-      {% set hidden = "hidden" if "navigation" in page.meta.hide %} 
+    {% if page.meta and page.meta.hide %}
+      {% set hidden = "hidden" if "navigation" in page.meta.hide %}
     {% endif %}
     <div
       class="md-sidebar md-sidebar--primary"
@@ -111,12 +111,12 @@
         </div>
       </div>
     </div>
-  {% endif %} 
+  {% endif %}
   
-  {#- Table of contents (TOC) -#} 
-  {% if "toc.integrate" not in features %} 
-    {% if page.meta and page.meta.hide %} 
-      {% set hidden = "hidden" if "toc" in page.meta.hide %} 
+  {#- Table of contents (TOC) -#}
+  {% if "toc.integrate" not in features %}
+    {% if page.meta and page.meta.hide %}
+      {% set hidden = "hidden" if "toc" in page.meta.hide %}
     {% endif %}
     <div
       class="md-sidebar md-sidebar--secondary"
@@ -126,7 +126,7 @@
     >
       <div class="md-sidebar__scrollwrap">
         <div class="md-sidebar__inner">
-          {#- TOC -#} 
+          {#- TOC -#}
           {% include "partials/toc.html" %}
         </div>
 
@@ -144,35 +144,35 @@
         </div>
       </div>
     </div>
-  {% endif %} 
-{% endblock %} 
+  {% endif %}
+{% endblock %}
 
-{%- block container -%}
-<div class="md-content" data-md-component="content">
-  {% set class = "index-page" if not page.content %}
-  <article class="md-content__inner md-typeset {{ class }}">
-    {% block content %} 
-      {% include "partials/content.html" %} 
-    {% endblock %}
-  </article>
-</div>
+{%- block container -%} 
+  <div class="md-content" data-md-component="content">
+    {% set class = "index-page" if not page.content %}
+    <article class="md-content__inner md-typeset {{ class }}">
+      {% block content %}
+        {% include "partials/content.html" %}
+      {% endblock %}
+    </article>
+  </div>
 {%- endblock -%} 
 
-{% block scripts %} 
+{% block scripts %}
   {{ super() }}
   <script defer>
     document.addEventListener('DOMContentLoaded', () => {
-      if (document.referrer.includes('docs.substrate.io')) {
+      if (document.referrer.includes('docs.substrate.io')) {        
         const announceElement = document.querySelector('.announce.hideable');
-        if (announceElement) {
+        if (announceElement) {          
           const content = announceElement.querySelector('.md-typeset');
-          if (content) {
-            const storedHash = __md_get('__announce');
+          if (content) {            
+            const storedHash = __md_get('__announce');  
             const currentHash = __md_hash(content.innerHTML);
 
             const close = document.querySelector('.md-banner__button');
             if (close) {
-              close.addEventListener('click', () => {
+              close.addEventListener('click', () => {                
                 // If the current hash matches the stored value, hide the element
                 if (currentHash === storedHash) {
                   announceElement.style.display = 'none';
@@ -184,7 +184,7 @@
                 }
               });
             }
-
+            
             // Only show the banner if the stored hash doesn't match
             if (currentHash !== storedHash) {
               announceElement.style.display = 'block';
@@ -195,102 +195,63 @@
     });
   </script>
   <script>
-    // AI_RAW_BASE = base URL where AI artifacts are stored 
-    const AI_RAW_BASE = 'https://raw.githubusercontent.com/polkadot-developers/polkadot-docs/master/.ai';
-
     document.addEventListener('DOMContentLoaded', () => {
-      const RAW_BASE = (AI_RAW_BASE).replace(/\/+$/, '');
-      const SITE_BASE = location.origin.replace(/\/+$/, '');
-
-      const toAbsolute = (dataPath) => {
-        if (!dataPath) return null;
-        if (/^https?:\/\//i.test(dataPath)) return dataPath; // already absolute
-
-        // 🔧 special-case: root-level llms.txt is served by MkDocs at same origin
-        if (dataPath === '/llms.txt' || dataPath === 'llms.txt') {
-          return `${SITE_BASE}/llms.txt`;
-        }
-
-        // 🔧 special-case: root-level llms-full.jsonl is served by MkDocs at same origin
-        if (dataPath === '/llms-full.jsonl' || dataPath === 'llms-full.jsonl') {
-          return `${SITE_BASE}/llms-full.jsonl`;
-        }
-
-        // AI artifacts live under RAW_BASE
-        if (dataPath.startsWith('/.ai/')) return `${RAW_BASE}${dataPath}`;
-        if (dataPath.startsWith('/')) return `${RAW_BASE}${dataPath}`;
-        return `${RAW_BASE}/` + dataPath.replace(/^\/+/, '');
-      };
-
-      const downloadViaFetch = async (url, filename) => {
+      const copyTxtFile = async (url) => {
         try {
-          const res = await fetch(url, { credentials: 'omit' });
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const blob = await res.blob(); // keep original content-type from server
-          const link = document.createElement('a');
-          const objectUrl = URL.createObjectURL(blob);
-          link.href = objectUrl;
-          link.download = filename || 'download.txt';
-          document.body.appendChild(link);
-          link.click();
-          URL.revokeObjectURL(objectUrl);
-          link.remove();
-        } catch (err) {
-          console.error('Download failed, falling back to navigation:', err);
-          // Fallback: just navigate to the URL (will open in browser)
-          window.location.href = url;
-        }
-      };
+            const response = await fetch(url);
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const text = await response.text();
+            await navigator.clipboard.writeText(text);
 
-      const copyTextFromUrl = async (url) => {
-        try {
-          const res = await fetch(url, { credentials: 'omit' });
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const text = await res.text();
-          await navigator.clipboard.writeText(text);
+            const copiedToClipboard = document.querySelector('.md-dialog');
+            if (copiedToClipboard) {
+              copiedToClipboard.classList.add('md-dialog--active');
 
-          const dlg = document.querySelector('.md-dialog');
-          if (dlg) {
-            dlg.classList.add('md-dialog--active');
-            const msg = dlg.querySelector('.md-dialog__inner');
-            if (msg) msg.textContent = "{{ lang.t('clipboard.copied') }}";
-            setTimeout(() => dlg.classList.remove('md-dialog--active'), 2000);
+              const copiedToClipboardMessage =
+                copiedToClipboard.querySelector('.md-dialog__inner');
+              if (
+                copiedToClipboardMessage &&
+                copiedToClipboardMessage.textContent !==
+                  "{{ lang.t('clipboard.copied') }}"
+              ) {
+                copiedToClipboardMessage.textContent =
+                  "{{ lang.t('clipboard.copied') }}";
+              }
+              // Set a timer to remove the dialog after 2 seconds (2000ms)
+              setTimeout(() => {
+                copiedToClipboard.classList.remove('md-dialog--active');
+              }, 2000);
+            }
+          } catch (err) {
+            console.error('Failed to copy:', err);
+            const copiedToClipboard = document.querySelector('.md-dialog');
+            if (copiedToClipboard) {
+              copiedToClipboard.classList.remove('md-dialog--active');
+            }
           }
-        } catch (err) {
-          console.error('Failed to copy:', err);
-          const dlg = document.querySelector('.md-dialog');
-          if (dlg) dlg.classList.remove('md-dialog--active');
-        }
-      };
+      }
 
-      // COPY buttons
-      document.querySelectorAll('.llms-copy').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const url = toAbsolute(btn.getAttribute('data-path'));
-          if (url) copyTextFromUrl(url);
-        });
-      });
+      document.querySelectorAll('.llms').forEach(button => {
+        button.addEventListener('click', (event) => {
+          event.preventDefault(); // Prevent default link behavior
 
-      // DOWNLOAD buttons: force a real download via Blob
-      document.querySelectorAll('.llms-dl').forEach((a) => {
-        // Set href for right-click "Copy link address" convenience
-        const abs = toAbsolute(a.getAttribute('data-path'));
-        if (abs) a.setAttribute('href', abs);
+          const action = button.getAttribute('data-action');
+          const fileName = button.getAttribute('data-value');
+          if (!fileName) return; // Exit if no file name is found
 
-        a.addEventListener('click', (e) => {
-          e.preventDefault();
-          const path = a.getAttribute('data-path') || '';
-          const url = toAbsolute(path);
-          if (!url) return;
-          // Prefer explicit filename; else derive from last path segment
-          const filename =
-            a.getAttribute('data-filename') ||
-            path.split('/').pop() ||
-            'download.txt';
-          downloadViaFetch(url, filename);
-        });
-      });
+          // Add 'llms-files/' prefix except for root-level llms.txt and llms-full.txt
+          const filePath = (fileName === "llms.txt" || fileName === "llms-full.txt") 
+            ? fileName 
+            : `llms-files/${fileName}`;
+          const url = `https://docs.polkadot.com/${filePath}`;
+
+          if (action === 'copy') {
+            copyTxtFile(url);
+          }
+        })
+      })
     });
   </script>
 {% endblock %}
