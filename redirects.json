@@ -1,6 +1,22 @@
 {
   "data": [
     {
+      "key": "/develop/interoperability/intro-to-xcm/",
+      "value": "/rollups/interoperability/"
+    },
+    {
+      "key": "/develop/parachains/maintenance/runtime-upgrades/",
+      "value": "/rollups/runtime-maintenance/"
+    },
+    {
+      "key": "/develop/parachains/maintenance/storage-migrations/",
+      "value": "/rollups/runtime-maintenance/storage-migrations/"
+    },
+    {
+      "key": "/develop/parachains/maintenance/unlock-parachain/",
+      "value": "/rollups/runtime-maintenance/unlock-rollups/"
+    },
+    {
       "key": "/develop/parachains/testing/setup/",
       "value": "/develop/parachains/testing/"
     },
@@ -21,8 +37,48 @@
       "value": "/develop/smart-contracts/overview/"
     },
     {
+      "key": "/develop/toolkit/integrations/indexers/",
+      "value": "/rollups/integrations/indexers/"
+    },
+    {
+      "key": "/develop/toolkit/integrations/oracles/",
+      "value": "/rollups/integrations/oracles/"
+    },
+    {
+      "key": "/develop/toolkit/integrations/wallets/",
+      "value": "/rollups/integrations/"
+    },
+    {
+      "key": "/develop/toolkit/interoperability/asset-transfer-api/",
+      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+    },
+    {
+      "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
+      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+    },
+    {
+      "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
+      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/fork-chains/chopsticks/get-started/",
+      "value": "/rollups/testing/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/spawn-chains/zombienet/get-started/",
+      "value": "/rollups/testing/run-a-rollup-network/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/",
+      "value": "/polkadot-protocol/parachain-basics/"
+    },
+    {
       "key": "/polkadot-protocol/basics/accounts/",
       "value": "/polkadot-protocol/parachain-basics/accounts/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/blocks-transactions-fees/",
+      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/"
     },
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/blocks/",
@@ -31,10 +87,6 @@
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/fees/",
       "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/fees/"
-    },
-    {
-      "key": "/polkadot-protocol/basics/blocks-transactions-fees/",
-      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/"
     },
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/transactions/",
@@ -53,10 +105,6 @@
       "value": "/polkadot-protocol/parachain-basics/data-encoding/"
     },
     {
-      "key": "/polkadot-protocol/basics/",
-      "value": "/polkadot-protocol/parachain-basics/"
-    },
-    {
       "key": "/polkadot-protocol/basics/interoperability/",
       "value": "/polkadot-protocol/parachain-basics/interoperability/"
     },
@@ -69,16 +117,12 @@
       "value": "/polkadot-protocol/parachain-basics/randomness/"
     },
     {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+      "key": "/tutorials/interoperability/xcm-channels/para-to-para/",
+      "value": "/rollups/interoperability/channels-between-rollups/"
     },
     {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+      "key": "/tutorials/interoperability/xcm-channels/para-to-system/",
+      "value": "/rollups/interoperability/channels-with-system-rollups/"
     }
   ]
 }
