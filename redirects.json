@@ -109,6 +109,10 @@
       "value": "/smart-contracts/for-eth-devs/"
     },
     {
+      "key": "/smart-contracts/cookbook/eth-dapps/",
+      "value": "/smart-contracts/cookbook/eth-dapps/uniswap-v2/"
+    },
+    {
       "key": "/tutorials/smart-contracts/demo-aplications/deploying-uniswap-v2/",
       "value": "/smart-contracts/cookbook/eth-dapps/uniswap-v2/"
     },
