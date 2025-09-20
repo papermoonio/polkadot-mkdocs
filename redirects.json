@@ -1,6 +1,42 @@
 {
   "data": [
     {
+      "key": "/develop/parachains/customize-parachain/add-existing-pallets/",
+      "value": "/parachains/customize-runtime/add-existing-pallets/"
+    },
+    {
+      "key": "/develop/parachains/customize-parachain/add-pallet-instances/",
+      "value": "/parachains/customize-runtime/add-pallet-instances/"
+    },
+    {
+      "key": "/develop/parachains/customize-parachain/add-smart-contract-functionality/",
+      "value": "/parachains/customize-runtime/add-smart-contract-functionality/"
+    },
+    {
+      "key": "/develop/parachains/customize-parachain/make-custom-pallet/",
+      "value": "/parachains/pallet-development/"
+    },
+    {
+      "key": "/develop/parachains/deployment/obtain-coretime/",
+      "value": "/parachains/launch-a-parachain/obtain-coretime/"
+    },
+    {
+      "key": "/develop/parachains/intro-polkadot-sdk/",
+      "value": "/parachains/overview/"
+    },
+    {
+      "key": "/develop/parachains/testing/benchmarking/",
+      "value": "/parachains/pallet-development/benchmark-pallet/"
+    },
+    {
+      "key": "/develop/parachains/testing/mock-runtime/",
+      "value": "/parachains/pallet-development/mock-runtime/"
+    },
+    {
+      "key": "/develop/parachains/testing/pallet-testing/",
+      "value": "/parachains/pallet-development/pallet-testing/"
+    },
+    {
       "key": "/develop/parachains/testing/setup/",
       "value": "/develop/parachains/testing/"
     },
@@ -127,6 +163,10 @@
     {
       "key": "/smart-contracts/dev-environments/",
       "value": "/smart-contracts/dev-environments/local-dev-node/"
+    },
+    {
+      "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/add-pallets-to-runtime/",
+      "value": "/parachains/pallet-development/add-pallet-to-runtime/"
     }
   ]
 }
