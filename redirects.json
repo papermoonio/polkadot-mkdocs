@@ -123,6 +123,10 @@
     {
       "key": "/polkadot-protocol/basics/randomness/",
       "value": "/polkadot-protocol/parachain-basics/randomness/"
+    },
+    {
+      "key": "/smart-contracts/dev-environments/",
+      "value": "/smart-contracts/dev-environments/local-dev-node/"
     }
   ]
 }
