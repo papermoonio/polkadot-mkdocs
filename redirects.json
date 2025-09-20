@@ -21,8 +21,104 @@
       "value": "/develop/smart-contracts/overview/"
     },
     {
+      "key": "/develop/toolkit/interoperability/asset-transfer-api/",
+      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+    },
+    {
+      "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
+      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+    },
+    {
+      "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
+      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+    },
+    {
+      "key": "/infrastructure/",
+      "value": "/nodes-and-validators/run-a-node/"
+    },
+    {
+      "key": "/infrastructure/running-a-node/",
+      "value": "/nodes-and-validators/run-a-node/"
+    },
+    {
+      "key": "/infrastructure/running-a-node/setup-bootnode/",
+      "value": "/nodes-and-validators/run-a-node/bootnode/"
+    },
+    {
+      "key": "/infrastructure/running-a-node/setup-full-node/",
+      "value": "/nodes-and-validators/run-a-node/"
+    },
+    {
+      "key": "/infrastructure/running-a-node/setup-secure-wss/",
+      "value": "/nodes-and-validators/run-a-node/secure-wss/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/",
+      "value": "/nodes-and-validators/run-a-validator/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/",
+      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/set-up-validator/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/key-management/",
+      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/key-management/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/set-up-validator/",
+      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/set-up-validator/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/start-validating/",
+      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/start-validating/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/stop-validating/",
+      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/stop-validating/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/operational-tasks/",
+      "value": "/nodes-and-validators/run-a-validator/operational-tasks/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/operational-tasks/general-management/",
+      "value": "/nodes-and-validators/run-a-validator/operational-tasks/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/operational-tasks/pause-validating/",
+      "value": "/nodes-and-validators/run-a-validator/operational-tasks/pause-validating/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/operational-tasks/upgrade-your-node/",
+      "value": "/nodes-and-validators/run-a-validator/operational-tasks/upgrade-your-node/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/requirements/",
+      "value": "/nodes-and-validators/run-a-validator/"
+    },
+    {
+      "key": "/infrastructure/staking-mechanics/",
+      "value": "/nodes-and-validators/run-a-validator/staking-mechanics/"
+    },
+    {
+      "key": "/infrastructure/staking-mechanics/offenses-and-slashes/",
+      "value": "/nodes-and-validators/run-a-validator/staking-mechanics/offenses-and-slashes/"
+    },
+    {
+      "key": "/infrastructure/staking-mechanics/rewards-payout/",
+      "value": "/nodes-and-validators/run-a-validator/staking-mechanics/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/",
+      "value": "/polkadot-protocol/parachain-basics/"
+    },
+    {
       "key": "/polkadot-protocol/basics/accounts/",
       "value": "/polkadot-protocol/parachain-basics/accounts/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/blocks-transactions-fees/",
+      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/"
     },
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/blocks/",
@@ -31,10 +127,6 @@
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/fees/",
       "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/fees/"
-    },
-    {
-      "key": "/polkadot-protocol/basics/blocks-transactions-fees/",
-      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/"
     },
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/transactions/",
@@ -53,10 +145,6 @@
       "value": "/polkadot-protocol/parachain-basics/data-encoding/"
     },
     {
-      "key": "/polkadot-protocol/basics/",
-      "value": "/polkadot-protocol/parachain-basics/"
-    },
-    {
       "key": "/polkadot-protocol/basics/interoperability/",
       "value": "/polkadot-protocol/parachain-basics/interoperability/"
     },
@@ -67,18 +155,6 @@
     {
       "key": "/polkadot-protocol/basics/randomness/",
       "value": "/polkadot-protocol/parachain-basics/randomness/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     }
   ]
 }
