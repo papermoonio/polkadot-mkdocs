@@ -2,19 +2,19 @@
   "data": [
     {
       "key": "/develop/interoperability/intro-to-xcm/",
-      "value": "/rollups/interoperability/"
+      "value": "/parachains/interoperability/"
     },
     {
       "key": "/develop/parachains/maintenance/runtime-upgrades/",
-      "value": "/rollups/runtime-maintenance/"
+      "value": "/parachains/runtime-maintenance/"
     },
     {
       "key": "/develop/parachains/maintenance/storage-migrations/",
-      "value": "/rollups/runtime-maintenance/storage-migrations/"
+      "value": "/parachains/runtime-maintenance/storage-migrations/"
     },
     {
       "key": "/develop/parachains/maintenance/unlock-parachain/",
-      "value": "/rollups/runtime-maintenance/unlock-rollups/"
+      "value": "/parachains/runtime-maintenance/unlock-parachains/"
     },
     {
       "key": "/develop/parachains/testing/setup/",
@@ -38,15 +38,15 @@
     },
     {
       "key": "/develop/toolkit/integrations/indexers/",
-      "value": "/rollups/integrations/indexers/"
+      "value": "/parachains/integrations/indexers/"
     },
     {
       "key": "/develop/toolkit/integrations/oracles/",
-      "value": "/rollups/integrations/oracles/"
+      "value": "/parachains/integrations/oracles/"
     },
     {
       "key": "/develop/toolkit/integrations/wallets/",
-      "value": "/rollups/integrations/"
+      "value": "/parachains/integrations/"
     },
     {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/",
@@ -62,11 +62,11 @@
     },
     {
       "key": "/develop/toolkit/parachains/fork-chains/chopsticks/get-started/",
-      "value": "/rollups/testing/"
+      "value": "/parachains/testing/"
     },
     {
       "key": "/develop/toolkit/parachains/spawn-chains/zombienet/get-started/",
-      "value": "/rollups/testing/run-a-rollup-network/"
+      "value": "/parachains/testing/run-a-parachain-network/"
     },
     {
       "key": "/polkadot-protocol/basics/",
@@ -118,11 +118,11 @@
     },
     {
       "key": "/tutorials/interoperability/xcm-channels/para-to-para/",
-      "value": "/rollups/interoperability/channels-between-rollups/"
+      "value": "/parachains/interoperability/channels-between-parachains/"
     },
     {
       "key": "/tutorials/interoperability/xcm-channels/para-to-system/",
-      "value": "/rollups/interoperability/channels-with-system-rollups/"
+      "value": "/parachains/interoperability/channels-with-system-parachains/"
     }
   ]
 }
