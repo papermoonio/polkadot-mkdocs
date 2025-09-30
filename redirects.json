@@ -133,6 +133,22 @@
       "value": "/parachains/testing/run-a-parachain-network/"
     },
     {
+      "key": "/parachains/integrations/",
+      "value": "/parachains/integrations/wallets/"
+    },
+    {
+      "key": "/parachains/interoperability/",
+      "value": "/parachains/interoperability/get-started/"
+    },
+    {
+      "key": "/parachains/runtime-maintenance/",
+      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
+    },
+    {
+      "key": "/parachains/testing/",
+      "value": "/parachains/testing/fork-a-parachain/"
+    },
+    {
       "key": "/polkadot-protocol/basics/",
       "value": "/polkadot-protocol/parachain-basics/"
     },
