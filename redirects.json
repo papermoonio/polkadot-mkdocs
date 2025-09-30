@@ -89,28 +89,12 @@
       "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     },
     {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
       "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     },
     {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
       "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/polkadot-protocol/basics/",
-      "value": "/polkadot-protocol/parachain-basics/"
     },
     {
       "key": "/polkadot-protocol/basics/",
