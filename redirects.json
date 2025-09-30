@@ -285,6 +285,22 @@
       "value": "/smart-contracts/for-eth-devs/dual-vm-stack/"
     },
     {
+      "key": "/reference/parachains/",
+      "value": "/reference/parachains/consensus/"
+    },
+    {
+      "key": "/reference/parachains/blocks-transactions-fees/",
+      "value": "/reference/parachains/blocks-transactions-fees/blocks/"
+    },
+    {
+      "key": "/reference/polkadot-hub/consensus-and-security/",
+      "value": "/reference/polkadot-hub/consensus-and-security/relay-chain/"
+    },
+    {
+      "key": "/reference/tools/",
+      "value": "/reference/tools/zombienet/"
+    },
+    {
       "key": "/smart-contracts/",
       "value": "/smart-contracts/get-started/"
     },
