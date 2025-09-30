@@ -117,72 +117,8 @@
       "value": "/smart-contracts/integrations/wallets/"
     },
     {
-      "key": "/develop/smart-contracts/libraries/ethers-js/",
-      "value": "/smart-contracts/libraries/"
-    },
-    {
-      "key": "/develop/smart-contracts/libraries/viem/",
-      "value": "/smart-contracts/libraries/viem/"
-    },
-    {
-      "key": "/develop/smart-contracts/libraries/wagmi/",
-      "value": "/smart-contracts/libraries/wagmi/"
-    },
-    {
-      "key": "/develop/smart-contracts/libraries/web3-js/",
-      "value": "/smart-contracts/libraries/web3-js/"
-    },
-    {
-      "key": "/develop/smart-contracts/libraries/web3-py/",
-      "value": "/smart-contracts/libraries/web3-py/"
-    },
-    {
-      "key": "/develop/smart-contracts/precompiles/",
-      "value": "/smart-contracts/precompiles/"
-    },
-    {
-      "key": "/develop/smart-contracts/precompiles/xcm-precompile/",
-      "value": "/smart-contracts/precompiles/xcm/"
-    },
-    {
-      "key": "/develop/smart-contracts/wallets/",
-      "value": "/smart-contracts/integrations/"
-    },
-    {
       "key": "/develop/smart-contracts/wasm-ink/",
       "value": "/smart-contracts/overview/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/polkadot-protocol/basics/",
-      "value": "/polkadot-protocol/parachain-basics/"
-    },
-    {
-      "key": "/polkadot-protocol/basics/",
-      "value": "/polkadot-protocol/parachain-basics/"
     },
     {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/",
