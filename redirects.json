@@ -133,6 +133,18 @@
       "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     },
     {
+      "key": "/parachains/",
+      "value": "/parachains/get-started/"
+    },
+    {
+      "key": "/parachains/customize-runtime/pallet-development/",
+      "value": "/parachains/customize-runtime/pallet-development/create-a-pallet/"
+    },
+    {
+      "key": "/parachains/launch-a-parachain/",
+      "value": "/parachains/launch-a-parachain/choose-a-template/"
+    },
+    {
       "key": "/polkadot-protocol/basics/",
       "value": "/polkadot-protocol/parachain-basics/"
     },
