@@ -201,18 +201,6 @@
       "value": "/smart-contracts/libraries/ethers-js/"
     },
     {
-      "key": "/tutorials/smart-contracts/demo-aplications/deploying-uniswap-v2/",
-      "value": "/smart-contracts/cookbook/eth-dapps/uniswap-v2/"
-    },
-    {
-      "key": "/tutorials/smart-contracts/deploy-erc20/",
-      "value": "/smart-contracts/cookbook/smart-contracts/deploy-erc20/"
-    },
-    {
-      "key": "/tutorials/smart-contracts/deploy-nft/",
-      "value": "/smart-contracts/cookbook/smart-contracts/deploy-nft/"
-    },
-    {
       "key": "/tutorials/interoperability/replay-and-dry-run-xcms/",
       "value": "/chain-interactions/send-transactions/interoperability/debug-and-preview-xcms/"
     },
@@ -230,7 +218,19 @@
     },
     {
       "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/register-local-asset/",
-      "value": "/chain-interactions/token-operations/"
+      "value": "/chain-interactions/token-operations/register-local-asset/"
+    },
+    {
+      "key": "/tutorials/smart-contracts/demo-aplications/deploying-uniswap-v2/",
+      "value": "/smart-contracts/cookbook/eth-dapps/uniswap-v2/"
+    },
+    {
+      "key": "/tutorials/smart-contracts/deploy-erc20/",
+      "value": "/smart-contracts/cookbook/smart-contracts/deploy-erc20/"
+    },
+    {
+      "key": "/tutorials/smart-contracts/deploy-nft/",
+      "value": "/smart-contracts/cookbook/smart-contracts/deploy-nft/"
     }
   ]
 }
