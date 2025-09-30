@@ -6,15 +6,15 @@
     },
     {
       "key": "/develop/smart-contracts/dev-environments/foundry/",
-      "value": "/smart-contracts/dev-environments/foundry/"
+      "value": "/smart-contracts/dev-environments/foundry/get-started/"
     },
     {
       "key": "/develop/smart-contracts/dev-environments/hardhat/",
-      "value": "/smart-contracts/dev-environments/hardhat/"
+      "value": "/smart-contracts/dev-environments/hardhat/get-started/"
     },
     {
       "key": "/develop/smart-contracts/dev-environments/remix/",
-      "value": "/smart-contracts/dev-environments/remix/"
+      "value": "/smart-contracts/dev-environments/remix/get-started/"
     },
     {
       "key": "/develop/smart-contracts/evm/",
@@ -30,7 +30,7 @@
     },
     {
       "key": "/develop/smart-contracts/libraries/ethers-js/",
-      "value": "/smart-contracts/libraries/"
+      "value": "/smart-contracts/libraries/ethers-js/"
     },
     {
       "key": "/develop/smart-contracts/libraries/viem/",
@@ -49,6 +49,10 @@
       "value": "/smart-contracts/libraries/web3-py/"
     },
     {
+      "key": "/develop/smart-contracts/local-development-node/",
+      "value": "/smart-contracts/dev-environments/local-dev-node/"
+    },
+    {
       "key": "/develop/smart-contracts/precompiles/",
       "value": "/smart-contracts/precompiles/"
     },
@@ -58,7 +62,7 @@
     },
     {
       "key": "/develop/smart-contracts/wallets/",
-      "value": "/smart-contracts/integrations/"
+      "value": "/smart-contracts/integrations/wallets/"
     },
     {
       "key": "/develop/smart-contracts/wasm-ink/",
@@ -127,6 +131,26 @@
     {
       "key": "/smart-contracts/dev-environments/",
       "value": "/smart-contracts/dev-environments/local-dev-node/"
+    },
+    {
+      "key": "/smart-contracts/dev-environments/foundry/",
+      "value": "/smart-contracts/dev-environments/foundry/get-started/"
+    },
+    {
+      "key": "/smart-contracts/dev-environments/hardhat/",
+      "value": "/smart-contracts/dev-environments/hardhat/get-started/"
+    },
+    {
+      "key": "/smart-contracts/dev-environments/remix/",
+      "value": "/smart-contracts/dev-environments/remix/get-started/"
+    },
+    {
+      "key": "/smart-contracts/integrations/",
+      "value": "/smart-contracts/integrations/wallets/"
+    },
+    {
+      "key": "/smart-contracts/libraries/",
+      "value": "/smart-contracts/libraries/ethers-js/"
     }
   ]
 }
