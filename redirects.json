@@ -5,6 +5,14 @@
       "value": "/develop/parachains/testing/"
     },
     {
+      "key": "/develop/smart-contracts/block-explorers/",
+      "value": "/smart-contracts/explorers/"
+    },
+    {
+      "key": "/develop/smart-contracts/connect-to-polkadot/",
+      "value": "/smart-contracts/connect/"
+    },
+    {
       "key": "/develop/smart-contracts/dev-environments/foundry/",
       "value": "/smart-contracts/dev-environments/foundry/get-started/"
     },
@@ -18,15 +26,19 @@
     },
     {
       "key": "/develop/smart-contracts/evm/",
-      "value": "/develop/smart-contracts/overview/"
+      "value": "/smart-contracts/overview/"
     },
     {
       "key": "/develop/smart-contracts/evm/native-evm-contracts/",
-      "value": "/develop/smart-contracts/overview/"
+      "value": "/smart-contracts/overview/"
     },
     {
       "key": "/develop/smart-contracts/evm/parachain-contracts/",
-      "value": "/develop/smart-contracts/overview/"
+      "value": "/smart-contracts/overview/"
+    },
+    {
+      "key": "/develop/smart-contracts/json-rpc-apis/",
+      "value": "/smart-contracts/for-eth-devs/json-rpc-apis/"
     },
     {
       "key": "/develop/smart-contracts/libraries/ethers-js/",
@@ -53,6 +65,10 @@
       "value": "/smart-contracts/dev-environments/local-dev-node/"
     },
     {
+      "key": "/develop/smart-contracts/overview/",
+      "value": "/smart-contracts/overview/"
+    },
+    {
       "key": "/develop/smart-contracts/precompiles/",
       "value": "/smart-contracts/precompiles/"
     },
@@ -66,7 +82,11 @@
     },
     {
       "key": "/develop/smart-contracts/wasm-ink/",
-      "value": "/develop/smart-contracts/overview/"
+      "value": "/smart-contracts/overview/"
+    },
+    {
+      "key": "/develop/toolkit/interoperability/asset-transfer-api/",
+      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     },
     {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/",
@@ -77,8 +97,20 @@
       "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     },
     {
+      "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
+      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+    },
+    {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
       "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+    },
+    {
+      "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
+      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/",
+      "value": "/polkadot-protocol/parachain-basics/"
     },
     {
       "key": "/polkadot-protocol/basics/",
@@ -129,6 +161,34 @@
       "value": "/polkadot-protocol/parachain-basics/randomness/"
     },
     {
+      "key": "/polkadot-protocol/smart-contract-basics/accounts/",
+      "value": "/smart-contracts/for-eth-devs/accounts/"
+    },
+    {
+      "key": "/polkadot-protocol/smart-contract-basics/blocks-transactions-fees/",
+      "value": "/smart-contracts/for-eth-devs/blocks-transactions-fees/"
+    },
+    {
+      "key": "/polkadot-protocol/smart-contract-basics/polkavm-design/",
+      "value": "/smart-contracts/for-eth-devs/dual-vm-stack/"
+    },
+    {
+      "key": "/smart-contracts/",
+      "value": "/smart-contracts/get-started/"
+    },
+    {
+      "key": "/smart-contracts/cookbook/dapps/",
+      "value": "/smart-contracts/cookbook/dapps/zero-to-hero/"
+    },
+    {
+      "key": "/smart-contracts/cookbook/eth-dapps/",
+      "value": "/smart-contracts/cookbook/eth-dapps/uniswap-v2/"
+    },
+    {
+      "key": "/smart-contracts/cookbook/smart-contracts/",
+      "value": "/smart-contracts/cookbook/smart-contracts/deploy-basic/"
+    },
+    {
       "key": "/smart-contracts/dev-environments/",
       "value": "/smart-contracts/dev-environments/local-dev-node/"
     },
@@ -145,12 +205,28 @@
       "value": "/smart-contracts/dev-environments/remix/get-started/"
     },
     {
+      "key": "/smart-contracts/for-eth-devs/",
+      "value": "/smart-contracts/for-eth-devs/dual-vm-stack/"
+    },
+    {
       "key": "/smart-contracts/integrations/",
       "value": "/smart-contracts/integrations/wallets/"
     },
     {
       "key": "/smart-contracts/libraries/",
       "value": "/smart-contracts/libraries/ethers-js/"
+    },
+    {
+      "key": "/tutorials/smart-contracts/demo-aplications/deploying-uniswap-v2/",
+      "value": "/smart-contracts/cookbook/eth-dapps/uniswap-v2/"
+    },
+    {
+      "key": "/tutorials/smart-contracts/deploy-erc20/",
+      "value": "/smart-contracts/cookbook/smart-contracts/deploy-erc20/"
+    },
+    {
+      "key": "/tutorials/smart-contracts/deploy-nft/",
+      "value": "/smart-contracts/cookbook/smart-contracts/deploy-nft/"
     }
   ]
 }
