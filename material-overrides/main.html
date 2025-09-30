@@ -196,30 +196,41 @@
   </script>
   <script>
     // AI_RAW_BASE = base URL where AI artifacts are stored 
-    const AI_RAW_BASE = 'https://raw.githubusercontent.com/polkadot-developers/polkadot-docs/master/.ai';
+    const AI_RAW_BASE = 'https://raw.githubusercontent.com/polkadot-developers/polkadot-docs/master/ai';
 
     document.addEventListener('DOMContentLoaded', () => {
       const RAW_BASE = (AI_RAW_BASE).replace(/\/+$/, '');
       const SITE_BASE = location.origin.replace(/\/+$/, '');
 
-      const toAbsolute = (dataPath) => {
-        if (!dataPath) return null;
+      const toAbsolute = (rawPath) => {
+        if (!rawPath) return null;
+
+        const dataPath = rawPath.trim();
         if (/^https?:\/\//i.test(dataPath)) return dataPath; // already absolute
 
-        // 🔧 special-case: root-level llms.txt is served by MkDocs at same origin
-        if (dataPath === '/llms.txt' || dataPath === 'llms.txt') {
-          return `${SITE_BASE}/llms.txt`;
+        const stripLeading = (value) => value.replace(/^\/+/, '');
+        const toSite = (path) => `${SITE_BASE}/${stripLeading(path)}`;
+        const toRaw = (path) => `${RAW_BASE}/${stripLeading(path.replace(/^ai\//, ''))}`;
+
+        const normalized = stripLeading(dataPath);
+        const isAiCategory = normalized.startsWith('ai/categories/');
+        const isAiPage = normalized.startsWith('ai/pages/');
+
+        if (isAiCategory || isAiPage) {
+          return toRaw(normalized);
         }
 
-        // 🔧 special-case: root-level llms-full.jsonl is served by MkDocs at same origin
-        if (dataPath === '/llms-full.jsonl' || dataPath === 'llms-full.jsonl') {
-          return `${SITE_BASE}/llms-full.jsonl`;
+        if (normalized.startsWith('categories/') || normalized.startsWith('pages/')) {
+          return toRaw(`ai/${normalized}`);
         }
 
-        // AI artifacts live under RAW_BASE
-        if (dataPath.startsWith('/.ai/')) return `${RAW_BASE}${dataPath}`;
-        if (dataPath.startsWith('/')) return `${RAW_BASE}${dataPath}`;
-        return `${RAW_BASE}/` + dataPath.replace(/^\/+/, '');
+        // 🔧 same-origin assets: default for everything we ship in docs/ (llms, ai bundles, etc.)
+        if (dataPath.startsWith('/')) return toSite(dataPath);
+        if (normalized.startsWith('ai/')) return toSite(normalized);
+        if (normalized === 'llms.txt' || normalized === 'llms-full.jsonl') return toSite(normalized);
+
+        // Fallback to raw GitHub path for anything else
+        return `${RAW_BASE}/${normalized}`;
       };
 
       const downloadViaFetch = async (url, filename) => {
