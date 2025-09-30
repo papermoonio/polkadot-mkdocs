@@ -2,11 +2,11 @@
   "data": [
     {
       "key": "/develop/interoperability/intro-to-xcm/",
-      "value": "/parachains/interoperability/"
+      "value": "/parachains/interoperability/get-started/"
     },
     {
       "key": "/develop/parachains/maintenance/runtime-upgrades/",
-      "value": "/parachains/runtime-maintenance/"
+      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
     },
     {
       "key": "/develop/parachains/maintenance/storage-migrations/",
@@ -110,7 +110,7 @@
     },
     {
       "key": "/develop/toolkit/integrations/wallets/",
-      "value": "/parachains/integrations/"
+      "value": "/parachains/integrations/wallets/"
     },
     {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/",
@@ -126,7 +126,7 @@
     },
     {
       "key": "/develop/toolkit/parachains/fork-chains/chopsticks/get-started/",
-      "value": "/parachains/testing/"
+      "value": "/parachains/testing/fork-a-parachain/"
     },
     {
       "key": "/develop/toolkit/parachains/spawn-chains/zombienet/get-started/",
