@@ -117,6 +117,106 @@
       "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     },
     {
+      "key": "/infrastructure/",
+      "value": "/nodes-and-validators/run-a-node/full-node/"
+    },
+    {
+      "key": "/infrastructure/running-a-node/",
+      "value": "/nodes-and-validators/run-a-node/full-node/"
+    },
+    {
+      "key": "/infrastructure/running-a-node/setup-bootnode/",
+      "value": "/nodes-and-validators/run-a-node/bootnode/"
+    },
+    {
+      "key": "/infrastructure/running-a-node/setup-full-node/",
+      "value": "/nodes-and-validators/run-a-node/full-node/"
+    },
+    {
+      "key": "/infrastructure/running-a-node/setup-secure-wss/",
+      "value": "/nodes-and-validators/run-a-node/secure-wss/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/",
+      "value": "/nodes-and-validators/run-a-validator/requirements/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/",
+      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/set-up-validator/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/key-management/",
+      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/key-management/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/set-up-validator/",
+      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/set-up-validator/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/start-validating/",
+      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/start-validating/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/stop-validating/",
+      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/stop-validating/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/operational-tasks/",
+      "value": "/nodes-and-validators/run-a-validator/operational-tasks/general-management/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/operational-tasks/general-management/",
+      "value": "/nodes-and-validators/run-a-validator/operational-tasks/general-management/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/operational-tasks/pause-validating/",
+      "value": "/nodes-and-validators/run-a-validator/operational-tasks/pause-validating/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/operational-tasks/upgrade-your-node/",
+      "value": "/nodes-and-validators/run-a-validator/operational-tasks/upgrade-your-node/"
+    },
+    {
+      "key": "/infrastructure/running-a-validator/requirements/",
+      "value": "/nodes-and-validators/run-a-validator/requirements/"
+    },
+    {
+      "key": "/infrastructure/staking-mechanics/",
+      "value": "/nodes-and-validators/run-a-validator/staking-mechanics/rewards/"
+    },
+    {
+      "key": "/infrastructure/staking-mechanics/offenses-and-slashes/",
+      "value": "/nodes-and-validators/run-a-validator/staking-mechanics/offenses-and-slashes/"
+    },
+    {
+      "key": "/infrastructure/staking-mechanics/rewards-payout/",
+      "value": "/nodes-and-validators/run-a-validator/staking-mechanics/rewards/"
+    },
+    {
+      "key": "/nodes-and-validators/",
+      "value": "/nodes-and-validators/run-a-node/full-node/"
+    },
+    {
+      "key": "/nodes-and-validators/run-a-node/",
+      "value": "/nodes-and-validators/run-a-node/full-node/"
+    },
+    {
+      "key": "/nodes-and-validators/run-a-validator/",
+      "value": "/nodes-and-validators/run-a-validator/requirements/"
+    },
+    {
+      "key": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/",
+      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/set-up-validator/"
+    },
+    {
+      "key": "/nodes-and-validators/run-a-validator/operational-tasks/",
+      "value": "/nodes-and-validators/run-a-validator/operational-tasks/general-management/"
+    },
+    {
+      "key": "/nodes-and-validators/run-a-validator/staking-mechanics/",
+      "value": "/nodes-and-validators/run-a-validator/staking-mechanics/rewards/"
+    },
+    {
       "key": "/polkadot-protocol/basics/",
       "value": "/polkadot-protocol/parachain-basics/"
     },
