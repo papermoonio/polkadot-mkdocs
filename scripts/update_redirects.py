@@ -88,6 +88,23 @@ def fetch_pr_files(owner: str, repo: str, pr_number: str):
     return files
 
 
+def add_redirect(existing, key, value):
+    """
+    Add or update a redirect:
+    - If the exact key/value exists, skip.
+    - If the key exists but value differs, update value.
+    - If key does not exist, add new entry.
+    """
+    for redirect in existing:
+        if redirect["key"] == key:
+            if redirect["value"] != value:
+                redirect["value"] = value  # update to new value
+                return "updated"
+            return "skipped"  # exact pair already exists
+    existing.append({"key": key, "value": value})
+    return "added"
+
+
 def process_pr(owner: str, repo: str, pr_number: str):
     pr_files = fetch_pr_files(owner, repo, pr_number)
     redirects = load_redirects()
@@ -118,10 +135,12 @@ def process_pr(owner: str, repo: str, pr_number: str):
                 if redirect["value"] == formatted:
                     redirect["value"] = "TODO: UPDATE_ME"
                     modified_count += 1
-            new_redirect = {"key": formatted, "value": "TODO: UPDATE_ME"}
-            existing.append(new_redirect)
-            added_redirects.append(new_redirect)
-            added_count += 1
+            result = add_redirect(existing, formatted, "TODO: UPDATE_ME")
+            if result == "added":
+                added_redirects.append({"key": formatted, "value": "TODO: UPDATE_ME"})
+                added_count += 1
+            elif result == "updated":
+                modified_count += 1
 
         elif status == "renamed":
             # Apply format_path to both old and new paths, handles index.md as well
@@ -131,10 +150,12 @@ def process_pr(owner: str, repo: str, pr_number: str):
                 if redirect["value"] == formatted_old:
                     redirect["value"] = formatted_new
                     modified_count += 1
-            new_redirect = {"key": formatted_old, "value": formatted_new}
-            existing.append(new_redirect)
-            added_redirects.append(new_redirect)
-            added_count += 1
+            result = add_redirect(existing, formatted_old, formatted_new)
+            if result == "added":
+                added_redirects.append({"key": formatted_old, "value": formatted_new})
+                added_count += 1
+            elif result == "updated":
+                modified_count += 1
 
     save_redirects(redirects)
 
