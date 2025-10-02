@@ -17,15 +17,11 @@ extra_javascript:
 extra_css:
   - assets/stylesheets/extra.css
   - assets/stylesheets/terminal.css
-  - assets/stylesheets/timeline-neoteroi.css # added
-
-# Diagnostic messages when validating links to documents
+  # Diagnostic messages when validating links to documents
 validation:
   absolute_links: ignore
   unrecognized_links: ignore
 exclude_docs: |
-    README.md
-    LICENSE.md
 # Theme related settings
 theme:
   name: material
@@ -155,6 +151,5 @@ extra:
         - icon: material/emoticon-sad-outline
           name: This page could be improved
           data: 0
-          note: >-
+         note: >-
             Thanks for your feedback! Help us improve this page by submitting
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZR0p70uR78JVemft66VuL39-k6Mge9rufGZyYBeEhezF3iw/viewform?usp=pp_url&entry.1469237372=[Feedback]+{title}+-+{url}" target="_blank" rel="noopener">additional feedback</a>.
