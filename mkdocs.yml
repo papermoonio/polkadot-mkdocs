@@ -35,18 +35,18 @@ theme:
   font:
     text: Manrope
   features:
-    - announce.dismiss # Dismiss the announcement bar
-    - content.action.edit # Edit this page button
-    - content.action.report # Show report an issue button
-    - content.code.annotate # Adds annotations to code blocks
-    - content.code.copy # Adds copy to clipboard button to code snippets
-    - content.tooltips # Adds tooltips
-    - navigation.footer # Shows previous and next on the footer
-    - navigation.tabs # Top-level sections are rendered below the header (can be modified to in-line with CSS)
-    - navigation.tabs.sticky # When scrolling, the tabs remain at the top of the page
-    - navigation.sections # Render top-level sections as groups in the sidebar
-    - navigation.indexes # Index pages
-    - navigation.top # Show the back to top button since we don't keep top nav sticky
+    - announce.dismiss
+    - content.action.edit 
+    - content.action.report
+    - content.code.annotate
+    - content.code.copy 
+    - content.tooltips 
+    - navigation.footer 
+    - navigation.tabs 
+    - navigation.tabs.sticky 
+    - navigation.sections
+    - navigation.indexes 
+    - navigation.top
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -153,3 +153,4 @@ extra:
           data: 0
          note: >-
             Thanks for your feedback! Help us improve this page by submitting
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZR0p70uR78JVemft66VuL39-k6Mge9rufGZyYBeEhezF3iw/viewform?usp=pp_url&entry.1469237372=[Feedback]+{title}+-+{url}" target="_blank" rel="noopener">additional feedback</a>.
