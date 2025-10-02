@@ -17,14 +17,15 @@ extra_javascript:
 extra_css:
   - assets/stylesheets/extra.css
   - assets/stylesheets/terminal.css
-  - assets/stylesheets/timeline-neoteroi.css
+  - assets/stylesheets/timeline-neoteroi.css # added
+
 # Diagnostic messages when validating links to documents
 validation:
   absolute_links: ignore
   unrecognized_links: ignore
 exclude_docs: |
-   README.md
-   LICENSE.md
+    README.md
+    LICENSE.md
 # Theme related settings
 theme:
   name: material
@@ -50,6 +51,21 @@ theme:
     - navigation.sections # Render top-level sections as groups in the sidebar
     - navigation.indexes # Index pages
     - navigation.top # Show the back to top button since we don't keep top nav sticky
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
 markdown_extensions:
   - abbr
   - admonition
