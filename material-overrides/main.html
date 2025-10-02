@@ -160,40 +160,6 @@
 
 {% block scripts %}
   {{ super() }}
-  <script defer>
-    document.addEventListener('DOMContentLoaded', () => {
-      if (document.referrer.includes('docs.substrate.io')) {        
-        const announceElement = document.querySelector('.announce.hideable');
-        if (announceElement) {          
-          const content = announceElement.querySelector('.md-typeset');
-          if (content) {            
-            const storedHash = __md_get('__announce');  
-            const currentHash = __md_hash(content.innerHTML);
-
-            const close = document.querySelector('.md-banner__button');
-            if (close) {
-              close.addEventListener('click', () => {                
-                // If the current hash matches the stored value, hide the element
-                if (currentHash === storedHash) {
-                  announceElement.style.display = 'none';
-                  announceElement.hidden = true;
-                } else {
-                  __md_set('__announce', currentHash);
-                  announceElement.style.display = 'none';
-                  announceElement.hidden = true;
-                }
-              });
-            }
-            
-            // Only show the banner if the stored hash doesn't match
-            if (currentHash !== storedHash) {
-              announceElement.style.display = 'block';
-            }
-          }
-        }
-      }
-    });
-  </script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const copyTxtFile = async (url) => {

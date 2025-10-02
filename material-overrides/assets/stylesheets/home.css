@@ -149,7 +149,7 @@ div.feature,
 .md-typeset a.feature {
   color: var(--md-default-fg-color);
   flex: 1 1;
-  border: 1px solid var(--mystic);
+  border: 1px solid var(--storm-gray-200);
   border-radius: 16px;
   padding: 32px;
   display: flex;
@@ -249,7 +249,7 @@ div.feature h3,
 .final-cta {
   min-height: 360px;
   border-radius: 16px;
-  border: 1px solid var(--mystic);
+  border: 1px solid var(--storm-gray-200);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
