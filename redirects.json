@@ -1,6 +1,22 @@
 {
   "data": [
     {
+      "key": "/develop/interoperability/intro-to-xcm/",
+      "value": "/parachains/interoperability/get-started/"
+    },
+    {
+      "key": "/develop/parachains/maintenance/runtime-upgrades/",
+      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
+    },
+    {
+      "key": "/develop/parachains/maintenance/storage-migrations/",
+      "value": "/parachains/runtime-maintenance/storage-migrations/"
+    },
+    {
+      "key": "/develop/parachains/maintenance/unlock-parachain/",
+      "value": "/parachains/runtime-maintenance/unlock-parachains/"
+    },
+    {
       "key": "/develop/parachains/testing/setup/",
       "value": "/develop/parachains/testing/"
     },
@@ -85,23 +101,19 @@
       "value": "/smart-contracts/overview/"
     },
     {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+      "key": "/develop/toolkit/integrations/indexers/",
+      "value": "/parachains/integrations/indexers/"
+    },
+    {
+      "key": "/develop/toolkit/integrations/oracles/",
+      "value": "/parachains/integrations/oracles/"
+    },
+    {
+      "key": "/develop/toolkit/integrations/wallets/",
+      "value": "/parachains/integrations/wallets/"
     },
     {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
       "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     },
     {
@@ -113,12 +125,12 @@
       "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     },
     {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+      "key": "/develop/toolkit/parachains/fork-chains/chopsticks/get-started/",
+      "value": "/parachains/testing/fork-a-parachain/"
     },
     {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+      "key": "/develop/toolkit/parachains/spawn-chains/zombienet/get-started/",
+      "value": "/parachains/testing/run-a-parachain-network/"
     },
     {
       "key": "/infrastructure/",
@@ -221,12 +233,20 @@
       "value": "/nodes-and-validators/run-a-validator/staking-mechanics/rewards/"
     },
     {
-      "key": "/polkadot-protocol/basics/",
-      "value": "/polkadot-protocol/parachain-basics/"
+      "key": "/parachains/integrations/",
+      "value": "/parachains/integrations/wallets/"
     },
     {
-      "key": "/polkadot-protocol/basics/",
-      "value": "/polkadot-protocol/parachain-basics/"
+      "key": "/parachains/interoperability/",
+      "value": "/parachains/interoperability/get-started/"
+    },
+    {
+      "key": "/parachains/runtime-maintenance/",
+      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
+    },
+    {
+      "key": "/parachains/testing/",
+      "value": "/parachains/testing/fork-a-parachain/"
     },
     {
       "key": "/polkadot-protocol/basics/",
@@ -331,6 +351,14 @@
     {
       "key": "/smart-contracts/libraries/",
       "value": "/smart-contracts/libraries/ethers-js/"
+    },
+    {
+      "key": "/tutorials/interoperability/xcm-channels/para-to-para/",
+      "value": "/parachains/interoperability/channels-between-parachains/"
+    },
+    {
+      "key": "/tutorials/interoperability/xcm-channels/para-to-system/",
+      "value": "/parachains/interoperability/channels-with-system-parachains/"
     },
     {
       "key": "/tutorials/smart-contracts/demo-aplications/deploying-uniswap-v2/",
