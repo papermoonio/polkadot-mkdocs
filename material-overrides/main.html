@@ -20,6 +20,7 @@
   {% if page and page.meta and page.meta.keywords %}
     <meta name="keywords" content="{{ page.meta.keywords }}">
   {% endif %}
+  <meta name="mkdocs-llms-config-url" content="{{ 'scripts/llms_config.json' | url }}">
 {% endblock %}
 
 {%- block htmltitle -%} 
@@ -196,62 +197,64 @@
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const copyTxtFile = async (url) => {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const text = await response.text();
-            await navigator.clipboard.writeText(text);
-
-            const copiedToClipboard = document.querySelector('.md-dialog');
-            if (copiedToClipboard) {
-              copiedToClipboard.classList.add('md-dialog--active');
-
-              const copiedToClipboardMessage =
-                copiedToClipboard.querySelector('.md-dialog__inner');
-              if (
-                copiedToClipboardMessage &&
-                copiedToClipboardMessage.textContent !==
-                  "{{ lang.t('clipboard.copied') }}"
-              ) {
-                copiedToClipboardMessage.textContent =
-                  "{{ lang.t('clipboard.copied') }}";
-              }
-              // Set a timer to remove the dialog after 2 seconds (2000ms)
-              setTimeout(() => {
-                copiedToClipboard.classList.remove('md-dialog--active');
-              }, 2000);
-            }
-          } catch (err) {
-            console.error('Failed to copy:', err);
-            const copiedToClipboard = document.querySelector('.md-dialog');
-            if (copiedToClipboard) {
-              copiedToClipboard.classList.remove('md-dialog--active');
-            }
-          }
+      if (!window.LLMS) {
+        return;
       }
 
-      document.querySelectorAll('.llms').forEach(button => {
-        button.addEventListener('click', (event) => {
-          event.preventDefault(); // Prevent default link behavior
+      const dialog = document.querySelector('.md-dialog');
 
-          const action = button.getAttribute('data-action');
-          const fileName = button.getAttribute('data-value');
-          if (!fileName) return; // Exit if no file name is found
+      const showDialog = () => {
+        if (!dialog) return;
+        dialog.classList.add('md-dialog--active');
+        const inner = dialog.querySelector('.md-dialog__inner');
+        if (inner && inner.textContent !== "{{ lang.t('clipboard.copied') }}") {
+          inner.textContent = "{{ lang.t('clipboard.copied') }}";
+        }
+        setTimeout(() => dialog.classList.remove('md-dialog--active'), 2000);
+      };
 
-          // Add 'llms-files/' prefix except for root-level llms.txt and llms-full.txt
-          const filePath = (fileName === "llms.txt" || fileName === "llms-full.txt") 
-            ? fileName 
-            : `llms-files/${fileName}`;
-          const url = `https://docs.polkadot.com/${filePath}`;
+      const hideDialog = () => {
+        if (dialog) {
+          dialog.classList.remove('md-dialog--active');
+        }
+      };
 
-          if (action === 'copy') {
-            copyTxtFile(url);
+      window.LLMS.ready().then(() => {
+        document.querySelectorAll('.llms-copy').forEach((button) => {
+          button.addEventListener('click', async (event) => {
+            event.preventDefault();
+            const path = button.getAttribute('data-path');
+            if (!path) return;
+            try {
+              const text = await window.LLMS.fetchPathText(path);
+              if (!text) throw new Error('No text content');
+              await navigator.clipboard.writeText(text);
+              showDialog();
+            } catch (error) {
+              console.error('LLMS copy failed:', error);
+              hideDialog();
+            }
+          });
+        });
+
+        document.querySelectorAll('.llms-dl').forEach((link) => {
+          const dataPath = link.getAttribute('data-path');
+          const resolved = window.LLMS.resolvePath(dataPath);
+          if (resolved) {
+            link.setAttribute('href', resolved);
           }
-        })
-      })
+
+          link.addEventListener('click', async (event) => {
+            event.preventDefault();
+            const path = link.getAttribute('data-path') || '';
+            const filename = link.getAttribute('data-filename') || path.split('/').pop() || 'download.txt';
+            const success = await window.LLMS.downloadPath(path, filename);
+            if (!success) {
+              console.error('LLMS download failed for', path);
+            }
+          });
+        });
+      });
     });
   </script>
 {% endblock %}
