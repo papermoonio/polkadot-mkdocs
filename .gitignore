@@ -3,3 +3,6 @@ venv
 .vscode
 polkadot-docs
 .gitmodules
+
+.github/instructions/kluster-code-verify.instructions.md
+.kluster
