@@ -52,23 +52,29 @@
     data-project-name="Polkadot"
     data-modal-title="Polkadot AI Chatbot"
     data-project-color="#1E1E1E"
-    data-button-bg-color="#1C0533"
+    data-button-bg-color="rgba(0, 0, 0, 0.60)"
+    data-button-border-radius="16px 16px 0 16px"
+    data-button-hover-animation-enabled="false"
+    data-button-image-height="17px"
+    data-button-image-width="17px"
     data-button-text-color="white"
-    data-button-height="80px"
-    data-button-width="72px"
+    data-button-text-font-family="Unbounded"
+    data-button-text-font-size="14px"
+    data-button-padding="16px"
+    data-button-width="88px"
+    data-button-height="85px"
     data-font-size-xs="12px"
     data-font-size-sm="14px"
     data-font-size-md="16px"
     data-font-size-lg="18px"
     data-font-size-xl="22px"
     data-modal-title-font-size="22px"
-    data-button-text-font-size="18px"
+    data-button-position-top="75vh"
+    data-button-position-right="24px"
     data-query-input-font-size="16px"
-    data-button-image-height="24px"
-    data-button-image-width="24px"
     data-modal-image-height="24px"
     data-modal-image-width="24px"
-    data-project-logo="https://1000logos.net/wp-content/uploads/2022/08/Polkadot-Symbol.png"
+    data-project-logo="/assets/images/favicon.svg"
     data-modal-header-bg-color="#1C0533"
     data-modal-title-color="white"
     data-modal-disclaimer="This is an AI chatbot trained to answer questions about Polkadot. As such, the answers it provides might not always be accurate or up-to-date. Please use your best judgement when evaluating its responses. Also, **please refrain from sharing any personal or private information with the bot**. By submitting a query, you agree that you have read and understood [these conditions](https://polkadot.com/legal-disclosures/).
@@ -77,20 +83,7 @@
     data-search-mode-enabled="false"
     data-search-mode-default="false"
     data-search-result-primary-title-font-size="16px"
-    data-button-position-top="120px"
-    data-button-position-right="0px"
   ></script>
-  <script defer>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.body.addEventListener('click', (event) => {
-        if (event.target.id === 'kapa-widget-container') {
-          event.target.addEventListener('keydown', (event) => {
-            event.stopPropagation();
-          });
-        }
-      });
-    });
-  </script>
 {% endblock %}
 
 {% block site_nav %}
@@ -160,6 +153,50 @@
 
 {% block scripts %}
   {{ super() }}
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.addEventListener('click', (event) => {
+        if (event.target.id === 'kapa-widget-container') {
+          event.target.addEventListener('keydown', (event) => {
+            event.stopPropagation();
+          });
+        }
+      });
+
+      const kapaWidget = document.querySelector('#kapa-widget-container')?.shadowRoot;
+      if (kapaWidget) {
+        const observer = new MutationObserver(() => {
+          const kapaButtonContent = kapaWidget.querySelector('.mantine-Flex-root');
+
+          if (kapaButtonContent) {
+            // Adjust position of Polkadot logo
+            kapaButtonContent.style.alignItems = 'start';
+            kapaButtonContent.style.gap = '4px';
+            
+            // Mobile adjustments: make button smaller and adjust layout
+            if (window.innerWidth <= 768) {
+              const kapaButton = kapaWidget.querySelector('.mantine-Button-root');
+              if (kapaButton) {
+                kapaButton.style.width = 'fit-content';
+                kapaButton.style.height = '56px';
+                kapaButton.style.borderRadius = '16px';
+                kapaButton.style.right = '16px';
+                kapaButton.style.top = '90vh';
+              }
+              kapaButtonContent.style.flexDirection = 'row';
+              kapaButtonContent.style.gap = '12px';
+            }
+
+            // Stop observing once we've applied styles
+            observer.disconnect();
+          }
+        });
+
+        // Observe additions inside the shadow DOM
+        observer.observe(kapaWidget, { childList: true, subtree: true });
+      }
+    });
+  </script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const copyTxtFile = async (url) => {
