@@ -21,6 +21,58 @@
       "value": "/chain-interactions/token-operations/register-local-asset/"
     },
     {
+      "key": "/develop/interoperability/intro-to-xcm/",
+      "value": "/parachains/interoperability/get-started/"
+    },
+    {
+      "key": "/develop/parachains/customize-parachain/add-existing-pallets/",
+      "value": "/parachains/customize-runtime/add-existing-pallets/"
+    },
+    {
+      "key": "/develop/parachains/customize-parachain/add-pallet-instances/",
+      "value": "/parachains/customize-runtime/add-pallet-instances/"
+    },
+    {
+      "key": "/develop/parachains/customize-parachain/add-smart-contract-functionality/",
+      "value": "/parachains/customize-runtime/add-smart-contract-functionality/"
+    },
+    {
+      "key": "/develop/parachains/customize-parachain/make-custom-pallet/",
+      "value": "/parachains/customize-runtime/pallet-development/create-a-pallet/"
+    },
+    {
+      "key": "/develop/parachains/deployment/obtain-coretime/",
+      "value": "/parachains/launch-a-parachain/obtain-coretime/"
+    },
+    {
+      "key": "/develop/parachains/intro-polkadot-sdk/",
+      "value": "/parachains/overview/"
+    },
+    {
+      "key": "/develop/parachains/maintenance/runtime-upgrades/",
+      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
+    },
+    {
+      "key": "/develop/parachains/maintenance/storage-migrations/",
+      "value": "/parachains/runtime-maintenance/storage-migrations/"
+    },
+    {
+      "key": "/develop/parachains/maintenance/unlock-parachain/",
+      "value": "/parachains/runtime-maintenance/unlock-parachains/"
+    },
+    {
+      "key": "/develop/parachains/testing/benchmarking/",
+      "value": "/parachains/customize-runtime/pallet-development/benchmark-pallet/"
+    },
+    {
+      "key": "/develop/parachains/testing/mock-runtime/",
+      "value": "/parachains/customize-runtime/pallet-development/mock-runtime/"
+    },
+    {
+      "key": "/develop/parachains/testing/pallet-testing/",
+      "value": "/parachains/customize-runtime/pallet-development/pallet-testing/"
+    },
+    {
       "key": "/develop/parachains/testing/setup/",
       "value": "/develop/parachains/testing/"
     },
@@ -105,6 +157,18 @@
       "value": "/smart-contracts/overview/"
     },
     {
+      "key": "/develop/toolkit/integrations/indexers/",
+      "value": "/parachains/integrations/indexers/"
+    },
+    {
+      "key": "/develop/toolkit/integrations/oracles/",
+      "value": "/parachains/integrations/oracles/"
+    },
+    {
+      "key": "/develop/toolkit/integrations/wallets/",
+      "value": "/parachains/integrations/wallets/"
+    },
+    {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/",
       "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     },
@@ -115,6 +179,14 @@
     {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
       "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/fork-chains/chopsticks/get-started/",
+      "value": "/parachains/testing/fork-a-parachain/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/spawn-chains/zombienet/get-started/",
+      "value": "/parachains/testing/run-a-parachain-network/"
     },
     {
       "key": "/infrastructure/",
@@ -215,6 +287,34 @@
     {
       "key": "/nodes-and-validators/run-a-validator/staking-mechanics/",
       "value": "/nodes-and-validators/run-a-validator/staking-mechanics/rewards/"
+    },
+    {
+      "key": "/parachains/",
+      "value": "/parachains/get-started/"
+    },
+    {
+      "key": "/parachains/customize-runtime/pallet-development/",
+      "value": "/parachains/customize-runtime/pallet-development/create-a-pallet/"
+    },
+    {
+      "key": "/parachains/integrations/",
+      "value": "/parachains/integrations/wallets/"
+    },
+    {
+      "key": "/parachains/interoperability/",
+      "value": "/parachains/interoperability/get-started/"
+    },
+    {
+      "key": "/parachains/launch-a-parachain/",
+      "value": "/parachains/launch-a-parachain/choose-a-template/"
+    },
+    {
+      "key": "/parachains/runtime-maintenance/",
+      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
+    },
+    {
+      "key": "/parachains/testing/",
+      "value": "/parachains/testing/fork-a-parachain/"
     },
     {
       "key": "/polkadot-protocol/basics/",
@@ -325,8 +425,20 @@
       "value": "/chain-interactions/send-transactions/interoperability/debug-and-preview-xcms/"
     },
     {
+      "key": "/tutorials/interoperability/xcm-channels/para-to-para/",
+      "value": "/parachains/interoperability/channels-between-parachains/"
+    },
+    {
+      "key": "/tutorials/interoperability/xcm-channels/para-to-system/",
+      "value": "/parachains/interoperability/channels-with-system-parachains/"
+    },
+    {
       "key": "/tutorials/interoperability/xcm-fee-estimation/",
       "value": "/chain-interactions/send-transactions/interoperability/estimate-xcm-fees/"
+    },
+    {
+      "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/add-pallets-to-runtime/",
+      "value": "/parachains/customize-runtime/pallet-development/add-pallet-to-runtime/"
     },
     {
       "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/asset-conversion/",
