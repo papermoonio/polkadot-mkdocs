@@ -32,7 +32,7 @@
     <nav class="md-footer__inner md-grid" aria-label="{{ lang.t('footer') }}" {{ hidden }}>
       {% if page.previous_page %}
         {% set direction = lang.t("footer.previous") %}
-        <div class="footer-link-wrapper">
+        <div class="footer-link-wrapper prev">
           <div class="md-footer__button md-icon">
             {% set icon = config.theme.icon.previous or "material/arrow-left" %}
             {% include ".icons/" ~ icon ~ ".svg" %}
@@ -51,7 +51,7 @@
       {% endif %}
       {% if page.next_page %}
         {% set direction = lang.t("footer.next") %}
-        <div class="footer-link-wrapper md-footer__link--next">
+        <div class="footer-link-wrapper next">
           <div class="md-footer__button md-icon">
             <span class="md-footer__direction">
               {{ direction }}
