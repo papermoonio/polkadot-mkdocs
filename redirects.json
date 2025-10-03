@@ -1,6 +1,26 @@
 {
   "data": [
     {
+      "key": "/chain-interactions/accounts/",
+      "value": "/chain-interactions/accounts/create-account/"
+    },
+    {
+      "key": "/chain-interactions/query-data/",
+      "value": "/chain-interactions/query-data/query-sdks/"
+    },
+    {
+      "key": "/chain-interactions/send-transactions/",
+      "value": "/chain-interactions/send-transactions/with-sdks/"
+    },
+    {
+      "key": "/chain-interactions/send-transactions/interoperability/",
+      "value": "/chain-interactions/send-transactions/interoperability/transfer-assets-parachains/"
+    },
+    {
+      "key": "/chain-interactions/token-operations/",
+      "value": "/chain-interactions/token-operations/register-local-asset/"
+    },
+    {
       "key": "/develop/interoperability/intro-to-xcm/",
       "value": "/parachains/interoperability/get-started/"
     },
@@ -401,6 +421,10 @@
       "value": "/smart-contracts/libraries/ethers-js/"
     },
     {
+      "key": "/tutorials/interoperability/replay-and-dry-run-xcms/",
+      "value": "/chain-interactions/send-transactions/interoperability/debug-and-preview-xcms/"
+    },
+    {
       "key": "/tutorials/interoperability/xcm-channels/para-to-para/",
       "value": "/parachains/interoperability/channels-between-parachains/"
     },
@@ -409,8 +433,24 @@
       "value": "/parachains/interoperability/channels-with-system-parachains/"
     },
     {
+      "key": "/tutorials/interoperability/xcm-fee-estimation/",
+      "value": "/chain-interactions/send-transactions/interoperability/estimate-xcm-fees/"
+    },
+    {
       "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/add-pallets-to-runtime/",
       "value": "/parachains/customize-runtime/pallet-development/add-pallet-to-runtime/"
+    },
+    {
+      "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/asset-conversion/",
+      "value": "/chain-interactions/token-operations/convert-assets/"
+    },
+    {
+      "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/register-foreign-asset/",
+      "value": "/chain-interactions/token-operations/register-foreign-asset/"
+    },
+    {
+      "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/register-local-asset/",
+      "value": "/chain-interactions/token-operations/register-local-asset/"
     },
     {
       "key": "/tutorials/smart-contracts/demo-aplications/deploying-uniswap-v2/",
