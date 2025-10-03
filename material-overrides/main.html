@@ -166,29 +166,29 @@
       const kapaWidget = document.querySelector('#kapa-widget-container')?.shadowRoot;
       if (kapaWidget) {
         const observer = new MutationObserver(() => {
-          // Adjust the position of the Polkadot logo
-          const kapaButtonContent = kapaWidget?.querySelector('.mantine-Flex-root');
+          const kapaButtonContent = kapaWidget.querySelector('.mantine-Flex-root');
+
           if (kapaButtonContent) {
+            // Adjust position of Polkadot logo
             kapaButtonContent.style.alignItems = 'start';
             kapaButtonContent.style.gap = '4px';
-            observer.disconnect();
-          }
-
-          // On mobile screens, make the button smaller
-          if (window.innerWidth <= 768) {
-            const kapaButton = kapaWidget?.querySelector('.mantine-Button-root');
-            if (kapaButton) {
-              kapaButton.style.width = 'fit-content';
-              kapaButton.style.height = '56px'; 
-              kapaButton.style.borderRadius = '16px';
-              kapaButton.style.right = '16px';
-              kapaButton.style.top = '90vh';
-            }
-
-            if (kapaButtonContent) {
+            
+            // Mobile adjustments: make button smaller and adjust layout
+            if (window.innerWidth <= 768) {
+              const kapaButton = kapaWidget.querySelector('.mantine-Button-root');
+              if (kapaButton) {
+                kapaButton.style.width = 'fit-content';
+                kapaButton.style.height = '56px';
+                kapaButton.style.borderRadius = '16px';
+                kapaButton.style.right = '16px';
+                kapaButton.style.top = '90vh';
+              }
               kapaButtonContent.style.flexDirection = 'row';
               kapaButtonContent.style.gap = '12px';
             }
+
+            // Stop observing once we've applied styles
+            observer.disconnect();
           }
         });
 
