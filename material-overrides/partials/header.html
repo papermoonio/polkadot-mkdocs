@@ -8,6 +8,7 @@
     {% set class = class ~ " md-header--shadow" %}
   {% endif %}
   <header class="{{ class }}" data-md-component="header">
+    <div class="header-container">
     <nav class="md-header__inner md-grid" aria-label="{{ lang.t('header') }}">
       <label class="md-header__button md-icon" for="__drawer">
         {% set icon = config.theme.icon.menu or "material/menu" %}
@@ -18,23 +19,15 @@
           <a href="{{ config.home_url }}" title="{{ config.home_name | e }}" class="md-header__button md-logo" aria-label="{{ config.home_name }}" data-md-component="logo">
             {% include "partials/logo.html" %}
           </a>
-        </div>
-      </div>
-      <div class="md-header__buttons">
-        <!-- Link to home -->
-        {% if not page.is_homepage %}
-          <div class="home-button-wrapper">
-            <a
-            href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}"
-            title="{{ config.site_name | e }}"
-            class="md-header__button md-tabs__link"
-            aria-label="{{ config.site_name }}"
-            data-md-component="logo"
-            >
-              Home
+          <div class="docs-badge">
+            <a href="{{ config.site_url }}" title="Home" aria-label="Home">
+              Docs
             </a>
           </div>
-        {% endif %}
+        </div>
+      </div>
+      <div class="header-divider"></div>
+      <div class="md-header__buttons">
         {% if "navigation.tabs.sticky" in features %}
           {% if "navigation.tabs" in features %}
             {% include "partials/tabs.html" %}
@@ -63,4 +56,5 @@
         </div>
       {% endif %}
     </nav>
+    </div>
   </header>
