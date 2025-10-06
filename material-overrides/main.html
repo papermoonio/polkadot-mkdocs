@@ -195,7 +195,7 @@
     });
   </script>
   <script>
-    // AI_RAW_BASE = base URL where AI artifacts are stored 
+    // AI_RAW_BASE = base URL where AI artifacts are stored.
     const AI_RAW_BASE = 'https://raw.githubusercontent.com/polkadot-developers/polkadot-docs/master/ai';
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -224,7 +224,7 @@
           return toRaw(`ai/${normalized}`);
         }
 
-        // 🔧 same-origin assets: default for everything we ship in docs/ (llms, ai bundles, etc.)
+        // NOTE: same-origin assets: default for everything we ship in docs/ (llms, ai bundles, etc.)
         if (dataPath.startsWith('/')) return toSite(dataPath);
         if (normalized.startsWith('ai/')) return toSite(normalized);
         if (normalized === 'llms.txt' || normalized === 'llms-full.jsonl') return toSite(normalized);
