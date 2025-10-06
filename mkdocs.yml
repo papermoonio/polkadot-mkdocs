@@ -92,6 +92,9 @@ markdown_extensions:
 
 plugins:
   - search
+  - exclude-search:
+      exclude:
+        - ai/*
   - awesome-nav
   - glightbox
   - macros:

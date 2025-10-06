@@ -8,6 +8,7 @@ Markdown==3.7
 MarkupSafe==3.0.2
 mkdocs==1.6.1
 mkdocs-awesome-nav==3.1.1
+mkdocs-exclude-search==0.6.6
 mkdocs-git-revision-date-localized-plugin==1.4.5
 mkdocs-glightbox==0.4.0
 mkdocs-jupyter==0.25.1
