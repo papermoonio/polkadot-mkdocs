@@ -170,5 +170,3 @@ extra:
 # ----------------------------------------------------------------------
 standalone_files:
   - ai/**
-  - ai-chatbot-policy.md
-  - example/ai-chatbot-policy.md
