@@ -35,6 +35,10 @@ theme:
     edit: material/github
     admonition:
       code: material/code-tags
+    search: custom/magnifying-glass
+    close: custom/close
+    previous: custom/left-arrow
+    next: custom/right-arrow
   font:
     text: Manrope
   features:
@@ -62,6 +66,9 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - material-overrides/.icons
   - pymdownx.highlight:
       anchor_linenums: True
       line_spans: __span
@@ -75,7 +82,7 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: True
   - toc:
-      title: ' '
+      title: 'On this page'
       permalink: True
   - pymdownx.superfences:
       custom_fences:
