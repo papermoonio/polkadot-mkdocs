@@ -815,10 +815,15 @@ input.md-search__input::placeholder {
     align-content: center;
   }
 
+  .md-nav__icon.md-icon svg path{
+    stroke: currentColor;
+  }
+  
   .md-nav__icon.md-icon svg {
     fill: none;
-    stroke: var(--storm-gray-800);
+    stroke: var(--nav-font-color);
     height: 16px;
+    stroke-width: 1px;
   }
 
   .md-nav__icon:hover {
