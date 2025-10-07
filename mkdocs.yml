@@ -52,6 +52,17 @@ theme:
     - navigation.tabs # Top-level sections are rendered below the header (can be modified to in-line with CSS)
     - navigation.tabs.sticky # When scrolling, the tabs remain at the top of the page
     - navigation.top # Show the back to top button since we don't keep top nav sticky
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
 markdown_extensions:
   - abbr
   - admonition
@@ -95,12 +106,12 @@ plugins:
   - macros:
       include_yaml:
         - polkadot-docs/variables.yml
-  - git-revision-date-localized:
-      type: date
-      enable_creation_date: true
-      exclude:
-        - node_modules/*
-      enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
+#  - git-revision-date-localized:
+#      type: date
+#      enable_creation_date: true
+#      exclude:
+#        - node_modules/*
+#      enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
 extra:
   consent:
     title: Cookie Consent
