@@ -19,6 +19,8 @@
   --aqua: #07ffff;
   --electric-violet: #7204ff;
 
+  --gray-storm-200-transparent: #52577566;
+
   --md-hover-opacity: 0.7;
   --max-page-width: 1600px;
   --page-padding: 48px;
@@ -73,7 +75,31 @@
 
   /*custom icons for admonition*/
   --md-admonition-icon--smartcontract: var(--md-admonition-icon--warning);
+
+    /*nav list */
+  --nav-font-color: var(--storm-gray-800);
+  --nav-title-color: var(--storm-gray-900);
+  --nav-hover-bg-color: var(--storm-gray-200);
 }
+
+[data-md-color-scheme='slate'][data-md-color-primary='indigo'] {
+  --md-default-fg-color: var(--white);
+  --md-default-bg-color: var(--black);
+
+  --md-primary-fg-color: var(--storm-gray-200);
+  --md-accent-fg-color: var(--pink);
+  
+  /*accent color */
+  --md-typeset-a-color: var(--pink);
+
+  /*nav list */
+  --nav-font-color: var(--storm-gray-300);
+  --nav-title-color: var(--athens-gray);
+  --nav-hover-bg-color: var(--gray-storm-200-transparent);
+
+
+}
+
 
 .md-grid {
   max-width: var(--max-page-width);
@@ -553,7 +579,7 @@ input.md-search__input::placeholder {
 .md-nav__link:hover,
 .md-nav__link-wrapper.md-nav__item.md-nav__item--active,
 .md-nav__item div.md-nav__link--active {
-  background: var(--storm-gray-200);
+  background: var(--nav-hover-bg-color);
   border-radius: 6px;
   margin-left: -1em;
 }
@@ -640,7 +666,7 @@ input.md-search__input::placeholder {
     .md-nav--primary
     .md-nav__item--section.md-nav__item
     > .md-nav__link {
-    color: var(--storm-gray-900);
+    color: var(--nav-title-color);
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.22px;
@@ -673,7 +699,7 @@ input.md-search__input::placeholder {
     padding-bottom: 4px;
     margin-top: 0.1em;
     margin-right: 0;
-    color: var(--storm-gray-800);
+    color: var(--nav-font-color);
   }
 
   [dir="ltr"] .md-nav--primary .md-nav__item > div.md-nav__link {
@@ -934,7 +960,7 @@ input.md-search__input::placeholder {
     font-size: 11px;
     letter-spacing: 0.22px;
     text-transform: uppercase;
-    color: var(--storm-gray-900);
+    color: var(--nav-title-color);
     padding-bottom: 8px;
   }
 
@@ -958,7 +984,7 @@ input.md-search__input::placeholder {
   }
 
   .md-nav--secondary .md-nav__link > * {
-    color: var(--storm-gray-800);
+    color: var(--nav-font-color);
     font-size: 16px;
   }
 }
