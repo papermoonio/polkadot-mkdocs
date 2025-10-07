@@ -13,10 +13,68 @@ import re
 import logging
 from pathlib import Path
 from typing import Dict, List, Optional
-from functools import lru_cache
 
-# Regex for robust frontmatter parsing
-FRONTMATTER_RE = re.compile(r'^---\s*\n(.*?)\n---\s*\n', re.DOTALL)
+# Configure custom logging with emojis
+class EmojiFormatter(logging.Formatter):
+    """Custom formatter that uses emojis instead of log level names."""
+    
+    EMOJI_MAP = {
+        logging.INFO: '📝',
+        logging.WARNING: '⚠️',
+        logging.ERROR: '❌',
+        logging.DEBUG: '🔍'
+    }
+    
+    def format(self, record):
+        emoji = self.EMOJI_MAP.get(record.levelno, '📝')
+        return f"{emoji} {record.getMessage()}"
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# Create handler with emoji formatter
+handler = logging.StreamHandler()
+handler.setFormatter(EmojiFormatter())
+logger.addHandler(handler)
+
+# Prevent duplicate logs
+logger.propagate = False
+
+# Global variables for path shortening
+_workspace_root = None
+_docs_dir = None
+
+def shorten_path(file_path: str) -> str:
+    """
+    Convert absolute path to a shorter relative path from docs directory.
+    
+    Args:
+        file_path: Absolute file path
+        
+    Returns:
+        Shortened path relative to docs directory
+    """
+    global _workspace_root, _docs_dir
+    if not _workspace_root or not _docs_dir:
+        return file_path
+    
+    try:
+        # Try to make relative to docs directory first
+        docs_path = os.path.join(_workspace_root, _docs_dir)
+        if file_path.startswith(docs_path):
+            rel_path = os.path.relpath(file_path, docs_path)
+            if rel_path == '.':
+                return _docs_dir
+            return f"{_docs_dir}/{rel_path}"
+        
+        # Fallback to workspace relative
+        if file_path.startswith(_workspace_root):
+            return os.path.relpath(file_path, _workspace_root)
+        
+        # If all else fails, just return the filename
+        return os.path.basename(file_path)
+    except:
+        return os.path.basename(file_path)
 
 # Common acronyms to preserve
 ACRONYMS = {'API', 'SDK', 'CLI', 'AI', 'ML', 'CPU', 'GPU', 'EVM', 'PVM', 'NFT', 'DApp'}
@@ -26,7 +84,6 @@ AUTO_START = "<!-- START OF AUTOMATICALLY GENERATED CONTENT -->"
 AUTO_END = "<!-- END OF AUTOMATICALLY GENERATED CONTENT -->"
 
 
-@lru_cache(maxsize=4096)
 def extract_frontmatter(file_path: str) -> Dict[str, str]:
     """
     Robustly parse YAML frontmatter at the top of a markdown file.
@@ -73,7 +130,7 @@ def extract_frontmatter(file_path: str) -> Dict[str, str]:
             'description': str(frontmatter.get('description') or '').strip(),
         }
     except Exception as e:
-        print(f"⚠️  Error reading frontmatter from {file_path}: {e}")
+        logger.warning(f"Error reading frontmatter from {shorten_path(file_path)}: {e}")
         return {}
 
 
@@ -97,46 +154,47 @@ def load_nav_file(nav_path: str) -> List[Dict]:
         if isinstance(data, list):
             return data
         
-        print(f"⚠️  Unexpected nav structure in {nav_path} (got {type(data).__name__})")
+        logger.warning(f"Unexpected nav structure in {shorten_path(nav_path)} (got {type(data).__name__})")
         return []
     
     except Exception as e:
-        print(f"❌ Error loading nav file {nav_path}: {e}")
+        logger.error(f"Error loading nav file {shorten_path(nav_path)}: {e}")
         return []
 
 
-def resolve_path(base_path: str, nav_path: str, workspace_root: str) -> str:
+def resolve_path(base_path: str, nav_path: str, workspace_root: str, content_root: str = None) -> str:
     """
-    Resolve navigation path relative to workspace root with security validation.
+    Resolve a path from a navigation file, handling both absolute and relative paths.
     
     Args:
-        base_path: Base directory where nav file is located
-        nav_path: Path from navigation file
-        workspace_root: Root directory of workspace
+        base_path: Base directory containing the navigation file
+        nav_path: Path from the navigation file
+        workspace_root: Root directory of the workspace
+        content_root: Content directory root (auto-detected if not provided)
         
     Returns:
         Resolved absolute path
         
     Raises:
-        ValueError: If the resolved path would escape the workspace root
+        ValueError: If path is invalid or contains dangerous sequences
     """
-    # Normalize the nav_path to prevent path traversal
-    nav_path = os.path.normpath(nav_path)
     
     if nav_path.startswith('/'):
-        # Absolute path from content root (polkadot-docs), not workspace root
-        # Find the content directory by looking for polkadot-docs
-        content_root = None
-        current = base_path
-        while current and current != workspace_root:
-            if os.path.basename(current) == 'polkadot-docs':
-                content_root = current
-                break
-            current = os.path.dirname(current)
-        
+        # Absolute path from content root, not workspace root
         if not content_root:
-            # Fallback to workspace root if we can't find polkadot-docs
-            content_root = workspace_root
+            # Auto-detect content directory
+            current = base_path
+            while current and current != workspace_root:
+                # Look for common docs directory names or use the first subdirectory
+                basename = os.path.basename(current)
+                if basename in ('docs', 'polkadot-docs', 'content', 'src'):
+                    content_root = current
+                    break
+                current = os.path.dirname(current)
+            
+            if not content_root:
+                # Fallback to workspace root
+                content_root = workspace_root
         
         resolved_path = os.path.join(content_root, nav_path.lstrip('/'))
     else:
@@ -260,28 +318,6 @@ def make_table_row(md_path: str, workspace_root: str) -> Optional[str]:
     return f"| {escape_table_cell(link_title)} | {escape_table_cell(tools)} | {escape_table_cell(desc)} |"
 
 
-def format_tools(tools_csv: str) -> str:
-    """
-    Format tools string with smart capitalization.
-    
-    Args:
-        tools_csv: Comma-separated tools string
-        
-    Returns:
-        Formatted tools string
-    """
-    parts = [t.strip() for t in tools_csv.split(',') if t.strip()]
-    out = []
-    for t in parts:
-        if t.upper() in ACRONYMS:
-            out.append(t.upper())
-        elif t.islower() and ' ' not in t:
-            out.append(t.capitalize())
-        else:
-            out.append(t)
-    return ', '.join(out) if out else 'N/A'
-
-
 def find_workspace_root(start: str) -> Optional[str]:
     """
     Find workspace root by looking for mkdocs.yml.
@@ -304,8 +340,53 @@ def find_workspace_root(start: str) -> Optional[str]:
     return None
 
 
-def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str, 
-                     content_dir: str) -> List[str]:
+def get_docs_dir_from_mkdocs(workspace_root: str) -> str:
+    """
+    Extract docs_dir from mkdocs.yml configuration using simple text parsing.
+    
+    Args:
+        workspace_root: Path to workspace root containing mkdocs.yml
+        
+    Returns:
+        Name of the docs directory (defaults to 'docs' if not found)
+    """
+    mkdocs_path = os.path.join(workspace_root, 'mkdocs.yml')
+    try:
+        with open(mkdocs_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Use simple text parsing to find docs_dir since YAML has complex tags
+        for line in content.split('\n'):
+            line = line.strip()
+            # Skip commented lines
+            if line.startswith('#'):
+                continue
+            
+            # Check if docs_dir appears before any comment
+            if 'docs_dir:' in line:
+                comment_pos = line.find('#')
+                docs_dir_pos = line.find('docs_dir:')
+                
+                # Only process if docs_dir appears before any comment
+                if comment_pos == -1 or docs_dir_pos < comment_pos:
+                    if line.startswith('docs_dir:'):
+                        # Extract the value after 'docs_dir:'
+                        docs_dir = line.split(':', 1)[1].strip()
+                        # Remove quotes if present
+                        docs_dir = docs_dir.strip('\'"')
+                        logger.info(f"Found docs_dir in mkdocs.yml: {docs_dir}")
+                        return docs_dir
+        
+        # If no docs_dir found, default to 'docs'
+        logger.info("No docs_dir found in mkdocs.yml, defaulting to 'docs'")
+        return 'docs'
+        
+    except Exception as e:
+        logger.warning(f"Error reading mkdocs.yml: {e}, defaulting to 'docs'")
+        return 'docs'
+
+
+def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str) -> List[str]:
     """
     Process navigation items and generate markdown content.
     
@@ -313,7 +394,6 @@ def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str
         nav_items: List of navigation items from .nav.yml
         base_path: Base directory where nav file is located
         workspace_root: Root directory of workspace
-        content_dir: Directory being scanned for content
         
     Returns:
         List of markdown lines
@@ -331,21 +411,19 @@ def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str
                 try:
                     resolved_path = resolve_path(base_path, path, workspace_root)
                 except ValueError as e:
-                    print(f"⚠️  Security warning - skipping unsafe path: {e}")
+                    logger.warning(f"Security warning - skipping unsafe path: {e}")
                     continue
                 
                 if os.path.isdir(resolved_path):
-                    # It's a directory - create subsection
-                    content_lines.append(f"## {title}")
-                    content_lines.append("")
+                    # It's a directory - buffer content first, then add section header if there's content
+                    section_content = []
                     
                     # Look for .nav.yml in this directory
                     sub_nav_path = os.path.join(resolved_path, '.nav.yml')
                     if os.path.exists(sub_nav_path):
                         sub_nav_items = load_nav_file(sub_nav_path)
-                        sub_content = process_nav_items(sub_nav_items, resolved_path, 
-                                                      workspace_root, content_dir)
-                        content_lines.extend(sub_content)
+                        section_content = process_nav_items(sub_nav_items, resolved_path, 
+                                                      workspace_root)
                     else:
                         # No nav file, scan for markdown files directly
                         md_files = [f for f in sorted(os.listdir(resolved_path)) 
@@ -356,35 +434,23 @@ def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str
                             
                             for md_file in sorted(md_files):
                                 md_path = os.path.join(resolved_path, md_file)
-                                frontmatter = extract_frontmatter(md_path)
-                                
-                                title = frontmatter.get('title', '').strip()
-                                tools = frontmatter.get('tools', '').strip()
-                                description = frontmatter.get('description', '').strip()
-                                
-                                if not title:
-                                    print(f"⚠️  No title found in frontmatter for {md_path} - skipping")
-                                    continue
-                                    
-                                if not description:
-                                    print(f"⚠️  No description found in frontmatter for {md_path} - skipping")
-                                    continue
-                                
-                                if not tools:
-                                    print(f"⚠️  No tools found in frontmatter for {md_path}")
-                                    tools = 'N/A'
+                                row = make_table_row(md_path, workspace_root)
+                                if row:
+                                    table_rows.append(row)
                                 else:
-                                    tools = format_tools(tools)
-                                
-                                link_title = create_markdown_link(title, md_path, workspace_root)
-                                table_rows.append(f"| {escape_table_cell(link_title)} | {escape_table_cell(tools)} | {escape_table_cell(description)} |")
+                                    logger.warning(f"Skipping {shorten_path(md_path)} - missing title or description")
                             
                             if table_rows:
-                                content_lines.append("| Title | Tools | Description |")
-                                content_lines.append("|-------|-------|-------------|")
-                                content_lines.extend(table_rows)
+                                section_content.append("| Title | Tools | Description |")
+                                section_content.append("|-------|-------|-------------|")
+                                section_content.extend(table_rows)
                     
-                    content_lines.append("")
+                    # Only add section header and content if there's actual content
+                    if section_content:
+                        content_lines.append(f"## {title}")
+                        content_lines.append("")
+                        content_lines.extend(section_content)
+                        content_lines.append("")
                 
                 elif os.path.isfile(resolved_path) and resolved_path.endswith('.md'):
                     # It's a markdown file - add to current section
@@ -395,13 +461,13 @@ def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str
                         # For now, we'll handle this in the main processing loop
                         pass
                     else:
-                        print(f"⚠️  No title found in frontmatter for {resolved_path}")
+                        logger.warning(f"No title found in frontmatter for {shorten_path(resolved_path)}")
                 
                 else:
                     # If directory not found, try looking for a .md file with the same name
                     # Handle both cases: path ending with / and without /
-                    base_path = resolved_path.rstrip('/')
-                    md_file_path = base_path + '.md'
+                    base_no_slash = resolved_path.rstrip('/')
+                    md_file_path = base_no_slash + '.md'
                     
                     if os.path.isfile(md_file_path):
                         frontmatter = extract_frontmatter(md_file_path)
@@ -410,48 +476,38 @@ def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str
                         tools = frontmatter.get('tools', '').strip()
                         description = frontmatter.get('description', '').strip()
                         
-                        if title_fm and description:
-                            if not tools:
-                                print(f"⚠️  No tools found in frontmatter for {md_file_path}")
-                                tools = 'N/A'
-                            else:
-                                tools = format_tools(tools)
-                            
+                        row = make_table_row(md_file_path, workspace_root)
+                        if row:
                             # Create section for single file
                             content_lines.append(f"## {title}")
                             content_lines.append("")
                             content_lines.append("| Title | Tools | Description |")
                             content_lines.append("|-------|-------|-------------|")
-                            
-                            link_title = create_markdown_link(title_fm, md_file_path, workspace_root)
-                            content_lines.append(f"| {escape_table_cell(link_title)} | {escape_table_cell(tools)} | {escape_table_cell(description)} |")
+                            content_lines.append(row)
                             content_lines.append("")
                         else:
-                            if not title_fm:
-                                print(f"⚠️  No title found in frontmatter for {md_file_path} - skipping")
-                            if not description:
-                                print(f"⚠️  No description found in frontmatter for {md_file_path} - skipping")
+                            logger.warning(f"Skipping {shorten_path(md_file_path)} - missing title or description")
                     else:
-                        print(f"⚠️  Referenced path not found: {resolved_path} (also tried {md_file_path})")
+                        logger.warning(f"Referenced path not found: {shorten_path(resolved_path)} (also tried {shorten_path(md_file_path)})")
     
     return content_lines
 
 
-def extract_manual_content(index_path: str) -> List[str]:
+def extract_manual_content(output_path: str) -> List[str]:
     """
-    Extract manual content from existing index.md file (everything before auto-generated marker).
+    Extract manual content from existing output file (everything before auto-generated marker).
     
     Args:
-        index_path: Path to existing index.md file
+        output_path: Path to existing output file
         
     Returns:
         List of lines containing manual content
     """
-    if not os.path.exists(index_path):
+    if not os.path.exists(output_path):
         return ["# Index", "", ""]
     
     try:
-        with open(index_path, 'r', encoding='utf-8') as f:
+        with open(output_path, 'r', encoding='utf-8') as f:
             lines = f.readlines()
         
         # Remove trailing newlines and convert to list of strings
@@ -478,36 +534,34 @@ def extract_manual_content(index_path: str) -> List[str]:
         return manual_content
         
     except Exception as e:
-        print(f"⚠️  Error reading existing index file: {e}")
+        logger.warning(f"Error reading existing output file: {e}")
         return ["# Index", "", ""]
 
 
-def generate_index_content(target_dir: str, content_dir: str, workspace_root: str) -> str:
+def generate_index_content(target_dir: str, content_dir: str, workspace_root: str, output_filename: str = 'index.md') -> str:
     """
     Generate the complete index markdown content, preserving manual content.
     
     Args:
-        target_dir: Directory where index.md will be created
+        target_dir: Directory where output file will be created
         content_dir: Directory to scan for content
         workspace_root: Root directory of workspace
+        output_filename: Name of the output file (default: 'index.md')
         
     Returns:
         Generated markdown content
     """
-    # Check for existing index.md and preserve manual content
-    index_path = os.path.join(target_dir, 'index.md')
-    content_lines = extract_manual_content(index_path)
+    # Build auto-generated content separately (not pre-seeded with manual)
+    auto_content_lines = []
     
     # Look for .nav.yml in target directory first
     nav_path = os.path.join(target_dir, '.nav.yml')
     
     if os.path.exists(nav_path):
-        print(f"📖 Processing navigation file: {nav_path}")
+        logger.info(f"Processing navigation file: {shorten_path(nav_path)}")
         nav_items = load_nav_file(nav_path)
         
         # Create sections based on nav items
-        current_section_items = []
-        
         for item in nav_items:
             if isinstance(item, dict):
                 for title, path in item.items():
@@ -518,14 +572,10 @@ def generate_index_content(target_dir: str, content_dir: str, workspace_root: st
                     try:
                         resolved_path = resolve_path(target_dir, path, workspace_root)
                     except ValueError as e:
-                        print(f"⚠️  Security warning - skipping unsafe path: {e}")
+                        logger.warning(f"Security warning - skipping unsafe path: {e}")
                         continue
                     
                     if os.path.isdir(resolved_path):
-                        # Create section header
-                        content_lines.append(f"## {title}")
-                        content_lines.append("")
-                        
                         # Look for .nav.yml in subdirectory
                         sub_nav_path = os.path.join(resolved_path, '.nav.yml')
                         if os.path.exists(sub_nav_path):
@@ -544,50 +594,29 @@ def generate_index_content(target_dir: str, content_dir: str, workspace_root: st
                                             try:
                                                 sub_resolved_path = resolve_path(resolved_path, sub_path, workspace_root)
                                             except ValueError as e:
-                                                print(f"⚠️  Security warning - skipping unsafe path: {e}")
+                                                logger.warning(f"Security warning - skipping unsafe path: {e}")
                                                 continue
                                             
                                             if os.path.isfile(sub_resolved_path) and sub_resolved_path.endswith('.md'):
-                                                frontmatter = extract_frontmatter(sub_resolved_path)
-                                                
-                                                title = frontmatter.get('title', '').strip()
-                                                description = frontmatter.get('description', '').strip()
-                                                tools = frontmatter.get('tools', '').strip()
-                                                
-                                                if not title:
-                                                    print(f"⚠️  No title found in frontmatter for {sub_resolved_path} - skipping")
-                                                    continue
-                                                    
-                                                if not description:
-                                                    print(f"⚠️  No description found in frontmatter for {sub_resolved_path} - skipping")
-                                                    continue
-                                                
-                                                if not tools:
-                                                    print(f"⚠️  No tools found in frontmatter for {sub_resolved_path}")
-                                                    tools = 'N/A'
+                                                row = make_table_row(sub_resolved_path, workspace_root)
+                                                if row:
+                                                    table_rows.append(row)
                                                 else:
-                                                    tools = format_tools(tools)
-                                                
-                                                link_title = create_markdown_link(title, sub_resolved_path, workspace_root)
-                                                table_rows.append(f"| {escape_table_cell(link_title)} | {escape_table_cell(tools)} | {escape_table_cell(description)} |")
+                                                    logger.warning(f"Skipping {shorten_path(sub_resolved_path)} - missing title or description")
                                 
                                 if table_rows:
-                                    content_lines.append("| Title | Tools | Description |")
-                                    content_lines.append("|-------|-------|-------------|")
-                                    content_lines.extend(table_rows)
-                                else:
-                                    # Remove the section header if no valid entries
-                                    # Safer approach: slice back to before we added the header
-                                    if len(content_lines) >= 2 and content_lines[-1] == "" and content_lines[-2].startswith(f"## {title}"):
-                                        content_lines = content_lines[:-2]
-                        
-                        content_lines.append("")
+                                    auto_content_lines.append(f"## {title}")
+                                    auto_content_lines.append("")
+                                    auto_content_lines.append("| Title | Tools | Description |")
+                                    auto_content_lines.append("|-------|-------|-------------|")
+                                    auto_content_lines.extend(table_rows)
+                                    auto_content_lines.append("")
                     
                     elif os.path.isfile(resolved_path) and resolved_path.endswith('.md'):
                         # Handle direct markdown file references
                         frontmatter = extract_frontmatter(resolved_path)
                         if not frontmatter.get('title'):
-                            print(f"⚠️  No title found in frontmatter for {resolved_path}")
+                            logger.warning(f"No title found in frontmatter for {shorten_path(resolved_path)}")
                     
                     else:
                         # Try adding .md extension
@@ -600,29 +629,20 @@ def generate_index_content(target_dir: str, content_dir: str, workspace_root: st
                             tools = frontmatter.get('tools', '').strip()
                             description = frontmatter.get('description', '').strip()
                             
-                            if title_fm and description:
+                            row = make_table_row(md_path, workspace_root)
+                            if row:
                                 # Create section for single file
-                                content_lines.append(f"## {title}")
-                                content_lines.append("")
-                                content_lines.append("| Title | Tools | Description |")
-                                content_lines.append("|-------|-------|-------------|")
-                                
-                                if not tools:
-                                    tools = 'N/A'
-                                else:
-                                    tools = format_tools(tools)
-                                
-                                link_title = create_markdown_link(title_fm, md_path, workspace_root)
-                                content_lines.append(f"| {escape_table_cell(link_title)} | {escape_table_cell(tools)} | {escape_table_cell(description)} |")
-                                content_lines.append("")
+                                auto_content_lines.append(f"## {title}")
+                                auto_content_lines.append("")
+                                auto_content_lines.append("| Title | Tools | Description |")
+                                auto_content_lines.append("|-------|-------|-------------|")
+                                auto_content_lines.append(row)
+                                auto_content_lines.append("")
                             else:
-                                if not title_fm:
-                                    print(f"⚠️  No title found in frontmatter for {md_path} - skipping")
-                                if not description:
-                                    print(f"⚠️  No description found in frontmatter for {md_path} - skipping")
+                                logger.warning(f"Skipping {shorten_path(md_path)} - missing title or description")
     
     else:
-        print(f"📂 No .nav.yml found in {target_dir}, scanning subdirectories...")
+        logger.info(f"No .nav.yml found in {shorten_path(target_dir)}, scanning subdirectories...")
         
         # Look for .nav.yml files in subdirectories
         for item in sorted(os.listdir(target_dir)):
@@ -639,85 +659,178 @@ def generate_index_content(target_dir: str, content_dir: str, workspace_root: st
                         else:
                             section_title = item.replace('-', ' ').title()
                         
-                        content_lines.append(f"## {section_title}")
-                        content_lines.append("")
-                        
                         # Process items in this nav file
-                        section_start_index = len(content_lines) - 2  # Remember where section started
-                        sub_content = process_nav_items(sub_nav_items, item_path, workspace_root, content_dir)
-                        content_lines.extend(sub_content)
+                        sub_content = process_nav_items(sub_nav_items, item_path, workspace_root)
                         
-                        # Check if section ended up empty (only contains header and empty line)
-                        if len(content_lines) == section_start_index + 2:
-                            # Remove empty section
-                            content_lines = content_lines[:section_start_index]
+                        # Only add section if there's actual content
+                        if sub_content:
+                            auto_content_lines.append(f"## {section_title}")
+                            auto_content_lines.append("")
+                            auto_content_lines.extend(sub_content)
     
     # Stitch final content deterministically: manual → marker → auto → end marker
-    index_path = os.path.join(target_dir, 'index.md')
-    manual = extract_manual_content(index_path)
+    output_path = os.path.join(target_dir, output_filename)
+    manual_content = extract_manual_content(output_path)
     
     # Build final content explicitly
-    out: List[str] = []
-    out.extend(manual)
+    final_content: List[str] = []
+    final_content.extend(manual_content)
     
-    # Only add auto-generated content if we have content beyond manual
-    auto_content = content_lines[len(manual):]
-    if auto_content:
-        out.append(AUTO_START)
-        out.append("")
-        out.extend(auto_content)
-        if auto_content and auto_content[-1] != "":
-            out.append("")
-        out.append(AUTO_END)
+    # Only add auto-generated content if we have any
+    if auto_content_lines:
+        final_content.append(AUTO_START)
+        final_content.append("")
+        final_content.extend(auto_content_lines)
+        if auto_content_lines and auto_content_lines[-1] != "":
+            final_content.append("")
+        final_content.append(AUTO_END)
     
-    return '\n'.join(out)
+    return '\n'.join(final_content)
+
+
+def sanitize_path_input(path_input: str, allow_separators: bool = True) -> str:
+    """
+    Sanitize user input to prevent path traversal attacks.
+    
+    Args:
+        path_input: User-provided path input
+        allow_separators: Whether to allow directory separators (False for filenames)
+        
+    Returns:
+        Sanitized path input
+        
+    Raises:
+        ValueError: If path contains dangerous sequences
+    """
+    if not path_input or not isinstance(path_input, str):
+        raise ValueError("Invalid path input")
+    
+    # Remove null bytes and normalize
+    sanitized = path_input.replace('\x00', '').strip()
+    
+    # Normalize path to catch sneaky traversals
+    normalized = os.path.normpath(sanitized)
+    
+    # Check for path traversal sequences (more robust)
+    if (normalized.startswith(('../', '..\\')) or 
+        normalized in ('.', '..') or
+        '/../' in normalized or 
+        '\\..\\' in normalized):
+        raise ValueError(f"Path traversal detected: {normalized}")
+    
+    # Check for absolute paths (cross-platform)
+    if os.path.isabs(sanitized) or sanitized.startswith('\\\\'):  # UNC paths
+        raise ValueError("Absolute paths not allowed")
+    
+    # For filenames, ensure no directory separators
+    if not allow_separators:
+        if '/' in sanitized or '\\' in sanitized:
+            raise ValueError("Filename cannot contain directory separators")
+    
+    return sanitized
 
 
 def main():
     """Main function to generate cookbook indexes."""
-    if len(sys.argv) != 3:
-        print("Usage: python generate-cookbook-indexes.py <target_dir> <content_dir>")
-        print("  target_dir: Directory where index.md will be created")
-        print("  content_dir: Directory to scan for content")
+    global _workspace_root, _docs_dir
+    
+    if len(sys.argv) < 2 or len(sys.argv) > 3:
+        logger.error("Usage: python generate-cookbook-indexes.py <target_path> [output_filename]")
+        logger.error("  target_path: Relative path from docs directory (e.g., smart-contracts/cookbook)")
+        logger.error("  output_filename: Name of output file (default: index.md)")
+        logger.error("")
+        logger.error("Examples:")
+        logger.error("  python generate-cookbook-indexes.py smart-contracts/cookbook")
+        logger.error("  python generate-cookbook-indexes.py smart-contracts/cookbook summary.md")
         sys.exit(1)
     
-    target_dir = os.path.abspath(sys.argv[1])
-    content_dir = os.path.abspath(sys.argv[2])
+    # Sanitize user inputs to prevent path traversal
+    try:
+        target_path = sanitize_path_input(sys.argv[1], allow_separators=True)
+        output_filename = sanitize_path_input(sys.argv[2] if len(sys.argv) == 3 else 'index.md', allow_separators=False)
+    except ValueError as e:
+        logger.error(f"Invalid input: {e}")
+        sys.exit(1)
     
-    # Find workspace root (preferring target_dir as starting point)
-    workspace_root = find_workspace_root(target_dir)
+    # Find workspace root from current directory
+    workspace_root = find_workspace_root(os.getcwd())
     
     if not workspace_root:
-        print("❌ Could not find workspace root (no mkdocs.yml found)")
+        logger.error("Could not find workspace root (no mkdocs.yml found)")
         sys.exit(1)
     
-    print(f"🚀 Generating cookbook index")
-    print(f"📁 Target directory: {target_dir}")
-    print(f"📂 Content directory: {content_dir}")
-    print(f"🌍 Workspace root: {workspace_root}")
+    # Get docs directory from mkdocs.yml and initialize global variables for path shortening
+    docs_dir_name = get_docs_dir_from_mkdocs(workspace_root)
+    _workspace_root = workspace_root
+    _docs_dir = docs_dir_name
+    content_dir = os.path.join(workspace_root, docs_dir_name)
+    target_dir = os.path.join(content_dir, target_path)
+    
+    # Security validation: Ensure resolved paths stay within workspace boundaries
+    try:
+        # Resolve to absolute paths and check boundaries using Path.resolve().relative_to()
+        workspace_path = Path(workspace_root).resolve()
+        content_path = Path(content_dir).resolve()
+        target_path = Path(target_dir).resolve()
+        
+        # Ensure content directory is within workspace
+        try:
+            content_path.relative_to(workspace_path)
+        except ValueError:
+            raise ValueError("Content directory resolves outside of workspace")
+            
+        # Ensure target directory is within content directory
+        try:
+            target_path.relative_to(content_path)
+        except ValueError:
+            raise ValueError("Target path resolves outside of docs directory")
+            
+        # Validate output file path as well
+        output_path = target_path / output_filename
+        try:
+            output_path.relative_to(content_path)
+        except ValueError:
+            raise ValueError("Output path resolves outside of docs directory")
+            
+    except (OSError, ValueError) as e:
+        logger.error(f"Path validation failed: {e}")
+        sys.exit(1)
+    
+    # Update paths to use validated resolved paths
+    workspace_root = str(workspace_path)
+    content_dir = str(content_path)
+    target_dir = str(target_path)
+    
+    logger.info(f"Generating cookbook index")
+    logger.info(f"Target directory: {shorten_path(target_dir)}")
+    logger.info(f"Content directory: {shorten_path(content_dir)}")
+    logger.info(f"Output filename: {output_filename}")
+    logger.info(f"Workspace root: {os.path.basename(workspace_root)}")
     
     # Validate directories
     if not os.path.exists(target_dir):
-        print(f"❌ Target directory does not exist: {target_dir}")
+        logger.error(f"Target directory does not exist: {shorten_path(target_dir)}")
+        logger.error(f"Make sure '{target_path}' exists within the docs directory '{docs_dir_name}'")
         sys.exit(1)
     
     if not os.path.exists(content_dir):
-        print(f"❌ Content directory does not exist: {content_dir}")
+        logger.error(f"Content directory does not exist: {shorten_path(content_dir)}")
+        logger.error(f"Make sure mkdocs.yml has correct docs_dir: {docs_dir_name}")
         sys.exit(1)
     
     # Generate content
     try:
-        content = generate_index_content(target_dir, content_dir, workspace_root)
+        content = generate_index_content(target_dir, content_dir, workspace_root, output_filename)
         
-        # Write to index.md
-        index_path = os.path.join(target_dir, 'index.md')
-        with open(index_path, 'w', encoding='utf-8') as f:
+        # Write to output file
+        output_path = os.path.join(target_dir, output_filename)
+        with open(output_path, 'w', encoding='utf-8') as f:
             f.write(content)
         
-        print(f"✅ Successfully generated {index_path}")
+        logger.info(f"Successfully generated {shorten_path(output_path)}")
         
     except Exception as e:
-        print(f"❌ Error generating index: {e}")
+        logger.error(f"Error generating index: {e}")
         sys.exit(1)
 
 
