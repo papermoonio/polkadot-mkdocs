@@ -76,10 +76,14 @@
   /*custom icons for admonition*/
   --md-admonition-icon--smartcontract: var(--md-admonition-icon--warning);
 
-    /*nav list */
+  /*nav list */
   --nav-font-color: var(--storm-gray-800);
   --nav-title-color: var(--storm-gray-900);
   --nav-hover-bg-color: var(--storm-gray-200);
+
+  /*feedback */
+  --feedback-border-color: var(--storm-gray-300);
+  --feedback-hr-color: var(--storm-gray-200);
 }
 
 [data-md-color-scheme='slate'][data-md-color-primary='indigo'] {
@@ -96,6 +100,10 @@
   --nav-font-color: var(--storm-gray-300);
   --nav-title-color: var(--athens-gray);
   --nav-hover-bg-color: var(--gray-storm-200-transparent);
+
+  /*feedback */
+  --feedback-border-color: var(--storm-gray-800);
+  --feedback-hr-color: var(--gray-storm-200-transparent);
 
 
 }
@@ -1606,7 +1614,7 @@ details.interface > summary::before {
 .md-feedback__title {
   font-weight: 400;
   font-size: 16px;
-  color: var(--storm-gray-800);
+  color: var(--nav-font-color);
   margin: 0;
 }
 
@@ -1618,7 +1626,7 @@ details.interface > summary::before {
 
 .md-feedback__icon,
 .md-feedback__list:hover .md-icon:not(:disabled) {
-  color: var(--storm-gray-800);
+  color: var(--nav-font-color);
 }
 
 .md-feedback__icon:not(:disabled).md-icon:hover {
@@ -1633,7 +1641,7 @@ details.interface > summary::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid var(--storm-gray-300);
+  border: 1px solid var(--feedback-border-color);
   border-radius: 16px;
   padding: 24px 8px;
   width: calc(100% - 2em);
@@ -1643,7 +1651,7 @@ details.interface > summary::before {
 
 .feedback-actions-container .divider {
   height: 1px;
-  background-color: var(--storm-gray-200);
+  background-color: var(--feedback-hr-color);
 }
 
 /* Styles to override unordered list defaults */
@@ -1807,7 +1815,7 @@ span.badge.advanced {
 }
 
 .md-content__button.md-icon svg {
-  fill: var(--storm-gray-800);
+  fill: var(--nav-font-color);
   transition: fill 0.3s ease;
 }
 
