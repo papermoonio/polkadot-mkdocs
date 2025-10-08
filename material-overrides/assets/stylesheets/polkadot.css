@@ -510,11 +510,11 @@ input.md-search__input::placeholder {
 }
 
 .md-nav__link:hover,
-.md-nav__link-wrapper.md-nav__item.md-nav__item--active,
-.md-nav__item div.md-nav__link--active {
+.md-nav__item--active .md-nav__link--active {
   background: var(--storm-gray-200);
   border-radius: 6px;
-  margin-left: -1em;
+  margin-left: -0.7em;
+  padding-left: 0.7em;
 }
 
 /* Nav items with icons in the title */
