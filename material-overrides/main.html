@@ -87,49 +87,16 @@
 {% endblock %}
 
 {% block site_nav %} 
-  {# --- Logic to hide/show navigation and TOC --- #}
-  {% set ns = namespace(hide_nav=false, hide_toc=false) %}
-
-  {# Check front-matter #}
-  {% if page.meta and page.meta.hide %}
-    {% if "navigation" in page.meta.hide %} {% set ns.hide_nav = true %} {% endif %}
-    {% if "toc" in page.meta.hide %} {% set ns.hide_toc = true %} {% endif %}
-  {% endif %}
-
-  {# Check standalone_files config #}
-  {% set standalone_patterns = config.standalone_files | default([]) %}
-  {% set page_path = page.file.src_path | replace("\\","/") %}
-
-  {% for pattern in standalone_patterns %}
-    {% set pattern_clean = pattern | replace("\\","/") %}
-    {% if pattern_clean.endswith("**") %}
-      {% set dir = pattern_clean.rstrip("*").rstrip("/") + "/" %}
-      {% if page_path.startswith(dir) %}
-        {% set ns.hide_nav = true %}
-        {% set ns.hide_toc = true %}
-      {% endif %}
-    {% elif pattern_clean.endswith("*") %}
-      {% set dir = pattern_clean.rstrip("*").rstrip("/") + "/" %}
-      {% set rest = page_path[dir|length:] %}
-      {% if page_path.startswith(dir) and "/" not in rest %}
-        {% set ns.hide_nav = true %}
-        {% set ns.hide_toc = true %}
-      {% endif %}
-    {% else %}
-      {% if page_path == pattern_clean %}
-        {% set ns.hide_nav = true %}
-        {% set ns.hide_toc = true %}
-      {% endif %}
-    {% endif %}
-  {% endfor %}
-
-  {#- Navigation (left menu) -#} 
+{#- Navigation (left menu) -#} 
   {% if nav %}
+    {% if page.meta and page.meta.hide %} 
+      {% set hidden = "hidden" if "navigation" in page.meta.hide %} 
+    {% endif %}
     <div
       class="md-sidebar md-sidebar--primary"
       data-md-component="sidebar"
       data-md-type="navigation"
-      {% if ns.hide_nav %} hidden {% endif %}
+      {{ hidden }}
     >
       <div class="md-sidebar__scrollwrap">
         <div class="md-sidebar__inner">
@@ -141,11 +108,14 @@
   
   {#- Table of contents (TOC) -#} 
   {% if "toc.integrate" not in features %} 
+    {% if page.meta and page.meta.hide %} 
+      {% set hidden = "hidden" if "toc" in page.meta.hide %} 
+    {% endif %}
     <div
       class="md-sidebar md-sidebar--secondary"
       data-md-component="sidebar"
       data-md-type="toc"
-      {% if ns.hide_toc %} hidden {% endif %}
+      {{ hidden }}
     >
       <div class="md-sidebar__scrollwrap">
         <div class="md-sidebar__inner">
@@ -168,7 +138,7 @@
       </div>
     </div>
   {% endif %} 
-{% endblock %} 
+{% endblock %}
 
 {%- block container -%}
 <div class="md-content" data-md-component="content">
@@ -228,42 +198,30 @@
     });
   </script>
   <script>
-    // AI_RAW_BASE = base URL where AI artifacts are stored.
-    const AI_RAW_BASE = 'https://raw.githubusercontent.com/polkadot-developers/polkadot-docs/master/ai';
-
     document.addEventListener('DOMContentLoaded', () => {
-      const RAW_BASE = (AI_RAW_BASE).replace(/\/+$/, '');
-      const SITE_BASE = location.origin.replace(/\/+$/, '');
+      const SITE_BASE = location.origin.replace(/\/+$/, ''); // current host
+      const AI_BASE = '/ai'; // relative path to AI content on same host
+
+      const stripLeading = (value) => value.replace(/^\/+/, '');
 
       const toAbsolute = (rawPath) => {
         if (!rawPath) return null;
-
         const dataPath = rawPath.trim();
         if (/^https?:\/\//i.test(dataPath)) return dataPath; // already absolute
 
-        const stripLeading = (value) => value.replace(/^\/+/, '');
-        const toSite = (path) => `${SITE_BASE}/${stripLeading(path)}`;
-        const toRaw = (path) => `${RAW_BASE}/${stripLeading(path.replace(/^ai\//, ''))}`;
-
         const normalized = stripLeading(dataPath);
-        const isAiCategory = normalized.startsWith('ai/categories/');
-        const isAiPage = normalized.startsWith('ai/pages/');
 
-        if (isAiCategory || isAiPage) {
-          return toRaw(normalized);
-        }
-
-        if (normalized.startsWith('categories/') || normalized.startsWith('pages/')) {
-          return toRaw(`ai/${normalized}`);
+        // All AI content is served from the AI_BASE on the current host
+        if (normalized.startsWith('ai/')) {
+          return `${SITE_BASE}${AI_BASE}/${stripLeading(normalized.replace(/^ai\//, ''))}`;
         }
 
         // NOTE: same-origin assets: default for everything we ship in docs/ (llms, ai bundles, etc.)
-        if (dataPath.startsWith('/')) return toSite(dataPath);
-        if (normalized.startsWith('ai/')) return toSite(normalized);
-        if (normalized === 'llms.txt' || normalized === 'llms-full.jsonl') return toSite(normalized);
+        if (dataPath.startsWith('/')) return `${SITE_BASE}/${stripLeading(dataPath)}`;
+        if (normalized === 'llms.txt' || normalized === 'llms-full.jsonl') return `${SITE_BASE}/${normalized}`;
 
-        // Fallback to raw GitHub path for anything else
-        return `${RAW_BASE}/${normalized}`;
+        // Fallback → site-relative
+        return `${SITE_BASE}/${normalized}`;
       };
 
       const downloadViaFetch = async (url, filename) => {

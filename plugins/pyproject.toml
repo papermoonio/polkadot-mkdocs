@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "copy_md"
+version = "0.1.0"
+description = "MkDocs plugin to copy raw Markdown files to the site directory."
+
+[tool.setuptools.packages.find]
+where = ["copy_md"]
+
+[project.entry-points."mkdocs.plugins"]
+copy_md = "plugins.copy_md.plugin:CopyMDPlugin"

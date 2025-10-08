@@ -98,6 +98,9 @@ plugins:
       exclude:
         - ai/*
   - awesome-nav
+  - copy_md:
+      source_dir: polkadot-docs/.ai
+      target_dir: ai
   - glightbox
   - macros:
       include_yaml:
@@ -154,19 +157,3 @@ extra:
           note: >-
             Thanks for your feedback! Help us improve this page by submitting
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZR0p70uR78JVemft66VuL39-k6Mge9rufGZyYBeEhezF3iw/viewform?usp=pp_url&entry.1469237372=[Feedback]+{title}+-+{url}" target="_blank" rel="noopener">additional feedback</a>.
-
-# ----------------------------------------------------------------------
-# This configuration defines Markdown pages or directories that should
-# be treated as "standalone," meaning they will not display the navigation
-# menu, table of contents (TOC), or feedback/edit sections when rendered.
-#
-# Usage:
-# - Exact file paths: hide specific files
-#     e.g., example.md
-# - Single-level directory wildcard (*): hide all files directly under a folder
-#     e.g., example/*  → hides example/example-1.md, example/example-2.md
-# - Recursive wildcard (**): hide all files in a folder and all nested subfolders
-#     e.g., example/** → hides example/file.md, example/pages/file.md, example/categories/file.md
-# ----------------------------------------------------------------------
-standalone_files:
-  - ai/**

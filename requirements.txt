@@ -1,1 +1,2 @@
 -r https://raw.githubusercontent.com/papermoonio/workflows/refs/heads/main/requirements.txt
+plugins/
