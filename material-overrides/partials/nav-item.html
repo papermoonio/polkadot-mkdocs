@@ -188,7 +188,10 @@
             tabindex="{{ tabindex }}"
           >
             {{ render_content(nav_item) }}
-            <span class="md-nav__icon md-icon"></span>
+            <span class="md-nav__icon md-icon">
+              <span class="closed">{% include ".icons/custom/right-chevron-circle.svg" %}</span>
+              <span class="expanded">{% include ".icons/custom/down-chevron-circle.svg" %}</span>
+            </span>
           </label>
 
         <!-- Toggle to expand nested items with link to index page -->
