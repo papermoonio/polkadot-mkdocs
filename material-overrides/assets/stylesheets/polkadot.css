@@ -297,6 +297,7 @@
 .md-header__inner {
   background-color: var(--header-bg-color);
   color: var(--md-default-fg-color);
+  backdrop-filter: blur(16px);
 }
 
 .md-tabs {
