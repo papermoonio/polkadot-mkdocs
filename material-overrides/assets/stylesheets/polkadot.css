@@ -297,67 +297,26 @@
 .md-header__inner {
   background-color: var(--header-bg-color);
   color: var(--md-default-fg-color);
+  backdrop-filter: blur(16px);
 }
 
 .md-tabs {
   background-color: transparent;
 }
 
-.md-tabs .md-grid {
-  display: flex;
-}
-
-.md-tabs__item--custom {
+.md-tabs__item {
   transition: border 0.3s ease;
   color: var(--black);
   height: var(--header-height);
   align-content: center;
-}
-
-.md-tabs__item--custom:hover {
-  cursor: pointer;
-}
-
-/* Pseudo-element to create hoverable area */
-.md-tabs__item--custom:hover::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -10px;
-  height: var(--dropdown-gap);
-  width: 100%;
-  background-color: transparent;
-  z-index: -1;
-}
-
-.md-tab__list {
-  display: none;
-}
-
-.md-tabs__item--custom:hover .md-tab__list {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  top: calc(100% + var(--dropdown-gap));
-  background: var(--md-default-bg-color);
-  border: 0.5px solid var(--storm-gray-300);
-  border-radius: 16px;
-  z-index: 3;
-  list-style: none;
-  display: grid;
   padding: 0;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  box-shadow: 0 0.2rem 0.5rem #0003, 0 0 0.05rem #00000059;
-  /* For Safari */
-  transform: translateZ(0);
 }
 
-.md-tabs__item {
-  padding-left: 1rem;
-  padding-right: 1rem;
+.md-tabs__item:hover .md-tabs__link {
+  color: var(--pink);
 }
 
-.md-tabs__item--custom:hover .md-tabs__link {
+.md-tabs__item:hover .md-tabs__link {
   color: var(--pink);
 }
 
