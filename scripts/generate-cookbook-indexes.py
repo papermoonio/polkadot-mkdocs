@@ -9,6 +9,7 @@ and extracting metadata from referenced markdown files.
 import os
 import sys
 import yaml
+import codecs
 import re
 import logging
 from pathlib import Path
@@ -100,8 +101,8 @@ def extract_frontmatter(file_path: str) -> Dict[str, str]:
             raw = fb.read()
 
         # Strip BOM if present
-        if raw.startswith(b'\xef\xbb\xbf'):
-            raw = raw[3:]
+        if raw.startswith(codecs.BOM_UTF8):
+            raw = raw[len(codecs.BOM_UTF8):]
 
         text = raw.decode('utf-8', errors='replace')
         lines = text.splitlines()
