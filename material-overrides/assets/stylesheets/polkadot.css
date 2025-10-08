@@ -50,6 +50,7 @@
   --md-footer-fg-color--light: var(--black);
   --md-footer-bg-color: var(--white);
   --md-footer-bg-color--dark: var(--white);
+  --footer-border-color: var(--storm-gray-200);
 
   /** Branded code snippets**/
   --md-code-fg-color: #363732;
@@ -92,6 +93,12 @@
 
   --md-primary-fg-color: var(--storm-gray-200);
   --md-accent-fg-color: var(--pink);
+  /*footer color */
+  --md-footer-fg-color: var(--white);
+  --md-footer-fg-color--light: var(--white);
+  --md-footer-bg-color: var(--black);
+  --md-footer-bg-color--dark: var(--black);
+  --footer-border-color: var(--gray-storm-200-transparent);
   
   /*accent color */
   --md-typeset-a-color: var(--pink);
@@ -1123,7 +1130,7 @@ article.md-content__inner.md-typeset > h1:has(+ .badge) {
 }
 
 .md-footer-meta {
-  border: 1px solid var(--storm-gray-200);
+  border: 1px solid var(--footer-border-color);
   border-radius: 1em;
   margin-bottom: 40px;
   margin-top: 40px;
