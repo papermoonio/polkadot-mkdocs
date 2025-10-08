@@ -3,8 +3,3 @@ venv
 .vscode
 polkadot-docs
 .gitmodules
-
-# Temporary plugin files
-__pycache__
-*.egg-info/
-plugins/build
