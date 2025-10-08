@@ -1,8 +1,52 @@
 {
   "data": [
     {
+      "key": "/chain-interactions/accounts/",
+      "value": "/chain-interactions/accounts/create-account/"
+    },
+    {
+      "key": "/chain-interactions/query-data/",
+      "value": "/chain-interactions/query-data/query-sdks/"
+    },
+    {
+      "key": "/chain-interactions/send-transactions/",
+      "value": "/chain-interactions/send-transactions/with-sdks/"
+    },
+    {
+      "key": "/chain-interactions/send-transactions/interoperability/",
+      "value": "/chain-interactions/send-transactions/interoperability/transfer-assets-parachains/"
+    },
+    {
+      "key": "/chain-interactions/token-operations/",
+      "value": "/chain-interactions/token-operations/register-local-asset/"
+    },
+    {
       "key": "/develop/interoperability/intro-to-xcm/",
       "value": "/parachains/interoperability/get-started/"
+    },
+    {
+      "key": "/develop/parachains/customize-parachain/add-existing-pallets/",
+      "value": "/parachains/customize-runtime/add-existing-pallets/"
+    },
+    {
+      "key": "/develop/parachains/customize-parachain/add-pallet-instances/",
+      "value": "/parachains/customize-runtime/add-pallet-instances/"
+    },
+    {
+      "key": "/develop/parachains/customize-parachain/add-smart-contract-functionality/",
+      "value": "/parachains/customize-runtime/add-smart-contract-functionality/"
+    },
+    {
+      "key": "/develop/parachains/customize-parachain/make-custom-pallet/",
+      "value": "/parachains/customize-runtime/pallet-development/create-a-pallet/"
+    },
+    {
+      "key": "/develop/parachains/deployment/obtain-coretime/",
+      "value": "/parachains/launch-a-parachain/obtain-coretime/"
+    },
+    {
+      "key": "/develop/parachains/intro-polkadot-sdk/",
+      "value": "/parachains/overview/"
     },
     {
       "key": "/develop/parachains/maintenance/runtime-upgrades/",
@@ -15,6 +59,18 @@
     {
       "key": "/develop/parachains/maintenance/unlock-parachain/",
       "value": "/parachains/runtime-maintenance/unlock-parachains/"
+    },
+    {
+      "key": "/develop/parachains/testing/benchmarking/",
+      "value": "/parachains/customize-runtime/pallet-development/benchmark-pallet/"
+    },
+    {
+      "key": "/develop/parachains/testing/mock-runtime/",
+      "value": "/parachains/customize-runtime/pallet-development/mock-runtime/"
+    },
+    {
+      "key": "/develop/parachains/testing/pallet-testing/",
+      "value": "/parachains/customize-runtime/pallet-development/pallet-testing/"
     },
     {
       "key": "/develop/parachains/testing/setup/",
@@ -101,6 +157,30 @@
       "value": "/smart-contracts/overview/"
     },
     {
+      "key": "/develop/toolkit/api-libraries/dedot/",
+      "value": "/reference/tools/dedot/"
+    },
+    {
+      "key": "/develop/toolkit/api-libraries/papi/",
+      "value": "/reference/tools/papi/"
+    },
+    {
+      "key": "/develop/toolkit/api-libraries/polkadot-js-api/",
+      "value": "/reference/tools/polkadot-js-api/"
+    },
+    {
+      "key": "/develop/toolkit/api-libraries/py-substrate-interface/",
+      "value": "/reference/tools/py-substrate-interface/"
+    },
+    {
+      "key": "/develop/toolkit/api-libraries/sidecar/",
+      "value": "/reference/tools/sidecar/"
+    },
+    {
+      "key": "/develop/toolkit/api-libraries/subxt/",
+      "value": "/reference/tools/subxt/"
+    },
+    {
       "key": "/develop/toolkit/integrations/indexers/",
       "value": "/parachains/integrations/indexers/"
     },
@@ -125,8 +205,24 @@
       "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     },
     {
+      "key": "/develop/toolkit/interoperability/xcm-tools/",
+      "value": "/reference/tools/xcm-tools/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/e2e-testing/moonwall/",
+      "value": "/reference/tools/moonwall/"
+    },
+    {
       "key": "/develop/toolkit/parachains/fork-chains/chopsticks/get-started/",
       "value": "/parachains/testing/fork-a-parachain/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/light-clients/",
+      "value": "/reference/tools/light-clients/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/polkadot-omni-node/",
+      "value": "/reference/tools/omninode/"
     },
     {
       "key": "/develop/toolkit/parachains/spawn-chains/zombienet/get-started/",
@@ -233,12 +329,24 @@
       "value": "/nodes-and-validators/run-a-validator/staking-mechanics/rewards/"
     },
     {
+      "key": "/parachains/",
+      "value": "/parachains/get-started/"
+    },
+    {
+      "key": "/parachains/customize-runtime/pallet-development/",
+      "value": "/parachains/customize-runtime/pallet-development/create-a-pallet/"
+    },
+    {
       "key": "/parachains/integrations/",
       "value": "/parachains/integrations/wallets/"
     },
     {
       "key": "/parachains/interoperability/",
       "value": "/parachains/interoperability/get-started/"
+    },
+    {
+      "key": "/parachains/launch-a-parachain/",
+      "value": "/parachains/launch-a-parachain/choose-a-template/"
     },
     {
       "key": "/parachains/runtime-maintenance/",
@@ -249,12 +357,44 @@
       "value": "/parachains/testing/fork-a-parachain/"
     },
     {
+      "key": "/polkadot-protocol/architecture/polkadot-chain/agile-coretime/",
+      "value": "/reference/polkadot-hub/consensus-and-security/agile-coretime/"
+    },
+    {
+      "key": "/polkadot-protocol/architecture/polkadot-chain/elastic-scaling/",
+      "value": "/reference/parachains/consensus/elastic-scaling/"
+    },
+    {
+      "key": "/polkadot-protocol/architecture/polkadot-chain/overview/",
+      "value": "/reference/polkadot-hub/consensus-and-security/relay-chain/"
+    },
+    {
+      "key": "/polkadot-protocol/architecture/polkadot-chain/pos-consensus/",
+      "value": "/reference/polkadot-hub/consensus-and-security/pos-consensus/"
+    },
+    {
+      "key": "/polkadot-protocol/architecture/system-chains/asset-hub/",
+      "value": "/reference/polkadot-hub/assets-and-smart-contracts/"
+    },
+    {
+      "key": "/polkadot-protocol/architecture/system-chains/bridge-hub/",
+      "value": "/reference/polkadot-hub/bridging/"
+    },
+    {
+      "key": "/polkadot-protocol/architecture/system-chains/collectives/",
+      "value": "/reference/polkadot-hub/collectives-and-daos/"
+    },
+    {
+      "key": "/polkadot-protocol/architecture/system-chains/people/",
+      "value": "/reference/polkadot-hub/people-and-identity/"
+    },
+    {
       "key": "/polkadot-protocol/basics/",
       "value": "/polkadot-protocol/parachain-basics/"
     },
     {
       "key": "/polkadot-protocol/basics/accounts/",
-      "value": "/polkadot-protocol/parachain-basics/accounts/"
+      "value": "/reference/parachains/accounts/"
     },
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/",
@@ -262,39 +402,95 @@
     },
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/blocks/",
-      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/blocks/"
+      "value": "/reference/parachains/blocks-transactions-fees/blocks/"
     },
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/fees/",
-      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/fees/"
+      "value": "/reference/parachains/blocks-transactions-fees/fees/"
     },
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/transactions/",
-      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/transactions/"
+      "value": "/reference/parachains/blocks-transactions-fees/transactions/"
     },
     {
       "key": "/polkadot-protocol/basics/chain-data/",
-      "value": "/polkadot-protocol/parachain-basics/chain-data/"
+      "value": "/reference/parachains/chain-data/"
     },
     {
       "key": "/polkadot-protocol/basics/cryptography/",
-      "value": "/polkadot-protocol/parachain-basics/cryptography/"
+      "value": "/reference/parachains/cryptography/"
     },
     {
       "key": "/polkadot-protocol/basics/data-encoding/",
-      "value": "/polkadot-protocol/parachain-basics/data-encoding/"
+      "value": "/reference/parachains/data-encoding/"
     },
     {
       "key": "/polkadot-protocol/basics/interoperability/",
-      "value": "/polkadot-protocol/parachain-basics/interoperability/"
+      "value": "/reference/parachains/interoperability/"
     },
     {
       "key": "/polkadot-protocol/basics/networks/",
-      "value": "/polkadot-protocol/parachain-basics/networks/"
+      "value": "/reference/parachains/networks/"
     },
     {
       "key": "/polkadot-protocol/basics/randomness/",
-      "value": "/polkadot-protocol/parachain-basics/randomness/"
+      "value": "/reference/parachains/randomness/"
+    },
+    {
+      "key": "/polkadot-protocol/glossary/",
+      "value": "/reference/glossary/"
+    },
+    {
+      "key": "/polkadot-protocol/onchain-governance/origins-tracks/",
+      "value": "/reference/governance/origins-tracks/"
+    },
+    {
+      "key": "/polkadot-protocol/onchain-governance/overview/",
+      "value": "/reference/governance/"
+    },
+    {
+      "key": "/polkadot-protocol/parachain-basics/accounts/",
+      "value": "/reference/parachains/accounts/"
+    },
+    {
+      "key": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/blocks/",
+      "value": "/reference/parachains/blocks-transactions-fees/blocks/"
+    },
+    {
+      "key": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/fees/",
+      "value": "/reference/parachains/blocks-transactions-fees/fees/"
+    },
+    {
+      "key": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/transactions/",
+      "value": "/reference/parachains/blocks-transactions-fees/transactions/"
+    },
+    {
+      "key": "/polkadot-protocol/parachain-basics/chain-data/",
+      "value": "/reference/parachains/chain-data/"
+    },
+    {
+      "key": "/polkadot-protocol/parachain-basics/cryptography/",
+      "value": "/reference/parachains/cryptography/"
+    },
+    {
+      "key": "/polkadot-protocol/parachain-basics/data-encoding/",
+      "value": "/reference/parachains/data-encoding/"
+    },
+    {
+      "key": "/polkadot-protocol/parachain-basics/interoperability/",
+      "value": "/reference/parachains/interoperability/"
+    },
+    {
+      "key": "/polkadot-protocol/parachain-basics/networks/",
+      "value": "/reference/parachains/networks/"
+    },
+    {
+      "key": "/polkadot-protocol/parachain-basics/node-and-runtime/",
+      "value": "/reference/parachains/node-and-runtime/"
+    },
+    {
+      "key": "/polkadot-protocol/parachain-basics/randomness/",
+      "value": "/reference/parachains/randomness/"
     },
     {
       "key": "/polkadot-protocol/smart-contract-basics/accounts/",
@@ -307,6 +503,22 @@
     {
       "key": "/polkadot-protocol/smart-contract-basics/polkavm-design/",
       "value": "/smart-contracts/for-eth-devs/dual-vm-stack/"
+    },
+    {
+      "key": "/reference/parachains/",
+      "value": "/reference/parachains/consensus/"
+    },
+    {
+      "key": "/reference/parachains/blocks-transactions-fees/",
+      "value": "/reference/parachains/blocks-transactions-fees/blocks/"
+    },
+    {
+      "key": "/reference/polkadot-hub/consensus-and-security/",
+      "value": "/reference/polkadot-hub/consensus-and-security/relay-chain/"
+    },
+    {
+      "key": "/reference/tools/",
+      "value": "/reference/tools/zombienet/"
     },
     {
       "key": "/smart-contracts/",
@@ -353,12 +565,36 @@
       "value": "/smart-contracts/libraries/ethers-js/"
     },
     {
+      "key": "/tutorials/interoperability/replay-and-dry-run-xcms/",
+      "value": "/chain-interactions/send-transactions/interoperability/debug-and-preview-xcms/"
+    },
+    {
       "key": "/tutorials/interoperability/xcm-channels/para-to-para/",
       "value": "/parachains/interoperability/channels-between-parachains/"
     },
     {
       "key": "/tutorials/interoperability/xcm-channels/para-to-system/",
       "value": "/parachains/interoperability/channels-with-system-parachains/"
+    },
+    {
+      "key": "/tutorials/interoperability/xcm-fee-estimation/",
+      "value": "/chain-interactions/send-transactions/interoperability/estimate-xcm-fees/"
+    },
+    {
+      "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/add-pallets-to-runtime/",
+      "value": "/parachains/customize-runtime/pallet-development/add-pallet-to-runtime/"
+    },
+    {
+      "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/asset-conversion/",
+      "value": "/chain-interactions/token-operations/convert-assets/"
+    },
+    {
+      "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/register-foreign-asset/",
+      "value": "/chain-interactions/token-operations/register-foreign-asset/"
+    },
+    {
+      "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/register-local-asset/",
+      "value": "/chain-interactions/token-operations/register-local-asset/"
     },
     {
       "key": "/tutorials/smart-contracts/demo-aplications/deploying-uniswap-v2/",
