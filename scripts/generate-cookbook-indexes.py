@@ -94,7 +94,7 @@ def extract_frontmatter(file_path: str) -> Dict[str, str]:
         file_path: Path to the markdown file
         
     Returns:
-        Dictionary containing title, tools, and description
+        Dictionary containing title, tools, description, and tutorial_badge
     """
     try:
         with open(file_path, 'rb') as fb:
@@ -129,6 +129,7 @@ def extract_frontmatter(file_path: str) -> Dict[str, str]:
             'title': str(frontmatter.get('title') or '').strip(),
             'tools': str(tools or '').strip(),
             'description': str(frontmatter.get('description') or '').strip(),
+            'tutorial_badge': str(frontmatter.get('tutorial_badge') or '').strip(),
         }
     except Exception as e:
         logger.warning(f"Error reading frontmatter from {shorten_path(file_path)}: {e}")
@@ -299,20 +300,34 @@ def format_tools(tools_csv: str) -> str:
 def make_table_row(md_path: str, workspace_root: str) -> Optional[str]:
     """
     Create a table row from a markdown file's frontmatter.
+    Only includes files that have a tutorial_badge in their frontmatter.
     
     Args:
         md_path: Path to the markdown file
         workspace_root: Root directory of workspace
         
     Returns:
-        Formatted table row or None if missing required fields
+        Formatted table row or None if missing required fields or tutorial_badge
     """
     fm = extract_frontmatter(md_path)
     title = fm.get('title', '')
     desc = fm.get('description', '')
+    tutorial_badge = fm.get('tutorial_badge', '')
     tools = format_tools(fm.get('tools', ''))
     
-    if not title or not desc:
+    # Collect all missing fields
+    missing_fields = []
+    if not title:
+        missing_fields.append('title')
+    if not desc:
+        missing_fields.append('description')
+    if not tutorial_badge:
+        missing_fields.append('tutorial_badge')
+    
+    # Log all missing fields at once
+    if missing_fields:
+        missing_str = ', '.join(missing_fields)
+        logger.warning(f"Skipping {shorten_path(md_path)} - missing {missing_str} in frontmatter")
         return None
         
     link_title = create_markdown_link(title, md_path, workspace_root)
@@ -438,8 +453,6 @@ def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str
                                 row = make_table_row(md_path, workspace_root)
                                 if row:
                                     table_rows.append(row)
-                                else:
-                                    logger.warning(f"Skipping {shorten_path(md_path)} - missing title or description")
                             
                             if table_rows:
                                 section_content.append("| Title | Tools | Description |")
@@ -486,8 +499,6 @@ def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str
                             content_lines.append("|-------|-------|-------------|")
                             content_lines.append(row)
                             content_lines.append("")
-                        else:
-                            logger.warning(f"Skipping {shorten_path(md_file_path)} - missing title or description")
                     else:
                         logger.warning(f"Referenced path not found: {shorten_path(resolved_path)} (also tried {shorten_path(md_file_path)})")
     
@@ -602,8 +613,6 @@ def generate_index_content(target_dir: str, content_dir: str, workspace_root: st
                                                 row = make_table_row(sub_resolved_path, workspace_root)
                                                 if row:
                                                     table_rows.append(row)
-                                                else:
-                                                    logger.warning(f"Skipping {shorten_path(sub_resolved_path)} - missing title or description")
                                 
                                 if table_rows:
                                     auto_content_lines.append(f"## {title}")
@@ -639,8 +648,6 @@ def generate_index_content(target_dir: str, content_dir: str, workspace_root: st
                                 auto_content_lines.append("|-------|-------|-------------|")
                                 auto_content_lines.append(row)
                                 auto_content_lines.append("")
-                            else:
-                                logger.warning(f"Skipping {shorten_path(md_path)} - missing title or description")
     
     else:
         logger.info(f"No .nav.yml found in {shorten_path(target_dir)}, scanning subdirectories...")
