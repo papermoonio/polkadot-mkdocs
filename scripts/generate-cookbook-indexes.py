@@ -216,18 +216,23 @@ def resolve_path(base_path: str, nav_path: str, workspace_root: str, content_roo
     return str(resolved_path)
 
 
-def to_site_path(abs_path: str, workspace_root: str) -> str:
+def to_site_path(abs_path: str, workspace_root: str, docs_dir_name: str = None) -> str:
     """
     Convert absolute path to site-relative path for MkDocs.
     
     Args:
         abs_path: Absolute file path
         workspace_root: Root directory of workspace
+        docs_dir_name: Name of the docs directory (auto-detected if not provided)
         
     Returns:
-        Site-relative path with leading slash
+        Site-relative path with leading slash (relative to docs directory)
     """
-    rel = os.path.relpath(abs_path, workspace_root).replace('\\', '/')
+    if not docs_dir_name:
+        docs_dir_name = get_docs_dir_from_mkdocs(workspace_root)
+    
+    docs_dir_path = os.path.join(workspace_root, docs_dir_name)
+    rel = os.path.relpath(abs_path, docs_dir_path).replace('\\', '/')
     if rel.endswith('.md'):
         rel = rel[:-3]  # strip .md suffix only
     if not rel.startswith('/'):
@@ -235,7 +240,7 @@ def to_site_path(abs_path: str, workspace_root: str) -> str:
     return rel
 
 
-def create_markdown_link(title: str, abs_path: str, workspace_root: str) -> str:
+def create_markdown_link(title: str, abs_path: str, workspace_root: str, docs_dir_name: str = None) -> str:
     """
     Create a markdown link for MkDocs Material.
     
@@ -243,12 +248,13 @@ def create_markdown_link(title: str, abs_path: str, workspace_root: str) -> str:
         title: Link text
         abs_path: Absolute path to target file
         workspace_root: Root directory of workspace
+        docs_dir_name: Name of the docs directory (auto-detected if not provided)
         
     Returns:
         Formatted markdown link
     """
     try:
-        return f"[{title}]({to_site_path(abs_path, workspace_root)})"
+        return f"[{title}]({to_site_path(abs_path, workspace_root, docs_dir_name)})"
     except Exception:
         return title
 
@@ -322,7 +328,7 @@ def format_difficulty(tutorial_badge: str) -> str:
     return difficulty_map.get(badge_lower, f'⚪ {tutorial_badge.title()}')
 
 
-def make_table_row(md_path: str, workspace_root: str) -> Optional[str]:
+def make_table_row(md_path: str, workspace_root: str, docs_dir_name: str = None) -> Optional[str]:
     """
     Create a table row from a markdown file's frontmatter.
     Only includes files that have a tutorial_badge in their frontmatter.
@@ -330,6 +336,7 @@ def make_table_row(md_path: str, workspace_root: str) -> Optional[str]:
     Args:
         md_path: Path to the markdown file
         workspace_root: Root directory of workspace
+        docs_dir_name: Name of the docs directory (auto-detected if not provided)
         
     Returns:
         Formatted table row or None if missing required fields or tutorial_badge
@@ -356,7 +363,7 @@ def make_table_row(md_path: str, workspace_root: str) -> Optional[str]:
         logger.warning(f"Skipping {shorten_path(md_path)} - missing {missing_str} in frontmatter")
         return None
         
-    link_title = create_markdown_link(title, md_path, workspace_root)
+    link_title = create_markdown_link(title, md_path, workspace_root, docs_dir_name)
     return f"| {escape_table_cell(link_title)} | {escape_table_cell(difficulty)} | {escape_table_cell(tools)} | {escape_table_cell(desc)} |"
 
 
@@ -428,7 +435,7 @@ def get_docs_dir_from_mkdocs(workspace_root: str) -> str:
         return 'docs'
 
 
-def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str) -> List[str]:
+def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str, docs_dir_name: str = None) -> List[str]:
     """
     Process navigation items and generate markdown content.
     
@@ -436,6 +443,7 @@ def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str
         nav_items: List of navigation items from .nav.yml
         base_path: Base directory where nav file is located
         workspace_root: Root directory of workspace
+        docs_dir_name: Name of the docs directory (auto-detected if not provided)
         
     Returns:
         List of markdown lines
@@ -465,7 +473,7 @@ def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str
                     if os.path.exists(sub_nav_path):
                         sub_nav_items = load_nav_file(sub_nav_path)
                         section_content = process_nav_items(sub_nav_items, resolved_path, 
-                                                      workspace_root)
+                                                      workspace_root, docs_dir_name)
                     else:
                         # No nav file, scan for markdown files directly
                         md_files = [f for f in sorted(os.listdir(resolved_path)) 
@@ -476,7 +484,7 @@ def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str
                             
                             for md_file in sorted(md_files):
                                 md_path = os.path.join(resolved_path, md_file)
-                                row = make_table_row(md_path, workspace_root)
+                                row = make_table_row(md_path, workspace_root, docs_dir_name)
                                 if row:
                                     table_rows.append(row)
                             
@@ -516,7 +524,7 @@ def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str
                         tools = frontmatter.get('tools', '').strip()
                         description = frontmatter.get('description', '').strip()
                         
-                        row = make_table_row(md_file_path, workspace_root)
+                        row = make_table_row(md_file_path, workspace_root, docs_dir_name)
                         if row:
                             # Create section for single file
                             content_lines.append(f"## {title}")
@@ -576,7 +584,7 @@ def extract_manual_content(output_path: str) -> List[str]:
         return ["# Index", "", ""]
 
 
-def generate_index_content(target_dir: str, content_dir: str, workspace_root: str, output_filename: str = 'index.md') -> str:
+def generate_index_content(target_dir: str, content_dir: str, workspace_root: str, output_filename: str = 'index.md', docs_dir_name: str = None) -> str:
     """
     Generate the complete index markdown content, preserving manual content.
     
@@ -585,6 +593,7 @@ def generate_index_content(target_dir: str, content_dir: str, workspace_root: st
         content_dir: Directory to scan for content
         workspace_root: Root directory of workspace
         output_filename: Name of the output file (default: 'index.md')
+        docs_dir_name: Name of the docs directory (auto-detected if not provided)
         
     Returns:
         Generated markdown content
@@ -636,7 +645,7 @@ def generate_index_content(target_dir: str, content_dir: str, workspace_root: st
                                                 continue
                                             
                                             if os.path.isfile(sub_resolved_path) and sub_resolved_path.endswith('.md'):
-                                                row = make_table_row(sub_resolved_path, workspace_root)
+                                                row = make_table_row(sub_resolved_path, workspace_root, docs_dir_name)
                                                 if row:
                                                     table_rows.append(row)
                                 
@@ -665,7 +674,7 @@ def generate_index_content(target_dir: str, content_dir: str, workspace_root: st
                             tools = frontmatter.get('tools', '').strip()
                             description = frontmatter.get('description', '').strip()
                             
-                            row = make_table_row(md_path, workspace_root)
+                            row = make_table_row(md_path, workspace_root, docs_dir_name)
                             if row:
                                 # Create section for single file
                                 auto_content_lines.append(f"## {title}")
@@ -694,7 +703,7 @@ def generate_index_content(target_dir: str, content_dir: str, workspace_root: st
                             section_title = item.replace('-', ' ').title()
                         
                         # Process items in this nav file
-                        sub_content = process_nav_items(sub_nav_items, item_path, workspace_root)
+                        sub_content = process_nav_items(sub_nav_items, item_path, workspace_root, docs_dir_name)
                         
                         # Only add section if there's actual content
                         if sub_content:
@@ -855,7 +864,7 @@ def main():
     
     # Generate content
     try:
-        content = generate_index_content(target_dir, content_dir, workspace_root, output_filename)
+        content = generate_index_content(target_dir, content_dir, workspace_root, output_filename, docs_dir_name)
         
         # Write to output file
         output_path = os.path.join(target_dir, output_filename)
