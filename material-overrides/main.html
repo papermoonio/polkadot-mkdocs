@@ -87,16 +87,49 @@
 {% endblock %}
 
 {% block site_nav %} 
-{#- Navigation (left menu) -#} 
-  {% if nav %}
-    {% if page.meta and page.meta.hide %} 
-      {% set hidden = "hidden" if "navigation" in page.meta.hide %} 
+  {# --- Logic to hide/show navigation and TOC --- #}
+  {% set ns = namespace(hide_nav=false, hide_toc=false) %}
+
+  {# Check front-matter #}
+  {% if page.meta and page.meta.hide %}
+    {% if "navigation" in page.meta.hide %} {% set ns.hide_nav = true %} {% endif %}
+    {% if "toc" in page.meta.hide %} {% set ns.hide_toc = true %} {% endif %}
+  {% endif %}
+
+  {# Check standalone_files config #}
+  {% set standalone_patterns = config.standalone_files | default([]) %}
+  {% set page_path = page.file.src_path | replace("\\","/") %}
+
+  {% for pattern in standalone_patterns %}
+    {% set pattern_clean = pattern | replace("\\","/") %}
+    {% if pattern_clean.endswith("**") %}
+      {% set dir = pattern_clean.rstrip("*").rstrip("/") + "/" %}
+      {% if page_path.startswith(dir) %}
+        {% set ns.hide_nav = true %}
+        {% set ns.hide_toc = true %}
+      {% endif %}
+    {% elif pattern_clean.endswith("*") %}
+      {% set dir = pattern_clean.rstrip("*").rstrip("/") + "/" %}
+      {% set rest = page_path[dir|length:] %}
+      {% if page_path.startswith(dir) and "/" not in rest %}
+        {% set ns.hide_nav = true %}
+        {% set ns.hide_toc = true %}
+      {% endif %}
+    {% else %}
+      {% if page_path == pattern_clean %}
+        {% set ns.hide_nav = true %}
+        {% set ns.hide_toc = true %}
+      {% endif %}
     {% endif %}
+  {% endfor %}
+
+  {#- Navigation (left menu) -#} 
+  {% if nav %}
     <div
       class="md-sidebar md-sidebar--primary"
       data-md-component="sidebar"
       data-md-type="navigation"
-      {{ hidden }}
+      {% if ns.hide_nav %} hidden {% endif %}
     >
       <div class="md-sidebar__scrollwrap">
         <div class="md-sidebar__inner">
@@ -108,14 +141,11 @@
   
   {#- Table of contents (TOC) -#} 
   {% if "toc.integrate" not in features %} 
-    {% if page.meta and page.meta.hide %} 
-      {% set hidden = "hidden" if "toc" in page.meta.hide %} 
-    {% endif %}
     <div
       class="md-sidebar md-sidebar--secondary"
       data-md-component="sidebar"
       data-md-type="toc"
-      {{ hidden }}
+      {% if ns.hide_toc %} hidden {% endif %}
     >
       <div class="md-sidebar__scrollwrap">
         <div class="md-sidebar__inner">
