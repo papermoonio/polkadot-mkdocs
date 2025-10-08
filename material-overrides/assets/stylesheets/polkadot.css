@@ -457,7 +457,7 @@
 
 .md-header__button.md-icon[for="__search"] svg path,
 .md-search__icon.md-icon svg path {
-  fill: var(--black);
+  fill: var(--header-font-color);
 }
 
 .md-search {
@@ -482,7 +482,7 @@ input.md-search__input::placeholder {
 .md-header__option .md-header__button:hover,
 .md-header__button.md-icon[for="__search"]:hover,
 .md-header__button.md-icon[for="__search"]:active {
-  color: var(--black);
+  color: var(--header-font-color);
   opacity: 1;
 }
 
