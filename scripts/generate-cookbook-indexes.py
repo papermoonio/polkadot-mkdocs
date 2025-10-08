@@ -297,6 +297,32 @@ def format_tools(tools_csv: str) -> str:
     return ', '.join(out) if out else 'N/A'
 
 
+def format_difficulty(tutorial_badge: str) -> str:
+    """
+    Format difficulty level with emoji indicators.
+    
+    Args:
+        tutorial_badge: The tutorial difficulty level
+        
+    Returns:
+        Formatted difficulty string with emoji
+    """
+    if not tutorial_badge:
+        return 'N/A'
+    
+    badge_lower = tutorial_badge.lower().strip()
+    
+    # Map difficulty levels to emojis
+    difficulty_map = {
+        'beginner': '🟢 Beginner',
+        'intermediate': '🟡 Intermediate', 
+        'advanced': '🔴 Advanced',
+        'expert': '🔴 Expert'
+    }
+    
+    return difficulty_map.get(badge_lower, f'⚪ {tutorial_badge.title()}')
+
+
 def make_table_row(md_path: str, workspace_root: str) -> Optional[str]:
     """
     Create a table row from a markdown file's frontmatter.
@@ -314,6 +340,7 @@ def make_table_row(md_path: str, workspace_root: str) -> Optional[str]:
     desc = fm.get('description', '')
     tutorial_badge = fm.get('tutorial_badge', '')
     tools = format_tools(fm.get('tools', ''))
+    difficulty = format_difficulty(tutorial_badge)
     
     # Collect all missing fields
     missing_fields = []
@@ -331,7 +358,7 @@ def make_table_row(md_path: str, workspace_root: str) -> Optional[str]:
         return None
         
     link_title = create_markdown_link(title, md_path, workspace_root)
-    return f"| {escape_table_cell(link_title)} | {escape_table_cell(tools)} | {escape_table_cell(desc)} |"
+    return f"| {escape_table_cell(link_title)} | {escape_table_cell(difficulty)} | {escape_table_cell(tools)} | {escape_table_cell(desc)} |"
 
 
 def find_workspace_root(start: str) -> Optional[str]:
@@ -455,8 +482,8 @@ def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str
                                     table_rows.append(row)
                             
                             if table_rows:
-                                section_content.append("| Title | Tools | Description |")
-                                section_content.append("|-------|-------|-------------|")
+                                section_content.append("| Title | Difficulty | Tools | Description |")
+                                section_content.append("|-------|:----------:|-------|-------------|")
                                 section_content.extend(table_rows)
                     
                     # Only add section header and content if there's actual content
@@ -495,8 +522,8 @@ def process_nav_items(nav_items: List[Dict], base_path: str, workspace_root: str
                             # Create section for single file
                             content_lines.append(f"## {title}")
                             content_lines.append("")
-                            content_lines.append("| Title | Tools | Description |")
-                            content_lines.append("|-------|-------|-------------|")
+                            content_lines.append("| Title | Difficulty | Tools | Description |")
+                            content_lines.append("|-------|:----------:|-------|-------------|")
                             content_lines.append(row)
                             content_lines.append("")
                     else:
@@ -617,8 +644,8 @@ def generate_index_content(target_dir: str, content_dir: str, workspace_root: st
                                 if table_rows:
                                     auto_content_lines.append(f"## {title}")
                                     auto_content_lines.append("")
-                                    auto_content_lines.append("| Title | Tools | Description |")
-                                    auto_content_lines.append("|-------|-------|-------------|")
+                                    auto_content_lines.append("| Title | Difficulty | Tools | Description |")
+                                    auto_content_lines.append("|-------|:----------:|-------|-------------|")
                                     auto_content_lines.extend(table_rows)
                                     auto_content_lines.append("")
                     
@@ -644,8 +671,8 @@ def generate_index_content(target_dir: str, content_dir: str, workspace_root: st
                                 # Create section for single file
                                 auto_content_lines.append(f"## {title}")
                                 auto_content_lines.append("")
-                                auto_content_lines.append("| Title | Tools | Description |")
-                                auto_content_lines.append("|-------|-------|-------------|")
+                                auto_content_lines.append("| Title | Difficulty | Tools | Description |")
+                                auto_content_lines.append("|-------|:----------:|-------|-------------|")
                                 auto_content_lines.append(row)
                                 auto_content_lines.append("")
     
