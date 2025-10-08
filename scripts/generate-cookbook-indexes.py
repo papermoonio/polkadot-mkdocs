@@ -73,7 +73,7 @@ def shorten_path(file_path: str) -> str:
         
         # If all else fails, just return the filename
         return os.path.basename(file_path)
-    except:
+    except Exception:
         return os.path.basename(file_path)
 
 # Common acronyms to preserve
@@ -747,7 +747,8 @@ def main():
     # Sanitize user inputs to prevent path traversal
     try:
         target_path = sanitize_path_input(sys.argv[1], allow_separators=True)
-        output_filename = sanitize_path_input(sys.argv[2] if len(sys.argv) == 3 else 'index.md', allow_separators=False)
+        output_arg = sys.argv[2] if len(sys.argv) == 3 else 'index.md'
+        output_filename = sanitize_path_input(output_arg, allow_separators=False)
     except ValueError as e:
         logger.error(f"Invalid input: {e}")
         sys.exit(1)
