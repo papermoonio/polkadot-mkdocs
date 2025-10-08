@@ -87,6 +87,9 @@
   /*feedback */
   --feedback-border-color: var(--storm-gray-300);
   --feedback-hr-color: var(--storm-gray-200);
+
+  /* Tabbed content */
+  --tabbed-border-color: var(--storm-gray-300);
 }
 
 [data-md-color-scheme='slate'][data-md-color-primary='indigo'] {
@@ -117,6 +120,9 @@
   /*feedback */
   --feedback-border-color: var(--storm-gray-800);
   --feedback-hr-color: var(--gray-storm-200-transparent);
+
+  /* Tabbed content */
+  --tabbed-border-color: var(--storm-gray-800);
 
 
 }
@@ -190,7 +196,7 @@
 
 /* --- HR (divider) --- */
 .md-typeset hr {
-  border-color: var(--storm-gray-300);
+  border-color: var(--tabbed-border-color);
 }
 
 /* --- Header styling --- */
@@ -1570,7 +1576,7 @@ details.interface > summary::before {
 
 .md-typeset .tabbed-content {
   background: var(--md-default-bg-color);
-  border: 1px solid var(--storm-gray-300);
+  border: 1px solid var(--tabbed-border-color);
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
 }
