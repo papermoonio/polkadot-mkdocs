@@ -317,7 +317,6 @@ def format_difficulty(tutorial_badge: str) -> str:
         'beginner': '🟢 Beginner',
         'intermediate': '🟡 Intermediate', 
         'advanced': '🔴 Advanced',
-        'expert': '🔴 Expert'
     }
     
     return difficulty_map.get(badge_lower, f'⚪ {tutorial_badge.title()}')
