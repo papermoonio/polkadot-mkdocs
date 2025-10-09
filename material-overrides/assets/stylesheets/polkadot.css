@@ -1175,6 +1175,12 @@ article.md-content__inner.md-typeset > h1:has(+ .badge) {
   box-shadow: none;
 }
 
+.md-footer__button svg path,
+.md-footer__button svg polyline,
+.md-footer__button svg line {
+  stroke: var(--md-footer-fg-color);
+}
+
 /* Copyright styling */
 .md-copyright {
   margin: 0;
