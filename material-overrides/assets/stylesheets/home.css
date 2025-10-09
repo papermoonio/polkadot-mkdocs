@@ -8,7 +8,6 @@
 }
 
 .home-container {
-  background-image: url("../images/gradient.webp");
   background-size: 100%;
   background-repeat: no-repeat;
   margin-top: calc(
@@ -21,6 +20,15 @@
   /* Center the background image */
   width: 100vw;
   margin-left: calc(-1 * var(--page-padding));
+}
+
+/* Theme-aware hero background */
+[data-md-color-scheme="default"] .home-container {
+  background-image: url("../images/gradient.webp");
+}
+
+[data-md-color-scheme="slate"] .home-container {
+  background-image: url("../images/dark-gradient-2.webp");
 }
 
 @media screen and (max-width: 35em) {
@@ -155,7 +163,7 @@ div.button-wrapper {
 
 div.feature,
 .md-typeset a.feature {
-  color: var(--md-default-fg-color);
+  color: var(--home-card-font-color);
   flex: 1 1;
   border: 1px solid var(--storm-gray-200);
   border-radius: 16px;
