@@ -36,9 +36,9 @@
 {%- endblock -%} 
 
 {% block announce %}
-  <span aria-hidden="true">⚠️</span> Upcoming network migration: some functionality may be temporarily limited during this period. 👉 
-  <a href="https://support.polkadot.network/support/solutions/articles/65000190561" target="_blank" rel="noopener noreferrer">
-    More details here.
+  <span aria-hidden="true">✅</span> Kusama Asset Hub migration done. 👉 
+  <a href="https://forum.polkadot.network/t/asset-hub-migration-2025/11129/73" target="_blank" rel="noopener noreferrer" style="font-weight: bold;">
+    Read more.
   </a>
 {% endblock %}
 
@@ -53,23 +53,29 @@
     data-project-name="Polkadot"
     data-modal-title="Polkadot AI Chatbot"
     data-project-color="#1E1E1E"
-    data-button-bg-color="#1C0533"
+    data-button-bg-color="rgba(0, 0, 0, 0.60)"
+    data-button-border-radius="16px 16px 0 16px"
+    data-button-hover-animation-enabled="false"
+    data-button-image-height="17px"
+    data-button-image-width="17px"
     data-button-text-color="white"
-    data-button-height="80px"
-    data-button-width="72px"
+    data-button-text-font-family="Unbounded"
+    data-button-text-font-size="14px"
+    data-button-padding="16px"
+    data-button-width="88px"
+    data-button-height="85px"
     data-font-size-xs="12px"
     data-font-size-sm="14px"
     data-font-size-md="16px"
     data-font-size-lg="18px"
     data-font-size-xl="22px"
     data-modal-title-font-size="22px"
-    data-button-text-font-size="18px"
+    data-button-position-top="75vh"
+    data-button-position-right="24px"
     data-query-input-font-size="16px"
-    data-button-image-height="24px"
-    data-button-image-width="24px"
     data-modal-image-height="24px"
     data-modal-image-width="24px"
-    data-project-logo="https://1000logos.net/wp-content/uploads/2022/08/Polkadot-Symbol.png"
+    data-project-logo="/assets/images/favicon.svg"
     data-modal-header-bg-color="#1C0533"
     data-modal-title-color="white"
     data-modal-disclaimer="This is an AI chatbot trained to answer questions about Polkadot. As such, the answers it provides might not always be accurate or up-to-date. Please use your best judgement when evaluating its responses. Also, **please refrain from sharing any personal or private information with the bot**. By submitting a query, you agree that you have read and understood [these conditions](https://polkadot.com/legal-disclosures/).
@@ -78,27 +84,14 @@
     data-search-mode-enabled="false"
     data-search-mode-default="false"
     data-search-result-primary-title-font-size="16px"
-    data-button-position-top="120px"
-    data-button-position-right="0px"
   ></script>
-  <script defer>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.body.addEventListener('click', (event) => {
-        if (event.target.id === 'kapa-widget-container') {
-          event.target.addEventListener('keydown', (event) => {
-            event.stopPropagation();
-          });
-        }
-      });
-    });
-  </script>
 {% endblock %}
 
-{% block site_nav %}
-{#- Navigation (left menu) -#}
+{% block site_nav %} 
+{#- Navigation (left menu) -#} 
   {% if nav %}
-    {% if page.meta and page.meta.hide %}
-      {% set hidden = "hidden" if "navigation" in page.meta.hide %}
+    {% if page.meta and page.meta.hide %} 
+      {% set hidden = "hidden" if "navigation" in page.meta.hide %} 
     {% endif %}
     <div
       class="md-sidebar md-sidebar--primary"
@@ -112,12 +105,12 @@
         </div>
       </div>
     </div>
-  {% endif %}
+  {% endif %} 
   
-  {#- Table of contents (TOC) -#}
-  {% if "toc.integrate" not in features %}
-    {% if page.meta and page.meta.hide %}
-      {% set hidden = "hidden" if "toc" in page.meta.hide %}
+  {#- Table of contents (TOC) -#} 
+  {% if "toc.integrate" not in features %} 
+    {% if page.meta and page.meta.hide %} 
+      {% set hidden = "hidden" if "toc" in page.meta.hide %} 
     {% endif %}
     <div
       class="md-sidebar md-sidebar--secondary"
@@ -127,7 +120,7 @@
     >
       <div class="md-sidebar__scrollwrap">
         <div class="md-sidebar__inner">
-          {#- TOC -#}
+          {#- TOC -#} 
           {% include "partials/toc.html" %}
         </div>
 
@@ -145,114 +138,160 @@
         </div>
       </div>
     </div>
-  {% endif %}
+  {% endif %} 
 {% endblock %}
 
-{%- block container -%} 
-  <div class="md-content" data-md-component="content">
-    {% set class = "index-page" if not page.content %}
-    <article class="md-content__inner md-typeset {{ class }}">
-      {% block content %}
-        {% include "partials/content.html" %}
-      {% endblock %}
-    </article>
-  </div>
+{%- block container -%}
+<div class="md-content" data-md-component="content">
+  {% set class = "index-page" if not page.content %}
+  <article class="md-content__inner md-typeset {{ class }}">
+    {% block content %} 
+      {% include "partials/content.html" %} 
+    {% endblock %}
+  </article>
+</div>
 {%- endblock -%} 
 
-{% block scripts %}
+{% block scripts %} 
   {{ super() }}
   <script defer>
     document.addEventListener('DOMContentLoaded', () => {
-      if (document.referrer.includes('docs.substrate.io')) {        
-        const announceElement = document.querySelector('.announce.hideable');
-        if (announceElement) {          
-          const content = announceElement.querySelector('.md-typeset');
-          if (content) {            
-            const storedHash = __md_get('__announce');  
-            const currentHash = __md_hash(content.innerHTML);
-
-            const close = document.querySelector('.md-banner__button');
-            if (close) {
-              close.addEventListener('click', () => {                
-                // If the current hash matches the stored value, hide the element
-                if (currentHash === storedHash) {
-                  announceElement.style.display = 'none';
-                  announceElement.hidden = true;
-                } else {
-                  __md_set('__announce', currentHash);
-                  announceElement.style.display = 'none';
-                  announceElement.hidden = true;
-                }
-              });
-            }
-            
-            // Only show the banner if the stored hash doesn't match
-            if (currentHash !== storedHash) {
-              announceElement.style.display = 'block';
-            }
-          }
+      document.body.addEventListener('click', (event) => {
+        if (event.target.id === 'kapa-widget-container') {
+          event.target.addEventListener('keydown', (event) => {
+            event.stopPropagation();
+          });
         }
+      });
+
+      const kapaWidget = document.querySelector('#kapa-widget-container')?.shadowRoot;
+      if (kapaWidget) {
+        const observer = new MutationObserver(() => {
+          const kapaButtonContent = kapaWidget.querySelector('.mantine-Flex-root');
+
+          if (kapaButtonContent) {
+            // Adjust position of Polkadot logo
+            kapaButtonContent.style.alignItems = 'start';
+            kapaButtonContent.style.gap = '4px';
+            
+            // Mobile adjustments: make button smaller and adjust layout
+            if (window.innerWidth <= 768) {
+              const kapaButton = kapaWidget.querySelector('.mantine-Button-root');
+              if (kapaButton) {
+                kapaButton.style.width = 'fit-content';
+                kapaButton.style.height = '56px';
+                kapaButton.style.borderRadius = '16px';
+                kapaButton.style.right = '16px';
+                kapaButton.style.top = '90vh';
+              }
+              kapaButtonContent.style.flexDirection = 'row';
+              kapaButtonContent.style.gap = '12px';
+            }
+
+            // Stop observing once we've applied styles
+            observer.disconnect();
+          }
+        });
+
+        // Observe additions inside the shadow DOM
+        observer.observe(kapaWidget, { childList: true, subtree: true });
       }
     });
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      if (!window.LLMS) {
-        return;
-      }
+      const SITE_BASE = location.origin.replace(/\/+$/, ''); // current host
+      const AI_BASE = '/ai'; // relative path to AI content on same host
 
-      const dialog = document.querySelector('.md-dialog');
+      const stripLeading = (value) => value.replace(/^\/+/, '');
 
-      const showDialog = () => {
-        if (!dialog) return;
-        dialog.classList.add('md-dialog--active');
-        const inner = dialog.querySelector('.md-dialog__inner');
-        if (inner && inner.textContent !== "{{ lang.t('clipboard.copied') }}") {
-          inner.textContent = "{{ lang.t('clipboard.copied') }}";
+      const toAbsolute = (rawPath) => {
+        if (!rawPath) return null;
+        const dataPath = rawPath.trim();
+        if (/^https?:\/\//i.test(dataPath)) return dataPath; // already absolute
+
+        const normalized = stripLeading(dataPath);
+
+        // All AI content is served from the AI_BASE on the current host
+        if (normalized.startsWith('ai/')) {
+          return `${SITE_BASE}${AI_BASE}/${stripLeading(normalized.replace(/^ai\//, ''))}`;
         }
-        setTimeout(() => dialog.classList.remove('md-dialog--active'), 2000);
+
+        // NOTE: same-origin assets: default for everything we ship in docs/ (llms, ai bundles, etc.)
+        if (dataPath.startsWith('/')) return `${SITE_BASE}/${stripLeading(dataPath)}`;
+        if (normalized === 'llms.txt' || normalized === 'llms-full.jsonl') return `${SITE_BASE}/${normalized}`;
+
+        // Fallback → site-relative
+        return `${SITE_BASE}/${normalized}`;
       };
 
-      const hideDialog = () => {
-        if (dialog) {
-          dialog.classList.remove('md-dialog--active');
+      const downloadViaFetch = async (url, filename) => {
+        try {
+          const res = await fetch(url, { credentials: 'omit' });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const blob = await res.blob(); // keep original content-type from server
+          const link = document.createElement('a');
+          const objectUrl = URL.createObjectURL(blob);
+          link.href = objectUrl;
+          link.download = filename || 'download.txt';
+          document.body.appendChild(link);
+          link.click();
+          URL.revokeObjectURL(objectUrl);
+          link.remove();
+        } catch (err) {
+          console.error('Download failed, falling back to navigation:', err);
+          // Fallback: just navigate to the URL (will open in browser)
+          window.location.href = url;
         }
       };
 
-      window.LLMS.ready().then(() => {
-        document.querySelectorAll('.llms-copy').forEach((button) => {
-          button.addEventListener('click', async (event) => {
-            event.preventDefault();
-            const path = button.getAttribute('data-path');
-            if (!path) return;
-            try {
-              const text = await window.LLMS.fetchPathText(path);
-              if (!text) throw new Error('No text content');
-              await navigator.clipboard.writeText(text);
-              showDialog();
-            } catch (error) {
-              console.error('LLMS copy failed:', error);
-              hideDialog();
-            }
-          });
-        });
+      const copyTextFromUrl = async (url) => {
+        try {
+          const res = await fetch(url, { credentials: 'omit' });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const text = await res.text();
+          await navigator.clipboard.writeText(text);
 
-        document.querySelectorAll('.llms-dl').forEach((link) => {
-          const dataPath = link.getAttribute('data-path');
-          const resolved = window.LLMS.resolvePath(dataPath);
-          if (resolved) {
-            link.setAttribute('href', resolved);
+          const dlg = document.querySelector('.md-dialog');
+          if (dlg) {
+            dlg.classList.add('md-dialog--active');
+            const msg = dlg.querySelector('.md-dialog__inner');
+            if (msg) msg.textContent = "{{ lang.t('clipboard.copied') }}";
+            setTimeout(() => dlg.classList.remove('md-dialog--active'), 2000);
           }
+        } catch (err) {
+          console.error('Failed to copy:', err);
+          const dlg = document.querySelector('.md-dialog');
+          if (dlg) dlg.classList.remove('md-dialog--active');
+        }
+      };
 
-          link.addEventListener('click', async (event) => {
-            event.preventDefault();
-            const path = link.getAttribute('data-path') || '';
-            const filename = link.getAttribute('data-filename') || path.split('/').pop() || 'download.txt';
-            const success = await window.LLMS.downloadPath(path, filename);
-            if (!success) {
-              console.error('LLMS download failed for', path);
-            }
-          });
+      // COPY buttons
+      document.querySelectorAll('.llms-copy').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const url = toAbsolute(btn.getAttribute('data-path'));
+          if (url) copyTextFromUrl(url);
+        });
+      });
+
+      // DOWNLOAD buttons: force a real download via Blob
+      document.querySelectorAll('.llms-dl').forEach((a) => {
+        // Set href for right-click "Copy link address" convenience
+        const abs = toAbsolute(a.getAttribute('data-path'));
+        if (abs) a.setAttribute('href', abs);
+
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          const path = a.getAttribute('data-path') || '';
+          const url = toAbsolute(path);
+          if (!url) return;
+          // Prefer explicit filename; else derive from last path segment
+          const filename =
+            a.getAttribute('data-filename') ||
+            path.split('/').pop() ||
+            'download.txt';
+          downloadViaFetch(url, filename);
         });
       });
     });

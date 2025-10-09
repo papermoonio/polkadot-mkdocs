@@ -6,6 +6,8 @@ edit_uri: https://github.com/polkadot-developers/polkadot-docs/edit/master
 site_dir: /var/www/polkadot-docs-static
 docs_dir: polkadot-docs
 copyright: © 2025
+
+# Extra JavaScript files
 extra_javascript:
   - js/header-scroll.js
   - js/search-bar-results.js
@@ -21,13 +23,16 @@ extra_css:
   - assets/stylesheets/terminal.css
   - assets/stylesheets/timeline-neoteroi.css
   - assets/stylesheets/copy-to-llm.css
+
 # Diagnostic messages when validating links to documents
 validation:
   absolute_links: ignore
   unrecognized_links: ignore
+  omitted_files: ignore
 exclude_docs: |
    README.md
    LICENSE.md
+
 # Theme related settings
 theme:
   name: material
@@ -38,6 +43,10 @@ theme:
     edit: material/github
     admonition:
       code: material/code-tags
+    search: custom/magnifying-glass
+    close: custom/close
+    previous: custom/left-arrow
+    next: custom/right-arrow
   font:
     text: Manrope
   features:
@@ -53,6 +62,8 @@ theme:
     - navigation.sections # Render top-level sections as groups in the sidebar
     - navigation.indexes # Index pages
     - navigation.top # Show the back to top button since we don't keep top nav sticky
+
+# Extensions
 markdown_extensions:
   - abbr
   - admonition
@@ -65,6 +76,9 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - material-overrides/.icons
   - pymdownx.highlight:
       anchor_linenums: True
       line_spans: __span
@@ -78,7 +92,7 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: True
   - toc:
-      title: ' '
+      title: 'On this page'
       permalink: True
   - pymdownx.superfences:
       custom_fences:
@@ -86,10 +100,40 @@ markdown_extensions:
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
 
+# Plugins
 plugins:
   - search
+  - exclude-search:
+      exclude:
+        - ai/*
   - awesome-nav
+  - copy_md:
+      source_dir: polkadot-docs/.ai
+      target_dir: ai
   - glightbox
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      cache_safe: true
+      js_files:
+        - js/header-scroll.js
+        - js/search-bar-results.js
+        - js/root-level-sections.js
+        - js/fix-created-date.js
+        - js/connect-to-metamask.js
+        - js/error-modal.js
+      css_files:
+        - assets/stylesheets/extra.css
+        - assets/stylesheets/terminal.css
+        - assets/stylesheets/timeline-neoteroi.css
+      scoped_css_templates:
+        home.html:
+          - assets/stylesheets/home.css
+        index-page.html:
+          - assets/stylesheets/index-page.css
+        main.html:
+          - assets/stylesheets/polkadot.css   
   - macros:
       include_yaml:
         - polkadot-docs/variables.yml
@@ -99,6 +143,8 @@ plugins:
       exclude:
         - node_modules/*
       enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
+
+# Extra configuration
 extra:
   consent:
     title: Cookie Consent
