@@ -1509,6 +1509,16 @@ details.interface > summary::before {
   text-align: center;
 }
 
+/** Icons in tables styling **/
+/* Download LLM Files table */
+.llms-view {
+  padding-right: 4px;
+}
+
+.llms-copy {
+  padding-right: 4px;
+}
+
 /** Tabbed element styling **/
 /* Tables in tabs */
 .tabbed-content .md-typeset__scrollwrap {
