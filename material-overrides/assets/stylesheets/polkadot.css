@@ -295,8 +295,11 @@
 
 /* Dropdown styling */
 .md-header__inner {
-  background-color: var(--header-bg-color);
+  background-color: rgba(255, 255, 255, 0.8); /* fallback for browsers without backdrop-filter */
+  background-color: var(--header-bg-color); /* override for supported browsers */
   color: var(--md-default-fg-color);
+  -webkit-backdrop-filter: blur(16px); /* Safari support */
+  backdrop-filter: blur(16px);
 }
 
 .md-tabs {
