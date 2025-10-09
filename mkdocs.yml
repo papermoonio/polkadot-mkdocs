@@ -30,7 +30,8 @@ theme:
   name: material
   custom_dir: material-overrides
   favicon: assets/images/favicon.webp
-  logo: assets/images/logo.webp
+  logo_light: assets/images/logo-light.webp
+  logo_dark: assets/images/logo-dark.webp
   icon:
     edit: material/github
     admonition:
