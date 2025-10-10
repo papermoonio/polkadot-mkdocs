@@ -102,6 +102,9 @@
 
   /* home buttons */
   --home-button-border-color: var(--black);
+
+  /* index cards */
+  --index-card-border-color: var(--storm-gray-200);
 }
 
 [data-md-color-scheme='slate'][data-md-color-primary='indigo'] {
@@ -146,6 +149,9 @@
 
   /* home buttons */
   --home-button-border-color: var(--white);
+
+  /* index cards */
+  --index-card-border-color: var(--storm-gray-800);
 
 }
 

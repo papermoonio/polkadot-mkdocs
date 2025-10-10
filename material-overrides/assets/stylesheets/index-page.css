@@ -5,7 +5,7 @@
 }
 
 .subsection-wrapper .card {
-  border: 1px solid var(--storm-gray-200);
+  border: 1px solid var(--index-card-border-color);
   border-radius: 16px;
   text-decoration: none;
   align-content: start;
