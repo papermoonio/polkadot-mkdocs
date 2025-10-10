@@ -20,7 +20,7 @@
   --electric-violet: #7204ff;
 
   --gray-storm-200-transparent: #52577566;
-  --grey-storm-950: #F8FAFB;
+  --gray-storm-950: #F8FAFB;
 
   --md-hover-opacity: 0.7;
   --max-page-width: 1600px;
@@ -128,7 +128,7 @@
   --header-font-color: var(--white);
 
   /* Search */
-  --hover-search-bg-color: var(--athens-gray);
+  --hover-search-bg-color: var(--storm-gray-950);
   
   /*accent color */
   --md-typeset-a-color: var(--pink);
@@ -144,7 +144,7 @@
 
   /* Tabbed content */
   --tabbed-border-color: var(--storm-gray-800);
-  --tabbed-active-color: var(--grey-storm-950);
+  --tabbed-active-color: var(--gray-storm-950);
   --tabbed-bg-color: var(--storm-gray-800);
   --tabbed-font-color: var(--white);
 
