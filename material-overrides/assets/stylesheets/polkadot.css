@@ -55,6 +55,9 @@
   --header-bg-color: #0000001A;
   --header-font-color: var(--black);
 
+  /* Search */
+  --hover-search-bg-color: var(--athens-gray);
+
   /** Branded code snippets**/
   --md-code-fg-color: #363732;
   /** Code highlighting color shades **/
@@ -123,6 +126,9 @@
   /* Header */
   --header-bg-color: #FFFFFF1A;
   --header-font-color: var(--white);
+
+  /* Search */
+  --hover-search-bg-color: var(--athens-gray);
   
   /*accent color */
   --md-typeset-a-color: var(--pink);
@@ -151,7 +157,7 @@
   --home-button-border-color: var(--white);
 
   /* index cards */
-  --index-card-border-color: var(--storm-gray-800);
+  --index-card-border-color: var(--storm-gray-950);
 
 }
 
@@ -544,7 +550,7 @@ input.md-search__input::placeholder {
 
 .md-search-result__link:focus,
 .md-search-result__link:hover {
-  background-color: var(--athens-gray);
+  background-color: var(--hover-search-bg-color);
 }
 
 .md-search-result .md-typeset h1 {
