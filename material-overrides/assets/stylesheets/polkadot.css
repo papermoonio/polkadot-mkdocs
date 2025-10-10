@@ -648,6 +648,15 @@ input.md-search__input::placeholder {
   color: var(--md-default-fg-color);
 }
 
+/* Render arrow next to expandable sections */
+.md-nav__link > * {
+  cursor: pointer;
+  display: flex;
+  flex: auto;
+  color: var(--black);
+  padding-right: 0.5em;
+}
+
 .md-nav__link:hover,
 .md-nav__link-wrapper.md-nav__item.md-nav__item--active,
 .md-nav__item div.md-nav__link--active {
@@ -685,10 +694,6 @@ input.md-search__input::placeholder {
   .md-nav__list .md-nav__item--section {
     margin-top: 0;
     margin-bottom: 1.25em;
-  }
-
-  .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link {
-    box-shadow: none;
   }
 
   /* Styling for root-level sections */
@@ -749,6 +754,15 @@ input.md-search__input::placeholder {
     padding-left: 1em;
   }
 
+  /* Allow section headers to be clickable */
+  .md-nav--lifted
+    > .md-nav__list
+    > .md-nav__item--active
+    > .md-nav__link:not(.md-nav__container),
+  .md-nav__item--section > .md-nav__link:not(.md-nav__container) {
+    pointer-events: auto;
+  }
+
   [dir="ltr"] .md-nav--primary .md-nav__item > .md-nav__link {
     margin-right: 0;
   }
@@ -787,8 +801,9 @@ input.md-search__input::placeholder {
     grid-template-rows: 0fr;
   }
 
-  .md-nav__icon {
-    width: 1.2rem;
+  /* Remove spacing for items in expandable sections */
+  .md-nav__toggle ~ .md-nav > .nav-wrapper {
+    overflow: hidden;
   }
 
   /* Hover and active styling */
