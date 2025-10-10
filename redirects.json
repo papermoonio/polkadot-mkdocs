@@ -77,68 +77,16 @@
       "value": "/develop/parachains/testing/"
     },
     {
-      "key": "/develop/smart-contracts/block-explorers/",
-      "value": "/smart-contracts/explorers/"
-    },
-    {
-      "key": "/develop/smart-contracts/connect-to-polkadot/",
-      "value": "/smart-contracts/connect/"
-    },
-    {
-      "key": "/develop/smart-contracts/dev-environments/foundry/",
-      "value": "/smart-contracts/dev-environments/foundry/get-started/"
-    },
-    {
-      "key": "/develop/smart-contracts/dev-environments/hardhat/",
-      "value": "/smart-contracts/dev-environments/hardhat/get-started/"
-    },
-    {
-      "key": "/develop/smart-contracts/dev-environments/remix/",
-      "value": "/smart-contracts/dev-environments/remix/get-started/"
-    },
-    {
       "key": "/develop/smart-contracts/evm/",
-      "value": "/smart-contracts/overview/"
+      "value": "/develop/smart-contracts/overview/"
     },
     {
       "key": "/develop/smart-contracts/evm/native-evm-contracts/",
-      "value": "/smart-contracts/overview/"
+      "value": "/develop/smart-contracts/overview/"
     },
     {
       "key": "/develop/smart-contracts/evm/parachain-contracts/",
-      "value": "/smart-contracts/overview/"
-    },
-    {
-      "key": "/develop/smart-contracts/json-rpc-apis/",
-      "value": "/smart-contracts/for-eth-devs/json-rpc-apis/"
-    },
-    {
-      "key": "/develop/smart-contracts/libraries/ethers-js/",
-      "value": "/smart-contracts/libraries/ethers-js/"
-    },
-    {
-      "key": "/develop/smart-contracts/libraries/viem/",
-      "value": "/smart-contracts/libraries/viem/"
-    },
-    {
-      "key": "/develop/smart-contracts/libraries/wagmi/",
-      "value": "/smart-contracts/libraries/wagmi/"
-    },
-    {
-      "key": "/develop/smart-contracts/libraries/web3-js/",
-      "value": "/smart-contracts/libraries/web3-js/"
-    },
-    {
-      "key": "/develop/smart-contracts/libraries/web3-py/",
-      "value": "/smart-contracts/libraries/web3-py/"
-    },
-    {
-      "key": "/develop/smart-contracts/local-development-node/",
-      "value": "/smart-contracts/dev-environments/local-dev-node/"
-    },
-    {
-      "key": "/develop/smart-contracts/overview/",
-      "value": "/smart-contracts/overview/"
+      "value": "/develop/smart-contracts/overview/"
     },
     {
       "key": "/develop/smart-contracts/precompiles/",
@@ -154,179 +102,11 @@
     },
     {
       "key": "/develop/smart-contracts/wasm-ink/",
-      "value": "/smart-contracts/overview/"
-    },
-    {
-      "key": "/develop/toolkit/integrations/indexers/",
-      "value": "/parachains/integrations/indexers/"
-    },
-    {
-      "key": "/develop/toolkit/integrations/oracles/",
-      "value": "/parachains/integrations/oracles/"
-    },
-    {
-      "key": "/develop/toolkit/integrations/wallets/",
-      "value": "/parachains/integrations/wallets/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
-    },
-    {
-      "key": "/develop/toolkit/parachains/fork-chains/chopsticks/get-started/",
-      "value": "/parachains/testing/fork-a-parachain/"
-    },
-    {
-      "key": "/develop/toolkit/parachains/spawn-chains/zombienet/get-started/",
-      "value": "/parachains/testing/run-a-parachain-network/"
-    },
-    {
-      "key": "/infrastructure/",
-      "value": "/nodes-and-validators/run-a-node/full-node/"
-    },
-    {
-      "key": "/infrastructure/running-a-node/",
-      "value": "/nodes-and-validators/run-a-node/full-node/"
-    },
-    {
-      "key": "/infrastructure/running-a-node/setup-bootnode/",
-      "value": "/nodes-and-validators/run-a-node/bootnode/"
-    },
-    {
-      "key": "/infrastructure/running-a-node/setup-full-node/",
-      "value": "/nodes-and-validators/run-a-node/full-node/"
-    },
-    {
-      "key": "/infrastructure/running-a-node/setup-secure-wss/",
-      "value": "/nodes-and-validators/run-a-node/secure-wss/"
-    },
-    {
-      "key": "/infrastructure/running-a-validator/",
-      "value": "/nodes-and-validators/run-a-validator/requirements/"
-    },
-    {
-      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/",
-      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/set-up-validator/"
-    },
-    {
-      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/key-management/",
-      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/key-management/"
-    },
-    {
-      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/set-up-validator/",
-      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/set-up-validator/"
-    },
-    {
-      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/start-validating/",
-      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/start-validating/"
-    },
-    {
-      "key": "/infrastructure/running-a-validator/onboarding-and-offboarding/stop-validating/",
-      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/stop-validating/"
-    },
-    {
-      "key": "/infrastructure/running-a-validator/operational-tasks/",
-      "value": "/nodes-and-validators/run-a-validator/operational-tasks/general-management/"
-    },
-    {
-      "key": "/infrastructure/running-a-validator/operational-tasks/general-management/",
-      "value": "/nodes-and-validators/run-a-validator/operational-tasks/general-management/"
-    },
-    {
-      "key": "/infrastructure/running-a-validator/operational-tasks/pause-validating/",
-      "value": "/nodes-and-validators/run-a-validator/operational-tasks/pause-validating/"
-    },
-    {
-      "key": "/infrastructure/running-a-validator/operational-tasks/upgrade-your-node/",
-      "value": "/nodes-and-validators/run-a-validator/operational-tasks/upgrade-your-node/"
-    },
-    {
-      "key": "/infrastructure/running-a-validator/requirements/",
-      "value": "/nodes-and-validators/run-a-validator/requirements/"
-    },
-    {
-      "key": "/infrastructure/staking-mechanics/",
-      "value": "/nodes-and-validators/run-a-validator/staking-mechanics/rewards/"
-    },
-    {
-      "key": "/infrastructure/staking-mechanics/offenses-and-slashes/",
-      "value": "/nodes-and-validators/run-a-validator/staking-mechanics/offenses-and-slashes/"
-    },
-    {
-      "key": "/infrastructure/staking-mechanics/rewards-payout/",
-      "value": "/nodes-and-validators/run-a-validator/staking-mechanics/rewards/"
-    },
-    {
-      "key": "/nodes-and-validators/",
-      "value": "/nodes-and-validators/run-a-node/full-node/"
-    },
-    {
-      "key": "/nodes-and-validators/run-a-node/",
-      "value": "/nodes-and-validators/run-a-node/full-node/"
-    },
-    {
-      "key": "/nodes-and-validators/run-a-validator/",
-      "value": "/nodes-and-validators/run-a-validator/requirements/"
-    },
-    {
-      "key": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/",
-      "value": "/nodes-and-validators/run-a-validator/onboarding-and-offboarding/set-up-validator/"
-    },
-    {
-      "key": "/nodes-and-validators/run-a-validator/operational-tasks/",
-      "value": "/nodes-and-validators/run-a-validator/operational-tasks/general-management/"
-    },
-    {
-      "key": "/nodes-and-validators/run-a-validator/staking-mechanics/",
-      "value": "/nodes-and-validators/run-a-validator/staking-mechanics/rewards/"
-    },
-    {
-      "key": "/parachains/",
-      "value": "/parachains/get-started/"
-    },
-    {
-      "key": "/parachains/customize-runtime/pallet-development/",
-      "value": "/parachains/customize-runtime/pallet-development/create-a-pallet/"
-    },
-    {
-      "key": "/parachains/integrations/",
-      "value": "/parachains/integrations/wallets/"
-    },
-    {
-      "key": "/parachains/interoperability/",
-      "value": "/parachains/interoperability/get-started/"
-    },
-    {
-      "key": "/parachains/launch-a-parachain/",
-      "value": "/parachains/launch-a-parachain/choose-a-template/"
-    },
-    {
-      "key": "/parachains/runtime-maintenance/",
-      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
-    },
-    {
-      "key": "/parachains/testing/",
-      "value": "/parachains/testing/fork-a-parachain/"
-    },
-    {
-      "key": "/polkadot-protocol/basics/",
-      "value": "/polkadot-protocol/parachain-basics/"
+      "value": "/develop/smart-contracts/overview/"
     },
     {
       "key": "/polkadot-protocol/basics/accounts/",
       "value": "/polkadot-protocol/parachain-basics/accounts/"
-    },
-    {
-      "key": "/polkadot-protocol/basics/blocks-transactions-fees/",
-      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/"
     },
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/blocks/",
@@ -335,6 +115,10 @@
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/fees/",
       "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/fees/"
+    },
+    {
+      "key": "/polkadot-protocol/basics/blocks-transactions-fees/",
+      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/"
     },
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/transactions/",
@@ -353,6 +137,10 @@
       "value": "/polkadot-protocol/parachain-basics/data-encoding/"
     },
     {
+      "key": "/polkadot-protocol/basics/",
+      "value": "/polkadot-protocol/parachain-basics/"
+    },
+    {
       "key": "/polkadot-protocol/basics/interoperability/",
       "value": "/polkadot-protocol/parachain-basics/interoperability/"
     },
@@ -365,104 +153,16 @@
       "value": "/polkadot-protocol/parachain-basics/randomness/"
     },
     {
-      "key": "/polkadot-protocol/smart-contract-basics/accounts/",
-      "value": "/smart-contracts/for-eth-devs/accounts/"
+      "key": "/develop/toolkit/interoperability/asset-transfer-api/",
+      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     },
     {
-      "key": "/polkadot-protocol/smart-contract-basics/blocks-transactions-fees/",
-      "value": "/smart-contracts/for-eth-devs/blocks-transactions-fees/"
+      "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
+      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     },
     {
-      "key": "/polkadot-protocol/smart-contract-basics/polkavm-design/",
-      "value": "/smart-contracts/for-eth-devs/dual-vm-stack/"
-    },
-    {
-      "key": "/smart-contracts/",
-      "value": "/smart-contracts/get-started/"
-    },
-    {
-      "key": "/smart-contracts/cookbook/dapps/",
-      "value": "/smart-contracts/cookbook/dapps/zero-to-hero/"
-    },
-    {
-      "key": "/smart-contracts/cookbook/eth-dapps/",
-      "value": "/smart-contracts/cookbook/eth-dapps/uniswap-v2/"
-    },
-    {
-      "key": "/smart-contracts/cookbook/smart-contracts/",
-      "value": "/smart-contracts/cookbook/smart-contracts/deploy-basic/"
-    },
-    {
-      "key": "/smart-contracts/dev-environments/",
-      "value": "/smart-contracts/dev-environments/local-dev-node/"
-    },
-    {
-      "key": "/smart-contracts/dev-environments/foundry/",
-      "value": "/smart-contracts/dev-environments/foundry/get-started/"
-    },
-    {
-      "key": "/smart-contracts/dev-environments/hardhat/",
-      "value": "/smart-contracts/dev-environments/hardhat/get-started/"
-    },
-    {
-      "key": "/smart-contracts/dev-environments/remix/",
-      "value": "/smart-contracts/dev-environments/remix/get-started/"
-    },
-    {
-      "key": "/smart-contracts/for-eth-devs/",
-      "value": "/smart-contracts/for-eth-devs/dual-vm-stack/"
-    },
-    {
-      "key": "/smart-contracts/integrations/",
-      "value": "/smart-contracts/integrations/wallets/"
-    },
-    {
-      "key": "/smart-contracts/libraries/",
-      "value": "/smart-contracts/libraries/ethers-js/"
-    },
-    {
-      "key": "/tutorials/interoperability/replay-and-dry-run-xcms/",
-      "value": "/chain-interactions/send-transactions/interoperability/debug-and-preview-xcms/"
-    },
-    {
-      "key": "/tutorials/interoperability/xcm-channels/para-to-para/",
-      "value": "/parachains/interoperability/channels-between-parachains/"
-    },
-    {
-      "key": "/tutorials/interoperability/xcm-channels/para-to-system/",
-      "value": "/parachains/interoperability/channels-with-system-parachains/"
-    },
-    {
-      "key": "/tutorials/interoperability/xcm-fee-estimation/",
-      "value": "/chain-interactions/send-transactions/interoperability/estimate-xcm-fees/"
-    },
-    {
-      "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/add-pallets-to-runtime/",
-      "value": "/parachains/customize-runtime/pallet-development/add-pallet-to-runtime/"
-    },
-    {
-      "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/asset-conversion/",
-      "value": "/chain-interactions/token-operations/convert-assets/"
-    },
-    {
-      "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/register-foreign-asset/",
-      "value": "/chain-interactions/token-operations/register-foreign-asset/"
-    },
-    {
-      "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/register-local-asset/",
-      "value": "/chain-interactions/token-operations/register-local-asset/"
-    },
-    {
-      "key": "/tutorials/smart-contracts/demo-aplications/deploying-uniswap-v2/",
-      "value": "/smart-contracts/cookbook/eth-dapps/uniswap-v2/"
-    },
-    {
-      "key": "/tutorials/smart-contracts/deploy-erc20/",
-      "value": "/smart-contracts/cookbook/smart-contracts/deploy-erc20/"
-    },
-    {
-      "key": "/tutorials/smart-contracts/deploy-nft/",
-      "value": "/smart-contracts/cookbook/smart-contracts/deploy-nft/"
+      "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
+      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
     }
   ]
 }
