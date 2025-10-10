@@ -1,9 +1,9 @@
-site_name: Polkadot Beta Developer Docs
-site_url: https://beta-docs.polkadot.com/
+site_name: Polkadot Developer Docs
+site_url: https://docs.polkadot.com/
 home_url: https://polkadot.com/
 home_name: Polkadot
-edit_uri: https://github.com/polkadot-developers/polkadot-docs/edit/staging/product-ia/
-site_dir: /var/www/polkadot-beta-docs-static
+edit_uri: https://github.com/polkadot-developers/polkadot-docs/edit/master
+site_dir: /var/www/polkadot-docs-static
 docs_dir: polkadot-docs
 copyright: © 2025
 
