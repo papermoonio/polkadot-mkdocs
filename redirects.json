@@ -1,26 +1,6 @@
 {
   "data": [
     {
-      "key": "/chain-interactions/accounts/",
-      "value": "/chain-interactions/accounts/create-account/"
-    },
-    {
-      "key": "/chain-interactions/query-data/",
-      "value": "/chain-interactions/query-data/query-sdks/"
-    },
-    {
-      "key": "/chain-interactions/send-transactions/",
-      "value": "/chain-interactions/send-transactions/with-sdks/"
-    },
-    {
-      "key": "/chain-interactions/send-transactions/interoperability/",
-      "value": "/chain-interactions/send-transactions/interoperability/transfer-assets-parachains/"
-    },
-    {
-      "key": "/chain-interactions/token-operations/",
-      "value": "/chain-interactions/token-operations/register-local-asset/"
-    },
-    {
       "key": "/develop/interoperability/intro-to-xcm/",
       "value": "/parachains/interoperability/get-started/"
     },
