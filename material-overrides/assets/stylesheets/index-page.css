@@ -1,3 +1,14 @@
+:root,
+[data-md-color-scheme="default"] {
+  /* Index cards */
+  --index-card-border-color: var(--storm-gray-200);
+}
+
+[data-md-color-scheme="slate"][data-md-color-primary="indigo"] {
+  /* Index cards */
+  --index-card-border-color: var(--storm-gray-950);
+}
+
 .subsection-wrapper {
   display: flex;
   gap: 1em;
