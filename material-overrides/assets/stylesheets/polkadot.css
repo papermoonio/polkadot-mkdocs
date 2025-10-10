@@ -94,6 +94,14 @@
   --tabbed-active-color: var(--storm-gray-950);
   --tabbed-bg-color: var(--athens-gray);
   --tabbed-font-color: var(--black);
+
+  /* home cards */
+  --home-card-font-color: var(--storm-gray-950);
+  --home-card-bg-color: var(--white);
+  --home-card-border-color: var(--storm-gray-200);
+
+  /* home buttons */
+  --home-button-border-color: var(--black);
 }
 
 [data-md-color-scheme='slate'][data-md-color-primary='indigo'] {
@@ -130,6 +138,14 @@
   --tabbed-active-color: var(--grey-storm-950);
   --tabbed-bg-color: var(--storm-gray-800);
   --tabbed-font-color: var(--white);
+
+  /* home cards */
+  --home-card-font-color: var(--storm-gray);
+  --home-card-bg-color: var(--black);
+  --home-card-border-color: var(--storm-gray);
+
+  /* home buttons */
+  --home-button-border-color: var(--white);
 
 }
 
@@ -1525,7 +1541,7 @@ details.interface > summary::before {
   padding: 22px;
   line-height: 17.36px;
   border-radius: 12px;
-  border: 1px solid var(--black);
+  border: 1px solid var(--home-button-border-color);
 }
 
 .md-typeset .md-button:hover {

@@ -165,12 +165,12 @@ div.feature,
 .md-typeset a.feature {
   color: var(--home-card-font-color);
   flex: 1 1;
-  border: 1px solid var(--storm-gray-200);
+  border: 1px solid var(--home-card-border-color);
   border-radius: 16px;
   padding: 32px;
   display: flex;
   gap: 36px;
-  background-color: var(--white);
+  background-color: var(--home-card-bg-color);
 }
 
 .md-typeset a.feature {
@@ -205,7 +205,7 @@ div.feature {
 div.feature h3,
 .md-typeset a.feature h3 {
   font-size: 1.382rem;
-  color: var(--black);
+  color: var(--md-default-fg-color);
   margin-top: 0;
   margin-bottom: 0;
   line-height: 1.2;
@@ -235,7 +235,7 @@ div.feature h3,
   display: flex;
   gap: 0.5em;
   padding: 0.3em;
-  color: var(--black);
+  color: var(--home-card-font-color);
   font-family: "Unbounded";
 }
 
