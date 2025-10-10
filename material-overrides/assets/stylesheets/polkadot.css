@@ -653,7 +653,6 @@ input.md-search__input::placeholder {
   cursor: pointer;
   display: flex;
   flex: auto;
-  color: var(--black);
   padding-right: 0.5em;
 }
 
@@ -923,11 +922,11 @@ input.md-search__input::placeholder {
   }
 
   /* When the toggle is checked, show "expanded" instead */
-  .md-nav__toggle:checked ~ label.md-nav__link .closed {
+  .md-nav__toggle:checked ~ .md-nav__link label .closed {
     display: none;
   }
 
-  .md-nav__toggle:checked ~ label.md-nav__link .expanded {
+  .md-nav__toggle:checked ~ .md-nav__link label .expanded {
     display: flex;
   }
 }
