@@ -307,7 +307,7 @@
   color: var(--md-default-fg-color);
 }
 
-@media screen and (min-width: 60em ){
+@media screen and (min-width: 60em){
   .md-header .md-header__inner {
     -webkit-backdrop-filter: blur(16px); /* Safari support */
     backdrop-filter: blur(16px);
