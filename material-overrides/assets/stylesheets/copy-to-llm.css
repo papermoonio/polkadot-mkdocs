@@ -29,7 +29,7 @@
 .copy-to-llm-split-container {
   display: inline-flex;
   margin-left: auto;
-  border: 1px solid var(--mystic);
+  border: 1px solid var(--storm-gray-300);
   border-radius: 6px;
   overflow: visible;
   position: relative;
@@ -54,7 +54,7 @@
 
 /* Left button (copy) */
 .copy-to-llm-left {
-  border-right: 1px solid var(--mystic);
+  border-right: 1px solid var(--storm-gray-300);
   border-radius: 6px 0 0 6px;
 }
 
@@ -109,7 +109,7 @@
   top: calc(100% + 4px);
   right: 0;
   background-color: var(--white);
-  border: 1px solid var(--mystic);
+  border: 1px solid var(--storm-gray-300);
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   min-width: 160px;
