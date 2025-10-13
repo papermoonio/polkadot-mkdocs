@@ -110,7 +110,7 @@
   --md-footer-fg-color--light: var(--white);
   --md-footer-bg-color: var(--black);
   --md-footer-bg-color--dark: var(--black);
-  --footer-border-color: var(--gray-storm-200-transparent);
+  --footer-border-color: var(--storm-gray-200-transparent);
 
   /* Header */
   --header-bg-color: #ffffff1a;
@@ -125,11 +125,11 @@
   /* Nav list */
   --nav-font-color: var(--storm-gray-300);
   --nav-title-color: var(--athens-gray);
-  --nav-hover-bg-color: var(--gray-storm-200-transparent);
+  --nav-hover-bg-color: var(--storm-gray-200-transparent);
 
   /* Feedback */
   --feedback-border-color: var(--storm-gray-800);
-  --feedback-hr-color: var(--gray-storm-200-transparent);
+  --feedback-hr-color: var(--storm-gray-200-transparent);
 
   /* Tabbed content */
   --tabbed-border-color: var(--storm-gray-800);
