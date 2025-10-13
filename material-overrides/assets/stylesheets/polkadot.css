@@ -874,11 +874,25 @@ input.md-search__input::placeholder {
     margin-left: 0;
   }
 
-  /* Adjust size of arrows for sections in left nav */
-  .md-nav--primary .md-nav__link.md-nav__link--index .md-icon:after,
   .md-nav--primary .md-nav__link.md-nav__link--index .md-nav__icon {
-    height: 24px;
-    width: 24px;
+    display: flex;
+    align-items: center;
+  }
+
+  .md-nav--primary .md-nav__link .md-nav__icon:after {
+    display: none;
+  }
+
+  .md-nav__icon .expanded {
+    display: none;
+  }
+
+  .md-nav__icon .closed {
+    display: flex;
+  }
+
+  .md-nav__icon .closed svg {
+    fill: var(--white);
   }
 }
 
@@ -986,7 +1000,7 @@ input.md-search__input::placeholder {
   }
 }
 
-/** TOC styling on smaller screens **/
+/** Nav styling on smaller screens **/
 @media screen and (max-width: 59.9844em) {
   .md-nav--primary .md-nav__link[for="__toc"] ~ .md-nav {
     overflow: scroll;
