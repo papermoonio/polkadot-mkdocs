@@ -100,7 +100,7 @@
 }
 
 [data-md-color-scheme='slate'][data-md-color-primary='indigo'] {
-  --md-default-fg-color: var(--white);
+  --md-default-fg-color: var(--storm-gray-050);
   --md-default-bg-color: var(--black);
 
   --md-primary-fg-color: var(--storm-gray-200);
