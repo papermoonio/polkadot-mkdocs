@@ -108,7 +108,7 @@
   --md-primary-fg-color: var(--storm-gray-200);
   --md-accent-fg-color: var(--pink);
   /* Footer color */
-  --md-footer-fg-color: var(--white);
+  --md-footer-fg-color: var(--storm-gray-050);
   --md-footer-fg-color--light: var(--white);
   --md-footer-bg-color: var(--black);
   --md-footer-bg-color--dark: var(--black);
@@ -687,7 +687,7 @@ input.md-search__input::placeholder {
     padding-left: 1em;
     font-weight: 600;
     font-size: 11px;
-    color: var(--storm-gray-900);
+    color: var(--nav-title-color);
     text-transform: uppercase;
     letter-spacing: 0.22px;
     box-shadow: none;
@@ -1181,6 +1181,10 @@ article.md-content__inner.md-typeset > h1:has(+ .badge) {
   width: 100%;
   max-width: var(--max-page-width);
   margin: auto;
+}
+
+.md-footer__direction {
+  opacity: 1;
 }
 
 .md-footer-meta {
