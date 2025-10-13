@@ -54,6 +54,8 @@
   /* Header */
   --header-bg-color: #0000001a;
   --header-font-color: var(--black);
+  --header-menu-bg-color: var(--white);
+  --header-menu-border-color: var(--storm-gray-200);
 
   /* Search */
   --hover-search-bg-color: var(--athens-gray);
@@ -115,6 +117,8 @@
   /* Header */
   --header-bg-color: #ffffff1a;
   --header-font-color: var(--white);
+  --header-menu-bg-color:rgb(26, 26, 26);
+  --header-menu-border-color: var(--md-default-fg-color--lighter);
 
   /* Search */
   --hover-search-bg-color: var(--storm-gray-950);
@@ -419,8 +423,8 @@
   width: 100%;
   left: 0;
   top: calc(100% + var(--dropdown-gap));
-  background: var(--md-default-bg-color);
-  border: 0.5px solid var(--storm-gray-300);
+  background: var(--header-menu-bg-color);
+  border: 0.5px solid var(--header-menu-border-color);
   border-radius: 16px;
   z-index: 3;
   list-style: none;
@@ -442,15 +446,10 @@
 }
 
 .md-tab__item {
+  border-bottom: 1px solid var(--header-menu-border-color);
   font-weight: 400;
   padding: 24px;
 }
-
-/* Apply bottom border to all items */
-.md-tab__item {
-  border-bottom: 1px solid var(--storm-gray-200);
-}
-
 /* Remove bottom border from the last item */
 .md-tab__item:last-child {
   border-bottom: none;
@@ -464,7 +463,7 @@
 
 /* Optionally, add right border to odd items for a two-column layout */
 .md-tab__item:nth-child(odd) {
-  border-right: 1px solid var(--storm-gray-200);
+  border-right: 1px solid var(--header-menu-border-color);
 }
 
 .md-tab__item:hover,
