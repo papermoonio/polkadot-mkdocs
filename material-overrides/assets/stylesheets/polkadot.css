@@ -78,6 +78,9 @@
   /* Comments */
   --md-code-hl-comment-color: #00000060;
 
+  /* Interface admonition */
+  --admo-interface-bg-color: var(--athens-gray);
+
   /* Custom code admonition colors */
   --md-code-admo-border-color: #5ee20c;
   --md-code-admo-title-bg: #64dd171a;
@@ -123,6 +126,9 @@
   /* Search */
   --hover-search-bg-color: #21232e;
 
+  /* Interface admonition */
+  --admo-interface-bg-color: var(--storm-gray-950);
+
   /* Accent color */
   --md-typeset-a-color: var(--pink);
 
@@ -138,7 +144,7 @@
   /* Tabbed content */
   --tabbed-border-color: var(--storm-gray-800);
   --tabbed-active-color: var(--storm-gray-050);
-  --tabbed-bg-color: var(--storm-gray-800);
+  --tabbed-bg-color: var(--storm-gray-900);
   --tabbed-font-color: var(--white);
 }
 
@@ -1491,13 +1497,13 @@ details.interface > summary::before {
 }
 
 .md-typeset details.interface {
-  border: 1px solid var(--storm-gray-200);
+  border: 1px solid var(--admo-interface-bg-color);
   box-shadow: none;
 }
 
 [dir='ltr'] .md-typeset details.interface > summary {
   padding: 1em 0 1em 1em;
-  background-color: var(--athens-gray);
+  background-color: var(--admo-interface-bg-color);
 }
 
 .md-typeset details.interface > summary:after {
@@ -1860,7 +1866,7 @@ span.badge.advanced {
 .md-source-file {
   display: flex;
   flex-direction: column;
-  color: var(--storm-gray-800);
+  color: var(--nav-font-color);
   margin-top: 40px;
 }
 
