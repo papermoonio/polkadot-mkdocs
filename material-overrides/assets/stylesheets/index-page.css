@@ -70,6 +70,7 @@
 }
 
 .subsection-wrapper .card hr {
+  border-color: var(--index-card-border-color);
   margin-bottom: 0.5em;
   margin-top: 0.5em;
 }
