@@ -51,6 +51,8 @@
   --md-footer-bg-color: var(--white);
   --md-footer-bg-color--dark: var(--white);
   --footer-border-color: var(--storm-gray-200);
+
+  --md-typeset-table-color--light: #00000009;
   /* Header */
   --header-bg-color: #0000001a;
   --header-font-color: var(--black);
@@ -116,6 +118,8 @@
   --md-footer-bg-color: var(--black);
   --md-footer-bg-color--dark: var(--black);
   --footer-border-color: var(--storm-gray-200-transparent);
+
+  --md-typeset-table-color--light: #f0f1f41a;
 
   /* Header */
   --header-bg-color: #ffffff1a;
@@ -1596,8 +1600,8 @@ details.interface > summary::before {
 }
 
 .md-typeset table:not([class]) th {
-  background-color: var(--athens-gray);
-  color: var(--black);
+  background-color: var(--tabbed-bg-color);
+  color: var(--tabbed-font-color);
 }
 
 .md-typeset table:not([class]) td {
