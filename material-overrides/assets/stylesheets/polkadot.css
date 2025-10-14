@@ -1511,12 +1511,9 @@ details.interface > summary::before {
 
 /** Icons in tables styling **/
 /* Download LLM Files table */
-.llms-view {
-  padding-right: 4px;
-}
-
-.llms-copy {
-  padding-right: 4px;
+.actions {
+  display: flex;
+  gap: 4px;
 }
 
 /** Tabbed element styling **/
