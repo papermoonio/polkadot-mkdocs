@@ -542,6 +542,11 @@ input.md-search__input::placeholder {
   opacity: 0;
 }
 
+[data-md-toggle=search]:checked~.md-header .md-header__option {
+  max-width: 100%;
+  opacity: 1;
+}
+
 .md-search-result__link:focus,
 .md-search-result__link:hover {
   background-color: var(--hover-search-bg-color);
