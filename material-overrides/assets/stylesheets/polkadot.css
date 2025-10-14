@@ -109,7 +109,7 @@
   --md-accent-fg-color: var(--pink);
   /* Footer color */
   --md-footer-fg-color: var(--storm-gray-050);
-  --md-footer-fg-color--light: var(--white);
+  --md-footer-fg-color--light: var(--storm-gray-050);
   --md-footer-bg-color: var(--black);
   --md-footer-bg-color--dark: var(--black);
   --footer-border-color: var(--storm-gray-200-transparent);
@@ -1579,6 +1579,7 @@ details.interface > summary::before {
 
 /** Back to top button styling **/
 .md-top {
+  background: var(--header-menu-bg-color);
   top: unset !important; /* To override inline styling */
   bottom: 75px;
 }
