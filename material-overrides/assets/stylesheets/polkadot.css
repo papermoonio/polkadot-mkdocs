@@ -346,6 +346,21 @@
 
 /* Header, home button, header buttons styling on smaller screens */
 @media screen and (max-width: 76.2344em) {
+  .md-nav--primary .md-nav__title .md-logo img[src$="#only-light"],
+  .md-nav--primary .md-nav__title .md-logo img[src$="#only-dark"] {
+    display: none;
+  }
+
+  [data-md-color-scheme="default"]
+  .md-nav--primary .md-nav__title .md-logo img[src$="#only-light"] {
+    display: block;
+  }
+
+  [data-md-color-scheme="slate"]
+  .md-nav--primary .md-nav__title .md-logo img[src$="#only-dark"] {
+    display: block;
+  }
+
   .md-header__inner {
     gap: 0;
     padding: 0 24px;
