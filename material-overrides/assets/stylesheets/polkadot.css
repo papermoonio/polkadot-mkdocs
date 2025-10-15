@@ -1908,6 +1908,7 @@ div.mermaid {
 .md-typeset .grid.cards > ul > li > hr,
 .md-typeset .grid.cards > ol > li > hr,
 .md-typeset .grid > .card > h {
+  border-color: var(--md-default-fg-color--lightest);
   margin-bottom: 0.5em;
   margin-top: 0.5em;
 }
