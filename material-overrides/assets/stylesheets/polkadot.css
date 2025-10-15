@@ -2077,6 +2077,7 @@ div.button-wrapper {
 
 div.button-wrapper > a.connectMetaMask {
   text-decoration: none;
+  border: 1px solid var(--white);
 }
 
 .md-typeset img {
