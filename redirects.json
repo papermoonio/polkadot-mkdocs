@@ -45,8 +45,12 @@
       "value": "/parachains/launch-a-parachain/obtain-coretime/"
     },
     {
+      "key": "/develop/parachains/install-polkadot-sdk/",
+      "value": "/parachains/install-polkadot-sdk/"
+    },
+    {
       "key": "/develop/parachains/intro-polkadot-sdk/",
-      "value": "/parachains/overview/"
+      "value": "/reference/parachains/"
     },
     {
       "key": "/develop/parachains/maintenance/runtime-upgrades/",
