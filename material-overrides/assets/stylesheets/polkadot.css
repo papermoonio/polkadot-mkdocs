@@ -346,21 +346,6 @@
 
 /* Header, home button, header buttons styling on smaller screens */
 @media screen and (max-width: 76.2344em) {
-  .md-nav--primary .md-nav__title .md-logo img[src$="#only-light"],
-  .md-nav--primary .md-nav__title .md-logo img[src$="#only-dark"] {
-    display: none;
-  }
-
-  [data-md-color-scheme="default"]
-  .md-nav--primary .md-nav__title .md-logo img[src$="#only-light"] {
-    display: block;
-  }
-
-  [data-md-color-scheme="slate"]
-  .md-nav--primary .md-nav__title .md-logo img[src$="#only-dark"] {
-    display: block;
-  }
-
   .md-header__inner {
     gap: 0;
     padding: 0 24px;
@@ -946,6 +931,20 @@ input.md-search__input::placeholder {
 
 /* Styling for nav items that are active or hovered over on smaller screens */
 @media screen and (max-width: 76.2344em) {
+  .md-nav--primary .md-nav__title .md-logo img {
+    display: none;
+  }
+
+  [data-md-color-scheme='default']
+  .md-nav--primary .md-nav__title .md-logo img[src$='#only-light'] {
+    display: inline-block;
+  }
+
+  [data-md-color-scheme='slate']
+  .md-nav--primary .md-nav__title .md-logo img[src$='#only-dark'] {
+    display: inline-block;
+  }
+
   .md-nav--primary .md-nav__title[for='__drawer'] {
     background-color: var(--md-default-bg-color);
     padding-bottom: 3em;
@@ -955,7 +954,7 @@ input.md-search__input::placeholder {
   .md-nav--primary .md-nav__link,
   .md-nav--primary a.md-nav__link {
     padding: 0.3rem 0.8rem;
-    color: var(--black);
+    color: var(--nav-font-color);
   }
 
   .md-nav--primary .md-nav__link .md-nav__icon:after {
