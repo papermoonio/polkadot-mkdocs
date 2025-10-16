@@ -1,3 +1,4 @@
 User-agent: *
 
 Sitemap: https://docs.polkadot.com/sitemap.xml
+Disallow: /ai/
