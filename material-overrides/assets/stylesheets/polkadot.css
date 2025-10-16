@@ -1354,6 +1354,7 @@ article.md-content__inner.md-typeset > h1:has(+ .badge) {
   text-decoration: none;
   padding-left: 20px;
   padding-right: 20px;
+  font-size: 14px;
 }
 
 /* Socials styling */
