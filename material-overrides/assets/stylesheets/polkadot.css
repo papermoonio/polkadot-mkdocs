@@ -305,7 +305,6 @@
     --header-bg-color
   ); /* override for supported browsers */
   color: var(--md-default-fg-color);
-  backdrop-filter: blur(16px);
 }
 
 @media screen and (min-width: 60em){
