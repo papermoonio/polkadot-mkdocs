@@ -90,6 +90,9 @@
   /* Custom icons for admonition */
   --md-admonition-icon--smartcontract: var(--md-admonition-icon--warning);
 
+  /* Child admonition */
+  --child-admo-border-color: var(--storm-gray-200);
+
   /* Nav list */
   --nav-font-color: var(--storm-gray-800);
   --nav-title-color: var(--storm-gray-900);
@@ -135,6 +138,9 @@
 
   /* Accent color */
   --md-typeset-a-color: var(--pink);
+
+  /* Child admonition */
+  --child-admo-border-color: var(--storm-gray-300);  
 
   /* Nav list */
   --nav-font-color: var(--storm-gray-300);
@@ -1521,7 +1527,7 @@ html .md-footer-meta.md-typeset .md-social a:hover {
 /* Add background for required parameters */
 .md-typeset .required kbd {
   background-color: rgba(255, 0, 0, 0.3);
-  color: var(--black);
+  color: var(--md-default-fg-color);
   text-transform: capitalize;
   padding-left: 0.6666666667em;
 }
@@ -1593,7 +1599,7 @@ details.child {
 
 .md-typeset details.child {
   width: fit-content;
-  border: 1px solid var(--storm-gray-200);
+  border: 1px solid var(--child-admo-border-color);
   box-shadow: none;
 }
 
