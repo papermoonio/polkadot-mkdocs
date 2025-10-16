@@ -2118,7 +2118,7 @@ div.button-wrapper > a.connectMetaMask {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-body[data-md-color-scheme='slate'] .md-typeset img {
+body[data-md-color-scheme='slate'] article.md-content__inner.md-typeset img {
   border: 1px solid var(--feedback-border-color);
 }
 
