@@ -509,10 +509,6 @@
       "value": "/smart-contracts/for-eth-devs/dual-vm-stack/"
     },
     {
-      "key": "/reference/parachains/",
-      "value": "/reference/parachains/consensus/"
-    },
-    {
       "key": "/reference/parachains/blocks-transactions-fees/",
       "value": "/reference/parachains/blocks-transactions-fees/blocks/"
     },
