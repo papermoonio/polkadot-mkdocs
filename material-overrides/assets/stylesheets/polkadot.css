@@ -319,11 +319,48 @@
   background-color: transparent;
 }
 
-.md-tabs__item {
+.md-tabs .md-grid {
+  display: flex;
+}
+
+.md-tabs__item--custom {
   transition: border 0.3s ease;
   color: var(--black);
   height: var(--header-height);
   align-content: center;
+}
+
+.md-tabs__item--custom:hover {
+  cursor: pointer;
+}
+
+/* Pseudo-element to create hoverable area */
+.md-tabs__item--custom:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  height: var(--dropdown-gap);
+  width: 100%;
+  background-color: transparent;
+  z-index: -1;
+}
+
+.md-tab__list {
+  display: none;
+}
+
+.md-tabs__item--custom:hover .md-tab__list {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: calc(100% + var(--dropdown-gap));
+  background: var(--md-default-bg-color);
+  border: 0.5px solid var(--storm-gray-300);
+  border-radius: 16px;
+  z-index: 3;
+  list-style: none;
+  display: grid;
   padding: 0;
 }
 
@@ -567,12 +604,20 @@ input.md-search__input::placeholder {
   color: var(--md-default-fg-color);
 }
 
+/* Render arrow next to expandable sections */
+.md-nav__link > * {
+  cursor: pointer;
+  display: flex;
+  flex: auto;
+  padding-right: 0.5em;
+}
+
 .md-nav__link:hover,
-.md-nav__item--active .md-nav__link--active {
+.md-nav__link-wrapper.md-nav__item.md-nav__item--active,
+.md-nav__item div.md-nav__link--active {
   background: var(--storm-gray-200);
   border-radius: 6px;
-  margin-left: -0.7em;
-  padding-left: 0.7em;
+  margin-left: -1em;
 }
 
 /* Nav items with icons in the title */
@@ -651,6 +696,21 @@ input.md-search__input::placeholder {
     > .md-nav__link.md-nav__link--active
     a {
     margin-left: 0;
+  }
+
+  [dir="ltr"]
+    .md-nav--primary
+    .md-nav__item--section.md-nav__item
+    > .md-nav__link {
+    color: var(--storm-gray-900);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22px;
+    margin-bottom: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-left: -1em;
+    padding-left: 1em;
   }
 
   [dir="ltr"]
@@ -822,11 +882,11 @@ input.md-search__input::placeholder {
   }
 
   /* When the toggle is checked, show "expanded" instead */
-  .md-nav__toggle:checked ~ label.md-nav__link .closed {
+  .md-nav__toggle:checked ~ .md-nav__link label .closed {
     display: none;
   }
 
-  .md-nav__toggle:checked ~ label.md-nav__link .expanded {
+  .md-nav__toggle:checked ~ .md-nav__link label .expanded {
     display: flex;
   }
 }

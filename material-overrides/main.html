@@ -86,11 +86,11 @@
   ></script>
 {% endblock %}
 
-{% block site_nav %}
-{#- Navigation (left menu) -#}
+{% block site_nav %} 
+{#- Navigation (left menu) -#} 
   {% if nav %}
-    {% if page.meta and page.meta.hide %}
-      {% set hidden = "hidden" if "navigation" in page.meta.hide %}
+    {% if page.meta and page.meta.hide %} 
+      {% set hidden = "hidden" if "navigation" in page.meta.hide %} 
     {% endif %}
     <div
       class="md-sidebar md-sidebar--primary"
@@ -104,12 +104,12 @@
         </div>
       </div>
     </div>
-  {% endif %}
+  {% endif %} 
   
-  {#- Table of contents (TOC) -#}
-  {% if "toc.integrate" not in features %}
-    {% if page.meta and page.meta.hide %}
-      {% set hidden = "hidden" if "toc" in page.meta.hide %}
+  {#- Table of contents (TOC) -#} 
+  {% if "toc.integrate" not in features %} 
+    {% if page.meta and page.meta.hide %} 
+      {% set hidden = "hidden" if "toc" in page.meta.hide %} 
     {% endif %}
     <div
       class="md-sidebar md-sidebar--secondary"
@@ -119,7 +119,7 @@
     >
       <div class="md-sidebar__scrollwrap">
         <div class="md-sidebar__inner">
-          {#- TOC -#}
+          {#- TOC -#} 
           {% include "partials/toc.html" %}
         </div>
 
@@ -137,7 +137,7 @@
         </div>
       </div>
     </div>
-  {% endif %}
+  {% endif %} 
 {% endblock %}
 
 {%- block container -%}
@@ -151,7 +151,7 @@
 </div>
 {%- endblock -%} 
 
-{% block scripts %}
+{% block scripts %} 
   {{ super() }}
   <script defer>
     document.addEventListener('DOMContentLoaded', () => {
