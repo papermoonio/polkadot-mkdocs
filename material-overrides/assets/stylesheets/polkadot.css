@@ -11,7 +11,7 @@
 
   --black: #000000;
 
-  --storm-gray-200-transparent: #52577566;
+  --storm-gray-200-transparent: #525776;
 
   /* Primary color */
   --pink: #ff2670;
@@ -139,7 +139,7 @@
   /* Nav list */
   --nav-font-color: var(--storm-gray-300);
   --nav-title-color: var(--athens-gray);
-  --nav-hover-bg-color: var(--storm-gray-200-transparent);
+  --nav-hover-bg-color: #21232e;
 
   /* Feedback */
   --feedback-border-color: var(--storm-gray-800);
@@ -687,6 +687,14 @@ input.md-search__input::placeholder {
     path,
   .md-search__icon.md-icon svg path {
     fill: none;
+  }
+
+  [data-md-toggle="search"]:checked
+    ~ .md-header
+    .md-search__icon.md-icon[for="__search"]
+    svg:nth-of-type(2) path {
+      stroke: var(--header-font-color);
+      fill: none;
   }
 
   [data-md-toggle="search"]:checked ~ .md-header .md-search__overlay {
