@@ -107,6 +107,9 @@
   --tabbed-active-color: var(--storm-gray-950);
   --tabbed-bg-color: var(--athens-gray);
   --tabbed-font-color: var(--black);
+
+  /* Where to go next cards */
+  --wtdn-card-border-color: var(--storm-gray-200);
 }
 
 [data-md-color-scheme='slate'][data-md-color-primary='indigo'] {
@@ -156,6 +159,9 @@
   --tabbed-active-color: var(--storm-gray-050);
   --tabbed-bg-color: var(--storm-gray-900);
   --tabbed-font-color: var(--white);
+
+  /* Where to go next cards */
+  --wtdn-card-border-color: var(--storm-gray-950);
 }
 
 .md-grid {
@@ -1869,10 +1875,11 @@ div.mermaid {
   display: flex;
   flex-direction: column;
   border-radius: 16px;
+  border-color: var(--wtdn-card-border-color);
 }
 
 .md-typeset .grid.cards > ul > li:hover {
-  border: 0.05rem solid var(--md-default-fg-color--lightest);
+  border: 0.05rem solid var(--wtdn-card-border-color);
   box-shadow: unset;
 }
 
@@ -1923,7 +1930,7 @@ div.mermaid {
 .md-typeset .grid.cards > ul > li > hr,
 .md-typeset .grid.cards > ol > li > hr,
 .md-typeset .grid > .card > h {
-  border-color: var(--md-default-fg-color--lightest);
+  border-color: var(--wtdn-card-border-color);
   margin-bottom: 0.5em;
   margin-top: 0.5em;
 }
