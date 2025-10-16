@@ -113,6 +113,9 @@
 
   /* Kapa widget */
   --button-bg: rgba(0, 0, 0, 0.60);
+
+  /* Buttons */
+  --home-button-border-color: var(--black);
 }
 
 [data-md-color-scheme='slate'][data-md-color-primary='indigo'] {
@@ -168,6 +171,9 @@
 
   /* Kapa widget */
   --button-bg: rgb(26, 26, 26);
+
+  /* Buttons */
+  --home-button-border-color: var(--white);
 }
 
 .md-grid {
@@ -2105,7 +2111,6 @@ div.button-wrapper {
 
 div.button-wrapper > a.connectMetaMask {
   text-decoration: none;
-  border: 1px solid var(--white);
 }
 
 .md-typeset img {
