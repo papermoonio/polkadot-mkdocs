@@ -110,6 +110,9 @@
 
   /* Where to go next cards */
   --wtdn-card-border-color: var(--storm-gray-200);
+
+  /* Kapa widget */
+  --button-bg: rgba(0, 0, 0, 0.60);
 }
 
 [data-md-color-scheme='slate'][data-md-color-primary='indigo'] {
@@ -162,6 +165,9 @@
 
   /* Where to go next cards */
   --wtdn-card-border-color: var(--storm-gray-950);
+
+  /* Kapa widget */
+  --button-bg: rgb(26, 26, 26);
 }
 
 .md-grid {
