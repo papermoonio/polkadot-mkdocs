@@ -149,7 +149,7 @@
   --md-typeset-a-color: var(--pink);
 
   /* Child admonition */
-  --child-admo-border-color: var(--storm-gray-300);  
+  --child-admo-border-color: var(--storm-gray-800);  
 
   /* Nav list */
   --nav-font-color: var(--storm-gray-300);
