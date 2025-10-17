@@ -1107,7 +1107,7 @@ input.md-search__input::placeholder {
     padding: 1.5rem 0.5rem;
     color: var(--header-font-color);
     background-color: var(--md-default-bg-color);
-    border: 1px solid var(--footer-border-color);
+    border-bottom: 1px solid var(--footer-border-color);
     display: flex;
     align-items: center;
     font-weight: 400;
