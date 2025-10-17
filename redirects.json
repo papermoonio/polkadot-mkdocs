@@ -169,6 +169,10 @@
       "value": "/reference/tools/papi/"
     },
     {
+      "key": "/develop/toolkit/api-libraries/polkadart/",
+      "value": "/reference/tools/polkadart/"
+    },
+    {
       "key": "/develop/toolkit/api-libraries/polkadot-js-api/",
       "value": "/reference/tools/polkadot-js-api/"
     },
@@ -198,15 +202,23 @@
     },
     {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+      "value": "/reference/tools/paraspell/"
     },
     {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/overview/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+      "value": "/reference/tools/paraspell/"
     },
     {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/reference/",
-      "value": "/develop/toolkit/interoperability/paraspell-xcm-sdk/"
+      "value": "/reference/tools/paraspell/"
+    },
+    {
+      "key": "/develop/toolkit/interoperability/paraspell-xcm-sdk/",
+      "value": "/reference/tools/paraspell/"
+    },
+    {
+      "key": "/develop/toolkit/interoperability/paraspell-xcm-sdk/transfer-tokens-between-parachains/",
+      "value": "/chain-interactions/send-transactions/interoperability/transfer-assets-parachains/"
     },
     {
       "key": "/develop/toolkit/interoperability/xcm-tools/",
@@ -595,6 +607,10 @@
     {
       "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/register-local-asset/",
       "value": "/chain-interactions/token-operations/register-local-asset/"
+    },
+    {
+      "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/send-a-tx-paying-fee-different-token/",
+      "value": "/chain-interactions/send-transactions/pay-fees-with-different-tokens/"
     },
     {
       "key": "/tutorials/smart-contracts/demo-aplications/deploying-uniswap-v2/",
