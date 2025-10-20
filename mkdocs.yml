@@ -15,7 +15,6 @@ extra_javascript:
   - js/fix-created-date.js
   - js/connect-to-metamask.js
   - js/error-modal.js
-  - js/llms-shared.js
   - js/copy-to-llm.js
 # Extra CSS files
 extra_css:
@@ -123,7 +122,6 @@ plugins:
         - js/fix-created-date.js
         - js/connect-to-metamask.js
         - js/error-modal.js
-        - js/llms-shared.js
         - js/copy-to-llm.js
       css_files:
         - assets/stylesheets/extra.css
