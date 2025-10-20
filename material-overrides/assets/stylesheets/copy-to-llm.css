@@ -118,14 +118,6 @@
   flex: 1;
 }
 
-.copy-to-llm-dropdown-item .external-icon {
-  width: 0.8em;
-  height: 0.8em;
-  fill: currentColor;
-  opacity: 0.6;
-  margin-left: auto;
-}
-
 .copy-to-llm-dropdown-item:hover {
   background-color: var(--athens-gray);
 }
