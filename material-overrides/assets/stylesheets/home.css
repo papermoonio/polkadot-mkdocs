@@ -140,6 +140,10 @@ div.button-wrapper {
   border-color: var(--black);
 }
 
+.hero-section .button-wrapper a:first-child .md-button:hover {
+  border-color: var(--pink); 
+}
+
 /**
   Feature section styles
 **/
