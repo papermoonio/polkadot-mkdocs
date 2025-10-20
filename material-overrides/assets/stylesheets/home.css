@@ -13,9 +13,6 @@
   --home-card-fg-color: var(--storm-gray-950);
   --home-card-bg-color: var(--white);
   --home-card-border-color: var(--storm-gray-200);
-
-  /* Home buttons */
-  --home-button-border-color: var(--black);
 }
 
 [data-md-color-scheme="slate"][data-md-color-primary="indigo"] {
