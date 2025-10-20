@@ -136,6 +136,14 @@ div.button-wrapper {
   height: 100%;
 }
 
+.hero-section .button-wrapper a:first-child .md-button {
+  border-color: var(--black);
+}
+
+.hero-section .button-wrapper a:first-child .md-button:hover {
+  border-color: var(--pink); 
+}
+
 /**
   Feature section styles
 **/
