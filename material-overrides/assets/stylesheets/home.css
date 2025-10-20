@@ -10,7 +10,7 @@
 :root,
 [data-md-color-scheme="default"] {
   /* Home cards */
-  --home-card-font-color: var(--storm-gray-950);
+  --home-card-fg-color: var(--storm-gray-950);
   --home-card-bg-color: var(--white);
   --home-card-border-color: var(--storm-gray-200);
 
@@ -20,7 +20,7 @@
 
 [data-md-color-scheme="slate"][data-md-color-primary="indigo"] {
   /* Home cards */
-  --home-card-font-color: var(--storm-gray);
+  --home-card-fg-color: var(--storm-gray);
   --home-card-bg-color: var(--black);
   --home-card-border-color: var(--storm-gray);
 
@@ -185,7 +185,7 @@ div.button-wrapper {
 
 div.feature,
 .md-typeset a.feature {
-  color: var(--home-card-font-color);
+  color: var(--home-card-fg-color);
   flex: 1 1;
   border: 1px solid var(--home-card-border-color);
   border-radius: 16px;
@@ -257,7 +257,7 @@ div.feature h3,
   display: flex;
   gap: 0.5em;
   padding: 0.3em;
-  color: var(--home-card-font-color);
+  color: var(--home-card-fg-color);
   font-family: "Unbounded";
 }
 

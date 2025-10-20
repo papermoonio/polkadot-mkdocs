@@ -1024,10 +1024,7 @@ input.md-search__input::placeholder {
   }
 
   [data-md-color-scheme='default']
-  .md-nav--primary .md-nav__title .md-logo img[src$='#only-light'] {
-    display: inline-block;
-  }
-
+  .md-nav--primary .md-nav__title .md-logo img[src$='#only-light'],
   [data-md-color-scheme='slate']
   .md-nav--primary .md-nav__title .md-logo img[src$='#only-dark'] {
     display: inline-block;
