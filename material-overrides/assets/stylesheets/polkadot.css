@@ -55,7 +55,7 @@
   --md-typeset-table-color--light: #00000009;
   /* Header */
   --header-bg-color: #0000001a;
-  --header-font-color: var(--black);
+  --header-fg-color: var(--black);
   --header-menu-bg-color: var(--white);
   --header-menu-border-color: var(--storm-gray-200);
 
@@ -94,7 +94,7 @@
   --child-admo-border-color: var(--storm-gray-200);
 
   /* Nav list */
-  --nav-font-color: var(--storm-gray-800);
+  --nav-fg-color: var(--storm-gray-800);
   --nav-title-color: var(--storm-gray-900);
   --nav-hover-bg-color: var(--storm-gray-200);
 
@@ -106,7 +106,7 @@
   --tabbed-border-color: var(--athens-gray);
   --tabbed-active-color: var(--storm-gray-950);
   --tabbed-bg-color: var(--athens-gray);
-  --tabbed-font-color: var(--black);
+  --tabbed-fg-color: var(--black);
 
   /* Where to go next cards */
   --wtdn-card-border-color: var(--storm-gray-200);
@@ -135,7 +135,7 @@
 
   /* Header */
   --header-bg-color: #ffffff1a;
-  --header-font-color: var(--white);
+  --header-fg-color: var(--white);
   --header-menu-bg-color:rgb(26, 26, 26);
   --header-menu-border-color: var(--md-default-fg-color--lighter);
 
@@ -152,7 +152,7 @@
   --child-admo-border-color: var(--storm-gray-800);  
 
   /* Nav list */
-  --nav-font-color: var(--storm-gray-300);
+  --nav-fg-color: var(--storm-gray-300);
   --nav-title-color: var(--athens-gray);
   --nav-hover-bg-color: #21232e;
 
@@ -164,7 +164,7 @@
   --tabbed-border-color: var(--storm-gray-800);
   --tabbed-active-color: var(--storm-gray-050);
   --tabbed-bg-color: var(--storm-gray-900);
-  --tabbed-font-color: var(--white);
+  --tabbed-fg-color: var(--white);
 
   /* Where to go next cards */
   --wtdn-card-border-color: var(--storm-gray-950);
@@ -381,7 +381,7 @@
   }
 
   .md-header__button {
-    color: var(--header-font-color);
+    color: var(--header-fg-color);
   }
 
   .docs-badge,
@@ -440,7 +440,7 @@
 
 .md-tabs__item--custom {
   transition: border 0.3s ease;
-  color: var(--header-font-color);
+  color: var(--header-fg-color);
   height: var(--header-height);
   align-content: center;
 }
@@ -536,7 +536,7 @@
 
 .md-header__button.md-icon[for='__search'] svg path,
 .md-search__icon.md-icon svg path {
-  fill: var(--header-font-color);
+  fill: var(--header-fg-color);
 }
 
 .md-search__input {
@@ -556,7 +556,7 @@ input.md-search__input::placeholder {
 .md-header__option .md-header__button:hover,
 .md-header__button.md-icon[for='__search']:hover,
 .md-header__button.md-icon[for='__search']:active {
-  color: var(--header-font-color);
+  color: var(--header-fg-color);
   opacity: 1;
 }
 
@@ -717,7 +717,7 @@ input.md-search__input::placeholder {
     ~ .md-header
     .md-search__icon.md-icon[for="__search"]
     svg:nth-of-type(2) path {
-      stroke: var(--header-font-color);
+      stroke: var(--header-fg-color);
       fill: none;
   }
 
@@ -870,7 +870,7 @@ input.md-search__input::placeholder {
     padding-bottom: 4px;
     margin-top: 0.1em;
     margin-right: 0;
-    color: var(--nav-font-color);
+    color: var(--nav-fg-color);
   }
 
   [dir='ltr'] .md-nav--primary .md-nav__item > div.md-nav__link {
@@ -993,7 +993,7 @@ input.md-search__input::placeholder {
 
   .md-nav__icon.md-icon svg {
     fill: none;
-    stroke: var(--nav-font-color);
+    stroke: var(--nav-fg-color);
     height: 16px;
     stroke-width: 1px;
   }
@@ -1039,7 +1039,7 @@ input.md-search__input::placeholder {
   .md-nav--primary .md-nav__link,
   .md-nav--primary a.md-nav__link {
     padding: 0.3rem 0.8rem;
-    color: var(--header-font-color);
+    color: var(--header-fg-color);
   }
 
   .md-nav--primary .md-nav__link .md-nav__icon:after {
@@ -1060,7 +1060,7 @@ input.md-search__input::placeholder {
   .md-nav--primary .md-nav__item--active > .md-nav__link,
   .md-nav--primary .md-nav__item--active > .md-nav__link:hover,
   .md-nav__link[href]:hover {
-    color: var(--header-font-color);
+    color: var(--header-fg-color);
   }
 
   .md-nav--primary .md-nav__item--active > .md-nav__link {
@@ -1093,7 +1093,7 @@ input.md-search__input::placeholder {
   }
 
   .md-nav__icon.md-icon svg path{
-    stroke: var(--header-font-color);
+    stroke: var(--header-fg-color);
   }
 }
 
@@ -1102,7 +1102,7 @@ input.md-search__input::placeholder {
   .md-nav--primary .md-nav__title {
     height: 0;
     padding: 1.5rem 0.5rem;
-    color: var(--header-font-color);
+    color: var(--header-fg-color);
     background-color: var(--md-default-bg-color);
     border-bottom: 1px solid var(--footer-border-color);
     display: flex;
@@ -1190,7 +1190,7 @@ input.md-search__input::placeholder {
   }
 
   .md-nav--secondary .md-nav__link > * {
-    color: var(--nav-font-color);
+    color: var(--nav-fg-color);
     font-size: 16px;
   }
 }
@@ -1724,7 +1724,7 @@ details.interface > summary::before {
 
 .md-typeset table:not([class]) th {
   background-color: var(--tabbed-bg-color);
-  color: var(--tabbed-font-color);
+  color: var(--tabbed-fg-color);
 }
 
 .md-typeset table:not([class]) td {
@@ -1770,7 +1770,7 @@ details.interface > summary::before {
 .md-typeset .tabbed-labels > label,
 .md-typeset .tabbed-labels > label > [href]:first-child,
 .md-typeset .tabbed-labels > label > a > code {
-  color: var(--tabbed-font-color);
+  color: var(--tabbed-fg-color);
 }
 
 .md-typeset .tabbed-labels--linked > label > a {
@@ -1819,7 +1819,7 @@ details.interface > summary::before {
 .md-feedback__title {
   font-weight: 400;
   font-size: 16px;
-  color: var(--nav-font-color);
+  color: var(--nav-fg-color);
   margin: 0;
 }
 
@@ -1831,7 +1831,7 @@ details.interface > summary::before {
 
 .md-feedback__icon,
 .md-feedback__list:hover .md-icon:not(:disabled) {
-  color: var(--nav-font-color);
+  color: var(--nav-fg-color);
 }
 
 .md-feedback__icon:not(:disabled).md-icon:hover {
@@ -1995,7 +1995,7 @@ span.badge.advanced {
 .md-source-file {
   display: flex;
   flex-direction: column;
-  color: var(--nav-font-color);
+  color: var(--nav-fg-color);
   margin-top: 40px;
 }
 
@@ -2022,7 +2022,7 @@ span.badge.advanced {
 }
 
 .md-content__button.md-icon svg {
-  fill: var(--nav-font-color);
+  fill: var(--nav-fg-color);
   transition: fill 0.3s ease;
 }
 
