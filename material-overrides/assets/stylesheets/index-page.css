@@ -1,3 +1,14 @@
+:root,
+[data-md-color-scheme="default"] {
+  /* Index cards */
+  --index-card-border-color: var(--storm-gray-200);
+}
+
+[data-md-color-scheme="slate"][data-md-color-primary="indigo"] {
+  /* Index cards */
+  --index-card-border-color: var(--storm-gray-950);
+}
+
 .subsection-wrapper {
   display: flex;
   gap: 1em;
@@ -5,7 +16,7 @@
 }
 
 .subsection-wrapper .card {
-  border: 1px solid var(--storm-gray-200);
+  border: 1px solid var(--index-card-border-color);
   border-radius: 16px;
   text-decoration: none;
   align-content: start;
@@ -59,6 +70,7 @@
 }
 
 .subsection-wrapper .card hr {
+  border-color: var(--index-card-border-color);
   margin-bottom: 0.5em;
   margin-top: 0.5em;
 }
