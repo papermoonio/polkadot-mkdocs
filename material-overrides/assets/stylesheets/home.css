@@ -20,7 +20,7 @@
 
 [data-md-color-scheme="slate"][data-md-color-primary="indigo"] {
   /* Home cards */
-  --home-card-fg-color: var(--storm-gray);
+  --home-card-fg-color: var(--storm-gray-050);
   --home-card-bg-color: var(--black);
   --home-card-border-color: var(--storm-gray);
 
