@@ -20,9 +20,6 @@
   --home-card-fg-color: var(--storm-gray-050);
   --home-card-bg-color: var(--black);
   --home-card-border-color: var(--storm-gray);
-
-  /* Home buttons */
-  --home-button-border-color: var(--white);
 }
 
 
