@@ -15,9 +15,9 @@
 [data-md-color-scheme="slate"][data-md-color-primary="indigo"] {
   /* LLM wdiget dark mode */
   --llm-widget-fg-color: var(--storm-gray-050);
-  --llm-widget-bg-color: var(--black);
+  --llm-widget-bg-color: var(--header-bg-color);
   --llm-widget-border-color: var(--storm-gray-200-transparent);
-  --llm-widget-bg-hover: var(--storm-gray-200);
+  --llm-widget-bg-hover: var(--nav-hover-bg-color);
   --llm-widget-bg-active: var(--athens-gray);
   --llm-widget-icon-fill: var(--white);
 }
@@ -67,7 +67,7 @@
 
 .copy-to-llm-left:hover {
   background-color: var(--llm-widget-bg-hover);
-  color: var(--llm-widget-bg-color);
+  color: var(--llm-widget-fg-color);
 }
 
 /* Right button (dropdown) */
@@ -89,6 +89,8 @@
 }
 
 /* Icons */
+
+/* Color of copy icon */
 .copy-to-llm-section .copy-icon {
   width: 1.1em;
   height: 1.1em;
@@ -96,10 +98,12 @@
   margin-right: 2px;
 }
 
+/* Color of copy icon on hover */
 .copy-to-llm-section:hover .copy-icon {
-  fill: var(--llm-widget-bg-color);
+  fill: var(--llm-widget-fg-color);
 }
 
+/* Color, size, and animation for chevron */
 .copy-to-llm-section .chevron-icon {
   width: 1em;
   height: 1em;
@@ -107,12 +111,14 @@
   fill: var(--llm-widget-icon-fill);
 }
 
+/* Color of chevron while left button is hovered */
 .copy-to-llm-section:hover .chevron-icon {
-  fill: var(--llm-widget-bg-color);
+  fill: var(--llm-widget-fg-color);
 }
 
+/* Color of chevron while left button is active */
 .copy-to-llm-right.active svg.chevron-icon {
-  fill: var(--llm-widget-bg-color);
+  fill: var(--llm-widget-fg-color);
 }
 
 /* Dropdown menu */
@@ -142,9 +148,7 @@
   gap: 0.5rem;
   width: 100%;
   padding: 0.475rem 0.625rem;
-  background: none;
   border: none;
-  border-radius: 3px;
   text-align: left;
   font-size: 16px;
   cursor: pointer;
@@ -159,7 +163,7 @@
 
 .copy-to-llm-dropdown-item:hover {
   background-color: var(--llm-widget-bg-hover);
-  color: var(--llm-widget-bg-color);
+  color: var(--llm-widget-fg-color);
 }
 
 .copy-to-llm-dropdown-item:active {
@@ -175,7 +179,7 @@
 }
 
 .copy-to-llm-dropdown-item:hover svg {
-  fill: var(--llm-widget-bg-color);
+  fill: var(--llm-widget-fg-color);
 }
 
 /* Loading spinner animation */
