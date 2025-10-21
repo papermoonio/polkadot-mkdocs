@@ -36,7 +36,7 @@
       {% endif %}
       {% if not indexes %}
         <label class="md-nav__link" for="{{ path }}" id="{{ path }}_label" tabindex="0">
-          {{ nav_item.title }}
+          {{ render_title_with_icon(nav_item.title, "twemoji nav-title") | safe }}
           <span class="md-nav__icon md-icon"></span>
         </label>
       {% else %}
@@ -84,13 +84,13 @@
       {% endif %}
       {% if toc %}
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          {{ nav_item.title }}
+          {{ render_title_with_icon(nav_item.title, "twemoji nav-title") | safe }}
           <span class="md-nav__icon md-icon"></span>
         </label>
       {% endif %}
       <div class="md-nav__link-wrapper {{ class }}">
         <a href="{{ nav_item.url | url }}" class="md-nav__link md-nav__link--active">
-          {{ render_title_with_icon(nav_item.title, "twemoji nav-title") }}
+          {{ render_title_with_icon(nav_item.title, "twemoji nav-title") | safe }}
         </a>
       </div>
       {% if toc %}
@@ -100,7 +100,7 @@
   {% else %}
     <li class="{{ class }}">
       <a href="{{ nav_item.url | url }}" class="md-nav__link">
-        {{ render_title_with_icon(nav_item.title, "twemoji nav-title") }}
+        {{ render_title_with_icon(nav_item.title, "twemoji nav-title") | safe }}
       </a>
     </li>
   {% endif %}

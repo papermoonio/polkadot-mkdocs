@@ -37,7 +37,8 @@ theme:
   name: material
   custom_dir: material-overrides
   favicon: assets/images/favicon.webp
-  logo: assets/images/logo.webp
+  logo_light: assets/images/logo-light.webp
+  logo_dark: assets/images/logo-dark.webp
   icon:
     edit: material/github
     admonition:
@@ -61,8 +62,17 @@ theme:
     - navigation.sections # Render top-level sections as groups in the sidebar
     - navigation.indexes # Index pages
     - navigation.top # Show the back to top button since we don't keep top nav sticky
-
-# Extensions
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
 markdown_extensions:
   - abbr
   - admonition
