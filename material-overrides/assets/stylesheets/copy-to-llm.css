@@ -1,5 +1,26 @@
 /* Copy to LLM Styles */
-/* From: https://github.com/leonardocustodio/mkdocs-copy-to-llm/blob/main/mkdocs_copy_to_llm/assets/css/copy-to-llm.css */
+/* Modified from: https://github.com/leonardocustodio/mkdocs-copy-to-llm/blob/main/mkdocs_copy_to_llm/assets/css/copy-to-llm.css */
+
+:root,
+[data-md-color-scheme="default"] {
+  /* LLM widget light mode */
+  --llm-widget-fg-color: var(--storm-gray-950);
+  --llm-widget-bg-color: var(--white);
+  --llm-widget-border-color: var(--storm-gray-200);
+  --llm-widget-bg-hover: var(--storm-gray-200);
+  --llm-widget-bg-active: var(--athens-gray);
+  --llm-widget-icon-fill: var(--black);
+}
+
+[data-md-color-scheme="slate"][data-md-color-primary="indigo"] {
+  /* LLM wdiget dark mode */
+  --llm-widget-fg-color: var(--storm-gray-050);
+  --llm-widget-bg-color: var(--black);
+  --llm-widget-border-color: var(--storm-gray-200-transparent);
+  --llm-widget-bg-hover: var(--storm-gray-200);
+  --llm-widget-bg-active: var(--athens-gray);
+  --llm-widget-icon-fill: var(--white);
+}
 
 /* H1 and copy button wrapper */
 .h1-copy-wrapper {
@@ -18,7 +39,7 @@
 .copy-to-llm-split-container {
   display: inline-flex;
   margin-left: auto;
-  border: 1px solid var(--storm-gray-300);
+  border: 1px solid var(--llm-widget-border-color);
   border-radius: 6px;
   overflow: visible;
   position: relative;
@@ -27,7 +48,8 @@
 /* Common styles for both parts */
 .copy-to-llm-section {
   padding: 0.6em 0.9em;
-  background-color: var(--white);
+  background-color: var(--llm-widget-bg-color);
+  color: var(--llm-widget-fg-color);
   border: none;
   cursor: pointer;
   transition: all 0.2s;
@@ -39,12 +61,13 @@
 
 /* Left button (copy) */
 .copy-to-llm-left {
-  border-right: 1px solid var(--storm-gray-300);
+  border-right: 1px solid var(--llm-widget-border-color);
   border-radius: 6px 0 0 6px;
 }
 
 .copy-to-llm-left:hover {
-  background-color: var(--storm-gray-200);
+  background-color: var(--llm-widget-bg-hover);
+  color: var(--llm-widget-bg-color);
 }
 
 /* Right button (dropdown) */
@@ -57,7 +80,8 @@
 
 .copy-to-llm-right:hover,
 .copy-to-llm-right.active {
-  background-color: var(--storm-gray-200);
+  background-color: var(--llm-widget-bg-hover);
+  color: var(--llm-widget-bg-color);
 }
 
 .copy-to-llm-right:focus {
@@ -68,12 +92,23 @@
 .copy-to-llm-section .copy-icon {
   width: 1.1em;
   height: 1.1em;
+  fill: var(--llm-widget-icon-fill);
+  margin-right: 2px;
+}
+
+.copy-to-llm-section:hover .copy-icon {
+  fill: var(--llm-widget-bg-color);
 }
 
 .copy-to-llm-section .chevron-icon {
   width: 1em;
   height: 1em;
   transition: transform 0.2s;
+  fill: var(--llm-widget-icon-fill);
+}
+
+.copy-to-llm-section:hover .chevron-icon {
+  fill: var(--llm-widget-bg-color);
 }
 
 /* Dropdown menu */
@@ -81,8 +116,8 @@
   position: absolute;
   top: calc(100% + 4px);
   right: 0;
-  background-color: var(--white);
-  border: 1px solid var(--storm-gray-300);
+  background-color: var(--llm-widget-bg-color);
+  border: 1px solid var(--llm-widget-border-color);
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   min-width: 160px;
@@ -119,17 +154,24 @@
 }
 
 .copy-to-llm-dropdown-item:hover {
-  background-color: var(--athens-gray);
+  background-color: var(--llm-widget-bg-hover);
+  color: var(--llm-widget-bg-color);
 }
 
 .copy-to-llm-dropdown-item:active {
-  background-color: var(--storm-gray-200);
+  background-color: var(--llm-widget-bg-active);
+  color: var(--llm-widget-bg-color);
 }
 
 .copy-to-llm-dropdown-item svg {
   width: 1em;
   height: 1em;
   flex-shrink: 0;
+  fill: var(--llm-widget-icon-fill);
+}
+
+.copy-to-llm-dropdown-item:hover svg {
+  fill: var(--llm-widget-bg-color);
 }
 
 /* Loading spinner animation */
