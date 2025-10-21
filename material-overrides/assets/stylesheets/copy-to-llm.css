@@ -111,6 +111,10 @@
   fill: var(--llm-widget-bg-color);
 }
 
+.copy-to-llm-right.active svg.chevron-icon {
+  fill: var(--llm-widget-bg-color);
+}
+
 /* Dropdown menu */
 .copy-to-llm-dropdown {
   position: absolute;
