@@ -1742,19 +1742,6 @@ details.interface > summary::before {
   text-align: center;
 }
 
-/** Tabbed element styling **/
-/* Tables in tabs */
-.tabbed-content .md-typeset__scrollwrap {
-  margin: 0;
-}
-
-.tabbed-content .md-typeset__table {
-  display: inline-table;
-  margin-bottom: 0;
-  padding: 0.5em;
-  width: 100%;
-}
-
 /* Tabbed Styling */
 .md-typeset .tabbed-set {
   border-radius: 16px;
@@ -1955,6 +1942,24 @@ details.interface > summary::before {
 .md-typeset .tabbed-block > .highlight:first-child > .filename ~ pre > code {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+}
+
+/* Tables in tabs */
+.md-typeset .tabbed-block > .md-typeset__scrollwrap {
+  margin: 0;
+  border-radius: 16px;
+}
+
+.md-typeset .tabbed-content .md-typeset__table {
+  padding: 0;
+  width: 100%;
+  display: inline-table;
+  margin-bottom: 0;
+}
+
+.md-typeset .tabbed-content .md-typeset__table table:not([class]) {
+  border: none;
+  display: inline-table;
 }
 
 /** Feedback widget styling **/
