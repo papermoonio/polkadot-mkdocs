@@ -1742,6 +1742,13 @@ details.interface > summary::before {
   text-align: center;
 }
 
+/** Icons in tables styling **/
+/* Download LLM Files table */
+.actions {
+  display: flex;
+  gap: 4px;
+}
+
 /** Tabbed element styling **/
 /* Tables in tabs */
 .tabbed-content .md-typeset__scrollwrap {

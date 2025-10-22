@@ -15,11 +15,13 @@ extra_javascript:
   - js/fix-created-date.js
   - js/connect-to-metamask.js
   - js/error-modal.js
+  - js/copy-to-llm.js
 # Extra CSS files
 extra_css:
   - assets/stylesheets/extra.css
   - assets/stylesheets/terminal.css
   - assets/stylesheets/timeline-neoteroi.css
+  - assets/stylesheets/copy-to-llm.css
 
 # Diagnostic messages when validating links to documents
 validation:
@@ -130,10 +132,12 @@ plugins:
         - js/fix-created-date.js
         - js/connect-to-metamask.js
         - js/error-modal.js
+        - js/copy-to-llm.js
       css_files:
         - assets/stylesheets/extra.css
         - assets/stylesheets/terminal.css
         - assets/stylesheets/timeline-neoteroi.css
+        - assets/stylesheets/copy-to-llm.css
       scoped_css_templates:
         home.html:
           - assets/stylesheets/home.css
