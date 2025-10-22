@@ -32,7 +32,7 @@
   --header-height: 54px;
   --header-gap: 24px;
 
-  --md-search-result-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 18'><path d='M14.582 1.49994C18.1028 1.49994 20.957 4.35412 20.957 7.87494C20.957 9.36527 20.4438 10.7347 19.5869 11.8203L22.9863 15.2197L23.0381 15.2763C23.2783 15.5709 23.2609 16.0056 22.9863 16.2802C22.7117 16.5548 22.277 16.5722 21.9824 16.332L21.9258 16.2802L18.5264 12.8808C17.441 13.7372 16.0719 14.2499 14.582 14.2499C11.0612 14.2499 8.20703 11.3958 8.20703 7.87494C8.20703 4.35412 11.0612 1.49994 14.582 1.49994ZM14.582 2.99994C11.8896 2.99994 9.70703 5.18255 9.70703 7.87494C9.70703 10.5673 11.8896 12.7499 14.582 12.7499C15.9245 12.7499 17.1399 12.2069 18.0215 11.329C18.0237 11.3267 18.026 11.3245 18.0283 11.3222C18.0308 11.3198 18.0327 11.3168 18.0352 11.3144C18.9133 10.4327 19.457 9.21766 19.457 7.87494C19.457 5.18255 17.2744 2.99994 14.582 2.99994Z'/></svg>");
+  --md-search-result-icon: url('data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 18'><path d='M14.582 1.49994C18.1028 1.49994 20.957 4.35412 20.957 7.87494C20.957 9.36527 20.4438 10.7347 19.5869 11.8203L22.9863 15.2197L23.0381 15.2763C23.2783 15.5709 23.2609 16.0056 22.9863 16.2802C22.7117 16.5548 22.277 16.5722 21.9824 16.332L21.9258 16.2802L18.5264 12.8808C17.441 13.7372 16.0719 14.2499 14.582 14.2499C11.0612 14.2499 8.20703 11.3958 8.20703 7.87494C8.20703 4.35412 11.0612 1.49994 14.582 1.49994ZM14.582 2.99994C11.8896 2.99994 9.70703 5.18255 9.70703 7.87494C9.70703 10.5673 11.8896 12.7499 14.582 12.7499C15.9245 12.7499 17.1399 12.2069 18.0215 11.329C18.0237 11.3267 18.026 11.3245 18.0283 11.3222C18.0308 11.3198 18.0327 11.3168 18.0352 11.3144C18.9133 10.4327 19.457 9.21766 19.457 7.87494C19.457 5.18255 17.2744 2.99994 14.582 2.99994Z'/></svg>');
 }
 
 :root,
@@ -1756,40 +1756,170 @@ details.interface > summary::before {
 }
 
 /* Tabbed Styling */
-.md-typeset .tabbed-labels {
-  box-shadow: none;
-  padding: 0.2em;
-}
-
 .md-typeset .tabbed-set {
-  background: var(--tabbed-bg-color);
   border-radius: 16px;
 }
 
-.md-typeset .tabbed-content {
-  background: var(--md-default-bg-color);
-  border: 1px solid var(--tabbed-border-color);
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
+.md-typeset .tabbed-labels {
+  box-shadow: none;
+  margin-bottom: 16px;
+  border-radius: 100px;
+  border: 1px solid #c6cfdb;
+  width: fit-content;
 }
 
-.md-typeset .tabbed-labels > label,
-.md-typeset .tabbed-labels > label > [href]:first-child,
+.js .md-typeset .tabbed-labels:before {
+  background-color: #282b39;
+  border-radius: 100px;
+  height: 100%;
+  z-index: -1;
+}
+
+.md-typeset .tabbed-labels > label {
+  border-bottom: none;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.md-typeset .tabbed-labels--linked > label > a {
+  padding: 12px 24px;
+  text-decoration: none;
+}
+
+.md-typeset .tabbed-labels > label > [href]:first-child {
+  color: #282b39;
+}
+
 .md-typeset .tabbed-labels > label > a > code {
   color: var(--tabbed-fg-color);
 }
 
-.md-typeset .tabbed-labels--linked > label > a {
-  text-decoration: none;
+.md-typeset .tabbed-content {
+  background: var(--md-default-bg-color);
+  border: 1px solid #c6cfdb;
+  border-radius: 16px;
 }
 
-.js .md-typeset .tabbed-labels:before {
-  background: var(--tabbed-active-color);
-  height: 4px;
-}
-
-.md-typeset .tabbed-labels > label:hover {
-  color: var(--white);
+.md-typeset
+  .tabbed-set
+  > input:first-child:checked
+  ~ .tabbed-labels
+  > :first-child
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(10):checked
+  ~ .tabbed-labels
+  > :nth-child(10),
+.md-typeset
+  .tabbed-set
+  > input:nth-child(11):checked
+  ~ .tabbed-labels
+  > :nth-child(11)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(12):checked
+  ~ .tabbed-labels
+  > :nth-child(12)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(13):checked
+  ~ .tabbed-labels
+  > :nth-child(13)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(14):checked
+  ~ .tabbed-labels
+  > :nth-child(14)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(15):checked
+  ~ .tabbed-labels
+  > :nth-child(15)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(16):checked
+  ~ .tabbed-labels
+  > :nth-child(16)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(17):checked
+  ~ .tabbed-labels
+  > :nth-child(17)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(18):checked
+  ~ .tabbed-labels
+  > :nth-child(18)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(19):checked
+  ~ .tabbed-labels
+  > :nth-child(19)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(2):checked
+  ~ .tabbed-labels
+  > :nth-child(2)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(20):checked
+  ~ .tabbed-labels
+  > :nth-child(20)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(3):checked
+  ~ .tabbed-labels
+  > :nth-child(3)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(4):checked
+  ~ .tabbed-labels
+  > :nth-child(4)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(5):checked
+  ~ .tabbed-labels
+  > :nth-child(5)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(6):checked
+  ~ .tabbed-labels
+  > :nth-child(6)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(7):checked
+  ~ .tabbed-labels
+  > :nth-child(7)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(8):checked
+  ~ .tabbed-labels
+  > :nth-child(8)
+  a,
+.md-typeset
+  .tabbed-set
+  > input:nth-child(9):checked
+  ~ .tabbed-labels
+  > :nth-child(9)
+  a {
+  color: #ffffff;
 }
 
 /* Add margin to all items nested inside a tabbed element */
@@ -1810,10 +1940,21 @@ details.interface > summary::before {
 }
 
 /* Adjust border of code elements nested inside tabbed elements */
+.md-typeset .tabbed-content > *,
+.md-typeset .tabbed-block > .highlight pre code,
 .md-typeset .tabbed-block > .highlight:first-child > pre > code,
 .md-typeset .tabbed-block > pre:first-child > code {
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
+  border-radius: 16px;
+}
+
+.md-typeset .tabbed-block > .highlight:first-child > .filename {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.md-typeset .tabbed-block > .highlight:first-child > .filename ~ pre > code {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 /** Feedback widget styling **/
