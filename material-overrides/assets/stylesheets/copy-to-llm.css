@@ -4,22 +4,22 @@
 :root,
 [data-md-color-scheme="default"] {
   /* LLM widget light mode */
-  --llm-widget-fg-color: var(--storm-gray-950);
-  --llm-widget-bg-color: var(--white);
-  --llm-widget-border-color: var(--storm-gray-200);
+  --llm-widget-fg-color: var(--header-fg-color);
+  --llm-widget-bg-color: var(--header-menu-bg-color);
+  --llm-widget-border-color: var(--header-menu-border-color);
   --llm-widget-bg-hover: var(--storm-gray-200);
   --llm-widget-bg-active: var(--athens-gray);
-  --llm-widget-icon-fill: var(--black);
+  --llm-widget-icon-fill: var(--header-fg-color);
 }
 
 [data-md-color-scheme="slate"][data-md-color-primary="indigo"] {
   /* LLM wdiget dark mode */
-  --llm-widget-fg-color: var(--storm-gray-050);
+  --llm-widget-fg-color: var(--header-fg-color);
   --llm-widget-bg-color: var(--header-menu-bg-color);
-  --llm-widget-border-color: var(--storm-gray-200-transparent);
+  --llm-widget-border-color: var(--header-menu-border-color);
   --llm-widget-bg-hover: var(--nav-hover-bg-color);
   --llm-widget-bg-active: var(--athens-gray);
-  --llm-widget-icon-fill: var(--white);
+  --llm-widget-icon-fill: var(--header-fg-color);
 }
 
 /* H1 and copy button wrapper */
