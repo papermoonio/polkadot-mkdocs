@@ -1893,6 +1893,8 @@ div.mermaid {
 }
 
 /* Card styling (as seen in Develop > Integrations section) */
+
+
 .md-typeset .grid.cards > ul > li {
   display: flex;
   flex-direction: column;
@@ -1903,6 +1905,10 @@ div.mermaid {
 .md-typeset .grid.cards > ul > li:hover {
   border: 0.05rem solid var(--wtdn-card-border-color);
   box-shadow: unset;
+}
+
+[dir="ltr"] .md-typeset .grid.cards ul li {
+    margin-left: 0;
 }
 
 .md-typeset .grid.cards .twemoji {
@@ -1916,9 +1922,21 @@ div.mermaid {
 }
 
 .md-typeset .grid.cards h3 {
-  margin: 0;
+  margin: 0.5em 1em 0 0.5em;
   font-size: 1.15em;
+  flex-direction: column;
+  align-items: flex-start;
   display: flex;
+  gap: 0.5em;
+}
+
+.md-typeset .grid.cards > ul > li > hr {
+  display: none;
+}
+
+.md-typeset .grid.cards ul ul{
+  list-style: none !important;
+  margin-left: 0.5em;
 }
 
 .md-typeset .grid.cards.links > ul > li > a {
