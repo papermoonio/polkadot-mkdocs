@@ -1498,11 +1498,9 @@ html .md-footer-meta.md-typeset .md-social a:hover {
 
 .footer-link-wrapper.next {
   align-items: flex-end;
-  text-decoration: none;
 }
 
 .footer-link-wrapper.prev {
-  text-decoration: none;
 }
 
 .footer-link-wrapper.next .md-footer__link {
@@ -1525,7 +1523,6 @@ html .md-footer-meta.md-typeset .md-social a:hover {
 
 .footer-link-wrapper .md-footer__link:hover {
   color: var(--pink);
-  text-decoration: none;
 }
 
 .md-footer__link--next .md-footer__button {
