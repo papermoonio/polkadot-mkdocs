@@ -1487,14 +1487,50 @@ html .md-footer-meta.md-typeset .md-social a:hover {
 }
 
 .footer-link-wrapper {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
   max-width: calc(50% - 20px);
+  color: var(--md-default-fg-color);
+  text-decoration: none;
+}
+
+.footer-link-wrapper:visited,
+.footer-link-wrapper:hover,
+.footer-link-wrapper:focus {
+  color: var(--md-default-fg-color);
+  text-decoration: none;
 }
 
 .footer-link-wrapper.next {
-  display: flex;
-  flex-direction: column;
   align-items: flex-end;
+  text-decoration: none;
+}
+
+.footer-link-wrapper.prev {
+  text-decoration: none;
+}
+
+.footer-link-wrapper.next .md-footer__link {
+  text-align: right;
+}
+
+.footer-link-wrapper .md-footer__button {
+color:var(--md-default-fg-color);
+}
+
+.footer-link-wrapper .md-footer__direction {
+  color: inherit;
+}
+
+.footer-link-wrapper .md-footer__link {
+  color: var(--pink);
+  font-weight: 600;
+  margin-top: 0;
+}
+
+.footer-link-wrapper .md-footer__link:hover {
+  color: var(--pink);
+  text-decoration: none;
 }
 
 .md-footer__link--next .md-footer__button {
