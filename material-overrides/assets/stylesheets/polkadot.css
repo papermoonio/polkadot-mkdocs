@@ -1486,7 +1486,6 @@ html .md-footer-meta.md-typeset .md-social a:hover {
   flex-direction: column;
   max-width: calc(50% - 20px);
   color: var(--md-default-fg-color);
-  text-decoration: none;
 }
 
 .footer-link-wrapper:visited,
@@ -1498,9 +1497,11 @@ html .md-footer-meta.md-typeset .md-social a:hover {
 
 .footer-link-wrapper.next {
   align-items: flex-end;
+  text-decoration: none;
 }
 
 .footer-link-wrapper.prev {
+  text-decoration: none;
 }
 
 .footer-link-wrapper.next .md-footer__link {
