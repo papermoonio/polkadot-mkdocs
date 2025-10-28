@@ -1403,13 +1403,8 @@ html .md-footer-meta.md-typeset .md-social a {
 
 html .md-footer-meta.md-typeset .md-social a:focus,
 html .md-footer-meta.md-typeset .md-social a:hover {
-  background-color: #d5d4d8;
-  border-radius: 9999px;
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  transition-duration: 0.5s;
-  transition-property: color, background-color, border-color,
-    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
-    backdrop-filter;
+  color: var(--pink);
+  opacity: 1;
 }
 
 .md-social__link {
