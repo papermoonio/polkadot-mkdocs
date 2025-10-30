@@ -2144,8 +2144,8 @@ body[data-md-color-scheme='slate'] article.md-content__inner.md-typeset img {
 }
 
 .error-modal {
-  background-color: var(--storm-gray-200);
-  border: 1px solid var(--storm-gray-300);
+  background-color: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color);
   border-radius: 16px;
   margin: 15% auto;
   font-size: 2em;
@@ -2187,7 +2187,7 @@ body[data-md-color-scheme='slate'] article.md-content__inner.md-typeset img {
 .md-typeset .md-button.disabled-button:hover {
   cursor: default;
   background-color: var(--black);
-  border-color: var(--black);
+  border-color: var(--button-border-color);
   text-decoration: none;
   text-overflow: ellipsis;
   overflow: hidden;
