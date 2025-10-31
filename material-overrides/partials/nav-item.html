@@ -54,25 +54,34 @@
           {% endif %}
         </div>
       {% endif %}
-      <nav class="md-nav" data-md-level="{{ level }}" aria-labelledby="{{ path }}_label" aria-expanded="{{ nav_item.active | tojson }}">
-        <label class="md-nav__title" for="{{ path }}">
-          <span class="md-nav__icon md-icon"></span>
-          {{nav_item.title}}
-        </label>
-        <div class="nav-wrapper">
-          {% if page %}
-            {% if indexes[0] %}
-              <ul class="md-nav__list {{ indexes[0].url.replace('/', '-') }}" data-md-scrollfix>
-            {% endif %}
-          {% endif %}
-          {% for nav_item in nav_item.children %}
-            {% if not indexes or nav_item != indexes | first %}
-              {{ render(nav_item, path ~ "_" ~ loop.index, level + 1) }}
-            {% endif %}
-          {% endfor %}
-          </ul>
-        </div>
-      </nav>
+
+      {% set visible_children = [] %}
+      {% for child in nav_item.children %}
+        {% if not indexes or child != indexes | first %}
+          {% set _ = visible_children.append(child) %}
+        {% endif %}
+      {% endfor %}
+
+      {% if visible_children | length > 0 %}
+        <nav class="md-nav"
+             data-md-level="{{ level }}"
+             aria-labelledby="{{ path }}_label"
+             aria-expanded="{{ nav_item.active | tojson }}">
+
+          <label class="md-nav__title" for="{{ path }}">
+            <span class="md-nav__icon md-icon"></span>
+            {{ nav_item.title }}
+          </label>
+
+          <div class="nav-wrapper">
+            <ul class="md-nav__list {{ indexes[0].url.replace('/', '-') if indexes and indexes[0] else '' }}" data-md-scrollfix>
+              {% for child in visible_children %}
+                {{ render(child, path ~ "_" ~ loop.index, level + 1) }}
+              {% endfor %}
+            </ul>
+          </div>
+        </nav>
+      {% endif %}
     </li>
   {% elif nav_item == page %}
     <li class="{{ class }}">
