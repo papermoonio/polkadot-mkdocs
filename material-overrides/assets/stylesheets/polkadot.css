@@ -1893,8 +1893,6 @@ div.mermaid {
 }
 
 /* Card styling (as seen in Develop > Integrations section) */
-
-
 .md-typeset .grid.cards > ul > li {
   display: flex;
   flex-direction: column;
