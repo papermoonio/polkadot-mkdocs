@@ -1924,10 +1924,7 @@ div.mermaid {
 .md-typeset .grid.cards h3 {
   margin: 0.5em 1em 0 0.5em;
   font-size: 1.15em;
-  flex-direction: column;
-  align-items: flex-start;
   display: flex;
-  gap: 0.5em;
 }
 
 .md-typeset .grid.cards > ul > li > hr {
