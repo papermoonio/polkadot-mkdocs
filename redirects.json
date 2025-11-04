@@ -373,6 +373,30 @@
       "value": "/parachains/testing/fork-a-parachain/"
     },
     {
+      "key": "/polkadot-protocol/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
+      "key": "/polkadot-protocol/architecture/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
+      "key": "/polkadot-protocol/architecture/parachains/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
+      "key": "/polkadot-protocol/architecture/parachains/consensus/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
+      "key": "/polkadot-protocol/architecture/parachains/overview/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
+      "key": "/polkadot-protocol/architecture/polkadot-chain/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
       "key": "/polkadot-protocol/architecture/polkadot-chain/agile-coretime/",
       "value": "/reference/polkadot-hub/consensus-and-security/agile-coretime/"
     },
@@ -389,6 +413,10 @@
       "value": "/reference/polkadot-hub/consensus-and-security/pos-consensus/"
     },
     {
+      "key": "/polkadot-protocol/architecture/system-chains/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
       "key": "/polkadot-protocol/architecture/system-chains/asset-hub/",
       "value": "/reference/polkadot-hub/assets-and-smart-contracts/"
     },
@@ -401,12 +429,20 @@
       "value": "/reference/polkadot-hub/collectives-and-daos/"
     },
     {
+      "key": "/polkadot-protocol/architecture/system-chains/coretime/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
+      "key": "/polkadot-protocol/architecture/system-chains/overview/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
       "key": "/polkadot-protocol/architecture/system-chains/people/",
       "value": "/reference/polkadot-hub/people-and-identity/"
     },
     {
       "key": "/polkadot-protocol/basics/",
-      "value": "/polkadot-protocol/parachain-basics/"
+      "value": "TODO: UPDATE_ME"
     },
     {
       "key": "/polkadot-protocol/basics/accounts/",
@@ -414,7 +450,7 @@
     },
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/",
-      "value": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/"
+      "value": "TODO: UPDATE_ME"
     },
     {
       "key": "/polkadot-protocol/basics/blocks-transactions-fees/blocks/",
@@ -457,6 +493,10 @@
       "value": "/reference/glossary/"
     },
     {
+      "key": "/polkadot-protocol/onchain-governance/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
       "key": "/polkadot-protocol/onchain-governance/origins-tracks/",
       "value": "/reference/governance/origins-tracks/"
     },
@@ -465,8 +505,16 @@
       "value": "/reference/governance/"
     },
     {
+      "key": "/polkadot-protocol/parachain-basics/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
       "key": "/polkadot-protocol/parachain-basics/accounts/",
       "value": "/reference/parachains/accounts/"
+    },
+    {
+      "key": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/",
+      "value": "TODO: UPDATE_ME"
     },
     {
       "key": "/polkadot-protocol/parachain-basics/blocks-transactions-fees/blocks/",
@@ -509,12 +557,28 @@
       "value": "/reference/parachains/randomness/"
     },
     {
+      "key": "/polkadot-protocol/smart-contract-basics/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
       "key": "/polkadot-protocol/smart-contract-basics/accounts/",
       "value": "/smart-contracts/for-eth-devs/accounts/"
     },
     {
       "key": "/polkadot-protocol/smart-contract-basics/blocks-transactions-fees/",
       "value": "/smart-contracts/for-eth-devs/blocks-transactions-fees/"
+    },
+    {
+      "key": "/polkadot-protocol/smart-contract-basics/evm-vs-polkavm/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
+      "key": "/polkadot-protocol/smart-contract-basics/networks/",
+      "value": "TODO: UPDATE_ME"
+    },
+    {
+      "key": "/polkadot-protocol/smart-contract-basics/overview/",
+      "value": "TODO: UPDATE_ME"
     },
     {
       "key": "/polkadot-protocol/smart-contract-basics/polkavm-design/",
