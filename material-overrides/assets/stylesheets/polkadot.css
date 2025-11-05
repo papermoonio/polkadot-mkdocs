@@ -671,14 +671,7 @@ input.md-search__input::placeholder {
     margin-right: 0;
   }
 
-  .md-sidebar--primary
-    .md-nav__item
-    .md-nav
-    > .md-nav__list
-    > .md-nav__item
-    > a.md-nav__link {
-    padding-right: 1.5em;
-  }
+
 
   /* Spacing styling */
   .md-nav--primary .md-nav__list {
@@ -708,6 +701,7 @@ input.md-search__input::placeholder {
 
   .md-nav__link {
     margin-top: 0;
+    padding-right: 1em;
   }
 
   .md-nav__toggle ~ .md-nav {
