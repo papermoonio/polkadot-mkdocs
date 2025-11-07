@@ -25,12 +25,12 @@
       <input class="md-nav__toggle md-toggle {{ indeterminate }}" type="checkbox" id="{{ path }}" {{ checked }}>
       {% set indexes = [] %}
       {% if "navigation.indexes" in features %}
-        {% for nav_item in nav_item.children %}
-          {% if nav_item.is_page and nav_item.url.endswith(".index/") %}
-            {% set _ = indexes.append(nav_item) %}
+        {% for child in nav_item.children %}
+          {% if child.is_page and child.url.endswith(".index/") %}
+            {% set _ = indexes.append(child) %}
           {% endif %}
-          {% if nav_item.is_index and not index is defined %}
-            {% set _ = indexes.append(nav_item) %}
+          {% if child.is_index and not index is defined %}
+            {% set _ = indexes.append(child) %}
           {% endif %}
         {% endfor %}
       {% endif %}
@@ -58,7 +58,7 @@
       {% set visible_children = [] %}
       {% for child in nav_item.children %}
         {% if not indexes or child != indexes | first %}
-          {% set _ = visible_children.append(child) %}
+          {% set _ = visible_children.append({ 'idx': loop.index, 'node': child }) %}
         {% endif %}
       {% endfor %}
 
@@ -73,10 +73,11 @@
             {{ nav_item.title }}
           </label>
 
+          {% set indexes_class = indexes[0].url.replace('/', '-') if indexes and indexes[0] else '' %}
           <div class="nav-wrapper">
-            <ul class="md-nav__list {{ indexes[0].url.replace('/', '-') if indexes and indexes[0] else '' }}" data-md-scrollfix>
-              {% for child in visible_children %}
-                {{ render(child, path ~ "_" ~ loop.index, level + 1) }}
+            <ul class="md-nav__list {{ indexes_class }}" data-md-scrollfix>
+              {% for it in visible_children %}
+                {{ render(it.node, path ~ "_" ~ it.idx, level + 1) }}
               {% endfor %}
             </ul>
           </div>
