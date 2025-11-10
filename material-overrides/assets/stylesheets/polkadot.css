@@ -1214,8 +1214,6 @@ input.md-search__input::placeholder {
   .md-nav--secondary .md-nav__link--active {
     margin-left: -0.7em;
     padding-left: 0.7em;
-    background: var(--nav-hover-bg-color);
-    border-radius: 6px;
   }
 }
 

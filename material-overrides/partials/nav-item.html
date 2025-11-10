@@ -25,15 +25,21 @@
       <input class="md-nav__toggle md-toggle {{ indeterminate }}" type="checkbox" id="{{ path }}" {{ checked }}>
       {% set indexes = [] %}
       {% if "navigation.indexes" in features %}
-        {% for child in nav_item.children %}
-          {% if child.is_page and child.url.endswith(".index/") %}
-            {% set _ = indexes.append(child) %}
+        {% for nav_item in nav_item.children %}
+          {% if nav_item.is_page and nav_item.url.endswith(".index/") %}
+            {% set _ = indexes.append(nav_item) %}
           {% endif %}
-          {% if child.is_index and not index is defined %}
-            {% set _ = indexes.append(child) %}
+          {% if nav_item.is_index and not index is defined %}
+            {% set _ = indexes.append(nav_item) %}
           {% endif %}
         {% endfor %}
       {% endif %}
+      {% set visible_children = [] %}
+      {% for nav_item in nav_item.children %}
+        {% if not indexes or nav_item != indexes | first %}
+          {% set _ = visible_children.append({ 'idx': loop.index, 'node': nav_item }) %}
+        {% endif %}
+      {% endfor %}
       {% if not indexes %}
         <label class="md-nav__link" for="{{ path }}" id="{{ path }}_label" tabindex="0">
           {{ render_title_with_icon(nav_item.title, "twemoji nav-title") | safe }}
@@ -54,13 +60,6 @@
           {% endif %}
         </div>
       {% endif %}
-
-      {% set visible_children = [] %}
-      {% for child in nav_item.children %}
-        {% if not indexes or child != indexes | first %}
-          {% set _ = visible_children.append({ 'idx': loop.index, 'node': child }) %}
-        {% endif %}
-      {% endfor %}
 
       {% if visible_children | length > 0 %}
         <nav class="md-nav"
