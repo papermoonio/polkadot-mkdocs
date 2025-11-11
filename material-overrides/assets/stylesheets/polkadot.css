@@ -955,6 +955,51 @@ input.md-search__input::placeholder {
   }
 }
 
+/* Set interface styling for FAQ pages */
+.md-typeset details.faq.interface:has(~ details.interface),
+.md-typeset details.faq.interface ~ details.interface {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.md-typeset details.faq.interface > summary:after {
+  height: 100%;
+  top: 0;
+}
+
+.md-typeset details.faq.interface:open .headerlink {
+  opacity: 1;
+}
+
+.md-typeset details.faq.interface:not(:open) .headerlink {
+  opacity: 0;
+}
+
+/* Fix link anchor positioning for the h2s inside the FAQ admos */
+.md-typeset details.faq.interface > summary {
+  display: block;
+  position: relative;
+  overflow: visible;
+  padding: 0;
+  cursor: pointer;
+}
+
+.md-typeset details.faq.interface > summary h2 {
+  margin: 0 1em;
+  padding: 1em 0;
+  margin-right: 1em;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.2;
+  flex: 1;
+  padding-right: 2.5em;
+}
+
+.md-typeset details.faq.interface > summary {
+  display: flex;
+  align-items: flex-start;
+}
+
 /** TOC Styling **/
 @media screen and (min-width: 60em) {
   .md-sidebar--secondary {
