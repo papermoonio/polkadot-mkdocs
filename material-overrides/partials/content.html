@@ -58,11 +58,17 @@
       {% set section_content = section[h2_end + 5:] %}
       
       {% if is_excluded_h2 %}
-        <h2{% if h2_attributes %}{{ h2_attributes | safe }}{% endif %}>{{ h2_text | safe }}</h2>
+        <h2{{ h2_attributes | safe }}>{{ h2_text | safe }}</h2>
         {{ section_content | safe }}
       {% else %}
         {# Generate unique details ID #}
-        {% set details_id = (page.url ~ section_counter) | replace('?', '') | replace('#', '') %}      
+        {% set details_id = ('faq-' ~ page.url ~ '-' ~ section_counter)
+          | replace('/', '-')
+          | replace('?', '')
+          | replace('#', '')
+          | replace('.', '-')
+          | replace(' ', '-')
+          | replace('--', '-') %}      
         <details class="interface faq" id="{{ details_id }}">
           <summary>
             <h2{% if h2_id %} id="{{ h2_id }}"{% endif %}>{{ h2_text | safe }}</h2>
