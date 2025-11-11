@@ -1199,11 +1199,21 @@ input.md-search__input::placeholder {
     color: var(--nav-fg-color);
     font-size: 16px;
   }
+
+  .md-nav--secondary .md-nav__link--active {
+    background: var(--nav-hover-bg-color);
+    border-radius: 6px;
+  }
 }
 
 @media screen and (min-width: 76.25em) {
   .md-nav--secondary .md-nav__link {
     margin-top: 0;
+  }
+
+  .md-nav--secondary .md-nav__link--active {
+    margin-left: -0.7em;
+    padding-left: 0.7em;
   }
 }
 
@@ -1899,6 +1909,10 @@ div.mermaid {
   box-shadow: unset;
 }
 
+[dir="ltr"] .md-typeset .grid.cards ul li {
+    margin-left: 0;
+}
+
 .md-typeset .grid.cards .twemoji {
   padding-right: 0.5em;
 }
@@ -1910,9 +1924,18 @@ div.mermaid {
 }
 
 .md-typeset .grid.cards h3 {
-  margin: 0;
+  margin: 0.5em 1em 0 0.5em;
   font-size: 1.15em;
   display: flex;
+}
+
+.md-typeset .grid.cards > ul > li > hr {
+  display: none;
+}
+
+.md-typeset .grid.cards ul ul {
+  list-style: none !important;
+  margin-left: 0.5em;
 }
 
 .md-typeset .grid.cards.links > ul > li > a {
@@ -2138,8 +2161,8 @@ body[data-md-color-scheme='slate'] article.md-content__inner.md-typeset img {
 }
 
 .error-modal {
-  background-color: var(--storm-gray-200);
-  border: 1px solid var(--storm-gray-300);
+  background-color: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color);
   border-radius: 16px;
   margin: 15% auto;
   font-size: 2em;
@@ -2181,7 +2204,7 @@ body[data-md-color-scheme='slate'] article.md-content__inner.md-typeset img {
 .md-typeset .md-button.disabled-button:hover {
   cursor: default;
   background-color: var(--black);
-  border-color: var(--black);
+  border-color: var(--button-border-color);
   text-decoration: none;
   text-overflow: ellipsis;
   overflow: hidden;
