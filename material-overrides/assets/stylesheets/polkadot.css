@@ -1496,18 +1496,10 @@ html .md-footer-meta.md-typeset .md-social a:hover {
   word-break: break-word;
 }
 
-.md-footer__link--next .md-footer__title {
-  text-align: right;
-}
-
 .md-footer__title .md-ellipsis span svg {
   width: 1.2em;
   height: 1.2em;
   vertical-align: sub;
-}
-
-.md-footer__link--next .md-footer__button {
-  justify-content: flex-end;
 }
 
 @media screen and (max-width: 44.9844em) {
