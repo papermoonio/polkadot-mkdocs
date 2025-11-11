@@ -1469,7 +1469,6 @@ html .md-footer-meta.md-typeset .md-social a:hover {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.5em;
 }
 
 .md-typeset a.md-footer__link.md-footer__link--next {
