@@ -1199,11 +1199,21 @@ input.md-search__input::placeholder {
     color: var(--nav-fg-color);
     font-size: 16px;
   }
+
+  .md-nav--secondary .md-nav__link--active {
+    background: var(--nav-hover-bg-color);
+    border-radius: 6px;
+  }
 }
 
 @media screen and (min-width: 76.25em) {
   .md-nav--secondary .md-nav__link {
     margin-top: 0;
+  }
+
+  .md-nav--secondary .md-nav__link--active {
+    margin-left: -0.7em;
+    padding-left: 0.7em;
   }
 }
 
