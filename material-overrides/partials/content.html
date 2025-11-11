@@ -55,7 +55,8 @@
       {% endif %}
       
       {# Get content after h2 until next h2 or end of page #}
-      {% set section_content = section[h2_end + 5:] %}
+      {% set h2_closing_tag_length = 5 %} {# Length of '</h2>' #}
+      {% set section_content = section[h2_end + h2_closing_tag_length:] %}
       
       {% if is_excluded_h2 %}
         <h2{{ h2_attributes | safe }}>{{ h2_text | safe }}</h2>

@@ -956,8 +956,8 @@ input.md-search__input::placeholder {
 }
 
 /* Set interface styling for FAQ pages */
-.md-typeset details.faq.interface:has(~ details.interface),
-.md-typeset details.faq.interface ~ details.interface {
+.md-typeset details.faq.interface:has(~ details.faq.interface),
+.md-typeset details.faq.interface ~ details.faq.interface {
   margin-top: 1em;
   margin-bottom: 1em;
 }
@@ -975,27 +975,23 @@ input.md-search__input::placeholder {
   opacity: 0;
 }
 
-/* Fix link anchor positioning for the h2s inside the FAQ admos */
+/* Fix link anchor positioning for the h2s inside the FAQ admonitions */
 .md-typeset details.faq.interface > summary {
   position: relative;
   overflow: visible;
   padding: 0;
   cursor: pointer;
+  display: flex;
+  align-items: flex-start;
 }
 
 .md-typeset details.faq.interface > summary h2 {
   margin: 0 1em;
-  padding: 1em 0;
+  padding: 1em 2.5em 1em 0;
   font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.2;
   flex: 1;
-  padding-right: 2.5em;
-}
-
-.md-typeset details.faq.interface > summary {
-  display: flex;
-  align-items: flex-start;
 }
 
 /** TOC Styling **/
