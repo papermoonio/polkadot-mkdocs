@@ -44,7 +44,7 @@
             </div>
             <div class="md-footer__title">
               <div class="md-ellipsis">
-                {{ page.previous_page.title }}
+                {{ render_title_with_icon(page.previous_page.title) }}
               </div>
             </div>
           </a>
@@ -63,7 +63,7 @@
             </div>
             <div class="md-footer__title">
               <div class="md-ellipsis">
-                {{ page.next_page.title }}
+                {{ render_title_with_icon(page.next_page.title) }}
               </div>
             </div>
           </a>
