@@ -926,7 +926,6 @@ input.md-search__input::placeholder {
   .md-nav__link.md-nav__link--index,
   .md-nav__link {
     margin-top: 0;
-    padding: 0.3rem 0.8rem;
   }
 
   /* Nav hover styling active pages */
@@ -952,6 +951,20 @@ input.md-search__input::placeholder {
   .md-nav__link-wrapper.md-nav__item.md-nav__item--active
     .md-nav__link.md-nav__link--active {
     display: none;
+  }
+}
+
+@media screen and (min-width: 60em) and (max-width: 76.1875em) {
+  .md-nav--secondary .md-nav__item {
+    margin-left: 0.7em
+  }
+
+  .md-nav--secondary a.md-nav__link {
+    padding-right: 0.7em;
+  }
+
+  .md-nav--secondary a.md-nav__link:hover {
+    margin-left: -0.7em;
   }
 }
 
