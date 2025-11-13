@@ -19,12 +19,9 @@
   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
   IN THE SOFTWARE.
 -->
-
-<!-- TODO: ADD SUPPORT FOR ICONS IN NAV TITLES BACK -->
-<!-- {% from "partials/macros.html" import render_title_with_icon %} -->
-
 <!-- TODO: ADD AN EXTERNAL LINK ICON FOR URLs STARTING WITH https -->
 
+{% from "partials/macros.html" import render_title_with_icon %}
 <!-- Render navigation link status -->
 {% macro render_status(nav_item, type) %}
   {% set class = "md-status md-status--" ~ type %}
@@ -54,7 +51,7 @@
 
   <!-- Navigation link title -->
   <span class="md-ellipsis">
-    {{ ref.title }}
+    {{ render_title_with_icon(ref.title, "twemoji nav-title") | safe }}
 
     <!-- Navigation link subtitle -->
     {% if nav_item.meta and nav_item.meta.subtitle %}
@@ -229,7 +226,7 @@
         >
           <label class="md-nav__title" for="{{ path }}">
             <span class="md-nav__icon md-icon"></span>
-            {{ nav_item.title }}
+            {{ render_title_with_icon(nav_item.title, "twemoji nav-title") | safe }}
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
 
