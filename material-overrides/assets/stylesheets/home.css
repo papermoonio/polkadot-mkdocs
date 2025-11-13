@@ -7,8 +7,23 @@
   --min-padding: 0 3em;
 }
 
+:root,
+[data-md-color-scheme="default"] {
+  /* Home cards */
+  --home-card-fg-color: var(--storm-gray-950);
+  --home-card-bg-color: var(--white);
+  --home-card-border-color: var(--storm-gray-200);
+}
+
+[data-md-color-scheme="slate"][data-md-color-primary="indigo"] {
+  /* Home cards */
+  --home-card-fg-color: var(--storm-gray-050);
+  --home-card-bg-color: var(--black);
+  --home-card-border-color: var(--storm-gray);
+}
+
+
 .home-container {
-  background-image: url("../images/gradient.webp");
   background-size: 100%;
   background-repeat: no-repeat;
   margin-top: calc(
@@ -21,6 +36,15 @@
   /* Center the background image */
   width: 100vw;
   margin-left: calc(-1 * var(--page-padding));
+}
+
+/* Theme-aware hero background */
+[data-md-color-scheme="default"] .home-container {
+  background-image: url("../images/gradient.webp");
+}
+
+[data-md-color-scheme="slate"] .home-container {
+  background-image: url("../images/dark-gradient.webp");
 }
 
 @media screen and (max-width: 35em) {
@@ -112,6 +136,14 @@ div.button-wrapper {
   height: 100%;
 }
 
+.hero-section .button-wrapper a:first-child .md-button {
+  border-color: var(--black);
+}
+
+.hero-section .button-wrapper a:first-child .md-button:hover {
+  border-color: var(--pink); 
+}
+
 /**
   Feature section styles
 **/
@@ -155,14 +187,14 @@ div.button-wrapper {
 
 div.feature,
 .md-typeset a.feature {
-  color: var(--md-default-fg-color);
+  color: var(--home-card-fg-color);
   flex: 1 1;
-  border: 1px solid var(--storm-gray-200);
+  border: 1px solid var(--home-card-border-color);
   border-radius: 16px;
   padding: 32px;
   display: flex;
   gap: 36px;
-  background-color: var(--white);
+  background-color: var(--home-card-bg-color);
 }
 
 .md-typeset a.feature {
@@ -197,7 +229,7 @@ div.feature {
 div.feature h3,
 .md-typeset a.feature h3 {
   font-size: 1.382rem;
-  color: var(--black);
+  color: var(--md-default-fg-color);
   margin-top: 0;
   margin-bottom: 0;
   line-height: 1.2;
@@ -216,7 +248,7 @@ div.feature h3,
   width: 32px;
   height: 32px;
   max-width: unset;
-  fill: var(--black);
+  fill: var(--md-default-fg-color);
 }
 
 .feature a {
@@ -227,7 +259,7 @@ div.feature h3,
   display: flex;
   gap: 0.5em;
   padding: 0.3em;
-  color: var(--black);
+  color: var(--home-card-fg-color);
   font-family: "Unbounded";
 }
 
