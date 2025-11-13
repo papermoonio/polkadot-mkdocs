@@ -22,7 +22,6 @@
   --home-card-border-color: var(--storm-gray);
 }
 
-
 .home-container {
   background-size: 100%;
   background-repeat: no-repeat;
@@ -49,7 +48,7 @@
 
 @media screen and (max-width: 35em) {
   .home-container {
-    margin-left: calc(-1 * var(--mobile-page-padding))
+    margin-left: calc(-1 * var(--mobile-page-padding));
   }
 }
 
@@ -141,7 +140,7 @@ div.button-wrapper {
 }
 
 .hero-section .button-wrapper a:first-child .md-button:hover {
-  border-color: var(--pink); 
+  border-color: var(--pink);
 }
 
 /**
