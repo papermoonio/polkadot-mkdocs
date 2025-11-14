@@ -14,11 +14,73 @@
 {% endif %}
 
 {% if "\x3ch1" in page.content %}
-  {{ page.content | replace('</h1>', '</h1>' ~ badge_html, 1) | safe }}
+  {% set rendered_content = page.content | replace('</h1>', '</h1>' ~ badge_html, 1) %}
 {% else %}
-  <h1>{{ page.title | d(config.site_name, true) }}</h1>
-  {{ badge_html | safe }}
-  {{ page.content }}
+  {% set rendered_content = '<h1>' ~ (page.title | d(config.site_name, true)) ~ '</h1>' ~ badge_html ~ page.content %}
+{% endif %}
+
+{% if "faq" in page.url %}
+  {# Split content for each FAQ by h2 #}
+  {% set h2_sections = rendered_content.split('<h2') %}
+  {% set intro_content = h2_sections[0] %}
+  
+  {# Keep any introduction content intact #}
+  {% if intro_content %}
+    {{ intro_content | safe }}
+  {% endif %}
+  
+  {# Process each FAQ section #}
+  {% for i in range(1, h2_sections | length) %}
+    {% set section = h2_sections[i] %}
+    {% set section_counter = loop.index %}
+    
+    {# Extract h2 content #}
+    {% set h2_end = section.find('</h2>') %}
+    {% if h2_end != -1 %}
+      {% set h2_full = section[:h2_end] %}
+      {% set h2_content_start = h2_full.find('>') + 1 %}
+      {% set h2_text = h2_full[h2_content_start:] %}
+      {% set h2_attributes = h2_full[:h2_content_start-1] %}
+      {% set normalized_h2_text = h2_text | striptags | trim %}
+      {% set h2_attributes_lower = h2_attributes | lower %}
+      {% set is_excluded_h2 = normalized_h2_text == "Where to Go Next" or 'id="where-to-go-next"' in h2_attributes_lower %}
+      
+      {# Extract ID from h2 attributes #}
+      {% set id_start = h2_attributes.find('id="') %}
+      {% set h2_id = '' %}
+      {% if id_start != -1 %}
+        {% set id_start = id_start + 4 %}
+        {% set id_end = h2_attributes.find('"', id_start) %}
+        {% set h2_id = h2_attributes[id_start:id_end] %}
+      {% endif %}
+      
+      {# Get content after h2 until next h2 or end of page #}
+      {% set h2_closing_tag_length = 5 %} {# Length of '</h2>' #}
+      {% set section_content = section[h2_end + h2_closing_tag_length:] %}
+      
+      {% if is_excluded_h2 %}
+        <h2{{ h2_attributes | safe }}>{{ h2_text | safe }}</h2>
+        {{ section_content | safe }}
+      {% else %}
+        {# Generate unique details ID #}
+        {% set details_id = ('faq-' ~ page.url ~ '-' ~ section_counter)
+          | replace('/', '-')
+          | replace('?', '')
+          | replace('#', '')
+          | replace('.', '-')
+          | replace(' ', '-')
+          | replace('--', '-') %}
+        <details class="interface faq" id="{{ details_id }}">
+          <summary>
+            <h2{% if h2_id %} id="{{ h2_id }}"{% endif %}>{{ h2_text | safe }}</h2>
+          </summary>
+          {{ section_content | safe }}
+        </details>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% else %}
+  {{ rendered_content | safe }}
 {% endif %}
 
 {% include "partials/source-file.html" %}
