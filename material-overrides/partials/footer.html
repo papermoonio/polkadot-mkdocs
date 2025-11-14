@@ -5,19 +5,26 @@
   <footer class="md-footer">
     <div class="md-footer-meta md-typeset">
       <div class="md-footer-meta__inner md-grid">
-        <div class="logo">
-          <a href="https://polkadot.com/">{% include "partials/logo.html" %}</a>
-          {% include "partials/copyright.html" %}
+        <div class="row">
+          <a href="/reference/" class="reference">
+            Technical Reference
+          </a>
+          {% if config.extra.social %}
+            {% include "partials/social.html" %}
+          {% endif %}
         </div>
-        <div class="policy-links">
-          <a href="/terms-of-use/">Terms of Use</a>
-          <a href="/privacy-policy/">Privacy Policy</a>
-          <a href="/cookie-policy/">Cookie Policy</a>
-          <a href="/ai-chatbot-policy/">AI Chatbot Policy</a>
+        <div class="row legal">
+          <div class="logo">
+            <a href="https://polkadot.com/">{% include "partials/logo.html" %}</a>
+            {% include "partials/copyright.html" %}
+          </div>
+          <div class="policy-links">
+            <a href="/terms-of-use/">Terms of Use</a>
+            <a href="/privacy-policy/">Privacy Policy</a>
+            <a href="/cookie-policy/">Cookie Policy</a>
+            <a href="/ai-chatbot-policy/">AI Chatbot Policy</a>
+          </div>
         </div>
-        {% if config.extra.social %}
-          {% include "partials/social.html" %}
-        {% endif %}
       </div>
     </div>
   </footer>
