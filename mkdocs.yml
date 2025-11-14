@@ -15,11 +15,13 @@ extra_javascript:
   - js/fix-created-date.js
   - js/connect-to-metamask.js
   - js/error-modal.js
+  - js/copy-to-llm.js
 # Extra CSS files
 extra_css:
   - assets/stylesheets/extra.css
   - assets/stylesheets/terminal.css
   - assets/stylesheets/timeline-neoteroi.css
+  - assets/stylesheets/copy-to-llm.css
 
 # Diagnostic messages when validating links to documents
 validation:
@@ -35,7 +37,8 @@ theme:
   name: material
   custom_dir: material-overrides
   favicon: assets/images/favicon.webp
-  logo: assets/images/logo.webp
+  logo_light: assets/images/logo-light.webp
+  logo_dark: assets/images/logo-dark.webp
   icon:
     edit: material/github
     admonition:
@@ -57,6 +60,17 @@ theme:
     - navigation.tabs # Top-level sections are rendered below the header (can be modified to in-line with CSS)
     - navigation.tabs.sticky # When scrolling, the tabs remain at the top of the page
     - navigation.top # Show the back to top button since we don't keep top nav sticky
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
 
 # Extensions
 markdown_extensions:
@@ -118,10 +132,12 @@ plugins:
         - js/fix-created-date.js
         - js/connect-to-metamask.js
         - js/error-modal.js
+        - js/copy-to-llm.js
       css_files:
         - assets/stylesheets/extra.css
         - assets/stylesheets/terminal.css
         - assets/stylesheets/timeline-neoteroi.css
+        - assets/stylesheets/copy-to-llm.css
       scoped_css_templates:
         home.html:
           - assets/stylesheets/home.css

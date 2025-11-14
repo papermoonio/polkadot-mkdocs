@@ -149,7 +149,7 @@ Neoteroi Mkdocs timeline extension: https://github.com/Neoteroi/mkdocs-plugins/b
           &.bigger {
             top: 0px;
             left: 10px;
-            background: var(--white);
+            background: var(--md-default-bg-color);
           }
         }
       }
@@ -211,7 +211,7 @@ Neoteroi Mkdocs timeline extension: https://github.com/Neoteroi/mkdocs-plugins/b
     }
   
     .icon {
-      color: var(--storm-gray);
+      color: var(--md-default-fg-color);
       position: relative;
       top: 2px;
     }
