@@ -8,7 +8,10 @@
   <div class="md-grid">
     <ul class="md-tabs__list">
       {% for nav_item in nav.items %}
-        {% if nav_item.url != "" %}
+        {% set is_reference = nav_item.children 
+                              and nav_item.children[0].is_page 
+                              and nav_item.children[0].url == "reference/" %}
+        {% if nav_item.url != "" and not is_reference %}
           {{ item.render(nav_item) }}
         {% endif %}
       {% endfor %}

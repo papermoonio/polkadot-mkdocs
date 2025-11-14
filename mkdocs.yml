@@ -148,12 +148,12 @@ plugins:
   - macros:
       include_yaml:
         - polkadot-docs/variables.yml
-  - git-revision-date-localized:
-      type: date
-      enable_creation_date: true
-      exclude:
-        - node_modules/*
-      enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
+  # - git-revision-date-localized:
+  #     type: date
+  #     enable_creation_date: true
+  #     exclude:
+  #       - node_modules/*
+  #     enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
 
 # Extra configuration
 extra:
