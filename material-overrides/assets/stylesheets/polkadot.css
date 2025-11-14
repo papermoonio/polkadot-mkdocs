@@ -1371,7 +1371,7 @@ html .md-footer-meta.md-typeset .md-social a:hover {
     flex-direction: column-reverse;
   }
 
-  .reference {
+  .md-footer .reference {
     display: none;
   }
 }
