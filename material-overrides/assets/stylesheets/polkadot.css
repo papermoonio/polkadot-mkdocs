@@ -1298,6 +1298,10 @@ html .md-footer-meta.md-typeset a {
   text-decoration: underline;
 }
 
+html .md-footer-meta.md-typeset a.reference {
+  font-weight: 600;
+}
+
 /* Copyright styling */
 .md-copyright {
   margin: 0;
@@ -1369,10 +1373,6 @@ html .md-footer-meta.md-typeset .md-social a:hover {
 
   .md-footer .row.legal {
     flex-direction: column-reverse;
-  }
-
-  .md-footer .reference {
-    display: none;
   }
 }
 
@@ -1535,12 +1535,6 @@ html .md-footer-meta.md-typeset .md-social a:hover {
 }
 
 /* Child Admonition */
-.api-reference-link {
-  position: absolute;
-  margin-top: -1em;
-  left: 69%;
-}
-
 details.child summary::before {
   display: none;
 }
