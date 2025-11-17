@@ -647,9 +647,6 @@ input.md-search__input::placeholder {
 .md-nav__item--active .md-nav__link--active {
   background: var(--nav-hover-bg-color);
   border-radius: 6px;
-  
-  /* margin-left: -0.7em; */
-  /* padding-left: 0.7em; */
 }
 
 /* Nav items with icons in the title */
@@ -721,23 +718,6 @@ input.md-search__input::placeholder {
     display: none;
   }
 
-  /* Top-level section title (not root-level) */
-  [dir="ltr"]
-    .md-nav--primary
-    .md-nav__item--section.md-nav__item
-    > .md-nav__link.md-nav__link--active
-    a {
-    /* margin-left: 0; */
-  }
-
-  [dir="ltr"]
-    .md-nav--primary
-    .md-nav__item--section.md-nav__item
-    > .md-nav__link.md-nav__link--active
-    a {
-    /* margin-left: 0; */
-  }
-
   [dir="ltr"]
     .md-nav--primary
     .md-nav__item--section.md-nav__item
@@ -746,20 +726,10 @@ input.md-search__input::placeholder {
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.22px;
-    /* margin-bottom: 0; */
-    /* padding-top: 8px; */
-    /* padding-bottom: 8px; */
-    /* margin-left: -1em; */
-    /* padding-left: 1em; */
   }
 
   [dir="ltr"] .md-nav--primary .md-nav__item > .md-nav__link {
     margin-right: 0;
-  }
-
-  /* Spacing styling */
-  .md-nav--primary .md-nav__list {
-    /* padding-bottom: 0; */
   }
 
   .md-nav__item {
@@ -775,8 +745,6 @@ input.md-search__input::placeholder {
     padding-bottom: 4px;
     padding-left: 0.7em;
     padding-right: 0.7em;
-  /* margin-top: 0.1em; */
-  /* margin-right: 0; */
     color: var(--nav-fg-color);
   }
 
@@ -787,35 +755,12 @@ input.md-search__input::placeholder {
     padding-right: 0.7em;
   }
 
-  .md-nav__link {
-  /* margin-top: 0; */
-  /* padding-right: 0.7em; */
-  }
-
   .md-nav__toggle ~ .md-nav {
     grid-template-rows: 0fr;
   }
 
   .md-nav__icon {
     width: 1.2rem;
-  }
-
-  /* Hover and active styling */
-  .md-nav__link:hover,
-  .md-nav__link-wrapper.md-nav__item.md-nav__item--active {
-  /* margin-left: -0.7em; */
-  /* padding-left: 0.7em; */
-  }
-
-  .md-nav__item div.md-nav__link--active {
-  /* margin-left: -0.7em; */
-  /* padding-left: 0; */
-  }
-
-  /* For active sections, when on that section index page */
-  .md-nav__item .md-nav__link-wrapper.md-nav__link--active a,
-  .md-nav__item .md-nav__link--active a {
-  /* margin-left: 0.7em; */
   }
 
   /* Ensure left navigation remains in place */
@@ -826,7 +771,7 @@ input.md-search__input::placeholder {
   .md-sidebar__scrollwrap {
     display: flex;
     flex-direction: column;
-    /* padding-bottom: 1.5em; */
+    padding-bottom: 1.5em;
   }
 
   /* A root-level section (i.e., Develop) can have both sections (i.e., Toolkit) and 
@@ -982,10 +927,6 @@ input.md-search__input::placeholder {
     background-color: var(--hover-search-bg-color);
   }
 
-  .md-nav__item div.md-nav__link--active {
-    /* margin-left: 0; */
-  }
-
   .md-nav--primary .md-nav__link.md-nav__link--index .md-nav__icon {
     display: flex;
     align-items: center;
@@ -1040,30 +981,9 @@ input.md-search__input::placeholder {
     border-top: none;
   }
 
-  /* Reset spacing */
-  .md-nav__link.md-nav__link--index,
-  .md-nav__link {
-    /* margin-top: 0; */
-  }
-
-  /* Nav hover styling active pages */
-  .md-nav__link:hover {
-    /* margin-left: unset; */
-  }
-
-  /* Nav hover styling for sections */
-  div.md-nav__link:hover {
-   /* margin-left: 0; */
-  }
-
-  /* Nav hover styling for pages */
-  a.md-nav__link:hover {
-    /* margin-left: 0; */
-  }
-
   /* TOC icon */
   .md-nav__link--active > .md-nav__icon {
-    /* margin-left: 0.5em; */
+    margin-left: 0.5em;
   }
 
   .md-nav__link-wrapper.md-nav__item.md-nav__item--active
@@ -1081,10 +1001,6 @@ input.md-search__input::placeholder {
     padding-left: 0.7em;
     padding-right: 0.7em;
   }
-
-  .md-nav--secondary a.md-nav__link:hover {
-    /* margin-left: -0.7em; */
-  }
 }
 
 /** TOC Styling **/
@@ -1099,14 +1015,6 @@ input.md-search__input::placeholder {
     text-transform: uppercase;
     color: var(--nav-title-color);
     padding-bottom: 8px;
-  }
-
-  .md-sidebar--secondary .md-sidebar__scrollwrap {
-    /* margin: 0; */
-  }
-
-  .md-nav--secondary .md-nav__list {
-    /* padding-bottom: 0; */
   }
 
   .md-nav--secondary .md-nav__title {
@@ -1133,14 +1041,8 @@ input.md-search__input::placeholder {
 
 @media screen and (min-width: 76.25em) {
   .md-nav--secondary .md-nav__link {
-    /* margin-top: 0; */
     padding-left: 0.7em;
     padding-right: 0.7em;
-  }
-
-  .md-nav--secondary .md-nav__link--active {
-    /* margin-left: -0.7em; */
-    /* padding-left: 0.7em; */
   }
 }
 
