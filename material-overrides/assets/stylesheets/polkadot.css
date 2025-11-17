@@ -1023,6 +1023,8 @@ input.md-search__input::placeholder {
     display: flex;
     align-items: center;
     font-weight: 400;
+    white-space: normal;
+    line-height: 1.2em;
   }
 
   /* Remove lines between sidebar nav items*/
