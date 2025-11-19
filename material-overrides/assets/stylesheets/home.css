@@ -204,16 +204,6 @@ div.feature {
   }
 }
 
-@media screen and (max-width: 894px) {
-  .md-typeset .hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .hero-content p {
-    font-size: 16px;
-  }
-}
-
 @media screen and (max-width: 785px) {
   .hero-section {
     padding: 24px 32px;
