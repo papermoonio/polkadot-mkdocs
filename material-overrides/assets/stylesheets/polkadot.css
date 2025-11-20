@@ -990,6 +990,8 @@ input.md-search__input::placeholder {
   font-family: var(--text-font);
   font-size: 0.8rem;
   line-height: 1.2;
+}
+
 @media screen and (min-width: 60em) and (max-width: 76.1875em) {
   .md-nav--secondary .md-nav__item {
     margin-left: 0.7em
