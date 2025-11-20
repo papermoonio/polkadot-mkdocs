@@ -1064,6 +1064,44 @@ input.md-search__input::placeholder {
   }
 }
 
+/* Set interface styling for FAQ pages */
+.md-typeset details.faq.interface:has(~ details.faq.interface),
+.md-typeset details.faq.interface ~ details.faq.interface {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.md-typeset details.faq.interface > summary:after {
+  height: 100%;
+  top: 0;
+}
+
+.md-typeset details.faq.interface:open .headerlink {
+  opacity: 1;
+}
+
+.md-typeset details.faq.interface:not(:open) .headerlink {
+  opacity: 0;
+}
+
+/* Fix link anchor positioning for the h2s inside the FAQ admonitions */
+.md-typeset details.faq.interface > summary {
+  position: relative;
+  overflow: visible;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: left;
+}
+
+.md-typeset details.faq.interface > summary h2 {
+  margin: 0.25em 0;
+  padding: 0 0.25em;
+  font-family: var(--text-font);
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
 @media screen and (min-width: 60em) and (max-width: 76.1875em) {
   .md-nav--secondary .md-nav__item {
     margin-left: 0.7em;
