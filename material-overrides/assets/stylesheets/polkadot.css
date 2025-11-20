@@ -197,10 +197,8 @@
 .md-typeset h3,
 .md-typeset h4,
 .md-typeset h5 {
-  font-family: "Unbounded";
   color: var(--md-default-fg-color);
-  font-weight: 400;
-  line-height: 35.2px;
+  font-weight: 600;
 }
 
 @media screen and (max-width: 35em) {
