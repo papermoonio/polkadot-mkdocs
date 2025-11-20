@@ -2145,3 +2145,13 @@ body[data-md-color-scheme="slate"] article.md-content__inner.md-typeset img {
   white-space: nowrap;
   opacity: 0.8;
 }
+
+/* Snippet Styling */
+.md-typeset code {
+  border-radius: 10px;
+}
+
+.highlight span.filename {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
