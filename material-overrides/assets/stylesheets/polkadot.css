@@ -276,7 +276,8 @@
   margin-left: 0;
   border-radius: 48px;
   gap: var(--header-gap);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, backdrop-filter 0.3s ease,
+    -webkit-backdrop-filter 0.3s ease;
   background-color: rgba(
     255,
     255,
@@ -435,7 +436,6 @@
   .md-header .md-header__inner {
     -webkit-backdrop-filter: blur(16px); /* Safari support */
     backdrop-filter: blur(16px);
-    transition: backdrop-filter 0.3s ease;
   }
 }
 
@@ -613,7 +613,6 @@ input.md-search__input::placeholder {
   [data-md-toggle="search"]:not(:checked) ~ .md-header .md-header__inner {
     -webkit-backdrop-filter: blur(16px); /* Safari support */
     backdrop-filter: blur(16px);
-    transition: backdrop-filter 0.1s, -webkit-backdrop-filter 0.1s;
   }
 
   [data-md-toggle="search"]:checked
