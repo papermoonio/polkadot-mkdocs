@@ -481,6 +481,11 @@ input.md-search__input::placeholder {
   opacity: 1;
 }
 
+.md-header__option[data-md-component="palette"] .md-header__button.md-icon svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
 .md-search-result__link:focus,
 .md-search-result__link:hover {
   background-color: var(--hover-search-bg-color);
