@@ -442,6 +442,7 @@
 /** Search styling **/
 .md-header__button.md-icon[for="__search"] {
   display: inline-block;
+  margin: 0;
 }
 
 .md-header__button.md-icon[for="__search"] svg,
@@ -526,7 +527,7 @@ input.md-search__input::placeholder {
     height: auto;
     padding-right: 0.3em;
     position: relative;
-    right: 53px;
+    right: 49px;
     z-index: 100;
   }
 
