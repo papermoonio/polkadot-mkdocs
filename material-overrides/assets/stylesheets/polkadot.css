@@ -373,6 +373,7 @@
 
 .md-header__button {
   padding: 0;
+  margin: 0;
 }
 
 .md-tabs {
@@ -442,13 +443,13 @@
 /** Search styling **/
 .md-header__button.md-icon[for='__search'] {
   display: inline-block;
-  margin: 0;
 }
 
 .md-header__button.md-icon[for='__search'] svg,
 .md-search__icon.md-icon svg {
   height: unset;
   width: unset;
+  display: inline;  /* aligning the search icon */
 }
 
 .md-header__button.md-icon[for='__search'] svg path,
