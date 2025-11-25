@@ -22,11 +22,11 @@
     },
     {
       "key": "/develop/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/intro-to-xcm/",
@@ -34,51 +34,51 @@
     },
     {
       "key": "/develop/interoperability/send-messages/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/test-and-debug/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/versions/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/versions/v5/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/versions/v5/asset-claimer/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/versions/v5/fees/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/versions/v5/migration-guide/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/versions/v5/transact/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/versions/v5/transfers/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/versions/v5/writing-xcm-programs/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/xcm-channels/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/xcm-config/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/interoperability/get-started/"
     },
     {
       "key": "/develop/interoperability/xcm-guides/",
@@ -106,19 +106,19 @@
     },
     {
       "key": "/develop/interoperability/xcm-runtime-apis/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/networks/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/parachains/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/get-started/"
     },
     {
       "key": "/develop/parachains/customize-parachain/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/customize-runtime/"
     },
     {
       "key": "/develop/parachains/customize-parachain/add-existing-pallets/",
@@ -138,27 +138,27 @@
     },
     {
       "key": "/develop/parachains/customize-parachain/overview/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/customize-runtime/"
     },
     {
       "key": "/develop/parachains/deployment/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/launch-a-parachain/deploy-to-polkadot/"
     },
     {
       "key": "/develop/parachains/deployment/build-deterministic-runtime/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/customize-runtime/"
     },
     {
       "key": "/develop/parachains/deployment/coretime-renewal/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/launch-a-parachain/obtain-coretime/"
     },
     {
       "key": "/develop/parachains/deployment/generate-chain-specs/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/launch-a-parachain/deploy-to-polkadot/"
     },
     {
       "key": "/develop/parachains/deployment/manage-coretime/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/launch-a-parachain/obtain-coretime/"
     },
     {
       "key": "/develop/parachains/deployment/obtain-coretime/",
@@ -174,15 +174,15 @@
     },
     {
       "key": "/develop/parachains/maintenance/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
     },
     {
       "key": "/develop/parachains/maintenance/configure-asynchronous-backing/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
     },
     {
       "key": "/develop/parachains/maintenance/runtime-metrics-monitoring/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
     },
     {
       "key": "/develop/parachains/maintenance/runtime-upgrades/",
@@ -198,7 +198,7 @@
     },
     {
       "key": "/develop/parachains/testing/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/customize-runtime/pallet-development/pallet-testing/"
     },
     {
       "key": "/develop/parachains/testing/benchmarking/",
@@ -214,11 +214,11 @@
     },
     {
       "key": "/develop/parachains/testing/setup/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/customize-runtime/pallet-development/pallet-testing/"
     },
     {
       "key": "/develop/smart-contracts/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/smart-contracts/get-started/"
     },
     {
       "key": "/develop/smart-contracts/block-explorers/",
@@ -226,7 +226,7 @@
     },
     {
       "key": "/develop/smart-contracts/connect-to-kusama/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/smart-contracts/connect/"
     },
     {
       "key": "/develop/smart-contracts/connect-to-polkadot/",
@@ -234,7 +234,7 @@
     },
     {
       "key": "/develop/smart-contracts/dev-environments/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/smart-contracts/dev-environments/local-dev-node/"
     },
     {
       "key": "/develop/smart-contracts/dev-environments/foundry/",
@@ -262,7 +262,7 @@
     },
     {
       "key": "/develop/smart-contracts/faqs/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/smart-contracts/overview/"
     },
     {
       "key": "/develop/smart-contracts/json-rpc-apis/",
@@ -270,7 +270,7 @@
     },
     {
       "key": "/develop/smart-contracts/libraries/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/smart-contracts/libraries/ethers-js/"
     },
     {
       "key": "/develop/smart-contracts/libraries/ethers-js/",
@@ -306,7 +306,7 @@
     },
     {
       "key": "/develop/smart-contracts/precompiles/interact-with-precompiles/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/smart-contracts/precompiles/"
     },
     {
       "key": "/develop/smart-contracts/precompiles/xcm-precompile/",
@@ -322,11 +322,11 @@
     },
     {
       "key": "/develop/toolkit/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/api-libraries/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/api-libraries/dedot/",
@@ -358,7 +358,7 @@
     },
     {
       "key": "/develop/toolkit/integrations/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/integrations/wallets/"
     },
     {
       "key": "/develop/toolkit/integrations/indexers/",
@@ -370,11 +370,11 @@
     },
     {
       "key": "/develop/toolkit/integrations/storage/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/integrations/wallets/"
     },
     {
       "key": "/develop/toolkit/integrations/transaction-construction/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/integrations/wallets/",
@@ -382,7 +382,7 @@
     },
     {
       "key": "/develop/toolkit/interoperability/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/",
@@ -410,11 +410,11 @@
     },
     {
       "key": "/develop/toolkit/parachains/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/parachains/e2e-testing/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/parachains/e2e-testing/moonwall/",
@@ -422,11 +422,11 @@
     },
     {
       "key": "/develop/toolkit/parachains/fork-chains/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/parachains/fork-chains/chopsticks/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/parachains/fork-chains/chopsticks/get-started/",
@@ -442,27 +442,27 @@
     },
     {
       "key": "/develop/toolkit/parachains/quickstart/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/parachains/quickstart/pop-cli/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/parachains/remote-proxies/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/parachains/rpc-calls/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/parachains/spawn-chains/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/parachains/spawn-chains/zombienet/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/parachains/spawn-chains/zombienet/get-started/",
@@ -470,7 +470,7 @@
     },
     {
       "key": "/develop/toolkit/parachains/spawn-chains/zombienet/write-tests/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/infrastructure/",
