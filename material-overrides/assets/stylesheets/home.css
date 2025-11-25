@@ -21,12 +21,10 @@
     var(--md-default-bg-color);
 }
 
-body{
+body {
   position: relative;
   overflow: hidden; /* optional but prevents edge artifacts */
-  background-color: var(
-    --md-default-bg-color
-  ); 
+  background-color: var(--md-default-bg-color);
 }
 
 body::before {
@@ -130,7 +128,7 @@ body::before {
 
 div.feature {
   flex: 1 1;
-  background-color: var(--md-default-bg-color);;
+  background-color: var(--md-default-bg-color);
   border: 1px solid var(--footer-border-color);
   border-radius: 16px;
   padding: 32px;
@@ -230,11 +228,9 @@ div.feature {
   .md-typeset img.hero-image {
     width: 250px;
   }
-
 }
 
 @media screen and (max-width: 725px) {
-
   .home-container {
     gap: 1.5em;
   }
@@ -254,7 +250,7 @@ div.feature {
   }
 
   .hero-content {
-    max-width: unset;;
+    max-width: unset;
   }
 
   div.feature {
