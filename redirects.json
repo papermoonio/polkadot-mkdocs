@@ -578,19 +578,19 @@
     },
     {
       "key": "/tutorials/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/tutorials/dapps/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/tutorials/dapps/remark-tutorial/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/tutorials/interoperability/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/tutorials/interoperability/replay-and-dry-run-xcms/",
@@ -598,7 +598,7 @@
     },
     {
       "key": "/tutorials/interoperability/xcm-channels/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/interoperability/channels-between-parachains/"
     },
     {
       "key": "/tutorials/interoperability/xcm-channels/para-to-para/",
@@ -614,31 +614,31 @@
     },
     {
       "key": "/tutorials/interoperability/xcm-transfers/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/tutorials/interoperability/xcm-transfers/from-relaychain-to-parachain/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/tutorials/onchain-governance/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/tutorials/onchain-governance/fast-track-gov-proposal/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/tutorials/polkadot-sdk/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/install-polkadot-sdk/"
     },
     {
       "key": "/tutorials/polkadot-sdk/parachains/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/launch-a-parachain/set-up-the-parachain-template/"
     },
     {
       "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/launch-a-parachain/set-up-the-parachain-template/"
     },
     {
       "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/add-pallets-to-runtime/",
@@ -646,39 +646,39 @@
     },
     {
       "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/build-custom-pallet/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/customize-runtime/pallet-development/create-a-pallet/"
     },
     {
       "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/deploy-to-testnet/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/launch-a-parachain/deploy-to-polkadot/"
     },
     {
       "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/obtain-coretime/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/launch-a-parachain/obtain-coretime/"
     },
     {
       "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/pallet-benchmarking/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/customize-runtime/pallet-development/benchmark-pallet/"
     },
     {
       "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/pallet-unit-testing/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/customize-runtime/pallet-development/pallet-testing/"
     },
     {
       "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/runtime-upgrade/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
     },
     {
       "key": "/tutorials/polkadot-sdk/parachains/zero-to-hero/set-up-a-template/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/launch-a-parachain/set-up-the-parachain-template/"
     },
     {
       "key": "/tutorials/polkadot-sdk/system-chains/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/"
     },
     {
       "key": "/tutorials/polkadot-sdk/system-chains/asset-hub/asset-conversion/",
@@ -698,23 +698,23 @@
     },
     {
       "key": "/tutorials/polkadot-sdk/testing/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/testing/fork-a-parachain/"
     },
     {
       "key": "/tutorials/polkadot-sdk/testing/fork-live-chains/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/testing/fork-a-parachain/"
     },
     {
       "key": "/tutorials/polkadot-sdk/testing/spawn-basic-chain/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/parachains/testing/run-a-parachain-network/"
     },
     {
       "key": "/tutorials/smart-contracts/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/smart-contracts/cookbook/"
     },
     {
       "key": "/tutorials/smart-contracts/demo-aplications/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/smart-contracts/cookbook/eth-dapps/uniswap-v2/"
     },
     {
       "key": "/tutorials/smart-contracts/demo-aplications/deploying-uniswap-v2/",
@@ -730,23 +730,23 @@
     },
     {
       "key": "/tutorials/smart-contracts/launch-your-first-project/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/smart-contracts/cookbook/dapps/zero-to-hero/"
     },
     {
       "key": "/tutorials/smart-contracts/launch-your-first-project/create-contracts/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/smart-contracts/cookbook/smart-contracts/deploy-basic/basic-remix/"
     },
     {
       "key": "/tutorials/smart-contracts/launch-your-first-project/create-dapp-ethers-js/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/smart-contracts/cookbook/dapps/zero-to-hero/"
     },
     {
       "key": "/tutorials/smart-contracts/launch-your-first-project/create-dapp-viem/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/smart-contracts/cookbook/dapps/zero-to-hero/"
     },
     {
       "key": "/tutorials/smart-contracts/launch-your-first-project/test-and-deploy-with-hardhat/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/smart-contracts/cookbook/dapps/zero-to-hero/"
     }
   ]
 }
