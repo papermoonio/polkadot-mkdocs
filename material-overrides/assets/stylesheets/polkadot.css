@@ -688,8 +688,8 @@ input.md-search__input::placeholder {
     > .md-nav__list
     > .md-nav__item--active
     > .md-nav__link:not(.md-nav__container) {
-    margin-left: -1em;
-    padding-left: 1em;
+    margin-left: 0;
+    padding-left: 0.7em;
     font-weight: 600;
     font-size: 11px;
     color: var(--nav-title-color);
