@@ -240,6 +240,15 @@
   padding: 12px 18px;
 }
 
+.md-typeset code {
+  border-radius: 10px;
+}
+
+.highlight span.filename {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
 /* --- HR (divider) --- */
 .md-typeset hr {
   border-color: var(--tabbed-border-color);
