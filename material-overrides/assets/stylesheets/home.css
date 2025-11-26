@@ -52,6 +52,10 @@ body::before {
   text-decoration: none;
 }
 
+.md-typeset a:focus, .md-typeset a:hover {
+  opacity: 1;
+}
+
 .md-main__inner {
   margin-top: 1.4rem;
 }
