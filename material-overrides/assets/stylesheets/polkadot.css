@@ -197,10 +197,8 @@
 .md-typeset h3,
 .md-typeset h4,
 .md-typeset h5 {
-  font-family: "Unbounded";
   color: var(--md-default-fg-color);
-  font-weight: 400;
-  line-height: 35.2px;
+  font-weight: 600;
 }
 
 @media screen and (max-width: 35em) {
@@ -240,6 +238,15 @@
 /* Code element styling */
 .md-typeset pre > code {
   padding: 12px 18px;
+}
+
+.md-typeset code {
+  border-radius: 10px;
+}
+
+.highlight span.filename {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 /* --- HR (divider) --- */
@@ -657,7 +664,8 @@ input.md-search__input::placeholder {
 
 .md-nav__link .nav-title.twemoji svg {
   vertical-align: sub;
-  margin: 0 0.5em;
+  margin-right: 0.4em;
+  width: auto;
 }
 
 .md-nav__link > .nav-title.twemoji > span svg {
@@ -997,6 +1005,44 @@ input.md-search__input::placeholder {
   }
 }
 
+/* Set interface styling for FAQ pages */
+.md-typeset details.faq.interface:has(~ details.faq.interface),
+.md-typeset details.faq.interface ~ details.faq.interface {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.md-typeset details.faq.interface > summary:after {
+  height: 100%;
+  top: 0;
+}
+
+.md-typeset details.faq.interface:open .headerlink {
+  opacity: 1;
+}
+
+.md-typeset details.faq.interface:not(:open) .headerlink {
+  opacity: 0;
+}
+
+/* Fix link anchor positioning for the h2s inside the FAQ admonitions */
+.md-typeset details.faq.interface > summary {
+  position: relative;
+  overflow: visible;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: left;
+}
+
+.md-typeset details.faq.interface > summary h2 {
+  margin: 0.25em 0;
+  padding: 0 0.25em;
+  font-family: var(--text-font);
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
 @media screen and (min-width: 60em) and (max-width: 76.1875em) {
   .md-nav--secondary .md-nav__item {
     margin-left:0;
@@ -1181,15 +1227,15 @@ article.md-content__inner.md-typeset > h1:has(+ .badge) {
 }
 
 .md-footer-meta {
-  border: 1px solid var(--footer-border-color);
-  border-radius: 1em;
-  margin-bottom: 40px;
+  border-top: 1px solid var(--footer-border-color);
   margin-top: 40px;
   padding: 24px 40px;
 }
 
 .md-grid.md-footer-meta__inner {
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .md-footer-meta__inner div.logo {
@@ -1199,12 +1245,12 @@ article.md-content__inner.md-typeset > h1:has(+ .badge) {
 }
 
 .md-footer-meta__inner div.logo a {
-  height: 32px;
+  height: 24px;
 }
 
 .md-footer-meta__inner div.logo img {
-  height: 32px;
-  min-width: 150.24px;
+  height: 24px;
+  min-width: 112.68px;
   box-shadow: none;
 }
 
@@ -1212,6 +1258,21 @@ article.md-content__inner.md-typeset > h1:has(+ .badge) {
 .md-footer__button svg polyline,
 .md-footer__button svg line {
   stroke: var(--md-footer-fg-color);
+}
+
+.md-footer .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Links */
+html .md-footer-meta.md-typeset a {
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+html .md-footer-meta.md-typeset a.reference {
+  font-weight: 600;
 }
 
 /* Copyright styling */
@@ -1233,10 +1294,12 @@ article.md-content__inner.md-typeset > h1:has(+ .badge) {
 }
 
 .md-typeset .policy-links a {
-  text-decoration: none;
   padding-left: 20px;
   padding-right: 20px;
-  font-size: 14px;
+}
+
+.md-typeset .policy-links a:last-child {
+  padding-right: 0;
 }
 
 /* Socials styling */
@@ -1273,10 +1336,16 @@ html .md-footer-meta.md-typeset .md-social a:hover {
   max-height: unset;
 }
 
-@media screen and (max-width: 76.2344em) {
-  .md-grid.md-footer-meta__inner {
+@media screen and (max-width: 60em) {
+  .md-grid.md-footer-meta__inner,
+  .md-footer .row {
     flex-direction: column;
-    gap: 40px;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .md-footer .row.legal {
+    flex-direction: column-reverse;
   }
 }
 
@@ -1284,9 +1353,19 @@ html .md-footer-meta.md-typeset .md-social a:hover {
   .md-footer-meta {
     padding: 24px 12px;
   }
+}
 
+@media screen and (max-width: 40em) {
   .policy-links {
-    flex-direction: column;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75em;
+  }
+
+  .md-typeset .policy-links a {
+    padding: 0;
   }
 }
 
@@ -1429,12 +1508,6 @@ html .md-footer-meta.md-typeset .md-social a:hover {
 }
 
 /* Child Admonition */
-.api-reference-link {
-  position: absolute;
-  margin-top: -1em;
-  left: 69%;
-}
-
 details.child summary::before {
   display: none;
 }
