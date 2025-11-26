@@ -443,6 +443,7 @@
 /** Search styling **/
 .md-header__button.md-icon[for="__search"] {
   display: inline-block;
+  margin-left: -7px;
 }
 
 .md-header__button.md-icon[for="__search"] svg,
@@ -522,13 +523,14 @@ input.md-search__input::placeholder {
     width: 0;
   }
 
-  [data-md-toggle="search"]:checked ~ .md-header .md-search {
+   [data-md-toggle="search"]:checked ~ .md-header .md-search {
     visibility: visible;
     width: fit-content;
     height: auto;
     padding-right: 0.3em;
     position: relative;
     right: 49px;
+    top: 0.1px;
     z-index: 100;
   }
 
@@ -595,6 +597,18 @@ input.md-search__input::placeholder {
 
   [dir="ltr"] .md-search__icon[for="__search"] {
     left: -0.35rem;
+  }
+}
+
+@media screen and (min-width: 125em) {
+  [data-md-toggle="search"]:checked ~ .md-header .md-search {
+    right: 47px;
+  }
+}
+
+@media screen and (min-width: 100em) and (max-width: 124.94em) {
+  [data-md-toggle="search"]:checked ~ .md-header .md-search {
+    right: 48px;
   }
 }
 
