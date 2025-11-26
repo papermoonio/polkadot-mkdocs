@@ -322,16 +322,16 @@
 }
 
 /* Logo to show the correct color scheme */
-[data-md-color-scheme='default']
+[data-md-color-scheme="default"]
   header
   .md-header__button.md-logo
-  img[src$='#only-dark'] {
+  img[src$="#only-dark"] {
   display: none;
 }
-[data-md-color-scheme='slate']
+[data-md-color-scheme="slate"]
   header
   .md-header__button.md-logo
-  img[src$='#only-light'] {
+  img[src$="#only-light"] {
   display: none;
 }
 
@@ -1007,7 +1007,7 @@ input.md-search__input::placeholder {
 
 @media screen and (min-width: 60em) and (max-width: 76.1875em) {
   .md-nav--secondary .md-nav__item {
-    margin-left:0;
+    margin-left: 0;
   }
 
   .md-nav--secondary a.md-nav__link {
