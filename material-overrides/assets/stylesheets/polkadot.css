@@ -484,8 +484,8 @@ input.md-search__input::placeholder {
 }
 
 .md-header__option[data-md-component="palette"] .md-header__button.md-icon svg {
-  width: 0.9rem;
-  height: 0.9rem;
+  width: 17px;
+  height: 17px;
 }
 
 .md-search-result__link:focus,
