@@ -1059,6 +1059,16 @@ input.md-search__input::placeholder {
   }
 }
 
+@media screen and (min-width: 60em) and (max-width: 76.2344em) {
+  .md-nav--primary .md-nav__link .md-nav__icon {
+    font-size: unset;
+    width: 36px;
+    max-width: 36px;
+    display: flex;
+    align-items: center;
+  }
+}
+
 /** Nav styling on smaller screens **/
 @media screen and (max-width: 59.9844em) {
   .md-nav--primary .md-nav__link[for="__toc"] ~ .md-nav {
@@ -1075,16 +1085,6 @@ input.md-search__input::placeholder {
     font-size: unset;
     width: 36px;
     max-width: 36px;
-  }
-}
-
-@media screen and (min-width: 60em) and (max-width: 76.2344em) {
-  .md-nav--primary .md-nav__link .md-nav__icon {
-    font-size: unset;
-    width: 36px;
-    max-width: 36px;
-    display: flex;
-    align-items: center;
   }
 }
 
