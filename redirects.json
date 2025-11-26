@@ -21,8 +21,104 @@
       "value": "/chain-interactions/token-operations/register-local-asset/"
     },
     {
+      "key": "/develop/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/",
+      "value": "/"
+    },
+    {
       "key": "/develop/interoperability/intro-to-xcm/",
       "value": "/parachains/interoperability/get-started/"
+    },
+    {
+      "key": "/develop/interoperability/send-messages/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/test-and-debug/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/versions/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/versions/v5/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/versions/v5/asset-claimer/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/versions/v5/fees/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/versions/v5/migration-guide/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/versions/v5/transact/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/versions/v5/transfers/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/versions/v5/writing-xcm-programs/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/xcm-channels/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/xcm-config/",
+      "value": "/parachains/interoperability/get-started/"
+    },
+    {
+      "key": "/develop/interoperability/xcm-guides/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/xcm-guides/from-apps/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/xcm-guides/from-apps/claiming-trapped-assets/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/xcm-guides/from-apps/fees/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/xcm-guides/from-apps/transact/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/xcm-guides/from-apps/transfers/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/interoperability/xcm-runtime-apis/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/networks/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/parachains/",
+      "value": "/parachains/get-started/"
+    },
+    {
+      "key": "/develop/parachains/customize-parachain/",
+      "value": "/parachains/customize-runtime/"
     },
     {
       "key": "/develop/parachains/customize-parachain/add-existing-pallets/",
@@ -41,6 +137,30 @@
       "value": "/parachains/customize-runtime/pallet-development/create-a-pallet/"
     },
     {
+      "key": "/develop/parachains/customize-parachain/overview/",
+      "value": "/parachains/customize-runtime/"
+    },
+    {
+      "key": "/develop/parachains/deployment/",
+      "value": "/parachains/launch-a-parachain/deploy-to-polkadot/"
+    },
+    {
+      "key": "/develop/parachains/deployment/build-deterministic-runtime/",
+      "value": "/parachains/customize-runtime/"
+    },
+    {
+      "key": "/develop/parachains/deployment/coretime-renewal/",
+      "value": "/parachains/launch-a-parachain/obtain-coretime/"
+    },
+    {
+      "key": "/develop/parachains/deployment/generate-chain-specs/",
+      "value": "/parachains/launch-a-parachain/deploy-to-polkadot/"
+    },
+    {
+      "key": "/develop/parachains/deployment/manage-coretime/",
+      "value": "/parachains/launch-a-parachain/obtain-coretime/"
+    },
+    {
       "key": "/develop/parachains/deployment/obtain-coretime/",
       "value": "/parachains/launch-a-parachain/obtain-coretime/"
     },
@@ -53,6 +173,18 @@
       "value": "/reference/parachains/"
     },
     {
+      "key": "/develop/parachains/maintenance/",
+      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
+    },
+    {
+      "key": "/develop/parachains/maintenance/configure-asynchronous-backing/",
+      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
+    },
+    {
+      "key": "/develop/parachains/maintenance/runtime-metrics-monitoring/",
+      "value": "/parachains/runtime-maintenance/runtime-upgrades/"
+    },
+    {
       "key": "/develop/parachains/maintenance/runtime-upgrades/",
       "value": "/parachains/runtime-maintenance/runtime-upgrades/"
     },
@@ -63,6 +195,10 @@
     {
       "key": "/develop/parachains/maintenance/unlock-parachain/",
       "value": "/parachains/runtime-maintenance/unlock-parachains/"
+    },
+    {
+      "key": "/develop/parachains/testing/",
+      "value": "/parachains/customize-runtime/pallet-development/pallet-testing/"
     },
     {
       "key": "/develop/parachains/testing/benchmarking/",
@@ -78,15 +214,27 @@
     },
     {
       "key": "/develop/parachains/testing/setup/",
-      "value": "/develop/parachains/testing/"
+      "value": "/parachains/customize-runtime/pallet-development/pallet-testing/"
+    },
+    {
+      "key": "/develop/smart-contracts/",
+      "value": "/smart-contracts/get-started/"
     },
     {
       "key": "/develop/smart-contracts/block-explorers/",
       "value": "/smart-contracts/explorers/"
     },
     {
+      "key": "/develop/smart-contracts/connect-to-kusama/",
+      "value": "/smart-contracts/connect/"
+    },
+    {
       "key": "/develop/smart-contracts/connect-to-polkadot/",
       "value": "/smart-contracts/connect/"
+    },
+    {
+      "key": "/develop/smart-contracts/dev-environments/",
+      "value": "/smart-contracts/dev-environments/local-dev-node/"
     },
     {
       "key": "/develop/smart-contracts/dev-environments/foundry/",
@@ -113,8 +261,16 @@
       "value": "/smart-contracts/overview/"
     },
     {
+      "key": "/develop/smart-contracts/faqs/",
+      "value": "/smart-contracts/overview/"
+    },
+    {
       "key": "/develop/smart-contracts/json-rpc-apis/",
       "value": "/smart-contracts/for-eth-devs/json-rpc-apis/"
+    },
+    {
+      "key": "/develop/smart-contracts/libraries/",
+      "value": "/smart-contracts/libraries/ethers-js/"
     },
     {
       "key": "/develop/smart-contracts/libraries/ethers-js/",
@@ -149,6 +305,10 @@
       "value": "/smart-contracts/precompiles/"
     },
     {
+      "key": "/develop/smart-contracts/precompiles/interact-with-precompiles/",
+      "value": "/smart-contracts/precompiles/"
+    },
+    {
       "key": "/develop/smart-contracts/precompiles/xcm-precompile/",
       "value": "/smart-contracts/precompiles/xcm/"
     },
@@ -159,6 +319,14 @@
     {
       "key": "/develop/smart-contracts/wasm-ink/",
       "value": "/smart-contracts/overview/"
+    },
+    {
+      "key": "/develop/toolkit/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/toolkit/api-libraries/",
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/api-libraries/dedot/",
@@ -189,6 +357,10 @@
       "value": "/reference/tools/subxt/"
     },
     {
+      "key": "/develop/toolkit/integrations/",
+      "value": "/parachains/integrations/wallets/"
+    },
+    {
       "key": "/develop/toolkit/integrations/indexers/",
       "value": "/parachains/integrations/indexers/"
     },
@@ -197,8 +369,20 @@
       "value": "/parachains/integrations/oracles/"
     },
     {
+      "key": "/develop/toolkit/integrations/storage/",
+      "value": "/parachains/integrations/wallets/"
+    },
+    {
+      "key": "/develop/toolkit/integrations/transaction-construction/",
+      "value": "/"
+    },
+    {
       "key": "/develop/toolkit/integrations/wallets/",
       "value": "/parachains/integrations/wallets/"
+    },
+    {
+      "key": "/develop/toolkit/interoperability/",
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/interoperability/asset-transfer-api/",
@@ -225,8 +409,24 @@
       "value": "/reference/tools/xcm-tools/"
     },
     {
+      "key": "/develop/toolkit/parachains/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/e2e-testing/",
+      "value": "/"
+    },
+    {
       "key": "/develop/toolkit/parachains/e2e-testing/moonwall/",
       "value": "/reference/tools/moonwall/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/fork-chains/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/fork-chains/chopsticks/",
+      "value": "/"
     },
     {
       "key": "/develop/toolkit/parachains/fork-chains/chopsticks/get-started/",
@@ -241,8 +441,36 @@
       "value": "/reference/tools/omninode/"
     },
     {
+      "key": "/develop/toolkit/parachains/quickstart/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/quickstart/pop-cli/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/remote-proxies/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/rpc-calls/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/spawn-chains/",
+      "value": "/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/spawn-chains/zombienet/",
+      "value": "/"
+    },
+    {
       "key": "/develop/toolkit/parachains/spawn-chains/zombienet/get-started/",
       "value": "/parachains/testing/run-a-parachain-network/"
+    },
+    {
+      "key": "/develop/toolkit/parachains/spawn-chains/zombienet/write-tests/",
+      "value": "/"
     },
     {
       "key": "/infrastructure/",
