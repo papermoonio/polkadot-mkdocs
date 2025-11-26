@@ -674,8 +674,6 @@ input.md-search__input::placeholder {
 .md-nav__item--active .md-nav__link--active {
   background: var(--nav-hover-bg-color);
   border-radius: 6px;
-  margin-left: -0.7em;
-  padding-left: 0.7em;
 }
 
 /* Nav items with icons in the title */
@@ -697,7 +695,6 @@ input.md-search__input::placeholder {
 @media screen and (min-width: 76.25em) {
   .md-nav {
     font-size: 16px;
-    margin-bottom: 0;
   }
 
   [dir="ltr"]
@@ -719,8 +716,8 @@ input.md-search__input::placeholder {
     > .md-nav__list
     > .md-nav__item--active
     > .md-nav__link:not(.md-nav__container) {
-    margin-left: -1em;
-    padding-left: 1em;
+    margin-left: 0;
+    padding-left: 0.7em;
     font-weight: 600;
     font-size: 11px;
     color: var(--nav-title-color);
@@ -748,23 +745,6 @@ input.md-search__input::placeholder {
     display: none;
   }
 
-  /* Top-level section title (not root-level) */
-  [dir="ltr"]
-    .md-nav--primary
-    .md-nav__item--section.md-nav__item
-    > .md-nav__link.md-nav__link--active
-    a {
-    margin-left: 0;
-  }
-
-  [dir="ltr"]
-    .md-nav--primary
-    .md-nav__item--section.md-nav__item
-    > .md-nav__link.md-nav__link--active
-    a {
-    margin-left: 0;
-  }
-
   [dir="ltr"]
     .md-nav--primary
     .md-nav__item--section.md-nav__item
@@ -773,20 +753,10 @@ input.md-search__input::placeholder {
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.22px;
-    margin-bottom: 0;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    margin-left: -1em;
-    padding-left: 1em;
   }
 
   [dir="ltr"] .md-nav--primary .md-nav__item > .md-nav__link {
     margin-right: 0;
-  }
-
-  /* Spacing styling */
-  .md-nav--primary .md-nav__list {
-    padding-bottom: 0;
   }
 
   .md-nav__item {
@@ -800,18 +770,15 @@ input.md-search__input::placeholder {
   [dir="ltr"] .md-nav--primary .md-nav__item > .md-nav__link {
     padding-top: 4px;
     padding-bottom: 4px;
-    margin-top: 0.1em;
-    margin-right: 0;
+    padding-left: 0.7em;
+    padding-right: 0.7em;
     color: var(--nav-fg-color);
   }
 
   [dir="ltr"] .md-nav--primary .md-nav__item > div.md-nav__link {
     padding-top: 0.212em;
     padding-bottom: 0.212em;
-  }
-
-  .md-nav__link {
-    margin-top: 0;
+    padding-left: 0.7em;
     padding-right: 0.7em;
   }
 
@@ -821,24 +788,6 @@ input.md-search__input::placeholder {
 
   .md-nav__icon {
     width: 1.2rem;
-  }
-
-  /* Hover and active styling */
-  .md-nav__link:hover,
-  .md-nav__link-wrapper.md-nav__item.md-nav__item--active {
-    margin-left: -0.7em;
-    padding-left: 0.7em;
-  }
-
-  .md-nav__item div.md-nav__link--active {
-    margin-left: -0.7em;
-    padding-left: 0;
-  }
-
-  /* For active sections, when on that section index page */
-  .md-nav__item .md-nav__link-wrapper.md-nav__link--active a,
-  .md-nav__item .md-nav__link--active a {
-    margin-left: 0.7em;
   }
 
   /* Ensure left navigation remains in place */
@@ -970,13 +919,12 @@ input.md-search__input::placeholder {
 
   .md-nav--primary .md-nav__title[for="__drawer"] {
     background-color: var(--md-default-bg-color);
-    padding-bottom: 3em;
     border-bottom: 1px solid var(--footer-border-color);
   }
 
   .md-nav--primary .md-nav__link,
   .md-nav--primary a.md-nav__link {
-    padding: 0.3rem 0.8rem;
+    padding: 0.3rem 0.7rem;
     color: var(--header-fg-color);
   }
 
@@ -987,7 +935,6 @@ input.md-search__input::placeholder {
   .md-nav--primary .md-nav__list {
     flex: none;
     display: grid;
-    margin-top: 1em;
   }
 
   .md-nav--primary .md-nav__title .md-nav__icon {
@@ -1002,11 +949,7 @@ input.md-search__input::placeholder {
   }
 
   .md-nav--primary .md-nav__item--active > .md-nav__link {
-    background-color: var(--hover-search-bg-color);
-  }
-
-  .md-nav__item div.md-nav__link--active {
-    margin-left: 0;
+    background-color: var(--nav-hover-bg-color);
   }
 
   .md-nav--primary .md-nav__link.md-nav__link--index .md-nav__icon {
@@ -1046,6 +989,16 @@ input.md-search__input::placeholder {
     display: flex;
     align-items: center;
     font-weight: 400;
+    white-space: normal;
+    line-height: 1.2em;
+  }
+
+  .md-nav--primary .md-nav__title > .md-nav__icon {
+    flex: 0 0 auto;
+  }
+
+  .md-nav--primary .md-nav__title > .md-logo {
+    margin: 0 auto;
   }
 
   /* Remove lines between sidebar nav items*/
@@ -1061,27 +1014,6 @@ input.md-search__input::placeholder {
     border-top: none;
   }
 
-  /* Reset spacing */
-  .md-nav__link.md-nav__link--index,
-  .md-nav__link {
-    margin-top: 0;
-  }
-
-  /* Nav hover styling active pages */
-  .md-nav__link:hover {
-    margin-left: unset;
-  }
-
-  /* Nav hover styling for sections */
-  div.md-nav__link:hover {
-    margin-left: 0;
-  }
-
-  /* Nav hover styling for pages */
-  a.md-nav__link:hover {
-    margin-left: 0;
-  }
-
   /* TOC icon */
   .md-nav__link--active > .md-nav__icon {
     margin-left: 0.5em;
@@ -1093,55 +1025,14 @@ input.md-search__input::placeholder {
   }
 }
 
-/* Set interface styling for FAQ pages */
-.md-typeset details.faq.interface:has(~ details.faq.interface),
-.md-typeset details.faq.interface ~ details.faq.interface {
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
-.md-typeset details.faq.interface > summary:after {
-  height: 100%;
-  top: 0;
-}
-
-.md-typeset details.faq.interface:open .headerlink {
-  opacity: 1;
-}
-
-.md-typeset details.faq.interface:not(:open) .headerlink {
-  opacity: 0;
-}
-
-/* Fix link anchor positioning for the h2s inside the FAQ admonitions */
-.md-typeset details.faq.interface > summary {
-  position: relative;
-  overflow: visible;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: left;
-}
-
-.md-typeset details.faq.interface > summary h2 {
-  margin: 0.25em 0;
-  padding: 0 0.25em;
-  font-family: var(--text-font);
-  font-size: 0.8rem;
-  line-height: 1.2;
-}
-
 @media screen and (min-width: 60em) and (max-width: 76.1875em) {
   .md-nav--secondary .md-nav__item {
-    margin-left: 0.7em;
+    margin-left: 0;
   }
 
   .md-nav--secondary a.md-nav__link {
+    padding-left: 0.7em;
     padding-right: 0.7em;
-  }
-
-  .md-nav--secondary a.md-nav__link:hover {
-    margin-left: -0.7em;
   }
 }
 
@@ -1157,14 +1048,7 @@ input.md-search__input::placeholder {
     text-transform: uppercase;
     color: var(--nav-title-color);
     padding-bottom: 8px;
-  }
-
-  .md-sidebar--secondary .md-sidebar__scrollwrap {
-    margin: 0;
-  }
-
-  .md-nav--secondary .md-nav__list {
-    padding-bottom: 0;
+    padding-left: calc(0.6rem + 0.7em);
   }
 
   .md-nav--secondary .md-nav__title {
@@ -1172,7 +1056,6 @@ input.md-search__input::placeholder {
   }
 
   .md-nav--secondary .md-nav__link {
-    margin-top: 0;
     font-size: 12px;
     padding-top: 0.362em;
     padding-bottom: 0.362em;
@@ -1191,12 +1074,18 @@ input.md-search__input::placeholder {
 
 @media screen and (min-width: 76.25em) {
   .md-nav--secondary .md-nav__link {
-    margin-top: 0;
-  }
-
-  .md-nav--secondary .md-nav__link--active {
-    margin-left: -0.7em;
     padding-left: 0.7em;
+    padding-right: 0.7em;
+  }
+}
+
+@media screen and (min-width: 60em) and (max-width: 76.2344em) {
+  .md-nav--primary .md-nav__link .md-nav__icon {
+    font-size: unset;
+    width: 36px;
+    max-width: 36px;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -1664,6 +1553,44 @@ details.interface > summary::before {
   ~ .tabbed-labels
   > :nth-child(2) {
   color: var(--white);
+}
+
+/* Set interface styling for FAQ pages */
+.md-typeset details.faq.interface:has(~ details.faq.interface),
+.md-typeset details.faq.interface ~ details.faq.interface {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.md-typeset details.faq.interface > summary:after {
+  height: 100%;
+  top: 0;
+}
+
+.md-typeset details.faq.interface:open .headerlink {
+  opacity: 1;
+}
+
+.md-typeset details.faq.interface:not(:open) .headerlink {
+  opacity: 0;
+}
+
+/* Fix link anchor positioning for the h2s inside the FAQ admonitions */
+.md-typeset details.faq.interface > summary {
+  position: relative;
+  overflow: visible;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: left;
+}
+
+.md-typeset details.faq.interface > summary h2 {
+  margin: 0.25em 0;
+  padding: 0 0.25em;
+  font-family: var(--text-font);
+  font-size: 0.8rem;
+  line-height: 1.2;
 }
 
 /* Styling for the Copy to Clipboard */
