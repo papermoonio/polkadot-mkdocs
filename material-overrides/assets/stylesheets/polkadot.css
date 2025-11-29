@@ -1058,6 +1058,10 @@ input.md-search__input::placeholder {
     margin-top: 1em;
   }
 
+  .md-nav--primary .md-nav--secondary .md-nav__list {
+    margin-top: 0;
+  }
+
   .md-nav--primary .md-nav__title .md-nav__icon {
     position: unset;
     display: flex;
@@ -1123,6 +1127,7 @@ input.md-search__input::placeholder {
 
   .md-nav--primary .md-nav__title ~ .md-nav__list[data-md-component='toc'] {
     padding-top: 0;
+    margin-top: 1em;
   }
 
   .md-nav--primary .md-nav__item {
@@ -1317,6 +1322,18 @@ input.md-search__input::placeholder {
   .md-header__inner {
     margin-left: auto;
     height: fit-content;
+  }
+
+  .md-main__inner {
+    margin-top: 1rem;
+  }
+
+  .md-container {
+    padding: 0 1rem;
+  }
+
+  .md-content__inner {
+    margin-right: 0;
   }
 }
 
@@ -1775,7 +1792,6 @@ details.interface > summary::before {
   border-bottom-right-radius: 16px;
 }
 
-.md-typeset .tabbed-labels > label,
 .md-typeset .tabbed-labels > label > [href]:first-child,
 .md-typeset .tabbed-labels > label > a > code {
   color: var(--tabbed-fg-color);
@@ -1788,10 +1804,6 @@ details.interface > summary::before {
 .js .md-typeset .tabbed-labels:before {
   background: var(--tabbed-active-color);
   height: 4px;
-}
-
-.md-typeset .tabbed-labels > label:hover {
-  color: var(--white);
 }
 
 /* Add margin to all items nested inside a tabbed element */
