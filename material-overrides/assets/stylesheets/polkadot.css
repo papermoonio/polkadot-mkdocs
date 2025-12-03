@@ -176,6 +176,8 @@
   --button-border-color: var(--white);
 }
 
+/* --- Layout styling --- */
+
 .md-grid {
   max-width: var(--max-page-width);
 }
@@ -333,21 +335,6 @@
   .md-header__button.md-logo
   img[src$="#only-light"] {
   display: none;
-}
-
-/* Home button styling */
-.home-button-wrapper:hover .md-tabs__link {
-  color: var(--pink);
-}
-
-.md-header__button.md-tabs__link {
-  color: var(--black);
-  font-weight: 600;
-  margin: 0;
-}
-
-[dir="ltr"] .md-tabs__list {
-  margin-left: 0;
 }
 
 /* Docs badge */
@@ -1869,6 +1856,10 @@ div.mermaid {
   width: 1.75em;
 }
 
+.md-typeset .twemoji.sub {
+  vertical-align: sub;
+}
+
 /* Cards with lists */
 .md-typeset .grid.cards ul li ul.card-list {
   margin: 0;
@@ -1890,6 +1881,26 @@ div.mermaid {
   border-color: var(--wtdn-card-border-color);
   margin-bottom: 0.5em;
   margin-top: 0.5em;
+}
+
+/* Support cards */
+.md-typeset .grid.cards.support ul.card-list>li {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+[dir="ltr"] .md-typeset .grid.cards.support ul li> p:last-child:has(a) {
+  margin-top: auto;
+}
+
+.md-typeset .grid.cards.support ul ul,
+[dir="ltr"] .md-typeset .grid.cards.support ul.card-list li {
+  list-style: initial !important;
+  margin-left: 1.25em;
+}
+
+.md-typeset .grid.cards.support ul ul {
+  margin-top: 1em;
 }
 
 /** Badge Styling */
