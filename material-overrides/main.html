@@ -166,6 +166,31 @@
       const kapaWidget = document.querySelector('#kapa-widget-container')?.shadowRoot;
       if (kapaWidget) {
         const observer = new MutationObserver(() => {
+          const kapaWidgetRoot = kapaWidget.querySelector('#kapa-widget-root');
+          console.log("hellllo", kapaWidgetRoot);
+          if (kapaWidgetRoot) {
+            const supportButton = document.createElement('button');
+            supportButton.innerHTML = 'Get Support';
+            supportButton.classList.add('test', 'mantine-qmc6d2');
+
+            const style = document.createElement('style');
+            style.textContent = `
+              button.test {
+                top: calc(70vh + 85px);
+                border-bottom-left-radius: 16px;
+                border-bottom-right-radius: 16px;
+                border-top: none;
+                box-shadow: none;
+                font-family: 'Unbounded', sans-serif;
+                font-size: 14px;
+                color: white;
+              }
+            `;
+
+            kapaWidgetRoot.prepend(supportButton);
+            kapaWidgetRoot.prepend(style);
+          }
+
           const kapaButtonContent = kapaWidget.querySelector('.mantine-Flex-root');
 
           if (kapaButtonContent) {
@@ -173,13 +198,32 @@
             kapaButtonContent.style.alignItems = 'start';
             kapaButtonContent.style.gap = '4px';
             
-            // Mobile adjustments: make button smaller and adjust layout
-            if (window.innerWidth <= 768) {
-              const kapaButton = kapaWidget.querySelector('.mantine-Button-root');
-              if (kapaButton) {
+            const kapaButton = kapaWidget.querySelector('.mantine-Button-root');
+            if (kapaButton) {
+              kapaButton.style.borderBottomLeftRadius = '0';
+              kapaButton.style.borderBottomRightRadius = '0';
+              kapaButton.style.borderBottom = 'none';
+              kapaButton.style.boxShadow = 'none';
+
+              if (window.innerWidth <= 768) {
                 kapaButton.style.width = 'fit-content';
                 kapaButton.style.height = '56px';
                 kapaButton.style.borderRadius = '16px';
+                kapaButton.style.right = '16px';
+                kapaButton.style.top = '90vh';
+
+                kapaButtonContent.style.flexDirection = 'row';
+                kapaButtonContent.style.gap = '12px';
+              }
+            }
+
+            // Mobile adjustments: make button smaller and adjust layout
+            if (window.innerWidth <= 768) {
+              if (kapaButton) {
+                kapaButton.style.width = 'fit-content';
+                kapaButton.style.height = '56px';
+                kapaButton.style.borderBottomLeftRadius = '16px';
+                kapaButton.style.borderBottomRightRadius = '16px';
                 kapaButton.style.right = '16px';
                 kapaButton.style.top = '90vh';
               }
