@@ -530,7 +530,7 @@ input.md-search__input::placeholder {
     background-color: var(--header-menu-bg-color);
   }
 
-  [dir=ltr] .md-search__options {
+  [dir="ltr"] .md-search__options {
     right: 2rem;
   }
 }
@@ -541,11 +541,13 @@ input.md-search__input::placeholder {
     width: 0;
   }
 
-  [data-md-toggle="search"]:checked ~ .md-header .md-header__button[for="__search"] {
+  [data-md-toggle="search"]:checked
+    ~ .md-header
+    .md-header__button[for="__search"] {
     display: none;
   }
 
-   [data-md-toggle="search"]:checked ~ .md-header .md-search {
+  [data-md-toggle="search"]:checked ~ .md-header .md-search {
     visibility: visible;
     width: fit-content;
   }
@@ -1723,6 +1725,7 @@ details.interface > summary::before {
 
 /* Add margin to all items nested inside a tabbed element */
 .md-typeset .tabbed-block > *,
+[dir=ltr] .md-typeset .tabbed-block > *,
 /* Need this line to override inline styling */
 .md-typeset .tabbed-block > .tabbed-set {
   margin: 1em;
@@ -2128,4 +2131,22 @@ body[data-md-color-scheme="slate"] article.md-content__inner.md-typeset img {
   overflow: hidden;
   white-space: nowrap;
   opacity: 0.8;
+}
+
+/* --- Support Bubble --- */
+#kapa-widget-container {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  top: 75vh;
+  height: 86px;
+  width: 161px;
+  padding: 16px;
+  background-color: var(--button-bg);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px;
+  border: 1px solid rgb(62, 62, 62);
+  z-index: 199;
+  animation: 1s ease-in-out 0s 1 normal none running wiggle;
+  border-radius: 16px;
+  border-bottom-right-radius: 0;
 }
