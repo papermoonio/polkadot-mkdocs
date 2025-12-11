@@ -52,6 +52,7 @@
     data-project-name="Polkadot"
     data-modal-title="Polkadot AI Chatbot"
     data-project-color="#1E1E1E"
+    data-project-logo="/assets/images/favicon.webp"
     data-button-hover-animation-enabled="false"
     data-button-text-color="white"
     data-button-text-font-family="var(--md-text-font-family)"
@@ -212,60 +213,61 @@
 
           // Modify the styles element
           const kapaStyles = kapaWidget.querySelector('style[data-mantine-styles="true"]');
-          kapaStyles.textContent += `
-            #kapa-button {
-              position: unset;
-              width: unset;
-              height: unset;
-              padding: 0;
-              background-color: transparent;
-              box-shadow: none;
-              animation: none;
-            }
-
-            #kapa-button:hover {
-              background-color: unset;
-              opacity: 0.7;
-            }
-
-            .kapa-shadow-root-wrapper {
-              display: flex;
-              flex-direction: column;
-              height: 100%;
-            }
-
-            .kapa-shadow-root-wrapper > div {
-              flex: 50%;
-              overflow-wrap: anywhere;
-              text-align: center;
-              line-height: 16px;
-              align-content: center;
-            }
-
-            .support-container {
-              border-bottom: 1px solid #3e3e3e;
-              font-size: 14px;
-              padding-bottom: 10px;
-            }
-
-            .support-container .support-link {
-              text-decoration: none;
-              color: var(--white);
-            }
-
-            .support-container .support-link:hover {
-              opacity: 0.7 !important;
-            }
-
-            #kapa-widget-root {
-              padding-top: 10px;
-            }
-
-            .mantine-Text-root {
-              line-height: 16px !important;
-            }
-          `;
-
+          if (kapaStyles) {
+            kapaStyles.textContent += `
+              #kapa-button {
+                position: unset;
+                width: unset;
+                height: unset;
+                padding: 0;
+                background-color: transparent;
+                box-shadow: none;
+                animation: none;
+              }
+  
+              #kapa-button:hover {
+                background-color: unset;
+                opacity: 0.7;
+              }
+  
+              .kapa-shadow-root-wrapper {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+              }
+  
+              .kapa-shadow-root-wrapper > div {
+                flex: 50%;
+                overflow-wrap: anywhere;
+                text-align: center;
+                line-height: 16px;
+                align-content: center;
+              }
+  
+              .support-container {
+                border-bottom: 1px solid #3e3e3e;
+                font-size: 14px;
+                padding-bottom: 10px;
+              }
+  
+              .support-container .support-link {
+                text-decoration: none;
+                color: var(--white);
+              }
+  
+              .support-container .support-link:hover {
+                opacity: 0.7 !important;
+              }
+  
+              #kapa-widget-root {
+                padding-top: 10px;
+              }
+  
+              .mantine-Text-root {
+                line-height: 16px !important;
+              }
+            `;
+          }
 
           const kapaButtonText = kapaWidget.querySelector('.mantine-Text-root');
           if (kapaButtonText) {
