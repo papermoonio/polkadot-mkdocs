@@ -268,7 +268,12 @@
 
 
           const kapaButtonText = kapaWidget.querySelector('.mantine-Text-root');
-          kapaButtonText.innerHTML = 'Ask <br> AI';
+          if (kapaButtonText) {
+            kapaButtonText.textContent = '';
+            kapaButtonText.appendChild(document.createTextNode('Ask'));
+            kapaButtonText.appendChild(document.createElement('br'));
+            kapaButtonText.appendChild(document.createTextNode('AI'));
+          }
 
           // Stop observing once we've modified everything
           observer.disconnect();
