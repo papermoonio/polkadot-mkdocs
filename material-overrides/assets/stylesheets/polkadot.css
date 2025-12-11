@@ -176,6 +176,7 @@
   --button-border-color: var(--white);
 }
 
+/* --- Layout styling --- */
 .md-grid {
   max-width: var(--max-page-width);
 }
@@ -333,21 +334,6 @@
   .md-header__button.md-logo
   img[src$="#only-light"] {
   display: none;
-}
-
-/* Home button styling */
-.home-button-wrapper:hover .md-tabs__link {
-  color: var(--pink);
-}
-
-.md-header__button.md-tabs__link {
-  color: var(--black);
-  font-weight: 600;
-  margin: 0;
-}
-
-[dir="ltr"] .md-tabs__list {
-  margin-left: 0;
 }
 
 /* Docs badge */
@@ -530,7 +516,7 @@ input.md-search__input::placeholder {
     background-color: var(--header-menu-bg-color);
   }
 
-  [dir=ltr] .md-search__options {
+  [dir="ltr"] .md-search__options {
     right: 2rem;
   }
 }
@@ -541,11 +527,13 @@ input.md-search__input::placeholder {
     width: 0;
   }
 
-  [data-md-toggle="search"]:checked ~ .md-header .md-header__button[for="__search"] {
+  [data-md-toggle="search"]:checked
+    ~ .md-header
+    .md-header__button[for="__search"] {
     display: none;
   }
 
-   [data-md-toggle="search"]:checked ~ .md-header .md-search {
+  [data-md-toggle="search"]:checked ~ .md-header .md-search {
     visibility: visible;
     width: fit-content;
   }
@@ -1723,6 +1711,7 @@ details.interface > summary::before {
 
 /* Add margin to all items nested inside a tabbed element */
 .md-typeset .tabbed-block > *,
+[dir=ltr] .md-typeset .tabbed-block > *,
 /* Need this line to override inline styling */
 .md-typeset .tabbed-block > .tabbed-set {
   margin: 1em;
@@ -1869,6 +1858,10 @@ div.mermaid {
   width: 1.75em;
 }
 
+.md-typeset .twemoji.sub {
+  vertical-align: sub;
+}
+
 /* Cards with lists */
 .md-typeset .grid.cards ul li ul.card-list {
   margin: 0;
@@ -1890,6 +1883,26 @@ div.mermaid {
   border-color: var(--wtdn-card-border-color);
   margin-bottom: 0.5em;
   margin-top: 0.5em;
+}
+
+/* Support cards */
+.md-typeset .grid.cards.support ul.card-list > li {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+[dir="ltr"] .md-typeset .grid.cards.support ul li > p:last-child:has(a) {
+  margin-top: auto;
+}
+
+.md-typeset .grid.cards.support ul ul,
+[dir="ltr"] .md-typeset .grid.cards.support ul.card-list li {
+  list-style: initial !important;
+  margin-left: 1.25em;
+}
+
+.md-typeset .grid.cards.support ul ul {
+  margin-top: 1em;
 }
 
 /** Badge Styling */
@@ -2128,4 +2141,22 @@ body[data-md-color-scheme="slate"] article.md-content__inner.md-typeset img {
   overflow: hidden;
   white-space: nowrap;
   opacity: 0.8;
+}
+
+/* --- Support Bubble --- */
+#kapa-widget-container {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  top: 75vh;
+  height: 120px;
+  width: 90px;
+  padding: 16px;
+  background-color: var(--button-bg);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px;
+  border: 1px solid rgb(62, 62, 62);
+  z-index: 199;
+  animation: 1s ease-in-out 0s 1 normal none running wiggle;
+  border-radius: 16px;
+  border-bottom-right-radius: 0;
 }
