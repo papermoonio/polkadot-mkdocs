@@ -52,14 +52,16 @@
     data-project-name="Polkadot"
     data-modal-title="Polkadot AI Chatbot"
     data-project-color="#1E1E1E"
-    data-button-bg-color="var(--button-bg);"
+    data-button-bg-color="var(--color-surface-secondary)"
+    data-button-border="1px solid var(--color-border-strong)"
     data-button-border-radius="16px 16px 0 16px"
     data-button-hover-animation-enabled="false"
     data-button-image-height="17px"
     data-button-image-width="17px"
-    data-button-text-color="white"
-    data-button-text-font-family="Unbounded"
-    data-button-text-font-size="14px"
+    data-button-text-color="var(--color-text-primary)"
+    data-button-text-font-family="DM Serif Display"
+    data-button-text-font-size="16px"
+    data-button-text-font-weight="600"
     data-button-padding="16px"
     data-button-width="88px"
     data-button-height="85px"
@@ -72,9 +74,10 @@
     data-button-position-top="75vh"
     data-button-position-right="24px"
     data-query-input-font-size="16px"
+    data-modal-header-bg-color="var(--color-surface)"
     data-modal-image-height="24px"
     data-modal-image-width="24px"
-    data-project-logo="/assets/images/favicon.svg"
+    data-project-logo="/assets/images/polkadot.png"
     data-modal-header-bg-color="#1C0533"
     data-modal-title-color="white"
     data-modal-disclaimer="This is an AI chatbot trained to answer questions about Polkadot. As such, the answers it provides might not always be accurate or up-to-date. Please use your best judgement when evaluating its responses. Also, **please refrain from sharing any personal or private information with the bot**. By submitting a query, you agree that you have read and understood [these conditions](https://polkadot.com/legal-disclosures/).
@@ -126,9 +129,7 @@
         {#- Feedback and Edit this page container -#}
         <div class="feedback-actions-container">
           {#- Feedback Section -#}
-          <div class="feedback-section">
-            {% include "partials/feedback.html" %}
-          </div>
+          {% include "partials/feedback.html" %}
 
           {#- Edit this Page Section -#}
           <div class="edit-section">
@@ -163,38 +164,81 @@
         }
       });
 
-      const kapaWidget = document.querySelector('#kapa-widget-container')?.shadowRoot;
-      if (kapaWidget) {
-        const observer = new MutationObserver(() => {
-          const kapaButtonContent = kapaWidget.querySelector('.mantine-Flex-root');
+      const widgetHost = document.querySelector('#kapa-widget-container');
+      const kapaWidget = widgetHost?.shadowRoot;
+      if (!kapaWidget) return;
 
-          if (kapaButtonContent) {
-            // Adjust position of Polkadot logo
-            kapaButtonContent.style.alignItems = 'start';
-            kapaButtonContent.style.gap = '4px';
-            
-            // Mobile adjustments: make button smaller and adjust layout
-            if (window.innerWidth <= 768) {
-              const kapaButton = kapaWidget.querySelector('.mantine-Button-root');
-              if (kapaButton) {
-                kapaButton.style.width = 'fit-content';
-                kapaButton.style.height = '56px';
-                kapaButton.style.borderRadius = '16px';
-                kapaButton.style.right = '16px';
-                kapaButton.style.top = '90vh';
-              }
-              kapaButtonContent.style.flexDirection = 'row';
-              kapaButtonContent.style.gap = '12px';
+      const observer = new MutationObserver(() => {
+        const kapaButton = kapaWidget.querySelector('.mantine-Button-root');
+        const kapaButtonContent = kapaWidget.querySelector('.mantine-Flex-root');
+
+        if (!kapaButton || !kapaButtonContent) return;
+
+        /**
+         * ─────────────────────────────
+         * Layout / runtime JS styles
+         * ─────────────────────────────
+         */
+        kapaButtonContent.style.alignItems = 'flex-start';
+
+        if (window.innerWidth <= 768) {
+          kapaButton.style.width = 'fit-content';
+          kapaButton.style.height = '56px';
+          kapaButton.style.borderRadius = '16px';
+          kapaButton.style.right = '16px';
+          kapaButton.style.top = '90vh';
+
+          kapaButtonContent.style.flexDirection = 'row';
+          kapaButtonContent.style.gap = '12px';
+        } else {
+          kapaButtonContent.style.flexDirection = 'column';
+          kapaButtonContent.style.gap = '4px';
+        }
+
+        /**
+         * ─────────────────────────────
+         * Inject styles (once)
+         * ─────────────────────────────
+         */
+        if (!kapaWidget.querySelector('#custom-kapa-styles')) {
+          const style = document.createElement('style');
+          style.id = 'custom-kapa-styles';
+          style.textContent = `
+            /* Light mode */
+            .mantine-Button-root:hover {
+              background-color: var(--color-surface);
             }
 
-            // Stop observing once we've applied styles
-            observer.disconnect();
-          }
-        });
+            :host-context([data-md-color-scheme="custom-light"])
+            .mantine-Image-root {
+              filter: invert(1);
+            }
 
-        // Observe additions inside the shadow DOM
-        observer.observe(kapaWidget, { childList: true, subtree: true });
-      }
+            :host-context([data-md-color-scheme="custom-light"])
+            .mantine-Title-root {
+              color: var(--color-text-primary);
+            }
+
+            :host-context([data-md-color-scheme="custom-dark"])
+            .mantine-Modal-close {
+              color: var(--color-text-primary);
+            }
+
+            :host-context([data-md-color-scheme="custom-dark"])
+            .mantine-CloseButton-root:hover {
+              background: var(--color-surface-secondary);
+            }
+          `;
+          kapaWidget.appendChild(style);
+        }
+
+        /**
+         * All done — stop observing
+         */
+        observer.disconnect();
+      });
+
+      observer.observe(kapaWidget, { childList: true, subtree: true });
     });
   </script>
   <script>
