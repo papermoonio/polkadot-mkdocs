@@ -190,6 +190,7 @@
   --md-code-hl-comment-color: #6a9955;
   --md-code-hl-operator-color: #d4d4d4;
   --md-code-hl-punctuation-color: #d4d4d4;
+  --md-code-hl-special-color: #9cdcfe;
 }
 
 /* --- Typography --- */
@@ -627,7 +628,6 @@ span.badge {
 }
 
 /* --- Cards --- */
-/* TODO: ERIN */
 .md-typeset .grid.cards {
   gap: var(--py-3);
 }
