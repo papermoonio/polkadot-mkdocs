@@ -39,14 +39,14 @@ theme:
   favicon: assets/images/polkadot.png
   logo: assets/images/polkadot.png
   icon:
-    edit: material/github
-    report: octicons/report-24
     admonition:
       code: material/code-tags
-    search: custom/magnifying-glass
-    close: custom/close
-    previous: custom/left-arrow
-    next: custom/right-arrow
+    edit: material/github
+    close: octicons/x-16
+    menu: octicons/three-bars-24
+    previous: octicons/arrow-left-16
+    report: octicons/report-24
+    search: octicons/search-16
   font:
     text: DM Sans
     code: JetBrains Mono

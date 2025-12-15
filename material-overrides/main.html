@@ -156,6 +156,16 @@
   {{ super() }}
   <script defer>
     document.addEventListener('DOMContentLoaded', () => {
+
+      const searchToggle = document.querySelector('[data-md-toggle="search"]');
+
+      searchToggle?.addEventListener('change', () => {
+        document.body.toggleAttribute(
+          'data-search-open',
+          searchToggle.checked
+        );
+      });
+
       document.body.addEventListener('click', (event) => {
         if (event.target.id === 'kapa-widget-container') {
           event.target.addEventListener('keydown', (event) => {
@@ -227,6 +237,10 @@
             :host-context([data-md-color-scheme="custom-dark"])
             .mantine-CloseButton-root:hover {
               background: var(--color-surface-secondary);
+            }
+
+            :host-context(body[data-search-open]) #kapa-button {
+              z-index: 1;
             }
           `;
           kapaWidget.appendChild(style);
