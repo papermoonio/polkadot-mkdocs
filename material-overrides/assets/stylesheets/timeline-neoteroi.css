@@ -2,8 +2,45 @@
 Neoteroi Mkdocs timeline extension: https://github.com/Neoteroi/mkdocs-plugins/blob/main/styles/timeline.scss **/
 
 /** Timeline CSS **/
-:root {
-  --timeline-gray: 120, 120, 120;
+
+/* Theme-aware timeline tokens */
+:root,
+[data-md-color-scheme="custom-light"] {
+  --nt-timeline-line-color: var(--color-text-primary);
+  --nt-timeline-line-color-strong: color-mix(
+    in srgb,
+    var(--nt-timeline-line-color) 80%,
+    transparent
+  );
+  --nt-timeline-line-color-soft: color-mix(
+    in srgb,
+    var(--nt-timeline-line-color) 35%,
+    transparent
+  );
+
+  --nt-timeline-content-divider: var(--color-border-strong);
+  --nt-timeline-dot-bg: var(--color-surface);
+  --nt-timeline-dot-border: var(--color-text-primary);
+  --nt-timeline-icon-color: var(--color-text-primary);
+}
+
+[data-md-color-scheme="custom-dark"] {
+  --nt-timeline-line-color: var(--color-text-primary);
+  --nt-timeline-line-color-strong: color-mix(
+    in srgb,
+    var(--nt-timeline-line-color) 80%,
+    transparent
+  );
+  --nt-timeline-line-color-soft: color-mix(
+    in srgb,
+    var(--nt-timeline-line-color) 35%,
+    transparent
+  );
+
+  --nt-timeline-content-divider: var(--color-border-strong);
+  --nt-timeline-dot-bg: var(--color-surface);
+  --nt-timeline-dot-border: var(--nt-timeline-line-color);
+  --nt-timeline-icon-color: var(--color-text-primary);
 }
 
 /* displays if timeline doesn't render properly 
@@ -124,26 +161,23 @@ Neoteroi Mkdocs timeline extension: https://github.com/Neoteroi/mkdocs-plugins/b
       /* px here control left margin/width of timeline */
       .nt-timeline-before {
         background: linear-gradient(
-            rgba(120, 120, 120, 0.3) 0%,
-            rgba(120, 120, 120, 0.7) 100%
+            var(--nt-timeline-line-color-soft) 0%,
+            var(--nt-timeline-line-color-strong) 100%
           )
           no-repeat 30px/2px 100%;
       }
 
       .nt-timeline-after {
-        background: linear-gradient(
-            rgba(120, 120, 120, 0) 0%,
-            rgba(120, 120, 120, 0) 100%
-          )
-          no-repeat 30px/2px 100%;
+        background: linear-gradient(transparent 0%, transparent 100%) no-repeat
+          30px/2px 100%;
         display: none;
       }
 
       .nt-timeline-items {
         background: linear-gradient(
-            rgba(120, 120, 120, 0.7) 0%,
-            rgba(120, 120, 120, 0.3) 50%,
-            rgba(255, 255, 255, 1) 100%
+            var(--nt-timeline-line-color-strong) 0%,
+            var(--nt-timeline-line-color-soft) 50%,
+            transparent 100%
           )
           no-repeat 30px/2px 100%;
       }
@@ -193,7 +227,7 @@ Neoteroi Mkdocs timeline extension: https://github.com/Neoteroi/mkdocs-plugins/b
   height: 20px;
 
   border-radius: 100%;
-  background-color: var(--white);
+  background-color: var(--nt-timeline-dot-bg);
   position: absolute;
   top: 0px;
   z-index: 2;
@@ -203,7 +237,7 @@ Neoteroi Mkdocs timeline extension: https://github.com/Neoteroi/mkdocs-plugins/b
   align-items: center;
 
   /* border around each icon */
-  border: 2px solid var(--storm-gray);
+  border: 2px solid var(--nt-timeline-dot-border);
 
   &:not(.bigger) {
     .icon {
