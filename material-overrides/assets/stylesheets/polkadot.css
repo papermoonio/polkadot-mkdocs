@@ -512,7 +512,7 @@ input.md-search__input::placeholder {
 
 .md-nav__link .nav-title.twemoji svg {
   vertical-align: sub;
-  margin: 0 0.5em;
+  margin: 0 .5em 0 0;
 }
 
 .md-nav__link > .nav-title.twemoji > span svg {
