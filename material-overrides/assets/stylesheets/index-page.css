@@ -1,6 +1,6 @@
 .subsection-wrapper {
   display: flex;
-  gap: 1em;
+  gap: var(--py-3);
   flex-wrap: wrap;
 }
 
