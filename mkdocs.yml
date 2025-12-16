@@ -184,7 +184,7 @@ extra:
       name: YouTube
     - icon: fontawesome/brands/x-twitter
       link: https://x.com/Polkadot
-      name: Twitter
+      name: X (formerly Twitter)
   analytics:
     provider: google
     property: G-ZSKWB953ZL
