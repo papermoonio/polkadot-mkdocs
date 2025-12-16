@@ -590,6 +590,7 @@ input.md-search__input::placeholder {
     margin-right: 0;
     padding-top: var(--p-1);
     padding-bottom: var(--p-1);
+    padding-right: var(--p-1);
     margin-top: 0;
   }
 
