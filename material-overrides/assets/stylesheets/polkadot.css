@@ -260,6 +260,18 @@
   flex-direction: column;
 }
 
+@media screen and (max-width: 76.2344em) {
+  .md-content {
+    padding: 0 32px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .md-content {
+    padding: 0 8px;
+  }
+}
+
 /* --- Top Navigation / Header --- */
 .md-header {
   box-shadow: none;
