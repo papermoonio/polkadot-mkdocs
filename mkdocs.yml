@@ -96,7 +96,7 @@ markdown_extensions:
   - pymdownx.keys
   - pymdownx.snippets:
       base_path: polkadot-docs/.snippets
-      # url_download: True
+      url_download: True
       dedent_subsections: True
   - pymdownx.tabbed:
       alternate_style: True
@@ -116,9 +116,9 @@ plugins:
       exclude:
         - ai/*
   - awesome-nav
-  # - copy_md:
-  #     source_dir: polkadot-docs/.ai
-  #     target_dir: ai
+  - copy_md:
+      source_dir: polkadot-docs/.ai
+      target_dir: ai
   - glightbox
   - minify:
       minify_html: true
