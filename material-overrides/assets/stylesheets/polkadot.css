@@ -393,6 +393,12 @@ input.md-search__input::placeholder {
   box-shadow: 0 -0.05rem var(--color-border-strong);
 }
 
+@media screen and (max-width: 1536px) {
+  .md-header__inner {
+    padding: 0 var(--py-3);
+  }
+}
+
 @media screen and (min-width: 60em) {
   .md-search__form {
     background-color: var(--color-surface-secondary);
