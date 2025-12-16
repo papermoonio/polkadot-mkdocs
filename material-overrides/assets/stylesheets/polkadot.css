@@ -1149,6 +1149,10 @@ h3 > span.twemoji.lg.middle {
   gap: var(--py-2);
 }
 
+[dir="ltr"] .md-content__button:hover {
+  opacity: 0.8;
+}
+
 /* --- Headerlink --- */
 .md-typeset .headerlink {
   color: var(--md-accent-fg-color);
