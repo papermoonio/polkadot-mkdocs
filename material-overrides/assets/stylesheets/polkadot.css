@@ -620,6 +620,10 @@ input.md-search__input::placeholder {
   .md-header--lifted ~ .md-container .md-sidebar {
     top: 3.8rem !important;
   }
+
+  .md-nav__icon:hover {
+    background-color: transparent;
+  }
 }
 
 @media screen and (min-width: 60em) {
