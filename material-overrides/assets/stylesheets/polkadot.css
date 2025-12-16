@@ -622,6 +622,7 @@ input.md-search__input::placeholder {
   [dir="ltr"] .md-nav--secondary .md-nav__item > .md-nav__link {
     padding-top: var(--p-1);
     padding-bottom: var(--p-1);
+    padding-right: var(--p-1);
     margin-top: 0;
   }
 
