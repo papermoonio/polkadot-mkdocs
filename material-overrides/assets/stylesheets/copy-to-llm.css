@@ -18,8 +18,8 @@
 .copy-to-llm-split-container {
   display: inline-flex;
   margin-left: auto;
-  border: 1px solid var(--header-menu-border-color);
-  border-radius: 6px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--rounded);
   overflow: visible;
   position: relative;
 }
@@ -27,40 +27,39 @@
 /* Common styles for both parts */
 .copy-to-llm-section {
   padding: 0.6em 0.9em;
-  background-color: var(--header-menu-bg-color);
-  color: var(--header-fg-color);
+  background-color: var(--color-surface-secondary);
+  color: var(--color-text-primary);
   border: none;
   cursor: pointer;
   transition: all 0.2s;
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
-  font-size: 16px;
+  font-size: 16px
 }
 
 /* Left button (copy) */
 .copy-to-llm-left {
-  border-right: 1px solid var(--header-menu-border-color);
-  border-radius: 6px 0 0 6px;
+  border-right: 1px solid var(--color-border-strong);
+  border-radius: var(--rounded) 0 0 var(--rounded);
 }
 
 .copy-to-llm-left:hover {
-  background-color: var(--nav-hover-bg-color);
-  color: var(--header-fg-color);
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
 }
 
 /* Right button (dropdown) */
 .copy-to-llm-right {
   padding: 0.6em 0.7em;
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 var(--rounded) var(--rounded) 0;
   position: relative;
   z-index: 1;
 }
 
 .copy-to-llm-right:hover,
 .copy-to-llm-right.active {
-  background-color: var(--nav-hover-bg-color);
-  color: var(--header-menu-bg-color);
+  background-color: var(--color-surface);
 }
 
 .copy-to-llm-right:focus {
@@ -73,13 +72,13 @@
 .copy-to-llm-section .copy-icon {
   width: 1.1em;
   height: 1.1em;
-  fill: var(--header-fg-color);
+  fill: var(--color-text-primary);
   margin-right: 2px;
 }
 
 /* Color of copy icon on hover */
 .copy-to-llm-section:hover .copy-icon {
-  fill: var(--header-fg-color);
+  fill: var(--color-text-primary);
 }
 
 /* Color, size, and animation for chevron */
@@ -87,17 +86,17 @@
   width: 1em;
   height: 1em;
   transition: transform 0.2s;
-  fill: var(--header-fg-color);
+  fill: var(--color-text-primary);
 }
 
 /* Color of chevron while left button is hovered */
 .copy-to-llm-section:hover .chevron-icon {
-  fill: var(--header-fg-color);
+  fill: var(--color-text-primary);
 }
 
 /* Color of chevron while left button is active */
 .copy-to-llm-right.active svg.chevron-icon {
-  fill: var(--header-fg-color);
+  fill: var(--color-text-primary);
 }
 
 /* Dropdown menu */
@@ -105,8 +104,8 @@
   position: absolute;
   top: calc(100% + 4px);
   right: 0;
-  background-color: var(--header-menu-bg-color);
-  border: 1px solid var(--header-menu-border-color);
+  background-color: var(--color-surface-secondary);
+  border: 1px solid var(--color-border-strong);
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   min-width: 160px;
@@ -134,31 +133,28 @@
   transition: all 0.2s;
   white-space: nowrap;
   line-height: 1.2;
+  color: var(--color-text-primary)
 }
 
 .copy-to-llm-dropdown-item span {
   flex: 1;
 }
 
-.copy-to-llm-dropdown-item:hover {
-  background-color: var(--nav-hover-bg-color);
-  color: var(--header-fg-color);
-}
-
+.copy-to-llm-dropdown-item:hover,
 .copy-to-llm-dropdown-item:active {
-  background-color: var(--athens-gray);
-  color: var(--header-menu-bg-color);
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
 }
 
 .copy-to-llm-dropdown-item svg {
   width: 1em;
   height: 1em;
   flex-shrink: 0;
-  fill: var(--header-fg-color);
+  fill: var(--color-text-primary);
 }
 
 .copy-to-llm-dropdown-item:hover svg {
-  fill: var(--header-fg-color);
+  fill: var(--color-text-primary);
 }
 
 /* Loading spinner animation */
@@ -181,12 +177,11 @@
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%) translateY(100px);
-  background-color: var(--copy-to-llm-toast-bg, var(--pink));
-  color: var(--copy-to-llm-toast-text, var(--white));
+  background-color: var(--color-text-primary);
+  color: var(--color-surface);
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
   font-size: 0.875rem;
-  font-family: var(--md-text-font-family);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   opacity: 0;
   transition: all 0.3s ease;
