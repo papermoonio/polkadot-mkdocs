@@ -10,7 +10,7 @@
   text-decoration: none;
   align-content: start;
   flex: 1 0 48%;
-  max-width: 48%;
+  max-width: 50%;
 }
 
 .md-typeset .subsection-wrapper .card a {
