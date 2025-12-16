@@ -1109,6 +1109,15 @@ h3 > span.twemoji.lg.middle {
   color: var(--color-text-secondary);
 }
 
+.md-feedback__icon,
+.md-feedback__list:hover .md-icon:not(:disabled) {
+  color: var(--color-text-secondary);
+}
+
+.md-feedback__icon:not(:disabled).md-icon:hover {
+  opacity: 0.8
+}
+
 .md-feedback__note {
   font-size: 12px;
   text-align: left;
