@@ -532,9 +532,9 @@ input.md-search__input::placeholder {
     .md-nav--primary
     .md-nav__item--section.md-nav__item
     > div.md-nav__link {
-      box-shadow: none;
-      color: var(--color-text-primary);
-    }
+    box-shadow: none;
+    color: var(--color-text-primary);
+  }
 
   /* Root-level section spacing */
   [dir="ltr"]
@@ -592,6 +592,10 @@ input.md-search__input::placeholder {
     padding-bottom: var(--p-1);
     padding-right: var(--p-1);
     margin-top: 0;
+  }
+
+  [dir="ltr" ] .md-nav--primary.md-nav--lifted > .md-nav__list > .md-nav__item--active > div.md-nav__link {
+    padding-bottom: 0;
   }
 
   /* Hover and active styling */
