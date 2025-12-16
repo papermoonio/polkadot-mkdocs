@@ -512,7 +512,7 @@ input.md-search__input::placeholder {
 
 .md-nav__link .nav-title.twemoji svg {
   vertical-align: sub;
-  margin: 0 .5em 0 0;
+  margin: 0 0.5em 0 0;
 }
 
 .md-nav__link > .nav-title.twemoji > span svg {
@@ -594,7 +594,11 @@ input.md-search__input::placeholder {
     margin-top: 0;
   }
 
-  [dir="ltr" ] .md-nav--primary.md-nav--lifted > .md-nav__list > .md-nav__item--active > div.md-nav__link {
+  [dir="ltr"]
+    .md-nav--primary.md-nav--lifted
+    > .md-nav__list
+    > .md-nav__item--active
+    > div.md-nav__link {
     padding-bottom: 0;
   }
 
@@ -931,6 +935,11 @@ span.badge {
   border-radius: var(--rounded-2xl);
 }
 
+.md-typeset .grid.cards > ul > li:hover,
+.md-typeset .grid.cards > ol > li:hover {
+  box-shadow: none;
+}
+
 .md-typeset .grid.cards > ul > li > hr,
 .md-typeset .grid.cards > ol > li > hr {
   display: none;
@@ -1115,7 +1124,7 @@ h3 > span.twemoji.lg.middle {
 }
 
 .md-feedback__icon:not(:disabled).md-icon:hover {
-  opacity: 0.8
+  opacity: 0.8;
 }
 
 .md-feedback__note {
