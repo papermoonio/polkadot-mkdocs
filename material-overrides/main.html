@@ -34,13 +34,6 @@
   {%- endif -%} 
 {%- endblock -%} 
 
-{% block announce %}
-  <span aria-hidden="true">✅</span> Kusama Asset Hub migration done. 👉 
-  <a href="https://forum.polkadot.network/t/asset-hub-migration-2025/11129/73" target="_blank" rel="noopener noreferrer" style="font-weight: bold;">
-    Read more.
-  </a>
-{% endblock %}
-
 {% block libs %}
   {{ super() }}
   <link rel="preconnect" href="https://widget.kapa.ai/">
@@ -52,12 +45,9 @@
     data-project-name="Polkadot"
     data-modal-title="Polkadot AI Chatbot"
     data-project-color="#1E1E1E"
-    data-project-logo="/assets/images/favicon.webp"
     data-button-hover-animation-enabled="false"
-    data-button-text-color="white"
-    data-button-text-font-family="var(--md-text-font-family)"
+    data-button-text-color="var(--color-text-primary)"
     data-button-text-font-size="14px"
-
     data-button-position-right="unset"
     data-button-position-bottom="unset"
     data-button-height="unset"
@@ -69,7 +59,6 @@
     data-button-animation-enabled="false"
     data-button-image-height="0px"
     data-button-image-width="0px"
-
     data-font-size-xs="12px"
     data-font-size-sm="14px"
     data-font-size-md="16px"
@@ -77,9 +66,10 @@
     data-font-size-xl="22px"
     data-modal-title-font-size="22px"
     data-query-input-font-size="16px"
+    data-modal-header-bg-color="var(--color-surface)"
     data-modal-image-height="24px"
     data-modal-image-width="24px"
-    data-modal-header-bg-color="#1C0533"
+    data-project-logo="/assets/images/polkadot.png"
     data-modal-title-color="white"
     data-modal-disclaimer="This is an AI chatbot trained to answer questions about Polkadot. As such, the answers it provides might not always be accurate or up-to-date. Please use your best judgement when evaluating its responses. Also, **please refrain from sharing any personal or private information with the bot**. By submitting a query, you agree that you have read and understood [these conditions](https://polkadot.com/legal-disclosures/).
       **If you need further assistance, you can reach out to [Polkadot Support](https://support.polkadot.network/support/tickets/new?ticket_form=i_have_a_support_request).**"
@@ -130,9 +120,7 @@
         {#- Feedback and Edit this page container -#}
         <div class="feedback-actions-container">
           {#- Feedback Section -#}
-          <div class="feedback-section">
-            {% include "partials/feedback.html" %}
-          </div>
+          {% include "partials/feedback.html" %}
 
           {#- Edit this Page Section -#}
           <div class="edit-section">
@@ -159,6 +147,16 @@
   {{ super() }}
   <script defer>
     document.addEventListener('DOMContentLoaded', () => {
+
+      const searchToggle = document.querySelector('[data-md-toggle="search"]');
+
+      searchToggle?.addEventListener('change', () => {
+        document.body.toggleAttribute(
+          'data-search-open',
+          searchToggle.checked
+        );
+      });
+
       document.body.addEventListener('click', (event) => {
         if (event.target.id === 'kapa-widget-container') {
           event.target.addEventListener('keydown', (event) => {
@@ -167,123 +165,155 @@
         }
       });
 
-      const kapaWidget = document.querySelector('#kapa-widget-container')?.shadowRoot;
+      const widgetHost = document.querySelector('#kapa-widget-container');
+      const kapaWidget = widgetHost?.shadowRoot;
+      if (!kapaWidget) return;
 
-      if (kapaWidget) {
-        /*
-          In order to customize the Kapa AI widget, we need to manipulate its shadow DOM.
-          
-          This script performs the following actions:
-            1. Wraps existing shadow root content in a new div for easier styling.
-            2. Adds a "Get Support" link to the widget.
-            3. Observes mutations in the shadow DOM to apply custom styles and hide unwanted elements
-        */
+      /*
+        In order to customize the Kapa AI widget, we need to manipulate its shadow DOM.
+        
+        This script performs the following actions:
+          1. Wraps existing shadow root content in a new div for easier styling.
+          2. Adds a "Get Support" link to the widget.
+          3. Observes mutations in the shadow DOM to apply custom styles and hide unwanted elements
+      */
 
-        /* --- 1. Add wrapper around the shadow root --- */
-        const shadowRootWrapper = document.createElement('div');
-        shadowRootWrapper.className = 'kapa-shadow-root-wrapper';
+      /* --- 1. Add wrapper around the shadow root --- */
+      const shadowRootWrapper = document.createElement('div');
+      shadowRootWrapper.className = 'kapa-shadow-root-wrapper';
 
-        // Move all existing children into the wrapper
-        while (kapaWidget.firstChild) {
-          shadowRootWrapper.appendChild(kapaWidget.firstChild);
+      // Move all existing children into the wrapper
+      while (kapaWidget.firstChild) {
+        shadowRootWrapper.appendChild(kapaWidget.firstChild);
+      }
+
+      // Insert the wrapper back into the shadow root
+      kapaWidget.appendChild(shadowRootWrapper);
+
+      /* --- 2. Create get support link and add to the shadow root --- */
+      const supportWrapper = document.createElement('div');
+      supportWrapper.classList.add('support-container');
+
+      const supportLink = document.createElement('a');
+      supportLink.href = '/get-support/';
+      supportLink.textContent = 'Get Support';
+      supportLink.classList.add('support-link');
+
+      supportWrapper.appendChild(supportLink);
+      shadowRootWrapper.prepend(supportWrapper);
+
+      /* --- 3. Observe mutations in the shadow DOM to apply custom styles and hide unwanted elements --- */
+      const observer = new MutationObserver(() => {
+        // Remove the image
+        const kapaButtonImage = kapaWidget.querySelector('.mantine-Image-root');
+        if (kapaButtonImage) {
+          kapaButtonImage.style.display = 'none';
         }
 
-        // Insert the wrapper back into the shadow root
-        kapaWidget.appendChild(shadowRootWrapper);
-
-        /* --- 2. Create get support link and add to the shadow root --- */
-        const supportWrapper = document.createElement('div');
-        supportWrapper.classList.add('support-container');
-
-        const supportLink = document.createElement('a');
-        supportLink.href = '/get-support/';
-        supportLink.textContent = 'Get Support';
-        supportLink.classList.add('support-link');
-
-        supportWrapper.appendChild(supportLink);
-        shadowRootWrapper.prepend(supportWrapper);
-
-        /* --- 3. Observe mutations in the shadow DOM to apply custom styles and hide unwanted elements --- */
-        const observer = new MutationObserver(() => {
-          // Remove the image
-          const kapaButtonImage = kapaWidget.querySelector('.mantine-Image-root');
-          if (kapaButtonImage) {
-            kapaButtonImage.style.display = 'none';
-          }
-
-          // Modify the styles element
-          const kapaStyles = kapaWidget.querySelector('style[data-mantine-styles="true"]');
-          if (kapaStyles) {
-            kapaStyles.textContent += `
-              #kapa-button {
-                position: unset;
-                width: unset;
-                height: unset;
-                padding: 0;
-                background-color: transparent;
-                box-shadow: none;
-                animation: none;
-              }
+        /**
+         * ─────────────────────────────
+         * Layout / runtime JS styles
+         * ─────────────────────────────
+         */
+        const kapaStyles = kapaWidget.querySelector('style[data-mantine-styles="true"]');
+        if (kapaStyles) {
+          kapaStyles.textContent += `
+            #kapa-button {
+              position: unset;
+              width: unset;
+              height: unset;
+              padding: 0;
+              background-color: transparent;
+              box-shadow: none;
+              animation: none;
+            }
   
-              #kapa-button:hover {
-                background-color: unset;
-                opacity: 0.7;
-              }
+            #kapa-button:hover {
+              background-color: unset;
+              opacity: 0.7;
+            }
   
-              .kapa-shadow-root-wrapper {
-                display: flex;
-                flex-direction: column;
-                height: 100%;
-              }
+            .kapa-shadow-root-wrapper {
+              display: flex;
+              flex-direction: column;
+              height: 100%;
+            }
   
-              .kapa-shadow-root-wrapper > div {
-                flex: 50%;
-                overflow-wrap: anywhere;
-                text-align: center;
-                line-height: 16px;
-                align-content: center;
-              }
+            .kapa-shadow-root-wrapper > div {
+              flex: 50%;
+              overflow-wrap: anywhere;
+              text-align: center;
+              line-height: 16px;
+              align-content: center;
+            }
   
-              .support-container {
-                border-bottom: 1px solid #3e3e3e;
-                font-size: 14px;
-                padding-bottom: 10px;
-              }
+            .support-container {
+              border-bottom: 1px solid #3e3e3e;
+              font-size: 14px;
+              padding-bottom: 10px;
+            }
   
-              .support-container .support-link {
-                text-decoration: none;
-                color: var(--white);
-              }
+            .support-container .support-link {
+              text-decoration: none;
+              color: var(--md-default-fg-color);
+            }
   
-              .support-container .support-link:hover {
-                opacity: 0.7 !important;
-              }
+            .support-container .support-link:hover {
+              opacity: 0.7 !important;
+            }
   
-              #kapa-widget-root {
-                padding-top: 10px;
-              }
+            #kapa-widget-root {
+              padding-top: 10px;
+            }
   
-              .mantine-Text-root {
-                line-height: 16px !important;
-              }
-            `;
-          }
+            .mantine-Text-root {
+              line-height: 16px !important;
+            }
+            
+            /* Light mode */
+            .mantine-Button-root:hover {
+              background-color: var(--color-surface);
+            }
 
-          const kapaButtonText = kapaWidget.querySelector('.mantine-Text-root');
-          if (kapaButtonText) {
-            kapaButtonText.textContent = '';
-            kapaButtonText.appendChild(document.createTextNode('Ask'));
-            kapaButtonText.appendChild(document.createElement('br'));
-            kapaButtonText.appendChild(document.createTextNode('AI'));
-          }
+            :host-context([data-md-color-scheme="custom-light"])
+            .mantine-Image-root {
+              filter: invert(1);
+            }
 
-          // Stop observing once we've modified everything
-          observer.disconnect();
-        });
+            :host-context([data-md-color-scheme="custom-light"])
+            .mantine-Title-root {
+              color: var(--color-text-primary);
+            }
 
-        // Observe additions inside the shadow DOM
-        observer.observe(kapaWidget, { childList: true, subtree: true });
-      }
+            :host-context([data-md-color-scheme="custom-dark"])
+            .mantine-Modal-close {
+              color: var(--color-text-primary);
+            }
+
+            :host-context([data-md-color-scheme="custom-dark"])
+            .mantine-CloseButton-root:hover {
+              background: var(--color-surface-secondary);
+            }
+
+            :host-context(body[data-search-open]) #kapa-button {
+              z-index: 1;
+            }
+          `;
+        }
+
+        const kapaButtonText = kapaWidget.querySelector('.mantine-Text-root');
+        if (kapaButtonText) {
+          kapaButtonText.textContent = '';
+          kapaButtonText.appendChild(document.createTextNode('Ask'));
+          kapaButtonText.appendChild(document.createElement('br'));
+          kapaButtonText.appendChild(document.createTextNode('AI'));
+        }
+
+        // Stop observing once we've modified everything
+        observer.disconnect();
+      });
+
+      observer.observe(kapaWidget, { childList: true, subtree: true });
     });
   </script>
   <script>
