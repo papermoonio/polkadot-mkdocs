@@ -1413,6 +1413,7 @@ div.mermaid {
 /* Make adjustments for code elements with titles */
 .md-typeset .tabbed-block .highlight:has(span.filename) pre {
   border: none;
+  margin-bottom: 0;
 }
 
 .md-typeset .tabbed-block .highlight:not(:first-child):has(span.filename) {
