@@ -3,7 +3,7 @@
   background: #101010;
   color: var(--white);
   font-size: 13px;
-  font-family: 'Fira Mono', Consolas, Menlo, Monaco, 'Courier New', Courier,
+  font-family: "Fira Mono", Consolas, Menlo, Monaco, "Courier New", Courier,
     monospace;
   border-radius: 4px;
   padding: 50px 30px 20px;
@@ -13,7 +13,7 @@
 }
 
 [data-termynal]:before {
-  content: '';
+  content: "";
   position: absolute;
   top: 13px;
   left: 13px;
@@ -27,7 +27,7 @@
 }
 
 [data-termynal]:after {
-  content: 'bash';
+  content: "bash";
   position: absolute;
   color: #a2a2a2;
   top: 6px;
@@ -42,7 +42,7 @@
 }
 
 .md-typeset [data-termynal] pre {
-    white-space: break-spaces;
+  white-space: break-spaces;
 }
 
 [data-ty] {
@@ -53,20 +53,20 @@
 }
 
 [data-ty]:before {
-  content: '';
+  content: "";
   display: inline-block;
   vertical-align: middle;
 }
 
-[data-ty='input']:before,
+[data-ty="input"]:before,
 [data-ty-prompt]:before {
   color: var(--pink);
-  content: 'papermoon@ubuntu-jammy:';
+  content: "papermoon@ubuntu-jammy:";
   size: 12px;
 }
 
 .file-path:before {
-  content: '~$';
+  content: "~$";
   color: var(--blue);
   margin-right: 0.75em;
 }
