@@ -5,7 +5,7 @@ home_name: Polkadot
 edit_uri: https://github.com/polkadot-developers/polkadot-docs/edit/staging/product-ia/
 site_dir: /var/www/polkadot-beta-docs-static
 docs_dir: polkadot-docs
-copyright: © 2025 Polkadot.
+copyright: © 2025
 
 # Extra JavaScript files
 extra_javascript:

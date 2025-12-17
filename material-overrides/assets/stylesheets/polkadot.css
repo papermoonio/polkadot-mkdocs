@@ -711,6 +711,18 @@ html .md-footer-meta.md-typeset a:hover {
   text-decoration: none;
 }
 
+.reference {
+  align-content: center;
+  font-size: var(--text-base);
+  font-weight: 600;
+  padding: 0.4rem;
+}
+
+.md-copyright {
+  padding: 0;
+  margin: auto 0;
+}
+
 @media screen and (max-width: 1024px) {
   .md-footer-meta__inner.md-grid {
     display: flex;
@@ -725,9 +737,14 @@ html .md-footer-meta.md-typeset a:hover {
   .md-social {
     padding: 0;
   }
+
+  .md-copyright,
+  .reference {
+    margin-left: 0.6rem;
+  }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 808px) {
   .md-footer-meta__inner.md-grid {
     text-align: center;
     justify-self: center;
@@ -735,17 +752,21 @@ html .md-footer-meta.md-typeset a:hover {
   }
 
   .md-copyright {
-    width: unset;
+    margin-top: 0.2rem;
   }
 
   .md-footer-meta__inner .row {
-    flex-direction: column;
+    flex-direction: column-reverse;;
     gap: var(--py-1);
     align-items: center;
   }
 
   .md-social {
     margin: 0;
+  }
+
+  .reference {
+    padding-bottom: var(--py-1);
   }
 }
 
