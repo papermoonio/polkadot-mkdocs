@@ -220,3 +220,8 @@
     z-index: 10000;
   }
 }
+
+/* --- 404 page --- */
+.not-found + .copy-to-llm-split-container {
+  display: none;
+}
