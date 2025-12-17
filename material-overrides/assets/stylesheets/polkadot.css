@@ -1368,7 +1368,8 @@ div.mermaid {
 
 .md-typeset .tabbed-block .highlight span.filename {
   margin-top: 0;
-  border-radius: var(--rounded);
+  border-top-left-radius: var(--rounded);
+  border-top-right-radius: var(--rounded);
 }
 
 /* Adjust top margin for first item in lists */
