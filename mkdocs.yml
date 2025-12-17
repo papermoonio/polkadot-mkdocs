@@ -18,7 +18,6 @@ extra_javascript:
   - js/copy-to-llm.js
 # Extra CSS files
 extra_css:
-  - assets/stylesheets/extra.css
   - assets/stylesheets/terminal.css
   - assets/stylesheets/timeline-neoteroi.css
   - assets/stylesheets/copy-to-llm.css
@@ -132,7 +131,6 @@ plugins:
         - js/error-modal.js
         - js/copy-to-llm.js
       css_files:
-        - assets/stylesheets/extra.css
         - assets/stylesheets/terminal.css
         - assets/stylesheets/timeline-neoteroi.css
         - assets/stylesheets/copy-to-llm.css
