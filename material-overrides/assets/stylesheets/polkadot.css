@@ -528,32 +528,11 @@ input.md-search__input::placeholder {
     padding-left: 1em;
   }
 
-  [dir="ltr"]
-    .md-nav--primary
-    .md-nav__item--section.md-nav__item
-    > div.md-nav__link {
-    box-shadow: none;
+  [dir="ltr"] .md-nav--lifted > .md-nav__list > .md-nav__item > [for] {
     color: var(--color-text-primary);
-  }
-
-  /* Root-level section spacing */
-  [dir="ltr"]
-    .md-nav--lifted
-    > .md-nav__list
-    > .md-nav__item--active
-    > a.md-nav__link {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  [dir="ltr"]
-    .md-nav--lifted
-    > .md-nav__list
-    > .md-nav__item--active
-    > .md-nav__link
-    > .md-nav__link {
-    padding-top: var(--p-1);
-    padding-bottom: var(--p-1);
+    box-shadow: none;
+    padding-top: var(--py-2);
+    padding-bottom: var(--py-2);
   }
 
   /* Top-level section title (not root-level) */
