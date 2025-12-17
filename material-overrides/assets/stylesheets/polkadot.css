@@ -1024,6 +1024,8 @@ span.badge {
 
 .highlight span.filename {
   border-color: var(--color-border);
+  border-top-left-radius: var(--rounded);
+  border-top-right-radius: var(--rounded);
 }
 
 /* --- Cookie consent --- */
