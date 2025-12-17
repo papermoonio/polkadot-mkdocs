@@ -183,8 +183,8 @@ extra:
       link: https://www.youtube.com/channel/UCB7PbjuZLEba_znc7mEGNgw
       name: YouTube
     - icon: fontawesome/brands/x-twitter
-      link: https://twitter.com/Polkadot
-      name: Twitter
+      link: https://x.com/Polkadot
+      name: X (formerly Twitter)
   analytics:
     provider: google
     property: G-ZSKWB953ZL
