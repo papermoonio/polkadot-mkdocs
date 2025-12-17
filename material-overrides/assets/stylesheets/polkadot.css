@@ -368,6 +368,7 @@
 .md-header__option[data-md-component="palette"] .md-icon svg {
   height: 0.7rem;
   width: 0.7rem;
+  transform: scaleX(-1);
 }
 
 .md-search-result__meta,
