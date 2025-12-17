@@ -1399,6 +1399,11 @@ div.mermaid {
   margin: 1em 0;
 }
 
+/* Specifically remove the margin on code inside a tabbed element */
+.md-typeset .tabbed-block .highlight:first-child {
+  margin: 0;
+}
+
 /* Wrap code elements in a border */
 .md-typeset .tabbed-block .highlight:not(:first-child) pre {
   border: 1px solid var(--color-border);
