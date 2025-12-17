@@ -1033,12 +1033,12 @@ span.badge {
   margin-top: 1em;
 }
 
-.md-typeset .grid.cards.support >ul>li>:first-child {
+.md-typeset .grid.cards.support > ul > li > :first-child {
   margin-bottom: 1em;
   font-size: 0.85rem;
 }
 
-.md-typeset .grid.cards.support >ul>li>:first-child .twemoji {
+.md-typeset .grid.cards.support > ul > li > :first-child .twemoji {
   margin-right: 0.5em;
 }
 
@@ -1398,7 +1398,6 @@ div.mermaid {
 [dir="ltr"] .md-typeset .tabbed-block > hr {
   margin: 1em 0;
 }
-
 
 /* Wrap code elements in a border */
 .md-typeset .tabbed-block .highlight:not(:first-child) pre {
