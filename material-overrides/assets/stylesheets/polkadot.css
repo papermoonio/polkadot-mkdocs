@@ -729,12 +729,10 @@ html .md-footer-meta.md-typeset a:hover {
     display: flex;
     flex-direction: column;
   }
-
   .md-footer-meta__inner .row {
     margin: 0 0.6rem;
     justify-content: space-between;
   }
-
   .md-social {
     padding: 0;
   }
@@ -757,7 +755,7 @@ html .md-footer-meta.md-typeset a:hover {
   }
 
   .md-footer-meta__inner .row {
-    flex-direction: column-reverse;;
+    flex-direction: column-reverse;
     gap: var(--py-1);
     align-items: center;
   }
@@ -982,6 +980,14 @@ span.badge {
   color: var(--color-text-primary);
 }
 
+.md-typeset .grid.cards > ul > li > p > strong:has(a) {
+  font-family: var(--md-text-font-family);
+}
+
+.md-typeset .twemoji.sub {
+  vertical-align: sub;
+}
+
 /* Cards with lists */
 .md-typeset .grid.cards ul li ul.card-list {
   margin: 0;
@@ -1006,6 +1012,34 @@ span.badge {
 
 [dir="ltr"] .md-typeset .grid.cards ul li {
   margin-left: 0;
+}
+
+/* Support cards */
+.md-typeset .grid.cards.support ul.card-list > li {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+[dir="ltr"] .md-typeset .grid.cards.support ul li > p:last-child:has(a) {
+  margin-top: auto;
+}
+
+.md-typeset .grid.cards.support ul ul,
+[dir="ltr"] .md-typeset .grid.cards.support ul.card-list li {
+  list-style: none !important;
+}
+
+.md-typeset .grid.cards.support ul ul {
+  margin-top: 1em;
+}
+
+.md-typeset .grid.cards.support > ul > li > :first-child {
+  margin-bottom: 1em;
+  font-size: 0.85rem;
+}
+
+.md-typeset .grid.cards.support > ul > li > :first-child .twemoji {
+  margin-right: 0.5em;
 }
 
 /* --- Code blocks --- */
@@ -1288,6 +1322,24 @@ div.mermaid {
   }
 }
 
+/* --- Support Bubble --- */
+#kapa-widget-container {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  top: 75vh;
+  height: 120px;
+  width: 90px;
+  padding: 16px;
+  background-color: var(--color-surface-secondary);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px;
+  border: 1px solid rgb(62, 62, 62);
+  z-index: 199;
+  animation: 1s ease-in-out 0s 1 normal none running wiggle;
+  border-radius: 16px;
+  border-bottom-right-radius: 0;
+}
+
 /* --- Tables --- */
 .md-typeset table:not([class]) {
   border-radius: var(--rounded);
@@ -1300,7 +1352,7 @@ div.mermaid {
 /* Icons in tables styling (as seen on AI Ready page) */
 .actions {
   display: flex;
-  gap: 4px;
+  gap: var(--py-2);
 }
 
 @media screen and (max-width: 30em) {
@@ -1361,9 +1413,10 @@ div.mermaid {
 /* Make adjustments for code elements with titles */
 .md-typeset .tabbed-block .highlight:has(span.filename) pre {
   border: none;
+  margin-bottom: 0;
 }
 
-.md-typeset .tabbed-block .highlight:has(span.filename) {
+.md-typeset .tabbed-block .highlight:not(:first-child):has(span.filename) {
   border: 1px solid var(--color-border);
   border-radius: var(--rounded);
 }
