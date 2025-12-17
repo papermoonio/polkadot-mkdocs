@@ -711,23 +711,39 @@ html .md-footer-meta.md-typeset a:hover {
   text-decoration: none;
 }
 
+.md-typeset a.reference {
+  align-content: center;
+  font-size: var(--text-base);
+  font-weight: 600;
+  padding: 0.4rem;
+  text-decoration: none;
+}
+
+.md-copyright {
+  padding: 0;
+  margin: auto 0;
+}
+
 @media screen and (max-width: 1024px) {
   .md-footer-meta__inner.md-grid {
     display: flex;
     flex-direction: column;
   }
-
   .md-footer-meta__inner .row {
     margin: 0 0.6rem;
     justify-content: space-between;
   }
-
   .md-social {
     padding: 0;
   }
+
+  .md-copyright,
+  .reference {
+    margin-left: 0.6rem;
+  }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 808px) {
   .md-footer-meta__inner.md-grid {
     text-align: center;
     justify-self: center;
@@ -735,17 +751,21 @@ html .md-footer-meta.md-typeset a:hover {
   }
 
   .md-copyright {
-    width: unset;
+    margin-top: 0.2rem;
   }
 
   .md-footer-meta__inner .row {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: var(--py-1);
     align-items: center;
   }
 
   .md-social {
     margin: 0;
+  }
+
+  .reference {
+    padding-bottom: var(--py-1);
   }
 }
 
@@ -960,6 +980,10 @@ span.badge {
   color: var(--color-text-primary);
 }
 
+.md-typeset .grid.cards > ul > li > p > strong:has(a) {
+  font-family: var(--md-text-font-family);
+}
+
 .md-typeset .twemoji.sub {
   vertical-align: sub;
 }
@@ -1002,12 +1026,20 @@ span.badge {
 
 .md-typeset .grid.cards.support ul ul,
 [dir="ltr"] .md-typeset .grid.cards.support ul.card-list li {
-  list-style: initial !important;
-  margin-left: 1.25em;
+  list-style: none !important;
 }
 
 .md-typeset .grid.cards.support ul ul {
   margin-top: 1em;
+}
+
+.md-typeset .grid.cards.support >ul>li>:first-child {
+  margin-bottom: 1em;
+  font-size: 0.85rem;
+}
+
+.md-typeset .grid.cards.support >ul>li>:first-child .twemoji {
+  margin-right: 0.5em;
 }
 
 /* --- Code blocks --- */
@@ -1026,6 +1058,8 @@ span.badge {
 
 .highlight span.filename {
   border-color: var(--color-border);
+  border-top-left-radius: var(--rounded);
+  border-top-right-radius: var(--rounded);
 }
 
 /* --- Cookie consent --- */
@@ -1365,19 +1399,33 @@ div.mermaid {
   margin: 1em 0;
 }
 
-/* Specifically remove the margin on code inside a tabbed element */
-.md-typeset .tabbed-block .highlight:first-child {
-  margin: 0;
-}
 
-.md-typeset .tabbed-block ol:first-child > li:first-child > p:first-child,
-.md-typeset .tabbed-block ul:first-child > li:first-child > p:first-child {
-  margin-top: 0;
-}
-
+/* Wrap code elements in a border */
 .md-typeset .tabbed-block .highlight:not(:first-child) pre {
   border: 1px solid var(--color-border);
   border-radius: var(--rounded);
+}
+
+/* Make adjustments for code elements with titles */
+.md-typeset .tabbed-block .highlight:has(span.filename) pre {
+  border: none;
+}
+
+.md-typeset .tabbed-block .highlight:has(span.filename) {
+  border: 1px solid var(--color-border);
+  border-radius: var(--rounded);
+}
+
+.md-typeset .tabbed-block .highlight span.filename {
+  margin-top: 0;
+  border-top-left-radius: var(--rounded);
+  border-top-right-radius: var(--rounded);
+}
+
+/* Adjust top margin for first item in lists */
+.md-typeset .tabbed-block ol:first-child > li:first-child > p:first-child,
+.md-typeset .tabbed-block ul:first-child > li:first-child > p:first-child {
+  margin-top: 0;
 }
 
 /* --- Types (for API docs) --- */
