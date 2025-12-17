@@ -1352,7 +1352,7 @@ div.mermaid {
 /* Icons in tables styling (as seen on AI Ready page) */
 .actions {
   display: flex;
-  gap: 4px;
+  gap: var(--py-2);
 }
 
 @media screen and (max-width: 30em) {
