@@ -1415,7 +1415,7 @@ div.mermaid {
   border: none;
 }
 
-.md-typeset .tabbed-block .highlight:has(span.filename) {
+.md-typeset .tabbed-block .highlight:not(:first-child):has(span.filename) {
   border: 1px solid var(--color-border);
   border-radius: var(--rounded);
 }
