@@ -1350,14 +1350,31 @@ div.mermaid {
   margin: 0;
 }
 
-.md-typeset .tabbed-block ol:first-child > li:first-child > p:first-child,
-.md-typeset .tabbed-block ul:first-child > li:first-child > p:first-child {
-  margin-top: 0;
-}
-
+/* Wrap code elements in a border */
 .md-typeset .tabbed-block .highlight:not(:first-child) pre {
   border: 1px solid var(--color-border);
   border-radius: var(--rounded);
+}
+
+/* Make adjustments for code elements with titles */
+.md-typeset .tabbed-block .highlight:has(span.filename) pre {
+  border: none;
+}
+
+.md-typeset .tabbed-block .highlight:has(span.filename) {
+  border: 1px solid var(--color-border);
+  border-radius: var(--rounded);
+}
+
+.md-typeset .tabbed-block .highlight span.filename {
+  margin-top: 0;
+  border-radius: var(--rounded);
+}
+
+/* Adjust top margin for first item in lists */
+.md-typeset .tabbed-block ol:first-child > li:first-child > p:first-child,
+.md-typeset .tabbed-block ul:first-child > li:first-child > p:first-child {
+  margin-top: 0;
 }
 
 /* --- Types (for API docs) --- */
