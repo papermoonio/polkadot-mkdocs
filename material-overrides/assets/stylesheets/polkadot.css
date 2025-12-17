@@ -711,11 +711,12 @@ html .md-footer-meta.md-typeset a:hover {
   text-decoration: none;
 }
 
-.reference {
+.md-typeset a.reference {
   align-content: center;
   font-size: var(--text-base);
   font-weight: 600;
   padding: 0.4rem;
+  text-decoration: none;
 }
 
 .md-copyright {
