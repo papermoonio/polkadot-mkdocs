@@ -903,6 +903,11 @@ details.interface > summary::before {
   text-decoration: none;
 }
 
+.md-content__inner.md-typeset > .button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 /* Disabled buttons */
 .md-typeset .md-button.disabled-button,
 .md-typeset .md-button.disabled-button:hover,
