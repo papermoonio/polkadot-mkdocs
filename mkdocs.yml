@@ -137,8 +137,6 @@ plugins:
       scoped_css_templates:
         home.html:
           - assets/stylesheets/home.css
-        index-page.html:
-          - assets/stylesheets/index-page.css
         main.html:
           - assets/stylesheets/polkadot.css   
   - macros:
