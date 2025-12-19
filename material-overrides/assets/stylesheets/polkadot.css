@@ -544,6 +544,7 @@ input.md-search__input::placeholder {
 .md-nav__link .nav-title.twemoji svg {
   vertical-align: sub;
   margin: 0 0.5em 0 0;
+  width: 1.3em;
 }
 
 .md-nav__link > .nav-title.twemoji > span svg {
@@ -901,6 +902,11 @@ details.interface > summary::before {
 
 .md-typeset .button-wrapper a.md-button {
   text-decoration: none;
+}
+
+.md-content__inner.md-typeset > .button-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 /* Disabled buttons */
