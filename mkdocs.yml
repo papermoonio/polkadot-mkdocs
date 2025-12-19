@@ -116,7 +116,7 @@ plugins:
       exclude:
         - ai/*
   - awesome-nav
-  - resolve_md: 
+  - resolve_md:
       llms_config: llms_config.json
   - glightbox
   - minify:
