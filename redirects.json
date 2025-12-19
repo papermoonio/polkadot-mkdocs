@@ -94,7 +94,7 @@
     },
     {
       "key": "/develop/interoperability/xcm-guides/from-apps/fees/",
-      "value": "/chain-interactions/send-transactions/interoperability/estimate-xcm-fees/"
+      "value": "/"
     },
     {
       "key": "/develop/interoperability/xcm-guides/from-apps/transact/",
@@ -442,11 +442,11 @@
     },
     {
       "key": "/develop/toolkit/parachains/quickstart/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/reference/tools/zombienet/"
     },
     {
       "key": "/develop/toolkit/parachains/quickstart/pop-cli/",
-      "value": "TODO: UPDATE_ME"
+      "value": "/reference/tools/zombienet/"
     },
     {
       "key": "/develop/toolkit/parachains/remote-proxies/",
@@ -922,7 +922,7 @@
     },
     {
       "key": "/tutorials/interoperability/xcm-fee-estimation/",
-      "value": "/chain-interactions/send-transactions/interoperability/estimate-xcm-fees/"
+      "value": "/chain-interactions/send-transactions/interoperability/transfer-assets-parachains/"
     },
     {
       "key": "/tutorials/interoperability/xcm-transfers/",
