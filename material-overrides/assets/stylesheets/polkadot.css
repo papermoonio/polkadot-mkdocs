@@ -713,7 +713,7 @@ html .md-footer-meta.md-typeset a:hover {
 
 .md-typeset a.reference {
   align-content: center;
-  font-size: var(--text-base);
+  font-size: 0.7rem;
   font-weight: 600;
   padding: 0.4rem;
   text-decoration: none;
@@ -1359,6 +1359,11 @@ div.mermaid {
   .actions {
     margin: 2em auto 0;
   }
+}
+
+/* Center tables */
+.md-typeset__scrollwrap {
+  text-align: center;
 }
 
 /* --- Tabs --- */
