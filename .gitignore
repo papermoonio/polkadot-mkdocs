@@ -7,3 +7,4 @@ polkadot-docs
 .github/instructions/kluster-code-verify.instructions.md
 .kluster
 __pycache__
+venv-test
