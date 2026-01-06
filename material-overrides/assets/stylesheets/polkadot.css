@@ -1046,14 +1046,26 @@ h3 > span.twemoji.lg.middle {
 }
 
 /* --- Copy to clipboard --- */
-.md-clipboard,
-:hover > .md-clipboard {
+.md-code__button {
   color: var(--md-accent-fg-color);
 }
 
-.md-clipboard:focus,
-.md-clipboard:hover {
+.md-code__button:hover,
+.md-code__button:focus,
+.md-code__button:focus-visible {
   opacity: 0.8;
+}
+
+.md-code__nav {
+  background-color: transparent;
+}
+
+pre:hover > .md-code__nav {
+  background: transparent;
+}
+
+pre:hover > .md-code__nav > .md-code__button {
+  color: var(--md-accent-fg-color);
 }
 
 /* --- Date / Last updated --- */
