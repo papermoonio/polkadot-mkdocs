@@ -155,8 +155,7 @@ plugins:
         - node_modules/*
       enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
   - social:
-    #  debug: true
-      cache: false
+      enabled: !ENV [CI, false]
       cards_layout_dir: layouts
       cards_layout: polkadot
       cards_layout_options:
