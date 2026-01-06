@@ -5,7 +5,7 @@ home_name: Polkadot
 edit_uri: https://github.com/polkadot-developers/polkadot-docs/edit/master
 site_dir: /var/www/polkadot-docs-static
 docs_dir: polkadot-docs
-copyright: © 2025 Polkadot.
+copyright: © 2026 Polkadot.
 
 # Extra JavaScript files
 extra_javascript:
