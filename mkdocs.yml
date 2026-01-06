@@ -154,6 +154,17 @@ plugins:
       exclude:
         - node_modules/*
       enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
+  - social:
+    #  debug: true
+      cache: false
+      cards_layout_dir: layouts
+      cards_layout: polkadot
+      cards_layout_options:
+        background_image: layouts/og-bg.webp
+        background_color: transparent
+        logo: null
+        title: Polkadot
+        description: Products for people.      
 
 # Extra configuration
 extra:
