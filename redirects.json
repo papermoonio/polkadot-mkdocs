@@ -922,7 +922,7 @@
     },
     {
       "key": "/tutorials/interoperability/xcm-fee-estimation/",
-      "value": "/chain-interactions/send-transactions/interoperability/transfer-assets-parachains/"
+      "value": "/chain-interactions/send-transactions/interoperability/estimate-xcm-fees/"
     },
     {
       "key": "/tutorials/interoperability/xcm-transfers/",
