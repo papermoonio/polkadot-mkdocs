@@ -117,15 +117,17 @@ definitions:
 
   # Logo
   - &logo >-
-    {%- if layout.logo -%}
-      {{ layout.logo }}
+    {%- if layout.logo is defined -%}
+      {%- if layout.logo -%}
+        {{ config.docs_dir }}/{{ layout.logo | x }}
+      {%- endif -%}
     {%- elif config.theme.logo -%}
-      {{ config.docs_dir }}/{{ config.theme.logo }}
+      {{ config.docs_dir }}/{{ config.theme.logo | x }}
     {%- endif -%}
 
   # Logo (icon)
   - &logo_icon >-
-    {%- if not layout.logo and config.theme.icon -%}
+    {%- if layout.logo is not defined and config.theme.icon -%}
       {{ config.theme.icon.logo | x }}
     {%- endif -%}
 
@@ -156,16 +158,18 @@ tags:
 size: { width: 1200, height: 630 }
 layers:
 
+
   # Background
   - background:
       image: *background_image
       color: *background_color
 
   # Page title
-  - size: { width: 1200, height: 150 }
-    offset: { x: 0, y: 220 }
+  - size: { width: 1100, height: 150 }
+    offset: { x: 50, y: 210 }
     typography:
       content: *page_title
+      overflow: shrink
       align: center
       color: "#ffffff"
       line:
@@ -176,14 +180,15 @@ layers:
         style: Regular
 
   # Page description
-  - size: { width: 1200, height: 110 }
-    offset: { x: 0, y: 330 }
+  - size: { width: 700, height: 110 }
+    offset: { x: 250, y: 340 }
     typography:
       content: *page_description
+      overflow: shrink
       align: center
       color: "#b3b3b3"
       line:
-        amount: 3
+        amount: 4
         height: 1.0
       font:
         family: DM Sans
