@@ -91,13 +91,17 @@ definitions:
   - &site_name >-
     {{ config.site_name }}
 
-  # Page title
-  - &page_title >-
+  # Card title
+  - &card_title >-
     {%- if layout.title -%}
       {{ layout.title }}
     {%- else -%}
       {{ page.meta.get("title", page.title) }}
     {%- endif -%}
+
+  # Page title
+  - &page_title >-
+    {{ page.meta.get("title", page.title) }}
 
   # Page title with site name
   - &page_title_with_site_name >-
@@ -165,10 +169,10 @@ layers:
       color: *background_color
 
   # Page title
-  - size: { width: 1100, height: 150 }
-    offset: { x: 50, y: 210 }
+  - size: { width: 1100, height: 160 }
+    offset: { x: 50, y: 220 }
     typography:
-      content: *page_title
+      content: *card_title
       overflow: shrink
       align: center
       color: "#ffffff"
@@ -181,9 +185,9 @@ layers:
 
   # Page description
   - size: { width: 700, height: 110 }
-    offset: { x: 250, y: 340 }
+    offset: { x: 250, y: 310 }
     typography:
-      content: *page_description
+      content: *page_title
       overflow: shrink
       align: center
       color: "#b3b3b3"
