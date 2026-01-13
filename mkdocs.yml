@@ -5,7 +5,7 @@ home_name: Polkadot
 edit_uri: https://github.com/polkadot-developers/polkadot-docs/edit/staging/product-ia/
 site_dir: /var/www/polkadot-beta-docs-static
 docs_dir: polkadot-docs
-copyright: © 2025 Polkadot.
+copyright: © 2026 Polkadot.
 
 # Extra JavaScript files
 extra_javascript:
@@ -148,6 +148,15 @@ plugins:
       exclude:
         - node_modules/*
       enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
+  - social:
+      enabled: !ENV [SOCIAL_CARDS, True]
+      cards_layout_dir: layouts
+      cards_layout: polkadot
+      cards_layout_options:
+        background_image: layouts/og-bg.webp
+        background_color: transparent
+        logo: null
+        title: Polkadot Developer Docs
 
 # Extra configuration
 extra:

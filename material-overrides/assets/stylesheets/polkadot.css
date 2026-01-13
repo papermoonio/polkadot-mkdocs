@@ -730,10 +730,12 @@ html .md-footer-meta.md-typeset a:hover {
     display: flex;
     flex-direction: column;
   }
+  
   .md-footer-meta__inner .row {
     margin: 0 0.6rem;
     justify-content: space-between;
   }
+  
   .md-social {
     padding: 0;
   }

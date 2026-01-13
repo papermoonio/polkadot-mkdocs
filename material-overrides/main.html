@@ -32,7 +32,14 @@
   {%- else -%}
     <title>{{ config.site_name }}</title> 
   {%- endif -%} 
-{%- endblock -%} 
+{%- endblock -%}
+
+{% block announce %}
+  <span aria-hidden="true">🎉</span> Polkadot Roundup 2025 is live! 👉 
+  <a href="https://medium.com/polkadot-network/polkadot-roundup-2025-3c3c71c7e9c4" target="_blank" rel="noopener noreferrer" style="font-weight: bold;">
+    Read more.
+  </a>
+{% endblock %}
 
 {% block libs %}
   {{ super() }}
