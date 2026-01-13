@@ -154,6 +154,15 @@ plugins:
       exclude:
         - node_modules/*
       enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
+  - social:
+      enabled: !ENV [SOCIAL_CARDS, True]
+      cards_layout_dir: layouts
+      cards_layout: polkadot
+      cards_layout_options:
+        background_image: layouts/og-bg.webp
+        background_color: transparent
+        logo: null
+        title: Polkadot Developer Docs
 
 # Extra configuration
 extra:
