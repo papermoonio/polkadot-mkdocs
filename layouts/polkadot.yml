@@ -116,7 +116,7 @@ definitions:
     {%- if layout.description -%}
       {{ layout.description }}
     {%- else -%}
-      {{ page.meta.get("description", config.site_description) | x }}
+      {{ page.meta.get("title", page.title) | x }}
     {%- endif -%}
 
   # Logo
@@ -187,7 +187,7 @@ layers:
   - size: { width: 700, height: 110 }
     offset: { x: 250, y: 310 }
     typography:
-      content: *page_title
+      content: *page_description
       overflow: shrink
       align: center
       color: "#b3b3b3"
