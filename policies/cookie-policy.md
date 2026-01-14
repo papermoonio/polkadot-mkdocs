@@ -60,6 +60,9 @@ Please note that once you correctly block cookies on your browser, parts of the 
 | Google Analytics | \_ga\_* | .polkadot.com | Google Analytics sets this cookie to store and count page views.                                                                                                                                                                                                                  | 1 year, 1 month, 4 days | Analytics |
 | Google Analytics | \_ga    | .polkadot.com | The \_ga cookie, installed by Google Analytics, calculates visitor, session and campaign data and also keeps track of site usage for the site's analytics report. The cookie stores information anonymously and assigns a randomly generated number to recognize unique visitors. | 1 year, 1 month, 4 days | Analytics |
 
+!!! note
+    For cookies under the domain [https://polkadot.com](https://polkadot.com/cookie-policy){target=\_blank}, and any of its subdomains, please refer to each applicable cookie policy. 
+
 ## Changes to This Policy
 
 We may update this Cookie Policy occasionally to reflect changes in legal requirements or how we use cookies. You are encouraged to review this policy periodically to stay informed of any updates. For more information on cookies and how they work, visit [www.cookiesandyou.com](https://www.cookiesandyou.com/){target=\_blank}.
