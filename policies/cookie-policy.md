@@ -61,7 +61,7 @@ Please note that once you correctly block cookies on your browser, parts of the 
 | Google Analytics | \_ga    | .polkadot.com | The \_ga cookie, installed by Google Analytics, calculates visitor, session and campaign data and also keeps track of site usage for the site's analytics report. The cookie stores information anonymously and assigns a randomly generated number to recognize unique visitors. | 1 year, 1 month, 4 days | Analytics |
 
 !!! note
-    For cookies under the domain [https://polkadot.com](https://polkadot.com/cookie-policy){target=\_blank}, and any of its subdomains, please refer to each applicable cookie policy. 
+    For cookies under the domain [https://polkadot.com](https://polkadot.com/){target=\_blank}, and any of its subdomains, please refer to each applicable cookie policy. 
 
 ## Changes to This Policy
 
