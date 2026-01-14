@@ -35,11 +35,28 @@
 {%- endblock -%}
 
 {% block announce %}
-  <span aria-hidden="true">🎉</span> Polkadot Roundup 2025 is live! 👉 
-  <a href="https://medium.com/polkadot-network/polkadot-roundup-2025-3c3c71c7e9c4" target="_blank" rel="noopener noreferrer" style="font-weight: bold;">
-    Read more.
+  <span aria-hidden="true">🎉</span>
+  REVM is live in
+  <a
+    href="https://docs.polkadot.com/smart-contracts/connect/"
+    target="_blank"
+    rel="noopener noreferrer"
+    style="font-weight: bold;"
+  >
+    Polkadot Hub TestNet
   </a>
+  —
+  <a
+    href="https://docs.polkadot.com/smart-contracts/cookbook/smart-contracts/deploy-basic/basic-hardhat/"
+    target="_blank"
+    rel="noopener noreferrer"
+    style="font-weight: bold;"
+  >
+    Deploy your first EVM contract
+  </a>
+  .
 {% endblock %}
+
 
 {% block libs %}
   {{ super() }}
