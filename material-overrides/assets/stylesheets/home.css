@@ -127,56 +127,48 @@
   gap: 32px;
 }
 
-.feature-section h2 {
-  text-align: center;
-  margin: 0;
-}
-
 .featured-content {
   gap: 24px;
-}
-
-.title-row {
-  justify-content: space-between;
-  align-items: center;
-}
-
-.title-row > :last-child {
-  min-width: 24px;
+  padding: 0 32px;
 }
 
 .card {
+  background-color: var(--color-surface);
   padding: var(--py-8);
   border-radius: var(--rounded-2xl);
   gap: 12px;
   width: 33%;
 }
 
-.md-typeset .card * {
-  margin: 0;
-  gap: 24px;
+.md-typeset .card a {
+  display: flex;
+  gap: var(--py-2);
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
-.md-typeset .card p {
-  margin-right: 48px;
+.md-typeset .card h3 {
+  margin-top: 0;
+  margin-bottom: var(--py-3);
 }
 
-.card .column {
-  gap: 32px;
+.md-typeset .card a .twemoji {
+  min-width: 20px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 4px;
 }
 
 @media screen and (max-width: 1024px) {
   .featured-content {
     gap: 12px;
     padding: 0 16px;
+    flex-wrap: wrap;
   }
 
   .card {
-    padding: 16px;
-  }
-
-  .md-typeset .card p {
-    margin-right: 32px;
+    width: 33%;
+    flex: 1 1 33%;
   }
 }
 

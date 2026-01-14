@@ -33,10 +33,14 @@
 
   /* Font sizes */
   --font-size-body-large: clamp(1.125rem, 1vw + 0.5rem, 1.25rem);
-  --font-size-body-base: 1rem; /* 16px */
-  --font-size-body-small: 0.875rem; /* 14px */
-  --font-size-caption: 0.813rem; /* 13px */
-  --font-size-label: 0.75rem; /* 12px */
+  /* 16px */
+  --font-size-body-base: 1rem;
+  /* 14px */
+  --font-size-body-small: 0.875rem;
+  /* 13px */
+  --font-size-caption: 0.813rem;
+  /* 12px */
+  --font-size-label: 0.75rem;
 
   /* Tailwind default font sizes */
   --text-xs: 12px;
@@ -61,18 +65,28 @@
   --line-height-label: 1.3;
 
   /* Border radius */
-  --rounded-sm: 4px; /* Small elements, tags */
-  --rounded: 8px; /* Buttons, inputs */
-  --rounded-lg: 12px; /* Cards */
-  --rounded-xl: 16px; /* Large cards, modals */
-  --rounded-2xl: 24px; /* Feature cards */
-  --rounded-full: 9999px; /* Avatars, pills */
+  /* Small elements, tags */
+  --rounded-sm: 4px;
+  /* Buttons, inputs */
+  --rounded: 8px;
+  /* Cards */
+  --rounded-lg: 12px;
+  /* Large cards, modals */
+  --rounded-xl: 16px;
+  /* Feature cards */
+  --rounded-2xl: 24px;
+  /* Avatars, pills */
+  --rounded-full: 9999px;
 
   /* Spacing */
-  --p-1: 0.25rem; /* Micro spacing */
-  --p-2: 0.5rem; /* Tight spacing */
-  --p-3: 0.75rem; /* Default gap */
-  --p-4: 1rem; /* Standard spacing */
+  /* Micro spacing */
+  --p-1: 0.25rem;
+  /* Tight spacing */
+  --p-2: 0.5rem;
+  /* Default gap */
+  --p-3: 0.75rem;
+  /* Standard spacing */
+  --p-4: 1rem;
 
   /* Tailwind default spacing */
   --py-0: 0px;
@@ -95,31 +109,39 @@
 :root,
 [data-md-color-scheme="custom-light"] {
   /* --- Style guide defined colors --- */
-  --color-bg: var(--grey-50); /* Page background */
-  --color-surface: var(--white); /* Cards, modals */
-  --color-surface-secondary: var(--grey-100); /* Secondary surfaces */
-  --color-text-primary: var(--grey-900); /* Headings, primary text */
-  --color-text-secondary: var(--grey-600); /* Body text */
-  --color-text-tertiary: var(--grey-400); /* Captions, hints */
-  --color-border: var(--grey-200); /* Default borders */
-  --color-border-strong: var(--grey-300); /* Emphasized borders */
+  /* Page background */
+  --color-bg: var(--grey-50);
+  /* Cards, modals */
+  --color-surface: var(--white);
+  /* Secondary surfaces */
+  --color-surface-secondary: var(--grey-100);
+  /* Headings, primary text */
+  --color-text-primary: var(--grey-900);
+  /* Body text */
+  --color-text-secondary: var(--grey-600);
+  /* Captions, hints */
+  --color-text-tertiary: var(--grey-400);
+  /* Default borders */
+  --color-border: var(--grey-200);
+  /* Emphasized borders */
+  --color-border-strong: var(--grey-300);
 
   --invert-dark-mode-images: invert(1);
   --invert-light-mode-images: invert(0);
 
   /* --- Match style guide colors to MkDocs defined colors --- */
-  --md-default-bg-color: var(--color-bg); /* Page background */
-  --md-default-fg-color: var(--color-text-primary); /* Primary text color */
+  --md-default-bg-color: var(--color-bg);
+  --md-default-fg-color: var(--color-text-primary);
   --md-default-fg-color--lighter: var(--color-border-strong);
   --md-default-fg-color--lightest: var(--md-default-bg-color);
-  --md-typeset-color: var(--color-text-secondary); /* Body text */
-  --md-typeset-a-color: var(--color-text-secondary); /* Links */
-  --md-primary-fg-color: var(--color-bg); /* Nav background */
-  --md-primary-bg-color: var(--color-text-primary); /* Nav text color */
-  --md-footer-bg-color--dark: var(--color-surface); /* Footer background */
+  --md-typeset-color: var(--color-text-secondary);
+  --md-typeset-a-color: var(--color-text-secondary);
+  --md-primary-fg-color: var(--color-bg);
+  --md-primary-bg-color: var(--color-text-primary);
+  --md-footer-bg-color--dark: var(--color-surface);
   --md-footer-fg-color--light: var(--color-text-secondary);
   --md-footer-fg-color: var(--color-text-secondary);
-  --md-accent-fg-color: var(--color-text-secondary); /* Accent text color */
+  --md-accent-fg-color: var(--color-text-secondary);
   --md-typeset-table-color: var(--color-border-strong);
   --md-mermaid-edge-color: var(--md-code-fg-color);
   --md-mermaid-node-bg-color: var(--color-surface);
@@ -141,31 +163,39 @@
 
 [data-md-color-scheme="custom-dark"] {
   /* --- Style guide defined colors --- */
-  --color-bg: var(--grey-950); /* Page background */
-  --color-surface: var(--grey-900); /* Cards, modals */
-  --color-surface-secondary: var(--grey-800); /* Secondary surfaces */
-  --color-text-primary: var(--grey-50); /* Headings, primary text */
-  --color-text-secondary: var(--grey-400); /* Body text */
-  --color-text-tertiary: var(--grey-600); /* Captions, hints */
-  --color-border: var(--grey-800); /* Default borders */
-  --color-border-strong: var(--grey-700); /* Emphasized borders */
+  /* Page background */
+  --color-bg: var(--grey-950);
+  /* Cards, modals */
+  --color-surface: var(--grey-900);
+  /* Secondary surfaces */
+  --color-surface-secondary: var(--grey-800);
+  /* Headings, primary text */
+  --color-text-primary: var(--grey-50);
+  /* Body text */
+  --color-text-secondary: var(--grey-400);
+  /* Captions, hints */
+  --color-text-tertiary: var(--grey-600);
+  /* Default borders */
+  --color-border: var(--grey-800);
+  /* Emphasized borders */
+  --color-border-strong: var(--grey-700);
 
   --invert-dark-mode-images: invert(0);
   --invert-light-mode-images: invert(1);
 
   /* --- Match style guide colors to MkDocs defined colors --- */
-  --md-default-bg-color: var(--color-bg); /* Page background */
-  --md-default-fg-color: var(--color-text-primary); /* Primary text color */
+  --md-default-bg-color: var(--color-bg);
+  --md-default-fg-color: var(--color-text-primary);
   --md-default-fg-color--lightest: var(--md-default-bg-color);
   --md-default-fg-color--lighter: var(--color-surface-secondary);
-  --md-typeset-color: var(--color-text-secondary); /* Body text */
-  --md-typeset-a-color: var(--color-text-secondary); /* Links */
-  --md-primary-fg-color: var(--color-bg); /* Nav background */
-  --md-primary-bg-color: var(--color-text-primary); /* Nav text color */
-  --md-footer-bg-color--dark: var(--color-surface); /* Footer background */
+  --md-typeset-color: var(--color-text-secondary);
+  --md-typeset-a-color: var(--color-text-secondary);
+  --md-primary-fg-color: var(--color-bg);
+  --md-primary-bg-color: var(--color-text-primary);
+  --md-footer-bg-color--dark: var(--color-surface);
   --md-footer-fg-color--light: var(--color-text-secondary);
   --md-footer-fg-color: var(--color-text-secondary);
-  --md-accent-fg-color: var(--color-text-secondary); /* Accent text color */
+  --md-accent-fg-color: var(--color-text-secondary);
   --md-typeset-table-color: var(--color-border-strong);
   --md-mermaid-edge-color: var(--md-code-fg-color);
   --md-mermaid-node-bg-color: var(--color-surface);
@@ -338,6 +368,7 @@
 .md-header__option[data-md-component="palette"] .md-icon svg {
   height: 0.7rem;
   width: 0.7rem;
+  transform: scaleX(-1);
 }
 
 .md-search-result__meta,
@@ -513,6 +544,7 @@ input.md-search__input::placeholder {
 .md-nav__link .nav-title.twemoji svg {
   vertical-align: sub;
   margin: 0 0.5em 0 0;
+  width: 1.3em;
 }
 
 .md-nav__link > .nav-title.twemoji > span svg {
@@ -528,32 +560,11 @@ input.md-search__input::placeholder {
     padding-left: 1em;
   }
 
-  [dir="ltr"]
-    .md-nav--primary
-    .md-nav__item--section.md-nav__item
-    > div.md-nav__link {
-    box-shadow: none;
+  [dir="ltr"] .md-nav--lifted > .md-nav__list > .md-nav__item > [for] {
     color: var(--color-text-primary);
-  }
-
-  /* Root-level section spacing */
-  [dir="ltr"]
-    .md-nav--lifted
-    > .md-nav__list
-    > .md-nav__item--active
-    > a.md-nav__link {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  [dir="ltr"]
-    .md-nav--lifted
-    > .md-nav__list
-    > .md-nav__item--active
-    > .md-nav__link
-    > .md-nav__link {
-    padding-top: var(--p-1);
-    padding-bottom: var(--p-1);
+    box-shadow: none;
+    padding-top: var(--py-2);
+    padding-bottom: var(--py-2);
   }
 
   /* Top-level section title (not root-level) */
@@ -701,23 +712,41 @@ html .md-footer-meta.md-typeset a:hover {
   text-decoration: none;
 }
 
+.md-typeset a.reference {
+  align-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.4rem;
+  text-decoration: none;
+}
+
+.md-copyright {
+  padding: 0;
+  margin: auto 0;
+}
+
 @media screen and (max-width: 1024px) {
   .md-footer-meta__inner.md-grid {
     display: flex;
     flex-direction: column;
   }
-
+  
   .md-footer-meta__inner .row {
     margin: 0 0.6rem;
     justify-content: space-between;
   }
-
+  
   .md-social {
     padding: 0;
   }
+
+  .md-copyright,
+  .reference {
+    margin-left: 0.6rem;
+  }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 808px) {
   .md-footer-meta__inner.md-grid {
     text-align: center;
     justify-self: center;
@@ -725,17 +754,21 @@ html .md-footer-meta.md-typeset a:hover {
   }
 
   .md-copyright {
-    width: unset;
+    margin-top: 0.2rem;
   }
 
   .md-footer-meta__inner .row {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: var(--py-1);
     align-items: center;
   }
 
   .md-social {
     margin: 0;
+  }
+
+  .reference {
+    padding-bottom: var(--py-1);
   }
 }
 
@@ -855,9 +888,9 @@ details.interface > summary::before {
   border-radius: var(--rounded-xl);
   display: inline-flex;
   align-items: center;
-  gap: 8px; /* gap-2 → 0.5rem */
-  padding: 16px 32px; /* py-4 (1rem) px-8 (2rem) */
-  font-weight: 500; /* font-medium */
+  gap: var(--py-2);
+  padding: var(--py-4) var(--py-8);
+  font-weight: 500;
   transition-property: background-color;
   transition-duration: 200ms;
 }
@@ -871,6 +904,11 @@ details.interface > summary::before {
 
 .md-typeset .button-wrapper a.md-button {
   text-decoration: none;
+}
+
+.md-content__inner.md-typeset > .button-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 /* Disabled buttons */
@@ -950,33 +988,12 @@ span.badge {
   color: var(--color-text-primary);
 }
 
-/* Custom cards with h3s (as seen on Develop index page) */
-.md-typeset .grid.cards h3 {
-  margin: 0.5em 1em 0 0.5em;
-  font-size: 0.8rem;
-  display: flex;
+.md-typeset .grid.cards > ul > li > p > strong:has(a) {
+  font-family: var(--md-text-font-family);
 }
 
-h3 > span.twemoji.lg.middle {
-  padding-right: 0.5em;
-}
-
-.md-typeset .grid.cards ul ul {
-  list-style: none !important;
-  margin-left: 0.5em;
-}
-
-.md-typeset .grid.cards.links > ul > li > a {
-  padding: 0.25em 0;
-}
-
-.md-typeset .grid.cards.links ul > li > p {
-  margin: 0;
-}
-
-.md-typeset .grid.cards.links .twemoji {
-  height: auto;
-  width: 1.25rem;
+.md-typeset .twemoji.sub {
+  vertical-align: sub;
 }
 
 /* Cards with lists */
@@ -1005,6 +1022,34 @@ h3 > span.twemoji.lg.middle {
   margin-left: 0;
 }
 
+/* Support cards */
+.md-typeset .grid.cards.support ul.card-list > li {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+[dir="ltr"] .md-typeset .grid.cards.support ul li > p:last-child:has(a) {
+  margin-top: auto;
+}
+
+.md-typeset .grid.cards.support ul ul,
+[dir="ltr"] .md-typeset .grid.cards.support ul.card-list li {
+  list-style: none !important;
+}
+
+.md-typeset .grid.cards.support ul ul {
+  margin-top: 1em;
+}
+
+.md-typeset .grid.cards.support > ul > li > :first-child {
+  margin-bottom: 1em;
+  font-size: 0.85rem;
+}
+
+.md-typeset .grid.cards.support > ul > li > :first-child .twemoji {
+  margin-right: 0.5em;
+}
+
 /* --- Code blocks --- */
 .highlight {
   background-color: var(--md-code-bg-color);
@@ -1021,6 +1066,8 @@ h3 > span.twemoji.lg.middle {
 
 .highlight span.filename {
   border-color: var(--color-border);
+  border-top-left-radius: var(--rounded);
+  border-top-right-radius: var(--rounded);
 }
 
 /* --- Cookie consent --- */
@@ -1046,26 +1093,14 @@ h3 > span.twemoji.lg.middle {
 }
 
 /* --- Copy to clipboard --- */
-.md-code__button {
+.md-clipboard,
+:hover > .md-clipboard {
   color: var(--md-accent-fg-color);
 }
 
-.md-code__button:hover,
-.md-code__button:focus,
-.md-code__button:focus-visible {
+.md-clipboard:focus,
+.md-clipboard:hover {
   opacity: 0.8;
-}
-
-.md-code__nav {
-  background-color: transparent;
-}
-
-pre:hover > .md-code__nav {
-  background: transparent;
-}
-
-pre:hover > .md-code__nav > .md-code__button {
-  color: var(--md-accent-fg-color);
 }
 
 /* --- Date / Last updated --- */
@@ -1295,6 +1330,24 @@ div.mermaid {
   }
 }
 
+/* --- Support Bubble --- */
+#kapa-widget-container {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  top: 75vh;
+  height: 120px;
+  width: 90px;
+  padding: 16px;
+  background-color: var(--color-surface-secondary);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px;
+  border: 1px solid rgb(62, 62, 62);
+  z-index: 199;
+  animation: 1s ease-in-out 0s 1 normal none running wiggle;
+  border-radius: 16px;
+  border-bottom-right-radius: 0;
+}
+
 /* --- Tables --- */
 .md-typeset table:not([class]) {
   border-radius: var(--rounded);
@@ -1307,13 +1360,18 @@ div.mermaid {
 /* Icons in tables styling (as seen on AI Ready page) */
 .actions {
   display: flex;
-  gap: 4px;
+  gap: var(--py-2);
 }
 
 @media screen and (max-width: 30em) {
   .actions {
     margin: 2em auto 0;
   }
+}
+
+/* Center tables */
+.md-typeset__scrollwrap {
+  text-align: center;
 }
 
 /* --- Tabs --- */
@@ -1359,14 +1417,33 @@ div.mermaid {
   margin: 0;
 }
 
-.md-typeset .tabbed-block ol:first-child > li:first-child > p:first-child,
-.md-typeset .tabbed-block ul:first-child > li:first-child > p:first-child {
-  margin-top: 0;
-}
-
+/* Wrap code elements in a border */
 .md-typeset .tabbed-block .highlight:not(:first-child) pre {
   border: 1px solid var(--color-border);
   border-radius: var(--rounded);
+}
+
+/* Make adjustments for code elements with titles */
+.md-typeset .tabbed-block .highlight:has(span.filename) pre {
+  border: none;
+  margin-bottom: 0;
+}
+
+.md-typeset .tabbed-block .highlight:not(:first-child):has(span.filename) {
+  border: 1px solid var(--color-border);
+  border-radius: var(--rounded);
+}
+
+.md-typeset .tabbed-block .highlight span.filename {
+  margin-top: 0;
+  border-top-left-radius: var(--rounded);
+  border-top-right-radius: var(--rounded);
+}
+
+/* Adjust top margin for first item in lists */
+.md-typeset .tabbed-block ol:first-child > li:first-child > p:first-child,
+.md-typeset .tabbed-block ul:first-child > li:first-child > p:first-child {
+  margin-top: 0;
 }
 
 /* --- Types (for API docs) --- */
@@ -1383,4 +1460,9 @@ div.mermaid {
   color: var(--md-default-fg-color);
   text-transform: capitalize;
   padding-left: 0.6666666667em;
+}
+
+/* --- 404 page --- */
+h1.not-found {
+  text-align: center;
 }
