@@ -113,7 +113,9 @@ definitions:
 
   # Page description
   - &page_description >-
-    {%- if layout.description -%}
+    {%- if page.is_homepage and page.meta.get("social_description") -%}
+      {{ page.meta.get("social_description") | x }}
+    {%- elif layout.description -%}
       {{ layout.description }}
     {%- else -%}
       {{ page.meta.get("title", page.title) | x }}
