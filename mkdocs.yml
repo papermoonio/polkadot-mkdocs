@@ -2,7 +2,7 @@ site_name: Polkadot Developer Docs
 site_url: https://docs.polkadot.com/
 home_url: https://polkadot.com/
 home_name: Polkadot
-edit_uri: https://github.com/polkadot-developers/polkadot-docs/edit/master
+edit_uri: https://github.com/polkadot-developers/polkadot-docs/edit/master/
 site_dir: /var/www/polkadot-docs-static
 docs_dir: polkadot-docs
 copyright: © 2026 Polkadot.
@@ -18,7 +18,6 @@ extra_javascript:
   - js/copy-to-llm.js
 # Extra CSS files
 extra_css:
-  - assets/stylesheets/extra.css
   - assets/stylesheets/terminal.css
   - assets/stylesheets/timeline-neoteroi.css
   - assets/stylesheets/copy-to-llm.css
@@ -59,14 +58,12 @@ theme:
     - content.tooltips # Adds tooltips
     - navigation.tabs # Top-level sections are rendered below the header (can be modified to in-line with CSS)
     - navigation.tabs.sticky # When scrolling, the tabs remain at the top of the page
-    - navigation.sections # Render top-level sections as groups in the sidebar
-    - navigation.indexes # Index pages
     - navigation.top # Show the back to top button since we don't keep top nav sticky
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: custom-light
       toggle:
-        icon: octicons/sun-16
+        icon: octicons/moon-16
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: custom-dark
@@ -134,15 +131,12 @@ plugins:
         - js/error-modal.js
         - js/copy-to-llm.js
       css_files:
-        - assets/stylesheets/extra.css
         - assets/stylesheets/terminal.css
         - assets/stylesheets/timeline-neoteroi.css
         - assets/stylesheets/copy-to-llm.css
       scoped_css_templates:
         home.html:
           - assets/stylesheets/home.css
-        index-page.html:
-          - assets/stylesheets/index-page.css
         main.html:
           - assets/stylesheets/polkadot.css   
   - macros:

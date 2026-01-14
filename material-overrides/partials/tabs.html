@@ -3,11 +3,15 @@
 -#}
 
 {% import "partials/tabs-item.html" as item with context %}
+
 <nav class="md-tabs" aria-label="{{ lang.t('tabs') }}" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
-      {% for nav_item in nav %}
-        {% if not (nav_item.is_page and nav_item.url == "") %}
+      {% for nav_item in nav.items %}
+        {% set is_ignored_section = nav_item.children 
+                              and nav_item.children[0].is_page 
+                              and nav_item.children[0].url in ["reference/", "get-support/"] %}
+        {% if nav_item.url != "" and not is_ignored_section %}
           {{ item.render(nav_item) }}
         {% endif %}
       {% endfor %}
