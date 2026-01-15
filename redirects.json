@@ -866,15 +866,15 @@
     },
     {
       "key": "/smart-contracts/dev-environments/foundry/",
-      "value": "/smart-contracts/dev-environments/hardhat/get-started/"
+      "value": "/smart-contracts/dev-environments/hardhat/"
     },
     {
       "key": "/smart-contracts/dev-environments/hardhat/",
-      "value": "/smart-contracts/dev-environments/hardhat/get-started/"
+      "value": "/smart-contracts/dev-environments/hardhat/"
     },
     {
       "key": "/smart-contracts/dev-environments/remix/",
-      "value": "/smart-contracts/dev-environments/remix/get-started/"
+      "value": "/smart-contracts/dev-environments/remix/"
     },
     {
       "key": "/smart-contracts/for-eth-devs/",
