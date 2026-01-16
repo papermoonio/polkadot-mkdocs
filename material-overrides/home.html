@@ -123,21 +123,30 @@
   <script>
     const canvas = document.querySelector('.grain-canvas');
     const ctx = canvas.getContext('2d');
+    const hero = document.querySelector('.hero-section');
 
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
-    let mouse = { x: width / 2, y: height / 2 };
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    // Generate static grain
+    function resizeCanvas() {
+      const rect = hero.getBoundingClientRect();
+      width = canvas.width = Math.max(1, Math.floor(rect.width));
+      height = canvas.height = Math.max(1, Math.floor(rect.height));
+    }
+
+    let width = 1;
+    let height = 1;
+    resizeCanvas();
+
+    // Generate grain frame
     function generateGrain() {
       const imgData = ctx.createImageData(width, height);
-      const alpha = 35; // grain visibility
+      const alpha = 28; // grain visibility (slightly softer)
 
       for (let i = 0; i < imgData.data.length; i += 4) {
         const v = Math.random() * 255;
-        imgData.data[i] = v;     // R
-        imgData.data[i + 1] = v; // G
-        imgData.data[i + 2] = v; // B
+        imgData.data[i] = v;         // R
+        imgData.data[i + 1] = v;     // G
+        imgData.data[i + 2] = v;     // B
         imgData.data[i + 3] = alpha; // A
       }
 
@@ -145,36 +154,112 @@
     }
 
     let grain = generateGrain();
+    let rafId = null;
 
-    function draw() {
+    let smoothX = width * 0.5;
+    let smoothY = height * 0.38;
+    const baseEase = 0.03;
+    const rampDurationMs = 1800; // smooth “entry” duration
+    let startTs = null;
+
+    // Animate spotlight automatically (no mouse)
+    function draw(t) {
+      // If reduced motion is enabled, render one static frame and stop.
+      if (prefersReducedMotion.matches) {
+        ctx.clearRect(0, 0, width, height);
+        ctx.putImageData(grain, 0, 0);
+
+        const x = width * 0.5;
+        const y = height * 0.35;
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, 600);
+        gradient.addColorStop(0, 'rgba(255,255,255,0.12)');
+        gradient.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, width, height);
+        return;
+      }
+
+      // Start timestamp for easing ramp
+      if (startTs === null) startTs = t;
+
+      // Occasionally refresh grain for subtle motion (cheap + nice)
+      // ~6 FPS for grain refresh while spotlight stays smooth
+      if (!draw.lastGrainTs || t - draw.lastGrainTs > 120) {
+        grain = generateGrain();
+        draw.lastGrainTs = t;
+      }
+
       ctx.clearRect(0, 0, width, height);
-
-      // Draw grain
       ctx.putImageData(grain, 0, 0);
 
-      // Spotlight always bright (white)
-      const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 600);
-      gradient.addColorStop(0, 'rgba(255,255,255,0.15)');
+      // Time-based orbit (slow + organic)
+      const time = t * 0.00025; // speed
+      const targetX = width * (0.5 + 0.28 * Math.cos(time));
+      const targetY = height * (0.42 + 0.20 * Math.sin(time * 1.15));
+
+      // Smooth easing toward target (prevents any “steppy” feel)
+      // Ease-in ramp so the spotlight doesn't “snap” at the beginning
+      const elapsed = t - startTs;
+      const ramp = Math.min(1, elapsed / rampDurationMs);
+      const ease = 0.008 + (baseEase - 0.008) * ramp;
+      smoothX += (targetX - smoothX) * ease;
+      smoothY += (targetY - smoothY) * ease;
+
+      const x = smoothX;
+      const y = smoothY;
+
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, 900);
+      gradient.addColorStop(0, 'rgba(255,255,255,0.14)');
+      gradient.addColorStop(0.35, 'rgba(255,255,255,0.06)');
       gradient.addColorStop(1, 'rgba(255,255,255,0)');
+
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
-      requestAnimationFrame(draw);
+      rafId = requestAnimationFrame(draw);
     }
 
-    // Mouse tracking
-    window.addEventListener('mousemove', e => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
+    function start() {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(draw);
+    }
 
     // Resize handler
     window.addEventListener('resize', () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      resizeCanvas();
       grain = generateGrain();
+
+      smoothX = width * 0.5;
+      smoothY = height * 0.38;
+      startTs = null;
+
+      // Render immediately after resize
+      start();
     });
 
-    draw();
+    // React to prefers-reduced-motion changes
+    prefersReducedMotion.addEventListener('change', () => {
+      // Reset grain so it doesn't look stale
+      grain = generateGrain();
+
+      smoothX = width * 0.5;
+      smoothY = height * 0.38;
+      startTs = null;
+
+      start();
+    });
+
+    // Keep canvas in sync with hero size (not just window resize)
+    const ro = new ResizeObserver(() => {
+      resizeCanvas();
+      grain = generateGrain();
+      smoothX = width * 0.5;
+      smoothY = height * 0.38;
+      startTs = null;
+      start();
+    });
+    ro.observe(hero);
+
+    start();
   </script>
 {% endblock %}
