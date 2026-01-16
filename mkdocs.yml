@@ -113,9 +113,8 @@ plugins:
       exclude:
         - ai/*
   - awesome-nav
-  - copy_md:
-      source_dir: polkadot-docs/.ai
-      target_dir: ai
+  - resolve_md:
+      llms_config: llms_config.json
   - glightbox
   - minify:
       minify_html: true
