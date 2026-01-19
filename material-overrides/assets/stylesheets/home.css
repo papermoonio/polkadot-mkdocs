@@ -1,10 +1,12 @@
 [data-md-color-scheme="custom-light"] {
   --grain-filter: invert(1) brightness(1);
+  --hover-button-color: var(--grey-800);
 }
 
 [data-md-color-scheme="custom-dark"] {
   --grain-filter: brightness(1);
   /* normal grain on dark mode */
+  --hover-button-color: var(--grey-200);
 }
 
 /*--- General ---*/
@@ -120,6 +122,10 @@
 
 .md-typeset .md-button .twemoji {
   flex: 0 0 auto;
+}
+
+.button-wrapper .md-button:hover {
+  background-color: var(--hover-button-color);
 }
 
 /*--- Feature section ---*/

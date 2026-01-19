@@ -125,6 +125,8 @@
   --color-border: var(--grey-200);
   /* Emphasized borders */
   --color-border-strong: var(--grey-300);
+  /* Hover color */
+  --color-text-hover: var(--grey-900);
 
   --invert-dark-mode-images: invert(1);
   --invert-light-mode-images: invert(0);
@@ -179,6 +181,8 @@
   --color-border: var(--grey-800);
   /* Emphasized borders */
   --color-border-strong: var(--grey-700);
+  /* Hover color */
+  --color-text-hover: var(--grey-100);
 
   --invert-dark-mode-images: invert(0);
   --invert-light-mode-images: invert(1);
@@ -234,25 +238,31 @@
 }
 
 .md-typeset h1 {
-  font-size: clamp(2.5rem, 4vw + 1rem, 4rem);
+  font-size: var(--text-5xl);
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
+@media screen and (min-width: 768px) {
+  .md-typeset h1 {
+    font-size: var(--text-6xl);
+  }
+}
+
 .md-typeset h2 {
-  font-size: clamp(2rem, 3vw + 0.75rem, 3rem);
+  font-size: var(--text-3xl);
   line-height: 1.25;
   letter-spacing: -0.02em;
 }
 
 .md-typeset h3 {
-  font-size: clamp(1.75rem, 2.5vw + 0.5rem, 2.5rem);
+  font-size: var(--text-2xl);
   line-height: 1.3;
   letter-spacing: -0.01em;
 }
 
 .md-typeset h4 {
-  font-size: clamp(1.5rem, 2vw + 0.5rem, 2rem);
+  font-size: var(--text-xl);
   line-height: 1.3;
   letter-spacing: -0.01em;
 }
@@ -263,7 +273,7 @@
 
 .md-typeset a:focus,
 .md-typeset a:hover {
-  opacity: 0.8;
+  color: var(--color-text-hover);
 }
 
 /* --- Layout --- */
@@ -329,7 +339,7 @@
 }
 
 .md-header__button:hover {
-  opacity: 0.8;
+  color: var(--color-text-hover);
 }
 
 .md-tabs {
@@ -347,16 +357,17 @@
 }
 
 .md-tabs__link {
-  font-weight: 600;
+  font-weight: 500;
   opacity: 1;
   padding: var(--p-1) var(--p-2);
   border-radius: var(--rounded);
   margin-top: 0;
+  color: var(--color-text-secondary);
 }
 
 .md-tabs__link:focus,
 .md-tabs__link:hover {
-  background: var(--color-surface-secondary);
+  color: var(--color-text-primary);
 }
 
 .md-header__option[data-md-component="palette"] .md-icon {
@@ -694,7 +705,8 @@ input.md-search__input::placeholder {
 
 html .md-footer-meta.md-typeset a:focus,
 html .md-footer-meta.md-typeset a:hover {
-  opacity: 0.8;
+
+  color:var(--color-text-hover)
 }
 
 .md-copyright__highlight,
