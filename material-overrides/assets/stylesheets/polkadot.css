@@ -373,12 +373,12 @@
 .md-header__option[data-md-component="palette"] .md-icon {
   background-color: var(--color-surface-secondary);
   border-radius: var(--rounded);
-  padding: var(--p-2);
+  padding: 0.7rem;
 }
 
 .md-header__option[data-md-component="palette"] .md-icon svg {
-  height: 0.7rem;
-  width: 0.7rem;
+  height: 0.8rem;
+  width: 0.8rem;
   transform: scaleX(-1);
 }
 
@@ -445,7 +445,7 @@ input.md-search__input::placeholder {
   .md-search__form {
     background-color: var(--color-surface-secondary);
     border-radius: var(--rounded);
-    height: 1.75rem;
+    height: 2rem;
   }
 
   .md-search__form:hover {
