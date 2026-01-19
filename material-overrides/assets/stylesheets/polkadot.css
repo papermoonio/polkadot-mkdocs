@@ -445,7 +445,7 @@ input.md-search__input::placeholder {
   .md-search__form {
     background-color: var(--color-surface-secondary);
     border-radius: var(--rounded);
-    height: 2rem;
+    height: 2.2rem;
   }
 
   .md-search__form:hover {
