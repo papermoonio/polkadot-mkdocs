@@ -667,7 +667,6 @@ div.md-nav__link--active,
     color: var(--color-text-primary);
     white-space: normal;
     overflow: visible;
-    text-overflow: unset;
     padding-top: 5em;
     line-height: 1em;
   }
