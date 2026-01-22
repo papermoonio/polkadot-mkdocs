@@ -104,6 +104,7 @@
   --py-16: 64px;
 
   --md-search-result-icon: url("/assets/images/article.svg");
+  --md-admonition-icon--test: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMS41IDhhNi41IDYuNSAwIDExMTMgMCA2LjUgNi41IDAgMDEtMTMgMHpNMCA4YTggOCAwIDExMTYgMEE4IDggMCAwMTAgOHptMTEuNzgtMS43MmEuNzUuNzUgMCAwMC0xLjA2LTEuMDZMNi43NSA5LjE5IDUuMjggNy43MmEuNzUuNzUgMCAwMC0xLjA2IDEuMDZsMiAyYS43NS43NSAwIDAwMS4wNiAwbDQuNS00LjV6Ii8+PC9zdmc+");
 }
 
 :root,
@@ -159,6 +160,8 @@
 
   --code-admo-border-color: #5ee20c;
   --code-admo-title-bg: #64dd171a;
+  --test-admo-border-color: var(--grey-700);
+  --test-admo-title-bg: color-mix(in srgb, var(--grey-700) 10%, transparent);
 }
 
 [data-md-color-scheme="custom-dark"] {
@@ -221,6 +224,8 @@
   --md-code-hl-operator-color: #d4d4d4;
   --md-code-hl-punctuation-color: #d4d4d4;
   --md-code-hl-special-color: #9cdcfe;
+  --test-admo-border-color: var(--grey-300);
+  --test-admo-title-bg: color-mix(in srgb, var(--grey-300) 12%, transparent);
 }
 
 /* --- Typography --- */
@@ -836,6 +841,24 @@ details.child {
   background-color: var(--code-admo-border-color);
   -webkit-mask-image: var(--md-admonition-icon--code);
   mask-image: var(--md-admonition-icon--code);
+}
+
+/* Test admonition */
+.md-typeset .admonition.test,
+.md-typeset details.test {
+  border-color: var(--test-admo-border-color);
+}
+
+.md-typeset .test > .admonition-title,
+.md-typeset .test > summary {
+  background-color: var(--test-admo-title-bg);
+}
+
+.md-typeset .test > .admonition-title::before,
+.md-typeset .test > summary::before {
+  background-color: var(--test-admo-border-color);
+  -webkit-mask-image: var(--md-admonition-icon--test);
+  mask-image: var(--md-admonition-icon--test);
 }
 
 /* Interface admonition */
