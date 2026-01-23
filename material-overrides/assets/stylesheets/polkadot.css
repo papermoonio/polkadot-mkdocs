@@ -961,6 +961,22 @@ span.badge {
   margin-right: 0.5em;
 }
 
+/* Verified tutorial badges */
+.md-typeset .verified-tutorial-badges {
+  display: inline-flex;
+  gap: var(--p-2);
+}
+
+.md-typeset .verified-tutorial-badges img {
+  display: block;
+}
+
+.md-typeset .verified-tutorial-badges a:not(:has(img)) {
+  color: var(--success);
+  display: inline-flex;
+  align-items: center;
+}
+
 /* --- Cards --- */
 .md-typeset .grid.cards {
   gap: var(--py-3);
