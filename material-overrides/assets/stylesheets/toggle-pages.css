@@ -18,7 +18,7 @@
 
 .toggle-header > span.active .h1-copy-wrapper {
   display: flex;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--p-2);
 }
 
 /* Button container */
