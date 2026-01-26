@@ -2,16 +2,23 @@
 .toggle-container {
   display: flex;
   flex-direction: column;
-  gap: var(--p-4);
 }
 
 /* Panel layout */
-.toggle-panel {
+.toggle-panel,
+.toggle-header > span,
+.toggle-header > span .h1-copy-wrapper {
   display: none;
 }
 
-.toggle-panel.active {
+.toggle-panel.active,
+.toggle-header > span.active {
   display: block;
+}
+
+.toggle-header > span.active .h1-copy-wrapper {
+  display: flex;
+  margin-bottom: 0.5rem;
 }
 
 /* Button container */
@@ -53,3 +60,13 @@
   transition: all 0.25s ease;
 }
 
+/* Update the copy-to-llm container margin when used alongside page-level toggle */
+@media screen and (max-width: 768px) {
+  .copy-to-llm-split-container {
+    margin-top: 0;
+  }
+
+  .toggle-buttons {
+    margin-top: 0.2rem;
+  }
+}
