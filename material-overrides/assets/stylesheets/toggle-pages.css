@@ -1,0 +1,61 @@
+/* Container layout */
+.toggle-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--p-4);
+}
+
+/* Panel layout */
+.toggle-panel {
+  display: none;
+}
+
+.toggle-panel.active {
+  display: block;
+}
+
+/* Button container */
+.toggle-buttons {
+  display: inline-flex;
+  position: relative;
+  background: var(--color-border-strong);
+  border-radius: var(--rounded-full);
+  padding: var(--py-1);
+  border: 1px solid var(--color-border);
+  width: fit-content;
+}
+
+/* Buttons */
+.toggle-btn {
+  z-index: 2;
+  padding: var(--py-1) var(--py-3);
+  border-radius: var(--rounded-full);
+  font-weight: 500;
+  color: var(--md-default-fg-color);
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+/* Active text color */
+.toggle-btn.active {
+  color: var(--md-default-bg-color);
+}
+
+/* Slider background */
+.toggle-buttons::before {
+  content: "";
+  position: absolute;
+  top: var(--py-1);
+  bottom: var(--py-1);
+  left: var(--py-1);
+  width: calc(50% - var(--py-1));
+  background: var(--md-primary-bg-color);
+  border-radius: var(--rounded-full);
+  transition: transform 0.25s ease;
+  z-index: 1;
+}
+
+/* Move slider when second button is active */
+.toggle-buttons:has(.toggle-btn:nth-child(2).active)::before {
+  transform: translateX(100%);
+}
