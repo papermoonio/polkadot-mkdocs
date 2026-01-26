@@ -35,7 +35,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
-  font-size: 16px
+  font-size: 16px;
 }
 
 /* Left button (copy) */
@@ -133,7 +133,7 @@
   transition: all 0.2s;
   white-space: nowrap;
   line-height: 1.2;
-  color: var(--color-text-primary)
+  color: var(--color-text-primary);
 }
 
 .copy-to-llm-dropdown-item span {
@@ -219,4 +219,9 @@
     min-width: 200px;
     z-index: 10000;
   }
+}
+
+/* --- 404 page --- */
+.not-found + .copy-to-llm-split-container {
+  display: none;
 }

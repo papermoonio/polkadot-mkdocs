@@ -1,4 +1,6 @@
 User-agent: *
+Disallow: /ai/
+
+# Algolia-Crawler-Verif: 72603F6F9AD5378A
 
 Sitemap: https://docs.polkadot.com/sitemap.xml
-Disallow: /ai/

@@ -35,11 +35,28 @@
 {%- endblock -%}
 
 {% block announce %}
-  <span aria-hidden="true">🎉</span> Polkadot Roundup 2025 is live! 👉 
-  <a href="https://medium.com/polkadot-network/polkadot-roundup-2025-3c3c71c7e9c4" target="_blank" rel="noopener noreferrer" style="font-weight: bold;">
-    Read more.
+  <span aria-hidden="true">🎉</span>
+  REVM is live in
+  <a
+    href="/smart-contracts/connect/"
+    target="_blank"
+    rel="noopener noreferrer"
+    style="font-weight: bold;"
+  >
+    Polkadot Hub TestNet
   </a>
+  —
+  <a
+    href="/smart-contracts/cookbook/smart-contracts/deploy-basic/basic-hardhat/"
+    target="_blank"
+    rel="noopener noreferrer"
+    style="font-weight: bold;"
+  >
+    Deploy your first EVM contract
+  </a>
+  .
 {% endblock %}
+
 
 {% block libs %}
   {{ super() }}
@@ -52,33 +69,31 @@
     data-project-name="Polkadot"
     data-modal-title="Polkadot AI Chatbot"
     data-project-color="#1E1E1E"
-    data-button-bg-color="var(--color-surface-secondary)"
-    data-button-border="1px solid var(--color-border-strong)"
-    data-button-border-radius="16px 16px 0 16px"
     data-button-hover-animation-enabled="false"
-    data-button-image-height="17px"
-    data-button-image-width="17px"
     data-button-text-color="var(--color-text-primary)"
-    data-button-text-font-family="DM Serif Display"
-    data-button-text-font-size="16px"
-    data-button-text-font-weight="600"
-    data-button-padding="16px"
-    data-button-width="88px"
-    data-button-height="85px"
+    data-button-text-font-size="14px"
+    data-button-position-right="unset"
+    data-button-position-bottom="unset"
+    data-button-height="unset"
+    data-button-width="unset"
+    data-button-padding="0"
+    data-button-bg-color="transparent"
+    data-button-border="none"
+    data-button-box-shadow="none"
+    data-button-animation-enabled="false"
+    data-button-image-height="0px"
+    data-button-image-width="0px"
     data-font-size-xs="12px"
     data-font-size-sm="14px"
     data-font-size-md="16px"
     data-font-size-lg="18px"
     data-font-size-xl="22px"
     data-modal-title-font-size="22px"
-    data-button-position-top="75vh"
-    data-button-position-right="24px"
     data-query-input-font-size="16px"
     data-modal-header-bg-color="var(--color-surface)"
     data-modal-image-height="24px"
     data-modal-image-width="24px"
     data-project-logo="/assets/images/polkadot.png"
-    data-modal-header-bg-color="#1C0533"
     data-modal-title-color="white"
     data-modal-disclaimer="This is an AI chatbot trained to answer questions about Polkadot. As such, the answers it provides might not always be accurate or up-to-date. Please use your best judgement when evaluating its responses. Also, **please refrain from sharing any personal or private information with the bot**. By submitting a query, you agree that you have read and understood [these conditions](https://polkadot.com/legal-disclosures/).
       **If you need further assistance, you can reach out to [Polkadot Support](https://support.polkadot.network/support/tickets/new?ticket_form=i_have_a_support_request).**"
@@ -178,42 +193,107 @@
       const kapaWidget = widgetHost?.shadowRoot;
       if (!kapaWidget) return;
 
-      const observer = new MutationObserver(() => {
-        const kapaButton = kapaWidget.querySelector('.mantine-Button-root');
-        const kapaButtonContent = kapaWidget.querySelector('.mantine-Flex-root');
+      /*
+        In order to customize the Kapa AI widget, we need to manipulate its shadow DOM.
+        
+        This script performs the following actions:
+          1. Wraps existing shadow root content in a new div for easier styling.
+          2. Adds a "Get Support" link to the widget.
+          3. Observes mutations in the shadow DOM to apply custom styles and hide unwanted elements
+      */
 
-        if (!kapaButton || !kapaButtonContent) return;
+      /* --- 1. Add wrapper around the shadow root --- */
+      const shadowRootWrapper = document.createElement('div');
+      shadowRootWrapper.className = 'kapa-shadow-root-wrapper';
+
+      // Move all existing children into the wrapper
+      while (kapaWidget.firstChild) {
+        shadowRootWrapper.appendChild(kapaWidget.firstChild);
+      }
+
+      // Insert the wrapper back into the shadow root
+      kapaWidget.appendChild(shadowRootWrapper);
+
+      /* --- 2. Create get support link and add to the shadow root --- */
+      const supportWrapper = document.createElement('div');
+      supportWrapper.classList.add('support-container');
+
+      const supportLink = document.createElement('a');
+      supportLink.href = '/get-support/';
+      supportLink.textContent = 'Get Support';
+      supportLink.classList.add('support-link');
+
+      supportWrapper.appendChild(supportLink);
+      shadowRootWrapper.prepend(supportWrapper);
+
+      /* --- 3. Observe mutations in the shadow DOM to apply custom styles and hide unwanted elements --- */
+      const observer = new MutationObserver(() => {
+        // Remove the image
+        const kapaButtonImage = kapaWidget.querySelector('.mantine-Image-root');
+        if (kapaButtonImage) {
+          kapaButtonImage.style.display = 'none';
+        }
 
         /**
          * ─────────────────────────────
          * Layout / runtime JS styles
          * ─────────────────────────────
          */
-        kapaButtonContent.style.alignItems = 'flex-start';
-
-        if (window.innerWidth <= 768) {
-          kapaButton.style.width = 'fit-content';
-          kapaButton.style.height = '56px';
-          kapaButton.style.borderRadius = '16px';
-          kapaButton.style.right = '16px';
-          kapaButton.style.top = '90vh';
-
-          kapaButtonContent.style.flexDirection = 'row';
-          kapaButtonContent.style.gap = '12px';
-        } else {
-          kapaButtonContent.style.flexDirection = 'column';
-          kapaButtonContent.style.gap = '4px';
-        }
-
-        /**
-         * ─────────────────────────────
-         * Inject styles (once)
-         * ─────────────────────────────
-         */
-        if (!kapaWidget.querySelector('#custom-kapa-styles')) {
-          const style = document.createElement('style');
-          style.id = 'custom-kapa-styles';
-          style.textContent = `
+        const kapaStyles = kapaWidget.querySelector('style[data-mantine-styles="true"]');
+        if (kapaStyles) {
+          kapaStyles.textContent += `
+            #kapa-button {
+              position: unset;
+              width: unset;
+              height: unset;
+              padding: 0;
+              background-color: transparent;
+              box-shadow: none;
+              animation: none;
+            }
+  
+            #kapa-button:hover {
+              background-color: unset;
+              opacity: 0.7;
+            }
+  
+            .kapa-shadow-root-wrapper {
+              display: flex;
+              flex-direction: column;
+              height: 100%;
+            }
+  
+            .kapa-shadow-root-wrapper > div {
+              flex: 50%;
+              overflow-wrap: anywhere;
+              text-align: center;
+              line-height: 16px;
+              align-content: center;
+            }
+  
+            .support-container {
+              border-bottom: 1px solid #3e3e3e;
+              font-size: 14px;
+              padding-bottom: 10px;
+            }
+  
+            .support-container .support-link {
+              text-decoration: none;
+              color: var(--md-default-fg-color);
+            }
+  
+            .support-container .support-link:hover {
+              opacity: 0.7 !important;
+            }
+  
+            #kapa-widget-root {
+              padding-top: 10px;
+            }
+  
+            .mantine-Text-root {
+              line-height: 16px !important;
+            }
+            
             /* Light mode */
             .mantine-Button-root:hover {
               background-color: var(--color-surface);
@@ -243,12 +323,17 @@
               z-index: 1;
             }
           `;
-          kapaWidget.appendChild(style);
         }
 
-        /**
-         * All done — stop observing
-         */
+        const kapaButtonText = kapaWidget.querySelector('.mantine-Text-root');
+        if (kapaButtonText) {
+          kapaButtonText.textContent = '';
+          kapaButtonText.appendChild(document.createTextNode('Ask'));
+          kapaButtonText.appendChild(document.createElement('br'));
+          kapaButtonText.appendChild(document.createTextNode('AI'));
+        }
+
+        // Stop observing once we've modified everything
         observer.disconnect();
       });
 
