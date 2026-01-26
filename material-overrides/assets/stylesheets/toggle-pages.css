@@ -42,20 +42,14 @@
 }
 
 /* Slider background */
-.toggle-buttons::before {
-  content: "";
+.toggle-slider {
   position: absolute;
   top: var(--py-1);
   bottom: var(--py-1);
-  left: var(--py-1);
-  width: calc(50% - var(--py-1));
+  left: 0;
   background: var(--md-primary-bg-color);
   border-radius: var(--rounded-full);
-  transition: transform 0.25s ease;
   z-index: 1;
+  transition: all 0.25s ease;
 }
 
-/* Move slider when second button is active */
-.toggle-buttons:has(.toggle-btn:nth-child(2).active)::before {
-  transform: translateX(100%);
-}
