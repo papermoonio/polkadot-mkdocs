@@ -16,11 +16,13 @@ extra_javascript:
   - js/connect-to-metamask.js
   - js/error-modal.js
   - js/copy-to-llm.js
+  - js/toggle-pages.js
 # Extra CSS files
 extra_css:
   - assets/stylesheets/terminal.css
   - assets/stylesheets/timeline-neoteroi.css
   - assets/stylesheets/copy-to-llm.css
+  - assets/stylesheets/toggle-pages.css
 
 # Diagnostic messages when validating links to documents
 validation:
@@ -115,6 +117,7 @@ plugins:
   - awesome-nav
   - resolve_md:
       llms_config: llms_config.json
+  - page_toggle
   - glightbox
   - minify:
       minify_html: true
@@ -129,10 +132,12 @@ plugins:
         - js/connect-to-metamask.js
         - js/error-modal.js
         - js/copy-to-llm.js
+        - js/toggle-pages.js
       css_files:
         - assets/stylesheets/terminal.css
         - assets/stylesheets/timeline-neoteroi.css
         - assets/stylesheets/copy-to-llm.css
+        - assets/stylesheets/toggle-pages.css
       scoped_css_templates:
         home.html:
           - assets/stylesheets/home.css
