@@ -10,3 +10,4 @@ __pycache__
 
 # MkDocs social cards
 .cache/
+minify
