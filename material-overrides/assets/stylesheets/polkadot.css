@@ -922,38 +922,28 @@ details.interface > summary::before {
 }
 
 /* MetaMask connect buttons */
-.md-typeset .button-wrapper:has(> a.md-button.connectMetaMask) {
-  gap: var(--py-3);
+.md-typeset .button-wrapper:has(> a.md-button.connect-metamask) {
+  flex-wrap: wrap;
   align-items: center;
-  margin: var(--py-4) 0;
+  gap: var(--p-2);
 }
 
-.md-typeset .button-wrapper:has(> a.md-button.connectMetaMask) > a.md-button.connectMetaMask {
-  white-space: nowrap;
-  overflow: hidden;
-  justify-content: center;
+.md-typeset .button-wrapper > a.md-button.connect-metamask {
   text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--py-4);
 }
 
-@media screen and (max-width: 90em) {
-  .md-typeset .button-wrapper:has(> a.md-button.connectMetaMask) > a.md-button.connectMetaMask {
-    padding: var(--py-3) var(--py-7);
-    white-space: normal;
-    text-align: center;
-  }
-}
-
-@media screen and (max-width: 40em) {
-  .md-typeset .button-wrapper:has(> a.md-button.connectMetaMask) {
+@media screen and (max-width: 1036px) {
+  .md-typeset .button-wrapper:has(> a.md-button.connect-metamask) {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
 
-  .md-typeset .button-wrapper:has(> a.md-button.connectMetaMask) > a.md-button.connectMetaMask {
-    width: 95%;
-    justify-content: center;
-    white-space: nowrap;
+  .md-typeset .button-wrapper > a.md-button.connect-metamask {
+    width: 100%;
+    max-width: 320px;
   }
 }
 
