@@ -733,6 +733,10 @@ html .md-footer-meta.md-typeset a:hover {
     justify-content: space-between;
   }
 
+  .footer-nav {
+    margin: 0 0.8rem;
+  }
+
   .md-social {
     padding: 0;
   }
@@ -769,6 +773,21 @@ html .md-footer-meta.md-typeset a:hover {
 
   .md-typeset a.footer-nav-link {
     padding-bottom: var(--py-1);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  /* --- Overall layout adjustments to push footer to bottom --- */
+  .md-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
+
+  .md-main {
+    padding-bottom: 4rem;
   }
 }
 
