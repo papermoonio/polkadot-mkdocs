@@ -1,52 +1,55 @@
-name: Deploy Docs
+name: Deploy Docs (Personal GH Pages)
+
 on:
   workflow_dispatch:
     inputs:
-      branch:
-        description: "Branch to build and deploy documentation from"
+      docs_branch:
+        description: "Branch of 0xlukem/polkadot-docs to build"
         required: true
         default: "master"
 
 permissions:
   contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Configure Git Credentials
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-      - name: Pull docs repository
+      # 1) Checkout this repo (polkadot-mkdocs) so mkdocs.yml + requirements.txt are available
+      - name: Checkout polkadot-mkdocs
+        uses: actions/checkout@v4
+
+      # 2) Checkout your docs fork into ./polkadot-docs
+      - name: Checkout polkadot-docs (fork)
         uses: actions/checkout@v4
         with:
-          repository: polkadot-developers/polkadot-docs
+          repository: 0xlukem/polkadot-docs
+          ref: ${{ inputs.docs_branch }}
           path: polkadot-docs
-          ref: ${{ inputs.branch }}
-      - uses: actions/setup-python@v5
+
+      # 3) Match Python to prod
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
-      - uses: actions/cache@v4
-        with:
-          key: mkdocs-material-${{ env.cache_id }}
-          path: .cache
-          restore-keys: |
-            mkdocs-material-
-      - name: Install System Dependencies
+
+      # 4) Install the exact same requirements your repo uses
+
+      - name: Install requirements
         run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-dev build-essential
-      - name: Install pip requirements
-        run: |
-          # upgrade pip
-          python -m pip install --upgrade pip setuptools 'cython<3.0.0' wheel
-          # install dependencies quietly
+          python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
+
       - name: Update image paths in Markdown files
         run: |
-          # Replace old image paths with new paths in Markdown files
+          # Match prod: rewrite absolute Markdown links for GitHub Pages subpath
           find polkadot-docs -type f -name "*.md" -exec sed -i -e 's|](/|](/polkadot-mkdocs/|g' -e 's|href="/|href="/polkadot-mkdocs/|g' {} \;
-      - name: Deploy Docs
-        run: mkdocs gh-deploy --force --clean --site-dir ./site
+
+      - name: Configure Git identity for gh-deploy
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # 5) Deploy to gh-pages on YOUR fork (this repo) via mkdocs gh-deploy
+      - name: Deploy to GitHub Pages (gh-pages branch)
+        run: mkdocs gh-deploy --force --clean
