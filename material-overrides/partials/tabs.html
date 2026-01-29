@@ -11,7 +11,9 @@
         {% set is_ignored_section = nav_item.children 
                               and nav_item.children[0].is_page 
                               and nav_item.children[0].url in ["reference/", "get-support/"] %}
-        {% if nav_item.url != "" and not is_ignored_section %}
+        {% set is_ignored_page = nav_item.is_page 
+                              and nav_item.url in ["ai-resources/"] %}
+        {% if nav_item.url != "" and not is_ignored_section and not is_ignored_page %}
           {{ item.render(nav_item) }}
         {% endif %}
       {% endfor %}

@@ -473,6 +473,10 @@
       "value": "/parachains/testing/run-a-parachain-network/"
     },
     {
+      "key": "/get-support/ai-ready-docs/",
+      "value": "/ai-resources/"
+    },
+    {
       "key": "/get-support/explore-resources/",
       "value": "/get-support/"
     },
@@ -557,10 +561,6 @@
       "value": "/node-infrastructure/run-a-validator/staking-mechanics/rewards/"
     },
     {
-      "key": "/nodes-and-validators/run-a-node/",
-      "value": "/node-infrastructure/run-a-node/polkadot-hub-rpc/"
-    },
-    {
       "key": "/node-infrastructure/run-a-node/relay-chain/",
       "value": "/node-infrastructure/run-a-node/relay-chain/full-node/"
     },
@@ -579,6 +579,10 @@
     {
       "key": "/node-infrastructure/run-a-validator/staking-mechanics/",
       "value": "/node-infrastructure/run-a-validator/staking-mechanics/rewards/"
+    },
+    {
+      "key": "/nodes-and-validators/run-a-node/",
+      "value": "/node-infrastructure/run-a-node/polkadot-hub-rpc/"
     },
     {
       "key": "/parachains/",
