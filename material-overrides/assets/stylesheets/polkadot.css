@@ -925,6 +925,32 @@ details.interface > summary::before {
   opacity: 0.7;
 }
 
+/* MetaMask connect buttons */
+.md-typeset .button-wrapper:has(> a.md-button.connect-metamask) {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--p-2);
+}
+
+.md-typeset .button-wrapper > a.md-button.connect-metamask {
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--py-4);
+}
+
+@media screen and (max-width: 1036px) {
+  .md-typeset .button-wrapper:has(> a.md-button.connect-metamask) {
+    flex-direction: column;
+  }
+
+  .md-typeset .button-wrapper > a.md-button.connect-metamask {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
 /* --- Back to top ---*/
 .md-top {
   background-color: var(--color-surface);
