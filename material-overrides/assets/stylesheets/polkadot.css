@@ -104,6 +104,7 @@
   --py-16: 64px;
 
   --md-search-result-icon: url("/assets/images/article.svg");
+  --md-admonition-icon--verified: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ij48cGF0aCBkPSJtMTEuMjggMy4yMiA0LjI1IDQuMjVhLjc1Ljc1IDAgMCAxIDAgMS4wNmwtNC4yNSA0LjI1YS43NDkuNzQ5IDAgMCAxLTEuMjc1LS4zMjYuNzQ5Ljc0OSAwIDAgMSAuMjE1LS43MzRMMTMuOTQgOGwtMy43Mi0zLjcyYS43NDkuNzQ5IDAgMCAxIC4zMjYtMS4yNzUuNzQ5Ljc0OSAwIDAgMSAuNzM0LjIxNVptLTYuNTYgMGEuNzUxLjc1MSAwIDAgMSAxLjA0Mi4wMTguNzUxLjc1MSAwIDAgMSAuMDE4IDEuMDQyTDIuMDYgOGwzLjcyIDMuNzJhLjc0OS43NDkgMCAwIDEtLjMyNiAxLjI3NS43NDkuNzQ5IDAgMCAxLS43MzQtLjIxNUwuNDcgOC41M2EuNzUuNzUgMCAwIDEgMC0xLjA2WiI+PC9wYXRoPjwvc3ZnPg==");
 }
 
 :root,
@@ -159,6 +160,11 @@
 
   --code-admo-border-color: #5ee20c;
   --code-admo-title-bg: #64dd171a;
+
+  /* Admonition verified tutorial */
+  --verified-admo-border-color: var(--grey-700);
+  --verified-admo-title-bg: var(--grey-100);
+  --verified-admo-icon-color: var(--grey-700);
 }
 
 [data-md-color-scheme="custom-dark"] {
@@ -221,6 +227,11 @@
   --md-code-hl-operator-color: #d4d4d4;
   --md-code-hl-punctuation-color: #d4d4d4;
   --md-code-hl-special-color: #9cdcfe;
+
+  /* Admonition verified tutorial */
+  --verified-admo-border-color: var(--grey-300);
+  --verified-admo-title-bg: var(--grey-800);
+  --verified-admo-icon-color: var(--grey-300);
 }
 
 /* --- Typography --- */
@@ -831,11 +842,31 @@ details.child {
   background-color: var(--code-admo-title-bg);
 }
 
+
 .md-typeset .code > .admonition-title::before,
 .md-typeset .code > summary::before {
   background-color: var(--code-admo-border-color);
   -webkit-mask-image: var(--md-admonition-icon--code);
   mask-image: var(--md-admonition-icon--code);
+}
+
+.md-typeset .admonition.verified,
+.md-typeset details.verified {
+  border-color: var(--verified-admo-border-color);
+}
+
+.md-typeset .verified > .admonition-title,
+.md-typeset .verified > summary {
+  background-color: var(--verified-admo-title-bg);
+  border-top-left-radius: var(--rounded);
+  border-top-right-radius: var(--rounded);
+}
+
+.md-typeset .verified > .admonition-title::before,
+.md-typeset .verified > summary::before {
+  background-color: var(--verified-admo-icon-color);
+  -webkit-mask-image: var(--md-admonition-icon--verified);
+          mask-image: var(--md-admonition-icon--verified);
 }
 
 /* Interface admonition */
@@ -972,7 +1003,6 @@ span.badge {
 }
 
 .md-typeset .verified-tutorial-badges a:not(:has(img)) {
-  color: var(--success);
   display: inline-flex;
   align-items: center;
 }
