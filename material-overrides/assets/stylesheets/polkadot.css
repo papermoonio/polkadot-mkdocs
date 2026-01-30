@@ -831,7 +831,6 @@ details.child {
   background-color: var(--code-admo-title-bg);
 }
 
-
 .md-typeset .code > .admonition-title::before,
 .md-typeset .code > summary::before {
   background-color: var(--code-admo-border-color);
