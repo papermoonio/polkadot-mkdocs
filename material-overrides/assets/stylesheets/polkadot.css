@@ -1504,3 +1504,23 @@ div.mermaid {
 h1.not-found {
   text-align: center;
 }
+
+/* --- GitHub status badges --- */
+.status-badge > p:first-child {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+a.tests-button {
+  width: fit-content;
+  padding: var(--p-1) var(--p-2);
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: var(--rounded);
+  background: var(--color-surface-secondary);
+  color: var(--md-default-fg-color);
+  display: flex;
+  gap: var(--p-1);
+  align-items: center;
+}
