@@ -781,7 +781,6 @@ html .md-footer-meta.md-typeset a:hover {
   .md-footer {
     position: fixed;
     bottom: 0;
-    left: 0;
     width: 100%;
     z-index: 100;
   }
@@ -976,7 +975,7 @@ details.interface > summary::before {
   color: var(--color-text-primary);
   border: 1px solid var(--color-border-strong);
   top: auto !important;
-  bottom: 1.25rem !important;
+  bottom: 4rem;
 }
 
 .md-top:focus,
