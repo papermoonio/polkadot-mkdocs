@@ -662,6 +662,12 @@ label.md-nav__link--active,
   }
 }
 
+@media screen and (max-width: 59.9844em) {
+  .md-nav--secondary .md-nav__link--passed {
+    color: var(--color-text-secondary);
+  }
+}
+
 @media screen and (max-width: 76.2344em) {
   .md-nav--primary .md-nav__title {
     color: var(--color-text-primary);
