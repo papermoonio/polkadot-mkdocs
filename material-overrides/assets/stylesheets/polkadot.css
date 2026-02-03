@@ -527,10 +527,10 @@ input.md-search__input::placeholder {
   box-shadow: none;
 }
 
-/* Unified nav highlight styling (hover = active = focus) */
 .md-nav__link:hover,
 a.md-nav__link--active,
 div.md-nav__link--active,
+label.md-nav__link--active,
 .md-nav__link-wrapper.md-nav__item--active {
   background: var(--color-surface-secondary);
   border-radius: 6px;
