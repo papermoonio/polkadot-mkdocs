@@ -357,7 +357,6 @@
 }
 
 .md-tabs__link {
-  font-weight: 500;
   opacity: 1;
   padding: var(--p-1) var(--p-2);
   margin-top: 0;
@@ -372,7 +371,7 @@
 .md-header__option[data-md-component="palette"] .md-icon {
   background-color: var(--color-surface-secondary);
   border-radius: var(--rounded-lg);
-  padding: 0.7rem;
+  padding: 13.2px;
 }
 
 .md-header__option[data-md-component="palette"] .md-icon svg {
@@ -444,7 +443,7 @@ input.md-search__input::placeholder {
   .md-search__form {
     background-color: var(--color-surface-secondary);
     border-radius: var(--rounded-lg);
-    height: 2.2rem;
+    height: 44px;
   }
 
   .md-search__form:hover {
@@ -901,7 +900,6 @@ details.interface > summary::before {
   align-items: center;
   gap: var(--py-2);
   padding: var(--py-4) var(--py-8);
-  font-weight: 500;
   transition-property: background-color;
   transition-duration: 200ms;
 }
