@@ -725,6 +725,20 @@ html .md-footer-meta.md-typeset a:hover {
   margin: auto 0;
 }
 
+@media screen and (min-width: 768px) {
+  /* Overall layout adjustments to push footer to bottom */
+  .md-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+  }
+
+  .md-main {
+    padding-bottom: 4rem;
+  }
+}
+
 @media screen and (max-width: 1148px) {
   .md-footer-meta__inner.md-grid {
     display: flex;
@@ -734,6 +748,10 @@ html .md-footer-meta.md-typeset a:hover {
   .md-footer-meta__inner .row {
     margin: 0 0.6rem;
     justify-content: space-between;
+  }
+
+  .footer-nav {
+    margin: 0 0.8rem;
   }
 
   .md-social {
@@ -772,6 +790,18 @@ html .md-footer-meta.md-typeset a:hover {
 
   .md-typeset a.footer-nav-link {
     padding-bottom: var(--py-1);
+  }
+
+  /* To account for the anchored footer */
+  .md-main {
+    padding-bottom: 6rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* To account for the non-anchored footer */
+  .md-main {
+    padding-bottom: 0;
   }
 }
 
@@ -960,13 +990,35 @@ details.interface > summary::before {
   color: var(--color-text-primary);
   border: 1px solid var(--color-border-strong);
   top: auto !important;
-  bottom: 1.25rem !important;
+  bottom: 4rem;
 }
 
 .md-top:focus,
 .md-top:hover {
   background-color: var(--color-surface-secondary);
   color: var(--color-text-primary);
+}
+
+/* These breakpoints align with the footer breakpoints */
+@media screen and (max-width: 1148px) {
+  /* Layout adjustments for anchoring footer to bottom */
+  .md-top {
+    bottom: 4.5rem;
+  }
+}
+
+@media screen and (max-width: 849px) {
+  /* Layout adjustments for anchoring footer to bottom */
+  .md-top {
+    bottom: 7rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  /* To account for the non-anchored footer, reset the back to top button */
+  .md-top {
+    bottom: 1.25rem;
+  }
 }
 
 /* --- Badges --- */
