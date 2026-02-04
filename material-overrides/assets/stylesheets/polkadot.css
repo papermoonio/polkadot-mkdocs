@@ -1011,7 +1011,7 @@ details.interface > summary::before {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   /* To account for the non-anchored footer, reset the back to top button */
   .md-top {
     bottom: 1.25rem;
