@@ -684,6 +684,10 @@ label.md-nav__link--active,
     margin-left: 0;
     padding-left: 0.8rem;
   }
+
+  .md-nav--primary .md-nav__list {
+    padding-top: .5em;
+  }
 }
 
 @media screen and (max-width: 59.9844em) {
