@@ -1,10 +1,12 @@
 [data-md-color-scheme="custom-light"] {
   --grain-filter: invert(1) brightness(1);
+  --hover-button-color: var(--grey-800);
 }
 
 [data-md-color-scheme="custom-dark"] {
   --grain-filter: brightness(1);
   /* normal grain on dark mode */
+  --hover-button-color: var(--grey-200);
 }
 
 /*--- General ---*/
@@ -122,6 +124,10 @@
   flex: 0 0 auto;
 }
 
+.button-wrapper .md-button:hover {
+  background-color: var(--hover-button-color);
+}
+
 /*--- Feature section ---*/
 .feature-section {
   gap: 32px;
@@ -135,7 +141,7 @@
 .card {
   background-color: var(--color-surface);
   padding: var(--py-8);
-  border-radius: var(--rounded-2xl);
+  border-radius: var(--rounded-xl);
   gap: 12px;
   width: 33%;
 }

@@ -69,7 +69,7 @@
   --rounded-sm: 4px;
   /* Buttons, inputs */
   --rounded: 8px;
-  /* Cards */
+  /* Cards, search bar, toggle button */
   --rounded-lg: 12px;
   /* Large cards, modals */
   --rounded-xl: 16px;
@@ -125,6 +125,8 @@
   --color-border: var(--grey-200);
   /* Emphasized borders */
   --color-border-strong: var(--grey-300);
+  /* Hover color */
+  --color-text-hover: var(--grey-900);
 
   --invert-dark-mode-images: invert(1);
   --invert-light-mode-images: invert(0);
@@ -179,6 +181,8 @@
   --color-border: var(--grey-800);
   /* Emphasized borders */
   --color-border-strong: var(--grey-700);
+  /* Hover color */
+  --color-text-hover: var(--grey-100);
 
   --invert-dark-mode-images: invert(0);
   --invert-light-mode-images: invert(1);
@@ -259,7 +263,7 @@
 
 .md-typeset a:focus,
 .md-typeset a:hover {
-  opacity: 0.8;
+  color: var(--color-text-hover);
 }
 
 /* --- Layout --- */
@@ -325,7 +329,7 @@
 }
 
 .md-header__button:hover {
-  opacity: 0.8;
+  color: var(--color-text-hover);
 }
 
 .md-tabs {
@@ -343,27 +347,28 @@
 }
 
 .md-tabs__link {
-  font-weight: 600;
   opacity: 1;
   padding: var(--p-1) var(--p-2);
-  border-radius: var(--rounded);
   margin-top: 0;
+  color: var(--color-text-secondary);
 }
 
 .md-tabs__link:focus,
 .md-tabs__link:hover {
-  background: var(--color-surface-secondary);
+  color: var(--color-text-primary);
 }
 
 .md-header__option[data-md-component="palette"] .md-icon {
   background-color: var(--color-surface-secondary);
-  border-radius: var(--rounded);
-  padding: var(--p-2);
+  border-radius: var(--rounded-lg);
+  padding: calc((44px - 0.8rem) / 2);
+  width: 44px;
+  height: 44px;
 }
 
 .md-header__option[data-md-component="palette"] .md-icon svg {
-  height: 0.7rem;
-  width: 0.7rem;
+  height: 0.8rem;
+  width: 0.8rem;
   transform: scaleX(-1);
 }
 
@@ -429,8 +434,8 @@ input.md-search__input::placeholder {
 @media screen and (min-width: 60em) {
   .md-search__form {
     background-color: var(--color-surface-secondary);
-    border-radius: var(--rounded);
-    height: 1.75rem;
+    border-radius: var(--rounded-lg);
+    height: 44px;
   }
 
   .md-search__form:hover {
@@ -439,7 +444,7 @@ input.md-search__input::placeholder {
   }
 
   [data-md-toggle="search"]:checked ~ .md-header .md-search__form {
-    border-radius: var(--rounded);
+    border-radius: var(--rounded-lg);
   }
 
   .md-search__icon[for="__search"] {
@@ -463,11 +468,11 @@ input.md-search__input::placeholder {
 
   [data-md-toggle="search"]:checked ~ .md-header .md-search__input {
     background: var(--color-surface-secondary);
-    border-radius: var(--rounded);
+    border-radius: var(--rounded-lg);
   }
 
   [data-md-toggle="search"]:checked ~ .md-header .md-search__output {
-    border-radius: var(--rounded);
+    border-radius: var(--rounded-lg);
     top: 48px;
   }
 }
@@ -475,8 +480,8 @@ input.md-search__input::placeholder {
 @media screen and (max-width: 59.9844em) {
   .md-header__button.md-icon[for="__search"] {
     background-color: var(--color-surface-secondary);
-    border-radius: var(--rounded);
-    padding: var(--p-2);
+    border-radius: var(--rounded-lg);
+    padding: 0.75rem;
   }
 
   [data-md-toggle="search"] .md-search {
@@ -693,7 +698,7 @@ input.md-search__input::placeholder {
 
 html .md-footer-meta.md-typeset a:focus,
 html .md-footer-meta.md-typeset a:hover {
-  opacity: 0.8;
+  color: var(--color-text-hover);
 }
 
 .md-copyright__highlight,
@@ -923,7 +928,6 @@ details.interface > summary::before {
   align-items: center;
   gap: var(--py-2);
   padding: var(--py-4) var(--py-8);
-  font-weight: 500;
   transition-property: background-color;
   transition-duration: 200ms;
 }
