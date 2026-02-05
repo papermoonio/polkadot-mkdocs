@@ -225,18 +225,6 @@
       rafId = requestAnimationFrame(draw);
     }
 
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-      grain = generateGrain();
-
-      smoothX = width * 0.5;
-      smoothY = height * 0.38;
-      startTs = null;
-      seeded = false;
-
-      start();
-    });
-
     prefersReducedMotion.addEventListener('change', () => {
       grain = generateGrain();
 
