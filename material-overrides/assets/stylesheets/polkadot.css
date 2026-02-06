@@ -529,11 +529,21 @@ input.md-search__input::placeholder {
 }
 
 .md-nav__link:hover,
-.md-nav__link-wrapper.md-nav__item.md-nav__item--active,
-.md-nav__item div.md-nav__link--active {
+a.md-nav__link--active,
+div.md-nav__link--active,
+label.md-nav__link--active,
+.md-nav__link-wrapper.md-nav__item--active {
   background: var(--color-surface-secondary);
   border-radius: 6px;
+}
+
+/* Keep the highlight aligned to the left edge without shifting text */
+[dir="ltr"] .md-nav__link:hover,
+[dir="ltr"] a.md-nav__link--active,
+[dir="ltr"] div.md-nav__link--active,
+[dir="ltr"] .md-nav__link-wrapper.md-nav__item--active {
   margin-left: -1em;
+  padding-left: 1em;
 }
 
 /* Nav items with icons in the title */
@@ -605,7 +615,8 @@ input.md-search__input::placeholder {
     margin-right: 0;
     padding-top: var(--p-1);
     padding-bottom: var(--p-1);
-    padding-right: var(--p-1);
+    /* To align with default left padding */
+    padding-right: 0.7em;
     margin-top: 0;
   }
 
@@ -617,22 +628,13 @@ input.md-search__input::placeholder {
     padding-bottom: 0;
   }
 
-  /* Hover and active styling */
-  .md-nav__link:hover,
-  .md-nav__link-wrapper.md-nav__item.md-nav__item--active {
+  /* Unified hover/active geometry on large screens */
+  [dir="ltr"] .md-nav__link:hover,
+  [dir="ltr"] a.md-nav__link--active,
+  [dir="ltr"] div.md-nav__link--active,
+  [dir="ltr"] .md-nav__link-wrapper.md-nav__item--active {
     margin-left: -0.7em;
     padding-left: 0.7em;
-  }
-
-  .md-nav__item div.md-nav__link--active {
-    margin-left: -0.7em;
-    padding-left: 0;
-  }
-
-  /* For active sections, when on that section index page */
-  .md-nav__item .md-nav__link-wrapper.md-nav__link--active a,
-  .md-nav__item .md-nav__link--active a {
-    margin-left: 0.7em;
   }
 
   /* Ensure left navigation remains in place */
@@ -649,7 +651,10 @@ input.md-search__input::placeholder {
   [dir="ltr"] .md-nav--secondary .md-nav__item > .md-nav__link {
     padding-top: var(--p-1);
     padding-bottom: var(--p-1);
-    padding-right: var(--p-1);
+    /* To account for default styling, use em */
+    padding-right: 0.7em;
+    padding-left: 0.7em;
+    margin-left: -0.7em;
     margin-top: 0;
   }
 
@@ -665,25 +670,41 @@ input.md-search__input::placeholder {
   }
 }
 
+@media screen and (max-width: 59.9844em) {
+  .md-nav--secondary .md-nav__link--passed {
+    color: var(--color-text-secondary);
+  }
+}
+
 @media screen and (max-width: 76.2344em) {
   .md-nav--primary .md-nav__title {
     color: var(--color-text-primary);
+    white-space: normal;
+    overflow: visible;
+    padding-top: 5em;
+    line-height: 1em;
   }
 
-  .md-nav--primary .md-nav__link:hover {
+  .md-nav--primary .md-nav__link:hover,
+  .md-nav--primary a.md-nav__link--active,
+  .md-nav--primary div.md-nav__link--active,
+  .md-nav--primary .md-nav__link-wrapper.md-nav__item--active {
     margin-left: 0;
+    padding-left: 0.8rem;
   }
 
-  .md-nav--secondary .md-nav__link:hover {
-    margin-left: -0.7em;
-    padding-left: 0.7em;
+  .md-nav--primary .md-nav__list {
+    padding-top: 0.5em;
   }
 }
 
 @media screen and (max-width: 59.9844em) {
-  .md-nav--secondary .md-nav__link:hover {
+  .md-nav--secondary .md-nav__link:hover,
+  .md-nav--secondary a.md-nav__link--active,
+  .md-nav--secondary div.md-nav__link--active,
+  .md-nav--secondary .md-nav__link-wrapper.md-nav__item--active {
     margin-left: 0;
-    padding-left: 1em;
+    padding-left: 0.8rem;
   }
 }
 
