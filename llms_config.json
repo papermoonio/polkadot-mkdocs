@@ -31,6 +31,35 @@
             "Tooling",
             "Reference"
         ],
+        "categories_info": {
+            "Basics": {
+                "description": "Polkadot general knowledge base to provide context around overview and beginner-level content."
+            },
+            "Reference": {
+                "description": "Reference material including key functions and glossary."
+            },
+            "Smart Contracts": {
+                "description": "How to develop and deploy Solidity smart contracts on Polkadot Hub."
+            },
+            "Parachains": {
+                "description": "How-to guides related to building, customizing, deploying, and maintaining a parachain."
+            },
+            "dApps": {
+                "description": "Information and tutorials for application developers."
+            },
+            "Networks": {
+                "description": "Information about Polkadot networks."
+            },
+            "Polkadot Protocol": {
+                "description": "In-depth details about the Polkadot Protocol."
+            },
+            "Infrastructure": {
+                "description": "Guide to node infrastructure."
+            },
+            "Tooling": {
+                "description": "Developer tooling resources."
+            }
+        },
         "exclusions": {
             "skip_basenames": [
                 "README.md",
