@@ -341,23 +341,21 @@
     });
   </script>
   <script>
+    /**
+     * AI Resources Page Interactivity
+     * 
+     * Purpose: Handle client-side interactivity (Download, Clipboard) that cannot be performed 
+     * by the static HTML generator plugin (ai_resources_page).
+     * 
+     * The plugin generates the HTML structure with `data-path` attributes to ensure 
+     * correct paths. This script consumes those paths to invoke browser APIs.
+     */
     document.addEventListener('DOMContentLoaded', () => {
-      const SITE_BASE = location.origin.replace(/\/+$/, ''); // current host
-      const AI_BASE = '/ai'; // relative path to AI content on same host
 
-      const toAbsolute = (rawPath) => {
-        if (!rawPath) return null;
-        let dataPath = rawPath.trim();
-        if (/^https?:\/\//i.test(dataPath)) return dataPath; 
-
-        // Ensure leading slash for site-absolute paths
-        if (!dataPath.startsWith('/')) {
-            dataPath = '/' + dataPath;
-        }
-
-        return `${SITE_BASE}${dataPath}`;
-      };
-
+      /**
+       * Justification: Standard HTML <a download> tags often open text/markdown files 
+       * in the browser instead of saving them. Fetching as a Blob forces a true "Save As" behavior.
+       */
       const downloadViaFetch = async (url, filename) => {
         try {
           const res = await fetch(url, { credentials: 'omit' });
@@ -378,6 +376,10 @@
         }
       };
 
+      /**
+       * Justification: Static HTML cannot access the user's system clipboard. 
+       * We must fetch the content client-side and use the navigator API to copy it.
+       */
       const copyTextFromUrl = async (url) => {
         try {
           const res = await fetch(url, { credentials: 'omit' });
@@ -403,46 +405,44 @@
       document.querySelectorAll('.llms-copy').forEach((btn) => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
-          const url = toAbsolute(btn.getAttribute('data-path'));
+          // Plugin generates the correct absolute path in data-path
+          const url = btn.getAttribute('data-path');
           if (url) copyTextFromUrl(url);
         });
       });
 
       // DOWNLOAD buttons: force a real download via Blob
       document.querySelectorAll('.llms-dl').forEach((a) => {
-        // Set href for right-click "Copy link address" convenience
-        const abs = toAbsolute(a.getAttribute('data-path'));
-        if (abs) a.setAttribute('href', abs);
+        // Plugin generates the correct absolute path in data-path
+        const url = a.getAttribute('data-path');
+        if (url) a.setAttribute('href', url);
 
         a.addEventListener('click', (e) => {
           e.preventDefault();
-          const path = a.getAttribute('data-path') || '';
-          const url = toAbsolute(path);
-          if (!url) return;
-          // Prefer explicit filename; else derive from last path segment
-          const filename =
-            a.getAttribute('data-filename') ||
-            path.split('/').pop() ||
-            'download.txt';
-          downloadViaFetch(url, filename);
+          const path = a.getAttribute('data-path');
+          if (!path) return;
+          
+          // Plugin provides the clean filename for saving
+          const filename = a.getAttribute('data-filename') || 'download.txt';
+          downloadViaFetch(path, filename);
         });
       });
 
       // VIEW buttons: open raw files in a new tab
       document.querySelectorAll('.llms-view').forEach((a) => {
-        const abs = toAbsolute(a.getAttribute('data-path'));
-        if (abs) {
-          a.setAttribute('href', abs);
+        const url = a.getAttribute('data-path');
+        if (url) {
+          a.setAttribute('href', url);
           a.setAttribute('target', '_blank');
           a.setAttribute('rel', 'noopener');
         }
 
         a.addEventListener('click', (e) => {
-          const url = toAbsolute(a.getAttribute('data-path') || '');
-          if (!url) return;
+          const path = a.getAttribute('data-path');
+          if (!path) return;
           if (a.getAttribute('target') !== '_blank') {
             e.preventDefault();
-            window.open(url, '_blank', 'noopener');
+            window.open(path, '_blank', 'noopener');
           }
         });
       });
