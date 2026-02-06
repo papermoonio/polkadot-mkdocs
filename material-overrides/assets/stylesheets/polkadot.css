@@ -611,7 +611,8 @@ label.md-nav__link--active,
     margin-right: 0;
     padding-top: var(--p-1);
     padding-bottom: var(--p-1);
-    padding-right: var(--p-1);
+    /* To align with default left padding */
+    padding-right: 0.7em;
     margin-top: 0;
   }
 
@@ -646,7 +647,10 @@ label.md-nav__link--active,
   [dir="ltr"] .md-nav--secondary .md-nav__item > .md-nav__link {
     padding-top: var(--p-1);
     padding-bottom: var(--p-1);
-    padding-right: var(--p-1);
+    /* To account for default styling, use em */
+    padding-right: 0.7em;
+    padding-left: 0.7em;
+    margin-left: -0.7em;
     margin-top: 0;
   }
 
@@ -686,7 +690,7 @@ label.md-nav__link--active,
   }
 
   .md-nav--primary .md-nav__list {
-    padding-top: .5em;
+    padding-top: 0.5em;
   }
 }
 
