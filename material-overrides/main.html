@@ -353,6 +353,30 @@
 
     document.addEventListener('DOMContentLoaded', () => {
 
+      // Helper: Toast Notification (reuses styles from copy-to-llm.css)
+      function showToast(message) {
+        const existingToast = document.querySelector('.copy-to-llm-toast');
+        if (existingToast) {
+          existingToast.remove();
+        }
+
+        const toast = document.createElement('div');
+        toast.className = 'copy-to-llm-toast';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+          toast.classList.add('show');
+        }, 10);
+
+        setTimeout(() => {
+          toast.classList.remove('show');
+          setTimeout(() => {
+            toast.remove();
+          }, 300);
+        }, 2500);
+      }
+
       // COPY buttons (use class selector .llms-copy)
       
       const copyButtons = document.querySelectorAll('.llms-copy');
@@ -369,11 +393,10 @@
             const text = await response.text();
             await navigator.clipboard.writeText(text);
             
-            // Optional/Simple feedback
-            alert('Copied to clipboard!');
+            showToast('Copied to clipboard!');
           } catch (err) {
             console.error('Failed to copy file content:', err);
-            alert('Failed to copy content.');
+            showToast('Failed to copy content.');
           }
         });
       });
@@ -390,9 +413,10 @@
 
           const anchor = document.createElement('a');
           anchor.href = targetPath;
-          if (filename) {
-            anchor.download = filename;
-          }
+          // Always set download attribute to force download behavior
+          // If filename is missing, browser infers it from URL when attribute is present but empty
+          anchor.download = filename || '';
+          
           document.body.appendChild(anchor);
           anchor.click();
           document.body.removeChild(anchor);
