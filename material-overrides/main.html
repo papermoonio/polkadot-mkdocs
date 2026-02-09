@@ -350,102 +350,66 @@
      * The plugin generates the HTML structure with `data-path` attributes to ensure 
      * correct paths. This script consumes those paths to invoke browser APIs.
      */
+
     document.addEventListener('DOMContentLoaded', () => {
 
-      /**
-       * Justification: Standard HTML <a download> tags often open text/markdown files 
-       * in the browser instead of saving them. Fetching as a Blob forces a true "Save As" behavior.
-       */
-      const downloadViaFetch = async (url, filename) => {
-        try {
-          const res = await fetch(url, { credentials: 'omit' });
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const blob = await res.blob(); // keep original content-type from server
-          const link = document.createElement('a');
-          const objectUrl = URL.createObjectURL(blob);
-          link.href = objectUrl;
-          link.download = filename || 'download.txt';
-          document.body.appendChild(link);
-          link.click();
-          URL.revokeObjectURL(objectUrl);
-          link.remove();
-        } catch (err) {
-          console.error('Download failed, falling back to navigation:', err);
-          // Fallback: just navigate to the URL (will open in browser)
-          window.location.href = url;
-        }
-      };
+      //--------------------------------------
 
-      /**
-       * Justification: Static HTML cannot access the user's system clipboard. 
-       * We must fetch the content client-side and use the navigator API to copy it.
-       */
-      const copyTextFromUrl = async (url) => {
-        try {
-          const res = await fetch(url, { credentials: 'omit' });
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const text = await res.text();
-          await navigator.clipboard.writeText(text);
+      // COPY buttons (use class selector .llms-copy)
+      
+      const copyButtons = document.querySelectorAll('.llms-copy');
+      copyButtons.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          const targetPath = btn.getAttribute('data-path');
+          if (!targetPath) return;
 
-          const dlg = document.querySelector('.md-dialog');
-          if (dlg) {
-            dlg.classList.add('md-dialog--active');
-            const msg = dlg.querySelector('.md-dialog__inner');
-            if (msg) msg.textContent = "{{ lang.t('clipboard.copied') }}";
-            setTimeout(() => dlg.classList.remove('md-dialog--active'), 2000);
+          try {
+            const response = await fetch(targetPath);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            
+            const text = await response.text();
+            await navigator.clipboard.writeText(text);
+            
+            // Optional/Simple feedback
+            alert('Copied to clipboard!');
+          } catch (err) {
+            console.error('Failed to copy file content:', err);
+            alert('Failed to copy content.');
           }
-        } catch (err) {
-          console.error('Failed to copy:', err);
-          const dlg = document.querySelector('.md-dialog');
-          if (dlg) dlg.classList.remove('md-dialog--active');
-        }
-      };
+        });
+      });
 
-      // COPY buttons
-      document.querySelectorAll('.llms-copy').forEach((btn) => {
+      //--------------------------------------
+
+      // DOWNLOAD buttons (use class selector .llms-dl)
+      
+      const dlButtons = document.querySelectorAll('.llms-dl');
+      dlButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
-          // Plugin generates the correct absolute path in data-path
-          const url = btn.getAttribute('data-path');
-          if (url) copyTextFromUrl(url);
-        });
-      });
+          const targetPath = btn.getAttribute('data-path');
+          const filename = btn.getAttribute('data-filename');
+          if (!targetPath) return;
 
-      // DOWNLOAD buttons: force a real download via Blob
-      document.querySelectorAll('.llms-dl').forEach((a) => {
-        // Plugin generates the correct absolute path in data-path
-        const url = a.getAttribute('data-path');
-        if (url) a.setAttribute('href', url);
-
-        a.addEventListener('click', (e) => {
-          e.preventDefault();
-          const path = a.getAttribute('data-path');
-          if (!path) return;
-          
-          // Plugin provides the clean filename for saving
-          const filename = a.getAttribute('data-filename') || 'download.txt';
-          downloadViaFetch(path, filename);
-        });
-      });
-
-      // VIEW buttons: open raw files in a new tab
-      document.querySelectorAll('.llms-view').forEach((a) => {
-        const url = a.getAttribute('data-path');
-        if (url) {
-          a.setAttribute('href', url);
-          a.setAttribute('target', '_blank');
-          a.setAttribute('rel', 'noopener');
-        }
-
-        a.addEventListener('click', (e) => {
-          const path = a.getAttribute('data-path');
-          if (!path) return;
-          if (a.getAttribute('target') !== '_blank') {
-            e.preventDefault();
-            window.open(path, '_blank', 'noopener');
+          const anchor = document.createElement('a');
+          anchor.href = targetPath;
+          if (filename) {
+            anchor.download = filename;
           }
+          document.body.appendChild(anchor);
+          anchor.click();
+          document.body.removeChild(anchor);
         });
       });
+
+      //--------------------------------------
+
+      // VIEW buttons (use class selector .llms-view)
+      
+      // Handled entirely by the generated HTML (href, target, rel).
+      // No JS needed.
+
     });
   </script>
 {% endblock %}
