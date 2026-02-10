@@ -115,6 +115,7 @@ plugins:
       exclude:
         - ai/*
   - awesome-nav
+  - ai_resources_page
   - resolve_md:
       llms_config: llms_config.json
   - page_toggle
