@@ -170,10 +170,10 @@
 /* 
    Loading Spinner 
 */
-.loading-spinner {
+.ai-file-actions-container .loading-spinner {
     animation: spinner-rotate 2s linear infinite;
 }
-.loading-spinner circle {
+.ai-file-actions-container .loading-spinner circle {
     animation: spinner-dash 1.5s ease-in-out infinite;
 }
 
