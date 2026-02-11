@@ -1073,7 +1073,7 @@ span.badge {
   flex-direction: column;
   padding-top: var(--p-3);
   margin: 0;
-  gap: var(--p-1)
+  gap: var(--p-1);
 }
 
 .status-badge a > img {
