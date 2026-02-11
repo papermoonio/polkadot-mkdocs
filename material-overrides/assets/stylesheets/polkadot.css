@@ -1611,3 +1611,38 @@ div.mermaid {
 h1.not-found {
   text-align: center;
 }
+
+/* --- Account Converter iframe --- */
+.md-typeset iframe.converter {
+  height: 570px;
+}
+
+@media screen and (max-width: 535px) {
+  .md-typeset iframe.converter {
+    height: 620px;
+  }
+}
+
+@media screen and (max-width: 458px) {
+  .md-typeset iframe.converter {
+    height: 660px;
+  }
+}
+
+@media screen and (max-width: 408px) {
+  .md-typeset iframe.converter {
+    height: 540px;
+  }
+}
+
+@media screen and (max-width: 388px) {
+  .md-typeset iframe.converter {
+    height: 570px;
+  }
+}
+
+@media screen and (max-width: 348px) {
+  .md-typeset iframe.converter {
+    height: 480px;
+  }
+}
