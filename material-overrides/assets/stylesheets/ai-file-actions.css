@@ -137,6 +137,10 @@
   transition: background-color 0.1s;
 }
 
+.ai-file-actions-item .ai-file-actions-external {
+  margin-left: auto;
+}
+
 .ai-file-actions-item:hover {
   background-color: var(--color-surface-secondary);
 }
