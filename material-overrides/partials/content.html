@@ -7,7 +7,7 @@
 {# Inject page-specific CSS if defined in frontmatter #}
 {% if page.meta.extra_css %}
   {% for css in page.meta.extra_css %}
-    <link rel="stylesheet" href="{{ base_url }}/{{ css }}">
+    <link rel="stylesheet" href="{{ css }}">
   {% endfor %}
 {% endif %}
 
