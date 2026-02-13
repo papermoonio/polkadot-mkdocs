@@ -4,6 +4,20 @@
 
 {% from "partials/macros.html" import render_title_with_icon %}
 
+{# Inject page-specific CSS if defined in frontmatter #}
+{% if page.meta.extra_css %}
+  {% for css in page.meta.extra_css %}
+    <link rel="stylesheet" href="{{ base_url }}/{{ css }}">
+  {% endfor %}
+{% endif %}
+
+{# Inject page-specific JavaScript if defined in frontmatter #}
+{% if page.meta.extra_javascript %}
+  {% for script in page.meta.extra_javascript %}
+    <script src="{{ script }}"></script>
+  {% endfor %}
+{% endif %}
+
 {% if "material/tags" in config.plugins and tags %}
   {% include "partials/tags.html" %}
 {% endif %}  
