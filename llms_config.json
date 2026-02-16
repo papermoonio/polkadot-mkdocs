@@ -20,27 +20,11 @@
     "content": {
         "docs_dir": ".",
         "base_context_categories": ["basics", "reference"],
-        "categories_order": [
-            "basics",
-            "smart_contracts",
-            "parachains",
-            "dapps",
-            "networks",
-            "polkadot_protocol",
-            "infrastructure",
-            "tooling",
-            "reference"
-        ],
         "categories_info": {
             "basics": {
                 "id": "basics",
                 "name": "Basics",
                 "description": "A Polkadot general knowledge base that provides context around overview and beginner-level content."
-            },
-            "reference": {
-                "id": "reference",
-                "name": "Reference",
-                "description": "Reference material including key functions and glossary."
             },
             "smart_contracts": {
                 "id": "smart_contracts",
@@ -76,6 +60,11 @@
                 "id": "tooling",
                 "name": "Tooling",
                 "description": "Developer tooling resources."
+            },
+            "reference": {
+                "id": "reference",
+                "name": "Reference",
+                "description": "Reference material including key functions and glossary."
             }
         },
         "exclusions": {
