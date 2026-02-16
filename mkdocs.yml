@@ -200,7 +200,7 @@ extra:
       name: X (formerly Twitter)
   analytics:
     provider: google
-    property: G-ZSKWB953ZL
+    property: G-CBTDT1LJ0C
     feedback:
       title: Was this page helpful?
       ratings:

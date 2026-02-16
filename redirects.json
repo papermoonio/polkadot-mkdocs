@@ -238,7 +238,7 @@
     },
     {
       "key": "/develop/smart-contracts/dev-environments/foundry/",
-      "value": "/smart-contracts/dev-environments/hardhat/"
+      "value": "/smart-contracts/dev-environments/foundry/"
     },
     {
       "key": "/develop/smart-contracts/dev-environments/hardhat/",
@@ -867,10 +867,6 @@
     {
       "key": "/smart-contracts/dev-environments/",
       "value": "/smart-contracts/dev-environments/local-dev-node/"
-    },
-    {
-      "key": "/smart-contracts/dev-environments/foundry/",
-      "value": "/smart-contracts/dev-environments/hardhat/"
     },
     {
       "key": "/smart-contracts/for-eth-devs/",
