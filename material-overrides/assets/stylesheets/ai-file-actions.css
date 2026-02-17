@@ -164,6 +164,43 @@
   transform: translateY(0);
 }
 
+/* --- H1 + per-page AI actions wrapper --- */
+.h1-ai-actions-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.h1-ai-actions-wrapper h1 {
+  flex: 1;
+  margin: 0;
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 768px) {
+  .h1-ai-actions-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .h1-ai-actions-wrapper h1 {
+    width: 100%;
+  }
+
+  .h1-ai-actions-wrapper .ai-file-actions-container {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  .h1-ai-actions-wrapper .ai-file-actions-menu {
+    left: 0;
+    right: auto;
+    min-width: 200px;
+  }
+}
+
 /* --- Loading Spinner --- */
 .ai-file-actions-container .loading-spinner {
   animation: spinner-rotate 2s linear infinite;
