@@ -1,8 +1,9 @@
-/* AI File Actions Styles */
-
-/* 
-   Container for the split button 
+/** 
+* AI File Actions Styles 
+* Styling for the AI file actions component, including the split button and dropdown menu.
 */
+
+/* --- Container for the split button --- */
 .ai-file-actions-container {
   display: inline-flex;
   margin-left: auto;
@@ -13,9 +14,7 @@
   white-space: nowrap;
 }
 
-/* 
-   Common Button Styles 
-*/
+/* --- Common Button Styles --- */
 .ai-file-actions-btn {
   padding: 0.6em 0.9em;
   background-color: var(--color-surface-secondary);
@@ -26,32 +25,30 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
-  font-size: 16px;
+  font-size: 0.64rem;
 }
 
-/* Hover effects on buttons */
+/* --- Hover effects on buttons --- */
 .ai-file-actions-btn:hover {
   background-color: var(--color-surface);
   color: var(--color-text-primary);
 }
 
-/* 
-   Left Button (Copy) 
-*/
+/* --- Left Button (Copy) --- */
 .ai-file-actions-copy {
   border-right: 1px solid var(--color-border-strong);
   gap: 0.5em;
-  border-top-left-radius: var(--rounded); 
+  border-top-left-radius: var(--rounded);
   border-bottom-left-radius: var(--rounded);
 }
 
 .ai-file-actions-container:hover .ai-file-actions-copy {
-    border-right-color: var(--color-border-strong); /* Keep separator stable on hover */
+  border-right-color: var(
+    --color-border-strong
+  ); /* Keep separator stable on hover */
 }
 
-/* 
-   Right Button (Trigger) 
-*/
+/* --- Right Button (Trigger) --- */
 .ai-file-actions-trigger {
   border-top-right-radius: var(--rounded);
   border-bottom-right-radius: var(--rounded);
@@ -59,44 +56,43 @@
 }
 
 .ai-file-actions-trigger.active {
-    background-color: var(--color-surface);
+  background-color: var(--color-surface);
 }
 
-/* 
-   Icons 
-*/
+/* --- Icons --- */
 .ai-file-actions-icon {
   width: 1.1em;
   height: 1.1em;
   min-width: 1.1em;
   fill: currentColor;
-  display: block; 
+  display: block;
 }
 
 /* Specific adjustment for spinner placement */
 .ai-file-actions-icon.loading-spinner {
-    margin: 0;
+  margin: 0;
 }
-
+/* Size and color for the chevron icon */
 .ai-file-actions-chevron {
   background-size: 1em 1em;
   transition: transform 0.2s;
   fill: var(--color-text-primary);
 }
 
+/* Rotate chevron when active */
 .ai-file-actions-trigger.active .ai-file-actions-chevron {
   transform: rotate(180deg);
 }
 
-/* 
-   Dropdown Menu 
-*/
+/* --- Dropdown Menu --- */
 .ai-file-actions-menu {
   display: none;
   position: absolute;
   top: calc(100% + 4px);
-  right: 0; 
-  background-color: var(--md-default-bg-color); /* Menu stays page bg color usually */
+  right: 0;
+  background-color: var(
+    --md-default-bg-color
+  ); /* Menu stays page bg color usually */
   border: 1px solid var(--color-border-strong);
   border-radius: var(--rounded);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
@@ -107,21 +103,19 @@
 }
 
 [data-md-color-scheme] .ai-file-actions-menu {
-    border-color: var(--color-border-strong);
+  border-color: var(--color-border-strong);
 }
 
 /* Reset specific overrides if they exist */
-[data-md-color-scheme="slate"] .ai-file-actions-container {
-    border-color: var(--color-border-strong);
+[data-md-color-scheme='slate'] .ai-file-actions-container {
+  border-color: var(--color-border-strong);
 }
 
 .ai-file-actions-menu.show {
   display: flex;
 }
 
-/* 
-   Dropdown Items 
-*/
+/* --- Dropdown Items --- */
 .ai-file-actions-item {
   display: inline-flex;
   align-items: center;
@@ -131,7 +125,7 @@
   border: none;
   background: none;
   color: var(--color-text-primary);
-  font-size: 0.8rem;
+  font-size: 0.64rem;
   text-align: left;
   cursor: pointer;
   transition: background-color 0.1s;
@@ -145,9 +139,7 @@
   background-color: var(--color-surface-secondary);
 }
 
-/* 
-   Toast Notification 
-*/
+/* --- Toast Notification --- */
 .ai-actions-toast {
   position: fixed;
   bottom: 2rem;
@@ -160,10 +152,12 @@
   font-weight: 500;
   opacity: 0;
   transform: translateY(1rem);
-  transition: opacity 0.3s, transform 0.3s;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
   pointer-events: none;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .ai-actions-toast.show {
@@ -171,21 +165,30 @@
   transform: translateY(0);
 }
 
-/* 
-   Loading Spinner 
-*/
+/* --- Loading Spinner --- */
 .ai-file-actions-container .loading-spinner {
-    animation: spinner-rotate 2s linear infinite;
+  animation: spinner-rotate 2s linear infinite;
 }
 .ai-file-actions-container .loading-spinner circle {
-    animation: spinner-dash 1.5s ease-in-out infinite;
+  animation: spinner-dash 1.5s ease-in-out infinite;
 }
 
 @keyframes spinner-rotate {
-  100% { transform: rotate(360deg); }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 @keyframes spinner-dash {
-  0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
-  50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
-  100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
 }
