@@ -25,7 +25,6 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
-  font-size: 0.64rem;
 }
 
 /* --- Hover effects on buttons --- */
@@ -125,10 +124,15 @@
   border: none;
   background: none;
   color: var(--color-text-primary);
-  font-size: 0.64rem;
   text-align: left;
   cursor: pointer;
   transition: background-color 0.1s;
+}
+
+/* --- Table-specific font size (matches table content at 0.64rem) --- */
+table .ai-file-actions-btn,
+table .ai-file-actions-item {
+  font-size: 0.64rem;
 }
 
 .ai-file-actions-item .ai-file-actions-external {
