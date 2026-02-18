@@ -105,8 +105,9 @@
   border-color: var(--color-border-strong);
 }
 
-/* Reset specific overrides if they exist */
-[data-md-color-scheme='slate'] .ai-file-actions-container {
+/* Reset specific overrides if they exist for the active custom schemes */
+[data-md-color-scheme='custom-light'] .ai-file-actions-container,
+[data-md-color-scheme='custom-dark'] .ai-file-actions-container {
   border-color: var(--color-border-strong);
 }
 
