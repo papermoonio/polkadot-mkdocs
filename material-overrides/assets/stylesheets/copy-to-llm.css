@@ -151,6 +151,7 @@
   height: 1em;
   flex-shrink: 0;
   fill: var(--color-text-primary);
+  margin-right: 2px;
 }
 
 .copy-to-llm-dropdown-item:hover svg {
