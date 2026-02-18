@@ -138,31 +138,6 @@
   background-color: var(--color-surface-secondary);
 }
 
-/* --- Toast Notification --- */
-.ai-actions-toast {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  padding: 0.75rem 1rem;
-  background-color: var(--md-default-fg-color);
-  color: var(--md-default-bg-color);
-  border-radius: 4px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  opacity: 0;
-  transform: translateY(1rem);
-  transition:
-    opacity 0.3s,
-    transform 0.3s;
-  pointer-events: none;
-  z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.ai-actions-toast.show {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* --- H1 + per-page AI actions wrapper --- */
 .h1-ai-actions-wrapper {

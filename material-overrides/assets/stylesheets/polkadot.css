@@ -1225,6 +1225,14 @@ a.tests-button {
   z-index: 201;
 }
 
+/* --- Toast / dialog --- */
+/* Material's .md-dialog defaults to z-index:4, which sits behind the
+   fixed footer (z-index:100).  Bump it above the footer so toasts are
+   visible on desktop viewports. */
+.md-dialog {
+  z-index: 101;
+}
+
 /* --- Copy to clipboard --- */
 .md-code__button {
   color: var(--md-accent-fg-color);
