@@ -121,21 +121,58 @@
 {% block scripts %}
   {{ super() }}
   <script>
+    (() => {
     const canvas = document.querySelector('.grain-canvas');
-    const ctx = canvas.getContext('2d');
     const hero = document.querySelector('.hero-section');
+    const ctx = canvas?.getContext('2d', { desynchronized: true });
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    function resizeCanvas() {
-      const rect = hero.getBoundingClientRect();
-      width = canvas.width = Math.max(1, Math.floor(rect.width));
-      height = canvas.height = Math.max(1, Math.floor(rect.height));
+    if (!canvas || !ctx || !hero) {
+      return;
     }
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const maxDpr = 1.5;
+    const resizeSettleMs = 160;
+    const normalGrainIntervalMs = 120;
+    const resizingGrainIntervalMs = 260;
+
+    function resizeCanvas(force = false) {
+      const rect = hero.getBoundingClientRect();
+      const nextCssWidth = Math.max(1, Math.floor(rect.width));
+      const nextCssHeight = Math.max(1, Math.floor(rect.height));
+      const nextDpr = Math.min(maxDpr, Math.max(1, window.devicePixelRatio || 1));
+      const nextWidth = Math.max(1, Math.floor(nextCssWidth * nextDpr));
+      const nextHeight = Math.max(1, Math.floor(nextCssHeight * nextDpr));
+
+      if (!force && nextWidth === width && nextHeight === height && nextDpr === dpr) {
+        return false;
+      }
+
+      const prevWidth = width;
+      const prevHeight = height;
+
+      dpr = nextDpr;
+      width = nextWidth;
+      height = nextHeight;
+      canvas.width = width;
+      canvas.height = height;
+
+      if (prevWidth > 0 && prevHeight > 0) {
+        smoothX = (smoothX / prevWidth) * width;
+        smoothY = (smoothY / prevHeight) * height;
+      }
+
+      if (!Number.isFinite(smoothX) || !Number.isFinite(smoothY)) {
+        smoothX = width * 0.5;
+        smoothY = height * 0.38;
+      }
+
+      return true;
+    }
+
+    let dpr = 1;
     let width = 1;
     let height = 1;
-    resizeCanvas();
 
     // Generate grain frame
     function generateGrain() {
@@ -153,29 +190,73 @@
       return imgData;
     }
 
-    let grain = generateGrain();
+    let grain = null;
     let rafId = null;
+    let lastGrainTs = 0;
+    let pendingResize = false;
+    let isResizing = false;
+    let lastResizeTs = 0;
 
     let smoothX = width * 0.5;
     let smoothY = height * 0.38;
     const baseEase = 0.03;
-    const minEase = 0.007; // visible entry
-    const rampDurationMs = 2200; // smoother entry
+    const minEase = 0.007;
+    const rampDurationMs = 2200;
     let startTs = null;
     let seeded = false;
 
-    function draw(t) {
-      if (prefersReducedMotion.matches) {
-        ctx.clearRect(0, 0, width, height);
-        ctx.putImageData(grain, 0, 0);
+    resizeCanvas(true);
+    smoothX = width * 0.5;
+    smoothY = height * 0.38;
+    grain = generateGrain();
 
-        const x = width * 0.5;
-        const y = height * 0.35;
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, 600);
-        gradient.addColorStop(0, 'rgba(255,255,255,0.12)');
-        gradient.addColorStop(1, 'rgba(255,255,255,0)');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, width, height);
+    function drawStaticGradient() {
+      const x = width * 0.5;
+      const y = height * 0.35;
+      const radius = Math.max(width, height) * 0.9;
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+      gradient.addColorStop(0, 'rgba(255,255,255,0.12)');
+      gradient.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+    }
+
+    function draw(t) {
+      rafId = null;
+
+      if (pendingResize) {
+        const resized = resizeCanvas();
+        pendingResize = false;
+
+        if (resized) {
+          grain = generateGrain();
+          lastGrainTs = t;
+        }
+      }
+
+      if (isResizing && t - lastResizeTs > resizeSettleMs) {
+        isResizing = false;
+      }
+
+      if (!grain || grain.width !== width || grain.height !== height) {
+        grain = generateGrain();
+        lastGrainTs = t;
+      }
+
+      const grainIntervalMs = isResizing ? resizingGrainIntervalMs : normalGrainIntervalMs;
+      if (!lastGrainTs || t - lastGrainTs > grainIntervalMs) {
+        grain = generateGrain();
+        lastGrainTs = t;
+      }
+
+      ctx.putImageData(grain, 0, 0);
+
+      if (prefersReducedMotion.matches) {
+        drawStaticGradient();
+
+        if (pendingResize || isResizing) {
+          rafId = requestAnimationFrame(draw);
+        }
         return;
       }
 
@@ -187,14 +268,6 @@
         smoothY = height * (0.42 + 0.20 * Math.sin(time0 * 1.15));
         seeded = true;
       }
-
-      if (!draw.lastGrainTs || t - draw.lastGrainTs > 120) {
-        grain = generateGrain();
-        draw.lastGrainTs = t;
-      }
-
-      ctx.clearRect(0, 0, width, height);
-      ctx.putImageData(grain, 0, 0);
 
       const time = t * 0.00025; // speed
       const targetX = width * (0.5 + 0.28 * Math.cos(time));
@@ -209,7 +282,8 @@
       const x = smoothX;
       const y = smoothY;
 
-      const gradient = ctx.createRadialGradient(x, y, 0, x, y, 900);
+      const gradientRadius = Math.max(width, height) * 0.9;
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, gradientRadius);
       gradient.addColorStop(0, 'rgba(255,255,255,0.18)');
       gradient.addColorStop(0.35, 'rgba(255,255,255,0.08)');
       gradient.addColorStop(1, 'rgba(255,255,255,0)');
@@ -221,32 +295,40 @@
     }
 
     function start() {
-      if (rafId) cancelAnimationFrame(rafId);
+      if (rafId !== null) return;
       rafId = requestAnimationFrame(draw);
     }
 
-    prefersReducedMotion.addEventListener('change', () => {
-      grain = generateGrain();
-
-      smoothX = width * 0.5;
-      smoothY = height * 0.38;
-      startTs = null;
-      seeded = false;
-
+    function handleReducedMotionChange() {
+      pendingResize = true;
+      grain = null;
+      if (!prefersReducedMotion.matches) {
+        startTs = null;
+        seeded = false;
+      }
       start();
-    });
+    }
+    prefersReducedMotion.addEventListener('change', handleReducedMotionChange);
 
     const ro = new ResizeObserver(() => {
-      resizeCanvas();
-      grain = generateGrain();
-      smoothX = width * 0.5;
-      smoothY = height * 0.38;
-      startTs = null;
-      seeded = false;
+      pendingResize = true;
+      isResizing = true;
+      lastResizeTs = performance.now();
       start();
     });
     ro.observe(hero);
 
+    function teardown() {
+      ro.disconnect();
+      prefersReducedMotion.removeEventListener('change', handleReducedMotionChange);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    }
+    window.addEventListener('pagehide', teardown, { once: true });
+
     start();
+    })();
   </script>
 {% endblock %}
