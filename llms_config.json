@@ -31,6 +31,11 @@
                 "name": "Smart Contracts",
                 "description": "How to develop and deploy Solidity smart contracts on Polkadot Hub."
             },
+            "chain_interactions": {
+                "id": "chain_interactions",
+                "name": "Chain Interactions",
+                "description": "How to interact with Polkadot chains using tools like Polkadot.js and Substrate API Sidecar."
+            },
             "parachains": {
                 "id": "parachains",
                 "name": "Parachains",
