@@ -116,7 +116,6 @@ plugins:
         - ai/*
   - awesome-nav
   - ai_resources_page
-  - ai_file_actions
   - ai_page_actions
   - resolve_md:
       llms_config: llms_config.json
