@@ -34,12 +34,12 @@
             "chain_interactions": {
                 "id": "chain_interactions",
                 "name": "Chain Interactions",
-                "description": "How to interact with Polkadot chains using tools like Polkadot.js and Substrate API Sidecar."
+                "description": "How to query on-chain data, send transactions, communicate across chains, and manage tokens and accounts on Polkadot-based chains."
             },
             "parachains": {
                 "id": "parachains",
                 "name": "Parachains",
-                "description": "How-to guides related to building, customizing, deploying, and maintaining a parachain."
+                "description": "How to guides related to building, customizing, deploying, and maintaining a parachain."
             },
             "dapps": {
                 "id": "dapps",
