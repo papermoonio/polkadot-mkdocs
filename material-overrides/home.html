@@ -209,6 +209,7 @@
     smoothX = width * 0.5;
     smoothY = height * 0.38;
     grain = generateGrain();
+    lastGrainTs = performance.now();
 
     function drawStaticGradient() {
       const x = width * 0.5;
