@@ -326,7 +326,12 @@
         rafId = null;
       }
     }
-    window.addEventListener('pagehide', teardown, { once: true });
+    window.addEventListener('pagehide', function (event) {
+      if (event.persisted) {
+        return;
+      }
+      teardown();
+    }, { once: true });
 
     start();
     })();
