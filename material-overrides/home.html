@@ -131,9 +131,9 @@
     }
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const maxDpr = 1.5;
+    const maxDpr = 1;
     const resizeSettleMs = 160;
-    const normalGrainIntervalMs = 120;
+    const normalGrainIntervalMs = 150;
     const resizingGrainIntervalMs = 260;
 
     function resizeCanvas(force = false) {
@@ -282,7 +282,7 @@
       const x = smoothX;
       const y = smoothY;
 
-      const gradientRadius = Math.max(width, height) * 0.9;
+      const gradientRadius = Math.min(900, Math.max(width, height) * 0.9);
       const gradient = ctx.createRadialGradient(x, y, 0, x, y, gradientRadius);
       gradient.addColorStop(0, 'rgba(255,255,255,0.18)');
       gradient.addColorStop(0.35, 'rgba(255,255,255,0.08)');
