@@ -142,11 +142,14 @@
   color: var(--color-text-primary);
 }
 
-/* --- Table-scoped font size --- */
+/* --- Table-scoped overrides --- */
 .md-typeset table .ai-file-actions-btn,
 .md-typeset table .ai-file-actions-item {
   font-size: 0.64rem;
 }
+
+/* Inside tables, dropdowns use position:fixed (set by JS) to
+   escape the scroll wrapper's overflow constraints */
 
 /* --- H1 + per-page AI actions wrapper --- */
 .h1-ai-actions-wrapper {
