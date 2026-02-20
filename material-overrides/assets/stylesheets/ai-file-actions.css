@@ -97,6 +97,7 @@
   min-width: 140px;
   overflow: hidden;
   flex-direction: column;
+  padding: 5px;
 }
 
 [data-md-color-scheme] .ai-file-actions-menu {
@@ -115,7 +116,7 @@
 
 /* --- Dropdown Items --- */
 .md-typeset a.ai-file-actions-item {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0.5rem;
   width: 100%;
@@ -127,6 +128,8 @@
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.1s;
+  font-size: 16px;
+  line-height: 1.2;
 }
 
 .ai-file-actions-item .ai-file-actions-external {
