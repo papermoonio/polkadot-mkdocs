@@ -142,6 +142,12 @@
   color: var(--color-text-primary);
 }
 
+/* --- Table-scoped font size --- */
+.md-typeset table .ai-file-actions-btn,
+.md-typeset table .ai-file-actions-item {
+  font-size: 0.64rem;
+}
+
 /* --- H1 + per-page AI actions wrapper --- */
 .h1-ai-actions-wrapper {
   display: flex;
