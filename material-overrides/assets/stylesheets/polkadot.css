@@ -713,6 +713,24 @@ label.md-nav__link--active,
   border-top: 1px solid var(--color-border);
 }
 
+/* --- Breadcrumbs --- */
+.md-path {
+  color: var(--md-footer-fg-color);
+}
+
+.md-path__item::after {
+  color: var(--md-footer-fg-color--light);
+}
+
+.md-path__link {
+  color: var(--md-footer-fg-color);
+}
+
+.md-path__link:focus,
+.md-path__link:hover {
+  color: var(--color-text-hover);
+}
+
 .md-footer-meta__inner .row {
   gap: var(--py-8);
 }
