@@ -158,6 +158,9 @@
 
 {%- block container -%}
 <div class="md-content" data-md-component="content">
+  {% if "navigation.path" in features %}
+    {% include "partials/path.html" %}
+  {% endif %}
   {% set class = "index-page" if not page.content %}
   <article class="md-content__inner md-typeset {{ class }}">
     {% block content %} 
