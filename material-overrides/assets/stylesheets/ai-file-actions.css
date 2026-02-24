@@ -94,7 +94,7 @@
   border: 1px solid var(--color-border-strong);
   border-radius: var(--rounded);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  z-index: 10;
+  z-index: 3;
   min-width: 140px;
   overflow: hidden;
   flex-direction: column;
@@ -148,8 +148,20 @@
   font-size: 0.64rem;
 }
 
-/* Inside tables, dropdowns use position:fixed (set by JS) to
-   escape the scroll wrapper's overflow constraints */
+/* Remove the scroll wrapper's overflow constraint on any table that contains
+   the file actions widget, so the absolutely-positioned dropdown can extend
+   beyond the table bounds without being clipped. */
+.md-typeset__scrollwrap:has(.ai-file-actions-container) {
+  overflow: visible;
+}
+
+/* Switching to inline-table prevents the table row from expanding to
+   accommodate the absolutely-positioned dropdown. As a block-level element,
+   display:table can stretch its rows to contain overflowing children;
+   inline-table does not exhibit this behaviour. */
+.md-typeset table:not([class]):has(.ai-file-actions-container) {
+  display: inline-table;
+}
 
 /* --- H1 + per-page AI actions wrapper --- */
 .h1-ai-actions-wrapper {
