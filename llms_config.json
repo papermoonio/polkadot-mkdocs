@@ -80,7 +80,8 @@
                 "LICENSE.md",
                 "ai-chatbot-policy.md",
                 "terms-of-use.md",
-                "privacy-policy.md"
+                "privacy-policy.md",
+                "ai-resources.md"
             ],
             "skip_paths": ["venv"]
         }
