@@ -75,7 +75,6 @@
         "exclusions": {
             "skip_basenames": [
                 "README.md",
-                ".CONTRIBUTING.md",
                 "pull-request-template.md",
                 "cookie-policy.md",
                 "LICENSE.md",
@@ -83,7 +82,7 @@
                 "terms-of-use.md",
                 "privacy-policy.md"
             ],
-            "skip_paths": [".snippets", ".github", ".venv", "venv"]
+            "skip_paths": ["venv"]
         }
     },
 
