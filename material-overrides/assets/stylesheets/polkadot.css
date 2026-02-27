@@ -713,6 +713,28 @@ label.md-nav__link--active,
   border-top: 1px solid var(--color-border);
 }
 
+/* --- Breadcrumbs --- */
+.md-path__item:not(:first-child) {
+  align-items: center;
+}
+
+.md-path {
+  color: var(--md-footer-fg-color);
+}
+
+.md-path__item:not(:first-child):before {
+  background-color: var(--color-text-tertiary);
+}
+
+.md-path__link {
+  color: var(--md-footer-fg-color);
+}
+
+.md-path__link:focus,
+.md-path__link:hover {
+  color: var(--color-text-hover);
+}
+
 .md-footer-meta__inner .row {
   gap: var(--py-8);
 }
