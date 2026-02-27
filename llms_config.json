@@ -19,30 +19,71 @@
 
     "content": {
         "docs_dir": ".",
-        "base_context_categories": ["Basics", "Reference"],
-        "categories_order": [
-            "Basics",
-            "Smart Contracts",
-            "Parachains",
-            "dApps",
-            "Networks",
-            "Polkadot Protocol",
-            "Infrastructure",
-            "Tooling",
-            "Reference"
-        ],
+        "base_context_categories": ["basics", "reference"],
+        "categories_info": {
+            "basics": {
+                "id": "basics",
+                "name": "Basics",
+                "description": "A Polkadot general knowledge base that provides context around overview and beginner-level content."
+            },
+            "smart_contracts": {
+                "id": "smart_contracts",
+                "name": "Smart Contracts",
+                "description": "How to develop and deploy Solidity smart contracts on Polkadot Hub."
+            },
+            "chain_interactions": {
+                "id": "chain_interactions",
+                "name": "Chain Interactions",
+                "description": "How to query on-chain data, send transactions, communicate across chains, and manage tokens and accounts on Polkadot-based chains."
+            },
+            "parachains": {
+                "id": "parachains",
+                "name": "Parachains",
+                "description": "How to guides related to building, customizing, deploying, and maintaining a parachain."
+            },
+            "dapps": {
+                "id": "dapps",
+                "name": "dApps",
+                "description": "Information and tutorials for application developers."
+            },
+            "networks": {
+                "id": "networks",
+                "name": "Networks",
+                "description": "Information about Polkadot networks."
+            },
+            "polkadot_protocol": {
+                "id": "polkadot_protocol",
+                "name": "Polkadot Protocol",
+                "description": "In-depth details about the Polkadot Protocol."
+            },
+            "infrastructure": {
+                "id": "infrastructure",
+                "name": "Infrastructure",
+                "description": "Guide to node infrastructure."
+            },
+            "tooling": {
+                "id": "tooling",
+                "name": "Tooling",
+                "description": "Developer tooling resources."
+            },
+            "reference": {
+                "id": "reference",
+                "name": "Reference",
+                "description": "Reference material including key functions and glossary."
+            }
+        },
         "exclusions": {
             "skip_basenames": [
                 "README.md",
-                ".CONTRIBUTING.md",
                 "pull-request-template.md",
                 "cookie-policy.md",
                 "LICENSE.md",
                 "ai-chatbot-policy.md",
                 "terms-of-use.md",
-                "privacy-policy.md"
+                "privacy-policy.md",
+                "ai-resources.md"
             ],
-            "skip_paths": [".snippets", ".github", ".venv", "venv"]
+            "skip_paths": ["venv"]
         }
     },
 

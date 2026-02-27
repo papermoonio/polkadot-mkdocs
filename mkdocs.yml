@@ -15,14 +15,14 @@ extra_javascript:
   - js/fix-created-date.js
   - js/connect-to-metamask.js
   - js/error-modal.js
-  - js/copy-to-llm.js
+  - js/ai-file-actions.js
   - js/toggle-pages.js
 # Extra CSS files
 extra_css:
   - assets/stylesheets/terminal.css
   - assets/stylesheets/timeline-neoteroi.css
-  - assets/stylesheets/copy-to-llm.css
   - assets/stylesheets/toggle-pages.css
+  - assets/stylesheets/ai-file-actions.css
 
 # Diagnostic messages when validating links to documents
 validation:
@@ -115,6 +115,8 @@ plugins:
       exclude:
         - ai/*
   - awesome-nav
+  - ai_resources_page
+  - ai_page_actions
   - resolve_md:
       llms_config: llms_config.json
   - page_toggle
@@ -131,13 +133,13 @@ plugins:
         - js/fix-created-date.js
         - js/connect-to-metamask.js
         - js/error-modal.js
-        - js/copy-to-llm.js
+        - js/ai-file-actions.js
         - js/toggle-pages.js
       css_files:
         - assets/stylesheets/terminal.css
         - assets/stylesheets/timeline-neoteroi.css
-        - assets/stylesheets/copy-to-llm.css
         - assets/stylesheets/toggle-pages.css
+        - assets/stylesheets/ai-file-actions.css
       scoped_css_templates:
         home.html:
           - assets/stylesheets/home.css
