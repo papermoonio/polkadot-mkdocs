@@ -714,12 +714,16 @@ label.md-nav__link--active,
 }
 
 /* --- Breadcrumbs --- */
+.md-path__item:not(:first-child) {
+  align-items: center;
+}
+
 .md-path {
   color: var(--md-footer-fg-color);
 }
 
-.md-path__item::after {
-  color: var(--md-footer-fg-color--light);
+.md-path__item:not(:first-child):before {
+  background-color: var(--color-text-tertiary);
 }
 
 .md-path__link {
