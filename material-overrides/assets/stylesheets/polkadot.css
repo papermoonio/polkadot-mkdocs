@@ -719,7 +719,7 @@ label.md-nav__link--active,
 }
 
 .md-path {
-  color: var(--md-footer-fg-color);
+  color: var(--grey-500);
 }
 
 .md-path__item:not(:first-child):before {
