@@ -55,7 +55,7 @@ mkdocs serve
 
 > **_NOTE:_** To improve build times, you can:
 
-- Disable the git revision plugin by running the following command before you serve the docs: `export ENABLED_GIT_REVISION_DATE=false`
-- Disable the LLM file plugins for local development by running the following command before you serve the docs: `export ENABLED_LLMS_PLUGINS=false`
+> - Disable the git revision plugin by running the following command before you serve the docs: `export ENABLED_GIT_REVISION_DATE=false`
+> - Disable the LLM file plugins for local development by running the following command before you serve the docs: `export ENABLED_LLMS_PLUGINS=false`
 
 After a successful build, the site should be available locally at `http://127.0.0.1:8000`.
