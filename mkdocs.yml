@@ -116,9 +116,12 @@ plugins:
         - ai/*
   - awesome-nav
   - ai_resources_page
+      enabled: !ENV [ENABLED_LLMS_PLUGINS, True]
   - ai_page_actions
+      enabled: !ENV [ENABLED_LLMS_PLUGINS, True]
   - resolve_md:
       llms_config: llms_config.json
+      enabled: !ENV [ENABLED_LLMS_PLUGINS, True]
   - page_toggle
   - glightbox
   - minify:
