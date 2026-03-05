@@ -1483,24 +1483,6 @@ div.mermaid {
   }
 }
 
-/* --- Support Bubble --- */
-#kapa-widget-container {
-  position: fixed;
-  bottom: 20px;
-  right: 24px;
-  top: 75vh;
-  height: 120px;
-  width: 90px;
-  padding: 16px;
-  background-color: var(--color-surface-secondary);
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px;
-  border: 1px solid rgb(62, 62, 62);
-  z-index: 199;
-  animation: 1s ease-in-out 0s 1 normal none running wiggle;
-  border-radius: 16px;
-  border-bottom-right-radius: 0;
-}
-
 /* --- Tables --- */
 .md-typeset table:not([class]) {
   border-radius: var(--rounded);
