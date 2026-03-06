@@ -61,6 +61,7 @@ theme:
     - navigation.tabs # Top-level sections are rendered below the header (can be modified to in-line with CSS)
     - navigation.tabs.sticky # When scrolling, the tabs remain at the top of the page
     - navigation.top # Show the back to top button since we don't keep top nav sticky
+    - navigation.path # Add breadcrumbs path to the top of the page
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: custom-light
