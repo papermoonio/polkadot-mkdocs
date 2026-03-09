@@ -24,52 +24,47 @@
             "basics": {
                 "id": "basics",
                 "name": "Basics",
-                "description": "A Polkadot general knowledge base that provides context around overview and beginner-level content."
+                "description": "General knowledge base covering Polkadot overview content, core concepts, getting started guides, and beginner-level material for developers new to the ecosystem."
             },
             "smart_contracts": {
                 "id": "smart_contracts",
                 "name": "Smart Contracts",
-                "description": "How to develop and deploy Solidity smart contracts on Polkadot Hub."
-            },
-            "chain_interactions": {
-                "id": "chain_interactions",
-                "name": "Chain Interactions",
-                "description": "How to query on-chain data, send transactions, communicate across chains, and manage tokens and accounts on Polkadot-based chains."
+                "description": "Developing and deploying smart contracts on Polkadot Hub, including Solidity development with EVM and PolkaVM, dev environments like Hardhat and Foundry, precompiles, and contract deployment tutorials."
             },
             "parachains": {
                 "id": "parachains",
                 "name": "Parachains",
-                "description": "How to guides related to building, customizing, deploying, and maintaining a parachain."
+                "description": "Building, customizing, testing, deploying, and maintaining parachains using the Polkadot SDK, including runtime development, pallet creation, coretime acquisition, and runtime upgrades."
             },
-            "dapps": {
-                "id": "dapps",
-                "name": "dApps",
-                "description": "Information and tutorials for application developers."
+            "accounts_and_transactions": {
+                "id": "accounts_and_transactions",
+                "name": "Accounts & Transactions",
+                "description": "Account creation and management, transaction construction and submission, fee calculation, token operations, and asset conversions across Polkadot-based chains."
             },
-            "networks": {
-                "id": "networks",
-                "name": "Networks",
-                "description": "Information about Polkadot networks."
-            },
-            "polkadot_protocol": {
-                "id": "polkadot_protocol",
-                "name": "Polkadot Protocol",
-                "description": "In-depth details about the Polkadot Protocol."
+            "interoperability": {
+                "id": "interoperability",
+                "name": "Interoperability",
+                "description": "Cross-chain communication using XCM, asset transfers between parachains, HRMP channel management, bridging to external networks, and cross-chain fee estimation."
             },
             "infrastructure": {
                 "id": "infrastructure",
                 "name": "Infrastructure",
-                "description": "Guide to node infrastructure."
+                "description": "Running and maintaining node infrastructure, including validators, collators, RPC nodes, and bootnodes, along with staking mechanics, key management, and operational tasks."
+            },
+            "polkadot_protocol": {
+                "id": "polkadot_protocol",
+                "name": "Polkadot Protocol",
+                "description": "In-depth protocol internals including consensus mechanisms, agile coretime, block production, transaction formats, cryptography, data encoding, and chain architecture."
             },
             "tooling": {
                 "id": "tooling",
                 "name": "Tooling",
-                "description": "Developer tooling resources."
+                "description": "Developer SDKs and tools including PAPI, Polkadot.js, subxt, Dedot, light clients, testing frameworks like Chopsticks and Zombienet, and CLI utilities like Pop CLI."
             },
             "reference": {
                 "id": "reference",
                 "name": "Reference",
-                "description": "Reference material including key functions and glossary."
+                "description": "Comprehensive reference material including glossary, governance structures, origin tracks, and detailed technical specifications for Polkadot Hub and parachain subsystems."
             }
         },
         "exclusions": {
