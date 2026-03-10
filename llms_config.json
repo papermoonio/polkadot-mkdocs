@@ -24,52 +24,47 @@
             "basics": {
                 "id": "basics",
                 "name": "Basics",
-                "description": "A Polkadot general knowledge base that provides context around overview and beginner-level content."
+                "description": "Polkadot overview, core concepts, and getting started guides for new developers."
             },
             "smart_contracts": {
                 "id": "smart_contracts",
                 "name": "Smart Contracts",
-                "description": "How to develop and deploy Solidity smart contracts on Polkadot Hub."
+                "description": "Developing and deploying smart contracts on Polkadot Hub using Solidity, EVM, PolkaVM, and tools like Hardhat and Foundry."
+            },
+            "parachains": {
+                "id": "parachains",
+                "name": "Parachains",
+                "description": "Building and deploying parachains with the Polkadot SDK, including runtime development, pallets, and coretime."
             },
             "chain_interactions": {
                 "id": "chain_interactions",
                 "name": "Chain Interactions",
                 "description": "How to query on-chain data, send transactions, communicate across chains, and manage tokens and accounts on Polkadot-based chains."
             },
-            "parachains": {
-                "id": "parachains",
-                "name": "Parachains",
-                "description": "How to guides related to building, customizing, deploying, and maintaining a parachain."
-            },
-            "dapps": {
-                "id": "dapps",
-                "name": "dApps",
-                "description": "Information and tutorials for application developers."
-            },
-            "networks": {
-                "id": "networks",
-                "name": "Networks",
-                "description": "Information about Polkadot networks."
-            },
-            "polkadot_protocol": {
-                "id": "polkadot_protocol",
-                "name": "Polkadot Protocol",
-                "description": "In-depth details about the Polkadot Protocol."
+            "interoperability": {
+                "id": "interoperability",
+                "name": "Interoperability",
+                "description": "Cross-chain communication via XCM, asset transfers, HRMP channels, and bridging to external networks."
             },
             "infrastructure": {
                 "id": "infrastructure",
                 "name": "Infrastructure",
-                "description": "Guide to node infrastructure."
+                "description": "Running validators, collators, and RPC nodes, plus staking mechanics and key management."
+            },
+            "polkadot_protocol": {
+                "id": "polkadot_protocol",
+                "name": "Polkadot Protocol",
+                "description": "Protocol internals covering consensus, coretime, block production, cryptography, and chain architecture."
             },
             "tooling": {
                 "id": "tooling",
                 "name": "Tooling",
-                "description": "Developer tooling resources."
+                "description": "Developer SDKs and tools including PAPI, Polkadot.js, subxt, light clients, and testing frameworks."
             },
             "reference": {
                 "id": "reference",
                 "name": "Reference",
-                "description": "Reference material including key functions and glossary."
+                "description": "Glossary, governance structures, origin tracks, and technical specifications."
             }
         },
         "exclusions": {
