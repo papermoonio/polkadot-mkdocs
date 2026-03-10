@@ -33,6 +33,9 @@ exclude_docs: |
    README.md
    LICENSE.md
 
+not_in_nav: |
+  tools/index.md
+
 # Theme related settings
 theme:
   name: material
