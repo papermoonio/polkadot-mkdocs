@@ -34,20 +34,10 @@
   {%- endif -%} 
 {%- endblock -%}
 
-{% block announce %}
-  <span aria-hidden="true">📣</span>
-  Apply for the
-  <a
-    href="https://polkadot.academy/pbp/?utm_source=polkadot_docs&utm_medium=documentation&utm_campaign=pbp_lisbon_2026&utm_content=landing_banner"
-    target="_blank"
-    rel="noopener noreferrer"
-    style="font-weight: bold;"
-  >
-    2026 Polkadot Protocol Builders Program
-  </a>
-  - <span aria-hidden="true">⏰</span> Open until March 10th, 2026.
-{% endblock %}
-
+{#- Uncomment to add announcement banner
+  {% block announce %}
+  {% endblock %}
+-#}
 
 {% block libs %}
   {{ super() }}
