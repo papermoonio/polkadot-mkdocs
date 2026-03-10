@@ -1,0 +1,280 @@
+{
+    "schema_version": "0.1",
+
+    "project": {
+        "id": "polkadot",
+        "name": "Polkadot",
+        "docs_base_url": "https://docs.polkadot.com/"
+    },
+
+    "reference_repos": {
+        "revm-hardhat-examples": {
+            "url": "https://github.com/polkadot-developers/revm-hardhat-examples",
+            "default_branch": "master",
+            "raw_base_url": "https://raw.githubusercontent.com/polkadot-developers/revm-hardhat-examples/master",
+            "description": "Working Hardhat and dApp examples for Polkadot Hub, including smart contract deployment and Next.js dApp projects"
+        }
+    },
+
+    "tasks": [
+        {
+            "id": "zero-to-hero-dapp",
+            "title": "Zero to Hero Smart Contract DApp",
+            "objective": "Set up a Hardhat project, create and deploy a Storage smart contract to Polkadot Hub TestNet, then build a Next.js dApp with Viem that connects a wallet, reads on-chain data, and writes transactions.",
+
+            "prerequisites": {
+                "runtime": [
+                    "Node.js v22.10.0 or later",
+                    "npm"
+                ],
+                "network": [
+                    "Polkadot Hub TestNet RPC endpoint: https://services.polkadothub-rpc.com/testnet",
+                    "Chain ID: 420420417"
+                ],
+                "tokens": [
+                    "Test PAS tokens from the Polkadot faucet (https://faucet.polkadot.io/)"
+                ],
+                "wallet": [
+                    "MetaMask or compatible Ethereum wallet with an exported private key"
+                ]
+            },
+
+            "env_vars": [
+                {
+                    "name": "PRIVATE_KEY",
+                    "description": "Wallet private key for signing contract deployment transactions. Export from MetaMask or another Ethereum-compatible wallet.",
+                    "required": true
+                }
+            ],
+
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "Create the project root directory",
+                    "commands": [
+                        "mkdir polkadot-hub-tutorial",
+                        "cd polkadot-hub-tutorial"
+                    ]
+                },
+                {
+                    "order": 2,
+                    "action": "Initialize the Hardhat project",
+                    "commands": [
+                        "mkdir storage-contract",
+                        "cd storage-contract",
+                        "npm init -y",
+                        "npm install --save-dev hardhat@3.0.9",
+                        "npx hardhat --init"
+                    ],
+                    "description": "This command is interactive. When prompted, select 'Create a TypeScript project' and accept all default options. If running non-interactively, you may need to pipe input or use flags to bypass prompts."
+                },
+                {
+                    "order": 3,
+                    "action": "Create the Storage smart contract",
+                    "reference_file": "storage-contract/contracts/Storage.sol",
+                    "description": "Delete any default contract files in the contracts/ directory, then fetch the reference file and save it as contracts/Storage.sol. This contract stores a uint256, emits a NumberStored event on update, and exposes a public storedNumber getter."
+                },
+                {
+                    "order": 4,
+                    "action": "Configure Hardhat for Polkadot Hub TestNet",
+                    "reference_file": "storage-contract/hardhat.config.ts",
+                    "description": "Replace the generated hardhat.config.ts entirely with the fetched reference file. It includes the polkadotTestNet network configuration using the RPC URL and process.env.PRIVATE_KEY. Also create a .env file in the storage-contract directory with PRIVATE_KEY=<your-private-key>."
+                },
+                {
+                    "order": 5,
+                    "action": "Compile the Storage contract",
+                    "commands": [
+                        "npx hardhat compile"
+                    ],
+                    "expected_output": "Successfully compiled 1 Solidity file"
+                },
+                {
+                    "order": 6,
+                    "action": "Create the Hardhat Ignition deployment module",
+                    "reference_file": "storage-contract/ignition/modules/Storage.ts",
+                    "description": "Delete any default files in the ignition/modules/ directory, then fetch the reference file and save it as ignition/modules/Storage.ts. It defines a StorageModule that deploys the Storage contract."
+                },
+                {
+                    "order": 7,
+                    "action": "Deploy the contract to Polkadot Hub TestNet",
+                    "commands": [
+                        "npx hardhat ignition deploy ./ignition/modules/Storage.ts --network polkadotTestNet"
+                    ],
+                    "description": "This command is interactive — it will prompt 'Confirm deploy to network polkadotTestNet (420420417)?' and you must respond 'yes'. Save the deployed contract address from the output (e.g., StorageModule#Storage - 0x...) — you will need it in step 11.",
+                    "expected_output": "[ StorageModule ] successfully deployed. Deployed Addresses: StorageModule#Storage - 0x..."
+                },
+                {
+                    "order": 8,
+                    "action": "Create the Next.js dApp project",
+                    "description": "Navigate back to the project root (polkadot-hub-tutorial) before running create-next-app.",
+                    "commands": [
+                        "cd ..",
+                        "npx create-next-app dapp --ts --eslint --tailwind --app --yes",
+                        "cd dapp",
+                        "npm install viem@2.38.5",
+                        "npm install --save-dev typescript@5.9.3 @types/node@22.19.24"
+                    ]
+                },
+                {
+                    "order": 9,
+                    "action": "Create the Viem client configuration",
+                    "reference_file": "dapp/viem.ts",
+                    "description": "Fetch the reference file and save it as viem.ts in the dapp project root (dapp/viem.ts, not inside app/). This file defines the Polkadot Hub TestNet chain, creates a public client for reading data, and provides a getWalletClient function for signing transactions. Other files import from this path."
+                },
+                {
+                    "order": 10,
+                    "action": "Copy the contract ABI to the dApp",
+                    "description": "Copy the ABI JSON generated by Hardhat compilation into the dApp's abis directory so the frontend can import it.",
+                    "commands": [
+                        "mkdir -p abis",
+                        "cp ../storage-contract/artifacts/contracts/Storage.sol/Storage.json ./abis/Storage.json"
+                    ]
+                },
+                {
+                    "order": 11,
+                    "action": "Create the contract interface utility",
+                    "reference_file": "dapp/utils/contract.ts",
+                    "description": "Fetch the reference file and save it as utils/contract.ts (at dapp/utils/contract.ts). Important: the reference file contains a hardcoded contract address. You must replace that address with the actual contract address you saved from the deployment output in step 7."
+                },
+                {
+                    "order": 12,
+                    "action": "Create the WalletConnect component",
+                    "reference_file": "dapp/app/components/WalletConnect.tsx",
+                    "description": "Fetch the reference file and save it as app/components/WalletConnect.tsx. This component handles MetaMask wallet connection, network switching to Polkadot Hub TestNet, and displays the connected account."
+                },
+                {
+                    "order": 13,
+                    "action": "Create the ReadContract component",
+                    "reference_file": "dapp/app/components/ReadContract.tsx",
+                    "description": "Fetch the reference file and save it as app/components/ReadContract.tsx. This component reads the storedNumber value from the contract using viem's readContract and polls for updates every 10 seconds."
+                },
+                {
+                    "order": 14,
+                    "action": "Create the WriteContract component",
+                    "reference_file": "dapp/app/components/WriteContract.tsx",
+                    "description": "Fetch the reference file and save it as app/components/WriteContract.tsx. This component allows users to input a number and send a setNumber transaction, with simulation, wallet signing, and receipt confirmation."
+                },
+                {
+                    "order": 15,
+                    "action": "Update the main page to integrate all components",
+                    "reference_file": "dapp/app/page.tsx",
+                    "description": "Fetch the reference file and replace the generated app/page.tsx. This file imports and renders WalletConnect, ReadContract, and WriteContract components with shared account state."
+                },
+                {
+                    "order": 16,
+                    "action": "Run the dApp",
+                    "commands": [
+                        "npm run dev"
+                    ],
+                    "expected_output": "The dApp is available at http://localhost:3000 with a wallet connection button, stored number display, and update form."
+                }
+            ],
+
+            "reference_code": {
+                "repo": "revm-hardhat-examples",
+                "base_path": "zero-to-hero-dapp",
+                "files": [
+                    {
+                        "path": "storage-contract/contracts/Storage.sol",
+                        "description": "Solidity contract that stores a uint256, emits NumberStored event on update, and exposes a public storedNumber getter"
+                    },
+                    {
+                        "path": "storage-contract/hardhat.config.ts",
+                        "description": "Hardhat configuration with Polkadot Hub TestNet network settings (chain ID 420420417)"
+                    },
+                    {
+                        "path": "storage-contract/ignition/modules/Storage.ts",
+                        "description": "Hardhat Ignition deployment module for the Storage contract"
+                    },
+                    {
+                        "path": "dapp/viem.ts",
+                        "description": "Viem client setup with Polkadot Hub TestNet chain config, public client, and wallet client factory"
+                    },
+                    {
+                        "path": "dapp/utils/contract.ts",
+                        "description": "Contract address, ABI import, and helper functions to get read-only and signer contract instances"
+                    },
+                    {
+                        "path": "dapp/abis/Storage.json",
+                        "description": "Contract ABI JSON copied from Hardhat build artifacts"
+                    },
+                    {
+                        "path": "dapp/app/components/WalletConnect.tsx",
+                        "description": "React component handling MetaMask connection, account tracking, and Polkadot Hub TestNet network switching"
+                    },
+                    {
+                        "path": "dapp/app/components/ReadContract.tsx",
+                        "description": "React component that reads storedNumber from the contract and polls for updates"
+                    },
+                    {
+                        "path": "dapp/app/components/WriteContract.tsx",
+                        "description": "React component with form input to call setNumber, including simulation, signing, and receipt handling"
+                    },
+                    {
+                        "path": "dapp/app/page.tsx",
+                        "description": "Main Next.js page composing WalletConnect, ReadContract, and WriteContract with shared account state"
+                    }
+                ]
+            },
+
+            "error_patterns": [
+                {
+                    "pattern": "ProviderError: insufficient funds",
+                    "cause": "The wallet does not have enough test PAS tokens to cover gas fees for deployment or transactions.",
+                    "resolution": "Request test tokens from the Polkadot faucet at https://faucet.polkadot.io/ and ensure the correct account is funded."
+                },
+                {
+                    "pattern": "HardhatError: HH108: Cannot connect to the network",
+                    "cause": "The Polkadot Hub TestNet RPC endpoint is unreachable or the URL is misconfigured.",
+                    "resolution": "Verify the RPC URL is https://services.polkadothub-rpc.com/testnet and that you have network connectivity."
+                },
+                {
+                    "pattern": "Error: No Ethereum browser provider detected",
+                    "cause": "The dApp is running in a browser without MetaMask or a compatible wallet extension installed.",
+                    "resolution": "Install MetaMask browser extension and refresh the page."
+                },
+                {
+                    "pattern": "Error 4902: Unrecognized chain ID",
+                    "cause": "Polkadot Hub TestNet has not been added to the user's MetaMask wallet.",
+                    "resolution": "The WalletConnect component handles this automatically by calling wallet_addEthereumChain. If it persists, manually add the network in MetaMask with chain ID 420420417."
+                },
+                {
+                    "pattern": "Error: Account not found on current network",
+                    "cause": "The wallet is connected to a different network than Polkadot Hub TestNet.",
+                    "resolution": "Switch to Polkadot Hub TestNet in MetaMask or use the 'Switch to Polkadot Testnet' button in the dApp."
+                },
+                {
+                    "pattern": "PRIVATE_KEY is not set or is empty",
+                    "cause": "The .env file is missing or the PRIVATE_KEY variable is not set.",
+                    "resolution": "Create a .env file in the storage-contract directory with PRIVATE_KEY=<your-private-key>. Export your private key from MetaMask under Account Details."
+                }
+            ],
+
+            "supplementary_context": {
+                "description": "These resolved documentation pages provide deeper context on wallet setup, network configuration, and smart contract fundamentals. Consult them if you need to understand why a step works, not just how to execute it.",
+                "pages": [
+                    {
+                        "slug": "smart-contracts-connect",
+                        "url": "https://docs.polkadot.com/ai/pages/smart-contracts-connect.md",
+                        "relevance": "Network connection details, chain IDs, RPC URLs, and wallet configuration for Polkadot Hub TestNet and MainNet"
+                    },
+                    {
+                        "slug": "smart-contracts-faucet",
+                        "url": "https://docs.polkadot.com/ai/pages/smart-contracts-faucet.md",
+                        "relevance": "How to obtain test PAS tokens needed for gas fees during contract deployment and transactions"
+                    },
+                    {
+                        "slug": "smart-contracts-cookbook-smart-contracts-deploy-basic-basic-hardhat",
+                        "url": "https://docs.polkadot.com/ai/pages/smart-contracts-cookbook-smart-contracts-deploy-basic-basic-hardhat.md",
+                        "relevance": "Detailed walkthrough of Hardhat project setup and basic contract deployment, useful if the agent needs more context on Hardhat configuration"
+                    }
+                ]
+            }
+        }
+    ],
+
+    "outputs": {
+        "public_root": "/ai/",
+        "tasks_dir": "tasks"
+    }
+}

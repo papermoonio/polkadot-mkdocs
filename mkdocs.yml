@@ -123,6 +123,9 @@ plugins:
   - resolve_md:
       llms_config: llms_config.json
       enabled: !ENV [ENABLED_LLMS_PLUGINS, True]
+  - agent_tasks:
+      agent_tasks_config: agent_tasks_config.json
+      enabled: !ENV [ENABLED_LLMS_PLUGINS, True]
   - page_toggle
   - glightbox
   - minify:
