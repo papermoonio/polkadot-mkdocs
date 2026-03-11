@@ -20,7 +20,7 @@
         {
             "id": "zero-to-hero-dapp",
             "title": "Zero to Hero Smart Contract DApp",
-            "objective": "Set up a Hardhat project, create and deploy a Storage smart contract to Polkadot Hub TestNet, then build a Next.js dApp with Viem that connects a wallet, reads on-chain data, and writes transactions.",
+            "objective": "Set up a Hardhat v3 project, create and deploy a Storage smart contract to Polkadot Hub TestNet, then build a Next.js 16 dApp with Viem that connects a wallet, reads on-chain data, and writes transactions.",
 
             "prerequisites": {
                 "runtime": [
@@ -42,7 +42,7 @@
             "env_vars": [
                 {
                     "name": "PRIVATE_KEY",
-                    "description": "Wallet private key for signing contract deployment transactions. Export from MetaMask or another Ethereum-compatible wallet.",
+                    "description": "Wallet private key (with 0x prefix) for signing contract deployment transactions. Export from MetaMask or another Ethereum-compatible wallet. This value is stored in a .env file in the storage-contract directory (never committed to git). The agent will create the .env file with a placeholder — the user must edit it and paste their key before deployment.",
                     "required": true
                 }
             ],
@@ -58,30 +58,57 @@
                 },
                 {
                     "order": 2,
-                    "action": "Initialize the Hardhat project",
+                    "action": "Scaffold the Hardhat project manually",
                     "commands": [
-                        "mkdir storage-contract",
+                        "mkdir -p storage-contract/contracts storage-contract/ignition/modules",
                         "cd storage-contract",
                         "npm init -y",
-                        "npm install --save-dev hardhat@3.0.9",
-                        "npx hardhat --init"
+                        "npm pkg set type=\"module\""
                     ],
-                    "description": "This command is interactive. When prompted, select 'Create a TypeScript project' and accept all default options. If running non-interactively, you may need to pipe input or use flags to bypass prompts."
+                    "description": "Create the storage-contract directory with its subdirectory structure and initialize it as an ESM Node.js project. Do NOT use 'npx hardhat --init' — it is interactive and will generate files that conflict with the reference configuration. Instead, the project is scaffolded manually in this step and the next two steps."
                 },
                 {
                     "order": 3,
-                    "action": "Create the Storage smart contract",
-                    "reference_file": "storage-contract/contracts/Storage.sol",
-                    "description": "Delete any default contract files in the contracts/ directory, then fetch the reference file and save it as contracts/Storage.sol. This contract stores a uint256, emits a NumberStored event on update, and exposes a public storedNumber getter."
+                    "action": "Install all Hardhat project dependencies",
+                    "commands": [
+                        "npm install --save-dev hardhat@^3.0.9 @nomicfoundation/hardhat-ignition@^3.0.3 @nomicfoundation/hardhat-toolbox-viem@^5.0.0 viem@^2.38.5 typescript@~5.8.0 @types/node@^22.18.13 forge-std@github:foundry-rs/forge-std#v1.9.4",
+                        "npm install dotenv@^16.4.0"
+                    ],
+                    "description": "Install Hardhat v3 and all required plugins as dev dependencies, plus dotenv as a runtime dependency. This must be Hardhat v3 (^3.0.9) — the reference code uses v3 API patterns including 'plugins' array registration, 'solidity.profiles', and 'networks.type' fields that do not exist in Hardhat v2. The forge-std package is required by the toolbox-viem plugin. The dotenv package is used to load the PRIVATE_KEY from a .env file. The project uses ESM ('type': 'module' set in the previous step), which is required by Hardhat v3."
                 },
                 {
                     "order": 4,
-                    "action": "Configure Hardhat for Polkadot Hub TestNet",
-                    "reference_file": "storage-contract/hardhat.config.ts",
-                    "description": "Replace the generated hardhat.config.ts entirely with the fetched reference file. It includes the polkadotTestNet network configuration using the RPC URL and process.env.PRIVATE_KEY. Also create a .env file in the storage-contract directory with PRIVATE_KEY=<your-private-key>."
+                    "action": "Create the TypeScript configuration",
+                    "reference_file": "storage-contract/tsconfig.json",
+                    "description": "Fetch the reference file and save it as tsconfig.json in the storage-contract directory. It targets ES2022, uses Node16 module resolution (required for Hardhat v3 ESM), and includes ES2023 library features."
                 },
                 {
                     "order": 5,
+                    "action": "Configure Hardhat for Polkadot Hub TestNet",
+                    "reference_file": "storage-contract/hardhat.config.ts",
+                    "description": "Fetch the reference file and save it as hardhat.config.ts in the storage-contract directory. The reference file is configured for local development and contains hardcoded values that must be changed for TestNet deployment. Make the following substitutions in the fetched file: (1) Add 'import \"dotenv/config\";' as the very first line of the file, before any other imports — this loads the PRIVATE_KEY from the .env file created in the next step. (2) Replace 'http://127.0.0.1:8545' with 'https://services.polkadothub-rpc.com/testnet' in the polkadotTestNet network URL. (3) Replace the hardcoded accounts array ['0x5fb92d6e98884f76de468fa3f6278f8807c48bebc13595d45af5bdc4da702133'] with [process.env.PRIVATE_KEY ?? ''] so the private key is read from the .env file at runtime. (4) Replace 'requiredConfirmations: 0' with 'requiredConfirmations: 1' since TestNet transactions require at least one confirmation. The file uses Hardhat v3 API patterns: plugin registration via a 'plugins' array, 'solidity.profiles' for compiler config, and 'type: \"http\"' for the network."
+                },
+                {
+                    "order": 6,
+                    "action": "Create the .env and .gitignore files for private key management",
+                    "commands": [
+                        "echo 'PRIVATE_KEY=' > .env",
+                        "echo '.env' >> .gitignore",
+                        "echo 'node_modules/' >> .gitignore",
+                        "echo 'artifacts/' >> .gitignore",
+                        "echo 'cache/' >> .gitignore",
+                        "echo 'ignition/deployments/' >> .gitignore"
+                    ],
+                    "description": "Create a .env file with an empty PRIVATE_KEY placeholder and a .gitignore to prevent secrets from being committed. IMPORTANT: After creating these files, stop and ask the user to edit the .env file and paste their wallet private key (with 0x prefix) as the value for PRIVATE_KEY. Do NOT ask the user to type or paste their private key in the chat — they should edit the .env file directly in their editor or file system. Wait for the user to confirm they have added their key before proceeding to deployment. The .env file will be read by dotenv (imported in hardhat.config.ts) at runtime."
+                },
+                {
+                    "order": 7,
+                    "action": "Create the Storage smart contract",
+                    "reference_file": "storage-contract/contracts/Storage.sol",
+                    "description": "Fetch the reference file and save it as contracts/Storage.sol in the storage-contract directory. This contract stores a uint256, emits a NumberStored event on update, and exposes getNumber() and setNumber() functions. No substitutions are needed — the contract has no hardcoded environment-specific values."
+                },
+                {
+                    "order": 8,
                     "action": "Compile the Storage contract",
                     "commands": [
                         "npx hardhat compile"
@@ -89,84 +116,99 @@
                     "expected_output": "Successfully compiled 1 Solidity file"
                 },
                 {
-                    "order": 6,
+                    "order": 9,
                     "action": "Create the Hardhat Ignition deployment module",
                     "reference_file": "storage-contract/ignition/modules/Storage.ts",
-                    "description": "Delete any default files in the ignition/modules/ directory, then fetch the reference file and save it as ignition/modules/Storage.ts. It defines a StorageModule that deploys the Storage contract."
+                    "description": "Fetch the reference file and save it as ignition/modules/Storage.ts in the storage-contract directory. It defines a StorageModule that deploys the Storage contract with no constructor arguments. No substitutions are needed."
                 },
                 {
-                    "order": 7,
+                    "order": 10,
                     "action": "Deploy the contract to Polkadot Hub TestNet",
                     "commands": [
                         "npx hardhat ignition deploy ./ignition/modules/Storage.ts --network polkadotTestNet"
                     ],
-                    "description": "This command is interactive — it will prompt 'Confirm deploy to network polkadotTestNet (420420417)?' and you must respond 'yes'. Save the deployed contract address from the output (e.g., StorageModule#Storage - 0x...) — you will need it in step 11.",
+                    "description": "Before running this command, confirm the user has added their private key to the .env file (step 6). This command is interactive — it will prompt 'Confirm deploy to network polkadotTestNet (420420417)?' and you must respond 'yes'. If running non-interactively, pipe the confirmation: echo 'yes' | npx hardhat ignition deploy ./ignition/modules/Storage.ts --network polkadotTestNet. Save the deployed contract address from the output (e.g., StorageModule#Storage - 0x...) — you will need it in step 16.",
                     "expected_output": "[ StorageModule ] successfully deployed. Deployed Addresses: StorageModule#Storage - 0x..."
                 },
                 {
-                    "order": 8,
-                    "action": "Create the Next.js dApp project",
-                    "description": "Navigate back to the project root (polkadot-hub-tutorial) before running create-next-app.",
+                    "order": 11,
+                    "action": "Scaffold the Next.js dApp project",
+                    "description": "Navigate back to the project root (polkadot-hub-tutorial) before running create-next-app. Pin to version 16 to match the reference code's Next.js 16.0.1 and React 19.2.0. The --yes flag bypasses interactive prompts. After scaffolding, install viem for blockchain interactions.",
                     "commands": [
                         "cd ..",
-                        "npx create-next-app dapp --ts --eslint --tailwind --app --yes",
+                        "npx create-next-app@16 dapp --ts --eslint --tailwind --app --yes",
                         "cd dapp",
-                        "npm install viem@2.38.5",
-                        "npm install --save-dev typescript@5.9.3 @types/node@22.19.24"
+                        "npm install viem@^2.38.5"
                     ]
                 },
                 {
-                    "order": 9,
-                    "action": "Create the Viem client configuration",
-                    "reference_file": "dapp/viem.ts",
-                    "description": "Fetch the reference file and save it as viem.ts in the dapp project root (dapp/viem.ts, not inside app/). This file defines the Polkadot Hub TestNet chain, creates a public client for reading data, and provides a getWalletClient function for signing transactions. Other files import from this path."
+                    "order": 12,
+                    "action": "Verify dApp scripts include the --webpack flag",
+                    "commands": [
+                        "npm pkg set scripts.dev=\"next dev --webpack\"",
+                        "npm pkg set scripts.build=\"next build --webpack\""
+                    ],
+                    "description": "The reference dApp uses the --webpack flag for Next.js dev and build scripts. This flag is required for Next.js 16 compatibility with the Viem library. If create-next-app already added it, this command is idempotent. If it did not, this ensures the scripts are correct."
                 },
                 {
-                    "order": 10,
+                    "order": 13,
+                    "action": "Create the Viem client configuration",
+                    "reference_file": "dapp/viem.ts",
+                    "description": "Fetch the reference file and save it as viem.ts in the dapp project root (dapp/viem.ts, NOT inside app/). Other files import from this path. The reference file is configured for local development and contains hardcoded values that must be changed for TestNet. Make the following substitutions in the fetched file: (1) Replace the transport line 'http('http://127.0.0.1:8545')' with 'http('https://services.polkadothub-rpc.com/testnet')'. (2) Replace 'id: 420420420' with 'id: 420420417' in the chain definition. (3) Replace 'http: ['http://127.0.0.1:8545']' with 'http: ['https://services.polkadothub-rpc.com/testnet']' in the rpcUrls.default block. (4) Remove or ignore the TODO comments — the values you just substituted are the correct production TestNet values."
+                },
+                {
+                    "order": 14,
                     "action": "Copy the contract ABI to the dApp",
-                    "description": "Copy the ABI JSON generated by Hardhat compilation into the dApp's abis directory so the frontend can import it.",
+                    "description": "Copy the ABI JSON generated by Hardhat compilation into the dApp's abis directory so the frontend can import it. The ABI file is generated at artifacts/contracts/Storage.sol/Storage.json during compilation in step 8.",
                     "commands": [
                         "mkdir -p abis",
                         "cp ../storage-contract/artifacts/contracts/Storage.sol/Storage.json ./abis/Storage.json"
                     ]
                 },
                 {
-                    "order": 11,
-                    "action": "Create the contract interface utility",
-                    "reference_file": "dapp/utils/contract.ts",
-                    "description": "Fetch the reference file and save it as utils/contract.ts (at dapp/utils/contract.ts). Important: the reference file contains a hardcoded contract address. You must replace that address with the actual contract address you saved from the deployment output in step 7."
-                },
-                {
-                    "order": 12,
-                    "action": "Create the WalletConnect component",
-                    "reference_file": "dapp/app/components/WalletConnect.tsx",
-                    "description": "Fetch the reference file and save it as app/components/WalletConnect.tsx. This component handles MetaMask wallet connection, network switching to Polkadot Hub TestNet, and displays the connected account."
-                },
-                {
-                    "order": 13,
-                    "action": "Create the ReadContract component",
-                    "reference_file": "dapp/app/components/ReadContract.tsx",
-                    "description": "Fetch the reference file and save it as app/components/ReadContract.tsx. This component reads the storedNumber value from the contract using viem's readContract and polls for updates every 10 seconds."
-                },
-                {
-                    "order": 14,
-                    "action": "Create the WriteContract component",
-                    "reference_file": "dapp/app/components/WriteContract.tsx",
-                    "description": "Fetch the reference file and save it as app/components/WriteContract.tsx. This component allows users to input a number and send a setNumber transaction, with simulation, wallet signing, and receipt confirmation."
-                },
-                {
                     "order": 15,
-                    "action": "Update the main page to integrate all components",
-                    "reference_file": "dapp/app/page.tsx",
-                    "description": "Fetch the reference file and replace the generated app/page.tsx. This file imports and renders WalletConnect, ReadContract, and WriteContract components with shared account state."
+                    "action": "Create the app/components directory",
+                    "commands": [
+                        "mkdir -p app/components"
+                    ]
                 },
                 {
                     "order": 16,
+                    "action": "Create the contract interface utility",
+                    "reference_file": "dapp/utils/contract.ts",
+                    "description": "Create the utils/ directory, then fetch the reference file and save it as utils/contract.ts (at dapp/utils/contract.ts). The reference file contains a hardcoded contract address '0x970951a12F975E6762482ACA81E57D5A2A4e73F4'. You must replace this address with the actual contract address you saved from the deployment output in step 10. The file imports from '../viem' (the file created in step 13) and '../abis/Storage.json' (copied in step 14)."
+                },
+                {
+                    "order": 17,
+                    "action": "Create the WalletConnect component",
+                    "reference_file": "dapp/app/components/WalletConnect.tsx",
+                    "description": "Fetch the reference file and save it as app/components/WalletConnect.tsx. This component handles MetaMask wallet connection, network switching to Polkadot Hub TestNet, and displays the connected account. It imports the chain definition from '../../viem' (two levels up from app/components/). No substitutions are needed — the component reads chain config from the viem.ts file you already modified in step 13."
+                },
+                {
+                    "order": 18,
+                    "action": "Create the ReadContract component",
+                    "reference_file": "dapp/app/components/ReadContract.tsx",
+                    "description": "Fetch the reference file and save it as app/components/ReadContract.tsx. This component reads the storedNumber value from the contract using viem's readContract and polls for updates every 10 seconds. It imports from '../../viem' and '../../utils/contract'. No substitutions are needed."
+                },
+                {
+                    "order": 19,
+                    "action": "Create the WriteContract component",
+                    "reference_file": "dapp/app/components/WriteContract.tsx",
+                    "description": "Fetch the reference file and save it as app/components/WriteContract.tsx. This component allows users to input a number and send a setNumber transaction, with simulation, wallet signing, and receipt confirmation. It imports from '../../viem' and '../../utils/contract'. No substitutions are needed."
+                },
+                {
+                    "order": 20,
+                    "action": "Replace the main page to integrate all components",
+                    "reference_file": "dapp/app/page.tsx",
+                    "description": "Fetch the reference file and replace the generated app/page.tsx entirely. This file imports and renders WalletConnect, ReadContract, and WriteContract components with shared account state. It uses 'use client' for client-side rendering."
+                },
+                {
+                    "order": 21,
                     "action": "Run the dApp",
                     "commands": [
                         "npm run dev"
                     ],
-                    "expected_output": "The dApp is available at http://localhost:3000 with a wallet connection button, stored number display, and update form."
+                    "expected_output": "The Next.js dev server starts at http://localhost:3000 with a page showing 'Polkadot Hub - Zero To Hero DApp', a wallet connection button, stored number display, and update form."
                 }
             ],
 
@@ -175,12 +217,16 @@
                 "base_path": "zero-to-hero-dapp",
                 "files": [
                     {
-                        "path": "storage-contract/contracts/Storage.sol",
-                        "description": "Solidity contract that stores a uint256, emits NumberStored event on update, and exposes a public storedNumber getter"
+                        "path": "storage-contract/tsconfig.json",
+                        "description": "TypeScript configuration targeting ES2022 with Node16 module resolution for Hardhat v3 ESM"
                     },
                     {
                         "path": "storage-contract/hardhat.config.ts",
-                        "description": "Hardhat configuration with Polkadot Hub TestNet network settings (chain ID 420420417)"
+                        "description": "Hardhat v3 configuration with plugins array, solidity profiles, and polkadotTestNet network (reference file uses localhost — requires substitution for TestNet)"
+                    },
+                    {
+                        "path": "storage-contract/contracts/Storage.sol",
+                        "description": "Solidity contract that stores a uint256, emits NumberStored event on update, and exposes getNumber/setNumber functions"
                     },
                     {
                         "path": "storage-contract/ignition/modules/Storage.ts",
@@ -188,15 +234,11 @@
                     },
                     {
                         "path": "dapp/viem.ts",
-                        "description": "Viem client setup with Polkadot Hub TestNet chain config, public client, and wallet client factory"
+                        "description": "Viem client setup with chain config, public client, and wallet client factory (reference file uses localhost and chain ID 420420420 — requires substitution for TestNet)"
                     },
                     {
                         "path": "dapp/utils/contract.ts",
-                        "description": "Contract address, ABI import, and helper functions to get read-only and signer contract instances"
-                    },
-                    {
-                        "path": "dapp/abis/Storage.json",
-                        "description": "Contract ABI JSON copied from Hardhat build artifacts"
+                        "description": "Contract address, ABI import, and helper functions for read-only and signer contract instances (reference file has hardcoded address — requires substitution with deployed address from step 9)"
                     },
                     {
                         "path": "dapp/app/components/WalletConnect.tsx",
@@ -204,7 +246,7 @@
                     },
                     {
                         "path": "dapp/app/components/ReadContract.tsx",
-                        "description": "React component that reads storedNumber from the contract and polls for updates"
+                        "description": "React component that reads storedNumber from the contract and polls for updates every 10 seconds"
                     },
                     {
                         "path": "dapp/app/components/WriteContract.tsx",
@@ -225,8 +267,23 @@
                 },
                 {
                     "pattern": "HardhatError: HH108: Cannot connect to the network",
-                    "cause": "The Polkadot Hub TestNet RPC endpoint is unreachable or the URL is misconfigured.",
-                    "resolution": "Verify the RPC URL is https://services.polkadothub-rpc.com/testnet and that you have network connectivity."
+                    "cause": "The Polkadot Hub TestNet RPC endpoint is unreachable or the URL in hardhat.config.ts was not updated from the localhost default.",
+                    "resolution": "Verify hardhat.config.ts has url set to 'https://services.polkadothub-rpc.com/testnet' (not 'http://127.0.0.1:8545') and that you have network connectivity."
+                },
+                {
+                    "pattern": "Error: Cannot find module '@nomicfoundation/hardhat-toolbox-viem'",
+                    "cause": "The Hardhat toolbox-viem plugin is missing. This can happen if dependencies were partially installed or if the wrong toolbox package was installed (hardhat-toolbox vs hardhat-toolbox-viem).",
+                    "resolution": "Run: npm install --save-dev @nomicfoundation/hardhat-toolbox-viem@^5.0.0. Note: this project uses hardhat-toolbox-viem (Viem-based), NOT hardhat-toolbox (ethers-based)."
+                },
+                {
+                    "pattern": "Error: Cannot find module 'forge-std'",
+                    "cause": "The forge-std package is a peer dependency of hardhat-toolbox-viem that must be installed from GitHub.",
+                    "resolution": "Run: npm install --save-dev forge-std@github:foundry-rs/forge-std#v1.9.4"
+                },
+                {
+                    "pattern": "ERR_REQUIRE_ESM or require() of ES Module not supported",
+                    "cause": "Hardhat v3 requires ESM. The project's package.json is missing '\"type\": \"module\"' or the tsconfig.json is using CommonJS module resolution.",
+                    "resolution": "Run 'npm pkg set type=\"module\"' in the storage-contract directory. Verify tsconfig.json has '\"module\": \"node16\"' and '\"moduleResolution\": \"node16\"'."
                 },
                 {
                     "pattern": "Error: No Ethereum browser provider detected",
@@ -236,17 +293,17 @@
                 {
                     "pattern": "Error 4902: Unrecognized chain ID",
                     "cause": "Polkadot Hub TestNet has not been added to the user's MetaMask wallet.",
-                    "resolution": "The WalletConnect component handles this automatically by calling wallet_addEthereumChain. If it persists, manually add the network in MetaMask with chain ID 420420417."
-                },
-                {
-                    "pattern": "Error: Account not found on current network",
-                    "cause": "The wallet is connected to a different network than Polkadot Hub TestNet.",
-                    "resolution": "Switch to Polkadot Hub TestNet in MetaMask or use the 'Switch to Polkadot Testnet' button in the dApp."
+                    "resolution": "The WalletConnect component handles this automatically by calling wallet_addEthereumChain. If it persists, manually add the network in MetaMask with chain ID 420420417 and RPC URL https://services.polkadothub-rpc.com/testnet."
                 },
                 {
                     "pattern": "PRIVATE_KEY is not set or is empty",
-                    "cause": "The .env file is missing or the PRIVATE_KEY variable is not set.",
-                    "resolution": "Create a .env file in the storage-contract directory with PRIVATE_KEY=<your-private-key>. Export your private key from MetaMask under Account Details."
+                    "cause": "The .env file in the storage-contract directory is missing or the PRIVATE_KEY value is still empty.",
+                    "resolution": "Ask the user to edit the .env file in the storage-contract directory and set PRIVATE_KEY=0x<their-key>. The key must include the 0x prefix. Do NOT ask the user to paste their key in the chat — they should edit the file directly."
+                },
+                {
+                    "pattern": "TypeError: Cannot read properties of undefined (reading 'id') in viem.ts",
+                    "cause": "The chain ID in viem.ts was not updated from the localhost default (420420420) to the TestNet value (420420417), or the RPC URL still points to localhost.",
+                    "resolution": "Verify viem.ts has id: 420420417 and all RPC URLs set to 'https://services.polkadothub-rpc.com/testnet'."
                 }
             ],
 
@@ -264,9 +321,220 @@
                         "relevance": "How to obtain test PAS tokens needed for gas fees during contract deployment and transactions"
                     },
                     {
+                        "slug": "smart-contracts-dev-environments-hardhat",
+                        "url": "https://docs.polkadot.com/ai/pages/smart-contracts-dev-environments-hardhat.md",
+                        "relevance": "Hardhat setup and configuration specifics for Polkadot Hub, useful if the agent needs more context on Hardhat v3 configuration patterns"
+                    },
+                    {
                         "slug": "smart-contracts-cookbook-smart-contracts-deploy-basic-basic-hardhat",
                         "url": "https://docs.polkadot.com/ai/pages/smart-contracts-cookbook-smart-contracts-deploy-basic-basic-hardhat.md",
-                        "relevance": "Detailed walkthrough of Hardhat project setup and basic contract deployment, useful if the agent needs more context on Hardhat configuration"
+                        "relevance": "Detailed walkthrough of Hardhat project setup and basic contract deployment, useful for understanding the deployment pipeline"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "deploy-erc20-token-hardhat",
+            "title": "Deploy an ERC-20 Token Using Hardhat",
+            "objective": "Set up a Hardhat v2 project with OpenZeppelin, create an ERC-20 token contract with mint and permit capabilities, compile and test it against Polkadot Hub TestNet, then deploy with an initial token mint via Hardhat Ignition.",
+
+            "prerequisites": {
+                "runtime": [
+                    "Node.js v22.13.1 or later",
+                    "npm"
+                ],
+                "network": [
+                    "Polkadot Hub TestNet RPC endpoint: https://services.polkadothub-rpc.com/testnet",
+                    "Chain ID: 420420417"
+                ],
+                "tokens": [
+                    "Test PAS tokens from the Polkadot faucet (https://faucet.polkadot.io/)"
+                ],
+                "wallet": [
+                    "A wallet private key for signing deployment and test transactions"
+                ]
+            },
+
+            "env_vars": [
+                {
+                    "name": "TESTNET_PRIVATE_KEY",
+                    "description": "Wallet private key (with 0x prefix) for signing contract deployment and test transactions. This value is stored in a .env file in the project directory (never committed to git). The agent will create the .env file with a placeholder — the user must edit it and paste their key before running tests or deployment.",
+                    "required": true
+                }
+            ],
+
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "Create the project directory and initialize npm",
+                    "commands": [
+                        "mkdir erc20-hardhat",
+                        "cd erc20-hardhat",
+                        "npm init -y"
+                    ]
+                },
+                {
+                    "order": 2,
+                    "action": "Install all dependencies",
+                    "commands": [
+                        "npm install --save-dev hardhat@^2.22.16 @nomicfoundation/hardhat-toolbox@^5.0.0 @types/node@^20.11.19 ts-node@^10.9.2 typescript@~5.3.3",
+                        "npm install @openzeppelin/contracts@^5.4.0 dotenv@^16.4.0"
+                    ],
+                    "description": "Install Hardhat v2 (not v3) and its toolbox as dev dependencies, plus OpenZeppelin Contracts and dotenv as runtime dependencies. The hardhat-toolbox v5 package bundles ethers, chai, mocha, and Hardhat Ignition as peer dependencies that npm will auto-install. The dotenv package is used to load the TESTNET_PRIVATE_KEY from a .env file. The reference code was written for Hardhat v2 — do not install Hardhat v3, which has breaking changes in config format and plugin registration."
+                },
+                {
+                    "order": 3,
+                    "action": "Create the Hardhat configuration",
+                    "reference_file": "hardhat.config.ts",
+                    "description": "Fetch the reference file and save it as hardhat.config.ts in the project root. The reference file uses Hardhat's encrypted config variables (vars) for the private key, which requires an interactive prompt that does not work well in agent workflows. Make the following substitutions in the fetched file: (1) Add 'require(\"dotenv\").config();' as the very first line of the file, before any other imports — this loads the TESTNET_PRIVATE_KEY from the .env file created in step 4. (2) Replace the import line 'import { HardhatUserConfig, vars } from \"hardhat/config\";' with 'import { HardhatUserConfig } from \"hardhat/config\";' (remove the vars import). (3) Replace 'accounts: vars.has(\"TESTNET_PRIVATE_KEY\") ? [vars.get(\"TESTNET_PRIVATE_KEY\")] : []' with 'accounts: process.env.TESTNET_PRIVATE_KEY ? [process.env.TESTNET_PRIVATE_KEY] : []'. The rest of the file is correct as-is: Solidity 0.8.28 with optimizer (200 runs), polkadotTestnet network with RPC URL https://services.polkadothub-rpc.com/testnet, and 40-second mocha timeout."
+                },
+                {
+                    "order": 4,
+                    "action": "Create the .env and .gitignore files for private key management",
+                    "commands": [
+                        "echo 'TESTNET_PRIVATE_KEY=' > .env",
+                        "echo '.env' >> .gitignore",
+                        "echo 'node_modules/' >> .gitignore",
+                        "echo 'artifacts/' >> .gitignore",
+                        "echo 'cache/' >> .gitignore",
+                        "echo 'ignition/deployments/' >> .gitignore"
+                    ],
+                    "description": "Create a .env file with an empty TESTNET_PRIVATE_KEY placeholder and a .gitignore to prevent secrets from being committed. IMPORTANT: After creating these files, stop and ask the user to edit the .env file and paste their wallet private key (with 0x prefix) as the value for TESTNET_PRIVATE_KEY. Do NOT ask the user to type or paste their private key in the chat — they should edit the .env file directly in their editor or file system. Wait for the user to confirm they have added their key before proceeding to testing or deployment. The .env file will be read by dotenv (loaded in hardhat.config.ts) at runtime."
+                },
+                {
+                    "order": 5,
+                    "action": "Create the TypeScript configuration",
+                    "reference_file": "tsconfig.json",
+                    "description": "Fetch the reference file and save it as tsconfig.json in the project root. It targets ES2022, uses CommonJS modules, and includes the hardhat config, scripts, test, typechain-types, and ignition directories."
+                },
+                {
+                    "order": 6,
+                    "action": "Create the ERC-20 token contract",
+                    "reference_file": "contracts/MyToken.sol",
+                    "description": "Create the contracts/ directory, then fetch the reference file and save it as contracts/MyToken.sol. This is an OpenZeppelin-based ERC-20 contract named 'MyToken' (symbol 'MTK') with Ownable access control (owner-only minting) and ERC20Permit for gasless approvals. The constructor takes an initialOwner address parameter. No substitutions are needed."
+                },
+                {
+                    "order": 7,
+                    "action": "Compile the contract",
+                    "commands": [
+                        "npx hardhat compile"
+                    ],
+                    "expected_output": "Compiled 1 Solidity file successfully (or similar message confirming compilation with no errors)."
+                },
+                {
+                    "order": 8,
+                    "action": "Create the test file",
+                    "reference_file": "test/MyToken.test.ts",
+                    "description": "Create the test/ directory, then fetch the reference file and save it as test/MyToken.test.ts. This file tests deployment verification (name, symbol, owner, zero initial supply), owner minting, total supply tracking, and multiple mint operations to different addresses. No substitutions are needed."
+                },
+                {
+                    "order": 9,
+                    "action": "Run tests against Polkadot Hub TestNet",
+                    "commands": [
+                        "npx hardhat test --network polkadotTestnet"
+                    ],
+                    "description": "Before running this command, confirm the user has added their private key to the .env file (step 4). Runs all tests against the live Polkadot Hub TestNet. This requires test PAS tokens in the configured wallet for gas fees. The mocha timeout is set to 40 seconds to accommodate on-chain transaction confirmation times.",
+                    "expected_output": "All 5 tests passing: correct name/symbol, correct owner, zero initial supply, owner can mint, supply increases after mint, and multiple mint tracking."
+                },
+                {
+                    "order": 10,
+                    "action": "Create the Ignition deployment module",
+                    "reference_file": "ignition/modules/MyToken.ts",
+                    "description": "Create the ignition/modules/ directory, then fetch the reference file and save it as ignition/modules/MyToken.ts. This module deploys the MyToken contract with account[0] as the owner, then calls mint to create 5 MTK tokens (5 * 10^18 base units) to the same account during deployment. No substitutions are needed."
+                },
+                {
+                    "order": 11,
+                    "action": "Deploy the contract to Polkadot Hub TestNet",
+                    "commands": [
+                        "npx hardhat ignition deploy ./ignition/modules/MyToken.ts --network polkadotTestnet"
+                    ],
+                    "description": "This command is interactive — it will prompt 'Confirm deploy to network polkadotTestnet (420420417)?' and you must respond 'yes'. If running non-interactively, pipe the confirmation: echo 'yes' | npx hardhat ignition deploy ./ignition/modules/MyToken.ts --network polkadotTestnet",
+                    "expected_output": "[ TokenModule ] successfully deployed. Deployed Addresses: TokenModule#MyToken - 0x..."
+                }
+            ],
+
+            "reference_code": {
+                "repo": "revm-hardhat-examples",
+                "base_path": "erc20-hardhat",
+                "files": [
+                    {
+                        "path": "hardhat.config.ts",
+                        "description": "Hardhat v2 configuration with Solidity 0.8.28, optimizer, polkadotTestnet network, and encrypted private key via Hardhat config variables"
+                    },
+                    {
+                        "path": "tsconfig.json",
+                        "description": "TypeScript configuration targeting ES2022 with CommonJS modules"
+                    },
+                    {
+                        "path": "contracts/MyToken.sol",
+                        "description": "OpenZeppelin ERC-20 contract with Ownable mint and ERC20Permit, named MyToken (MTK)"
+                    },
+                    {
+                        "path": "test/MyToken.test.ts",
+                        "description": "Test suite covering deployment, minting, supply tracking, and multi-address mint operations"
+                    },
+                    {
+                        "path": "ignition/modules/MyToken.ts",
+                        "description": "Hardhat Ignition deployment module that deploys MyToken and mints 5 MTK to the deployer"
+                    }
+                ]
+            },
+
+            "error_patterns": [
+                {
+                    "pattern": "ProviderError: insufficient funds",
+                    "cause": "The wallet does not have enough test PAS tokens to cover gas fees for deployment or test transactions.",
+                    "resolution": "Request test tokens from the Polkadot faucet at https://faucet.polkadot.io/ and ensure the correct account is funded."
+                },
+                {
+                    "pattern": "HardhatError: HH108: Cannot connect to the network",
+                    "cause": "The Polkadot Hub TestNet RPC endpoint is unreachable or the URL is misconfigured in hardhat.config.ts.",
+                    "resolution": "Verify the RPC URL is https://services.polkadothub-rpc.com/testnet and that you have network connectivity."
+                },
+                {
+                    "pattern": "TESTNET_PRIVATE_KEY is not set or accounts array is empty",
+                    "cause": "The .env file is missing or the TESTNET_PRIVATE_KEY value is still empty.",
+                    "resolution": "Ask the user to edit the .env file in the project directory and set TESTNET_PRIVATE_KEY=0x<their-key>. The key must include the 0x prefix. Do NOT ask the user to paste their key in the chat — they should edit the file directly."
+                },
+                {
+                    "pattern": "Error: Cannot find module '@openzeppelin/contracts'",
+                    "cause": "OpenZeppelin Contracts package was not installed or was installed as a dev dependency instead of a regular dependency.",
+                    "resolution": "Run: npm install @openzeppelin/contracts@^5.4.0"
+                },
+                {
+                    "pattern": "Error: Cannot find module '@nomicfoundation/hardhat-toolbox'",
+                    "cause": "The Hardhat toolbox plugin is missing. This can happen if dependencies were partially installed.",
+                    "resolution": "Run: npm install --save-dev @nomicfoundation/hardhat-toolbox@^5.0.0"
+                },
+                {
+                    "pattern": "Error: HH18: You installed Hardhat with a corrupted lockfile",
+                    "cause": "npm lockfile is inconsistent, often caused by mixing Hardhat v2 and v3 packages.",
+                    "resolution": "Delete node_modules and package-lock.json, then run npm install again. Ensure only Hardhat v2 (^2.22.16) is specified in package.json."
+                }
+            ],
+
+            "supplementary_context": {
+                "description": "These resolved documentation pages provide deeper context on ERC-20 standards, network configuration, and smart contract deployment on Polkadot Hub. Consult them if you need to understand why a step works, not just how to execute it.",
+                "pages": [
+                    {
+                        "slug": "smart-contracts-connect",
+                        "url": "https://docs.polkadot.com/ai/pages/smart-contracts-connect.md",
+                        "relevance": "Network connection details, chain IDs, RPC URLs, and wallet configuration for Polkadot Hub TestNet and MainNet"
+                    },
+                    {
+                        "slug": "smart-contracts-faucet",
+                        "url": "https://docs.polkadot.com/ai/pages/smart-contracts-faucet.md",
+                        "relevance": "How to obtain test PAS tokens needed for gas fees during contract deployment and test execution"
+                    },
+                    {
+                        "slug": "smart-contracts-dev-environments-hardhat",
+                        "url": "https://docs.polkadot.com/ai/pages/smart-contracts-dev-environments-hardhat.md",
+                        "relevance": "Hardhat setup and configuration specifics for Polkadot Hub, including network configuration and plugin usage"
+                    },
+                    {
+                        "slug": "smart-contracts-precompiles-erc20",
+                        "url": "https://docs.polkadot.com/ai/pages/smart-contracts-precompiles-erc20.md",
+                        "relevance": "Details on ERC-20 precompile interactions and the Assets pallet ERC-20 interface on Polkadot Hub"
                     }
                 ]
             }

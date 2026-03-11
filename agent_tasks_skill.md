@@ -4,7 +4,7 @@
 
 This skill guides an AI agent through the process of analyzing a documentation project and its associated reference repositories to produce an `agent_tasks_config.json` file. That config is then consumed by the `agent_tasks` build plugin to generate self-contained, agent-optimized task files at build time.
 
-This is a **one-time onboarding process** (per project or per major update). The output is a committed config file that the build pipeline uses on every subsequent build. The agent running this skill is *not* the same agent that will later consume the task files — this agent is a collaborator helping a documentation engineer set up the config.
+This skill is used both for **initial setup** (creating the first config for a project) and **ongoing maintenance** (adding new tasks or updating existing ones as documentation evolves). The output is a committed config file that the build pipeline uses on every subsequent build. The agent running this skill is *not* the same agent that will later consume the task files — this agent is a collaborator helping a documentation engineer set up and maintain the config.
 
 ---
 
@@ -27,64 +27,173 @@ The `agent_tasks_config.json` bridges the gap by defining task workflows that th
 
 ## What You Will Produce
 
-A complete `agent_tasks_config.json` file with this structure:
+A new or updated `agent_tasks_config.json` file. This file lives in the project root alongside `llms_config.json`.
+
+Below is an annotated skeleton showing the shape of the config with one task containing three representative steps — a command step, a reference file step, and a step with expected output. Every task you produce should follow this structure.
 
 ```json
 {
     "schema_version": "0.1",
-    "project": { ... },
-    "reference_repos": { ... },
-    "tasks": [ ... ],
-    "outputs": { ... }
+
+    "project": {
+        "id": "<from llms_config.json>",
+        "name": "<from llms_config.json>",
+        "docs_base_url": "<from llms_config.json>"
+    },
+
+    "reference_repos": {
+        "<repo-id>": {
+            "url": "https://github.com/<org>/<repo>",
+            "default_branch": "main",
+            "raw_base_url": "https://raw.githubusercontent.com/<org>/<repo>/main",
+            "description": "<what this repo provides>"
+        }
+    },
+
+    "tasks": [
+        {
+            "id": "verb-noun-qualifier",
+            "title": "Human-Readable Task Title",
+            "objective": "One sentence: what the agent will have accomplished by the end.",
+
+            "prerequisites": {
+                "runtime": ["Node.js v22+", "npm"],
+                "network": ["RPC endpoint: <url>"],
+                "tokens": ["Testnet tokens from <faucet-url>"]
+            },
+
+            "env_vars": [
+                {
+                    "name": "EXAMPLE_KEY",
+                    "description": "What this is and where to get it.",
+                    "required": true
+                }
+            ],
+
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "Initialize the project",
+                    "commands": ["mkdir my-project", "cd my-project", "npm init -y"],
+                    "description": "Setup step using commands only — no reference file needed."
+                },
+                {
+                    "order": 2,
+                    "action": "Create the config file",
+                    "reference_file": "src/config.ts",
+                    "description": "Fetch the reference file and save it as src/config.ts. In the fetched file, replace 'http://localhost:8080' with '<production-rpc-url>'."
+                },
+                {
+                    "order": 3,
+                    "action": "Build and verify",
+                    "commands": ["npm run build"],
+                    "expected_output": "Build completed successfully with no errors."
+                }
+            ],
+
+            "reference_code": {
+                "repo": "<repo-id>",
+                "base_path": "examples/my-task",
+                "files": [
+                    {
+                        "path": "src/config.ts",
+                        "description": "One-line summary of what this file does"
+                    }
+                ]
+            },
+
+            "error_patterns": [
+                {
+                    "pattern": "Error: Cannot find module 'example'",
+                    "cause": "Dependency not installed.",
+                    "resolution": "Run npm install example."
+                }
+            ],
+
+            "supplementary_context": {
+                "description": "When to consult these pages — for understanding why, not how.",
+                "pages": [
+                    {
+                        "slug": "page-slug",
+                        "url": "<docs_base_url>/ai/pages/page-slug.md",
+                        "relevance": "Why an agent might need this page"
+                    }
+                ]
+            }
+        }
+    ],
+
+    "outputs": {
+        "public_root": "/ai/",
+        "tasks_dir": "tasks"
+    }
 }
 ```
 
-This file lives in the project root alongside `llms_config.json`.
+If an `agent_tasks_config.json` already exists in the project, read it before starting — you may be adding a task to an existing config rather than creating one from scratch. See Phase 4 for merge behavior.
+
+**For a real-world example** of a completed config with a multi-step task, read the `agent_tasks_config.json` in this project's root directory.
 
 ---
 
-## Prerequisites
+## Before You Begin
 
-Before starting, confirm you have access to:
+### Step 1: Verify the Documentation Project
 
-1. **The documentation project** — an MkDocs site with `resolve_md` already configured and an existing `llms_config.json`
-2. **At least one reference repository** — a repo containing working, tested code that mirrors what the documentation teaches (e.g., example scripts, sample projects, SDK usage examples)
-3. **The documentation engineer** — a human collaborator who can answer questions about task scope, prerequisites, and known error patterns
+Confirm you are inside a valid documentation project by checking for:
+
+- `mkdocs.yml` in the project root
+- `llms_config.json` in the project root (the `resolve_md` plugin must already be configured)
+
+If either is missing, stop and inform the documentation engineer — this skill requires an existing MkDocs project with `resolve_md` set up.
+
+Read `llms_config.json` to capture:
+- Project identity (`project.id`, `project.name`, `docs_base_url`)
+- Content categories (`content.categories_info`) — these tell you the domain areas the docs cover
+- Output paths (`outputs`) — where resolved pages will be served from
+
+### Step 2: Discovery Interview
+
+The documentation engineer is your human collaborator. Before diving into analysis, conduct a brief interview to understand the scope of work. Ask the following questions (you can present them all at once):
+
+1. **What task(s) do you want to build?** Do you have specific tasks identified, or would you like help surfacing task candidates from the docs?
+2. **Do you have a reference repository** (or repositories) containing working, tested code for the task(s)? If so, provide the URL(s).
+3. **What are the common pitfalls?** When someone follows this workflow manually, what typically goes wrong? (This feeds error patterns later.)
+
+Based on the answers, determine your path through the remaining phases:
+
+| Answer | Effect |
+|---|---|
+| Engineer has specific tasks | Skip the doc-scanning steps in Phase 1 (steps 1-3) and proceed directly to Phase 2 with the tasks they provide |
+| Engineer wants help finding tasks | Complete all of Phase 1 to scan docs and propose candidates |
+| Engineer provides reference repo(s) | Use them in Phase 2; still scan the docs for any additional repos the engineer may have missed |
+| Engineer has no reference repo | Scan the docs for repo links in Phase 2; if none are found, flag this to the engineer — tasks without reference code are possible but significantly weaker |
 
 ---
 
 ## Process
 
-### Phase 1: Inventory the Documentation
+### Phase 1: Identify Task Candidates
 
-**Goal:** Understand what the docs cover and identify which tasks to build.
+**Goal:** Scan the docs and propose tasks to build. Skip steps 1-3 if the engineer provided specific tasks in the discovery interview.
 
-1. Read `llms_config.json` to understand:
-   - Project identity (`project.id`, `project.name`, `docs_base_url`)
-   - Content categories (`content.categories_info`) — these tell you the domain areas the docs cover
-   - Output paths (`outputs`) — where resolved pages will be served from
-
-2. **Ask the documentation engineer:** Do you already have a specific task (or tasks) identified that you want to build a config for, or would you like help surfacing task candidates from the docs?
-
-   - **If the engineer has tasks identified:** Proceed directly to Phase 2 using the tasks they provide. Skip steps 3-5 below.
-   - **If the engineer wants help surfacing candidates:** Continue with steps 3-5 to scan the docs and propose candidates.
-
-3. Scan the docs directory structure:
+1. Scan the docs directory structure:
    - Read `.nav.yml` files to understand the navigation hierarchy and logical groupings
    - Identify tutorial/guide pages vs reference pages vs conceptual pages
    - Note which pages walk users through multi-step workflows — these are your task candidates
 
-4. Read frontmatter on candidate pages:
+2. Read frontmatter on candidate pages:
    - `title` and `description` for understanding scope
    - `categories` for understanding which domain areas a page covers
 
-5. Identify task-shaped content:
+3. Identify task-shaped content:
    - Pages or page sequences that walk through a complete workflow from start to finish
    - Content that has a clear objective (e.g., "by the end of this guide, you will have...")
    - Multi-page flows connected by navigation ordering
 
 **Output of this phase:** A list of candidate tasks with:
 - A working title for each task
+- A proposed task ID following the naming convention: `verb-noun-qualifier`, lowercase, hyphen-separated (e.g., `build-zero-to-hero-dapp`, `deploy-erc20-contract`, `setup-validator-node`). The ID must be URL-safe and descriptive enough to distinguish from other tasks at a glance
 - The doc pages involved
 - The approximate scope (what does the user accomplish?)
 
@@ -94,41 +203,36 @@ Before starting, confirm you have access to:
 
 ### Phase 2: Analyze the Reference Repository
 
-**Goal:** Map working reference code to the candidate tasks.
+**Goal:** Map working reference code to the candidate tasks. Use the reference repo(s) provided in the discovery interview. If none were provided, start at step 3 to scan the docs for repo links.
 
-1. **Ask the documentation engineer:** Do you have a reference repository (or repositories) that contains working code for the identified tasks?
-
-   - **If the engineer provides a repo:** Accept it and proceed to step 2 with that repo.
-   - **If the engineer does not have one:** Skip to step 3 to scan the docs for references.
-
-2. **Examine the provided reference repo structure:**
+1. **Examine the provided reference repo structure:**
    - Clone or browse the repo to understand its directory layout
    - Identify the main code files and their purposes
    - Note the language, runtime, and dependency requirements
    - **Check the repo's own dependency versions** — read `package.json`, `Cargo.toml`, `requirements.txt`, or equivalent to determine which tool versions the reference code was written for. Record these versions; you will need them in Phase 3 to ensure the task steps specify compatible versions.
 
-3. **Scan the docs for additional reference repos:** Look through the candidate task pages for:
+2. **Scan the docs for additional reference repos:** Look through the candidate task pages for:
    - GitHub repository links (clone URLs, badge links, "View source" links)
    - Code snippet includes that reference external repos (e.g., `--8<--` paths, submodule references)
    - "Where to Go Next" or conclusion sections that link to working example repos
    - Present any additional repos found to the engineer for confirmation before including them
 
-4. For each confirmed reference repo, construct the entry:
+3. For each confirmed reference repo, construct the entry:
    - `url`: The GitHub URL of the repo
    - `default_branch`: The branch to reference (usually `main`)
    - `raw_base_url`: Constructed as `https://raw.githubusercontent.com/{org}/{repo}/{branch}`
    - `description`: What this repo provides
 
-5. For each candidate task, identify:
+4. For each candidate task, identify:
    - Which files from the reference repo(s) are needed
    - The logical order in which an agent should create/use those files
    - The base path within the repo (e.g., `node/scripts`, `examples/python`)
 
-6. For each file, determine:
+5. For each file, determine:
    - `path`: Relative path from the base path
    - `description`: One-line summary of what this file does
 
-7. **Version compatibility audit** — compare the tool versions used in the reference code against the versions you plan to specify in the task steps. Look for:
+6. **Version compatibility audit** — compare the tool versions used in the reference code against the versions you plan to specify in the task steps. Look for:
    - **Major version mismatches** — e.g., reference code written for v2 of a framework but the task will specify v3. Check changelogs or migration guides for breaking changes in config format, plugin registration, module system (`"type": "module"` requirements), and API patterns.
    - **Dependency manifest completeness** — read the reference repo's lockfile or dependency manifest to capture the full dependency tree, including peer dependencies that won't auto-install. Note any transitive dependencies that require manual installation.
    - **Hardcoded values that differ from task context** — scan reference files for values like localhost URLs, placeholder chain IDs, default ports, or example API keys that will need to be replaced with task-specific values. Record each one as a substitution pair (reference value → task value).
@@ -181,6 +285,11 @@ For each candidate task:
    - **Cross-step data dependencies:** If a step produces a value that a later step needs (e.g., a deployed contract address, a generated API key, a build artifact path), the producing step's description must say "save this value — you will need it in step N" and the consuming step's description must say exactly what to substitute and where. Never assume the agent will infer that a hardcoded value in a reference file should be replaced.
    - **File placement:** When a reference file path could be ambiguous (e.g., the repo structure differs from what the tutorial text describes), the description should state the exact destination path relative to the current working directory and note where other files expect to import it from.
    - **Reference file substitutions:** If Phase 2 identified hardcoded values in a reference file that differ from the task context (e.g., a localhost URL that should be a production RPC endpoint, a default chain ID that should be a testnet chain ID), the step description must list each substitution explicitly: "In the fetched file, replace `<old value>` with `<new value>`." Do not use vague instructions like "adapt to your environment" — the agent has no way to infer which values to change.
+   - **Secrets and private keys — always use the `.env` file pattern:** Agents run inside tools like Claude Code where the user's shell environment is not shared and interactive secret prompts create security and usability problems. For any task that requires secrets (private keys, API keys, tokens):
+     1. **Always use dotenv:** Include `dotenv` in the dependency install step. For ESM projects, add `import "dotenv/config";` as the first line of the config file. For CommonJS projects, add `require("dotenv").config();` as the first line.
+     2. **Create a `.env` + `.gitignore` step:** Add a dedicated step that creates a `.env` file with empty placeholder values (e.g., `PRIVATE_KEY=`) and a `.gitignore` that excludes `.env`. This step's description must include this exact instruction: *"IMPORTANT: After creating these files, stop and ask the user to edit the .env file and paste their secret value. Do NOT ask the user to type or paste secrets in the chat — they should edit the .env file directly in their editor or file system. Wait for the user to confirm before proceeding."*
+     3. **Never use shell exports or interactive prompts for secrets:** Do not instruct the agent to run `export SECRET=...` (the agent's shell is ephemeral and not shared with the user's terminal) or interactive commands like `npx hardhat vars set` (the agent would need to ask for the secret, which sends it through the chat). If the reference code uses a tool-specific secret mechanism (e.g., Hardhat config variables, encrypted keystores), add substitution instructions to convert it to dotenv.
+     4. **Gate deployment/test steps on the secret:** Any step that requires the secret must include: *"Before running this command, confirm the user has added their key to the .env file (step N)."*
 
 4a. **Define the dependency manifest** — for steps that install packages, list the complete install command including:
    - All top-level packages with version constraints
@@ -211,6 +320,16 @@ For each candidate task:
 ### Phase 4: Assemble the Config
 
 **Goal:** Produce the final `agent_tasks_config.json`.
+
+**Before assembling, check if `agent_tasks_config.json` already exists in the project root.**
+
+- **If it exists:**
+   1. Read it and use it as the base config.
+   2. Preserve existing `project`, `reference_repos`, and `outputs` blocks — only update them if the values in `llms_config.json` have changed.
+   3. Scan the existing `tasks` array for tasks with the same or similar `id` or `title` as the new task being created. If a match is found, **ask the documentation engineer:** "A task with a similar name already exists: `<existing task title>` (`<existing task id>`). Would you like to update the existing task or create a new, separate task?" Do not silently overwrite or duplicate.
+   4. If updating an existing task, replace that task entry in the array. If creating a new task, append it. In either case, merge any new `reference_repos` entries without removing existing ones.
+
+- **If it does not exist:** Start from an empty config structure and proceed with the steps below.
 
 1. **Set the project block** — mirror the relevant fields from `llms_config.json`:
    ```json
@@ -306,7 +425,7 @@ Before delivering the config:
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `id` | string | yes | URL-safe task identifier |
+| `id` | string | yes | URL-safe task identifier using `verb-noun-qualifier` convention (e.g., `build-zero-to-hero-dapp`) |
 | `title` | string | yes | Human-readable task title |
 | `objective` | string | yes | One sentence describing what the agent accomplishes |
 | `prerequisites` | object | yes | Grouped prerequisite lists |
