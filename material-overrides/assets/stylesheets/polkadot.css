@@ -363,6 +363,7 @@
   background-color: var(--color-surface-secondary);
   border-radius: var(--rounded-lg);
   padding: calc((44px - 0.8rem) / 2);
+  margin: .2rem 0;
   width: 44px;
   height: 44px;
 }
@@ -479,6 +480,13 @@ input.md-search__input::placeholder {
   [data-md-toggle="search"]:checked ~ .md-header .md-search__output {
     border-radius: var(--rounded-lg);
     top: 48px;
+  }
+
+  [data-md-toggle="search"]:checked
+    ~ .md-header
+    .md-header__option[data-md-component="palette"] {
+    max-width: 100%;
+    opacity: 1;
   }
 }
 

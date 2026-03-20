@@ -36,10 +36,10 @@
     {% endif %}
     {% if config.theme.palette %}
       {% if not config.theme.palette is mapping %}
+        {% include "partials/palette.html" %}
         <a href="{{ '/tools/' | url }}" title="Utility Tools" class="md-header__button md-icon md-header__tools" aria-label="Utility Tools">
           {% include ".icons/octicons/tools-16.svg" %}
         </a>
-        {% include "partials/palette.html" %}
       {% endif %}
     {% endif %}
     {% if not config.theme.palette is mapping %}
