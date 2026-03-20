@@ -358,7 +358,8 @@
   color: var(--color-text-primary);
 }
 
-.md-header__option[data-md-component="palette"] .md-icon {
+.md-header__option[data-md-component="palette"] .md-icon,
+.md-header__tools {
   background-color: var(--color-surface-secondary);
   border-radius: var(--rounded-lg);
   padding: calc((44px - 0.8rem) / 2);
@@ -366,9 +367,13 @@
   height: 44px;
 }
 
-.md-header__option[data-md-component="palette"] .md-icon svg {
+.md-header__option[data-md-component="palette"] .md-icon svg,
+.md-header__tools svg {
   height: 0.8rem;
   width: 0.8rem;
+}
+
+.md-header__option[data-md-component="palette"] .md-icon svg {
   transform: scaleX(-1);
 }
 
