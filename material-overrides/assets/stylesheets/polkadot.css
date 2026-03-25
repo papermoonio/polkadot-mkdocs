@@ -985,6 +985,7 @@ details.interface > summary::before {
   padding: var(--py-4) var(--py-8);
   transition-property: background-color;
   transition-duration: 200ms;
+  font-weight: 500;
 }
 
 .md-typeset .md-button:hover,
