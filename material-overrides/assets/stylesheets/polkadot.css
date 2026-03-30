@@ -358,7 +358,8 @@
   color: var(--color-text-primary);
 }
 
-.md-header__option[data-md-component="palette"] .md-icon {
+.md-header__option[data-md-component="palette"] .md-icon,
+.md-header__tools {
   background-color: var(--color-surface-secondary);
   border-radius: var(--rounded-lg);
   padding: calc((44px - 0.8rem) / 2);
@@ -366,9 +367,13 @@
   height: 44px;
 }
 
-.md-header__option[data-md-component="palette"] .md-icon svg {
+.md-header__option[data-md-component="palette"] .md-icon svg,
+.md-header__tools svg {
   height: 0.8rem;
   width: 0.8rem;
+}
+
+.md-header__option[data-md-component="palette"] .md-icon svg {
   transform: scaleX(-1);
 }
 
@@ -432,6 +437,11 @@ input.md-search__input::placeholder {
 }
 
 @media screen and (min-width: 60em) {
+  .md-header__option[data-md-component="palette"] .md-icon,
+  .md-header__tools {
+    margin: 0.2rem 0;
+  }
+
   .md-search__form {
     background-color: var(--color-surface-secondary);
     border-radius: var(--rounded-lg);
@@ -474,6 +484,13 @@ input.md-search__input::placeholder {
   [data-md-toggle="search"]:checked ~ .md-header .md-search__output {
     border-radius: var(--rounded-lg);
     top: 48px;
+  }
+
+  [data-md-toggle="search"]:checked
+    ~ .md-header
+    .md-header__option[data-md-component="palette"] {
+    max-width: 100%;
+    opacity: 1;
   }
 }
 
@@ -859,6 +876,18 @@ html .md-footer-meta.md-typeset a:hover {
     flex-wrap: wrap;
     justify-content: center;
   }
+
+  .footer-nav {
+    gap: 4px;
+    margin-top: var(--py-1);
+    margin-bottom: var(--py-1);
+    flex-wrap: wrap;
+  }
+
+  .md-typeset a.footer-nav-link {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 /* --- Admonitions --- */
@@ -973,6 +1002,7 @@ details.interface > summary::before {
   padding: var(--py-4) var(--py-8);
   transition-property: background-color;
   transition-duration: 200ms;
+  font-weight: 500;
 }
 
 .md-typeset .md-button:hover,
@@ -1095,7 +1125,7 @@ span.badge {
   flex-direction: column;
   padding-top: var(--p-3);
   margin: 0;
-  gap: var(--p-1)
+  gap: var(--p-1);
 }
 
 .status-badge a > img {
@@ -1503,24 +1533,6 @@ div.mermaid {
     width: 80%;
     margin: 25% auto;
   }
-}
-
-/* --- Support Bubble --- */
-#kapa-widget-container {
-  position: fixed;
-  bottom: 20px;
-  right: 24px;
-  top: 75vh;
-  height: 120px;
-  width: 90px;
-  padding: 16px;
-  background-color: var(--color-surface-secondary);
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px;
-  border: 1px solid rgb(62, 62, 62);
-  z-index: 199;
-  animation: 1s ease-in-out 0s 1 normal none running wiggle;
-  border-radius: 16px;
-  border-bottom-right-radius: 0;
 }
 
 /* --- Tables --- */

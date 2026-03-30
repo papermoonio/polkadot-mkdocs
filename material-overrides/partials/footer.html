@@ -47,14 +47,13 @@
   {% endif %}
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="footer-nav">
-        <a href="/reference/" class="footer-nav-link">
-          Technical Reference
-        </a>
-        <a href="/ai-resources/" class="footer-nav-link">
-          AI Resources
-        </a>
-      </div>
+      {% if config.extra.footer_nav %}
+        <div class="footer-nav">
+          {% for item in config.extra.footer_nav %}
+            <a href="{{ item.url | url }}" class="footer-nav-link">{{ item.title }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
       <div class="row">
         {% include "partials/copyright.html" %}
         <div class="policy-links">
