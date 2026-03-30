@@ -1408,6 +1408,112 @@
                     }
                 ]
             }
+        },
+        {
+            "id": "set-up-local-dev-node",
+            "title": "Set Up a Local Development Node",
+            "objective": "Clone the Polkadot SDK, compile the revive-dev-node and eth-rpc binaries, and run a local blockchain environment with an ETH-RPC adapter accessible at http://localhost:8545 for smart contract development without network fees or confirmation delays.",
+            "license": "CC-BY-4.0",
+            "source_pages": ["smart-contracts/dev-environments/local-dev-node.md"],
+
+            "prerequisites": {
+                "runtime": [
+                    "Rust (stable toolchain) — install via rustup at https://rustup.rs/",
+                    "Polkadot SDK build dependencies — complete the Install Polkadot SDK Dependencies guide before proceeding",
+                    "git"
+                ]
+            },
+
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "Clone the Polkadot SDK repository",
+                    "working_directory": ".",
+                    "commands": [
+                        "git clone https://github.com/paritytech/polkadot-sdk.git"
+                    ],
+                    "description": "Clone the Polkadot SDK monorepo from GitHub. It contains both the revive-dev-node and the pallet-revive-eth-rpc adapter used in subsequent steps."
+                },
+                {
+                    "order": 2,
+                    "action": "Build the revive-dev-node binary",
+                    "working_directory": "polkadot-sdk",
+                    "commands": [
+                        "cargo build -p revive-dev-node --bin revive-dev-node --release"
+                    ],
+                    "description": "Compile the revive-dev-node binary in release mode. This node runs a local blockchain with pallet-revive for smart contract support and pre-funded development accounts. The binary is output to polkadot-sdk/target/release/revive-dev-node. Release builds optimize for performance over compilation speed.",
+                    "expected_output": "Compilation completes without errors. This step can take up to 30 minutes on first run."
+                },
+                {
+                    "order": 3,
+                    "action": "Build the ETH-RPC adapter binary",
+                    "working_directory": "polkadot-sdk",
+                    "commands": [
+                        "cargo build -p pallet-revive-eth-rpc --bin eth-rpc --release"
+                    ],
+                    "description": "Compile the eth-rpc adapter binary in release mode. This adapter translates standard Ethereum JSON-RPC calls into Substrate-compatible requests, enabling familiar Ethereum tooling (MetaMask, Hardhat, Ethers.js) to work against the local node. The binary is output to polkadot-sdk/target/release/eth-rpc.",
+                    "expected_output": "Compilation completes without errors. This step can also take up to 30 minutes on first run."
+                },
+                {
+                    "order": 4,
+                    "action": "Start the local development node",
+                    "working_directory": "polkadot-sdk",
+                    "commands": [
+                        "./target/release/revive-dev-node --dev"
+                    ],
+                    "description": "Start the local blockchain node in development mode. The --dev flag initializes a single-node chain with pallet-revive enabled and pre-funded development accounts. Keep this terminal open — the node must remain running for the ETH-RPC adapter and development tools to connect.",
+                    "expected_output": "Node starts and begins producing blocks. Log output confirms the node is running."
+                },
+                {
+                    "order": 5,
+                    "action": "Start the ETH-RPC adapter",
+                    "working_directory": "polkadot-sdk",
+                    "commands": [
+                        "./target/release/eth-rpc --dev"
+                    ],
+                    "description": "Open a new terminal and start the ETH-RPC adapter in development mode. The adapter connects to the running local node and exposes a standard Ethereum JSON-RPC interface at http://localhost:8545. Keep this terminal open alongside the node terminal. Once running, tools like MetaMask, Hardhat, and Ethers.js can be pointed at http://localhost:8545 to interact with the local chain. Note: the local node exposes a subset of the Ethereum JSON-RPC API — some methods used by tools like Foundry or Hardhat may be unavailable or behave differently than on native Ethereum networks.",
+                    "expected_output": "Adapter starts and listens on http://localhost:8545. Log output confirms the adapter is connected to the local node."
+                }
+            ],
+
+            "error_patterns": [
+                {
+                    "pattern": "error: linker `cc` not found",
+                    "cause": "A C/C++ linker is not installed, which is required to compile Rust projects with native dependencies.",
+                    "resolution": "Install build tools. On Ubuntu/Debian: sudo apt-get install build-essential. On macOS: xcode-select --install. Then retry the cargo build command."
+                },
+                {
+                    "pattern": "error[E0463]: can't find crate for `std`",
+                    "cause": "The Rust standard library target is missing for the active toolchain.",
+                    "resolution": "Run rustup target add wasm32-unknown-unknown and ensure all Polkadot SDK build dependencies from the prerequisite guide are fully installed. Then retry the cargo build command."
+                },
+                {
+                    "pattern": "Address already in use",
+                    "cause": "Port 8545 is already occupied by another process — either a previous eth-rpc instance or another Ethereum node.",
+                    "resolution": "Stop the conflicting process. On Linux/macOS: lsof -ti:8545 | xargs kill -9. Then restart the eth-rpc adapter."
+                },
+                {
+                    "pattern": "Connection refused",
+                    "cause": "The ETH-RPC adapter cannot connect to the local node. Either the node is not running or it has not finished starting.",
+                    "resolution": "Ensure revive-dev-node is running (step 4) and producing blocks before starting the eth-rpc adapter (step 5). Both must remain running simultaneously in separate terminals."
+                }
+            ],
+
+            "supplementary_context": {
+                "description": "These documentation pages provide background context for understanding the local development environment. Consult them if you need to understand WHY something works, not HOW to do it.",
+                "pages": [
+                    {
+                        "slug": "smart-contracts-dev-environments-local-dev-node",
+                        "url": "https://docs.polkadot.com/smart-contracts/dev-environments/local-dev-node/",
+                        "relevance": "The full guide this skill is based on. Consult for narrative context, optional debug logging configuration for both binaries, and details about the ETH-RPC API subset limitations."
+                    },
+                    {
+                        "slug": "smart-contracts-connect",
+                        "url": "https://docs.polkadot.com/smart-contracts/connect/",
+                        "relevance": "Network details for Polkadot Hub TestNet and MainNet. Consult when transitioning from local development to deploying on a live network."
+                    }
+                ]
+            }
         }
     ],
 
