@@ -290,6 +290,12 @@
   flex-direction: column;
 }
 
+@media screen and (min-width: 76.25em) {
+  .md-header--lifted ~ .md-container .md-typeset :target {
+    --md-scroll-margin: 4rem;
+  }
+}
+
 @media screen and (max-width: 76.2344em) {
   .md-content {
     padding: 0 32px;
