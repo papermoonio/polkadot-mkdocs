@@ -8,12 +8,9 @@
   <div class="md-grid">
     <ul class="md-tabs__list">
       {% for nav_item in nav.items %}
-        {# Skip sections that should only appear in footer or sidebar #}
-        {% set is_ignored_section = nav_item.children
-                              and nav_item.title in ["Technical Reference", "Get Support", "Policies"] %}
-        {% set is_ignored_page = nav_item.is_page
-                              and nav_item.title in ["AI Resources"] %}
-        {% if nav_item.url != "" and not is_ignored_section and not is_ignored_page %}
+        {% if nav_item.url != "" and 
+           not (nav_item.meta and nav_item.meta.footer_nav) and
+           nav_item.title != "Policies" %}
           {{ item.render(nav_item) }}
         {% endif %}
       {% endfor %}

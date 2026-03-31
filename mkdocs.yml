@@ -112,6 +112,7 @@ markdown_extensions:
 # Hooks
 hooks:
   - hooks/footer_nav.py
+  - hooks/synthesize_ancestors.py
 
 # Plugins
 plugins:

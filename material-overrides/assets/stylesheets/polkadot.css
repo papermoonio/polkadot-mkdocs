@@ -662,6 +662,11 @@ label.md-nav__link--active,
   .md-nav__icon:hover {
     background-color: transparent;
   }
+
+  /* Breadcrumbs */
+  .md-path {
+    margin: 0 0.8rem;
+  }
 }
 
 @media screen and (min-width: 60em) {
@@ -796,7 +801,7 @@ html .md-footer-meta.md-typeset a:hover {
     position: fixed;
     bottom: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 2;
   }
 
   .md-main {
