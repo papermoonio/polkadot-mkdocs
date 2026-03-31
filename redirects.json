@@ -473,6 +473,14 @@
       "value": "/parachains/testing/run-a-parachain-network/"
     },
     {
+      "key": "/ai-chatbot-policy/",
+      "value": "/policies/ai-chatbot-policy/"
+    },
+    {
+      "key": "/cookie-policy/",
+      "value": "/policies/cookie-policy/"
+    },
+    {
       "key": "/get-support/ai-ready-docs/",
       "value": "/ai-resources/"
     },
@@ -611,6 +619,10 @@
     {
       "key": "/parachains/testing/",
       "value": "/parachains/testing/fork-a-parachain/"
+    },
+    {
+      "key": "/privacy-policy/",
+      "value": "/policies/privacy-policy/"
     },
     {
       "key": "/polkadot-protocol/",
@@ -879,6 +891,10 @@
     {
       "key": "/smart-contracts/libraries/",
       "value": "/smart-contracts/libraries/ethers-js/"
+    },
+    {
+      "key": "/terms-of-use/",
+      "value": "/policies/terms-of-use/"
     },
     {
       "key": "/tutorials/",
