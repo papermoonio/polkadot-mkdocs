@@ -662,6 +662,11 @@ label.md-nav__link--active,
   .md-nav__icon:hover {
     background-color: transparent;
   }
+
+  /* Breadcrumbs */
+  .md-path {
+    margin: 0 0.8rem;
+  }
 }
 
 @media screen and (min-width: 60em) {
@@ -796,7 +801,7 @@ html .md-footer-meta.md-typeset a:hover {
     position: fixed;
     bottom: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 2;
   }
 
   .md-main {
@@ -1208,6 +1213,11 @@ a.tests-button {
 }
 
 /* Support cards */
+.md-typeset .grid.cards.support > ul > li {
+  display: flex;
+  flex-direction: column;
+}
+
 .md-typeset .grid.cards.support ul.card-list > li {
   margin-top: 0;
   margin-bottom: 0.5em;
@@ -1653,3 +1663,4 @@ div.mermaid {
 h1.not-found {
   text-align: center;
 }
+
