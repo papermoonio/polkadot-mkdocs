@@ -117,15 +117,21 @@ hooks:
 # Plugins
 plugins:
   - search
-  - exclude-search:
-      exclude:
-        - ai/*
-  - awesome-nav
   - ai_docs:
       llms_config: llms_config.json
       enabled: !ENV [ENABLED_LLMS_PLUGINS, True]
-  - page_toggle
+  - awesome-nav
+  - git-revision-date-localized:
+      type: date
+      enable_creation_date: true
+      exclude:
+        - node_modules/*
+      enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
   - glightbox
+  - link_processor
+  - macros:
+      include_yaml:
+        - polkadot-docs/variables.yml
   - minify:
       minify_html: true
       minify_js: true
@@ -150,15 +156,7 @@ plugins:
           - assets/stylesheets/home.css
         main.html:
           - assets/stylesheets/polkadot.css   
-  - macros:
-      include_yaml:
-        - polkadot-docs/variables.yml
-  - git-revision-date-localized:
-      type: date
-      enable_creation_date: true
-      exclude:
-        - node_modules/*
-      enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
+  - page_toggle
   - social:
       enabled: !ENV [SOCIAL_CARDS, True]
       cards_layout_dir: layouts
