@@ -1704,24 +1704,5 @@
     "outputs": {
         "public_root": "/ai/",
         "skills_dir": "skills"
-    },
-    "coverage": {
-        "exclude_patterns": [
-            "index.md",
-            "*/index.md",
-            "README.md",
-            "LICENSE.md",
-            ".CONTRIBUTING.md",
-            ".snippets/*",
-            ".github/*",
-            "images/*",
-            "privacy-policy.md",
-            "terms-of-use.md",
-            "cookie-policy.md",
-            "ai-chatbot-policy.md",
-            "ai-resources.md",
-            "get-support/*",
-            ".*"
-        ]
     }
 }
