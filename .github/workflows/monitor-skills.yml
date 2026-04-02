@@ -1,0 +1,46 @@
+name: Monitor Skills
+
+on:
+  repository_dispatch:
+    types: [docs-updated, reference-code-updated]
+  workflow_dispatch:
+
+jobs:
+  check-skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: polkadot-developers/polkadot-docs
+          path: polkadot-docs
+
+      - uses: actions/checkout@v4
+        with:
+          repository: papermoonio/agent-ready-docs-hub
+          path: agent-ready-docs-hub
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Monitor upstream changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 agent-ready-docs-hub/monitor_changes.py polkadot-docs \
+            --mkdocs-root .
+
+      - name: Refresh skill coverage
+        run: |
+          python3 agent-ready-docs-hub/generate_coverage.py polkadot-docs \
+            --mkdocs-root .
+
+      - name: Commit updated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add skill_coverage.json change_alerts.json repo_state.json
+          git diff --cached --quiet || git commit -m "chore: refresh skill coverage and alerts"
+          git push

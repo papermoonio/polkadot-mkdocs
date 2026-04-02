@@ -1,0 +1,1708 @@
+{
+    "schema_version": "0.1",
+    "generated": "2026-03-31T12:47:32Z",
+    "content_hash": "sha256:d9c3d065e47f413ac95c51a76bcea55df4fc35af0bb4a3d44113c52b0c083a62",
+    "project": {
+        "id": "polkadot",
+        "name": "Polkadot",
+        "docs_base_url": "https://docs.polkadot.com/"
+    },
+    "reference_repos": {
+        "revm-hardhat-examples": {
+            "url": "https://github.com/polkadot-developers/revm-hardhat-examples",
+            "default_branch": "master",
+            "raw_base_url": "https://raw.githubusercontent.com/polkadot-developers/revm-hardhat-examples/master",
+            "description": "Working examples for smart contract tutorials using Hardhat v3, Viem, and Next.js on Polkadot Hub"
+        }
+    },
+    "skills": [
+        {
+            "id": "build-zero-to-hero-dapp",
+            "title": "Build a Zero to Hero Storage DApp",
+            "objective": "Set up a Hardhat v3 project, deploy a Storage smart contract to Polkadot Hub TestNet, and build a Next.js dApp with Viem that connects a MetaMask wallet, reads on-chain data, and writes transactions.",
+            "license": "CC-BY-4.0",
+            "source_pages": [
+                "smart-contracts/cookbook/dapps/zero-to-hero.md"
+            ],
+            "prerequisites": {
+                "runtime": [
+                    "Node.js v22+",
+                    "npm"
+                ],
+                "network": [
+                    "RPC endpoint: https://services.polkadothub-rpc.com/testnet (Polkadot Hub TestNet, chain ID 420420417)",
+                    "Base fee: 1000 gwei \u2014 significantly higher than Ethereum. When troubleshooting stuck transactions or setting custom gas parameters, use this as the minimum base fee"
+                ],
+                "tokens": [
+                    "Testnet PAS tokens from https://faucet.polkadot.io/ \u2014 the deploying account needs enough PAS to cover gas for contract deployment and transactions"
+                ],
+                "wallet": [
+                    "MetaMask or compatible EVM wallet with an exported private key (0x-prefixed) funded with testnet PAS tokens"
+                ]
+            },
+            "env_vars": [
+                {
+                    "name": "PRIVATE_KEY",
+                    "description": "The 0x-prefixed private key of a funded Polkadot Hub TestNet account. Export from MetaMask (Account Details > Show Private Key) or another EVM wallet. Fund the corresponding address via https://faucet.polkadot.io/.",
+                    "required": true
+                }
+            ],
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "Create the project root directory",
+                    "working_directory": ".",
+                    "commands": [
+                        "mkdir -p zero-to-hero-dapp/storage-contract"
+                    ],
+                    "description": "Create the root project directory with a subdirectory for the smart contract project. The frontend dApp directory will be created later by create-next-app in step 11."
+                },
+                {
+                    "order": 2,
+                    "action": "Create the storage-contract package.json",
+                    "working_directory": "zero-to-hero-dapp",
+                    "reference_file": "storage-contract/package.json",
+                    "description": "Fetch the reference file and save it as storage-contract/package.json. This file sets \"type\": \"module\" (required for Hardhat v3) and pins the correct dependency versions. No substitutions needed."
+                },
+                {
+                    "order": 3,
+                    "action": "Install storage-contract dependencies",
+                    "working_directory": "zero-to-hero-dapp/storage-contract",
+                    "commands": [
+                        "npm install",
+                        "npm install dotenv"
+                    ],
+                    "description": "Install all dependencies listed in package.json, plus the dotenv package (needed by hardhat.config.ts in step 5 to load PRIVATE_KEY from .env). This includes Hardhat v3, @nomicfoundation/hardhat-toolbox-viem, @nomicfoundation/hardhat-ignition, viem, TypeScript, and dotenv. The project uses ESM (\"type\": \"module\") so all imports use ES module syntax.",
+                    "expected_output": "npm install completes without errors. If you see peer dependency warnings, they can be ignored as long as no errors occur."
+                },
+                {
+                    "order": 4,
+                    "action": "Create the Storage smart contract",
+                    "working_directory": "zero-to-hero-dapp/storage-contract",
+                    "reference_file": "storage-contract/contracts/Storage.sol",
+                    "description": "Fetch the reference file and save it as contracts/Storage.sol. This is a simple Solidity contract with a storedNumber state variable, a setNumber(uint256) function, a getNumber() view function, and a NumberStored event. No substitutions needed."
+                },
+                {
+                    "order": 5,
+                    "action": "Create the Hardhat configuration",
+                    "working_directory": "zero-to-hero-dapp/storage-contract",
+                    "reference_file": "storage-contract/hardhat.config.ts",
+                    "description": "Fetch the reference file and save it as hardhat.config.ts.\n\nWARNING: This reference file contains a hardcoded test private key. AI-powered fetch tools may flag or refuse to return the file contents due to the detected secret. If your fetch is blocked, use a raw HTTP client instead: curl -sL https://raw.githubusercontent.com/polkadot-developers/revm-hardhat-examples/master/zero-to-hero-dapp/storage-contract/hardhat.config.ts\n\nThen make the following substitutions:\n\n1. Add `import \"dotenv/config\";` as the FIRST import line in the file (before any other imports). This loads the private key from the .env file created in step 8. The dotenv package was installed in step 3.\n2. Replace the RPC URL `http://127.0.0.1:8545` with `https://services.polkadothub-rpc.com/testnet`.\n3. Replace the hardcoded private key value (the hex string assigned to the accounts array) with `process.env.PRIVATE_KEY`. The accounts line should read: `accounts: [process.env.PRIVATE_KEY],` \u2014 note: no quotes around process.env.PRIVATE_KEY, it is a variable reference, not a string literal.\n4. Replace the chain ID `420420420` with `420420417`. These are different networks \u2014 420420420 is a local dev node, 420420417 is the public TestNet.\n5. In the Ignition configuration block, replace `requiredConfirmations: 0` with `requiredConfirmations: 1`. The zero-confirmation setting is designed for local dev nodes with instant finality. On a real TestNet, it causes Ignition to misinterpret pending transactions as dropped, leading to 'Transaction Already Imported' errors on retry."
+                },
+                {
+                    "order": 6,
+                    "action": "Create the TypeScript configuration for storage-contract",
+                    "working_directory": "zero-to-hero-dapp/storage-contract",
+                    "reference_file": "storage-contract/tsconfig.json",
+                    "description": "Fetch the reference file and save it as tsconfig.json. This configures TypeScript with ES2022 target and node16 module resolution, which is required for Hardhat v3's ESM setup. No substitutions needed."
+                },
+                {
+                    "order": 7,
+                    "action": "Create the Hardhat Ignition deployment module",
+                    "working_directory": "zero-to-hero-dapp/storage-contract",
+                    "reference_file": "storage-contract/ignition/modules/Storage.ts",
+                    "description": "Fetch the reference file and save it as ignition/modules/Storage.ts. Create the ignition/modules/ directory if it does not exist. This module deploys the Storage contract with no constructor arguments. No substitutions needed."
+                },
+                {
+                    "order": 8,
+                    "action": "Create .env and .gitignore for private key management",
+                    "working_directory": "zero-to-hero-dapp/storage-contract",
+                    "commands": [
+                        "echo 'PRIVATE_KEY=' > .env",
+                        "echo '.env' > .gitignore",
+                        "echo 'node_modules/' >> .gitignore",
+                        "echo 'artifacts/' >> .gitignore",
+                        "echo 'cache/' >> .gitignore",
+                        "echo 'typechain-types/' >> .gitignore"
+                    ],
+                    "description": "Create a .env file with an empty PRIVATE_KEY= placeholder and a .gitignore that excludes .env and build artifacts.\n\nIMPORTANT: After creating these files, stop and ask the user to edit the .env file and paste their secret value. Do NOT ask the user to type or paste secrets in the chat \u2014 they should edit the .env file directly in their editor or file system. The value must be their 0x-prefixed private key. Wait for the user to confirm before proceeding."
+                },
+                {
+                    "order": 9,
+                    "action": "Compile the contract",
+                    "working_directory": "zero-to-hero-dapp/storage-contract",
+                    "commands": [
+                        "npx hardhat compile"
+                    ],
+                    "description": "Compile the Storage contract. The dotenv package required by hardhat.config.ts was already installed in step 3. Compilation generates ABI artifacts in artifacts/contracts/Storage.sol/Storage.json \u2014 you will need this artifact in step 14.",
+                    "expected_output": "Compilation completes with 'Successfully compiled 1 Solidity file' or similar. The file artifacts/contracts/Storage.sol/Storage.json should exist after compilation."
+                },
+                {
+                    "order": 10,
+                    "action": "Deploy the Storage contract to Polkadot Hub TestNet",
+                    "working_directory": "zero-to-hero-dapp/storage-contract",
+                    "commands": [
+                        "npx hardhat ignition deploy ignition/modules/Storage.ts --network polkadotTestNet"
+                    ],
+                    "description": "Deploy the Storage contract using Hardhat Ignition.\n\nBefore running this command, confirm the user has added their private key to the .env file (step 8).\n\nThis command is INTERACTIVE \u2014 it will prompt 'Confirm deploy to network polkadotTestNet? (y/n)'. To run non-interactively, either:\n- Pipe confirmation: echo \"y\" | npx hardhat ignition deploy ignition/modules/Storage.ts --network polkadotTestNet\n- Or try the --default-sender flag if available in your Hardhat Ignition version\n\nAfter successful deployment, the deployed contract address will be printed to the console and saved in ignition/deployments/chain-420420417/deployed_addresses.json. Save this contract address \u2014 you will need it in step 15 to configure the frontend.\n\nDEPLOYMENT RECOVERY: Polkadot Hub TestNet can be unstable. If Ignition reports the transaction as 'dropped' or you encounter 'Transaction Already Imported' errors on retry, the original transaction may still be pending in the mempool. Do NOT immediately retry. Instead:\n1. Wait at least 60-90 seconds for the transaction to be mined. Note: the TestNet base fee is 1000 gwei (much higher than Ethereum) \u2014 this is normal, not a gas pricing error.\n2. Verify whether the deployment actually succeeded by checking if a contract address was written to ignition/deployments/chain-420420417/deployed_addresses.json.\n3. If no address was recorded but you suspect the transaction went through, compute the expected contract address from the deployer's address and nonce (nonce 0 for a fresh account), then check for deployed code: cast code <expected-address> --rpc-url https://services.polkadothub-rpc.com/testnet (if cast/foundry is available) or use a JSON-RPC eth_getCode call.\n4. If the deployment genuinely failed, delete the ignition/deployments/ directory entirely and re-run the deploy command.\n5. Save the confirmed contract address \u2014 you will need it in step 15.",
+                    "expected_output": "Deployment completes successfully and prints the deployed Storage contract address (a 0x-prefixed address). The address is also saved to ignition/deployments/chain-420420417/deployed_addresses.json. If Ignition lost track of the transaction but it was mined, the address can be recovered via eth_getCode verification."
+                },
+                {
+                    "order": 11,
+                    "action": "Scaffold the Next.js frontend dApp",
+                    "working_directory": "zero-to-hero-dapp",
+                    "commands": [
+                        "yes 'n' | npx create-next-app@16.0.1 dapp --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --use-npm",
+                        "rm dapp/app/page.tsx",
+                        "rm dapp/app/globals.css"
+                    ],
+                    "description": "Scaffold a new Next.js project in the dapp/ directory.\n\nThe version is pinned to 16.0.1 to match the reference repository and avoid unpredictable prompts introduced in newer releases. The command is piped through `yes 'n'` as a safety net \u2014 create-next-app may ask interactive questions that have no corresponding CLI flags (e.g., React Compiler, AGENTS.md). Piping 'n' declines these optional features, which are not needed for this task. The explicit flags (--typescript, --tailwind, etc.) still control the core scaffolding options.\n\nIf prompted interactively despite the pipe:\n- Project name: dapp\n- TypeScript: Yes (handled by --typescript)\n- ESLint: Yes (handled by --eslint)\n- Tailwind CSS: Yes (handled by --tailwind)\n- src/ directory: No (handled by --no-src-dir)\n- App Router: Yes (handled by --app)\n- Import alias: @/* (handled by --import-alias)\n- Any other prompts: No\n\nAfter scaffolding, the rm commands delete the placeholder page.tsx and globals.css that will be replaced by reference files in steps 19 and 20."
+                },
+                {
+                    "order": 12,
+                    "action": "Install viem and update dApp scripts for webpack",
+                    "working_directory": "zero-to-hero-dapp/dapp",
+                    "commands": [
+                        "npm install viem",
+                        "npm pkg set scripts.dev=\"next dev --webpack\"",
+                        "npm pkg set scripts.build=\"next build --webpack\""
+                    ],
+                    "description": "Install the viem library in the dApp project and update the dev/build scripts to use webpack instead of Turbopack. The --webpack flag is needed because the reference code is tested with webpack. Turbopack (the default in recent Next.js versions) may have compatibility differences."
+                },
+                {
+                    "order": 13,
+                    "action": "Create the Viem chain and client configuration",
+                    "working_directory": "zero-to-hero-dapp/dapp",
+                    "reference_file": "dapp/viem.ts",
+                    "description": "Fetch the reference file and save it as viem.ts in the dapp/ root directory. Then make the following substitutions:\n\n1. Replace the RPC URL `http://127.0.0.1:8545` with `https://services.polkadothub-rpc.com/testnet`. There may be multiple occurrences (HTTP transport config and chain rpcUrls) \u2014 replace ALL of them.\n2. Replace all occurrences of the chain ID `420420420` with `420420417`.\n3. If the file contains any hex representations of the chain ID (such as `0x190F1B44`), replace with `0x190F1B41`.\n\nThis file defines the custom Polkadot Hub TestNet chain object and exports a publicClient (for read operations) and a getWalletClient function (for write operations using MetaMask)."
+                },
+                {
+                    "order": 14,
+                    "action": "Copy the contract ABI artifact to the dApp",
+                    "working_directory": "zero-to-hero-dapp/dapp",
+                    "commands": [
+                        "mkdir -p abis",
+                        "cp ../storage-contract/artifacts/contracts/Storage.sol/Storage.json abis/Storage.json"
+                    ],
+                    "description": "Create an abis/ directory and copy the compiled Storage contract artifact from the storage-contract build output. This artifact was generated in step 9 and contains the ABI needed for the frontend to interact with the deployed contract. Do NOT fetch this file from the reference repo \u2014 use the locally compiled artifact to ensure ABI consistency with the deployed contract."
+                },
+                {
+                    "order": 15,
+                    "action": "Create the contract utility module",
+                    "working_directory": "zero-to-hero-dapp/dapp",
+                    "reference_file": "dapp/utils/contract.ts",
+                    "description": "Fetch the reference file and save it as utils/contract.ts. Create the utils/ directory if it does not exist. Then make the following substitution:\n\nReplace the hardcoded CONTRACT_ADDRESS value `0x970951a12F975E6762482ACA81E57D5A2A4e73F4` with the contract address you obtained from the deployment output in step 10. The address is in ignition/deployments/chain-420420417/deployed_addresses.json in the storage-contract/ directory.\n\nThis file exports helper functions that create read-only and write-capable contract instances using the ABI from abis/Storage.json and the viem clients from viem.ts."
+                },
+                {
+                    "order": 16,
+                    "action": "Create the WalletConnect component",
+                    "working_directory": "zero-to-hero-dapp/dapp",
+                    "reference_file": "dapp/app/components/WalletConnect.tsx",
+                    "description": "Fetch the reference file and save it as app/components/WalletConnect.tsx. Create the app/components/ directory if it does not exist.\n\nReplace all occurrences of the chain ID `420420420` with `420420417` \u2014 this includes decimal literals AND any hex representations (replace `0x190F1B44` with `0x190F1B41`). The component uses these values for MetaMask's wallet_switchEthereumChain and wallet_addEthereumChain RPC calls.\n\nAlso replace the RPC URL `http://127.0.0.1:8545` with `https://services.polkadothub-rpc.com/testnet` if it appears in the wallet_addEthereumChain parameters.\n\nThis component handles MetaMask wallet connection, disconnection, account display, and automatic network switching to the Polkadot Hub TestNet."
+                },
+                {
+                    "order": 17,
+                    "action": "Create the ReadContract component",
+                    "working_directory": "zero-to-hero-dapp/dapp",
+                    "reference_file": "dapp/app/components/ReadContract.tsx",
+                    "description": "Fetch the reference file and save it as app/components/ReadContract.tsx. No substitutions needed. This component polls the Storage contract's getNumber() function every 10 seconds using publicClient.readContract() and displays the current stored value."
+                },
+                {
+                    "order": 18,
+                    "action": "Create the WriteContract component",
+                    "working_directory": "zero-to-hero-dapp/dapp",
+                    "reference_file": "dapp/app/components/WriteContract.tsx",
+                    "description": "Fetch the reference file and save it as app/components/WriteContract.tsx.\n\nReplace all occurrences of the chain ID `420420420` with `420420417` if the component hardcodes the chain ID for network validation. Also replace any hex chain ID `0x190F1B44` with `0x190F1B41`.\n\nThis component provides a form to call setNumber() on the Storage contract. It simulates the transaction, requests a wallet signature, waits for confirmation, and displays the transaction hash on success."
+                },
+                {
+                    "order": 19,
+                    "action": "Replace the main page with the dApp page",
+                    "working_directory": "zero-to-hero-dapp/dapp",
+                    "reference_file": "dapp/app/page.tsx",
+                    "description": "Replace the generated app/page.tsx entirely with the fetched reference file. Save it as app/page.tsx. This is a client component ('use client') that composes the WalletConnect, ReadContract, and WriteContract components into the main page. No substitutions needed."
+                },
+                {
+                    "order": 20,
+                    "action": "Replace the global CSS with Tailwind v4 styles",
+                    "working_directory": "zero-to-hero-dapp/dapp",
+                    "reference_file": "dapp/app/globals.css",
+                    "description": "Replace the generated app/globals.css entirely with the fetched reference file. Save it as app/globals.css. This file uses the Tailwind CSS v4 import syntax (@import \"tailwindcss\") and defines root theme variables. If your scaffolded project generated Tailwind v3 syntax (@tailwind base; @tailwind components; @tailwind utilities;), this replacement is essential. No substitutions needed."
+                },
+                {
+                    "order": 21,
+                    "action": "Replace the PostCSS config for Tailwind v4",
+                    "working_directory": "zero-to-hero-dapp/dapp",
+                    "reference_file": "dapp/postcss.config.mjs",
+                    "description": "Replace the generated postcss.config.mjs entirely with the fetched reference file. Save it as postcss.config.mjs. This configures PostCSS to use the @tailwindcss/postcss plugin (Tailwind v4). If the scaffolded project generated a Tailwind v3 PostCSS config (with 'tailwindcss' and 'autoprefixer' plugins), this replacement is essential. If the generated config already uses @tailwindcss/postcss, this step can be skipped. No substitutions needed."
+                },
+                {
+                    "order": 22,
+                    "action": "Start the dApp development server",
+                    "working_directory": "zero-to-hero-dapp/dapp",
+                    "commands": [
+                        "npm run dev"
+                    ],
+                    "description": "Start the Next.js development server. This runs 'next dev --webpack' (as configured in step 12).",
+                    "expected_output": "The development server starts and displays a local URL (typically http://localhost:3000). The dApp should load in a browser and display the WalletConnect, ReadContract, and WriteContract components. Connecting MetaMask to the Polkadot Hub TestNet should allow reading the current stored number and writing a new value via transaction."
+                }
+            ],
+            "reference_code": {
+                "repo": "revm-hardhat-examples",
+                "base_path": "zero-to-hero-dapp",
+                "files": [
+                    {
+                        "path": "storage-contract/package.json",
+                        "description": "Storage contract project manifest with Hardhat v3, hardhat-toolbox-viem, hardhat-ignition, and TypeScript dependencies (ESM via type: module)"
+                    },
+                    {
+                        "path": "storage-contract/hardhat.config.ts",
+                        "description": "Hardhat v3 configuration with polkadotTestNet network, viem toolbox plugin, and Solidity 0.8.28 compiler"
+                    },
+                    {
+                        "path": "storage-contract/tsconfig.json",
+                        "description": "TypeScript configuration targeting ES2022 with node16 module resolution for Hardhat v3 ESM compatibility"
+                    },
+                    {
+                        "path": "storage-contract/contracts/Storage.sol",
+                        "description": "Solidity smart contract with storedNumber state variable, setNumber/getNumber functions, and NumberStored event"
+                    },
+                    {
+                        "path": "storage-contract/ignition/modules/Storage.ts",
+                        "description": "Hardhat Ignition deployment module that deploys the Storage contract with no constructor arguments"
+                    },
+                    {
+                        "path": "dapp/viem.ts",
+                        "description": "Custom Polkadot Hub TestNet chain definition, publicClient for reads, and getWalletClient for MetaMask-signed writes"
+                    },
+                    {
+                        "path": "dapp/utils/contract.ts",
+                        "description": "Contract address constant, ABI import, and factory functions for read-only and signed contract instances"
+                    },
+                    {
+                        "path": "dapp/app/page.tsx",
+                        "description": "Main page client component composing WalletConnect, ReadContract, and WriteContract into the dApp UI"
+                    },
+                    {
+                        "path": "dapp/app/components/WalletConnect.tsx",
+                        "description": "MetaMask wallet connection component with account display, network detection, and automatic chain switching"
+                    },
+                    {
+                        "path": "dapp/app/components/ReadContract.tsx",
+                        "description": "Component that polls getNumber() every 10 seconds via publicClient.readContract() and displays the stored value"
+                    },
+                    {
+                        "path": "dapp/app/components/WriteContract.tsx",
+                        "description": "Form component that calls setNumber() with transaction simulation, wallet signing, and confirmation tracking"
+                    },
+                    {
+                        "path": "dapp/app/globals.css",
+                        "description": "Tailwind CSS v4 stylesheet using @import syntax with root theme variables for light/dark mode"
+                    },
+                    {
+                        "path": "dapp/postcss.config.mjs",
+                        "description": "PostCSS configuration using @tailwindcss/postcss plugin for Tailwind CSS v4"
+                    }
+                ]
+            },
+            "error_patterns": [
+                {
+                    "pattern": "Error: insufficient funds for gas",
+                    "cause": "The account associated with PRIVATE_KEY does not have enough PAS tokens to cover gas fees for deployment or transactions.",
+                    "resolution": "Fund the account using the faucet at https://faucet.polkadot.io/. Verify the correct address is funded by checking the account derived from the private key in the .env file."
+                },
+                {
+                    "pattern": "Error: could not detect network",
+                    "cause": "The RPC endpoint URL is incorrect, unreachable, or the testnet is experiencing downtime.",
+                    "resolution": "Verify the RPC URL is exactly https://services.polkadothub-rpc.com/testnet in hardhat.config.ts and viem.ts. Check the Polkadot status page or Discord for outage reports."
+                },
+                {
+                    "pattern": "ERR_REQUIRE_ESM",
+                    "cause": "Hardhat v3 requires ES modules but the project is configured as CommonJS.",
+                    "resolution": "Ensure package.json contains \"type\": \"module\". Ensure tsconfig.json uses \"module\": \"node16\" and \"moduleResolution\": \"node16\". All imports must use ESM syntax (import/export, not require)."
+                },
+                {
+                    "pattern": "Cannot find module 'dotenv/config'",
+                    "cause": "The dotenv package was not installed but is imported in hardhat.config.ts.",
+                    "resolution": "Run npm install dotenv from the storage-contract/ directory."
+                },
+                {
+                    "pattern": "Error: chain mismatch",
+                    "cause": "The chain ID configured in the code does not match the chain the RPC endpoint or wallet is connected to. Common when the reference code's local dev chain ID (420420420) was not updated to the TestNet chain ID (420420417).",
+                    "resolution": "Search for 420420420 across all project files (hardhat.config.ts, viem.ts, component files) and replace with 420420417. Also check for hex representations: replace 0x190F1B44 with 0x190F1B41."
+                },
+                {
+                    "pattern": "MetaMask - RPC Error: Unrecognized chain ID",
+                    "cause": "MetaMask does not have the Polkadot Hub TestNet configured as a network.",
+                    "resolution": "The WalletConnect component should handle this automatically via wallet_addEthereumChain. If it fails, manually add the network in MetaMask: RPC URL https://services.polkadothub-rpc.com/testnet, Chain ID 420420417, Currency symbol PAS."
+                },
+                {
+                    "pattern": "Error: execution reverted",
+                    "cause": "A smart contract function call was rejected. For the Storage contract this is unlikely since setNumber has no access controls, but can occur if the contract address is wrong or the ABI does not match the deployed contract.",
+                    "resolution": "Verify the contract address in utils/contract.ts matches the address from step 10. Verify the ABI in abis/Storage.json was copied from the local build artifacts (step 14), not from an external source with a different contract version."
+                },
+                {
+                    "pattern": "Priority is too low",
+                    "cause": "The transaction's gas price or priority fee is below the network's minimum acceptance threshold. On Polkadot Hub TestNet (base fee 1000 gwei), the default gas estimation from ethers.js often produces values too low for the node to accept. This also occurs when retrying a failed transaction at the same nonce without sufficiently increasing the gas price (nodes typically require a 10%+ bump for replacement transactions).",
+                    "resolution": "Add an explicit gasPrice to the polkadotTestNet network config in hardhat.config.ts: `gasPrice: 5000000000000` (5000 gwei, 5x the base fee). This ensures all transactions clear with comfortable margin. Do NOT simply retry at the same gas price \u2014 that triggers 'Transaction Already Imported'. After updating the config, delete the ignition/deployments/ directory and redeploy."
+                },
+                {
+                    "pattern": "Transaction Already Imported",
+                    "cause": "Hardhat Ignition reported a transaction as dropped (due to requiredConfirmations: 0 on a real TestNet) and attempted to resubmit it, but the node's mempool still holds the original transaction.",
+                    "resolution": "Wait 30-60 seconds for the original transaction to be mined, then delete the ignition/deployments/ directory and re-run the deployment command from step 10. Verify that hardhat.config.ts has requiredConfirmations set to 1 or higher (step 5, substitution 5) \u2014 a value of 0 is only appropriate for local dev nodes."
+                },
+                {
+                    "pattern": "IgnitionError: You are trying to deploy to an in-process deployment",
+                    "cause": "A previous Hardhat Ignition deployment was interrupted and left an incomplete deployment journal.",
+                    "resolution": "Delete the ignition/deployments/ directory and re-run the deployment command from step 10."
+                },
+                {
+                    "pattern": "IGN411: An error occurred while trying to send a transaction",
+                    "cause": "Hardhat Ignition encountered a transaction-level failure. The error message includes the nonce and sender address, and suggests using the track-tx command to recover.",
+                    "resolution": "The error output includes the nonce and sender address. To find the transaction hash without a block explorer, run a Hardhat script or console command: `await ethers.provider.getTransaction(await ethers.provider.getTransactionCount('SENDER_ADDRESS') - 1)` or query the RPC directly with eth_getTransactionByBlockNumberAndIndex for recent blocks. Once you have the tx hash, run: `npx hardhat ignition track-tx <txHash> <deploymentId> --network polkadotTestnet`. If you cannot recover the transaction, delete the ignition/deployments/ directory and redeploy."
+                },
+                {
+                    "pattern": "Transaction stuck: deployed_addresses.json is empty and eth_getCode returns 0x",
+                    "cause": "The deployment transaction is genuinely stuck in the mempool \u2014 it was not mined and the contract does not exist at the computed address. This can happen when the gas price is too low relative to the network's base fee (1000 gwei on Polkadot Hub TestNet). Simply retrying with the same parameters will produce 'Transaction Already Imported' errors because the original transaction still occupies that nonce in the mempool.",
+                    "resolution": "Replace the stuck transaction by sending a zero-value transaction to your own address with the SAME nonce and a HIGHER gas price. Create and run a Hardhat script: `const [signer] = await ethers.getSigners(); const tx = await signer.sendTransaction({ to: signer.address, value: 0, nonce: STUCK_NONCE, gasPrice: ethers.parseUnits('2000', 'gwei') }); await tx.wait(); console.log('Nonce cleared:', tx.hash);` \u2014 replace STUCK_NONCE with the nonce from the error message. After the replacement transaction is mined, delete the ignition/deployments/ directory and redeploy. To prevent this in future attempts, add `gasPrice: 2000000000000n` (2000 gwei) to the network config in hardhat.config.ts."
+                },
+                {
+                    "pattern": "Module not found: Can't resolve 'viem'",
+                    "cause": "The viem package is not installed in the dApp project.",
+                    "resolution": "Run npm install viem from the dapp/ directory. Viem must be installed in the frontend project separately from the storage-contract project."
+                },
+                {
+                    "pattern": "window is not defined",
+                    "cause": "A component that accesses browser APIs (window.ethereum) is being rendered on the server side.",
+                    "resolution": "Ensure the component file has 'use client' as the first line. The page.tsx and all wallet/contract interaction components must be client components in Next.js App Router."
+                }
+            ],
+            "supplementary_context": {
+                "description": "These documentation pages provide background context for understanding the concepts behind each step. Consult them if you need to understand WHY something works, not HOW to do it. Note: resolved AI page versions (/ai/pages/) do not yet exist for the smart contracts section \u2014 these URLs point to the published docs pages which can still be fetched and read.",
+                "pages": [
+                    {
+                        "slug": "smart-contracts-cookbook-dapps-zero-to-hero",
+                        "url": "https://docs.polkadot.com/smart-contracts/cookbook/dapps/zero-to-hero/",
+                        "relevance": "The full tutorial this task is based on. Consult for narrative context, conceptual explanations, or if a step's purpose is unclear."
+                    },
+                    {
+                        "slug": "smart-contracts-dev-environments-hardhat",
+                        "url": "https://docs.polkadot.com/smart-contracts/dev-environments/hardhat/",
+                        "relevance": "Hardhat setup and configuration reference for Polkadot Hub. Consult if encountering Hardhat-specific configuration issues."
+                    },
+                    {
+                        "slug": "smart-contracts-connect",
+                        "url": "https://docs.polkadot.com/smart-contracts/connect/",
+                        "relevance": "Network details for Polkadot Hub TestNet and MainNet including RPC endpoints, chain IDs, and wallet configuration. Consult if network connectivity or chain ID issues arise."
+                    },
+                    {
+                        "slug": "smart-contracts-cookbook-smart-contracts-deploy-basic-basic-hardhat",
+                        "url": "https://docs.polkadot.com/smart-contracts/cookbook/smart-contracts/deploy-basic/basic-hardhat/",
+                        "relevance": "Simpler deployment-only tutorial that covers the Hardhat + Ignition deployment pattern in isolation. Consult if the deployment steps need additional context."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "deploy-erc20-token-hardhat",
+            "title": "Deploy an ERC-20 Token Using Hardhat",
+            "objective": "Set up a Hardhat v2 project with OpenZeppelin, create an ERC-20 token contract with mint and permit capabilities, compile and test it locally and against Polkadot Hub TestNet, then deploy with an initial token mint via Hardhat Ignition.",
+            "license": "CC-BY-4.0",
+            "source_pages": [
+                "smart-contracts/cookbook/smart-contracts/deploy-erc20/erc20-hardhat.md"
+            ],
+            "prerequisites": {
+                "runtime": [
+                    "Node.js v22+",
+                    "npm"
+                ],
+                "network": [
+                    "RPC endpoint: https://services.polkadothub-rpc.com/testnet (Polkadot Hub TestNet, chain ID 420420417)",
+                    "Base fee: 1000 gwei \u2014 significantly higher than Ethereum. When troubleshooting stuck transactions or setting custom gas parameters, use this as the minimum base fee"
+                ],
+                "tokens": [
+                    "Testnet PAS tokens from https://faucet.polkadot.io/ \u2014 the deploying account needs enough PAS to cover gas for contract deployment, testing, and the initial mint transaction"
+                ],
+                "wallet": [
+                    "MetaMask or compatible EVM wallet with an exported private key (0x-prefixed) funded with testnet PAS tokens"
+                ]
+            },
+            "env_vars": [
+                {
+                    "name": "PRIVATE_KEY",
+                    "description": "The 0x-prefixed private key of a funded Polkadot Hub TestNet account. Export from MetaMask (Account Details > Show Private Key) or another EVM wallet. Fund the corresponding address via https://faucet.polkadot.io/.",
+                    "required": true
+                }
+            ],
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "Create the project directory",
+                    "working_directory": ".",
+                    "commands": [
+                        "mkdir erc20-hardhat"
+                    ],
+                    "description": "Create the project directory for the ERC-20 token contract."
+                },
+                {
+                    "order": 2,
+                    "action": "Create the package.json",
+                    "working_directory": "erc20-hardhat",
+                    "reference_file": "package.json",
+                    "description": "Fetch the reference file and save it as package.json. This project uses Hardhat v2 (CommonJS \u2014 no \"type\": \"module\") with @nomicfoundation/hardhat-toolbox (includes ethers.js v6, Mocha, Chai, and TypeChain), OpenZeppelin Contracts v5.4.0, and TypeScript. No substitutions needed."
+                },
+                {
+                    "order": 3,
+                    "action": "Install dependencies",
+                    "working_directory": "erc20-hardhat",
+                    "commands": [
+                        "npm install",
+                        "npm install dotenv"
+                    ],
+                    "description": "Install all dependencies listed in package.json, plus the dotenv package (needed by hardhat.config.ts in step 5 to load PRIVATE_KEY from .env). This includes Hardhat v2, hardhat-toolbox (ethers.js v6, Mocha, Chai, TypeChain), OpenZeppelin Contracts, ts-node, and TypeScript.",
+                    "expected_output": "npm install completes without errors. If you see peer dependency warnings, they can be ignored as long as no errors occur."
+                },
+                {
+                    "order": 4,
+                    "action": "Create the ERC-20 token contract",
+                    "working_directory": "erc20-hardhat",
+                    "reference_file": "contracts/MyToken.sol",
+                    "description": "Fetch the reference file and save it as contracts/MyToken.sol. Create the contracts/ directory if it does not exist. This is a Solidity contract that inherits ERC20, Ownable, and ERC20Permit from OpenZeppelin. It defines an ERC-20 token named \"MyToken\" (symbol \"MTK\") with an owner-only mint function and gasless approval support via EIP-2612 permit. No substitutions needed."
+                },
+                {
+                    "order": 5,
+                    "action": "Create the Hardhat configuration",
+                    "working_directory": "erc20-hardhat",
+                    "reference_file": "hardhat.config.ts",
+                    "description": "Fetch the reference file and save it as hardhat.config.ts. Then make the following substitutions:\n\n1. Add `import \"dotenv/config\";` as the FIRST import line in the file (before any other imports). This loads the private key from the .env file created in step 9.\n2. The reference file uses Hardhat's Configuration Variables system (`vars.get()` and `vars.has()` imported from \"hardhat/config\") to manage the private key. This is an interactive mechanism that does not work in agent shells. Replace the entire accounts/private key handling:\n   - Remove `vars` from the import statement (keep `HardhatUserConfig` and any other imports from \"hardhat/config\")\n   - Replace the accounts conditional (e.g., `accounts: vars.has(\"TESTNET_PRIVATE_KEY\") ? [vars.get(\"TESTNET_PRIVATE_KEY\")] : []`) with: `accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : []`\n3. The RPC URL in the polkadotTestnet network config should already be `https://services.polkadothub-rpc.com/testnet`. If it is different (e.g., localhost), replace it with that URL.\n4. In the solidity compiler configuration, add `evmVersion: \"cancun\"` inside the settings object (alongside the optimizer). OpenZeppelin Contracts v5.4.0 uses the `mcopy` opcode which requires the Cancun EVM version. Without this setting, compilation will fail with an 'invalid opcode' error. The solidity config should look like: `solidity: { version: \"0.8.28\", settings: { evmVersion: \"cancun\", optimizer: { enabled: true, runs: 200 } } }`\n\nNote: This is a Hardhat v2 project using CommonJS (not ESM). The `import \"dotenv/config\"` syntax works because ts-node compiles it with esModuleInterop enabled."
+                },
+                {
+                    "order": 6,
+                    "action": "Create the TypeScript configuration",
+                    "working_directory": "erc20-hardhat",
+                    "reference_file": "tsconfig.json",
+                    "description": "Fetch the reference file and save it as tsconfig.json. This configures TypeScript with ES2022 target and CommonJS module system, with esModuleInterop enabled for compatibility with ES module imports in .ts files. No substitutions needed."
+                },
+                {
+                    "order": 7,
+                    "action": "Create the test file",
+                    "working_directory": "erc20-hardhat",
+                    "reference_file": "test/MyToken.test.ts",
+                    "description": "Fetch the reference file and save it as test/MyToken.test.ts. Create the test/ directory if it does not exist. This test suite uses Mocha + Chai with ethers.js v6 to verify: correct token name and symbol, owner assignment, zero initial supply, minting by owner, and total supply tracking after multiple mints. No substitutions needed."
+                },
+                {
+                    "order": 8,
+                    "action": "Create the Hardhat Ignition deployment module",
+                    "working_directory": "erc20-hardhat",
+                    "reference_file": "ignition/modules/MyToken.ts",
+                    "description": "Fetch the reference file and save it as ignition/modules/MyToken.ts. Create the ignition/modules/ directory if it does not exist. This module deploys the MyToken contract with account[0] as the initial owner, then calls mint() to mint 5 MTK (5 * 10^18 smallest units) to the deployer's address. No substitutions needed."
+                },
+                {
+                    "order": 9,
+                    "action": "Create .env and .gitignore for private key management",
+                    "working_directory": "erc20-hardhat",
+                    "commands": [
+                        "echo 'PRIVATE_KEY=' > .env",
+                        "echo '.env' > .gitignore",
+                        "echo 'node_modules/' >> .gitignore",
+                        "echo 'artifacts/' >> .gitignore",
+                        "echo 'cache/' >> .gitignore",
+                        "echo 'typechain-types/' >> .gitignore",
+                        "echo 'ignition/deployments/' >> .gitignore"
+                    ],
+                    "description": "Create a .env file with an empty PRIVATE_KEY= placeholder and a .gitignore that excludes .env, build artifacts, and deployment records.\n\nIMPORTANT: After creating these files, stop and ask the user to edit the .env file and paste their secret value. Do NOT ask the user to type or paste secrets in the chat \u2014 they should edit the .env file directly in their editor or file system. The value must be their 0x-prefixed private key. Wait for the user to confirm before proceeding."
+                },
+                {
+                    "order": 10,
+                    "action": "Compile the contract",
+                    "working_directory": "erc20-hardhat",
+                    "commands": [
+                        "npx hardhat compile"
+                    ],
+                    "description": "Compile the MyToken contract and its OpenZeppelin dependencies. The dotenv package required by hardhat.config.ts was already installed in step 3.",
+                    "expected_output": "Compilation succeeds and generates artifacts in the artifacts/ directory and type bindings in typechain-types/. Expect output similar to: 'Compiled 21 Solidity files successfully' (the count includes OpenZeppelin dependencies)."
+                },
+                {
+                    "order": 11,
+                    "action": "Run tests locally",
+                    "working_directory": "erc20-hardhat",
+                    "commands": [
+                        "npx hardhat test"
+                    ],
+                    "description": "Run the test suite against Hardhat's built-in local network. This does not require a funded account or TestNet access \u2014 the local network provides unlimited test accounts. This step verifies the contract logic works before testing against the real TestNet.",
+                    "expected_output": "All tests pass. Expected output: 6 passing tests covering deployment properties (name, symbol, owner, initial supply) and minting behavior (single mint, multiple mints with balance tracking)."
+                },
+                {
+                    "order": 12,
+                    "action": "Run tests against Polkadot Hub TestNet",
+                    "working_directory": "erc20-hardhat",
+                    "commands": [
+                        "npx hardhat test --network polkadotTestnet"
+                    ],
+                    "description": "Run the same test suite against the live Polkadot Hub TestNet. This validates that the contract behaves correctly on the actual chain, not just the local simulator.\n\nBefore running this command, confirm the user has added their private key to the .env file (step 9). The test account must be funded with PAS tokens since each test deploys a fresh contract and executes transactions on-chain.\n\nThe Mocha timeout is set to 40 seconds in hardhat.config.ts to accommodate TestNet block times. If tests time out, the TestNet may be experiencing congestion \u2014 wait and retry.\n\nNote: TestNet tests are slower than local tests and consume gas. If the TestNet is unstable, the local test results from step 11 confirm the contract logic is sound.",
+                    "expected_output": "All 6 tests pass against the live TestNet. Test execution will be slower than the local run (expect 10-30 seconds total depending on TestNet conditions)."
+                },
+                {
+                    "order": 13,
+                    "action": "Deploy the ERC-20 token to Polkadot Hub TestNet",
+                    "working_directory": "erc20-hardhat",
+                    "commands": [
+                        "npx hardhat ignition deploy ignition/modules/MyToken.ts --network polkadotTestnet"
+                    ],
+                    "description": "Deploy the MyToken contract and execute the initial mint of 5 MTK via Hardhat Ignition.\n\nBefore running this command, confirm the user has added their private key to the .env file (step 9).\n\nThis command is INTERACTIVE \u2014 it will prompt 'Confirm deploy to network polkadotTestnet? (y/n)'. To run non-interactively, pipe confirmation: echo \"y\" | npx hardhat ignition deploy ignition/modules/MyToken.ts --network polkadotTestnet\n\nThe Ignition module performs two on-chain actions: (1) deploy the MyToken contract with the deployer as owner, and (2) call mint() to send 5 MTK (5 * 10^18 smallest units) to the deployer's address.\n\nAfter successful deployment, the contract address will be printed to the console and saved in ignition/deployments/chain-420420417/deployed_addresses.json.\n\nDEPLOYMENT RECOVERY: Polkadot Hub TestNet can be unstable. If Ignition reports the transaction as 'dropped' or you encounter 'Transaction Already Imported' errors on retry, the original transaction may still be pending in the mempool. Do NOT immediately retry. Instead:\n1. Wait at least 60-90 seconds for the transaction to be mined. The TestNet base fee is 1000 gwei \u2014 this is normal, not a gas pricing error.\n2. Check if a contract address was written to ignition/deployments/chain-420420417/deployed_addresses.json.\n3. If the deployment genuinely failed, delete the ignition/deployments/ directory entirely and re-run the deploy command.\n4. Note: the Ignition module includes a mint() call after deployment. If the deploy succeeds but the mint fails, you can mint manually via Hardhat console.",
+                    "expected_output": "Deployment completes successfully and prints the deployed MyToken contract address (a 0x-prefixed address). The Ignition module also mints 5 MTK to the deployer's address. The contract address is saved to ignition/deployments/chain-420420417/deployed_addresses.json."
+                }
+            ],
+            "reference_code": {
+                "repo": "revm-hardhat-examples",
+                "base_path": "erc20-hardhat",
+                "files": [
+                    {
+                        "path": "package.json",
+                        "description": "Project manifest with Hardhat v2, hardhat-toolbox (ethers.js v6, Mocha, Chai, TypeChain), OpenZeppelin Contracts v5.4.0, and TypeScript (CommonJS)"
+                    },
+                    {
+                        "path": "hardhat.config.ts",
+                        "description": "Hardhat v2 configuration with polkadotTestnet network, Solidity 0.8.28 with optimizer, and 40s Mocha timeout"
+                    },
+                    {
+                        "path": "tsconfig.json",
+                        "description": "TypeScript configuration targeting ES2022 with CommonJS module system and esModuleInterop enabled"
+                    },
+                    {
+                        "path": "contracts/MyToken.sol",
+                        "description": "ERC-20 token contract inheriting OpenZeppelin ERC20, Ownable, and ERC20Permit with an owner-only mint function"
+                    },
+                    {
+                        "path": "test/MyToken.test.ts",
+                        "description": "Mocha + Chai test suite verifying token metadata, ownership, initial supply, minting, and multi-mint balance tracking"
+                    },
+                    {
+                        "path": "ignition/modules/MyToken.ts",
+                        "description": "Hardhat Ignition deployment module that deploys MyToken with owner and mints 5 MTK to the deployer"
+                    }
+                ]
+            },
+            "error_patterns": [
+                {
+                    "pattern": "Error: insufficient funds for gas",
+                    "cause": "The account associated with PRIVATE_KEY does not have enough PAS tokens to cover gas fees. TestNet tests deploy contracts on-chain, so running tests also consumes gas.",
+                    "resolution": "Fund the account using the faucet at https://faucet.polkadot.io/. Verify the correct address is funded by checking the account derived from the private key in the .env file."
+                },
+                {
+                    "pattern": "Error: could not detect network",
+                    "cause": "The RPC endpoint URL is incorrect, unreachable, or the TestNet is experiencing downtime.",
+                    "resolution": "Verify the RPC URL is exactly https://services.polkadothub-rpc.com/testnet in hardhat.config.ts. Check the Polkadot status page or Discord for outage reports."
+                },
+                {
+                    "pattern": "Cannot find module 'dotenv/config'",
+                    "cause": "The dotenv package was not installed but is imported in hardhat.config.ts.",
+                    "resolution": "Run npm install dotenv from the erc20-hardhat/ directory."
+                },
+                {
+                    "pattern": "invalid opcode: MCOPY",
+                    "cause": "OpenZeppelin Contracts v5.4.0 uses the mcopy opcode introduced in the Cancun EVM upgrade. The Solidity compiler defaults to an older EVM version that does not support this opcode.",
+                    "resolution": "Add evmVersion: \"cancun\" to the Solidity compiler settings in hardhat.config.ts. The settings block should include: evmVersion: \"cancun\" alongside the optimizer config. See step 5, substitution 4."
+                },
+                {
+                    "pattern": "vars is not defined",
+                    "cause": "The hardhat.config.ts still uses Hardhat's Configuration Variables system (vars.get/vars.has) instead of the dotenv pattern.",
+                    "resolution": "Verify that step 5 substitutions were applied correctly: remove vars from the import statement, replace vars.has()/vars.get() with process.env.PRIVATE_KEY, and ensure import \"dotenv/config\" is the first line."
+                },
+                {
+                    "pattern": "Error: Timeout of 40000ms exceeded",
+                    "cause": "A test timed out waiting for a transaction to be mined on the TestNet. Polkadot Hub TestNet block times can vary under load.",
+                    "resolution": "Wait and retry. If timeouts persist, try running individual tests or increasing the Mocha timeout in hardhat.config.ts (e.g., from 40000 to 120000). Local tests (step 11) passing confirms the contract logic is correct."
+                },
+                {
+                    "pattern": "Priority is too low",
+                    "cause": "The transaction's gas price or priority fee is below the network's minimum acceptance threshold. On Polkadot Hub TestNet (base fee 1000 gwei), the default gas estimation from ethers.js often produces values too low for the node to accept. This also occurs when retrying a failed transaction at the same nonce without sufficiently increasing the gas price (nodes typically require a 10%+ bump for replacement transactions).",
+                    "resolution": "Add an explicit gasPrice to the polkadotTestnet network config in hardhat.config.ts: `gasPrice: 5000000000000` (5000 gwei, 5x the base fee). This ensures all transactions clear with comfortable margin. Do NOT simply retry at the same gas price \u2014 that triggers 'Transaction Already Imported'. After updating the config, delete the ignition/deployments/ directory and redeploy."
+                },
+                {
+                    "pattern": "Transaction Already Imported",
+                    "cause": "Hardhat Ignition reported a transaction as dropped and attempted to resubmit it, but the node's mempool still holds the original transaction.",
+                    "resolution": "Wait at least 60-90 seconds for the original transaction to be mined. Then delete the ignition/deployments/ directory and re-run the deployment command from step 13."
+                },
+                {
+                    "pattern": "IgnitionError: You are trying to deploy to an in-process deployment",
+                    "cause": "A previous Hardhat Ignition deployment was interrupted and left an incomplete deployment journal.",
+                    "resolution": "Delete the ignition/deployments/ directory and re-run the deployment command from step 13."
+                },
+                {
+                    "pattern": "IGN411: An error occurred while trying to send a transaction",
+                    "cause": "Hardhat Ignition encountered a transaction-level failure. The error message includes the nonce and sender address, and suggests using the track-tx command to recover.",
+                    "resolution": "The error output includes the nonce and sender address. To find the transaction hash without a block explorer, run a Hardhat script or console command: `await ethers.provider.getTransaction(await ethers.provider.getTransactionCount('SENDER_ADDRESS') - 1)` or query the RPC directly with eth_getTransactionByBlockNumberAndIndex for recent blocks. Once you have the tx hash, run: `npx hardhat ignition track-tx <txHash> <deploymentId> --network polkadotTestnet`. If you cannot recover the transaction, delete the ignition/deployments/ directory and redeploy."
+                },
+                {
+                    "pattern": "Transaction stuck: deployed_addresses.json is empty and eth_getCode returns 0x",
+                    "cause": "The deployment transaction is genuinely stuck in the mempool \u2014 it was not mined and the contract does not exist at the computed address. This can happen when the gas price is too low relative to the network's base fee (1000 gwei on Polkadot Hub TestNet). Simply retrying with the same parameters will produce 'Transaction Already Imported' errors because the original transaction still occupies that nonce in the mempool.",
+                    "resolution": "Replace the stuck transaction by sending a zero-value transaction to your own address with the SAME nonce and a HIGHER gas price. Create and run a Hardhat script: `const [signer] = await ethers.getSigners(); const tx = await signer.sendTransaction({ to: signer.address, value: 0, nonce: STUCK_NONCE, gasPrice: ethers.parseUnits('2000', 'gwei') }); await tx.wait(); console.log('Nonce cleared:', tx.hash);` \u2014 replace STUCK_NONCE with the nonce from the error message. After the replacement transaction is mined, delete the ignition/deployments/ directory and redeploy. To prevent this in future attempts, add `gasPrice: 2000000000000n` (2000 gwei) to the network config in hardhat.config.ts."
+                },
+                {
+                    "pattern": "Error: OwnableUnauthorizedAccount",
+                    "cause": "A non-owner account attempted to call the mint() function. The MyToken contract restricts minting to the owner set in the constructor.",
+                    "resolution": "Verify the deployer account (account[0] from the PRIVATE_KEY in .env) is the same account calling mint(). The Ignition module automatically uses account[0] for both deployment and minting."
+                }
+            ],
+            "supplementary_context": {
+                "description": "These documentation pages provide background context for understanding the concepts behind each step. Consult them if you need to understand WHY something works, not HOW to do it. Note: resolved AI page versions (/ai/pages/) do not yet exist for the smart contracts section \u2014 these URLs point to the published docs pages which can still be fetched and read.",
+                "pages": [
+                    {
+                        "slug": "smart-contracts-cookbook-smart-contracts-deploy-erc20-erc20-hardhat",
+                        "url": "https://docs.polkadot.com/smart-contracts/cookbook/smart-contracts/deploy-erc20/erc20-hardhat/",
+                        "relevance": "The full tutorial this task is based on. Consult for narrative context, conceptual explanations of ERC-20 token standards, or if a step's purpose is unclear."
+                    },
+                    {
+                        "slug": "smart-contracts-dev-environments-hardhat",
+                        "url": "https://docs.polkadot.com/smart-contracts/dev-environments/hardhat/",
+                        "relevance": "Hardhat setup and configuration reference for Polkadot Hub. Consult if encountering Hardhat-specific configuration issues. Notes that Hardhat's standard test helpers (time.increase(), loadFixture) may not work against Polkadot nodes."
+                    },
+                    {
+                        "slug": "smart-contracts-connect",
+                        "url": "https://docs.polkadot.com/smart-contracts/connect/",
+                        "relevance": "Network details for Polkadot Hub TestNet and MainNet including RPC endpoints, chain IDs, and wallet configuration. Consult if network connectivity or chain ID issues arise."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "deploy-basic-contract-hardhat",
+            "title": "Deploy a Basic Contract with Hardhat",
+            "objective": "Set up a Hardhat v2 project, create a simple Storage smart contract, compile it, and deploy it to Polkadot Hub TestNet using Hardhat Ignition.",
+            "license": "CC-BY-4.0",
+            "source_pages": [
+                "smart-contracts/cookbook/smart-contracts/deploy-basic/basic-hardhat.md"
+            ],
+            "prerequisites": {
+                "runtime": [
+                    "Node.js v22+",
+                    "npm"
+                ],
+                "network": [
+                    "RPC endpoint: https://services.polkadothub-rpc.com/testnet (Polkadot Hub TestNet, chain ID 420420417)",
+                    "Base fee: 1000 gwei \u2014 significantly higher than Ethereum. When troubleshooting stuck transactions or setting custom gas parameters, use this as the minimum base fee"
+                ],
+                "tokens": [
+                    "Testnet PAS tokens from https://faucet.polkadot.io/ \u2014 the deploying account needs enough PAS to cover gas for contract deployment"
+                ],
+                "wallet": [
+                    "MetaMask or compatible EVM wallet with an exported private key (0x-prefixed) funded with testnet PAS tokens"
+                ]
+            },
+            "env_vars": [
+                {
+                    "name": "PRIVATE_KEY",
+                    "description": "The 0x-prefixed private key of a funded Polkadot Hub TestNet account. Export from MetaMask (Account Details > Show Private Key) or another EVM wallet. Fund the corresponding address via https://faucet.polkadot.io/.",
+                    "required": true
+                }
+            ],
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "Create the project directory",
+                    "working_directory": ".",
+                    "commands": [
+                        "mkdir basic-hardhat"
+                    ],
+                    "description": "Create the project directory for the basic Storage contract."
+                },
+                {
+                    "order": 2,
+                    "action": "Create the package.json",
+                    "working_directory": "basic-hardhat",
+                    "reference_file": "package.json",
+                    "description": "Fetch the reference file and save it as package.json. This project uses Hardhat v2 (CommonJS) with @nomicfoundation/hardhat-toolbox and TypeScript. There are no production dependencies \u2014 the Storage contract has no external imports. No substitutions needed."
+                },
+                {
+                    "order": 3,
+                    "action": "Install dependencies",
+                    "working_directory": "basic-hardhat",
+                    "commands": [
+                        "npm install",
+                        "npm install dotenv"
+                    ],
+                    "description": "Install all dependencies listed in package.json, plus the dotenv package (needed by hardhat.config.ts in step 5 to load PRIVATE_KEY from .env). This includes Hardhat v2, hardhat-toolbox, ts-node, and TypeScript.",
+                    "expected_output": "npm install completes without errors. If you see peer dependency warnings, they can be ignored as long as no errors occur."
+                },
+                {
+                    "order": 4,
+                    "action": "Create the Storage smart contract",
+                    "working_directory": "basic-hardhat",
+                    "reference_file": "contracts/Storage.sol",
+                    "description": "Fetch the reference file and save it as contracts/Storage.sol. Create the contracts/ directory if it does not exist. This is a minimal Solidity contract with a private storedNumber state variable and two functions: store(uint256) to write a value and retrieve() to read it. No imports, no constructor, no external dependencies. No substitutions needed."
+                },
+                {
+                    "order": 5,
+                    "action": "Create the Hardhat configuration",
+                    "working_directory": "basic-hardhat",
+                    "reference_file": "hardhat.config.ts",
+                    "description": "Fetch the reference file and save it as hardhat.config.ts. Then make the following substitutions:\n\n1. Add `import \"dotenv/config\";` as the FIRST import line in the file (before any other imports). This loads the private key from the .env file created in step 8.\n2. The reference file uses Hardhat's Configuration Variables system (`vars.get()` and `vars.has()` imported from \"hardhat/config\") to manage the private key. This is an interactive mechanism that does not work in agent shells. Replace the entire accounts/private key handling:\n   - Remove `vars` from the import statement (keep `HardhatUserConfig` and any other imports from \"hardhat/config\")\n   - Replace the accounts conditional (e.g., `accounts: vars.has(\"PRIVATE_KEY\") ? [vars.get(\"PRIVATE_KEY\")] : []`) with: `accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : []`\n3. The RPC URL and chain ID should already be correct (`https://services.polkadothub-rpc.com/testnet` and `420420417`). If either is different, replace with these values.\n\nNote: This is a Hardhat v2 project using CommonJS (not ESM). The `import \"dotenv/config\"` syntax works because ts-node compiles it with esModuleInterop enabled."
+                },
+                {
+                    "order": 6,
+                    "action": "Create the TypeScript configuration",
+                    "working_directory": "basic-hardhat",
+                    "reference_file": "tsconfig.json",
+                    "description": "Fetch the reference file and save it as tsconfig.json. This configures TypeScript with ES2022 target and CommonJS module system, with esModuleInterop enabled. No substitutions needed."
+                },
+                {
+                    "order": 7,
+                    "action": "Create the Hardhat Ignition deployment module",
+                    "working_directory": "basic-hardhat",
+                    "reference_file": "ignition/modules/Storage.ts",
+                    "description": "Fetch the reference file and save it as ignition/modules/Storage.ts. Create the ignition/modules/ directory if it does not exist. This module deploys the Storage contract with no constructor arguments. No substitutions needed."
+                },
+                {
+                    "order": 8,
+                    "action": "Create .env and .gitignore for private key management",
+                    "working_directory": "basic-hardhat",
+                    "commands": [
+                        "echo 'PRIVATE_KEY=' > .env",
+                        "echo '.env' > .gitignore",
+                        "echo 'node_modules/' >> .gitignore",
+                        "echo 'artifacts/' >> .gitignore",
+                        "echo 'cache/' >> .gitignore",
+                        "echo 'typechain-types/' >> .gitignore",
+                        "echo 'ignition/deployments/' >> .gitignore"
+                    ],
+                    "description": "Create a .env file with an empty PRIVATE_KEY= placeholder and a .gitignore that excludes .env, build artifacts, and deployment records.\n\nIMPORTANT: After creating these files, stop and ask the user to edit the .env file and paste their secret value. Do NOT ask the user to type or paste secrets in the chat \u2014 they should edit the .env file directly in their editor or file system. The value must be their 0x-prefixed private key. Wait for the user to confirm before proceeding."
+                },
+                {
+                    "order": 9,
+                    "action": "Compile the contract",
+                    "working_directory": "basic-hardhat",
+                    "commands": [
+                        "npx hardhat compile"
+                    ],
+                    "description": "Compile the Storage contract. The dotenv package required by hardhat.config.ts was already installed in step 3.",
+                    "expected_output": "Compilation succeeds and generates artifacts in the artifacts/ directory and type bindings in typechain-types/. Expect output similar to: 'Compiled 1 Solidity file successfully'."
+                },
+                {
+                    "order": 10,
+                    "action": "Deploy the Storage contract to Polkadot Hub TestNet",
+                    "working_directory": "basic-hardhat",
+                    "commands": [
+                        "npx hardhat ignition deploy ignition/modules/Storage.ts --network polkadotTestnet"
+                    ],
+                    "description": "Deploy the Storage contract using Hardhat Ignition.\n\nBefore running this command, confirm the user has added their private key to the .env file (step 8).\n\nThis command is INTERACTIVE \u2014 it will prompt 'Confirm deploy to network polkadotTestnet? (y/n)'. To run non-interactively, pipe confirmation: echo \"y\" | npx hardhat ignition deploy ignition/modules/Storage.ts --network polkadotTestnet\n\nAfter successful deployment, the contract address will be printed to the console and saved in ignition/deployments/chain-420420417/deployed_addresses.json.\n\nDEPLOYMENT RECOVERY: Polkadot Hub TestNet can be unstable. If Ignition reports the transaction as 'dropped' or you encounter 'Transaction Already Imported' errors on retry, the original transaction may still be pending in the mempool. Do NOT immediately retry. Instead:\n1. Wait at least 60-90 seconds for the transaction to be mined. The TestNet base fee is 1000 gwei \u2014 this is normal, not a gas pricing error.\n2. Check if a contract address was written to ignition/deployments/chain-420420417/deployed_addresses.json.\n3. If the deployment genuinely failed, delete the ignition/deployments/ directory entirely and re-run the deploy command.",
+                    "expected_output": "Deployment completes successfully and prints the deployed Storage contract address (a 0x-prefixed address). The address is saved to ignition/deployments/chain-420420417/deployed_addresses.json."
+                }
+            ],
+            "reference_code": {
+                "repo": "revm-hardhat-examples",
+                "base_path": "basic-hardhat",
+                "files": [
+                    {
+                        "path": "package.json",
+                        "description": "Project manifest with Hardhat v2, hardhat-toolbox, and TypeScript (CommonJS, no production dependencies)"
+                    },
+                    {
+                        "path": "hardhat.config.ts",
+                        "description": "Hardhat v2 configuration with polkadotTestnet network (chain ID 420420417), Solidity 0.8.28 with optimizer"
+                    },
+                    {
+                        "path": "tsconfig.json",
+                        "description": "TypeScript configuration targeting ES2022 with CommonJS module system and esModuleInterop enabled"
+                    },
+                    {
+                        "path": "contracts/Storage.sol",
+                        "description": "Minimal Storage contract with store(uint256) and retrieve() functions \u2014 no imports, no constructor"
+                    },
+                    {
+                        "path": "ignition/modules/Storage.ts",
+                        "description": "Hardhat Ignition deployment module that deploys the Storage contract with no constructor arguments"
+                    }
+                ]
+            },
+            "error_patterns": [
+                {
+                    "pattern": "Error: insufficient funds for gas",
+                    "cause": "The account associated with PRIVATE_KEY does not have enough PAS tokens to cover gas fees for deployment.",
+                    "resolution": "Fund the account using the faucet at https://faucet.polkadot.io/. Verify the correct address is funded by checking the account derived from the private key in the .env file."
+                },
+                {
+                    "pattern": "Error: could not detect network",
+                    "cause": "The RPC endpoint URL is incorrect, unreachable, or the TestNet is experiencing downtime.",
+                    "resolution": "Verify the RPC URL is exactly https://services.polkadothub-rpc.com/testnet in hardhat.config.ts. Check the Polkadot status page or Discord for outage reports."
+                },
+                {
+                    "pattern": "Cannot find module 'dotenv/config'",
+                    "cause": "The dotenv package was not installed but is imported in hardhat.config.ts.",
+                    "resolution": "Run npm install dotenv from the basic-hardhat/ directory."
+                },
+                {
+                    "pattern": "vars is not defined",
+                    "cause": "The hardhat.config.ts still uses Hardhat's Configuration Variables system (vars.get/vars.has) instead of the dotenv pattern.",
+                    "resolution": "Verify that step 5 substitutions were applied correctly: remove vars from the import statement, replace vars.has()/vars.get() with process.env.PRIVATE_KEY, and ensure import \"dotenv/config\" is the first line."
+                },
+                {
+                    "pattern": "Priority is too low",
+                    "cause": "The transaction's gas price or priority fee is below the network's minimum acceptance threshold. On Polkadot Hub TestNet (base fee 1000 gwei), the default gas estimation from ethers.js often produces values too low for the node to accept. This also occurs when retrying a failed transaction at the same nonce without sufficiently increasing the gas price (nodes typically require a 10%+ bump for replacement transactions).",
+                    "resolution": "Add an explicit gasPrice to the polkadotTestnet network config in hardhat.config.ts: `gasPrice: 5000000000000` (5000 gwei, 5x the base fee). This ensures all transactions clear with comfortable margin. Do NOT simply retry at the same gas price \u2014 that triggers 'Transaction Already Imported'. After updating the config, delete the ignition/deployments/ directory and redeploy."
+                },
+                {
+                    "pattern": "Transaction Already Imported",
+                    "cause": "Hardhat Ignition reported a transaction as dropped and attempted to resubmit it, but the node's mempool still holds the original transaction.",
+                    "resolution": "Wait at least 60-90 seconds for the original transaction to be mined. Then delete the ignition/deployments/ directory and re-run the deployment command from step 10."
+                },
+                {
+                    "pattern": "IgnitionError: You are trying to deploy to an in-process deployment",
+                    "cause": "A previous Hardhat Ignition deployment was interrupted and left an incomplete deployment journal.",
+                    "resolution": "Delete the ignition/deployments/ directory and re-run the deployment command from step 10."
+                },
+                {
+                    "pattern": "IGN411: An error occurred while trying to send a transaction",
+                    "cause": "Hardhat Ignition encountered a transaction-level failure. The error message includes the nonce and sender address, and suggests using the track-tx command to recover.",
+                    "resolution": "The error output includes the nonce and sender address. To find the transaction hash without a block explorer, run a Hardhat script or console command: `await ethers.provider.getTransaction(await ethers.provider.getTransactionCount('SENDER_ADDRESS') - 1)` or query the RPC directly with eth_getTransactionByBlockNumberAndIndex for recent blocks. Once you have the tx hash, run: `npx hardhat ignition track-tx <txHash> <deploymentId> --network polkadotTestnet`. If you cannot recover the transaction, delete the ignition/deployments/ directory and redeploy."
+                },
+                {
+                    "pattern": "Transaction stuck: deployed_addresses.json is empty and eth_getCode returns 0x",
+                    "cause": "The deployment transaction is genuinely stuck in the mempool \u2014 it was not mined and the contract does not exist at the computed address. This can happen when the gas price is too low relative to the network's base fee (1000 gwei on Polkadot Hub TestNet). Simply retrying with the same parameters will produce 'Transaction Already Imported' errors because the original transaction still occupies that nonce in the mempool.",
+                    "resolution": "Replace the stuck transaction by sending a zero-value transaction to your own address with the SAME nonce and a HIGHER gas price. Create and run a Hardhat script: `const [signer] = await ethers.getSigners(); const tx = await signer.sendTransaction({ to: signer.address, value: 0, nonce: STUCK_NONCE, gasPrice: ethers.parseUnits('2000', 'gwei') }); await tx.wait(); console.log('Nonce cleared:', tx.hash);` \u2014 replace STUCK_NONCE with the nonce from the error message. After the replacement transaction is mined, delete the ignition/deployments/ directory and redeploy. To prevent this in future attempts, add `gasPrice: 2000000000000n` (2000 gwei) to the network config in hardhat.config.ts."
+                }
+            ],
+            "supplementary_context": {
+                "description": "These documentation pages provide background context for understanding the concepts behind each step. Consult them if you need to understand WHY something works, not HOW to do it. Note: resolved AI page versions (/ai/pages/) do not yet exist for the smart contracts section \u2014 these URLs point to the published docs pages which can still be fetched and read.",
+                "pages": [
+                    {
+                        "slug": "smart-contracts-cookbook-smart-contracts-deploy-basic-basic-hardhat",
+                        "url": "https://docs.polkadot.com/smart-contracts/cookbook/smart-contracts/deploy-basic/basic-hardhat/",
+                        "relevance": "The full tutorial this task is based on. Consult for narrative context or if a step's purpose is unclear."
+                    },
+                    {
+                        "slug": "smart-contracts-dev-environments-hardhat",
+                        "url": "https://docs.polkadot.com/smart-contracts/dev-environments/hardhat/",
+                        "relevance": "Hardhat setup and configuration reference for Polkadot Hub. Consult if encountering Hardhat-specific configuration issues."
+                    },
+                    {
+                        "slug": "smart-contracts-connect",
+                        "url": "https://docs.polkadot.com/smart-contracts/connect/",
+                        "relevance": "Network details for Polkadot Hub TestNet and MainNet including RPC endpoints, chain IDs, and wallet configuration. Consult if network connectivity or chain ID issues arise."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "setup-hardhat-and-verify-contract",
+            "title": "Set Up Hardhat and Verify a Contract on Polkadot Hub",
+            "objective": "Set up a Hardhat v2 TypeScript project configured for Polkadot Hub TestNet with Blockscout contract verification, deploy a Storage contract, and verify it on-chain.",
+            "license": "CC-BY-4.0",
+            "source_pages": [
+                "smart-contracts/dev-environments/hardhat.md"
+            ],
+            "prerequisites": {
+                "runtime": [
+                    "Node.js v22+",
+                    "npm"
+                ],
+                "network": [
+                    "RPC endpoint: https://services.polkadothub-rpc.com/testnet (Polkadot Hub TestNet, chain ID 420420417)",
+                    "Base fee: 1000 gwei \u2014 significantly higher than Ethereum. When troubleshooting stuck transactions or setting custom gas parameters, use this as the minimum base fee",
+                    "Blockscout explorer API: https://blockscout-testnet.polkadot.io/api (no API key required)"
+                ],
+                "tokens": [
+                    "Testnet PAS tokens from https://faucet.polkadot.io/ \u2014 the deploying account needs enough PAS to cover gas for contract deployment"
+                ],
+                "wallet": [
+                    "MetaMask or compatible EVM wallet with an exported private key (0x-prefixed) funded with testnet PAS tokens"
+                ]
+            },
+            "env_vars": [
+                {
+                    "name": "PRIVATE_KEY",
+                    "description": "The 0x-prefixed private key of a funded Polkadot Hub TestNet account. Export from MetaMask (Account Details > Show Private Key) or another EVM wallet. Fund the corresponding address via https://faucet.polkadot.io/.",
+                    "required": true
+                }
+            ],
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "Create the project directory",
+                    "working_directory": ".",
+                    "commands": [
+                        "mkdir hardhat-verify-demo"
+                    ],
+                    "description": "Create the project directory."
+                },
+                {
+                    "order": 2,
+                    "action": "Create the package.json",
+                    "working_directory": "hardhat-verify-demo",
+                    "reference_file": "package.json",
+                    "description": "Fetch the reference file and save it as package.json. This provides a known-good Hardhat v2 project manifest with pinned dependency versions, avoiding version resolution issues that occur with `npx hardhat init` during the v2-to-v3 transition. No substitutions needed."
+                },
+                {
+                    "order": 3,
+                    "action": "Install dependencies, verification plugin, and dotenv",
+                    "working_directory": "hardhat-verify-demo",
+                    "commands": [
+                        "npm install",
+                        "npm install --save-dev @nomicfoundation/hardhat-verify@^2.0.0",
+                        "npm install dotenv"
+                    ],
+                    "description": "Install all dependencies from package.json (Hardhat v2, hardhat-toolbox, TypeScript), plus the Hardhat verification plugin (v2.x for Hardhat v2) and dotenv for private key management. The verification plugin enables the `npx hardhat verify` command for on-chain contract verification.",
+                    "expected_output": "npm install completes without errors. If you see peer dependency warnings, they can be ignored as long as no errors occur."
+                },
+                {
+                    "order": 4,
+                    "action": "Create the Storage smart contract",
+                    "working_directory": "hardhat-verify-demo",
+                    "reference_file": "contracts/Storage.sol",
+                    "description": "Fetch the reference file and save it as contracts/Storage.sol. Create the contracts/ directory if it does not exist. This is a minimal Solidity contract with a private storedNumber state variable and two functions: store(uint256) to write a value and retrieve() to read it. No constructor arguments \u2014 this simplifies the verification step. No substitutions needed."
+                },
+                {
+                    "order": 5,
+                    "action": "Create the Hardhat configuration with TestNet and verification settings",
+                    "working_directory": "hardhat-verify-demo",
+                    "reference_file": "hardhat.config.ts",
+                    "description": "Fetch the reference file and save it as hardhat.config.ts. Then replace the ENTIRE file content with the following configuration, which adds Blockscout verification support and dotenv for private key management.\n\nWrite this exact content to hardhat.config.ts:\n\nimport \"dotenv/config\";\nimport type { HardhatUserConfig } from \"hardhat/config\";\nimport \"@nomicfoundation/hardhat-toolbox\";\nimport \"@nomicfoundation/hardhat-verify\";\n\nconst config: HardhatUserConfig = {\n  solidity: {\n    version: \"0.8.28\",\n    settings: {\n      optimizer: {\n        enabled: true,\n        runs: 200,\n      },\n    },\n  },\n  networks: {\n    polkadotTestnet: {\n      url: \"https://services.polkadothub-rpc.com/testnet\",\n      chainId: 420420417,\n      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],\n    },\n  },\n  etherscan: {\n    apiKey: {\n      polkadotTestnet: \"no-api-key-needed\",\n    },\n    customChains: [\n      {\n        network: \"polkadotTestnet\",\n        chainId: 420420417,\n        urls: {\n          apiURL: \"https://blockscout-testnet.polkadot.io/api\",\n          browserURL: \"https://blockscout-testnet.polkadot.io/\",\n        },\n      },\n    ],\n  },\n};\n\nexport default config;\n\nKey points:\n- `import \"dotenv/config\"` loads the private key from .env (installed in step 3)\n- `accounts` uses `process.env.PRIVATE_KEY` (not Hardhat's interactive `vars.get()`)\n- `etherscan` block configures Blockscout as the verification target with no API key required\n- The reference file is fetched only for the build plugin to track it as a dependency \u2014 the entire content is replaced with the config above"
+                },
+                {
+                    "order": 6,
+                    "action": "Create the TypeScript configuration",
+                    "working_directory": "hardhat-verify-demo",
+                    "reference_file": "tsconfig.json",
+                    "description": "Fetch the reference file and save it as tsconfig.json. This configures TypeScript with ES2022 target and CommonJS module system, with esModuleInterop enabled. No substitutions needed."
+                },
+                {
+                    "order": 7,
+                    "action": "Create the Hardhat Ignition deployment module",
+                    "working_directory": "hardhat-verify-demo",
+                    "reference_file": "ignition/modules/Storage.ts",
+                    "description": "Fetch the reference file and save it as ignition/modules/Storage.ts. Create the ignition/modules/ directory if it does not exist. This module deploys the Storage contract with no constructor arguments. No substitutions needed."
+                },
+                {
+                    "order": 8,
+                    "action": "Create .env and .gitignore for private key management",
+                    "working_directory": "hardhat-verify-demo",
+                    "commands": [
+                        "echo 'PRIVATE_KEY=' > .env",
+                        "echo '.env' > .gitignore",
+                        "echo 'node_modules/' >> .gitignore",
+                        "echo 'artifacts/' >> .gitignore",
+                        "echo 'cache/' >> .gitignore",
+                        "echo 'typechain-types/' >> .gitignore",
+                        "echo 'ignition/deployments/' >> .gitignore"
+                    ],
+                    "description": "Create a .env file with an empty PRIVATE_KEY= placeholder and a .gitignore that excludes .env, build artifacts, and deployment records.\n\nIMPORTANT: After creating these files, stop and ask the user to edit the .env file and paste their secret value. Do NOT ask the user to type or paste secrets in the chat \u2014 they should edit the .env file directly in their editor or file system. The value must be their 0x-prefixed private key. Wait for the user to confirm before proceeding."
+                },
+                {
+                    "order": 9,
+                    "action": "Compile the contract",
+                    "working_directory": "hardhat-verify-demo",
+                    "commands": [
+                        "npx hardhat compile"
+                    ],
+                    "description": "Compile the Storage contract.",
+                    "expected_output": "Compilation succeeds with 'Compiled 1 Solidity file successfully' or similar."
+                },
+                {
+                    "order": 10,
+                    "action": "Deploy the Storage contract to Polkadot Hub TestNet",
+                    "working_directory": "hardhat-verify-demo",
+                    "commands": [
+                        "npx hardhat ignition deploy ignition/modules/Storage.ts --network polkadotTestnet"
+                    ],
+                    "description": "Deploy the Storage contract using Hardhat Ignition.\n\nBefore running this command, confirm the user has added their private key to the .env file (step 8).\n\nThis command is INTERACTIVE \u2014 it will prompt 'Confirm deploy to network polkadotTestnet? (y/n)'. To run non-interactively, pipe confirmation: echo \"y\" | npx hardhat ignition deploy ignition/modules/Storage.ts --network polkadotTestnet\n\nAfter successful deployment, save the deployed contract address \u2014 you will need it in step 11 for verification. The address is printed to the console and saved in ignition/deployments/chain-420420417/deployed_addresses.json.\n\nDEPLOYMENT RECOVERY: Polkadot Hub TestNet can be unstable. If Ignition reports the transaction as 'dropped' or you encounter 'Transaction Already Imported' errors on retry, the original transaction may still be pending in the mempool. Do NOT immediately retry. Instead:\n1. Wait at least 60-90 seconds for the transaction to be mined. The TestNet base fee is 1000 gwei \u2014 this is normal, not a gas pricing error.\n2. Check if a contract address was written to ignition/deployments/chain-420420417/deployed_addresses.json.\n3. If the deployment genuinely failed, delete the ignition/deployments/ directory entirely and re-run the deploy command.",
+                    "expected_output": "Deployment completes successfully and prints the deployed Storage contract address (a 0x-prefixed address)."
+                },
+                {
+                    "order": 11,
+                    "action": "Verify the contract on Blockscout",
+                    "working_directory": "hardhat-verify-demo",
+                    "commands": [
+                        "npx hardhat verify --network polkadotTestnet INSERT_CONTRACT_ADDRESS"
+                    ],
+                    "description": "Verify the deployed Storage contract on Blockscout. Replace INSERT_CONTRACT_ADDRESS with the contract address from step 10.\n\nThe Storage contract has no constructor arguments, so no additional arguments are needed after the address.\n\nFor contracts WITH constructor arguments, append them after the address. For example: `npx hardhat verify --network polkadotTestnet CONTRACT_ADDRESS \"arg1\" \"arg2\"`\n\nNote: Blockscout verification requires no API key \u2014 the config uses 'no-api-key-needed' as a placeholder. The verification plugin communicates with Blockscout's Etherscan-compatible API at https://blockscout-testnet.polkadot.io/api.\n\nTip: If verification fails immediately after deployment, wait 30-60 seconds for Blockscout to index the contract, then retry.",
+                    "expected_output": "Verification succeeds with a message like 'Successfully verified contract Storage on Etherscan' (the plugin uses 'Etherscan' generically even for Blockscout). The verified contract source code is now viewable at https://blockscout-testnet.polkadot.io/address/CONTRACT_ADDRESS."
+                }
+            ],
+            "reference_code": {
+                "repo": "revm-hardhat-examples",
+                "base_path": "basic-hardhat",
+                "files": [
+                    {
+                        "path": "package.json",
+                        "description": "Project manifest with Hardhat v2, hardhat-toolbox, and TypeScript (CommonJS, pinned versions)"
+                    },
+                    {
+                        "path": "hardhat.config.ts",
+                        "description": "Base Hardhat v2 configuration \u2014 fetched as a dependency but replaced entirely in step 5 with verification-enabled config"
+                    },
+                    {
+                        "path": "tsconfig.json",
+                        "description": "TypeScript configuration targeting ES2022 with CommonJS module system and esModuleInterop enabled"
+                    },
+                    {
+                        "path": "contracts/Storage.sol",
+                        "description": "Minimal Storage contract with store(uint256) and retrieve() functions \u2014 no constructor, no imports"
+                    },
+                    {
+                        "path": "ignition/modules/Storage.ts",
+                        "description": "Hardhat Ignition deployment module that deploys the Storage contract with no constructor arguments"
+                    }
+                ]
+            },
+            "error_patterns": [
+                {
+                    "pattern": "Error: insufficient funds for gas",
+                    "cause": "The account associated with PRIVATE_KEY does not have enough PAS tokens to cover gas fees for deployment.",
+                    "resolution": "Fund the account using the faucet at https://faucet.polkadot.io/. Verify the correct address is funded by checking the account derived from the private key in the .env file."
+                },
+                {
+                    "pattern": "Error: could not detect network",
+                    "cause": "The RPC endpoint URL is incorrect, unreachable, or the TestNet is experiencing downtime.",
+                    "resolution": "Verify the RPC URL is exactly https://services.polkadothub-rpc.com/testnet in hardhat.config.ts. Check the Polkadot status page or Discord for outage reports."
+                },
+                {
+                    "pattern": "Cannot find module 'dotenv/config'",
+                    "cause": "The dotenv package was not installed but is imported in hardhat.config.ts.",
+                    "resolution": "Run npm install dotenv from the hardhat-verify-demo/ directory."
+                },
+                {
+                    "pattern": "Cannot find module '@nomicfoundation/hardhat-verify'",
+                    "cause": "The hardhat-verify plugin was not installed.",
+                    "resolution": "Run npm install --save-dev @nomicfoundation/hardhat-verify@^2.0.0 from the hardhat-verify-demo/ directory."
+                },
+                {
+                    "pattern": "Priority is too low",
+                    "cause": "The transaction's gas price or priority fee is below the network's minimum acceptance threshold. On Polkadot Hub TestNet (base fee 1000 gwei), the default gas estimation from ethers.js often produces values too low for the node to accept. This also occurs when retrying a failed transaction at the same nonce without sufficiently increasing the gas price (nodes typically require a 10%+ bump for replacement transactions).",
+                    "resolution": "Add an explicit gasPrice to the polkadotTestnet network config in hardhat.config.ts: `gasPrice: 5000000000000` (5000 gwei, 5x the base fee). This ensures all transactions clear with comfortable margin. Do NOT simply retry at the same gas price \u2014 that triggers 'Transaction Already Imported'. After updating the config, delete the ignition/deployments/ directory and redeploy."
+                },
+                {
+                    "pattern": "Transaction Already Imported",
+                    "cause": "Hardhat Ignition reported a transaction as dropped and attempted to resubmit it, but the node's mempool still holds the original transaction.",
+                    "resolution": "Wait at least 60-90 seconds for the original transaction to be mined. Then delete the ignition/deployments/ directory and re-run the deployment command from step 10."
+                },
+                {
+                    "pattern": "IgnitionError: You are trying to deploy to an in-process deployment",
+                    "cause": "A previous Hardhat Ignition deployment was interrupted and left an incomplete deployment journal.",
+                    "resolution": "Delete the ignition/deployments/ directory and re-run the deployment command from step 10."
+                },
+                {
+                    "pattern": "IGN411: An error occurred while trying to send a transaction",
+                    "cause": "Hardhat Ignition encountered a transaction-level failure. The error message includes the nonce and sender address, and suggests using the track-tx command to recover.",
+                    "resolution": "The error output includes the nonce and sender address. To find the transaction hash without a block explorer, run a Hardhat script or console command: `await ethers.provider.getTransaction(await ethers.provider.getTransactionCount('SENDER_ADDRESS') - 1)` or query the RPC directly with eth_getTransactionByBlockNumberAndIndex for recent blocks. Once you have the tx hash, run: `npx hardhat ignition track-tx <txHash> <deploymentId> --network polkadotTestnet`. If you cannot recover the transaction, delete the ignition/deployments/ directory and redeploy."
+                },
+                {
+                    "pattern": "Transaction stuck: deployed_addresses.json is empty and eth_getCode returns 0x",
+                    "cause": "The deployment transaction is genuinely stuck in the mempool \u2014 it was not mined and the contract does not exist at the computed address. This can happen when the gas price is too low relative to the network's base fee (1000 gwei on Polkadot Hub TestNet). Simply retrying with the same parameters will produce 'Transaction Already Imported' errors because the original transaction still occupies that nonce in the mempool.",
+                    "resolution": "Replace the stuck transaction by sending a zero-value transaction to your own address with the SAME nonce and a HIGHER gas price. Create and run a Hardhat script: `const [signer] = await ethers.getSigners(); const tx = await signer.sendTransaction({ to: signer.address, value: 0, nonce: STUCK_NONCE, gasPrice: ethers.parseUnits('2000', 'gwei') }); await tx.wait(); console.log('Nonce cleared:', tx.hash);` \u2014 replace STUCK_NONCE with the nonce from the error message. After the replacement transaction is mined, delete the ignition/deployments/ directory and redeploy. To prevent this in future attempts, add `gasPrice: 2000000000000n` (2000 gwei) to the network config in hardhat.config.ts."
+                },
+                {
+                    "pattern": "Error: Failed to verify contract",
+                    "cause": "Blockscout verification failed. Common causes: wrong constructor arguments, contract not yet indexed by Blockscout, or Solidity version mismatch between local compilation and the verification request.",
+                    "resolution": "1. Verify the constructor argument matches what was used during deployment (check ignition/deployments/chain-420420417/journal.jsonl for the actual value). 2. Wait 30-60 seconds after deployment for Blockscout to index the contract, then retry. 3. Ensure the Solidity version in hardhat.config.ts matches the contract's pragma."
+                }
+            ],
+            "supplementary_context": {
+                "description": "These documentation pages provide background context for understanding the concepts behind each step. Consult them if you need to understand WHY something works, not HOW to do it. Note: resolved AI page versions (/ai/pages/) do not yet exist for the smart contracts section \u2014 these URLs point to the published docs pages which can still be fetched and read.",
+                "pages": [
+                    {
+                        "slug": "smart-contracts-dev-environments-hardhat",
+                        "url": "https://docs.polkadot.com/smart-contracts/dev-environments/hardhat/",
+                        "relevance": "The full tutorial this task is based on. Covers Hardhat initialization, configuration, and contract verification on both Blockscout and Routescan."
+                    },
+                    {
+                        "slug": "smart-contracts-connect",
+                        "url": "https://docs.polkadot.com/smart-contracts/connect/",
+                        "relevance": "Network details for Polkadot Hub TestNet and MainNet including RPC endpoints, chain IDs, and wallet configuration. Consult if network connectivity or chain ID issues arise."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "deploy-uniswap-v2-on-polkadot",
+            "title": "Deploy Uniswap V2 on Polkadot Hub",
+            "objective": "Clone the Uniswap V2 Hardhat examples, configure Core and Periphery projects for Polkadot Hub TestNet, compile and test both locally and on-chain, then deploy the full Uniswap V2 protocol (Factory, WETH, and Router) to TestNet.",
+            "license": "CC-BY-4.0",
+            "source_pages": [
+                "smart-contracts/cookbook/eth-dapps/uniswap-v2.md"
+            ],
+            "prerequisites": {
+                "runtime": [
+                    "Node.js v22+",
+                    "npm",
+                    "git"
+                ],
+                "network": [
+                    "RPC endpoint: https://services.polkadothub-rpc.com/testnet (Polkadot Hub TestNet, chain ID 420420417)",
+                    "Base fee: 1000 gwei \u2014 significantly higher than Ethereum. When troubleshooting stuck transactions or setting custom gas parameters, use this as the minimum base fee"
+                ],
+                "tokens": [
+                    "Testnet PAS tokens from https://faucet.polkadot.io/ \u2014 the deploying account needs substantial PAS to cover gas for compiling, testing on-chain (tests deploy contracts), and deploying the full protocol (multiple contract deployments)"
+                ],
+                "wallet": [
+                    "MetaMask or compatible EVM wallet with an exported private key (0x-prefixed) funded with testnet PAS tokens"
+                ]
+            },
+            "env_vars": [
+                {
+                    "name": "PRIVATE_KEY",
+                    "description": "The 0x-prefixed private key of a funded Polkadot Hub TestNet account. Export from MetaMask (Account Details > Show Private Key) or another EVM wallet. Fund the corresponding address via https://faucet.polkadot.io/. This key is used for both Core and Periphery projects.",
+                    "required": true
+                }
+            ],
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "Clone the reference repository",
+                    "working_directory": ".",
+                    "commands": [
+                        "git clone https://github.com/polkadot-developers/revm-hardhat-examples.git"
+                    ],
+                    "description": "Clone the full reference repository. This contains two Uniswap V2 projects: uniswap-v2-core-hardhat/ (Factory and Pair contracts) and uniswap-v2-periphery-hardhat/ (Router contracts). Unlike the simpler tasks which fetch individual files, this task clones the repo because it involves 25+ contract files across two interdependent projects."
+                },
+                {
+                    "order": 2,
+                    "action": "Install Core project dependencies",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-core-hardhat",
+                    "commands": [
+                        "npm install",
+                        "npm install dotenv"
+                    ],
+                    "description": "Install dependencies for the Uniswap V2 Core project (Factory, Pair, and ERC20 contracts). This includes Hardhat v2, hardhat-toolbox (ethers.js v6, Mocha, Chai, TypeChain), and TypeScript. The dotenv package is needed for the config modification in step 3.",
+                    "expected_output": "npm install completes without errors."
+                },
+                {
+                    "order": 3,
+                    "action": "Modify Core hardhat.config.ts for dotenv",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-core-hardhat",
+                    "description": "Open hardhat.config.ts (already present from the clone) and make the following substitutions:\n\n1. Add `import \"dotenv/config\";` as the FIRST import line in the file (before any other imports).\n2. Remove `vars` from the import statement (keep `HardhatUserConfig` and any other imports from \"hardhat/config\").\n3. Replace the accounts conditional that uses `vars.has(\"TESTNET_PRIVATE_KEY\")` / `vars.get(\"TESTNET_PRIVATE_KEY\")` with: `accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : []`\n4. The RPC URL for polkadotTestnet should already be `https://services.polkadothub-rpc.com/testnet`. If it is different, replace it.\n5. Add `gasPrice: 5000000000000` (5000 gwei) to the polkadotTestnet network config. This is a PROACTIVE measure \u2014 Polkadot Hub TestNet has a 1000 gwei base fee, and the default gas estimation from ethers.js often falls below the node's minimum acceptance threshold. Setting an explicit gasPrice of 5x the base fee prevents 'Priority is too low' and 'Transaction Already Imported' errors that occur when replacement transactions don't meet the minimum price bump. The network config should include: `url, chainId, accounts, gasPrice: 5000000000000`.\n\nPreserve all other config settings (solidity version, optimizer, other network configs, Mocha timeout)."
+                },
+                {
+                    "order": 4,
+                    "action": "Create .env and .gitignore for Core",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-core-hardhat",
+                    "commands": [
+                        "echo 'PRIVATE_KEY=' > .env",
+                        "echo '.env' >> .gitignore"
+                    ],
+                    "description": "Create a .env file with an empty PRIVATE_KEY= placeholder. Append .env to the existing .gitignore (use >> to preserve existing entries).\n\nIMPORTANT: After creating these files, stop and ask the user to edit the .env file and paste their secret value. Do NOT ask the user to type or paste secrets in the chat \u2014 they should edit the .env file directly in their editor or file system. The value must be their 0x-prefixed private key. Wait for the user to confirm before proceeding."
+                },
+                {
+                    "order": 5,
+                    "action": "Compile Core contracts",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-core-hardhat",
+                    "commands": [
+                        "npx hardhat compile"
+                    ],
+                    "description": "Compile the Uniswap V2 Core contracts (UniswapV2Factory, UniswapV2Pair, UniswapV2ERC20, and supporting libraries). The contracts use Solidity 0.5.16.",
+                    "expected_output": "Compilation succeeds. Expect multiple Solidity files compiled (the core includes ~12 contract files including interfaces and libraries)."
+                },
+                {
+                    "order": 6,
+                    "action": "Run Core tests locally",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-core-hardhat",
+                    "commands": [
+                        "npx hardhat test"
+                    ],
+                    "description": "Run the Core test suite against Hardhat's built-in local network. This verifies the Factory, Pair, and ERC20 contract logic without needing a funded account or TestNet access.",
+                    "expected_output": "All 29 tests pass, covering ERC20 operations (approve, transfer, permit), Factory operations (pair creation, fee management), and Pair operations (mint, burn, swap, price tracking)."
+                },
+                {
+                    "order": 7,
+                    "action": "Install Periphery project dependencies",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-periphery-hardhat",
+                    "commands": [
+                        "npm install",
+                        "npm install dotenv"
+                    ],
+                    "description": "Install dependencies for the Uniswap V2 Periphery project (Router01, Router02, and WETH contracts). Same stack as Core: Hardhat v2, hardhat-toolbox, TypeScript.",
+                    "expected_output": "npm install completes without errors."
+                },
+                {
+                    "order": 8,
+                    "action": "Modify Periphery hardhat.config.ts for dotenv",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-periphery-hardhat",
+                    "description": "Open hardhat.config.ts (already present from the clone) and make the same substitutions as step 3:\n\n1. Add `import \"dotenv/config\";` as the FIRST import line.\n2. Remove `vars` from the import statement.\n3. Replace the accounts conditional with: `accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : []`\n4. Verify the RPC URL is `https://services.polkadothub-rpc.com/testnet`.\n5. Add `gasPrice: 5000000000000` (5000 gwei) to the polkadotTestnet network config, same as step 3. This prevents 'Priority is too low' errors during the gas-intensive Periphery deployment and testing.\n\nPreserve all other config settings. Note: the Periphery config uses a multi-compiler setup (Solidity 0.5.16 and 0.6.6) and has `allowUnlimitedContractSize: true` on the hardhat network \u2014 both are required and must be preserved."
+                },
+                {
+                    "order": 9,
+                    "action": "Copy .env to Periphery and update .gitignore",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-periphery-hardhat",
+                    "commands": [
+                        "cp ../uniswap-v2-core-hardhat/.env .env",
+                        "echo '.env' >> .gitignore"
+                    ],
+                    "description": "Copy the .env file from the Core project (which the user already filled in at step 4) so both projects use the same private key. Append .env to the Periphery's .gitignore."
+                },
+                {
+                    "order": 10,
+                    "action": "Compile Periphery contracts",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-periphery-hardhat",
+                    "commands": [
+                        "npx hardhat compile"
+                    ],
+                    "description": "Compile the Uniswap V2 Periphery contracts (UniswapV2Router01, UniswapV2Router02, WETH9, and supporting libraries/test helpers). Uses multi-compiler: Solidity 0.5.16 for legacy contracts and 0.6.6 for the routers.",
+                    "expected_output": "Compilation succeeds. Expect multiple Solidity files compiled across two compiler versions (~13 contract files)."
+                },
+                {
+                    "order": 11,
+                    "action": "Run Periphery tests locally",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-periphery-hardhat",
+                    "commands": [
+                        "npx hardhat test"
+                    ],
+                    "description": "Run the Periphery test suite against Hardhat's built-in local network. This verifies Router01 (38 tests covering liquidity management and swap types) and Router02 (12 tests covering fee-on-transfer token support).",
+                    "expected_output": "All 50 tests pass."
+                },
+                {
+                    "order": 12,
+                    "action": "Run Core tests on Polkadot Hub TestNet",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-core-hardhat",
+                    "commands": [
+                        "npx hardhat test --network polkadotTestnet"
+                    ],
+                    "description": "Run the Core test suite against the live Polkadot Hub TestNet. This validates that the contracts behave correctly on the actual chain.\n\nBefore running this command, confirm the user has added their private key to the .env file (step 4). The test account must be funded with PAS tokens since tests deploy contracts and execute transactions on-chain.\n\nNote: TestNet tests are slower than local tests and consume gas. If the TestNet is unstable, the local test results from step 6 confirm the contract logic is sound. If tests time out, wait and retry.",
+                    "expected_output": "All 29 Core tests pass against the live TestNet. Execution will be slower than the local run."
+                },
+                {
+                    "order": 13,
+                    "action": "Run Periphery tests on Polkadot Hub TestNet",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-periphery-hardhat",
+                    "commands": [
+                        "npx hardhat test --network polkadotTestnet"
+                    ],
+                    "description": "Run the Periphery test suite against the live Polkadot Hub TestNet.\n\nBefore running, confirm the .env file contains the private key (copied in step 9). The Periphery tests are more extensive (50 tests) and deploy multiple contracts per test, so they consume more gas than Core tests.\n\nNote: If tests time out due to TestNet congestion, the local test results from step 11 confirm the contract logic is sound.",
+                    "expected_output": "All 50 Periphery tests pass against the live TestNet."
+                },
+                {
+                    "order": 14,
+                    "action": "Deploy Uniswap V2 Core (Factory) to TestNet",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-core-hardhat",
+                    "commands": [
+                        "npx hardhat ignition deploy ignition/modules/UniswapV2Factory.ts --network polkadotTestnet"
+                    ],
+                    "description": "Deploy the UniswapV2Factory contract using Hardhat Ignition. The Factory is the central registry that creates and manages trading pairs.\n\nThis command is INTERACTIVE \u2014 it will prompt for deployment confirmation. To run non-interactively: echo \"y\" | npx hardhat ignition deploy ignition/modules/UniswapV2Factory.ts --network polkadotTestnet\n\nAfter successful deployment, save the Factory contract address \u2014 it is printed to the console and saved in ignition/deployments/chain-420420417/deployed_addresses.json.\n\nDEPLOYMENT RECOVERY: Polkadot Hub TestNet can be unstable. If Ignition reports the transaction as 'dropped' or you encounter 'Transaction Already Imported' errors on retry, the original transaction may still be pending in the mempool. Do NOT immediately retry. Instead:\n1. Wait at least 60-90 seconds for the transaction to be mined. The TestNet base fee is 1000 gwei \u2014 this is normal, not a gas pricing error.\n2. Check if a contract address was written to ignition/deployments/chain-420420417/deployed_addresses.json.\n3. If the deployment genuinely failed, delete the ignition/deployments/ directory entirely and re-run the deploy command.",
+                    "expected_output": "Deployment completes and prints the UniswapV2Factory contract address."
+                },
+                {
+                    "order": 15,
+                    "action": "Deploy Uniswap V2 Periphery (WETH + Factory + Router) to TestNet",
+                    "working_directory": "revm-hardhat-examples/uniswap-v2-periphery-hardhat",
+                    "commands": [
+                        "npx hardhat ignition deploy ignition/modules/UniswapV2Router02.ts --network polkadotTestnet"
+                    ],
+                    "description": "Deploy the Periphery stack using Hardhat Ignition. The Periphery Ignition module deploys three contracts in sequence: WETH9 (wrapped native token), a UniswapV2Factory instance, and UniswapV2Router02 (the user-facing router that handles swaps and liquidity).\n\nNote: The Periphery deploys its own Factory instance. In a production scenario, you would configure the Router to use the Core Factory from step 14. For this tutorial, each project is self-contained.\n\nThis command is INTERACTIVE \u2014 pipe confirmation: echo \"y\" | npx hardhat ignition deploy ignition/modules/UniswapV2Router02.ts --network polkadotTestnet\n\nThe Ignition module deploys multiple contracts, so this step involves multiple on-chain transactions. If any transaction fails mid-deployment, Ignition's journal tracks progress \u2014 you can re-run the same command to resume from where it left off.\n\nDEPLOYMENT RECOVERY: Same guidance as step 14. If transactions are stuck, wait 60-90 seconds, check deployed_addresses.json, and delete ignition/deployments/ only if genuinely failed.",
+                    "expected_output": "Deployment completes and prints addresses for WETH9, UniswapV2Factory, and UniswapV2Router02. All addresses are saved in ignition/deployments/chain-420420417/deployed_addresses.json."
+                }
+            ],
+            "reference_code": {
+                "repo": "revm-hardhat-examples",
+                "base_path": ".",
+                "files": [
+                    {
+                        "path": "uniswap-v2-core-hardhat/package.json",
+                        "description": "Core project manifest with Hardhat v2, hardhat-toolbox, and TypeScript (CommonJS)"
+                    },
+                    {
+                        "path": "uniswap-v2-core-hardhat/hardhat.config.ts",
+                        "description": "Core Hardhat v2 config with Solidity 0.5.16, optimizer, polkadotTestnet network, and Mocha timeout"
+                    },
+                    {
+                        "path": "uniswap-v2-core-hardhat/ignition/modules/UniswapV2Factory.ts",
+                        "description": "Ignition module deploying UniswapV2Factory with deployer as fee setter"
+                    },
+                    {
+                        "path": "uniswap-v2-periphery-hardhat/package.json",
+                        "description": "Periphery project manifest with Hardhat v2, hardhat-toolbox, and TypeScript (CommonJS)"
+                    },
+                    {
+                        "path": "uniswap-v2-periphery-hardhat/hardhat.config.ts",
+                        "description": "Periphery Hardhat v2 config with multi-compiler (Solidity 0.5.16 + 0.6.6), allowUnlimitedContractSize, polkadotTestnet network"
+                    },
+                    {
+                        "path": "uniswap-v2-periphery-hardhat/ignition/modules/UniswapV2Router02.ts",
+                        "description": "Ignition module deploying WETH9 \u2192 UniswapV2Factory \u2192 UniswapV2Router02 with dependency chain"
+                    }
+                ]
+            },
+            "error_patterns": [
+                {
+                    "pattern": "Error: insufficient funds for gas",
+                    "cause": "The account does not have enough PAS tokens. Uniswap V2 deployment and testing is gas-intensive \u2014 TestNet tests alone deploy multiple contracts per test run across 79 total tests.",
+                    "resolution": "Fund the account generously using the faucet at https://faucet.polkadot.io/. You may need to request tokens multiple times. Verify the correct address is funded."
+                },
+                {
+                    "pattern": "Error: could not detect network",
+                    "cause": "The RPC endpoint URL is incorrect, unreachable, or the TestNet is experiencing downtime.",
+                    "resolution": "Verify the RPC URL is exactly https://services.polkadothub-rpc.com/testnet in BOTH hardhat.config.ts files (core and periphery). Check the Polkadot status page or Discord for outage reports."
+                },
+                {
+                    "pattern": "Cannot find module 'dotenv/config'",
+                    "cause": "The dotenv package was not installed in one of the projects.",
+                    "resolution": "Run npm install dotenv from the project directory that's throwing the error (uniswap-v2-core-hardhat/ or uniswap-v2-periphery-hardhat/)."
+                },
+                {
+                    "pattern": "vars is not defined",
+                    "cause": "The hardhat.config.ts still uses Hardhat's Configuration Variables system instead of the dotenv pattern.",
+                    "resolution": "Verify that the substitutions from step 3 (core) or step 8 (periphery) were applied correctly: remove vars from the import, replace vars.has()/vars.get() with process.env.PRIVATE_KEY, and ensure import \"dotenv/config\" is the first line."
+                },
+                {
+                    "pattern": "Error: Timeout of 40000ms exceeded",
+                    "cause": "A test timed out waiting for a transaction to be mined on the TestNet. Uniswap V2 tests are especially heavy \u2014 each test deploys multiple contracts.",
+                    "resolution": "Wait and retry. If timeouts persist, increase the Mocha timeout in the relevant hardhat.config.ts (e.g., from 40000 to 120000). Local tests passing (steps 6 and 11) confirm the contract logic is sound."
+                },
+                {
+                    "pattern": "Priority is too low",
+                    "cause": "The transaction's gas price or priority fee is below the network's minimum acceptance threshold. On Polkadot Hub TestNet (base fee 1000 gwei), the default gas estimation from ethers.js often produces values too low for the node to accept. This also occurs when retrying a failed transaction at the same nonce without sufficiently increasing the gas price (nodes typically require a 10%+ bump for replacement transactions).",
+                    "resolution": "Add an explicit gasPrice to the polkadotTestnet network config in hardhat.config.ts: `gasPrice: 5000000000000` (5000 gwei, 5x the base fee). This ensures all transactions clear with comfortable margin. Do NOT simply retry at the same gas price \u2014 that triggers 'Transaction Already Imported'. After updating the config, delete the ignition/deployments/ directory and redeploy."
+                },
+                {
+                    "pattern": "Transaction Already Imported",
+                    "cause": "Hardhat Ignition reported a transaction as dropped and attempted to resubmit it, but the node's mempool still holds the original transaction.",
+                    "resolution": "Wait at least 60-90 seconds for the original transaction to be mined. Then delete the ignition/deployments/ directory in the relevant project and re-run the deployment command."
+                },
+                {
+                    "pattern": "IgnitionError: You are trying to deploy to an in-process deployment",
+                    "cause": "A previous Hardhat Ignition deployment was interrupted and left an incomplete deployment journal.",
+                    "resolution": "Delete the ignition/deployments/ directory in the relevant project and re-run the deployment command."
+                },
+                {
+                    "pattern": "IGN411: An error occurred while trying to send a transaction",
+                    "cause": "Hardhat Ignition encountered a transaction-level failure. The error message includes the nonce and sender address.",
+                    "resolution": "The error output includes the nonce and sender address. To find the transaction hash, run a Hardhat script: `await ethers.provider.getTransaction(await ethers.provider.getTransactionCount('SENDER_ADDRESS') - 1)`. Once you have the tx hash, run: `npx hardhat ignition track-tx <txHash> <deploymentId> --network polkadotTestnet`. If recovery fails, delete ignition/deployments/ and redeploy."
+                },
+                {
+                    "pattern": "Transaction stuck: deployed_addresses.json is empty and eth_getCode returns 0x",
+                    "cause": "The deployment transaction is genuinely stuck in the mempool with insufficient gas price (base fee is 1000 gwei on Polkadot Hub TestNet).",
+                    "resolution": "Replace the stuck transaction by sending a zero-value transaction to your own address with the SAME nonce and a HIGHER gas price. Create and run a Hardhat script: `const [signer] = await ethers.getSigners(); const tx = await signer.sendTransaction({ to: signer.address, value: 0, nonce: STUCK_NONCE, gasPrice: ethers.parseUnits('2000', 'gwei') }); await tx.wait();` \u2014 replace STUCK_NONCE with the nonce from the error. After the replacement is mined, delete ignition/deployments/ and redeploy. To prevent recurrence, add `gasPrice: 2000000000000n` to the network config."
+                },
+                {
+                    "pattern": "CompilerError: Stack too deep",
+                    "cause": "Some Uniswap V2 contracts are complex and may hit Solidity's stack depth limit, especially with optimizer settings that don't match the original.",
+                    "resolution": "Ensure the optimizer is enabled with 200 runs (matching the reference config). Do not change the Solidity versions (0.5.16 for core, 0.5.16/0.6.6 for periphery) as the contracts are written for these specific versions."
+                }
+            ],
+            "supplementary_context": {
+                "description": "These documentation pages provide background context for understanding the Uniswap V2 protocol and its deployment on Polkadot. Consult them if you need to understand WHY something works, not HOW to do it.",
+                "pages": [
+                    {
+                        "slug": "smart-contracts-cookbook-eth-dapps-uniswap-v2",
+                        "url": "https://docs.polkadot.com/smart-contracts/cookbook/eth-dapps/uniswap-v2/",
+                        "relevance": "The full tutorial this task is based on. Covers AMM concepts, Uniswap V2 architecture (Factory/Pair/Router), and the porting rationale."
+                    },
+                    {
+                        "slug": "smart-contracts-dev-environments-hardhat",
+                        "url": "https://docs.polkadot.com/smart-contracts/dev-environments/hardhat/",
+                        "relevance": "Hardhat setup and configuration reference for Polkadot Hub. Notes that Hardhat's standard test helpers may not work against Polkadot nodes."
+                    },
+                    {
+                        "slug": "smart-contracts-connect",
+                        "url": "https://docs.polkadot.com/smart-contracts/connect/",
+                        "relevance": "Network details for Polkadot Hub TestNet including RPC endpoints, chain IDs, and wallet configuration."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "set-up-local-dev-node",
+            "title": "Set Up a Local Development Node",
+            "objective": "Clone the Polkadot SDK, compile the revive-dev-node and eth-rpc binaries, and run a local blockchain environment with an ETH-RPC adapter accessible at http://localhost:8545 for smart contract development without network fees or confirmation delays.",
+            "license": "CC-BY-4.0",
+            "source_pages": [
+                "smart-contracts/dev-environments/local-dev-node.md"
+            ],
+            "prerequisites": {
+                "runtime": [
+                    "Rust (stable toolchain) \u2014 install via rustup at https://rustup.rs/",
+                    "Polkadot SDK build dependencies \u2014 complete the Install Polkadot SDK Dependencies guide before proceeding",
+                    "git"
+                ]
+            },
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "Clone the Polkadot SDK repository",
+                    "working_directory": ".",
+                    "commands": [
+                        "git clone https://github.com/paritytech/polkadot-sdk.git"
+                    ],
+                    "description": "Clone the Polkadot SDK monorepo from GitHub. It contains both the revive-dev-node and the pallet-revive-eth-rpc adapter used in subsequent steps."
+                },
+                {
+                    "order": 2,
+                    "action": "Build the revive-dev-node binary",
+                    "working_directory": "polkadot-sdk",
+                    "commands": [
+                        "cargo build -p revive-dev-node --bin revive-dev-node --release"
+                    ],
+                    "description": "Compile the revive-dev-node binary in release mode. This node runs a local blockchain with pallet-revive for smart contract support and pre-funded development accounts. The binary is output to polkadot-sdk/target/release/revive-dev-node. Release builds optimize for performance over compilation speed.",
+                    "expected_output": "Compilation completes without errors. This step can take up to 30 minutes on first run."
+                },
+                {
+                    "order": 3,
+                    "action": "Build the ETH-RPC adapter binary",
+                    "working_directory": "polkadot-sdk",
+                    "commands": [
+                        "cargo build -p pallet-revive-eth-rpc --bin eth-rpc --release"
+                    ],
+                    "description": "Compile the eth-rpc adapter binary in release mode. This adapter translates standard Ethereum JSON-RPC calls into Substrate-compatible requests, enabling familiar Ethereum tooling (MetaMask, Hardhat, Ethers.js) to work against the local node. The binary is output to polkadot-sdk/target/release/eth-rpc.",
+                    "expected_output": "Compilation completes without errors. This step can also take up to 30 minutes on first run."
+                },
+                {
+                    "order": 4,
+                    "action": "Start the local development node",
+                    "working_directory": "polkadot-sdk",
+                    "commands": [
+                        "./target/release/revive-dev-node --dev"
+                    ],
+                    "description": "Start the local blockchain node in development mode. The --dev flag initializes a single-node chain with pallet-revive enabled and pre-funded development accounts. Keep this terminal open \u2014 the node must remain running for the ETH-RPC adapter and development tools to connect.",
+                    "expected_output": "Node starts and begins producing blocks. Log output confirms the node is running."
+                },
+                {
+                    "order": 5,
+                    "action": "Start the ETH-RPC adapter",
+                    "working_directory": "polkadot-sdk",
+                    "commands": [
+                        "./target/release/eth-rpc --dev"
+                    ],
+                    "description": "Open a new terminal and start the ETH-RPC adapter in development mode. The adapter connects to the running local node and exposes a standard Ethereum JSON-RPC interface at http://localhost:8545. Keep this terminal open alongside the node terminal. Once running, tools like MetaMask, Hardhat, and Ethers.js can be pointed at http://localhost:8545 to interact with the local chain. Note: the local node exposes a subset of the Ethereum JSON-RPC API \u2014 some methods used by tools like Foundry or Hardhat may be unavailable or behave differently than on native Ethereum networks.",
+                    "expected_output": "Adapter starts and listens on http://localhost:8545. Log output confirms the adapter is connected to the local node."
+                }
+            ],
+            "error_patterns": [
+                {
+                    "pattern": "error: linker `cc` not found",
+                    "cause": "A C/C++ linker is not installed, which is required to compile Rust projects with native dependencies.",
+                    "resolution": "Install build tools. On Ubuntu/Debian: sudo apt-get install build-essential. On macOS: xcode-select --install. Then retry the cargo build command."
+                },
+                {
+                    "pattern": "error[E0463]: can't find crate for `std`",
+                    "cause": "The Rust standard library target is missing for the active toolchain.",
+                    "resolution": "Run rustup target add wasm32-unknown-unknown and ensure all Polkadot SDK build dependencies from the prerequisite guide are fully installed. Then retry the cargo build command."
+                },
+                {
+                    "pattern": "Address already in use",
+                    "cause": "Port 8545 is already occupied by another process \u2014 either a previous eth-rpc instance or another Ethereum node.",
+                    "resolution": "Stop the conflicting process. On Linux/macOS: lsof -ti:8545 | xargs kill -9. Then restart the eth-rpc adapter."
+                },
+                {
+                    "pattern": "Connection refused",
+                    "cause": "The ETH-RPC adapter cannot connect to the local node. Either the node is not running or it has not finished starting.",
+                    "resolution": "Ensure revive-dev-node is running (step 4) and producing blocks before starting the eth-rpc adapter (step 5). Both must remain running simultaneously in separate terminals."
+                }
+            ],
+            "supplementary_context": {
+                "description": "These documentation pages provide background context for understanding the local development environment. Consult them if you need to understand WHY something works, not HOW to do it.",
+                "pages": [
+                    {
+                        "slug": "smart-contracts-dev-environments-local-dev-node",
+                        "url": "https://docs.polkadot.com/smart-contracts/dev-environments/local-dev-node/",
+                        "relevance": "The full guide this skill is based on. Consult for narrative context, optional debug logging configuration for both binaries, and details about the ETH-RPC API subset limitations."
+                    },
+                    {
+                        "slug": "smart-contracts-connect",
+                        "url": "https://docs.polkadot.com/smart-contracts/connect/",
+                        "relevance": "Network details for Polkadot Hub TestNet and MainNet. Consult when transitioning from local development to deploying on a live network."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "create-polkadot-account",
+            "title": "Create a Polkadot Account Programmatically",
+            "objective": "Create a new Polkadot account with a 12-word mnemonic, SR25519 keypair, and SS58-encoded address using the Polkadot.js keyring library in a Node.js project.",
+            "license": "CC-BY-4.0",
+            "source_pages": [
+                "chain-interactions/accounts/create-account.md"
+            ],
+            "prerequisites": {
+                "runtime": [
+                    "Node.js v18+ (v22+ recommended)",
+                    "npm"
+                ]
+            },
+            "env_vars": [],
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "Create the project directory and initialize it",
+                    "working_directory": ".",
+                    "commands": [
+                        "mkdir account-creator",
+                        "cd account-creator && npm init -y && npm pkg set type=module"
+                    ],
+                    "description": "Create a new directory called `account-creator` and initialize it as an ESM Node.js project. The `type=module` setting is required because the Polkadot.js libraries use ES module imports."
+                },
+                {
+                    "order": 2,
+                    "action": "Install dependencies",
+                    "working_directory": "account-creator",
+                    "commands": [
+                        "npm install @polkadot/util-crypto@13.5.9 @polkadot/keyring@13.5.9",
+                        "npm install --save-dev typescript@^5.7.2 tsx@^4.0.0"
+                    ],
+                    "description": "Install the Polkadot cryptographic utilities and keyring library. The `@polkadot/util-crypto` package provides mnemonic generation and WASM crypto initialization. The `@polkadot/keyring` package manages keypairs and address encoding. TypeScript and tsx are dev dependencies for running the script.",
+                    "expected_output": "npm install completes without errors. Peer dependency warnings can be ignored."
+                },
+                {
+                    "order": 3,
+                    "action": "Create the account creation script",
+                    "working_directory": "account-creator",
+                    "description": "Create a file at `create-account.ts` with the following content:\n\n```typescript\nimport { cryptoWaitReady, mnemonicGenerate } from '@polkadot/util-crypto';\nimport { Keyring } from '@polkadot/keyring';\n\nasync function main() {\n  await cryptoWaitReady();\n\n  const mnemonic = mnemonicGenerate(12);\n  const keyring = new Keyring({ type: 'sr25519', ss58Format: 0 });\n  const pair = keyring.addFromMnemonic(mnemonic);\n\n  console.log(`Address: ${pair.address}`);\n  console.log(`Mnemonic: ${mnemonic}`);\n}\n\nmain().catch(console.error);\n```\n\nKey details:\n- `cryptoWaitReady()` initializes the WASM crypto module \u2014 this MUST complete before any cryptographic operations.\n- `mnemonicGenerate(12)` creates a 12-word BIP39 mnemonic phrase for key backup.\n- `Keyring` with `type: 'sr25519'` uses Polkadot's default signature scheme.\n- `ss58Format: 0` encodes the address for the Polkadot relay chain (addresses start with `1`).\n- `addFromMnemonic()` derives a keypair deterministically from the mnemonic."
+                },
+                {
+                    "order": 4,
+                    "action": "Run the script",
+                    "working_directory": "account-creator",
+                    "commands": [
+                        "npx tsx create-account.ts"
+                    ],
+                    "expected_output": "The script prints an SS58-encoded address (starting with `1`) and a 12-word mnemonic phrase. Example:\n\nAddress: 15oF4uVJwmo4TdGW7VfQxNLavjCXviqWrztPu5CAcNTHmPvH\nMnemonic: word1 word2 word3 word4 word5 word6 word7 word8 word9 word10 word11 word12\n\nThe address and mnemonic will be different each run since a new keypair is generated."
+                }
+            ],
+            "reference_code": {
+                "repo": "none",
+                "base_path": "",
+                "files": []
+            },
+            "error_patterns": [
+                {
+                    "pattern": "Error: WASM initialization failed",
+                    "cause": "The `cryptoWaitReady()` call failed, likely due to a missing or incompatible WASM binary in the @polkadot/wasm-crypto package.",
+                    "resolution": "Ensure Node.js v18+ is installed. Delete `node_modules` and `package-lock.json`, then run `npm install` again. If the issue persists, check that the @polkadot/util-crypto version is compatible with your Node.js version."
+                },
+                {
+                    "pattern": "SyntaxError: Cannot use import statement outside a module",
+                    "cause": "The project is not configured as an ES module. The `type` field in package.json is missing or set to `commonjs`.",
+                    "resolution": "Run `npm pkg set type=module` in the project directory to set `\"type\": \"module\"` in package.json."
+                },
+                {
+                    "pattern": "ERR_MODULE_NOT_FOUND",
+                    "cause": "Dependencies are not installed or a package name is misspelled.",
+                    "resolution": "Run `npm install` in the project directory. Verify that `@polkadot/util-crypto` and `@polkadot/keyring` appear in `node_modules/`."
+                }
+            ],
+            "supplementary_context": {
+                "description": "Consult these pages for background on Polkadot account concepts, not for procedural steps.",
+                "pages": [
+                    {
+                        "slug": "chain-interactions-accounts-create-account",
+                        "url": "https://docs.polkadot.com/chain-interactions/accounts/create-account/",
+                        "relevance": "The full tutorial this skill is based on. Includes Python and Rust alternatives for account creation."
+                    },
+                    {
+                        "slug": "reference-parachains-accounts",
+                        "url": "https://docs.polkadot.com/reference/parachains/accounts/",
+                        "relevance": "Reference on account data structures, balance types, SS58 address formats, and reference counters."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "query-account-info-sdks",
+            "title": "Query Account Information with Polkadot-API (PAPI)",
+            "objective": "Set up a TypeScript project with Polkadot-API (PAPI), connect to Polkadot Hub via WebSocket, and query an account's balance, nonce, and system data.",
+            "license": "CC-BY-4.0",
+            "source_pages": [
+                "chain-interactions/accounts/query-accounts.md"
+            ],
+            "prerequisites": {
+                "runtime": [
+                    "Node.js v18+ (v22+ recommended)",
+                    "npm"
+                ],
+                "network": [
+                    "WebSocket endpoint for a Polkadot SDK-based chain (e.g., wss://asset-hub-paseo.dotters.network for Asset Hub Paseo TestNet)"
+                ]
+            },
+            "env_vars": [],
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "Create the project directory and initialize it",
+                    "working_directory": ".",
+                    "commands": [
+                        "mkdir papi-query-account-example",
+                        "cd papi-query-account-example && npm init -y && npm pkg set type=module"
+                    ],
+                    "description": "Create a new directory and initialize it as an ESM Node.js project. The `type=module` setting is required for Polkadot-API imports."
+                },
+                {
+                    "order": 2,
+                    "action": "Install dependencies",
+                    "working_directory": "papi-query-account-example",
+                    "commands": [
+                        "npm install polkadot-api",
+                        "npm install --save-dev @types/node tsx typescript"
+                    ],
+                    "description": "Install the Polkadot-API (PAPI) library and TypeScript tooling. PAPI is the recommended modern SDK for interacting with Polkadot SDK-based chains.",
+                    "expected_output": "npm install completes without errors."
+                },
+                {
+                    "order": 3,
+                    "action": "Generate type descriptors for the target chain",
+                    "working_directory": "papi-query-account-example",
+                    "commands": [
+                        "npx papi add polkadotTestNet -w wss://asset-hub-paseo.dotters.network"
+                    ],
+                    "description": "Generate TypeScript type descriptors by connecting to the chain's WebSocket endpoint and downloading its runtime metadata. This creates a `@polkadot-api/descriptors` package in the project with typed API bindings for all pallets, storage items, and calls.\n\nThe command connects to Asset Hub Paseo TestNet. To target a different chain, replace the WebSocket URL.\n\nThis step is NOT interactive \u2014 it fetches metadata and generates code automatically. It may take 10-30 seconds depending on network speed.",
+                    "expected_output": "The command prints metadata download progress and generates type descriptor files. A `.papi/` directory and `@polkadot-api/descriptors` entry appear in the project."
+                },
+                {
+                    "order": 4,
+                    "action": "Create the account query script",
+                    "working_directory": "papi-query-account-example",
+                    "description": "Create a file at `query-account.ts` with the following content:\n\n```typescript\nimport { createClient } from 'polkadot-api';\nimport { getWsProvider } from 'polkadot-api/ws-provider';\nimport { withPolkadotSdkCompat } from 'polkadot-api/polkadot-sdk-compat';\nimport { polkadotTestNet } from '@polkadot-api/descriptors';\n\nconst POLKADOT_HUB_RPC = 'INSERT_WS_ENDPOINT';\nconst ACCOUNT_ADDRESS = 'INSERT_ACCOUNT_ADDRESS';\nconst PAS_UNITS = 10_000_000_000;\n\nasync function main() {\n  try {\n    const client = createClient(\n      withPolkadotSdkCompat(getWsProvider(POLKADOT_HUB_RPC))\n    );\n\n    const api = client.getTypedApi(polkadotTestNet);\n    console.log('Connected to Polkadot Hub');\n\n    console.log(`\\nQuerying account: ${ACCOUNT_ADDRESS}\\n`);\n\n    const accountInfo = await api.query.System.Account.getValue(\n      ACCOUNT_ADDRESS\n    );\n\n    console.log('Account Information:');\n    console.log('===================');\n    console.log(`Nonce: ${accountInfo.nonce}`);\n    console.log(`Consumers: ${accountInfo.consumers}`);\n    console.log(`Providers: ${accountInfo.providers}`);\n    console.log(`Sufficients: ${accountInfo.sufficients}`);\n\n    console.log('\\nBalance Details:');\n    console.log('================');\n    console.log(\n      `Free Balance: ${accountInfo.data.free} (${\n        Number(accountInfo.data.free) / PAS_UNITS\n      } PAS)`\n    );\n    console.log(\n      `Reserved Balance: ${accountInfo.data.reserved} (${\n        Number(accountInfo.data.reserved) / PAS_UNITS\n      } PAS)`\n    );\n    console.log(\n      `Frozen Balance: ${accountInfo.data.frozen} (${\n        Number(accountInfo.data.frozen) / PAS_UNITS\n      } PAS)`\n    );\n\n    const total =\n      Number(accountInfo.data.free) + Number(accountInfo.data.reserved);\n    console.log(`\\nTotal Balance: ${total} (${total / PAS_UNITS} PAS)`);\n\n    await client.destroy();\n    console.log('\\nDisconnected');\n  } catch (error) {\n    console.error('Error:', error);\n    process.exit(1);\n  }\n}\n\nmain();\n```\n\nMake the following substitutions:\n1. Replace `INSERT_WS_ENDPOINT` with the WebSocket endpoint URL (e.g., `wss://asset-hub-paseo.dotters.network`). This must match the chain used in step 3 for type generation.\n2. Replace `INSERT_ACCOUNT_ADDRESS` with a valid SS58 account address to query (e.g., `5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY` for the Alice dev account, or any funded account on the target chain).\n\nKey details:\n- `withPolkadotSdkCompat` wraps the WebSocket provider for Polkadot SDK compatibility.\n- `getTypedApi(polkadotTestNet)` returns a fully typed API using the descriptors generated in step 3.\n- `System.Account.getValue()` queries the System pallet's Account storage map.\n- `PAS_UNITS` (10^10) converts raw balance values to human-readable PAS units."
+                },
+                {
+                    "order": 5,
+                    "action": "Run the query script",
+                    "working_directory": "papi-query-account-example",
+                    "commands": [
+                        "npx tsx query-account.ts"
+                    ],
+                    "expected_output": "The script connects to the chain, queries the account, and prints account information:\n\nConnected to Polkadot Hub\n\nQuerying account: <address>\n\nAccount Information:\n===================\nNonce: <number>\nConsumers: <number>\nProviders: <number>\nSufficients: <number>\n\nBalance Details:\n================\nFree Balance: <raw> (<human> PAS)\nReserved Balance: <raw> (<human> PAS)\nFrozen Balance: <raw> (<human> PAS)\n\nTotal Balance: <raw> (<human> PAS)\n\nDisconnected\n\nIf the account has no on-chain data, all values will be 0."
+                }
+            ],
+            "reference_code": {
+                "repo": "none",
+                "base_path": "",
+                "files": []
+            },
+            "error_patterns": [
+                {
+                    "pattern": "Error: connect ECONNREFUSED",
+                    "cause": "The WebSocket endpoint is unreachable. The URL may be wrong, the node may be down, or a firewall is blocking the connection.",
+                    "resolution": "Verify the WebSocket URL is correct and accessible. Try opening it in a browser or with `websocat wss://...`. For Asset Hub Paseo, use `wss://asset-hub-paseo.dotters.network`."
+                },
+                {
+                    "pattern": "Cannot find module '@polkadot-api/descriptors'",
+                    "cause": "The type descriptors were not generated in step 3, or the `papi add` command failed.",
+                    "resolution": "Run `npx papi add polkadotTestNet -w <WS_ENDPOINT>` again. Verify that a `.papi/` directory exists in the project root and that `@polkadot-api/descriptors` is listed in package.json dependencies."
+                },
+                {
+                    "pattern": "SyntaxError: Cannot use import statement outside a module",
+                    "cause": "The project is not configured as an ES module.",
+                    "resolution": "Run `npm pkg set type=module` to set `\"type\": \"module\"` in package.json."
+                },
+                {
+                    "pattern": "Error: Metadata version not supported",
+                    "cause": "The PAPI version is incompatible with the chain's runtime metadata version.",
+                    "resolution": "Update polkadot-api to the latest version: `npm install polkadot-api@latest`. Then regenerate descriptors: `npx papi add polkadotTestNet -w <WS_ENDPOINT>`."
+                },
+                {
+                    "pattern": "RpcError: -32602: Invalid params",
+                    "cause": "The account address is not a valid SS58 address, or it uses the wrong SS58 prefix for the target chain.",
+                    "resolution": "Verify the account address is a valid SS58-encoded address. For Polkadot relay chain, addresses start with `1`. For generic Substrate chains, addresses start with `5`."
+                }
+            ],
+            "supplementary_context": {
+                "description": "Consult these pages for background on account data structures and alternative SDK options.",
+                "pages": [
+                    {
+                        "slug": "chain-interactions-accounts-query-accounts",
+                        "url": "https://docs.polkadot.com/chain-interactions/accounts/query-accounts/",
+                        "relevance": "The full tutorial this skill is based on. Includes Polkadot.js, Dedot, Python, and Subxt alternatives for querying accounts."
+                    },
+                    {
+                        "slug": "reference-parachains-accounts",
+                        "url": "https://docs.polkadot.com/reference/parachains/accounts/",
+                        "relevance": "Reference on account data structures, balance types (free, reserved, frozen), reference counters, and SS58 formats."
+                    },
+                    {
+                        "slug": "reference-tools-papi",
+                        "url": "https://docs.polkadot.com/reference/tools/papi/",
+                        "relevance": "Full PAPI reference: installation, providers (WebSocket, light client), reading storage, sending transactions, and ink! contract interaction."
+                    }
+                ]
+            }
+        }
+    ],
+    "outputs": {
+        "public_root": "/ai/",
+        "skills_dir": "skills"
+    }
+}
