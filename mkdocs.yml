@@ -16,6 +16,7 @@ extra_javascript:
   - js/connect-to-metamask.js
   - js/error-modal.js
   - js/ai-file-actions.js
+  - js/agent-skills-search.js
   - js/toggle-pages.js
 # Extra CSS files
 extra_css:
@@ -138,6 +139,7 @@ plugins:
         - js/connect-to-metamask.js
         - js/error-modal.js
         - js/ai-file-actions.js
+        - js/agent-skills-search.js
         - js/toggle-pages.js
       css_files:
         - assets/stylesheets/terminal.css

@@ -290,3 +290,78 @@
     color: var(--color-text-primary);
     text-decoration: underline;
   }
+
+/* --- Agent Skills Search --- */
+.agent-skills-search {
+  margin: 1.5rem 0;
+}
+
+.agent-skills-search__input {
+  width: 100%;
+  padding: 0.6em 0.9em;
+  background-color: var(--color-surface-secondary);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--rounded);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.agent-skills-search__input:focus {
+  outline: none;
+  border-color: var(--color-text-secondary);
+}
+
+.agent-skills-search__results {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.agent-skills-search__empty {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.agent-skills-search__card {
+  padding: 0.875rem 1rem;
+  background-color: var(--color-surface-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--rounded);
+}
+
+.agent-skills-search__card-title {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+}
+
+.agent-skills-search__card-desc {
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  margin: 0 0 0.75rem;
+  line-height: 1.5;
+}
+
+.agent-skills-search__card-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.md-typeset .agent-skills-search__card-link {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  padding: 0.2em 0.6em;
+  border-radius: var(--rounded-sm);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.md-typeset .agent-skills-search__card-link:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-border-strong);
+}
