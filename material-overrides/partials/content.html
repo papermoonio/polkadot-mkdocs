@@ -48,46 +48,62 @@
 {% endif %}
 
 {# ------------------------------------------------------------------ #}
-{# Page details row — rendered directly below the H1                  #}
-{# Contains: tutorial badge, test status badge, ai dropdowns.         #}
+{# Page badges — rendered directly below the H1                       #}
+{# To add a new badge: add a key under page_badges in frontmatter     #}
+{# and handle it in the render_badges macro below.                    #}
+{# To reposition badges, move the render_badges call in the content   #}
+{# rendering section below.                                           #}
 {# ------------------------------------------------------------------ #}
 
-{# Signal-cellular icons for difficulty level #}
+{# Signal-cellular icons for tutorial difficulty level #}
 {% set _ico_cell1 %}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="ai-file-actions-icon" aria-hidden="true"><path d="M19.5 5.5v13h-2v-13zm-7 5v8h-2v-8zM21 4h-5v16h5zm-7 5H9v11h5zm-7 5H2v6h5z"/></svg>{% endset %}
 {% set _ico_cell2 %}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="ai-file-actions-icon" aria-hidden="true"><path d="M19.5 5.5v13h-2v-13zM21 4h-5v16h5zm-7 5H9v11h5zm-7 5H2v6h5z"/></svg>{% endset %}
 {% set _ico_cell3 %}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="ai-file-actions-icon" aria-hidden="true"><path d="M21 4h-5v16h5zm-7 5H9v11h5zm-7 5H2v6h5z"/></svg>{% endset %}
 
-{# --- Assemble the full page-details row --- #}
-{% set page_details_html %}
-<div class="page-details">
-  {%- if page.meta and page.meta.test_workflow -%}
-    {%- set _wf = page.meta.test_workflow | e -%}
-    {%- set _gh = 'https://github.com/polkadot-developers/polkadot-cookbook/actions/workflows/' -%}
-    <a class="page-detail-item page-detail-test-badge" href="{{ _gh }}{{ _wf }}.yml" target="_blank" rel="noopener">
-      <img src="{{ _gh }}{{ _wf }}.yml/badge.svg?event=push" alt="Test status">
-    </a>
-  {%- endif -%}
-  {%- if page.meta and page.meta.tutorial_badge -%}
-    {%- set _level = page.meta.tutorial_badge | lower -%}
-    <span class="page-detail-item">
-      {%- if _level == 'beginner' -%}{{ _ico_cell1 }}
-      {%- elif _level == 'intermediate' -%}{{ _ico_cell2 }}
-      {%- elif _level == 'advanced' -%}{{ _ico_cell3 }}
-      {%- endif -%}
-      {{ page.meta.tutorial_badge }}
-    </span>
+{#
+  Renders a .page-header-row row from a page_badges dict.
+  Pass an optional variant string to scope the block with data-variant.
+#}
+{% macro render_badges(badges, variant=None) %}
+<div class="page-header-row"{% if variant %} data-variant="{{ variant | e }}"{% endif %}>
+  {%- if badges -%}
+    {%- if badges.test_workflow -%}
+      {%- set _wf = badges.test_workflow | e -%}
+      {%- set _gh = 'https://github.com/polkadot-developers/polkadot-cookbook/actions/workflows/' -%}
+      <a class="page-header-item page-header-test-badge" href="{{ _gh }}{{ _wf }}.yml" target="_blank" rel="noopener">
+        <img src="{{ _gh }}{{ _wf }}.yml/badge.svg?event=push" alt="Test status">
+      </a>
+    {%- endif -%}
+    {%- if badges.tutorial_badge -%}
+      {%- set _level = badges.tutorial_badge | lower -%}
+      <span class="page-header-item">
+        {%- if _level == 'beginner' -%}{{ _ico_cell1 }}
+        {%- elif _level == 'intermediate' -%}{{ _ico_cell2 }}
+        {%- elif _level == 'advanced' -%}{{ _ico_cell3 }}
+        {%- endif -%}
+        {{ badges.tutorial_badge }}
+      </span>
+    {%- endif -%}
   {%- endif -%}
 </div>
-{% endset %}
+{% endmacro %}
 
 {# ------------------------------------------------------------------ #}
 {# Content rendering                                                    #}
 {# ------------------------------------------------------------------ #}
 
-{% if "\x3ch1" in page.content %}
-  {% set rendered_content = page.content | replace('</h1>', '</h1>' ~ page_details_html, 1) %}
+{% if page.meta.toggle_variant_metas %}
+  {# Toggle page: replace the plugin-inserted placeholder with per-variant badge blocks #}
+  {% set badge_blocks %}
+    {%- for variant, badges in page.meta.toggle_variant_metas -%}
+      {{- render_badges(badges, variant) -}}
+    {%- endfor -%}
+  {% endset %}
+  {% set rendered_content = page.content | replace('<!-- toggle-badges -->', badge_blocks, 1) %}
+{% elif "\x3ch1" in page.content %}
+  {% set rendered_content = page.content | replace('</h1>', '</h1>' ~ render_badges(page.meta.page_badges), 1) %}
 {% else %}
-  {% set rendered_content = '<h1>' ~ (page.title | d(config.site_name, true)) ~ '</h1>' ~ page_details_html ~ page.content %}
+  {% set rendered_content = '<h1>' ~ (page.title | d(config.site_name, true)) ~ '</h1>' ~ render_badges(page.meta.page_badges) ~ page.content %}
 {% endif %}
 
 {% if "faq" in page.url %}
