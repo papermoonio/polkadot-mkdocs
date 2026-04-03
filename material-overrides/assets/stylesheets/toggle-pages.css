@@ -7,7 +7,6 @@
 /* Panel layout */
 .toggle-panel,
 .toggle-header > span,
-.toggle-header > span .h1-copy-wrapper,
 .page-header-row[data-variant] {
   display: none;
 }
@@ -18,8 +17,7 @@
   display: block;
 }
 
-.toggle-header > span.active .h1-copy-wrapper {
-  display: flex;
+.md-typeset .toggle-header h1 {
   margin-bottom: var(--p-2);
 }
 
@@ -30,6 +28,7 @@
   background: var(--color-border-strong);
   border-radius: var(--rounded-full);
   padding: var(--py-1);
+  margin-bottom: var(--p-2);
   border: 1px solid var(--color-border);
   width: fit-content;
 }

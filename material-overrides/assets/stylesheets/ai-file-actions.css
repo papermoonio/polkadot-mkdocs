@@ -51,7 +51,8 @@ a.ai-file-actions-btn.single-action-btn {
 }
 
 .ai-file-actions-container:hover .ai-file-actions-copy {
-  border-right-color: var(--color-border-strong); /* Keep separator stable on hover */
+  /* Keep separator stable on hover */
+  border-right-color: var(--color-border-strong);
 }
 
 /* --- Right Button (Trigger) --- */
@@ -112,8 +113,8 @@ a.ai-file-actions-btn.single-action-btn {
 }
 
 /* Reset specific overrides if they exist for the active custom schemes */
-[data-md-color-scheme='custom-light'] .ai-file-actions-container,
-[data-md-color-scheme='custom-dark'] .ai-file-actions-container {
+[data-md-color-scheme="custom-light"] .ai-file-actions-container,
+[data-md-color-scheme="custom-dark"] .ai-file-actions-container {
   border-color: var(--color-border-strong);
 }
 
@@ -223,8 +224,7 @@ tr:has(pre > code):hover pre > code {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.4rem;
-  padding-bottom: 0.75rem;
-  margin-bottom: 0.75rem;
+  padding-bottom: 0.25rem;
   border-bottom: 1px solid var(--color-border-strong);
 }
 
