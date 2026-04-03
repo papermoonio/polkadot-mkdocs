@@ -8,13 +8,13 @@
 .toggle-panel,
 .toggle-header > span,
 .toggle-header > span .h1-copy-wrapper,
-.page-details[data-variant] {
+.page-header-row[data-variant] {
   display: none;
 }
 
 .toggle-panel.active,
 .toggle-header > span.active,
-.page-details[data-variant].active {
+.page-header-row[data-variant].active {
   display: block;
 }
 

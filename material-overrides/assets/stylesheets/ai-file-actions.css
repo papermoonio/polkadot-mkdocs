@@ -218,7 +218,7 @@ tr:has(pre > code):hover pre > code {
 }
 
 /* --- Page details row (below H1) --- */
-.page-details {
+.page-header-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -229,7 +229,7 @@ tr:has(pre > code):hover pre > code {
 }
 
 /* Shared style — tutorial badge label and test badge */
-.page-detail-item {
+.page-header-item {
   display: inline-flex;
   align-items: center;
   gap: 0.35em;
@@ -240,35 +240,35 @@ tr:has(pre > code):hover pre > code {
   white-space: nowrap;
 }
 
-.md-typeset a.page-detail-item {
+.md-typeset a.page-header-item {
   text-decoration: none;
   color: var(--color-text-secondary);
 }
 
-.md-typeset a.page-detail-item:hover {
+.md-typeset a.page-header-item:hover {
   color: var(--color-text-primary);
 }
 
-.page-detail-test-badge img {
+.page-header-test-badge img {
   display: block;
   height: 1.3em;
   border-radius: 2px;
 }
 
 /* Dropdown containers — remove outer border and auto-margin */
-.page-details .ai-file-actions-container {
+.page-header-row .ai-file-actions-container {
   margin-left: 0;
   border: none;
   font-size: 0.8em;
 }
 
 /* Strip the default button background so the trigger is borderless */
-.page-details .ai-file-actions-btn {
+.page-header-row .ai-file-actions-btn {
   background: transparent;
 }
 
 /* Single-button trigger: borderless, icon + text + chevron */
-.page-details .ai-file-actions-trigger {
+.page-header-row .ai-file-actions-trigger {
   border: none;
   border-radius: var(--rounded);
   background: transparent;
@@ -279,13 +279,13 @@ tr:has(pre > code):hover pre > code {
   color: var(--color-text-secondary);
 }
 
-.page-details .ai-file-actions-trigger:hover {
+.page-header-row .ai-file-actions-trigger:hover {
   background: var(--color-surface-secondary);
   color: var(--color-text-primary);
 }
 
 /* Scale the chevron down to match the row text size */
-.page-details .ai-file-actions-chevron {
+.page-header-row .ai-file-actions-chevron {
   width: 1.1em;
   height: 1.1em;
   min-width: 1.1em;
