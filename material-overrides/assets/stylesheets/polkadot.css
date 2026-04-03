@@ -240,6 +240,7 @@
 .md-typeset h1 {
   line-height: 1.2;
   letter-spacing: -0.02em;
+  margin-bottom: var(--p-4);
 }
 
 .md-typeset h2 {

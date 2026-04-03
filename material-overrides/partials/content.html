@@ -45,34 +45,66 @@
 
 {% if "material/tags" in config.plugins and tags %}
   {% include "partials/tags.html" %}
-{% endif %}  
-
-{% set badge_html = '' %}
-{% if page.meta and page.meta.tutorial_badge %}
-  {% set badge_html = '<span class="badge ' ~ (page.meta.tutorial_badge | lower | replace(".", "-")) ~ '">' ~ (page.meta.tutorial_badge | capitalize) ~ '</span>' %}
 {% endif %}
 
+{# ------------------------------------------------------------------ #}
+{# Page details row — rendered directly below the H1                  #}
+{# Contains: tutorial badge, test status badge, ai dropdowns.         #}
+{# ------------------------------------------------------------------ #}
+
+{# Signal-cellular icons for difficulty level #}
+{% set _ico_cell1 %}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="ai-file-actions-icon" aria-hidden="true"><path d="M19.5 5.5v13h-2v-13zm-7 5v8h-2v-8zM21 4h-5v16h5zm-7 5H9v11h5zm-7 5H2v6h5z"/></svg>{% endset %}
+{% set _ico_cell2 %}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="ai-file-actions-icon" aria-hidden="true"><path d="M19.5 5.5v13h-2v-13zM21 4h-5v16h5zm-7 5H9v11h5zm-7 5H2v6h5z"/></svg>{% endset %}
+{% set _ico_cell3 %}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="ai-file-actions-icon" aria-hidden="true"><path d="M21 4h-5v16h5zm-7 5H9v11h5zm-7 5H2v6h5z"/></svg>{% endset %}
+
+{# --- Assemble the full page-details row --- #}
+{% set page_details_html %}
+<div class="page-details">
+  {%- if page.meta and page.meta.test_workflow -%}
+    {%- set _wf = page.meta.test_workflow | e -%}
+    {%- set _gh = 'https://github.com/polkadot-developers/polkadot-cookbook/actions/workflows/' -%}
+    <a class="page-detail-item page-detail-test-badge" href="{{ _gh }}{{ _wf }}.yml" target="_blank" rel="noopener">
+      <img src="{{ _gh }}{{ _wf }}.yml/badge.svg?event=push" alt="Test status">
+    </a>
+  {%- endif -%}
+  {%- if page.meta and page.meta.tutorial_badge -%}
+    {%- set _level = page.meta.tutorial_badge | lower -%}
+    <span class="page-detail-item">
+      {%- if _level == 'beginner' -%}{{ _ico_cell1 }}
+      {%- elif _level == 'intermediate' -%}{{ _ico_cell2 }}
+      {%- elif _level == 'advanced' -%}{{ _ico_cell3 }}
+      {%- endif -%}
+      {{ page.meta.tutorial_badge }}
+    </span>
+  {%- endif -%}
+</div>
+{% endset %}
+
+{# ------------------------------------------------------------------ #}
+{# Content rendering                                                    #}
+{# ------------------------------------------------------------------ #}
+
 {% if "\x3ch1" in page.content %}
-  {% set rendered_content = page.content | replace('</h1>', '</h1>' ~ badge_html, 1) %}
+  {% set rendered_content = page.content | replace('</h1>', '</h1>' ~ page_details_html, 1) %}
 {% else %}
-  {% set rendered_content = '<h1>' ~ (page.title | d(config.site_name, true)) ~ '</h1>' ~ badge_html ~ page.content %}
+  {% set rendered_content = '<h1>' ~ (page.title | d(config.site_name, true)) ~ '</h1>' ~ page_details_html ~ page.content %}
 {% endif %}
 
 {% if "faq" in page.url %}
   {# Split content for each FAQ by h2 #}
   {% set h2_sections = rendered_content.split('<h2') %}
   {% set intro_content = h2_sections[0] %}
-  
+
   {# Keep any introduction content intact #}
   {% if intro_content %}
     {{ intro_content | safe }}
   {% endif %}
-  
+
   {# Process each FAQ section #}
   {% for i in range(1, h2_sections | length) %}
     {% set section = h2_sections[i] %}
     {% set section_counter = loop.index %}
-    
+
     {# Extract h2 content #}
     {% set h2_end = section.find('</h2>') %}
     {% if h2_end != -1 %}
@@ -83,7 +115,7 @@
       {% set normalized_h2_text = h2_text | striptags | trim %}
       {% set h2_attributes_lower = h2_attributes | lower %}
       {% set is_excluded_h2 = normalized_h2_text == "Where to Go Next" or 'id="where-to-go-next"' in h2_attributes_lower %}
-      
+
       {# Extract ID from h2 attributes #}
       {% set id_start = h2_attributes.find('id="') %}
       {% set h2_id = '' %}
@@ -92,11 +124,11 @@
         {% set id_end = h2_attributes.find('"', id_start) %}
         {% set h2_id = h2_attributes[id_start:id_end] %}
       {% endif %}
-      
+
       {# Get content after h2 until next h2 or end of page #}
       {% set h2_closing_tag_length = 5 %} {# Length of '</h2>' #}
       {% set section_content = section[h2_end + h2_closing_tag_length:] %}
-      
+
       {% if is_excluded_h2 %}
         <h2{{ h2_attributes | safe }}>{{ h2_text | safe }}</h2>
         {{ section_content | safe }}
