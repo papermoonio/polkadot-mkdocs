@@ -65,27 +65,27 @@
   Pass an optional variant string to scope the block with data-variant.
 #}
 {% macro render_badges(badges, variant=None) %}
+<div class="page-header-row"{% if variant %} data-variant="{{ variant | e }}"{% endif %}>
   {%- if badges -%}
-    <div class="page-header-row"{% if variant %} data-variant="{{ variant | e }}"{% endif %}>
-      {%- if badges.test_workflow -%}
-        {%- set _wf = badges.test_workflow | e -%}
-        {%- set _gh = 'https://github.com/polkadot-developers/polkadot-cookbook/actions/workflows/' -%}
-        <a class="page-header-item page-header-test-badge" href="{{ _gh }}{{ _wf }}.yml" target="_blank" rel="noopener">
-          <img src="{{ _gh }}{{ _wf }}.yml/badge.svg?event=push" alt="Test status">
-        </a>
-      {%- endif -%}
-      {%- if badges.tutorial_badge -%}
-        {%- set _level = badges.tutorial_badge | lower -%}
-        <span class="page-header-item">
-          {%- if _level == 'beginner' -%}{{ _ico_cell1 }}
-          {%- elif _level == 'intermediate' -%}{{ _ico_cell2 }}
-          {%- elif _level == 'advanced' -%}{{ _ico_cell3 }}
-          {%- endif -%}
-          {{ badges.tutorial_badge }}
-        </span>
-      {%- endif -%}
-    </div>
+    {%- if badges.test_workflow -%}
+      {%- set _wf = badges.test_workflow | e -%}
+      {%- set _gh = 'https://github.com/polkadot-developers/polkadot-cookbook/actions/workflows/' -%}
+      <a class="page-header-item page-header-test-badge" href="{{ _gh }}{{ _wf }}.yml" target="_blank" rel="noopener">
+        <img src="{{ _gh }}{{ _wf }}.yml/badge.svg?event=push" alt="Test status">
+      </a>
+    {%- endif -%}
+    {%- if badges.tutorial_badge -%}
+      {%- set _level = badges.tutorial_badge | lower -%}
+      <span class="page-header-item">
+        {%- if _level == 'beginner' -%}{{ _ico_cell1 }}
+        {%- elif _level == 'intermediate' -%}{{ _ico_cell2 }}
+        {%- elif _level == 'advanced' -%}{{ _ico_cell3 }}
+        {%- endif -%}
+        {{ badges.tutorial_badge }}
+      </span>
+    {%- endif -%}
   {%- endif -%}
+</div>
 {% endmacro %}
 
 {# ------------------------------------------------------------------ #}
