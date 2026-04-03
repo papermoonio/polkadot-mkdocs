@@ -7,12 +7,14 @@
 /* Panel layout */
 .toggle-panel,
 .toggle-header > span,
-.toggle-header > span .h1-copy-wrapper {
+.toggle-header > span .h1-copy-wrapper,
+.page-details[data-variant] {
   display: none;
 }
 
 .toggle-panel.active,
-.toggle-header > span.active {
+.toggle-header > span.active,
+.page-details[data-variant].active {
   display: block;
 }
 
