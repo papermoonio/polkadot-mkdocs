@@ -120,7 +120,7 @@ plugins:
   - ai_docs:
       llms_config: llms_config.json
       enabled: !ENV [ENABLED_LLMS_PLUGINS, True]
-      ai_page_actions_anchor: page-details
+      ai_page_actions_anchor: page-header-row
       ai_page_actions_style: dropdown
       ai_page_actions_dropdown_label: 'Markdown for LLMs'
   - awesome-nav
