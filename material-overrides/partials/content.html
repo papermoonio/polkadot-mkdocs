@@ -47,15 +47,8 @@
   {% include "partials/tags.html" %}
 {% endif %}
 
-{# ------------------------------------------------------------------ #}
-{# Page badges — rendered directly below the H1                       #}
-{# To add a new badge: add a key under page_badges in frontmatter     #}
-{# and handle it in the render_badges macro below.                    #}
-{# To reposition badges, move the render_badges call in the content   #}
-{# rendering section below.                                           #}
-{# ------------------------------------------------------------------ #}
-
 {% from "partials/page-badges.html" import render_badges %}
+{% from "partials/page-tests.html" import render_test_block %}
 
 {# ------------------------------------------------------------------ #}
 {# Content rendering                                                    #}
@@ -73,6 +66,22 @@
   {% set rendered_content = page.content | replace('</h1>', '</h1>' ~ render_badges(page.meta.page_badges), 1) %}
 {% else %}
   {% set rendered_content = '<h1>' ~ (page.title | d(config.site_name, true)) ~ '</h1>' ~ render_badges(page.meta.page_badges) ~ page.content %}
+{% endif %}
+
+{# ------------------------------------------------------------------ #}
+{# Page tests block — injected before "Where to Go Next" or at end    #}
+{# Driven by page_tests.path in frontmatter; uses page_badges         #}
+{# .test_workflow (if set) for the CI badge image.                    #}
+{# ------------------------------------------------------------------ #}
+{% if page.meta.page_tests and page.meta.page_tests.path %}
+  {%- set _wf = page.meta.page_badges.test_workflow if page.meta.page_badges and page.meta.page_badges.test_workflow else None -%}
+  {%- set _test_block = render_test_block(_wf, page.meta.page_tests.path, page.title) -%}
+  {%- set _wtgn_marker = '<h2 id="where-to-go-next"' -%}
+  {%- if _wtgn_marker in rendered_content -%}
+    {%- set rendered_content = rendered_content | replace(_wtgn_marker, _test_block ~ _wtgn_marker, 1) -%}
+  {%- else -%}
+    {%- set rendered_content = rendered_content ~ _test_block -%}
+  {%- endif -%}
 {% endif %}
 
 {% if "faq" in page.url %}

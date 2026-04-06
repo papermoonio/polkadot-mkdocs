@@ -3,7 +3,8 @@
 
   render_badges(badges, variant=None)
     Renders a single .page-header-row div containing tutorial difficulty and
-    CI test-workflow badges sourced from page frontmatter.
+    CI test-workflow badges sourced from page frontmatter. AI dropdowns are also
+    injected into this div by the ai_docs plugin.
 
       badges  — a page_badges dict from frontmatter (may be None/empty)
       variant — optional data-variant string; when set, scopes the row with
