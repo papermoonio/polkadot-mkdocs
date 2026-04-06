@@ -6,8 +6,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  check-skills:
+  # Job 1: Detect changes, refresh coverage, produce alerts
+  detect-changes:
     runs-on: ubuntu-latest
+    outputs:
+      has_stale: ${{ steps.check.outputs.has_stale }}
+      has_uncovered: ${{ steps.check.outputs.has_uncovered }}
     steps:
       - uses: actions/checkout@v4
 
@@ -37,10 +41,124 @@ jobs:
           python3 agent-ready-docs-hub/generate_coverage.py polkadot-docs \
             --mkdocs-root .
 
+      - name: Check for work to do
+        id: check
+        run: |
+          has_stale=$(python3 -c "
+          import json
+          d = json.load(open('skill_coverage.json'))
+          print('true' if d.get('summary',{}).get('stale',0) > 0 else 'false')
+          ")
+          has_uncovered=$(python3 -c "
+          import json
+          d = json.load(open('skill_coverage.json'))
+          print('true' if d.get('summary',{}).get('uncovered',0) > 0 else 'false')
+          ")
+          echo "has_stale=$has_stale" >> "$GITHUB_OUTPUT"
+          echo "has_uncovered=$has_uncovered" >> "$GITHUB_OUTPUT"
+
       - name: Commit updated files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add skill_coverage.json change_alerts.json repo_state.json
           git diff --cached --quiet || git commit -m "chore: refresh skill coverage and alerts"
+          git push
+
+  # Job 2: Triage uncovered/stale pages into skill candidates
+  triage:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has_uncovered == 'true' || needs.detect-changes.outputs.has_stale == 'true'
+    runs-on: ubuntu-latest
+    environment: skill-automation
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: polkadot-developers/polkadot-docs
+          path: polkadot-docs
+
+      - uses: actions/checkout@v4
+        with:
+          repository: papermoonio/agent-ready-docs-hub
+          path: agent-ready-docs-hub
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Load agent-ready-docs-hub/skills/triage-skill-candidates/SKILL.md and run it.
+            The mkdocs project is at the workspace root (.).
+            Also load:
+            - agent-ready-docs-hub/verticals/blockchain.md
+            - agent-ready-docs-hub/projects/polkadot-docs/context.md
+            Do NOT ask any questions — make your own judgement for all classifications.
+            Write skill_candidates.json to the workspace root.
+          claude_args: >-
+            --max-turns 30
+            --model claude-sonnet-4-6
+            --allowedTools "Read,Write,Edit,Glob,Grep,Bash"
+
+      - name: Commit triage results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add skill_candidates.json
+          git diff --cached --quiet || git commit -m "chore: auto-triage skill candidates"
+          git push
+
+  # Job 3: Generate/update skills for stale or high-priority candidates
+  generate-skills:
+    needs: [detect-changes, triage]
+    if: |
+      always() &&
+      (needs.detect-changes.outputs.has_stale == 'true' ||
+       needs.triage.result == 'success')
+    runs-on: ubuntu-latest
+    environment: skill-automation
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: polkadot-developers/polkadot-docs
+          path: polkadot-docs
+
+      - uses: actions/checkout@v4
+        with:
+          repository: papermoonio/agent-ready-docs-hub
+          path: agent-ready-docs-hub
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Load agent-ready-docs-hub/skills/generate-skill-config-entry/SKILL.md and run it.
+            The mkdocs project is at the workspace root (.).
+            Also load:
+            - agent-ready-docs-hub/verticals/blockchain.md
+            - agent-ready-docs-hub/projects/polkadot-docs/context.md
+            - agent-ready-docs-hub/projects/polkadot-docs/gotchas.md
+
+            Skip the Discovery Interview. Instead, use these answers:
+            1. Build all high-priority candidates with status "pending" in skill_candidates.json.
+               Also update any skills flagged as "stale" in skill_coverage.json.
+            2. The reference repository is already defined in agent_skills_config.json under reference_repos.
+            3. Known pitfalls are in the gotchas.md file loaded above.
+
+            Do NOT ask any questions — proceed autonomously.
+            Write updated agent_skills_config.json and skill_coverage.json to the workspace root.
+          claude_args: >-
+            --max-turns 50
+            --model claude-sonnet-4-6
+            --allowedTools "Read,Write,Edit,Glob,Grep,Bash"
+            --max-budget-usd 5.00
+
+      - name: Commit generated skills
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add agent_skills_config.json skill_coverage.json skill_candidates.json
+          git diff --cached --quiet || git commit -m "chore: auto-generate/update skills"
           git push
