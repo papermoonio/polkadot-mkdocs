@@ -17,14 +17,6 @@
   display: block;
 }
 
-.md-typeset .toggle-header h1 {
-  margin-bottom: var(--p-2);
-}
-
-.toggle-header div:has(h1) {
-  margin-bottom: var(--p-2);
-}
-
 /* Button container */
 .toggle-buttons {
   display: inline-flex;

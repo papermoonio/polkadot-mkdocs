@@ -218,56 +218,18 @@ tr:has(pre > code):hover pre > code {
   }
 }
 
-/* --- Page details row (below H1) --- */
-.page-header-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.4rem;
-  padding-bottom: 0.25rem;
-  border-bottom: 1px solid var(--color-border-strong);
-}
 
-/* Shared style — tutorial badge label and test badge */
-.page-header-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35em;
-  padding: 0.2em 0.4em;
-  color: var(--color-text-secondary);
-  font-size: 0.8em;
-  line-height: 1.4;
-  white-space: nowrap;
-}
-
-.md-typeset a.page-header-item {
-  text-decoration: none;
-  color: var(--color-text-secondary);
-}
-
-.md-typeset a.page-header-item:hover {
-  color: var(--color-text-primary);
-}
-
-.page-header-test-badge img {
-  display: block;
-  height: 1.3em;
-  border-radius: 2px;
-}
-
-/* Dropdown containers — remove outer border and auto-margin */
+/* --- Page header row: ai-file-actions overrides --- */
 .page-header-row .ai-file-actions-container {
   margin-left: 0;
   border: none;
   font-size: 0.8em;
 }
 
-/* Strip the default button background so the trigger is borderless */
 .page-header-row .ai-file-actions-btn {
   background: transparent;
 }
 
-/* Single-button trigger: borderless, icon + text + chevron */
 .page-header-row .ai-file-actions-trigger {
   border: none;
   border-radius: var(--rounded);
@@ -284,7 +246,6 @@ tr:has(pre > code):hover pre > code {
   color: var(--color-text-primary);
 }
 
-/* Scale the chevron down to match the row text size */
 .page-header-row .ai-file-actions-chevron {
   width: 1.1em;
   height: 1.1em;
