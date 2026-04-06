@@ -1,0 +1,14 @@
+{
+  "schema_version": "1",
+  "last_checked": "2026-04-02T18:19:14Z",
+  "docs_repo": {
+    "branch": "master",
+    "last_checked_commit": "b53091977f391b6fd60b8f7db0f18c0839fa563c"
+  },
+  "reference_repos": {
+    "revm-hardhat-examples": {
+      "branch": "master",
+      "last_checked_commit": "a871364c8f4da052855b5c8ee4ed6b89fd182cb1"
+    }
+  }
+}

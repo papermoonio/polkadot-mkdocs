@@ -1,0 +1,57 @@
+{
+  "schema_version": "1",
+  "generated": "2026-04-02T18:19:14Z",
+  "summary": {
+    "docs_changes": 2,
+    "reference_changes": 0,
+    "skills_affected": 2
+  },
+  "alerts": [
+    {
+      "type": "docs_change",
+      "source": "polkadot-docs",
+      "file": "smart-contracts/cookbook/eth-dapps/uniswap-v2.md",
+      "skills_affected": [
+        "deploy-uniswap-v2-on-polkadot"
+      ],
+      "commits": [
+        {
+          "sha": "6ac751e12c59",
+          "date": "2026-03-31T14:46:31-04:00",
+          "message": "remove tools front matter (#1574)"
+        }
+      ],
+      "severity": "high"
+    },
+    {
+      "type": "docs_change",
+      "source": "polkadot-docs",
+      "file": "smart-contracts/cookbook/smart-contracts/deploy-erc20/erc20-hardhat.md",
+      "skills_affected": [
+        "deploy-erc20-token-hardhat"
+      ],
+      "commits": [
+        {
+          "sha": "6ac751e12c59",
+          "date": "2026-03-31T14:46:31-04:00",
+          "message": "remove tools front matter (#1574)"
+        }
+      ],
+      "severity": "high"
+    }
+  ],
+  "history": [
+    {
+      "checked_at": "2026-04-02T18:18:49Z",
+      "alerts_found": 0
+    },
+    {
+      "checked_at": "2026-04-02T18:18:55Z",
+      "alerts_found": 2
+    },
+    {
+      "checked_at": "2026-04-02T18:19:14Z",
+      "alerts_found": 0
+    }
+  ]
+}
