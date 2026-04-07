@@ -12,9 +12,13 @@
 }
 
 .toggle-panel.active,
-.toggle-header > span.active,
-.page-header-row[data-variant].active {
+.toggle-header > span.active {
   display: block;
+}
+
+.page-header-row[data-variant].active {
+  display: flex;
+  margin-top: 0;
 }
 
 /* Button container */
