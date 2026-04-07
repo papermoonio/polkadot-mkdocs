@@ -1192,6 +1192,14 @@ a.tests-button {
   margin-top: 1.2rem;
 }
 
+.page-header-item-icon {
+  width: 1.1em;
+  height: 1.1em;
+  min-width: 1.1em;
+  fill: currentColor;
+  display: block;
+}
+
 /* --- Cards --- */
 .md-typeset .grid.cards {
   gap: var(--py-3);
