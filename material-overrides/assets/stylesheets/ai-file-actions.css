@@ -239,11 +239,11 @@
   }
 
   /* --- Agent Skill Badge --- */
-  .agent-skill-badges {
+  .agent-skill-widgets {
     display: contents; /* badges become direct flex children of page-meta-chips */
   }
 
-  .md-typeset .agent-skill-badge {
+  .md-typeset .agent-skill-widget {
     display: inline-flex;
     align-items: center;
     gap: 0.4em;
@@ -255,23 +255,23 @@
     font-size: 0.75em;
   }
 
-  .md-typeset .agent-skill-badge__icon {
+  .md-typeset .agent-skill-widget__icon {
     fill: var(--color-text-tertiary);
     flex-shrink: 0;
     display: block;
   }
 
-  .md-typeset .agent-skill-badge__label {
+  .md-typeset .agent-skill-widget__label {
     color: var(--color-text-tertiary);
     font-weight: 500;
     white-space: nowrap;
   }
 
-  .md-typeset .agent-skill-badge__dot {
+  .md-typeset .agent-skill-widget__dot {
     color: var(--color-text-tertiary);
   }
 
-  .md-typeset .agent-skill-badge__divider {
+  .md-typeset .agent-skill-widget__divider {
     width: 1px;
     height: 0.85em;
     background-color: var(--color-border-strong);
@@ -279,14 +279,14 @@
     flex-shrink: 0;
   }
 
-  .md-typeset .agent-skill-badge__action {
+  .md-typeset .agent-skill-widget__action {
     color: var(--color-text-secondary);
     text-decoration: none;
     white-space: nowrap;
     transition: color 0.15s;
   }
 
-  .md-typeset .agent-skill-badge__action:hover {
+  .md-typeset .agent-skill-widget__action:hover {
     color: var(--color-text-primary);
     text-decoration: underline;
   }
