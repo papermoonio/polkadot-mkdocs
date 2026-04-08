@@ -79,6 +79,7 @@ a.ai-file-actions-btn.single-action-btn {
 .ai-file-actions-icon.loading-spinner {
   margin: 0;
 }
+
 /* Size and color for the chevron icon */
 .ai-file-actions-chevron {
   background-size: 1em 1em;
@@ -107,10 +108,6 @@ a.ai-file-actions-btn.single-action-btn {
   padding: 5px;
 }
 
-[data-md-color-scheme] .ai-file-actions-menu {
-  border-color: var(--color-border-strong);
-}
-
 /* Reset specific overrides if they exist for the active custom schemes */
 [data-md-color-scheme="custom-light"] .ai-file-actions-container,
 [data-md-color-scheme="custom-dark"] .ai-file-actions-container {
@@ -132,9 +129,7 @@ tr:has(pre > code):hover pre > code {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  width: 100%;
   padding: 0.475rem 0.625rem;
-  border: none;
   background: none;
   color: var(--color-text-primary);
   text-align: left;
@@ -151,7 +146,6 @@ tr:has(pre > code):hover pre > code {
 .md-typeset a.ai-file-actions-item:hover,
 .md-typeset button.ai-file-actions-item:hover {
   background-color: var(--color-surface);
-  color: var(--color-text-primary);
 }
 
 /* --- Table-scoped overrides --- */
@@ -216,7 +210,6 @@ tr:has(pre > code):hover pre > code {
   }
 }
 
-
 /* --- Page header row: ai-file-actions overrides --- */
 .page-header-row .ai-file-actions-container {
   margin-left: 0;
@@ -242,12 +235,6 @@ tr:has(pre > code):hover pre > code {
 .page-header-row .ai-file-actions-trigger:hover {
   background: var(--color-surface-secondary);
   color: var(--color-text-primary);
-}
-
-.page-header-row .ai-file-actions-chevron {
-  width: 1.1em;
-  height: 1.1em;
-  min-width: 1.1em;
 }
 
 /* --- Loading Spinner --- */
