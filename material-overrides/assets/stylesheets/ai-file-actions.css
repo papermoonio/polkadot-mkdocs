@@ -51,7 +51,8 @@ a.ai-file-actions-btn.single-action-btn {
 }
 
 .ai-file-actions-container:hover .ai-file-actions-copy {
-  border-right-color: var(--color-border-strong); /* Keep separator stable on hover */
+  /* Keep separator stable on hover */
+  border-right-color: var(--color-border-strong);
 }
 
 /* --- Right Button (Trigger) --- */
@@ -78,6 +79,7 @@ a.ai-file-actions-btn.single-action-btn {
 .ai-file-actions-icon.loading-spinner {
   margin: 0;
 }
+
 /* Size and color for the chevron icon */
 .ai-file-actions-chevron {
   background-size: 1em 1em;
@@ -95,7 +97,6 @@ a.ai-file-actions-btn.single-action-btn {
   display: none;
   position: absolute;
   top: calc(100% + 4px);
-  right: 0;
   background-color: var(--color-surface-secondary);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--rounded);
@@ -107,13 +108,9 @@ a.ai-file-actions-btn.single-action-btn {
   padding: 5px;
 }
 
-[data-md-color-scheme] .ai-file-actions-menu {
-  border-color: var(--color-border-strong);
-}
-
 /* Reset specific overrides if they exist for the active custom schemes */
-[data-md-color-scheme='custom-light'] .ai-file-actions-container,
-[data-md-color-scheme='custom-dark'] .ai-file-actions-container {
+[data-md-color-scheme="custom-light"] .ai-file-actions-container,
+[data-md-color-scheme="custom-dark"] .ai-file-actions-container {
   border-color: var(--color-border-strong);
 }
 
@@ -127,30 +124,28 @@ tr:has(pre > code):hover pre > code {
 }
 
 /* --- Dropdown Items --- */
-.md-typeset a.ai-file-actions-item {
+.md-typeset a.ai-file-actions-item,
+.md-typeset button.ai-file-actions-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  width: 100%;
   padding: 0.475rem 0.625rem;
-  border: none;
   background: none;
   color: var(--color-text-primary);
   text-align: left;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.1s;
-  font-size: 16px;
-  line-height: 1.2;
+  line-height: 1;
 }
 
 .ai-file-actions-item .ai-file-actions-external {
   margin-left: auto;
 }
 
-.md-typeset a.ai-file-actions-item:hover {
+.md-typeset a.ai-file-actions-item:hover,
+.md-typeset button.ai-file-actions-item:hover {
   background-color: var(--color-surface);
-  color: var(--color-text-primary);
 }
 
 /* --- Table-scoped overrides --- */
@@ -213,6 +208,33 @@ tr:has(pre > code):hover pre > code {
     right: auto;
     min-width: 200px;
   }
+}
+
+/* --- Page header row: ai-file-actions overrides --- */
+.page-header-row .ai-file-actions-container {
+  margin-left: 0;
+  border: none;
+  font-size: 0.8em;
+}
+
+.page-header-row .ai-file-actions-btn {
+  background: transparent;
+}
+
+.page-header-row .ai-file-actions-trigger {
+  border: none;
+  border-radius: var(--rounded);
+  background: transparent;
+  padding: 0.2em 0.2em 0.2em 0.4em;
+  gap: 0.35em;
+  font-size: inherit;
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+}
+
+.page-header-row .ai-file-actions-trigger:hover {
+  background: var(--color-surface-secondary);
+  color: var(--color-text-primary);
 }
 
 /* --- Loading Spinner --- */

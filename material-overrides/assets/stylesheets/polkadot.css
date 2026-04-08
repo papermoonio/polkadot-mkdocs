@@ -240,6 +240,7 @@
 .md-typeset h1 {
   line-height: 1.2;
   letter-spacing: -0.02em;
+  margin-bottom: var(--p-2);
 }
 
 .md-typeset h2 {
@@ -667,11 +668,6 @@ label.md-nav__link--active,
 
   .md-nav__icon:hover {
     background-color: transparent;
-  }
-
-  /* Breadcrumbs */
-  .md-path {
-    margin: 0 0.8rem;
   }
 }
 
@@ -1130,17 +1126,12 @@ span.badge {
   margin-right: 0.5em;
 }
 
-/* --- GitHub status badges --- */
-.status-badge > p:first-child {
+.status-badge {
   display: flex;
   flex-direction: column;
   padding-top: var(--p-3);
   margin: 0;
   gap: var(--p-1);
-}
-
-.status-badge a > img {
-  border-radius: var(--rounded);
 }
 
 a.tests-button {
@@ -1155,6 +1146,63 @@ a.tests-button {
   display: flex;
   gap: var(--p-1);
   align-items: center;
+}
+
+.md-typeset .status-badge a img {
+  border-radius: var(--rounded);
+}
+
+/* --- Page header row (below H1) --- */
+.page-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--color-border-strong);
+}
+
+.page-header-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.2em 0.4em;
+  font-size: 0.8em;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.md-typeset a.page-header-item {
+  text-decoration: none;
+  color: var(--color-text-secondary);
+}
+
+.md-typeset a.page-header-item:hover {
+  color: var(--color-text-primary);
+}
+
+.md-typeset .page-header-test-badge img {
+  display: block;
+  height: 1.5em;
+  border-radius: var(--rounded-sm);
+}
+
+.page-header-row + :not(h2) {
+  margin-top: 1.2rem;
+}
+
+.page-header-item-icon {
+  width: 1.1em;
+  height: 1.1em;
+  min-width: 1.1em;
+  fill: currentColor;
+  display: block;
+}
+
+[data-md-color-scheme="custom-dark"]
+  article.md-content__inner.md-typeset
+  .page-header-test-badge
+  img {
+  border: none;
 }
 
 /* --- Cards --- */
@@ -1669,4 +1717,3 @@ div.mermaid {
 h1.not-found {
   text-align: center;
 }
-

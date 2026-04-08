@@ -45,34 +45,75 @@
 
 {% if "material/tags" in config.plugins and tags %}
   {% include "partials/tags.html" %}
-{% endif %}  
-
-{% set badge_html = '' %}
-{% if page.meta and page.meta.tutorial_badge %}
-  {% set badge_html = '<span class="badge ' ~ (page.meta.tutorial_badge | lower | replace(".", "-")) ~ '">' ~ (page.meta.tutorial_badge | capitalize) ~ '</span>' %}
 {% endif %}
 
-{% if "\x3ch1" in page.content %}
-  {% set rendered_content = page.content | replace('</h1>', '</h1>' ~ badge_html, 1) %}
+{% from "partials/page-badges.html" import render_badges %}
+{% from "partials/page-tests.html" import render_test_block %}
+
+{# ------------------------------------------------------------------ #}
+{# Content rendering                                                    #}
+{# ------------------------------------------------------------------ #}
+
+{% if page.meta.toggle_variant_metas %}
+  {# Toggle page: replace the plugin-inserted placeholder with per-variant badge blocks #}
+  {% set badge_blocks %}
+    {%- for variant, badges in page.meta.toggle_variant_metas -%}
+      {{- render_badges(badges, variant) -}}
+    {%- endfor -%}
+  {% endset %}
+  {% set rendered_content = page.content | replace('<!-- toggle-badges -->', badge_blocks, 1) %}
+  {# Replace per-variant test placeholders injected by the plugin before "Where to Go Next".
+     A namespace is required because Jinja2 for-loop scope does not propagate variable
+     assignments back to the enclosing scope. #}
+  {% if page.meta.toggle_variant_test_metas %}
+    {% set _ns = namespace(content=rendered_content) %}
+    {% for variant, tests, wf in page.meta.toggle_variant_test_metas %}
+      {%- if tests and tests.path -%}
+        {%- set _test_block = render_test_block(wf, tests.path, '') -%}
+      {%- else -%}
+        {%- set _test_block = '' -%}
+      {%- endif -%}
+      {%- set _ns.content = _ns.content | replace('<!-- toggle-tests-' ~ variant ~ ' -->', _test_block, 1) -%}
+    {% endfor %}
+    {% set rendered_content = _ns.content %}
+  {% endif %}
+{% elif "\x3ch1" in page.content %}
+  {% set rendered_content = page.content | replace('</h1>', '</h1>' ~ render_badges(page.meta.page_badges), 1) %}
 {% else %}
-  {% set rendered_content = '<h1>' ~ (page.title | d(config.site_name, true)) ~ '</h1>' ~ badge_html ~ page.content %}
+  {% set rendered_content = '<h1>' ~ (page.title | d(config.site_name, true)) ~ '</h1>' ~ render_badges(page.meta.page_badges) ~ page.content %}
+{% endif %}
+
+{# ------------------------------------------------------------------ #}
+{# Page tests block — injected before "Where to Go Next" or at end    #}
+{# Driven by page_tests.path in frontmatter; uses page_badges         #}
+{# .test_workflow (if set) for the CI badge image.                    #}
+{# ------------------------------------------------------------------ #}
+{% if page.meta.page_tests and page.meta.page_tests.path and not page.meta.toggle_variant_metas %}
+  {%- set _wf = page.meta.page_badges.test_workflow if page.meta.page_badges and page.meta.page_badges.test_workflow else None -%}
+  {%- set _test_block = render_test_block(_wf, page.meta.page_tests.path, page.title) -%}
+  {%- set _wtgn_marker = '<h2 id="where-to-go-next"' -%}
+  {%- if _wtgn_marker in rendered_content -%}
+    {%- set rendered_content = rendered_content | replace(_wtgn_marker, _test_block ~ _wtgn_marker, 1) -%}
+  {%- else -%}
+    {%- set rendered_content = rendered_content ~ _test_block -%}
+  {%- endif -%}
 {% endif %}
 
 {% if "faq" in page.url %}
   {# Split content for each FAQ by h2 #}
   {% set h2_sections = rendered_content.split('<h2') %}
   {% set intro_content = h2_sections[0] %}
-  
+
   {# Keep any introduction content intact #}
   {% if intro_content %}
     {{ intro_content | safe }}
   {% endif %}
-  
+
   {# Process each FAQ section #}
   {% for i in range(1, h2_sections | length) %}
     {% set section = h2_sections[i] %}
     {% set section_counter = loop.index %}
-    
+
     {# Extract h2 content #}
     {% set h2_end = section.find('</h2>') %}
     {% if h2_end != -1 %}
@@ -83,7 +124,7 @@
       {% set normalized_h2_text = h2_text | striptags | trim %}
       {% set h2_attributes_lower = h2_attributes | lower %}
       {% set is_excluded_h2 = normalized_h2_text == "Where to Go Next" or 'id="where-to-go-next"' in h2_attributes_lower %}
-      
+
       {# Extract ID from h2 attributes #}
       {% set id_start = h2_attributes.find('id="') %}
       {% set h2_id = '' %}
@@ -92,11 +133,11 @@
         {% set id_end = h2_attributes.find('"', id_start) %}
         {% set h2_id = h2_attributes[id_start:id_end] %}
       {% endif %}
-      
+
       {# Get content after h2 until next h2 or end of page #}
       {% set h2_closing_tag_length = 5 %} {# Length of '</h2>' #}
       {% set section_content = section[h2_end + h2_closing_tag_length:] %}
-      
+
       {% if is_excluded_h2 %}
         <h2{{ h2_attributes | safe }}>{{ h2_text | safe }}</h2>
         {{ section_content | safe }}

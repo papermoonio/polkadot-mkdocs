@@ -120,6 +120,8 @@ plugins:
   - ai_docs:
       llms_config: llms_config.json
       enabled: !ENV [ENABLED_LLMS_PLUGINS, True]
+      ai_page_actions_anchor: page-header-row
+      ai_page_actions_style: dropdown
   - awesome-nav
   - git-revision-date-localized:
       type: date
