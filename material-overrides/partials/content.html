@@ -62,6 +62,21 @@
     {%- endfor -%}
   {% endset %}
   {% set rendered_content = page.content | replace('<!-- toggle-badges -->', badge_blocks, 1) %}
+  {# Replace per-variant test placeholders injected by the plugin before "Where to Go Next".
+     A namespace is required because Jinja2 for-loop scope does not propagate variable
+     assignments back to the enclosing scope. #}
+  {% if page.meta.toggle_variant_test_metas %}
+    {% set _ns = namespace(content=rendered_content) %}
+    {% for variant, tests, wf in page.meta.toggle_variant_test_metas %}
+      {%- if tests and tests.path -%}
+        {%- set _test_block = render_test_block(wf, tests.path, '') -%}
+      {%- else -%}
+        {%- set _test_block = '' -%}
+      {%- endif -%}
+      {%- set _ns.content = _ns.content | replace('<!-- toggle-tests-' ~ variant ~ ' -->', _test_block, 1) -%}
+    {% endfor %}
+    {% set rendered_content = _ns.content %}
+  {% endif %}
 {% elif "\x3ch1" in page.content %}
   {% set rendered_content = page.content | replace('</h1>', '</h1>' ~ render_badges(page.meta.page_badges), 1) %}
 {% else %}
@@ -73,7 +88,7 @@
 {# Driven by page_tests.path in frontmatter; uses page_badges         #}
 {# .test_workflow (if set) for the CI badge image.                    #}
 {# ------------------------------------------------------------------ #}
-{% if page.meta.page_tests and page.meta.page_tests.path %}
+{% if page.meta.page_tests and page.meta.page_tests.path and not page.meta.toggle_variant_metas %}
   {%- set _wf = page.meta.page_badges.test_workflow if page.meta.page_badges and page.meta.page_badges.test_workflow else None -%}
   {%- set _test_block = render_test_block(_wf, page.meta.page_tests.path, page.title) -%}
   {%- set _wtgn_marker = '<h2 id="where-to-go-next"' -%}
