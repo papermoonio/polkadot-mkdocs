@@ -1156,7 +1156,6 @@ a.tests-button {
 .page-header-row {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 0.4rem;
   padding-bottom: 0.25rem;
   border-bottom: 1px solid var(--color-border-strong);
@@ -1167,7 +1166,6 @@ a.tests-button {
   align-items: center;
   gap: 0.35em;
   padding: 0.2em 0.4em;
-  color: var(--color-text-secondary);
   font-size: 0.8em;
   line-height: 1.4;
   white-space: nowrap;
@@ -1198,6 +1196,13 @@ a.tests-button {
   min-width: 1.1em;
   fill: currentColor;
   display: block;
+}
+
+[data-md-color-scheme="custom-dark"]
+  article.md-content__inner.md-typeset
+  .page-header-test-badge
+  img {
+  border: none;
 }
 
 /* --- Cards --- */

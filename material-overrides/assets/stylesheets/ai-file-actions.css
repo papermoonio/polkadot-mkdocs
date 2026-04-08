@@ -96,7 +96,6 @@ a.ai-file-actions-btn.single-action-btn {
   display: none;
   position: absolute;
   top: calc(100% + 4px);
-  right: 0;
   background-color: var(--color-surface-secondary);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--rounded);
@@ -142,8 +141,7 @@ tr:has(pre > code):hover pre > code {
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.1s;
-  font-size: 16px;
-  line-height: 1.2;
+  line-height: 1;
 }
 
 .ai-file-actions-item .ai-file-actions-external {
