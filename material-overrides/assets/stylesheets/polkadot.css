@@ -1717,3 +1717,10 @@ div.mermaid {
 h1.not-found {
   text-align: center;
 }
+
+/* --- Tooltip --- */
+.md-tooltip2__inner {
+    border: solid var(--color-border);
+    border-radius: var(--rounded);
+    scrollbar-width: auto;
+  }
