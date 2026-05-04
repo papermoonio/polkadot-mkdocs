@@ -237,6 +237,15 @@ tr:has(pre > code):hover pre > code {
   color: var(--color-text-primary);
 }
 
+.ai-skill-warning-indicator {
+  color: var(--warning);
+}
+
+.ai-skill-warning-icon {
+  width: 0.9em;
+  min-width: 0.9em;
+}
+
 /* --- Loading Spinner --- */
 .ai-file-actions-container .loading-spinner {
   animation: spinner-rotate 2s linear infinite;
