@@ -237,16 +237,6 @@ tr:has(pre > code):hover pre > code {
   color: var(--color-text-primary);
 }
 
-.ai-skill-warning-indicator {
-  color: var(--warning);
-}
-
-.ai-skill-warning-icon {
-  width: 0.9em;
-  height: 0.9em;
-  min-width: 0.9em;
-}
-
 /* --- Loading Spinner --- */
 .ai-file-actions-container .loading-spinner {
   animation: spinner-rotate 2s linear infinite;
@@ -273,4 +263,44 @@ tr:has(pre > code):hover pre > code {
     stroke-dasharray: 90, 150;
     stroke-dashoffset: -124;
   }
+}
+
+/* --- Skill Warning Tooltip --- */
+.page-header-row .ai-skill-warning-tooltip {
+  position: absolute;
+  top: calc(100% + 0.2rem);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-header-row .ai-skill-tooltip-host .ai-file-actions-trigger:hover ~ .ai-skill-warning-tooltip,
+.page-header-row .ai-skill-tooltip-host .ai-file-actions-trigger:focus ~ .ai-skill-warning-tooltip,
+.page-header-row .ai-skill-tooltip-host .ai-file-actions-trigger:focus-visible ~ .ai-skill-warning-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    transform 0.25s cubic-bezier(0.1, 0.7, 0.1, 1),
+    opacity 0.25s,
+    z-index 0ms;
+  z-index: 2;
+}
+
+.page-header-row .ai-skill-warning-tooltip-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.page-header-row .ai-skill-warning-tooltip-icon {
+  display: inline-flex;
+  width: 0.7rem;
+  height: 0.7rem;
+  color: var(--warning);
+}
+
+.page-header-row .ai-skill-warning-tooltip-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
 }
