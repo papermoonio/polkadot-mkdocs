@@ -47,15 +47,35 @@ git clone https://github.com/polkadot-developers/polkadot-docs.git
 
 ## Run the Docs
 
-Now in the `polkadot-mkdocs` folder, you can build the site by running:
+From the `polkadot-mkdocs` folder, run:
 
 ```bash
-mkdocs serve
+make serve
 ```
+
+On Windows:
+
+```bat
+Makefile.bat serve
+```
+
+This will install dependencies automatically if you haven't already, then start the local server. After a successful build, the site is available at `http://127.0.0.1:8000` with live reload on file changes.
 
 > **_NOTE:_** To improve build times, you can:
 
 > - Disable the git revision plugin by running the following command before you serve the docs: `export ENABLED_GIT_REVISION_DATE=false`
 > - Disable the LLM file plugins for local development by running the following command before you serve the docs: `export ENABLED_LLMS_PLUGINS=false`
 
-After a successful build, the site should be available locally at `http://127.0.0.1:8000`.
+## Optional Quality Checks
+
+To validate the site builds cleanly with strict mode (the same check that runs in CI):
+
+```bash
+make build
+```
+
+On Windows:
+
+```bat
+Makefile.bat build
+```
