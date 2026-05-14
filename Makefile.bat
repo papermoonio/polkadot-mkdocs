@@ -9,7 +9,8 @@ set SCRIPTS_DIR=scripts
 
 :: Detect python3 or python
 set PYTHON_BIN=
-where python3 >nul 2>&1 && set PYTHON_BIN=python3
+where python3.10 >nul 2>&1 && set PYTHON_BIN=python3.10
+if "%PYTHON_BIN%"=="" where python3 >nul 2>&1 && set PYTHON_BIN=python3
 if "%PYTHON_BIN%"=="" where python >nul 2>&1 && set PYTHON_BIN=python
 if "%PYTHON_BIN%"=="" (
     echo Error: No Python interpreter found.
@@ -19,12 +20,17 @@ if "%PYTHON_BIN%"=="" (
 
 if "%1"=="" goto help
 if "%1"=="install" goto install
+if "%1"=="reinstall" goto reinstall
 if "%1"=="serve" goto serve
 if "%1"=="build" goto build
 if "%1"=="gen-cookbook" goto gen-cookbook
 if "%1"=="help" goto help
 echo Unknown target: %1
 goto help
+
+:reinstall
+if exist %VENV%\.installed del %VENV%\.installed
+goto install
 
 :install
 if exist %VENV%\.installed goto :eof
@@ -37,7 +43,7 @@ if errorlevel 1 (
     echo   On Windows, reinstall Python from https://python.org and check "Add to PATH".
     exit /b 1
 )
-%PIP% install --upgrade pip setuptools "cython<3.0.0" wheel
+%PIP% install --upgrade pip
 if errorlevel 1 (
     echo.
     echo Error: Failed to upgrade pip.
@@ -59,7 +65,7 @@ goto :eof
 :serve
 if not exist %VENV%\.installed call :install
 if errorlevel 1 exit /b 1
-%MKDOCS% serve
+%MKDOCS% serve %~2
 if errorlevel 1 (
     echo.
     echo Error: Failed to start the local server.
@@ -72,7 +78,7 @@ goto :eof
 :build
 if not exist %VENV%\.installed call :install
 if errorlevel 1 exit /b 1
-%MKDOCS% build --strict
+%MKDOCS% build --strict %~2
 if errorlevel 1 (
     echo.
     echo Error: Build failed. Fix the errors above, then re-run: Makefile.bat build
@@ -101,7 +107,10 @@ goto :eof
 :help
 echo Please use "Makefile.bat [target]" where [target] is one of:
 echo   install       to create a virtual environment and install all doc dependencies
+echo   reinstall     to force reinstall of all dependencies (use when remote requirements change)
 echo   serve         to watch, rebuild, and serve the docs locally with live reload (http://127.0.0.1:8000)
+echo                   pass extra flags as a second arg: Makefile.bat serve "--watch-theme"
 echo   build         to build the static site and validate it compiles cleanly (mirrors CI)
+echo                   pass extra flags as a second arg: Makefile.bat build "-d site"
 echo   gen-cookbook  to regenerate the cookbook index table (set TARGET=path/to/section)
 goto :eof

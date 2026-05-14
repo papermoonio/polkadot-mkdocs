@@ -20,14 +20,6 @@ git clone https://github.com/papermoonio/polkadot-mkdocs
 cd polkadot-mkdocs
 ```
 
-### Install Dependencies
-
-To get started you need to have [Mkdocs](https://www.mkdocs.org/) installed. All dependencies can be installed with a single command, you can run:
-
-```bash
-pip install -r requirements.txt
-```
-
 ## Set Up Repository Structure
 
 In order for everything to work correctly, the structure needs to be as follows:
@@ -60,6 +52,18 @@ Makefile.bat serve
 ```
 
 This will install dependencies automatically if you haven't already, then start the local server. After a successful build, the site is available at `http://127.0.0.1:8000` with live reload on file changes.
+
+To pass extra flags to `mkdocs serve`, use the `ARGS` variable:
+
+```bash
+make serve ARGS="--watch-theme"
+```
+
+On Windows, pass them as a second argument:
+
+```bat
+Makefile.bat serve "--watch-theme"
+```
 
 > **_NOTE:_** To improve build times, you can:
 
