@@ -1720,15 +1720,14 @@ h1.not-found {
 
 /* --- Tooltip  --- */
 .md-tooltip2 > .md-tooltip2__inner {
-    border: 1px solid var(--color-border-strong);
-    border-radius: var(--rounded-lg);
-    scrollbar-color: var(--color-border-strong) transparent;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--rounded-lg);
+  scrollbar-color: var(--color-border-strong) transparent;
 }
 
-.md-tooltip2__inner.md-typeset .button-wrapper:has(> a.md-button.connect-metamask){
-  display:flex;
+.md-tooltip2__inner.md-typeset .button-wrapper:has(> a.md-button.connect-metamask) {
+  display: flex;
   flex-direction: column;
   gap: var(--p-2);
-  margin: 0.75rem  0 1rem;
+  margin: 0.75rem 0 1rem;
 }
-
