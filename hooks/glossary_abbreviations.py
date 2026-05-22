@@ -1,4 +1,23 @@
-"""MkDocs hook: add glossary tooltips to paragraph text."""
+"""MkDocs hook: adds glossary definitions as paragraph tooltips.
+
+Glossary terms are maintained in ``reference/glossary.md``. During the build,
+this hook reads the glossary, turns headings and definitions into a term map,
+applies exclusions from ``mkdocs.yml``, and annotates matching terms after
+MkDocs has rendered each page to HTML.
+
+This hook:
+  1. Reads ``reference/glossary.md`` from the configured MkDocs docs_dir.
+  2. Parses second- and third-level glossary headings with their definitions.
+  3. Builds an in-memory term map, for example:
+     ``{"Runtime": "The runtime represents..."}``
+  4. Expands parenthesized aliases, so ``Term (Alias)`` can match both names.
+  5. Removes terms configured in ``mkdocs.yml``:
+     ``extra.glossary_tooltips.exclude_terms: ["Polkadot"]``.
+  6. Scans the rendered HTML for each Markdown page.
+  7. Processes only normal ``<p>`` paragraph text.
+  8. Replaces matched text with ``<abbr title="...">Term</abbr>`` so the
+     Material theme can display the tooltip.
+"""
 
 from __future__ import annotations
 
