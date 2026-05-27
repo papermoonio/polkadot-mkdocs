@@ -187,7 +187,7 @@ def _build_content(scan_dir, docs_dir, columns, flat=False, extra_rows=None, ove
             rows = [r for r in (_make_row(f, docs_dir, columns, nav_title=nt, overrides=overrides) for f, nt in _collect_files(resolved, docs_dir)) if r]
 
             if rows:
-                sections.append(f"## {title}\n")
+                sections.append(f"## {_strip_icons(title)}\n")
                 sections.append(header)
                 sections.append(separator)
                 sections.extend(rows)
