@@ -312,7 +312,7 @@ def _resolve(base_dir, path, docs_dir):
         resolved = os.path.normpath(os.path.join(docs_dir, path.lstrip('/')))
     else:
         resolved = os.path.normpath(os.path.join(base_dir, path))
-    if not resolved.startswith(os.path.normpath(docs_dir)):
+    if os.path.commonpath([resolved, os.path.normpath(docs_dir)]) != os.path.normpath(docs_dir):
         return None
     return resolved
 
