@@ -319,7 +319,12 @@ def _resolve(base_dir, path, docs_dir):
 
 def _to_site_path(abs_path, docs_dir):
     rel = os.path.relpath(abs_path, docs_dir).replace('\\', '/')
-    return '/' + (rel[:-3] if rel.endswith('.md') else rel)
+    if rel.endswith('.md'):
+        rel = rel[:-3]
+        if rel.endswith('/index') or rel == 'index':
+            return '/' + rel[:-len('index')]
+        return '/' + rel + '/'
+    return '/' + rel
 
 
 def _format_tools(tools):
