@@ -19,10 +19,13 @@ Optional YAML config in the opening comment:
 Config options:
   dir        - directory to scan, relative to the page (default: page's own dir)
                use a leading / to make it relative to docs_dir instead
-  columns    - columns to include (default: all four)
+  columns    - columns to include and their display order
+               (default: [title, difficulty, tools, description])
                available: title, difficulty, tools, description
   flat       - if true, all pages are collected into a single table with no
-               section headings (default: false)
+               section headings (default: false); when false, directory entries
+               are recursively expanded by following .nav.yml files in
+               subdirectories
   extra_rows - list of extra rows appended after the auto-generated ones
                each entry is a dict with: title (raw markdown), description,
                tools, and optionally difficulty
@@ -35,8 +38,11 @@ Fields used per row:
                 falls back to frontmatter title; page is skipped if both missing
   description - read from frontmatter short_description first, falls back to
                 description; page is skipped if both missing
-  tools       - top-level frontmatter field; shows N/A if absent
+  tools       - frontmatter field; accepts a list or a comma/semicolon-separated
+                string; shows N/A if absent
   difficulty  - from page_badges.tutorial_badge frontmatter; shows N/A if absent
+
+Note: index.md files are always skipped regardless of nav configuration.
 """
 
 import os
