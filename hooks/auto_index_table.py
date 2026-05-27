@@ -102,6 +102,12 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
                 log.warning(f"auto_index: invalid YAML config in {page.file.src_path}: {e} — using defaults")
 
         columns = cfg.get('columns', DEFAULT_COLUMNS)
+        if isinstance(columns, str):
+            columns = [columns]
+        unknown = [c for c in columns if c not in COLUMN_HEADERS]
+        if unknown:
+            log.warning(f"auto_index: unknown column(s) {unknown} in {page.file.src_path} — falling back to defaults")
+            columns = DEFAULT_COLUMNS
         flat = cfg.get('flat', False)
         extra_rows = cfg.get('extra_rows') or []
         overrides = cfg.get('overrides') or {}
