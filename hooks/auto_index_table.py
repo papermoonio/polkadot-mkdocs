@@ -98,8 +98,8 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
         if raw_config:
             try:
                 cfg = yaml.safe_load(raw_config) or {}
-            except Exception:
-                pass
+            except Exception as e:
+                log.warning(f"auto_index: invalid YAML config in {page.file.src_path}: {e} — using defaults")
 
         columns = cfg.get('columns', DEFAULT_COLUMNS)
         flat = cfg.get('flat', False)
