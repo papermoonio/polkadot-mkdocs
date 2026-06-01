@@ -113,6 +113,7 @@ markdown_extensions:
 hooks:
   - hooks/auto_index_table.py
   - hooks/footer_nav.py
+  - hooks/glossary_abbreviations.py
   - hooks/synthesize_ancestors.py
 
 # Plugins
@@ -173,6 +174,9 @@ plugins:
 
 # Extra configuration
 extra:
+  glossary_tooltips:
+    exclude_terms:
+      - Polkadot
   consent:
     title: Cookie Consent
     description: >-
