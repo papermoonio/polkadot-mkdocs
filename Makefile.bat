@@ -93,4 +93,5 @@ echo   reinstall     to force reinstall of all dependencies (use when remote req
 echo   serve         to watch, rebuild, and serve the docs locally with live reload (http://127.0.0.1:8000)
 echo                   pass extra flags as a second arg: Makefile.bat serve "--watch-theme"
 echo   build         to build the static site and validate it compiles cleanly (mirrors CI)
-echo                   pass extra flags as a second arg: Makefile.bat build "-d site"goto :eof
+echo                   pass extra flags as a second arg: Makefile.bat build "-d site"
+goto :eof
