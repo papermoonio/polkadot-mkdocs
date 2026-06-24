@@ -1,4 +1,5 @@
 venv
+site
 .DS_Store
 .vscode
 polkadot-docs
