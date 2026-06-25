@@ -478,7 +478,7 @@
     },
     {
       "key": "/cookie-policy/",
-      "value": "/policies/cookie-policy/"
+      "value": "/policies/terms-of-use/"
     },
     {
       "key": "/get-support/ai-ready-docs/",
@@ -622,7 +622,7 @@
     },
     {
       "key": "/privacy-policy/",
-      "value": "/policies/privacy-policy/"
+      "value": "/policies/terms-of-use/"
     },
     {
       "key": "/polkadot-protocol/",
@@ -1067,6 +1067,14 @@
     {
       "key": "/tutorials/smart-contracts/launch-your-first-project/test-and-deploy-with-hardhat/",
       "value": "/smart-contracts/cookbook/dapps/zero-to-hero/"
+    },
+    {
+      "key": "/policies/privacy-policy/",
+      "value": "/policies/terms-of-use/"
+    },
+    {
+      "key": "/policies/cookie-policy/",
+      "value": "/policies/terms-of-use/"
     }
   ]
 }
